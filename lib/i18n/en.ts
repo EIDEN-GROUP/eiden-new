@@ -495,55 +495,155 @@ export const en: Dictionary = {
   pages: {
     about: {
       eyebrow: "About",
-      title: "An agency that builds, not one that advises.",
-      lead: "EIDEN GROUP was founded in 2025 in Agadir, from a simple observation: in Morocco, plenty of solid businesses stay invisible online, or spend without knowing what comes back.",
-      body: "We chose another way of working. We start by understanding the business, the customers and the numbers. Only then do we build — brand, site, campaigns, content — with deliverables you keep and understand.",
-      valuesTitle: "What we hold to",
-      values: [
+      titleLead: "A firm built on a",
+      titleAccent: "category",
+      titleTail: "that did not exist yet.",
+      lead: "The MENA region's first business architecture firm. Headquartered in Agadir; at work across four continents.",
+
+      positionEyebrow: "Where we stand",
+      positionTitle: "We do not hand out advice. We lay the structure.",
+      positionBody:
+        "Business architecture is the invisible structure that decides whether a company scales or suffocates. We treat it the way an architect treats a building: studied, structured, deliberate — with an engineer's rigour and a designer's eye.",
+
+      storyEyebrow: "The origin",
+      storyTitle: "Four movements.",
+      movements: [
         {
-          title: "Structure over advice",
-          text: "Every engagement produces something concrete: a system you own and can operate.",
+          n: "I",
+          title: "The inheritance",
+          text: "Twelve years inside Moroccan and international companies — operations, sales, marketing, strategy. The number people call when growth stalls.",
         },
         {
-          title: "Quiet confidence",
-          text: "We state facts and show results. No superlatives, no comparisons with others.",
+          n: "II",
+          title: "The pattern",
+          text: "The same scene, every time. Strong founders. Good products. Capable teams. And underneath: revenue leaking through gaps nobody had mapped, operations running on WhatsApp voice notes.",
         },
         {
-          title: "Morocco first",
-          text: "Local examples, plain language, a real understanding of the market and its codes.",
+          n: "III",
+          title: "The insight",
+          text: "What was missing was not one more opinion. It was architecture. And no firm in the region was treating that work as a discipline of its own.",
         },
         {
-          title: "Nothing decorative",
-          text: "Every page, every animation, every word serves a purpose. Otherwise it goes.",
-        },
-      ],
-      timelineTitle: "The path",
-      timeline: [
-        {
-          year: "2025",
-          title: "Founded in Agadir",
-          text: "EIDEN GROUP starts with a first core team: strategy, creative, engineering.",
-        },
-        {
-          year: "2025",
-          title: "First brands delivered",
-          text: "Hospitality, food and healthcare — the first complete projects go live.",
-        },
-        {
-          year: "2026",
-          title: "Media & performance",
-          text: "The acquisition practice takes shape: Google Ads, social ads, SEO and reporting.",
-        },
-        {
-          year: "Today",
-          title: "Beyond Morocco",
-          text: "Projects running across four continents, still steered from Agadir.",
+          n: "IV",
+          title: "The architecture",
+          text: "EIDEN came out of that: the rigour of engineers and the sensibility of designers, brought to a business the way they are brought to a building.",
         },
       ],
+
+      principlesEyebrow: "Our principles",
+      principlesTitle: "Four rules, held on every engagement.",
+      principles: [
+        {
+          n: "01",
+          title: "Architecture before advice",
+          text: "We listen to the whole system before we suggest anything at all.",
+          quote:
+            "We map before we move. The fracture network first, the interventions second.",
+        },
+        {
+          n: "02",
+          title: "Structure with style",
+          text: "Operational rigour and care for form are not two separate trades.",
+          quote:
+            "Operations that look like nothing are operations that get ignored.",
+        },
+        {
+          n: "03",
+          title: "Execution, not consulting",
+          text: "We stay through to go-live. We price a transformation, not a stack of deliverables.",
+          quote: "Shipped systems. Trained teams. Measurable outcomes.",
+        },
+        {
+          n: "04",
+          title: "Rooted in Morocco, fluent anywhere",
+          text: "The base is Moroccan, the reach is international — Africa, Europe, North America.",
+          quote:
+            "Agadir. Casablanca. Paris. Montréal. Florida. Dubai. One studio, many timezones.",
+        },
+      ],
+
+      methodsEyebrow: "Our methods",
+      methodsTitle: "Three tools, built in-house.",
+      methods: [
+        {
+          name: "Hydra Analysis™",
+          text: "The diagnosis. It maps the fractures across marketing, operations, strategy and positioning.",
+          quote:
+            "Cut one head. Two more appear. Every fracture holds to the others.",
+        },
+        {
+          name: "Onion Methodology™",
+          text: "The analysis, in four layers: brand, operations, strategy, foundation.",
+          quote: "Peel layer by layer. Each one reveals the truth beneath it.",
+        },
+        {
+          name: "Fountain Operations™",
+          text: "The build. One function is brought up to level, then it overflows into the next.",
+          quote: "Fill one tier. Let it overflow. Then the next.",
+        },
+      ],
+
+      numbersEyebrow: "By the numbers",
+      numbers: [
+        { value: "2025", label: "Founded" },
+        { value: "27+", label: "Businesses architected" },
+        { value: "43%", label: "Average efficiency gain" },
+        { value: "04", label: "Continents served" },
+      ],
+
+      placesEyebrow: "Where we sit",
+      placesTitle: "One studio, many timezones.",
+      placesNote:
+        "We work in French and English, with Arabic for our Moroccan and Gulf clients.",
+      places: [
+        { city: "Agadir", role: "Headquarters", zone: "GMT+1" },
+        { city: "Casablanca", role: "Primary", zone: "GMT+1" },
+        { city: "Paris", role: "Expansion", zone: "GMT+1" },
+        { city: "Montréal", role: "Expansion", zone: "GMT−5" },
+        { city: "Florida", role: "Expansion", zone: "GMT−5" },
+        { city: "Dubai", role: "Expansion", zone: "GMT+4" },
+      ],
+
+      faqEyebrow: "Frequently asked",
+      faqTitle: "What we get asked most.",
+      faq: [
+        {
+          q: "What is business architecture?",
+          a: "The invisible structure that decides whether a company scales or suffocates: how the brand, the operations, the strategy and the foundation hold together. We study it and we lay it, the way an architect would with a building.",
+        },
+        {
+          q: "How is this different from consulting?",
+          a: "A consultant hands over a report and leaves. We stay through to go-live: shipped systems, trained teams, measurable outcomes. We price a transformation, not a stack of deliverables.",
+        },
+        {
+          q: "How does an engagement run?",
+          a: "It opens with the Hydra Scan™, which surfaces the visible fractures. Then the Onion Methodology™ goes down layer by layer — brand, operations, strategy, foundation. The build follows Fountain Operations™: one function at a time, until it overflows into the next.",
+        },
+        {
+          q: "What is the Hydra Scan™?",
+          a: "Two hours, one conversation. You leave with the Hydra Map: the state of your visible fractures and the way they hold to one another.",
+        },
+        {
+          q: "How long before we see results?",
+          a: "The scan takes two hours and the map is yours the same day. Beyond that, the timeline follows the spread of the fractures — we quote it after the scan, never before.",
+        },
+        {
+          q: "Do you work outside Morocco?",
+          a: "Yes. The base is Agadir, and we also work out of Casablanca, Paris, Montréal, Florida and Dubai. We operate in French and English, with Arabic for our Moroccan and Gulf clients.",
+        },
+      ],
+
+      ctaEyebrow: "Begin",
+      ctaTitle: "Your first move.",
+      ctaText:
+        "Two hours. One conversation. We map every visible fracture in your business, and you leave with the Hydra Map.",
+      ctaAction: "Book a Hydra Scan",
     },
     clients: {
       eyebrow: "Clients",
-      title: "The people we build for.",
+      titleLead: "The people we",
+      titleAccent: "build",
+      titleTail: "for.",
       lead: "Hospitality, food, healthcare, education, retail, services. Different structures, one shared need: clarity and measurable results.",
       sectorsTitle: "The sectors we know best",
       sectors: [

@@ -12,8 +12,6 @@ export function ContactBanner() {
   return (
     <section id="contact" data-nav-tone="dark" className="relative isolate w-full">
       <FixedBackdrop src={contactTexture} />
-
-      {/* Darkest through the middle, where the type lands. */}
       <span
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]"

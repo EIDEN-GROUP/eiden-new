@@ -107,15 +107,6 @@ export const caseStudies: CaseStudyRecord[] = [
   },
 ];
 
-/**
- * The picture behind each route in the full-screen menu.
- *
- * Every file here has to survive being drawn into an opened column, which is
- * roughly 590×744 — the widest slot any of them lands in. The `*-cover.png`
- * set is only 452×626, so it would be blown up past its own size and go soft;
- * `clients` reaches for a full-size frame for that reason. At these sizes the
- * heaviest of them still lands under 1:1.
- */
 export const menuMedia: Record<NavRoute["key"], string> = {
   home: "/work/hero.png",
   about: "/work/CEO.png",
@@ -128,8 +119,8 @@ export const heroTexture = "/work/hero.png";
 
 export const contactTexture = "/work/contact-bg.png";
 
-/* The silk the proof sequence opens on — brand gold and emerald, and a
-   literal curtain, which is what the cases then stack over it as. */
+export const aboutTexture = "/work/contact-bg.png";
+
 export const proofTexture = "/work/contact-section-bg.png";
 
 export const serviceMedia: Record<string, string> = {

@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { PageHero } from "@/components/layout/page-hero";
-import { Proof } from "@/components/sections/proof";
+import { FilmHero } from "@/components/layout/film-hero";
 import { ContactBanner } from "@/components/sections/contact-banner";
-import { ButtonLink } from "@/components/ui/button";
 import { LogoMarquee } from "@/components/ui/marquee";
-import { Reveal, RevealGroup } from "@/components/ui/reveal";
+import { RevealGroup } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useLanguage } from "@/components/providers/language-provider";
-import { caseStudies, clientLogos, siteConfig } from "@/lib/data/site";
+import { caseStudies, clientLogos, heroTexture } from "@/lib/data/site";
 
 export function ClientsView() {
   const { t } = useLanguage();
@@ -18,13 +16,19 @@ export function ClientsView() {
 
   return (
     <>
-      <PageHero eyebrow={page.eyebrow} title={page.title} lead={page.lead}>
-        <Reveal delay={0.2}>
-          <div className="border-canvas/12 mt-14 border-t pt-10">
-            <LogoMarquee logos={clientLogos} tone="light" speed={44} />
-          </div>
-        </Reveal>
-      </PageHero>
+      <FilmHero
+        eyebrow={page.eyebrow}
+        titleLead={page.titleLead}
+        titleAccent={page.titleAccent}
+        titleTail={page.titleTail}
+        lead={page.lead}
+        image={heroTexture}
+        imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
+      >
+        <div className="border-canvas/12 border-t pt-8">
+          <LogoMarquee logos={clientLogos} tone="light" speed={44} />
+        </div>
+      </FilmHero>
 
       {/* Project grid */}
       <section className="bg-canvas py-24 sm:py-32">
@@ -139,35 +143,6 @@ export function ClientsView() {
               </article>
             ))}
           </RevealGroup>
-        </div>
-      </section>
-
-      <Proof />
-
-      {/* Portfolio link */}
-      <section className="bg-canvas pb-24">
-        <div className="container-eiden">
-          <Reveal>
-            <div className="border-forest/10 bg-cream flex flex-col items-start gap-6 rounded-2xl border p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12">
-              <div>
-                <h2 className="font-display text-forest text-2xl font-bold tracking-[-0.025em] sm:text-3xl">
-                  {page.portfolioTitle}
-                </h2>
-                <p className="text-forest/60 mt-3 max-w-xl text-[0.9375rem] leading-relaxed">
-                  {page.portfolioText}
-                </p>
-              </div>
-              <ButtonLink
-                href={siteConfig.portfolioUrl}
-                variant="dark"
-                size="lg"
-                dot
-                className="shrink-0"
-              >
-                {page.portfolioCta}
-              </ButtonLink>
-            </div>
-          </Reveal>
         </div>
       </section>
 

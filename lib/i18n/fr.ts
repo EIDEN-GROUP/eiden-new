@@ -500,55 +500,157 @@ export const fr = {
   pages: {
     about: {
       eyebrow: "À propos",
-      title: "Une agence qui construit, pas qui conseille.",
-      lead: "EIDEN GROUP est née en 2025 à Agadir, d'un constat simple : au Maroc, beaucoup d'entreprises solides restent invisibles en ligne, ou dépensent sans savoir ce que ça rapporte.",
-      body: "Nous avons choisi une autre manière de travailler. On commence par comprendre le métier, les clients et les chiffres. Ensuite seulement, on construit — marque, site, campagnes, contenu — avec des livrables que vous gardez et que vous comprenez.",
-      valuesTitle: "Ce à quoi nous tenons",
-      values: [
+      titleLead: "Un cabinet bâti sur une",
+      titleAccent: "catégorie",
+      titleTail: "qui n'existait pas encore.",
+      lead: "Le premier cabinet d'architecture d'entreprise de la région MENA. Le siège est à Agadir ; le travail se fait sur quatre continents.",
+
+      positionEyebrow: "Notre position",
+      positionTitle: "Nous ne donnons pas d'avis. Nous posons la structure.",
+      positionBody:
+        "L'architecture d'entreprise, c'est la structure invisible qui décide si une activité passe à l'échelle ou s'étouffe. Nous la traitons comme un architecte traite un bâtiment : étudiée, structurée, délibérée avec la rigueur d'un ingénieur et l'œil d'un designer.",
+
+      storyEyebrow: "L'origine",
+      storyTitle: "Quatre mouvements.",
+      movements: [
         {
-          title: "La structure avant l'avis",
-          text: "Chaque mission produit un livrable concret : un système que vous possédez et que vous pouvez faire tourner.",
+          n: "I",
+          title: "L'héritage",
+          text: "Douze ans passés dans des entreprises marocaines et internationales — opérations, vente, marketing, stratégie. Le numéro qu'on appelle quand la croissance cale.",
         },
         {
-          title: "La confiance discrète",
-          text: "On énonce des faits, on montre des résultats. Pas de superlatifs, pas de comparaisons avec les autres.",
+          n: "II",
+          title: "Le schéma",
+          text: "Toujours la même scène. Des fondateurs solides. De bons produits. Des équipes compétentes. Et dessous : des fuites de revenus que personne n'a cartographiées, des opérations qui tournent sur des notes vocales WhatsApp.",
         },
         {
-          title: "Le Maroc d'abord",
-          text: "Des exemples locaux, une langue simple, une compréhension réelle du marché et de ses codes.",
+          n: "III",
+          title: "L'intuition",
+          text: "Ce qui manquait n'était pas un avis de plus. C'était l'architecture. Et personne, dans la région, ne traitait ce travail comme un métier à part entière.",
         },
         {
-          title: "Rien de décoratif",
-          text: "Chaque page, chaque animation, chaque mot sert un objectif. Sinon, ça saute.",
-        },
-      ],
-      timelineTitle: "Le parcours",
-      timeline: [
-        {
-          year: "2025",
-          title: "Création à Agadir",
-          text: "EIDEN GROUP est fondée avec un premier noyau : stratégie, création, technique.",
-        },
-        {
-          year: "2025",
-          title: "Premières marques livrées",
-          text: "Hôtellerie, restauration et santé — les premiers projets complets voient le jour.",
-        },
-        {
-          year: "2026",
-          title: "Media & performance",
-          text: "Le pôle acquisition se structure : Google Ads, social ads, SEO et suivi des résultats.",
-        },
-        {
-          year: "Aujourd'hui",
-          title: "Au-delà du Maroc",
-          text: "Des projets menés sur quatre continents, toujours pilotés depuis Agadir.",
+          n: "IV",
+          title: "L'architecture",
+          text: "EIDEN est née de là : la rigueur des ingénieurs et la sensibilité des designers, appliquées à une entreprise comme on les applique à un bâtiment.",
         },
       ],
+
+      principlesEyebrow: "Nos principes",
+      principlesTitle: "Quatre règles, tenues sur chaque dossier.",
+      principles: [
+        {
+          n: "01",
+          title: "L'architecture avant l'avis",
+          text: "Nous écoutons le système entier avant de proposer quoi que ce soit.",
+          quote:
+            "On cartographie avant de bouger. Le réseau des fractures d'abord, les interventions ensuite.",
+        },
+        {
+          n: "02",
+          title: "La structure avec le style",
+          text: "La rigueur opérationnelle et le soin de la forme ne sont pas deux métiers séparés.",
+          quote:
+            "Des opérations qui ne ressemblent à rien sont des opérations qu'on ignore.",
+        },
+        {
+          n: "03",
+          title: "L'exécution, pas le conseil",
+          text: "Nous restons jusqu'à la mise en service. Nous facturons une transformation, pas des livrables.",
+          quote:
+            "Des systèmes livrés. Des équipes formées. Des résultats mesurables.",
+        },
+        {
+          n: "04",
+          title: "Ancrés au Maroc, à l'aise partout",
+          text: "Le siège est marocain, la portée est internationale — Afrique, Europe, Amérique du Nord.",
+          quote:
+            "Agadir. Casablanca. Paris. Montréal. Floride. Dubaï. Un studio, plusieurs fuseaux.",
+        },
+      ],
+
+      methodsEyebrow: "Nos méthodes",
+      methodsTitle: "Trois outils, développés en interne.",
+      methods: [
+        {
+          name: "Hydra Analysis™",
+          text: "Le diagnostic. Il cartographie les fractures à travers le marketing, les opérations, la stratégie et le positionnement.",
+          quote:
+            "Coupez une tête. Deux repoussent. Chaque fracture tient aux autres.",
+        },
+        {
+          name: "Onion Methodology™",
+          text: "L'analyse en quatre couches : marque, opérations, stratégie, fondations.",
+          quote:
+            "On pèle couche après couche. Chacune découvre la vérité d'en dessous.",
+        },
+        {
+          name: "Fountain Operations™",
+          text: "La mise en œuvre. Un service est porté à niveau, puis il déborde sur le suivant.",
+          quote: "On remplit un étage. On le laisse déborder. Puis le suivant.",
+        },
+      ],
+
+      numbersEyebrow: "En chiffres",
+      numbers: [
+        { value: "2025", label: "Année de création" },
+        { value: "27+", label: "Entreprises architecturées" },
+        { value: "43 %", label: "Gain d'efficacité moyen" },
+        { value: "04", label: "Continents servis" },
+      ],
+
+      placesEyebrow: "Nos ancrages",
+      placesTitle: "Un studio, plusieurs fuseaux.",
+      placesNote:
+        "Nous travaillons en français et en anglais, avec l'arabe pour nos clients marocains et du Golfe.",
+      places: [
+        { city: "Agadir", role: "Siège", zone: "GMT+1" },
+        { city: "Casablanca", role: "Principal", zone: "GMT+1" },
+        { city: "Paris", role: "Expansion", zone: "GMT+1" },
+        { city: "Montréal", role: "Expansion", zone: "GMT−5" },
+        { city: "Floride", role: "Expansion", zone: "GMT−5" },
+        { city: "Dubaï", role: "Expansion", zone: "GMT+4" },
+      ],
+
+      faqEyebrow: "Questions fréquentes",
+      faqTitle: "Ce qu'on nous demande le plus.",
+      faq: [
+        {
+          q: "Qu'est-ce que l'architecture d'entreprise ?",
+          a: "La structure invisible qui décide si une activité passe à l'échelle ou s'étouffe : la façon dont la marque, les opérations, la stratégie et les fondations tiennent ensemble. Nous l'étudions et nous la posons, comme un architecte le ferait d'un bâtiment.",
+        },
+        {
+          q: "En quoi est-ce différent du conseil ?",
+          a: "Un consultant remet un rapport et s'en va. Nous restons jusqu'à la mise en service : systèmes livrés, équipes formées, résultats mesurables. Nous facturons une transformation, pas des livrables.",
+        },
+        {
+          q: "Comment se déroule une mission ?",
+          a: "Elle s'ouvre par le Hydra Scan™, qui relève les fractures visibles. Vient ensuite l'Onion Methodology™, qui descend couche par couche — marque, opérations, stratégie, fondations. La mise en œuvre suit le Fountain Operations™ : un service à la fois, jusqu'à ce qu'il déborde sur le suivant.",
+        },
+        {
+          q: "Qu'est-ce que le Hydra Scan™ ?",
+          a: "Deux heures, une conversation. Vous repartez avec la Hydra Map : l'état de vos fractures visibles et la façon dont elles se tiennent les unes aux autres.",
+        },
+        {
+          q: "Combien de temps avant de voir des résultats ?",
+          a: "Le scan tient en deux heures et la carte est à vous le jour même. Pour le reste, la durée dépend de l'étendue des fractures — nous l'annonçons après le scan, jamais avant.",
+        },
+        {
+          q: "Travaillez-vous en dehors du Maroc ?",
+          a: "Oui. Le siège est à Agadir, et nous intervenons aussi depuis Casablanca, Paris, Montréal, la Floride et Dubaï. Nous travaillons en français et en anglais, avec l'arabe pour nos clients marocains et du Golfe.",
+        },
+      ],
+
+      ctaEyebrow: "Commencer",
+      ctaTitle: "Votre premier mouvement.",
+      ctaText:
+        "Deux heures. Une conversation. Nous cartographions chaque fracture visible de votre activité, et vous repartez avec la Hydra Map.",
+      ctaAction: "Réserver un Hydra Scan",
     },
     clients: {
       eyebrow: "Clients",
-      title: "Ceux pour qui nous construisons.",
+      titleLead: "Ceux pour qui nous",
+      titleAccent: "construisons.",
+      titleTail: "",
       lead: "Hôtellerie, restauration, santé, éducation, commerce, services. Des structures différentes, un même besoin : de la clarté et des résultats mesurables.",
       sectorsTitle: "Les secteurs que nous connaissons le mieux",
       sectors: [
