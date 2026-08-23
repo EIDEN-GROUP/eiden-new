@@ -1,23 +1,44 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { Wordmark } from "@/components/ui/wordmark";
 import { useLanguage } from "@/components/providers/language-provider";
-import { useMediaQuery } from "@/lib/hooks";
+import { useHydrated, useMediaQuery } from "@/lib/hooks";
+import { setIntroDone } from "@/lib/intro-store";
+import { cn } from "@/lib/utils";
 
 const SESSION_KEY = "eiden.introSeen";
+
+/** Milliseconds: the mark fills, holds, then the curtains clear the frame. */
+const FILL_MS = 950;
+const HOLD_MS = 220;
+const SWEEP_MS = 1150;
+
+/**
+ * The three colours that cross the frame, in the order they leave it.
+ * Dark first and light last, so the final band before the page is gold.
+ */
+const CURTAINS = [
+  { tone: "bg-teal", delay: 0.05 },
+  { tone: "bg-teal-lt", delay: 0.12 },
+  { tone: "bg-gold", delay: 0.19 },
+];
 
 /** Session storage never changes under us mid-visit, so there is nothing to subscribe to. */
 const noopSubscribe = () => () => {};
 
 /**
- * First-visit intro: the wordmark resolves out of the forest surface while a
- * hairline progress bar fills. Shown once per browser session, and skipped
- * entirely for visitors who prefer reduced motion.
+ * First-visit intro: the wordmark fills left to right behind a block riding
+ * its own edge, and the frame is then carried off by a train of curtains —
+ * the ground leading, three brand colours crossing it from off-stage left, so
+ * the page is uncovered a band at a time rather than in one cut.
+ *
+ * Shown once per browser session, and skipped entirely for visitors who
+ * prefer reduced motion.
  */
 export function PageLoader() {
   const { t } = useLanguage();
+  const hydrated = useHydrated();
   const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   const introSeen = useSyncExternalStore(
@@ -27,7 +48,7 @@ export function PageLoader() {
   );
 
   const [dismissed, setDismissed] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [sweeping, setSweeping] = useState(false);
 
   const visible = !introSeen && !reduced && !dismissed;
 
@@ -36,79 +57,93 @@ export function PageLoader() {
 
     document.body.style.overflow = "hidden";
 
-    // Ease towards 100% so the bar never stalls at a fixed value.
-    const tick = window.setInterval(() => {
-      setProgress((value) =>
-        value >= 100 ? 100 : value + (100 - value) * 0.18 + 2,
-      );
-    }, 90);
-
-    const finish = window.setTimeout(() => {
-      setProgress(100);
-      window.setTimeout(() => {
+    const toSweep = window.setTimeout(() => setSweeping(true), FILL_MS + HOLD_MS);
+    const toGone = window.setTimeout(
+      () => {
         window.sessionStorage.setItem(SESSION_KEY, "1");
         setDismissed(true);
-      }, 420);
-    }, 1500);
+      },
+      FILL_MS + HOLD_MS + SWEEP_MS,
+    );
 
     return () => {
-      window.clearInterval(tick);
-      window.clearTimeout(finish);
+      window.clearTimeout(toSweep);
+      window.clearTimeout(toGone);
       document.body.style.overflow = "";
     };
   }, [visible]);
+
+  /*
+   * Release the chrome that waits behind the intro. Guarded on hydration
+   * because the server snapshot reports the intro as already seen — without
+   * that, the very first commit would call this a beat before the loader
+   * has even had a chance to appear.
+   */
+  useEffect(() => {
+    if (!hydrated || visible) return;
+    setIntroDone();
+  }, [hydrated, visible]);
 
   // Repeat visitors and reduced-motion visitors never see it; mark it seen anyway.
   useEffect(() => {
     if (reduced) window.sessionStorage.setItem(SESSION_KEY, "1");
   }, [reduced]);
 
+  if (!visible) return null;
+
+  const fill = `${FILL_MS}ms var(--ease-brand) both`;
+
   return (
-    <AnimatePresence>
-      {visible ? (
-        <motion.div
-          key="loader"
-          className="grain bg-forest fixed inset-0 z-[100] flex flex-col items-center justify-center"
-          role="status"
-          aria-live="polite"
-          aria-label={t.common.loading}
-          initial={{ opacity: 1 }}
-          exit={{
-            opacity: 0,
-            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-canvas"
+    <div
+      className="pointer-events-none fixed inset-0 z-[100] overflow-hidden"
+      role="status"
+      aria-live="polite"
+      aria-label={t.common.loading}
+    >
+      {/* The ground, already covering the frame and first to leave it. */}
+      <div
+        className={cn(
+          "bg-ink absolute inset-0 flex items-center justify-center",
+          sweeping &&
+            "motion-safe:[animation:eiden-curtain-out_0.8s_var(--ease-brand)_both]",
+        )}
+      >
+        <span className="relative grid h-9 sm:h-12">
+          {/* The mark at rest, and the same mark lit — one on top of the
+              other, with the clip opening the lit copy left to right. */}
+          <Wordmark className="text-canvas/20 col-start-1 row-start-1 h-full" />
+          <span
+            className="col-start-1 row-start-1 motion-safe:[animation:eiden-mark-fill_var(--fill)]"
+            style={{ "--fill": fill } as React.CSSProperties}
           >
-            <Wordmark className="h-11 sm:h-14" />
-          </motion.div>
+            <Wordmark className="text-canvas h-full" />
+          </span>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.35, duration: 0.5 }}
-            className="bg-canvas/15 mt-10 h-px w-40 overflow-hidden sm:w-56"
-          >
+          {/* The block riding the edge of the fill, and left standing just
+              past the mark when it lands. */}
+          <span
+            aria-hidden
+            className="bg-gold absolute top-0 h-full motion-safe:[animation:eiden-mark-head_var(--fill)]"
+            style={{ aspectRatio: 0.55, "--fill": fill } as React.CSSProperties}
+          />
+        </span>
+      </div>
+
+      {/* Three colours crossing the frame behind it, uncovering the page. */}
+      {sweeping
+        ? CURTAINS.map((curtain) => (
             <div
-              className="bg-gold h-full transition-[width] duration-300 ease-out"
-              style={{ width: `${Math.min(progress, 100)}%` }}
+              key={curtain.tone}
+              aria-hidden
+              className={cn(
+                "absolute inset-0",
+                curtain.tone,
+                "motion-safe:[animation:eiden-curtain-pass_0.95s_var(--ease-brand)_both]",
+              )}
+              style={{ animationDelay: `${curtain.delay}s` }}
             />
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="eyebrow text-canvas/40 mt-6"
-          >
-            Agadir · Maroc
-          </motion.p>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
+          ))
+        : null}
+    </div>
   );
 }

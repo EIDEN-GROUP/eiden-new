@@ -4,6 +4,23 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 
 /**
+ * The live instance, held at module scope so chrome outside this tree can
+ * hand a scroll to the same easing. `null` whenever Lenis is not running —
+ * on the server, before mount, or when the visitor prefers reduced motion.
+ */
+let instance: Lenis | null = null;
+
+/** Scroll back to the top of the page, riding Lenis when it is running. */
+export function scrollToTop() {
+  if (instance) {
+    instance.scrollTo(0);
+    return;
+  }
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+}
+
+/**
  * Lenis smooth scrolling, mounted once at the root.
  * Disabled entirely when the visitor prefers reduced motion.
  */
@@ -18,6 +35,8 @@ export function SmoothScroll() {
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
+
+    instance = lenis;
 
     let frame = 0;
     const raf = (time: number) => {
@@ -46,6 +65,7 @@ export function SmoothScroll() {
       document.removeEventListener("click", onAnchorClick);
       cancelAnimationFrame(frame);
       lenis.destroy();
+      instance = null;
     };
   }, []);
 

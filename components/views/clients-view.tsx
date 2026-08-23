@@ -44,8 +44,11 @@ export function ClientsView() {
               return (
                 <article
                   key={entry.slug}
+                  // Landing target for the hero arc, which links each card
+                  // straight to its own project. The offset clears the header.
+                  id={entry.slug}
                   className={
-                    "group bg-cream relative overflow-hidden rounded-2xl " +
+                    "group bg-cream relative scroll-mt-28 overflow-hidden rounded-2xl " +
                     (index === 0 ? "md:col-span-2" : "")
                   }
                 >

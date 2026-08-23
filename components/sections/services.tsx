@@ -1,215 +1,125 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
-import { Reveal } from "@/components/ui/reveal";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
+import { serviceMedia } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
+/**
+ * The four expertises, as one list that changes shape rather than two.
+ *
+ * Above `lg` it is a rank of rules: number, copy, name, arrow, with the
+ * picture waiting behind for the row to be pointed at. Below it, where there
+ * is no pointer to wait for, each row becomes a card standing on its own
+ * picture — which is the only way the work is ever seen on a phone.
+ */
 export function Services() {
   const { t } = useLanguage();
-  const [hovered, setHovered] = useState<number | null>(null);
-  const [expanded, setExpanded] = useState<number | null>(0);
 
   return (
-    <section id="services" className="bg-canvas py-24 sm:py-32">
+    <section id="services" className="bg-ink py-20 sm:py-28">
       <div className="container-eiden">
         <Reveal direction="none" duration={0.5}>
-          <p className="eyebrow text-forest/45">{t.services.eyebrow}</p>
-        </Reveal>
-
-        <Reveal delay={0.05}>
-          <h2 className="text-forest mt-6 max-w-4xl text-[clamp(2rem,5vw,3.5rem)]">
-            {t.services.title}
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.1} direction="none">
-          <p className="eyebrow text-forest/30 mt-6 hidden lg:block">
-            {t.services.hint}
+          <p className="eyebrow text-gold flex items-center gap-3">
+            <span
+              aria-hidden
+              className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.1s_both]"
+            />
+            {t.services.eyebrow}
           </p>
         </Reveal>
 
-        {/* ── Desktop: a dark detail bar wipes over the title row ── */}
-        <div
-          className="mt-12 hidden lg:block"
-          onMouseLeave={() => setHovered(null)}
-        >
-          {t.services.items.map((item, index) => {
-            const active = hovered === index;
-            return (
-              <div
-                key={item.slug}
-                onMouseEnter={() => setHovered(index)}
-                className={cn(
-                  "border-forest/12 relative overflow-hidden border-t",
-                  index === t.services.items.length - 1 && "border-b",
-                )}
-              >
-                {/*
-                  The row keeps one fixed height across both states. Animating
-                  it was what made the old hover feel jumpy — every row below
-                  had to be re-laid out mid-transition.
-                */}
-                <div className="relative h-[clamp(6rem,8.5vw,8rem)]">
-                  {/* Resting state — oversized title */}
-                  <div
-                    aria-hidden={active}
-                    className={cn(
-                      "absolute inset-0 flex items-center justify-between gap-8",
-                      "transition-[opacity,transform] duration-500 ease-[var(--ease-brand)]",
-                      active
-                        ? "-translate-x-4 opacity-0"
-                        : "translate-x-0 opacity-100 delay-100",
-                    )}
-                  >
-                    <h3 className="font-display text-forest text-[clamp(1.75rem,4.6vw,3.75rem)] leading-none font-extrabold tracking-[-0.045em] uppercase">
-                      {item.title}
-                    </h3>
-                    <ArrowUpRight
-                      aria-hidden
-                      strokeWidth={1.4}
-                      className="text-forest/30 size-10 shrink-0 xl:size-12"
-                    />
-                  </div>
+        <RevealWords
+          as="h2"
+          text={t.services.title}
+          delay={0.05}
+          className="text-canvas mt-6 max-w-4xl text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]"
+        />
 
-                  {/* Hovered state — dark bar wiping in from the left */}
-                  <div
-                    className={cn(
-                      "bg-ink absolute inset-0 flex items-center justify-between gap-8 px-8 xl:px-12",
-                      "transition-[clip-path] duration-600 ease-[var(--ease-brand)]",
-                      active
-                        ? "[clip-path:inset(0_0%_0_0)]"
-                        : "pointer-events-none [clip-path:inset(0_100%_0_0)]",
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "flex min-w-0 flex-1 items-center gap-10",
-                        "transition-[opacity,transform] duration-500 ease-[var(--ease-brand)]",
-                        active
-                          ? "translate-x-0 opacity-100 delay-200"
-                          : "-translate-x-3 opacity-0",
-                      )}
-                    >
-                      <div className="max-w-md min-w-0 shrink-0">
-                        <p className="eyebrow text-gold">{item.kicker}</p>
-                        <p className="text-canvas/85 mt-3 text-[0.9375rem] leading-snug">
-                          {item.text}
-                        </p>
-                      </div>
+        <Reveal delay={0.1} direction="none">
+          <p className="eyebrow text-canvas/25 mt-8 hidden lg:block">
+            {t.services.hint}
+          </p>
+        </Reveal>
+      </div>
 
-                      {/* Deliverables straight from the EIDEN catalogue */}
-                      <div className="min-w-0 flex-1">
-                        <p className="eyebrow text-canvas/30 mb-2.5">
-                          {t.services.deliverablesLabel}
-                        </p>
-                        <ul className="flex flex-wrap gap-x-2 gap-y-1.5">
-                          {item.deliverables.map((entry) => (
-                            <li
-                              key={entry}
-                              className="border-canvas/15 text-canvas/75 rounded-full border px-3 py-1 text-xs whitespace-nowrap"
-                            >
-                              {entry}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+      <div className="mt-14 lg:mt-16">
+        {t.services.items.map((item, index) => {
+          const media = serviceMedia[item.slug as keyof typeof serviceMedia];
 
-                    <ArrowUpRight
-                      aria-hidden
-                      strokeWidth={1.4}
-                      className={cn(
-                        "text-gold size-10 shrink-0 xl:size-12",
-                        "transition-transform duration-600 ease-[var(--ease-brand)]",
-                        active
-                          ? "translate-x-0 rotate-45"
-                          : "-translate-x-3 rotate-0",
-                      )}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ── Mobile / tablet: tap to expand ── */}
-        <div className="mt-10 lg:hidden">
-          {t.services.items.map((item, index) => {
-            const open = expanded === index;
-            return (
-              <div
-                key={item.slug}
-                className={cn(
-                  "border-forest/12 border-t",
-                  index === t.services.items.length - 1 && "border-b",
-                )}
-              >
-                <h3>
-                  <button
-                    type="button"
-                    onClick={() => setExpanded(open ? null : index)}
-                    aria-expanded={open}
-                    className="flex w-full items-center justify-between gap-5 py-6 text-left"
-                  >
-                    <span className="font-display text-forest text-[clamp(1.25rem,5.6vw,2rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
-                      {item.title}
-                    </span>
-                    <span
-                      className={cn(
-                        "border-forest/15 text-forest flex size-9 shrink-0 items-center justify-center rounded-full border transition-[transform,background-color,border-color,color] duration-500 ease-[var(--ease-brand)]",
-                        open && "border-teal bg-teal text-canvas rotate-45",
-                      )}
-                    >
-                      <ArrowUpRight
-                        className="size-4"
-                        strokeWidth={1.8}
-                        aria-hidden
-                      />
-                    </span>
-                  </button>
-                </h3>
-
-                {/* `grid-template-rows: 0fr → 1fr` animates to intrinsic
-                    height in pure CSS, so the panel opens with or without JS
-                    animation support. */}
-                <div
+          return (
+            <Link
+              key={item.slug}
+              href="/nos-solutions"
+              className={cn(
+                "group border-canvas/10 relative isolate block border-t",
+                index === t.services.items.length - 1 && "border-b",
+              )}
+            >
+              {media ? (
+                <span
+                  aria-hidden
                   className={cn(
-                    "grid transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease-brand)]",
-                    open
-                      ? "grid-rows-[1fr] opacity-100"
-                      : "grid-rows-[0fr] opacity-0",
+                    "absolute inset-0 -z-10 overflow-hidden transition-opacity duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                    "opacity-100 lg:opacity-0 lg:group-hover:opacity-100",
                   )}
                 >
-                  <div className="overflow-hidden">
-                    <div className="bg-ink mb-6 rounded-2xl p-5">
-                      <p className="eyebrow text-gold">{item.kicker}</p>
-                      <p className="text-canvas/85 mt-2.5 text-[0.9375rem] leading-relaxed">
-                        {item.text}
-                      </p>
+                  <Image
+                    src={media}
+                    alt=""
+                    fill
+                    sizes="100vw"
+                    className="object-cover object-center"
+                  />
+                  <span className="bg-ink/78 absolute inset-0" />
+                </span>
+              ) : null}
 
-                      <p className="eyebrow text-canvas/30 mt-5 mb-2.5">
-                        {t.services.deliverablesLabel}
-                      </p>
-                      <ul className="flex flex-wrap gap-1.5">
-                        {item.deliverables.map((entry) => (
-                          <li
-                            key={entry}
-                            className="border-canvas/15 text-canvas/75 rounded-full border px-3 py-1 text-xs"
-                          >
-                            {entry}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+              <div className="container-eiden flex flex-col gap-5 py-9 sm:py-10 lg:flex-row lg:items-center lg:gap-10 lg:py-10 xl:gap-14">
+                <span className="border-canvas/25 text-canvas/50 group-hover:border-gold group-hover:text-gold flex size-9 shrink-0 items-center justify-center rounded-full border text-[0.7rem] transition-colors duration-500 ease-[var(--ease-brand)]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <div className="lg:w-[15rem] lg:shrink-0 xl:w-[17rem]">
+                  {/* The card has room to say what the row is; the rank has
+                      the name doing that job already. */}
+                  <p className="eyebrow text-gold mb-2 lg:hidden">{item.kicker}</p>
+                  <p className="text-canvas/70 group-hover:text-canvas/85 text-[0.875rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.9375rem] lg:text-[0.8125rem]">
+                    {item.text}
+                  </p>
+                  <p className="text-canvas/40 mt-3 text-xs transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
+                    {item.deliverables.join(" · ")}
+                  </p>
                 </div>
+
+                <h3 className="font-display text-canvas min-w-0 flex-1 text-[clamp(2.25rem,9vw,4rem)] leading-[1.04] font-light tracking-[-0.03em] lg:text-center">
+                  <span className="relative inline-block pb-2">
+                    {item.title}
+                    {/* Drawn on the card, since there is no hover to draw it;
+                        struck on the rank only when the row is pointed at. */}
+                    <span
+                      aria-hidden
+                      className="bg-canvas absolute bottom-0 left-0 h-1 w-full origin-left scale-x-100 transition-transform duration-600 ease-[var(--ease-brand)] motion-reduce:transition-none lg:scale-x-0 lg:group-hover:scale-x-100"
+                    />
+                  </span>
+                </h3>
+
+                <span className="flex justify-end lg:block lg:shrink-0">
+                  <span className="border-canvas/25 text-canvas/70 group-hover:text-canvas flex size-11 items-center justify-center rounded-full border transition-[transform,color] duration-500 ease-[var(--ease-brand)] group-hover:translate-x-2 motion-reduce:transition-none lg:size-auto lg:border-0">
+                    <ArrowRight
+                      aria-hidden
+                      strokeWidth={1.4}
+                      className="size-5 lg:size-12 xl:size-14"
+                    />
+                  </span>
+                </span>
               </div>
-            );
-          })}
-        </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

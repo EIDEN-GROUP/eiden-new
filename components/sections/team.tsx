@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -91,7 +92,7 @@ function Member({
 
 export function Team() {
   const { t } = useLanguage();
-  const people = [t.team.founder, ...t.team.members];
+  const founder = t.team.founder;
 
   return (
     <section id="equipe" className="grain bg-ink text-canvas py-24 sm:py-32">
@@ -116,14 +117,45 @@ export function Team() {
           </Reveal>
         </div>
 
-        <RevealGroup className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {people.map((person, index) => (
+        {/* The founder stands alone and at full width — he is on every file,
+            and the layout should say so before the roster does. */}
+        <Reveal delay={0.12} duration={0.9} className="mt-16">
+          <Link
+            href="/a-propos#equipe"
+            aria-label={`${founder.name} — ${founder.role}`}
+            className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]"
+          >
+            <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-[26rem]">
+              <Image
+                src="/work/CEO.png"
+                alt={founder.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 22rem"
+                className="object-cover object-top grayscale transition-[filter,transform] duration-700 ease-[var(--ease-brand)] group-hover:scale-[1.03] group-hover:grayscale-0 motion-reduce:transition-none"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center gap-5 p-7 sm:p-10">
+              <p className="eyebrow text-gold">{founder.role}</p>
+              <p className="font-display text-canvas text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.05] font-medium tracking-[-0.03em]">
+                {founder.name}
+              </p>
+              <p className="text-canvas/60 max-w-xl text-[0.9375rem] leading-relaxed">
+                {founder.text}
+              </p>
+            </div>
+          </Link>
+        </Reveal>
+
+        {/* The specialists behind him. */}
+        <RevealGroup className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {t.team.members.map((person, index) => (
             <Member
               key={person.initials}
               initials={person.initials}
               name={person.name}
               role={person.role}
-              accent={accents[index % accents.length]}
+              accent={accents[(index + 1) % accents.length]}
             />
           ))}
         </RevealGroup>

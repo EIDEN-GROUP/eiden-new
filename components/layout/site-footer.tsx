@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, AtSign } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { ArrowRight, ArrowUp, AtSign } from "lucide-react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { socialAccounts } from "@/components/ui/social-links";
+import { scrollToTop } from "@/components/providers/smooth-scroll";
 import { useLanguage } from "@/components/providers/language-provider";
+import { setFooterRevealed, useFooterRevealed } from "@/lib/footer-reveal";
 import { navRoutes, siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
@@ -44,14 +46,14 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   const spacerRef = useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = useState(false);
+  const revealed = useFooterRevealed();
 
   useEffect(() => {
     const node = spacerRef.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setRevealed(entry.intersectionRatio > 0.12),
+      ([entry]) => setFooterRevealed(entry.intersectionRatio > 0.12),
       { threshold: [0, 0.12, 0.4] },
     );
 
@@ -61,14 +63,16 @@ export function SiteFooter() {
 
   return (
     <>
-      {/* Scroll room for the panel behind it — never painted. */}
-      <div ref={spacerRef} aria-hidden className="h-svh shrink-0" />
+      {/* Scroll room for the panel behind it — never painted. `dvh` and not
+          `svh`: the panel below is sized by the viewport itself, so anything
+          shorter leaves a strip of page permanently covering its top. */}
+      <div ref={spacerRef} aria-hidden className="h-dvh shrink-0" />
 
       {/* `inset-0` rather than a viewport-height unit: the panel then measures
           exactly one frame on every device, with no seam at the edges. */}
       <footer
         data-footer-reveal={revealed ? "in" : "out"}
-        className="grain bg-ink text-canvas fixed inset-0 z-0 flex flex-col justify-between overflow-hidden"
+        className="grain bg-ink text-canvas fixed inset-0 z-0 flex flex-col overflow-hidden"
       >
         {/* Soft brand wash behind the wordmark */}
         <div
@@ -77,7 +81,7 @@ export function SiteFooter() {
         />
 
         {/* ── Address & actions ─────────────────────────────────────── */}
-        <div className="container-eiden relative z-2 pt-20 sm:pt-28">
+        <div className="container-eiden relative z-2 shrink-0 pt-[clamp(3.5rem,8svh,7rem)]">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
             <div className="max-w-2xl">
               <Rise>
@@ -86,7 +90,7 @@ export function SiteFooter() {
                 </h2>
               </Rise>
 
-              <Rise delay={0.1} className="mt-8">
+              <Rise delay={0.1} className="mt-[clamp(1.25rem,3.5svh,2rem)]">
                 <span className="flex flex-wrap items-center gap-3">
                   <Link
                     href={siteConfig.bookingUrl}
@@ -139,16 +143,20 @@ export function SiteFooter() {
                   <p className="eyebrow text-canvas/35 mb-4">
                     {t.footer.socialLabel}
                   </p>
-                  <ul className="flex flex-col gap-1.5">
+                  {/* The marks alone: two words of plain text next to a
+                      navigation stack read as more navigation. */}
+                  <ul className="flex flex-wrap items-center gap-2.5">
                     {socialAccounts.map((account) => (
                       <li key={account.label}>
                         <a
                           href={account.href}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="hover:text-gold text-[1.0625rem] transition-colors duration-300 sm:text-xl"
+                          aria-label={account.label}
+                          title={account.label}
+                          className="border-canvas/20 text-canvas/70 hover:border-gold/60 hover:text-gold flex size-11 items-center justify-center rounded-full border transition-colors duration-300"
                         >
-                          {account.label}
+                          <account.Icon className="size-[1.15rem]" />
                         </a>
                       </li>
                     ))}
@@ -158,7 +166,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <Rise delay={0.28} className="mt-10">
+          <Rise delay={0.28} className="mt-[clamp(1.25rem,3.5svh,2.5rem)]">
             <span className="text-canvas/45 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <a
                 href={`mailto:${siteConfig.email}`}
@@ -177,33 +185,42 @@ export function SiteFooter() {
           </Rise>
         </div>
 
-        {/* ── Oversized wordmark ────────────────────────────────────── */}
-        {/* Its own tight gutter rather than the page container, so the word can
-            run edge to edge; the `svh` term keeps a short, wide frame from
-            clipping it. */}
-        <div className="relative z-2 mt-6 px-3 pb-2 sm:mt-8 sm:px-5 lg:px-8">
-          <Rise delay={0.34}>
-            <h3 className="text-center text-[min(31vw,60svh)] leading-[0.8] tracking-[-0.03em] text-white uppercase">
+        <div className="[container-type:size] relative z-2 mt-[clamp(1rem,2.5svh,2rem)] flex min-h-0 flex-1 items-end justify-center px-3 pb-2 sm:px-5 lg:px-8">
+          <Rise delay={0.34} className="w-full">
+            <h3 className="text-center text-[min(31vw,118cqh)] leading-[0.8] tracking-[-0.03em] text-white uppercase">
               eiden
             </h3>
           </Rise>
         </div>
 
         {/* ── Bottom bar ────────────────────────────────────────────── */}
-        <div className="container-eiden relative z-2">
-          <div className="border-canvas/10 text-canvas/45 flex flex-col gap-4 border-t py-6 text-[0.8125rem] md:flex-row md:items-center md:justify-between">
+        <div className="container-eiden relative z-2 shrink-0">
+          <div className="border-canvas/10 text-canvas/45 flex flex-col gap-4 border-t py-[clamp(1rem,2.5svh,1.5rem)] text-[0.8125rem] md:flex-row md:items-center md:justify-between">
             <p>
-              © {year} — {siteConfig.name}. {t.footer.rights}.
+              © {year} {siteConfig.name}. {t.footer.rights}.
             </p>
             <p className="md:text-center">{t.footer.madeIn}</p>
-            <button
-              type="button"
-              onClick={toggleLocale}
-              aria-label={t.common.langSwitch}
-              className="border-canvas/20 font-label hover:border-canvas/60 hover:text-canvas flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase transition-colors duration-300"
-            >
-              {locale === "fr" ? "EN" : "FR"}
-            </button>
+            {/* The floating badge stands down once the panel is up, so the way
+                back to the top and the language switch live here instead. */}
+            <div className="flex w-fit items-center gap-2">
+              <button
+                type="button"
+                onClick={scrollToTop}
+                title={t.common.backToTop}
+                aria-label={t.common.backToTop}
+                className="border-canvas/20 hover:border-canvas/60 hover:text-canvas flex size-9 items-center justify-center rounded-full border transition-colors duration-300"
+              >
+                <ArrowUp className="size-4" strokeWidth={1.8} aria-hidden />
+              </button>
+              <button
+                type="button"
+                onClick={toggleLocale}
+                aria-label={t.common.langSwitch}
+                className="border-canvas/20 font-label hover:border-canvas/60 hover:text-canvas flex items-center gap-2 rounded-full border px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase transition-colors duration-300"
+              >
+                {locale === "fr" ? "EN" : "FR"}
+              </button>
+            </div>
           </div>
         </div>
       </footer>

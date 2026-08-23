@@ -35,8 +35,10 @@ export function Idea() {
     const stage = stageRef.current;
     if (!track || !stage) return;
 
-    if (!animate) {
+    if (reduced) {
+      track.removeAttribute("style");
       stage.removeAttribute("style");
+      track.setAttribute("data-nav-tone", "light");
       return;
     }
 
@@ -44,9 +46,35 @@ export function Idea() {
 
     const update = () => {
       frame = 0;
+      const box = track.getBoundingClientRect();
+
+      /*
+       * Two readings of the same journey. Pinned, the honest ruler is how far
+       * the frame has been held; unpinned there is nothing to hold, so it is
+       * how far the block has climbed the screen. Both land on 0 → 1, and
+       * everything below is written against that.
+       */
       const span = track.offsetHeight - window.innerHeight;
-      if (span <= 0) return;
-      const p = clamp01(-track.getBoundingClientRect().top / span);
+      const p = animate
+        ? span > 0
+          ? clamp01(-box.top / span)
+          : 0
+        : clamp01((window.innerHeight - box.top) / (window.innerHeight * 0.9));
+
+      /* The room going out, and the bar above it told which way to draw. */
+      const dim = animate ? ramp(p, 0.34, 0.6) : ramp(p, 0.05, 0.45);
+      track.style.setProperty("--dim", `${dim}`);
+      const tone = dim > 0.55 ? "dark" : "light";
+      if (track.dataset.navTone !== tone) {
+        track.setAttribute("data-nav-tone", tone);
+      }
+
+      if (!animate) {
+        // No room to walk them sideways: they arrive in turn from below.
+        stage.style.setProperty("--mission-in", `${ramp(p, 0.1, 0.4)}`);
+        stage.style.setProperty("--vision-in", `${ramp(p, 0.28, 0.58)}`);
+        return;
+      }
 
       // Headline parts to either side, opening the gap the first card lands in.
       stage.style.setProperty("--head-x", `${ramp(p, 0, 0.42)}`);
@@ -70,29 +98,26 @@ export function Idea() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [animate]);
+  }, [animate, reduced]);
 
+  /* Both cards are cut from the same white; what tells them apart is what
+     they say. The travel each one makes lives in `.idea-card-*`, so the
+     wide-screen walk and the stacked arrival are one switch in the sheet
+     rather than two sets of inline transforms. */
   const cards = [
     {
       label: t.idea.missionLabel,
       body: t.idea.mission,
       points: t.idea.missionPoints,
-      tone: "light" as const,
-      style: {
-        transform:
-          "translateX(calc(var(--mission-x, 0) * 51.6%)) scale(calc(0.94 + var(--mission-in, 1) * 0.06))",
-        opacity: "var(--mission-in, 1)",
-      } as CSSProperties,
+      lane: "idea-card-mission",
+      enter: "--mission-in",
     },
     {
       label: t.idea.visionLabel,
       body: t.idea.vision,
       points: t.idea.visionPoints,
-      tone: "dark" as const,
-      style: {
-        transform: "translateX(calc(var(--vision-x, 0) * 61.6%))",
-        opacity: "var(--vision-in, 1)",
-      } as CSSProperties,
+      lane: "idea-card-vision",
+      enter: "--vision-in",
     },
   ];
 
@@ -166,8 +191,15 @@ export function Idea() {
       </div>
 
       {/* ── Shift stage — headline parts, one card becomes two ─────── */}
-      <div ref={trackRef} className="relative mt-24 lg:mt-0 lg:h-[300vh]">
-        <div className="lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
+      <div
+        ref={trackRef}
+        data-nav-tone="light"
+        className="relative mt-24 lg:mt-0 lg:h-[300vh]"
+      >
+        {/* The light going out, so the cards are handed a dark room. */}
+        <span aria-hidden className="idea-wash" />
+
+        <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
             {/* Headline — one line that splits and clears the frame */}
             <div className="relative z-10 mb-12 flex flex-wrap justify-center gap-x-[0.3em] text-center lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2 lg:flex-nowrap lg:whitespace-nowrap">
@@ -176,7 +208,7 @@ export function Idea() {
                   transform: "translateX(calc(var(--head-x, 0) * -58vw))",
                   opacity: "var(--head-o, 1)",
                 }}
-                className="font-display text-forest text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em]"
+                className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em]"
               >
                 {t.idea.shiftLead}
               </span>
@@ -185,35 +217,27 @@ export function Idea() {
                   transform: "translateX(calc(var(--head-x, 0) * 58vw))",
                   opacity: "var(--head-o, 1)",
                 }}
-                className="font-display text-forest/35 text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em]"
+                className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em] opacity-35"
               >
                 {t.idea.shiftTail}
               </span>
             </div>
 
             {/* Cards */}
-            <div className="mx-auto grid max-w-5xl gap-4 lg:grid-cols-2">
+            <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
               {cards.map((card) => (
                 <article
                   key={card.label}
-                  style={card.style}
+                  style={{ "--card-in": `var(${card.enter}, 1)` } as CSSProperties}
                   className={cn(
-                    "flex min-h-[24rem] flex-col justify-between rounded-[1.75rem] p-8 sm:p-10 lg:h-[62svh]",
-                    card.tone === "light"
-                      ? "bg-cream text-forest"
-                      : "bg-teal text-canvas",
+                    "idea-card bg-canvas text-forest flex min-h-[22rem] flex-col justify-between rounded-[1.75rem] p-8 sm:p-10 lg:h-[66svh] lg:p-12",
+                    "shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)]",
+                    card.lane,
                   )}
                 >
                   <div>
-                    <p
-                      className={cn(
-                        "eyebrow",
-                        card.tone === "light" ? "text-forest/40" : "text-canvas/50",
-                      )}
-                    >
-                      {card.label}
-                    </p>
-                    <p className="mt-6 max-w-md text-[clamp(1.375rem,2.4vw,2rem)] leading-[1.15] font-medium tracking-[-0.02em]">
+                    <p className="eyebrow text-teal/45">{card.label}</p>
+                    <p className="text-teal mt-6 max-w-xl text-[clamp(1.5rem,2.6vw,2.25rem)] leading-[1.14] font-medium tracking-[-0.02em]">
                       {card.body}
                     </p>
                   </div>
@@ -223,23 +247,11 @@ export function Idea() {
                       <li key={point} className="flex items-start gap-3">
                         <span
                           aria-hidden
-                          className={cn(
-                            "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full",
-                            card.tone === "light"
-                              ? "bg-forest/10 text-forest"
-                              : "bg-canvas/20 text-canvas",
-                          )}
+                          className="bg-teal/10 text-teal mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full"
                         >
                           <Check className="size-3" strokeWidth={2.6} />
                         </span>
-                        <span
-                          className={cn(
-                            "text-[0.9375rem] leading-snug",
-                            card.tone === "light"
-                              ? "text-forest/70"
-                              : "text-canvas/85",
-                          )}
-                        >
+                        <span className="text-forest/70 text-[0.9375rem] leading-snug">
                           {point}
                         </span>
                       </li>

@@ -16,9 +16,11 @@ export default function HomePage() {
       <Idea />
       <Services />
       <Vsl />
-      <Team />
+      <div className="vsl-split-under relative z-0">
+        <Team />
+      </div>
       <Proof />
-      <Offer />
+      {/* <Offer /> */}
       {/* <BookCall /> */}
       {/* <Pricing /> */}
       <ContactBanner />

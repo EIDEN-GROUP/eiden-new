@@ -13,6 +13,8 @@ import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { PageLoader } from "@/components/layout/page-loader";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { FloatingActions } from "@/components/layout/floating-actions";
+import { SideTags } from "@/components/layout/side-tags";
 import { siteConfig } from "@/lib/data/site";
 
 /* Five typefaces, five roles — per the EIDEN brand identity system. */
@@ -98,7 +100,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${outfit.variable} ${dmSerif.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
-        {/* Scroll reveals are driven by JavaScript; without it, show everything. */}
         <noscript>
           <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>
         </noscript>
@@ -108,18 +109,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MotionProvider>
             <SmoothScroll />
             <PageLoader />
-            <a
-              href="#main"
-              className="bg-forest text-canvas sr-only rounded-full px-5 py-3 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[110]"
-            >
+            <a href="#main" className="bg-forest text-canvas sr-only rounded-full px-5 py-3 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[110]">
               Aller au contenu principal
             </a>
             <SiteHeader />
-            {/* Opaque and above the footer, so the page slides up off it. */}
             <div className="bg-canvas relative z-10 flex-1">
               <main id="main">{children}</main>
             </div>
             <SiteFooter />
+            <FloatingActions />
+            <SideTags />
           </MotionProvider>
         </LanguageProvider>
       </body>

@@ -1,10 +1,3 @@
-/**
- * Language-independent site facts: contact details, routes, socials and the
- * client / project records reused across pages.
- *
- * Every localisable string lives in `lib/i18n/dictionary.ts` instead.
- */
-
 export const siteConfig = {
   name: "EIDEN GROUP",
   domain: "eiden-group.com",
@@ -35,12 +28,6 @@ export const navRoutes: NavRoute[] = [
   { href: "/contact", key: "contact" },
 ];
 
-/**
- * Client work shown in the horizontal rail on the homepage.
- *
- * Split into two rows that travel in opposite directions, so the order here is
- * the order they appear left to right within their own row.
- */
 export const projectGallery = [
   { src: "/work/lunja-cover.png", client: "Lunja Village" },
   { src: "/work/bopassage-web-desktop.png", client: "Bôpassage" },
@@ -56,7 +43,6 @@ export const projectGallery = [
   { src: "/work/dmc-cover.png", client: "DMC Hospitality Morocco" },
 ] as const;
 
-/** Logos rendered in the trust carousel. Files live in `public/clients`. */
 export const clientLogos = [
   { name: "Bôpassage", src: "/clients/bopassage.png" },
   { name: "DMC Hospitality Morocco", src: "/clients/dmc.png" },
@@ -69,11 +55,6 @@ export const clientLogos = [
   { name: "Chill Out", src: "/clients/chill-out.png" },
 ] as const;
 
-/**
- * Case studies surfaced on the homepage and the /clients page.
- * `metric` values are editorial placeholders — replace them with the audited
- * numbers before the site goes live.
- */
 export type CaseStudyRecord = {
   slug: string;
   client: string;
@@ -126,5 +107,34 @@ export const caseStudies: CaseStudyRecord[] = [
   },
 ];
 
-/** Image used behind the hero and the contact banner. */
-export const heroTexture = "/work/contact-bg.png";
+/**
+ * The picture behind each route in the full-screen menu.
+ *
+ * Every file here has to survive being drawn into an opened column, which is
+ * roughly 590×744 — the widest slot any of them lands in. The `*-cover.png`
+ * set is only 452×626, so it would be blown up past its own size and go soft;
+ * `clients` reaches for a full-size frame for that reason. At these sizes the
+ * heaviest of them still lands under 1:1.
+ */
+export const menuMedia: Record<NavRoute["key"], string> = {
+  home: "/work/hero.png",
+  about: "/work/CEO.png",
+  clients: "/work/bopassage-brand-identity.png",
+  solutions: "/services/web-2.jpg",
+  contact: "/work/contact-bg.png",
+};
+
+export const heroTexture = "/work/hero.png";
+
+export const contactTexture = "/work/contact-bg.png";
+
+/* The silk the proof sequence opens on — brand gold and emerald, and a
+   literal curtain, which is what the cases then stack over it as. */
+export const proofTexture = "/work/contact-section-bg.png";
+
+export const serviceMedia: Record<string, string> = {
+  web: "/services/web-2.jpg",
+  visibilite: "/services/op-1.jpg",
+  media: "/services/audit-2.jpg",
+  contenu: "/services/illustration.jpg",
+};

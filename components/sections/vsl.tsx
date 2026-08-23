@@ -7,24 +7,26 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import { Pause, Play, Volume2, VolumeX } from "lucide-react";
+import { Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
-import { ButtonLink } from "@/components/ui/button";
 import { useLanguage } from "@/components/providers/language-provider";
 import { cn } from "@/lib/utils";
 
-/** `M:SS`, with a stable width so the timecode never jitters. */
 function timecode(seconds: number) {
   if (!Number.isFinite(seconds)) return "0:00";
   const whole = Math.max(0, Math.floor(seconds));
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
+const GROWTH_SHARE = 0.86;
+
 export function Vsl() {
   const { t } = useLanguage();
-  const chapters = t.vsl.chapters;
-
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const litRef = useRef<HTMLDivElement>(null);
+  const splitRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
   const elapsedRef = useRef<HTMLSpanElement>(null);
   const totalRef = useRef<HTMLSpanElement>(null);
@@ -32,14 +34,102 @@ export function Vsl() {
 
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [chapter, setChapter] = useState(0);
 
-  /*
-   * The runtime is written to the DOM rather than held in state. Metadata for
-   * a local file often lands before hydration attaches a React handler, so the
-   * `loadedmetadata` event alone would leave the label reading 0:00; this reads
-   * whatever the element already knows and keeps listening for the rest.
-   */
+  useEffect(() => {
+    const track = trackRef.current;
+    const section = sectionRef.current;
+    if (!track || !section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let painted = Number.NaN;
+
+    const paint = () => {
+      const { top, height } = track.getBoundingClientRect();
+      // The frame is pinned for `height − viewport`; that span is the growth.
+      const travel = height - window.innerHeight;
+      const share = travel > 0 ? -top / travel : 1;
+      const eased = Math.min(Math.max(share / GROWTH_SHARE, 0), 1);
+      const value = Math.round(eased * 500) / 500;
+
+      if (value !== painted) {
+        painted = value;
+        section.style.setProperty("--grow", `${value}`);
+        // Past the halfway point the room is lit, and anything fixed over it
+        // has to be drawn the other way round.
+        const tone = value > 0.55 ? "light" : "dark";
+        if (litRef.current?.dataset.navTone !== tone) {
+          litRef.current?.setAttribute("data-nav-tone", tone);
+        }
+      }
+      raf = requestAnimationFrame(paint);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Painted straight away rather than on the next frame: `--grow`
+        // defaults to lit, so one unpainted frame is a flash of white.
+        if (entry.isIntersecting) {
+          if (!raf) paint();
+          return;
+        }
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { rootMargin: "25% 0px" },
+    );
+
+    observer.observe(track);
+    return () => {
+      observer.disconnect();
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  useEffect(() => {
+    const split = splitRef.current;
+    if (!split) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    let painted = Number.NaN;
+
+    const paint = () => {
+      const { top, height } = split.getBoundingClientRect();
+      const travel = height - window.innerHeight;
+      const share = travel > 0 ? -top / travel : 1;
+      const value = Math.round(Math.min(Math.max(share, 0), 1) * 500) / 500;
+
+      if (value !== painted) {
+        painted = value;
+        split.style.setProperty("--split", `${value}`);
+      }
+      raf = requestAnimationFrame(paint);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!raf) paint();
+          return;
+        }
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { rootMargin: "25% 0px" },
+    );
+
+    observer.observe(split);
+    return () => {
+      observer.disconnect();
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -57,12 +147,6 @@ export function Vsl() {
     };
   }, []);
 
-  /*
-   * Playback progress is written straight to the DOM from a rAF loop: at 60fps
-   * a `timeupdate`-driven state update would re-render the whole section
-   * several times a second for a bar that is pure presentation. Only the
-   * active chapter — which changes twice per play-through — is state.
-   */
   useEffect(() => {
     if (!playing) return;
 
@@ -74,11 +158,6 @@ export function Vsl() {
         if (elapsedRef.current) {
           elapsedRef.current.textContent = timecode(video.currentTime);
         }
-        const next = Math.min(
-          chapters.length - 1,
-          Math.floor(ratio * chapters.length),
-        );
-        setChapter((active) => (active === next ? active : next));
       }
       frameRef.current = requestAnimationFrame(step);
     };
@@ -88,7 +167,7 @@ export function Vsl() {
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       frameRef.current = null;
     };
-  }, [playing, chapters.length]);
+  }, [playing]);
 
   const togglePlay = useCallback(() => {
     const video = videoRef.current;
@@ -104,250 +183,198 @@ export function Vsl() {
     setMuted(video.muted);
   }, []);
 
-  /** Jump to a chapter's share of the runtime and keep playing from there. */
-  const seekToChapter = useCallback(
-    (index: number) => {
-      const video = videoRef.current;
-      if (!video || !video.duration) return;
-      video.currentTime = (video.duration / chapters.length) * index;
-      setChapter(index);
-      if (video.paused) void video.play();
-    },
-    [chapters.length],
-  );
+  const goFullscreen = useCallback(() => {
+    const video = videoRef.current as
+      (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (!video) return;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+      return;
+    }
+    if (video.requestFullscreen) void video.requestFullscreen();
+    else video.webkitEnterFullscreen?.();
+  }, []);
+
+  const withGrow = { opacity: "var(--grow, 1)" } as CSSProperties;
 
   return (
     <section
       id="methode"
-      className="grain bg-forest relative overflow-hidden py-24 sm:py-32"
+      ref={sectionRef}
+      className="pointer-events-none relative z-10"
     >
+      <div
+        ref={litRef}
+        data-nav-tone="dark"
+        className="grain bg-forest pointer-events-auto relative"
+      >
+        <span aria-hidden className="vsl-wash" />
+        <div ref={trackRef} className="vsl-track relative z-2">
+          <div
+            className={cn(
+              "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8",
+              "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14",
+            )}
+          >
+            <span aria-hidden className="vsl-bloom" />
+            <div className="flex flex-1 flex-col justify-end pb-12 md:pb-8">
+              <Reveal direction="none" duration={0.5}>
+                <p className="eyebrow vsl-ink-gold">{t.vsl.eyebrow}</p>
+              </Reveal>
+            </div>
+            <div className="vsl-stage w-full">
+              <div className="vsl-grow group bg-ink overflow-hidden">
+                <video
+                  ref={videoRef}
+                  className="size-full object-cover"
+                  poster="/work/eiden-hero.png"
+                  playsInline
+                  autoPlay
+                  muted={muted}
+                  loop
+                  preload="metadata"
+                  onPlay={() => setPlaying(true)}
+                  onPause={() => setPlaying(false)}
+                >
+                  <source src="/media/eiden-method.mp4" type="video/mp4" />
+                </video>
 
-      <div className="container-eiden relative z-2">
-        {/* ── Statement ──────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <Reveal direction="none" duration={0.5}>
-              <p className="eyebrow text-gold flex items-center gap-3">
-                <span
+                <div
                   aria-hidden
-                  className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.15s_both]"
-                />
-                {t.vsl.eyebrow}
-              </p>
-            </Reveal>
-
-            <RevealWords
-              as="h2"
-              text={t.vsl.title}
-              delay={0.08}
-              className="text-canvas mt-6 text-[clamp(2rem,4.8vw,3.5rem)]"
-            />
-
-            <Reveal delay={0.22}>
-              <p className="text-canvas/60 mt-6 max-w-xl text-base leading-relaxed sm:text-[1.0625rem]">
-                {t.vsl.text}
-              </p>
-            </Reveal>
-          </div>
-
-          <Reveal delay={0.3} direction="left" className="shrink-0">
-            <ButtonLink href="/contact" variant="gold" size="lg" dot>
-              {t.vsl.cta}
-            </ButtonLink>
-          </Reveal>
-        </div>
-
-        {/* ── Player ─────────────────────────────────────────────────── */}
-        <Reveal delay={0.1} duration={1} amount={0.15} className="mt-14">
-          <div className="group border-canvas/10 bg-ink relative overflow-hidden rounded-[1.25rem] border shadow-[0_50px_120px_-50px_rgba(0,0,0,0.9)] sm:rounded-[1.75rem]">
-            <video
-              ref={videoRef}
-              className={cn(
-                "aspect-16/10 w-full object-cover",
-                "transition-transform duration-[1200ms] ease-[var(--ease-brand)] motion-reduce:transition-none",
-                playing ? "scale-100" : "scale-[1.03] group-hover:scale-100",
-              )}
-              poster="/work/eiden-hero.png"
-              playsInline
-              muted={muted}
-              loop
-              preload="metadata"
-              onPlay={() => setPlaying(true)}
-              onPause={() => setPlaying(false)}
-            >
-              <source src="/media/eiden-method.mp4" type="video/mp4" />
-            </video>
-
-            {/* Vignette that lifts once playback starts */}
-            <div
-              aria-hidden
-              className={cn(
-                "pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,12,0.88),transparent_52%)]",
-                "transition-opacity duration-700",
-                playing ? "opacity-45" : "opacity-100",
-              )}
-            />
-
-            {/* Centre control — the ring breathes while paused */}
-            <button
-              type="button"
-              onClick={togglePlay}
-              aria-label={playing ? t.vsl.pause : t.vsl.play}
-              className={cn(
-                "absolute inset-0 flex items-center justify-center",
-                "transition-opacity duration-500",
-                playing
-                  ? "opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
-                  : "opacity-100",
-              )}
-            >
-              <span className="relative flex size-20 items-center justify-center sm:size-24">
-                {!playing ? (
-                  <>
-                    <span
-                      aria-hidden
-                      className="border-canvas/70 absolute inset-0 rounded-full border motion-safe:[animation:eiden-pulse-ring_2.6s_ease-out_infinite]"
-                    />
-                    <span
-                      aria-hidden
-                      className="border-canvas/70 absolute inset-0 rounded-full border motion-safe:[animation:eiden-pulse-ring_2.6s_ease-out_1.3s_infinite]"
-                    />
-                  </>
-                ) : null}
-
-                <span
                   className={cn(
-                    "bg-canvas/95 text-forest relative flex size-full items-center justify-center rounded-full backdrop-blur-sm",
-                    "shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]",
-                    "transition-transform duration-400 ease-[var(--ease-brand)]",
-                    "group-hover:scale-[1.06] active:scale-95 motion-reduce:transition-none",
+                    "pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,12,0.88),transparent_52%)]",
+                    "transition-opacity duration-700",
+                    playing ? "opacity-45" : "opacity-100",
+                  )}
+                />
+
+                <button
+                  type="button"
+                  onClick={togglePlay}
+                  aria-label={playing ? t.vsl.pause : t.vsl.play}
+                  className={cn(
+                    "absolute inset-0 flex items-center justify-center",
+                    "transition-opacity duration-500",
+                    playing
+                      ? "opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+                      : "opacity-100",
                   )}
                 >
-                  {/* Both glyphs stay mounted and cross-fade in place */}
-                  <Play
-                    aria-hidden
-                    strokeWidth={0}
-                    className={cn(
-                      "absolute ml-1 size-7 fill-current transition-[opacity,transform] duration-300",
-                      playing ? "scale-75 opacity-0" : "scale-100 opacity-100",
-                    )}
-                  />
-                  <Pause
-                    aria-hidden
-                    strokeWidth={0}
-                    className={cn(
-                      "absolute size-7 fill-current transition-[opacity,transform] duration-300",
-                      playing ? "scale-100 opacity-100" : "scale-75 opacity-0",
-                    )}
-                  />
-                </span>
-              </span>
-            </button>
+                  <span className="relative flex size-20 items-center justify-center sm:size-24">
+                    {!playing ? (
+                      <>
+                        <span
+                          aria-hidden
+                          className="border-canvas/70 absolute inset-0 rounded-full border motion-safe:[animation:eiden-pulse-ring_2.6s_ease-out_infinite]"
+                        />
+                        <span
+                          aria-hidden
+                          className="border-canvas/70 absolute inset-0 rounded-full border motion-safe:[animation:eiden-pulse-ring_2.6s_ease-out_1.3s_infinite]"
+                        />
+                      </>
+                    ) : null}
 
-            {/* Transport rail — timecode, progress, sound.
-                It carries its own tinted pill so the controls stay legible
-                whatever the frame underneath happens to be. */}
-            <div className="absolute inset-x-0 bottom-0 px-4 pb-4 sm:px-6 sm:pb-6">
-              <div className="border-canvas/15 bg-ink/60 flex items-center gap-4 rounded-full border py-2 pr-2 pl-5 backdrop-blur-xl">
-                <span className="font-label text-canvas text-[0.7rem] tracking-[0.18em] tabular-nums">
+                    <span
+                      className={cn(
+                        "bg-canvas/95 text-forest relative flex size-full items-center justify-center rounded-full backdrop-blur-sm",
+                        "shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]",
+                        "transition-transform duration-400 ease-[var(--ease-brand)]",
+                        "group-hover:scale-[1.06] active:scale-95 motion-reduce:transition-none",
+                      )}
+                    >
+                      {/* Both glyphs stay mounted and cross-fade in place */}
+                      <Play
+                        aria-hidden
+                        strokeWidth={0}
+                        className={cn(
+                          "absolute ml-1 size-7 fill-current transition-[opacity,transform] duration-300",
+                          playing ? "scale-75 opacity-0" : "scale-100 opacity-100",
+                        )}
+                      />
+                      <Pause
+                        aria-hidden
+                        strokeWidth={0}
+                        className={cn(
+                          "absolute size-7 fill-current transition-[opacity,transform] duration-300",
+                          playing ? "scale-100 opacity-100" : "scale-75 opacity-0",
+                        )}
+                      />
+                    </span>
+                  </span>
+                </button>
+
+                <span
+                  style={withGrow}
+                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.7rem] tracking-[0.18em] tabular-nums sm:block"
+                >
                   <span ref={elapsedRef}>0:00</span>
-                  <span className="text-canvas/45">
+                  <span className="text-canvas/40">
                     {" / "}
                     <span ref={totalRef}>0:00</span>
                   </span>
                 </span>
 
+                <div
+                  style={withGrow}
+                  className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2.5 p-4 sm:p-5"
+                >
+                  <button
+                    type="button"
+                    onClick={toggleMute}
+                    aria-label={muted ? t.vsl.unmute : t.vsl.mute}
+                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.65rem] font-semibold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                  >
+                    {muted ? (
+                      <VolumeX className="size-3.5" strokeWidth={1.7} aria-hidden />
+                    ) : (
+                      <Volume2 className="size-3.5" strokeWidth={1.7} aria-hidden />
+                    )}
+                    {t.vsl.sound}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={goFullscreen}
+                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.65rem] font-semibold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                  >
+                    <Maximize className="size-3.5" strokeWidth={1.7} aria-hidden />
+                    {t.vsl.fullscreen}
+                  </button>
+                </div>
+
                 <span
                   aria-hidden
-                  className="bg-canvas/20 relative h-[3px] flex-1 overflow-hidden rounded-full"
+                  className="bg-canvas/15 absolute inset-x-0 bottom-0 h-px"
                 >
                   <span
                     ref={barRef}
-                    className="bg-gold absolute inset-0 origin-left rounded-full"
+                    className="bg-gold absolute inset-0 origin-left"
                     style={{ transform: "scaleX(0)" } as CSSProperties}
                   />
                 </span>
-
-                <button
-                  type="button"
-                  onClick={toggleMute}
-                  aria-label={muted ? t.vsl.unmute : t.vsl.mute}
-                  className="border-canvas/20 text-canvas hover:bg-canvas hover:text-ink flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300"
-                >
-                  {muted ? (
-                    <VolumeX className="size-4" strokeWidth={1.7} aria-hidden />
-                  ) : (
-                    <Volume2 className="size-4" strokeWidth={1.7} aria-hidden />
-                  )}
-                </button>
               </div>
             </div>
+
+            <div className="flex flex-1 flex-col justify-start pt-14 md:pt-6">
+              <RevealWords
+                as="h2"
+                text={t.vsl.title}
+                delay={0.08}
+                className="font-display vsl-ink block max-w-4xl text-center text-[clamp(1.5rem,4.2vw,3.25rem)] leading-[1.04] font-medium tracking-[-0.03em]"
+              />
+            </div>
           </div>
-        </Reveal>
+        </div>
+      </div>
 
-        {/* ── Chapters — each one seeks the film ─────────────────────── */}
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          {chapters.map((entry, index) => {
-            const active = playing && chapter === index;
-            return (
-              <Reveal key={entry.n} delay={0.06 * index} amount={0.2}>
-                <button
-                  type="button"
-                  onClick={() => seekToChapter(index)}
-                  aria-current={active ? "true" : undefined}
-                  className={cn(
-                    "group/chapter relative h-full w-full overflow-hidden rounded-2xl border p-6 text-left",
-                    "transition-[background-color,border-color,transform] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                    "hover:-translate-y-1",
-                    active
-                      ? "border-gold/40 bg-forest-md"
-                      : "border-canvas/10 bg-forest-md/50 hover:border-canvas/25",
-                  )}
-                >
-                  {/* Fill line — reads as the chapter's slot in the runtime */}
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "bg-gold absolute inset-x-0 top-0 h-px origin-left",
-                      "transition-transform duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                      active ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-
-                  <div className="flex items-center justify-between gap-3">
-                    <span
-                      className={cn(
-                        "font-label text-sm font-semibold tracking-[0.2em] transition-colors duration-500",
-                        active ? "text-gold" : "text-canvas/40",
-                      )}
-                    >
-                      {entry.n}
-                    </span>
-                    <span
-                      className={cn(
-                        "border-canvas/15 text-canvas/70 flex size-8 items-center justify-center rounded-full border",
-                        "transition-[transform,border-color,color] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                        "group-hover/chapter:border-gold/50 group-hover/chapter:text-gold group-hover/chapter:scale-110",
-                      )}
-                    >
-                      <Play
-                        aria-hidden
-                        strokeWidth={0}
-                        className="ml-0.5 size-3 fill-current"
-                      />
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-canvas mt-4 text-lg font-bold tracking-[-0.02em]">
-                    {entry.label}
-                  </h3>
-                  <p className="text-canvas/55 mt-2 text-sm leading-relaxed">
-                    {entry.text}
-                  </p>
-                </button>
-              </Reveal>
-            );
-          })}
+      <div
+        ref={splitRef}
+        aria-hidden
+        className="vsl-split pointer-events-none relative z-2"
+      >
+        <div className="sticky top-0 h-svh overflow-hidden">
+          <span className="vsl-leaf vsl-leaf-top" />
+          <span className="vsl-leaf vsl-leaf-bottom" />
         </div>
       </div>
     </section>
