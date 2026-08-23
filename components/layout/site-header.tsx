@@ -322,15 +322,6 @@ export function SiteHeader() {
                   "last:border-b-0 md:last:border-r-0",
                 )}
               >
-                {/* The picture. Always on show where the routes are stacked
-                    and there is no pointer to open one with; from `md` up it
-                    waits for the column to be opened.
-
-                    It fills its slot, and no picture is drawn above its own
-                    scale doing so — that is a property of the files chosen,
-                    not of the fit, and `menuMedia` says what it costs. Fitting
-                    the whole frame instead would strand the portraits as a
-                    sliver down the middle of a phone's short, wide row. */}
                 <span
                   aria-hidden
                   className={cn(

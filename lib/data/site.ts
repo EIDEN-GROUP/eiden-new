@@ -109,7 +109,7 @@ export const caseStudies: CaseStudyRecord[] = [
 
 export const menuMedia: Record<NavRoute["key"], string> = {
   home: "/work/hero.png",
-  about: "/work/CEO.png",
+  about: "/media/eiden-hero-poster.jpg",
   clients: "/work/bopassage-brand-identity.png",
   solutions: "/services/web-2.jpg",
   contact: "/work/contact-bg.png",
