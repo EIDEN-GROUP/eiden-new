@@ -455,6 +455,20 @@ export const fr = {
       hours: "Horaires",
     },
     hours: "Lundi – vendredi, 9h – 18h (GMT+1)",
+    /* The card beside the form: a call is the shorter way in, so it is
+       given its own seal rather than a line in the copy. */
+    book: {
+      stamp: "Parlez-nous de votre projet",
+      title: "Cliquez ici pour réserver un appel",
+      text: "30 minutes, sans engagement. On regarde où vous en êtes, et ce qu'il y a à construire.",
+      whatsapp:
+        "Bonjour EIDEN, j'aimerais réserver un appel pour parler de mon projet.",
+    },
+    map: {
+      label: "Nous trouver",
+      action: "Ouvrir dans Google Maps",
+      frameTitle: "Carte des bureaux EIDEN GROUP à Agadir",
+    },
     form: {
       title: "Écrivez-nous",
       name: "Nom complet",
@@ -469,6 +483,8 @@ export const fr = {
         "Contenu & réseaux sociaux",
         "Autre",
       ],
+      otherLabel: "Précisez votre besoin",
+      otherPlaceholder: "En deux mots.",
       message: "Votre message",
       messagePlaceholder:
         "Parlez-nous de votre activité, de votre objectif et de votre échéance.",

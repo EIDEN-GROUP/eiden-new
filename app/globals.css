@@ -187,6 +187,14 @@
   }
 }
 
+/* Google only draws its tiles in daylight, and the contact page is ink, so
+   the frame is turned back into a night map here. Greyscale first — without
+   it the inversion returns a road as orange — then the contrast pulled back
+   so the place names stay readable rather than glaring. */
+@utility map-night {
+  filter: grayscale(1) invert(0.92) contrast(0.92) brightness(1.04);
+}
+
 /* ============================================================
    Keyframes
    ============================================================ */
@@ -641,10 +649,10 @@
    Menu columns — one per route, the opened one taking the room
 
    Below `md` the routes stack and every picture is on show, since
-   there is no pointer to open one with. From `md` up they are
-   columns of equal share until one is pointed at or tabbed into,
-   and that one takes roughly two fifths of the frame while the
-   rest divide what is left.
+   there is no pointer to open one with. From `md` up the route you
+   are on is the open one, and it takes roughly two fifths of the
+   frame while the rest divide what is left — until a pointer or the
+   keyboard asks for a different column, which takes over from it.
 
    `flex-grow` is the animated property rather than `width`: the
    track stays a flex row, so the columns that give way are laid
@@ -662,9 +670,19 @@
     transition: flex-grow 0.75s var(--ease-brand);
   }
 
+  /* The column being pointed at takes the room — and so does the route you
+     are already reading, so the panel opens on where you stand instead of
+     marking it in another colour. The pointer outranks the page: ask for a
+     different column and the open one gives its share straight back. */
   .menu-col:hover,
-  .menu-col:focus-within {
+  .menu-col:focus-within,
+  .menu-col[aria-current="page"] {
     flex-grow: 2.8;
+  }
+
+  .menu-veil:has(.menu-col:hover, .menu-col:focus-within)
+    .menu-col[aria-current="page"]:not(:hover, :focus-within) {
+    flex-grow: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {

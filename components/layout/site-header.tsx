@@ -300,12 +300,17 @@ export function SiteHeader() {
                   "last:border-b-0 md:last:border-r-0",
                 )}
               >
+                {/* The picture behind a column, on show while it is hovered
+                    — and left on for the route you are already reading. The
+                    open column is what says "you are here", so the label
+                    keeps the colour every other one has. */}
                 <span
                   aria-hidden
                   className={cn(
                     "bg-ink absolute inset-0 -z-10 transition-opacity duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     "opacity-100 md:opacity-0",
                     "md:group-hover/col:opacity-100 md:group-focus-visible/col:opacity-100",
+                    active && "md:opacity-100",
                   )}
                 >
                   <Image
@@ -325,6 +330,7 @@ export function SiteHeader() {
                   className={cn(
                     "bg-cream absolute inset-0 -z-20 hidden transition-opacity duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     "md:block md:group-hover/col:opacity-0 md:group-focus-visible/col:opacity-0",
+                    active && "md:opacity-0",
                   )}
                 />
 
@@ -349,6 +355,7 @@ export function SiteHeader() {
                       "md:-translate-x-2 md:opacity-0",
                       "md:group-hover/col:translate-x-0 md:group-hover/col:opacity-100",
                       "md:group-focus-visible/col:translate-x-0 md:group-focus-visible/col:opacity-100",
+                      active && "md:translate-x-0 md:opacity-100",
                     )}
                   />
                   <span
@@ -357,7 +364,7 @@ export function SiteHeader() {
                       "transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                       "text-canvas md:text-ink",
                       "md:group-hover/col:text-canvas md:group-focus-visible/col:text-canvas",
-                      active && "md:text-gold-dk",
+                      active && "md:text-canvas",
                     )}
                   >
                     {t.nav[route.key]}
@@ -372,6 +379,7 @@ export function SiteHeader() {
                     "transition-opacity duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     "md:block md:opacity-0",
                     "md:group-hover/col:opacity-100 md:group-focus-visible/col:opacity-100",
+                    active && "md:opacity-100",
                   )}
                 >
                   {t.menu.captions[route.key]}

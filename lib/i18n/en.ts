@@ -450,6 +450,19 @@ export const en: Dictionary = {
       hours: "Hours",
     },
     hours: "Monday – Friday, 9am – 6pm (GMT+1)",
+    /* The card beside the form: a call is the shorter way in, so it is
+       given its own seal rather than a line in the copy. */
+    book: {
+      stamp: "Tell us about your project",
+      title: "Click here to schedule a call",
+      text: "30 minutes, no strings. We look at where you stand, and what there is to build.",
+      whatsapp: "Hello EIDEN, I'd like to book a call to talk about my project.",
+    },
+    map: {
+      label: "Find us",
+      action: "Open in Google Maps",
+      frameTitle: "Map of EIDEN GROUP's offices in Agadir",
+    },
     form: {
       title: "Write to us",
       name: "Full name",
@@ -464,6 +477,8 @@ export const en: Dictionary = {
         "Content & social media",
         "Other",
       ],
+      otherLabel: "Tell us what you need",
+      otherPlaceholder: "In a few words.",
       message: "Your message",
       messagePlaceholder:
         "Tell us about your business, your goal and your timeline.",

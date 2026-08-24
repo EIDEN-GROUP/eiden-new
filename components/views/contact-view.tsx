@@ -1,34 +1,41 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import { PageHero } from "@/components/layout/page-hero";
+import { useId, useState, type FormEvent, type ReactNode } from "react";
+import {
+  ArrowUpRight,
+  CalendarClock,
+  ChevronDown,
+  Clock,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-type Errors = Partial<Record<"name" | "email" | "message", string>>;
+type Errors = Partial<Record<"name" | "email" | "message" | "detail", string>>;
 
 const fieldClass =
-  "w-full rounded-xl border border-forest/15 bg-canvas px-4 py-3.5 text-[0.9375rem] text-forest " +
-  "placeholder:text-forest/35 transition-colors duration-300 focus:border-teal focus:outline-none " +
-  "focus-visible:outline-none";
+  "w-full border-b border-canvas/25 bg-transparent px-0 py-3 text-[0.9375rem] text-canvas " +
+  "placeholder:text-canvas/30 transition-colors duration-300 " +
+  "hover:border-canvas/45 focus:border-gold focus:outline-none focus-visible:outline-none";
 
 export function ContactView() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const page = t.pages.contact;
   const form = t.contact.form;
+  const book = t.contact.book;
+  const map = t.contact.map;
 
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [subjectIndex, setSubjectIndex] = useState(0);
 
-  /**
-   * There is no mail backend yet, so a valid submission hands the composed
-   * message to the visitor's own mail client. Swap this for a route handler
-   * once a transactional provider is connected.
-   */
+  const needsDetail = subjectIndex === form.subjects.length - 1;
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,7 +43,8 @@ export function ContactView() {
     const email = String(data.get("email") ?? "").trim();
     const company = String(data.get("company") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
-    const subject = String(data.get("subject") ?? "").trim();
+    const subject = form.subjects[subjectIndex] ?? "";
+    const detail = String(data.get("subjectDetail") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
     const nextErrors: Errors = {};
@@ -45,6 +53,7 @@ export function ContactView() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
       nextErrors.email = form.invalidEmail;
     if (!message) nextErrors.message = form.required;
+    if (needsDetail && !detail) nextErrors.detail = form.required;
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
@@ -54,7 +63,7 @@ export function ContactView() {
       company ? `${form.company}: ${company}` : null,
       `${form.email}: ${email}`,
       phone ? `${form.phone}: ${phone}` : null,
-      `${form.subject}: ${subject}`,
+      `${form.subject}: ${subject}${detail ? ` — ${detail}` : ""}`,
       "",
       message,
     ]
@@ -62,7 +71,7 @@ export function ContactView() {
       .join("\n");
 
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      `${subject} — ${name}`,
+      `${detail || subject} — ${name}`,
     )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
@@ -76,7 +85,7 @@ export function ContactView() {
     },
     {
       icon: Phone,
-      label: `${t.contact.infoLabels.phone} — ${t.footer.phoneMaLabel}`,
+      label: `${t.contact.infoLabels.phone} | ${t.footer.phoneMaLabel}`,
       value: siteConfig.phoneMa,
       href: `tel:${siteConfig.phoneMa.replace(/\s/g, "")}`,
     },
@@ -85,39 +94,65 @@ export function ContactView() {
       label: t.contact.infoLabels.address,
       value: siteConfig.address,
     },
-    {
-      icon: Clock,
-      label: t.contact.infoLabels.hours,
-      value: t.contact.hours,
-    },
+    // {
+    //   icon: Clock,
+    //   label: t.contact.infoLabels.hours,
+    //   value: t.contact.hours,
+    // },
   ];
 
-  return (
-    <>
-      <PageHero eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
+  const bookingHref = `https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}?text=${encodeURIComponent(
+    book.whatsapp,
+  )}`;
 
-      <section className="bg-canvas py-24 sm:py-32">
-        <div className="container-eiden grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)] lg:gap-16">
-          {/* Form */}
-          <Reveal>
-            <div className="border-forest/10 bg-cream rounded-2xl border p-7 sm:p-10">
-              <h2 className="font-display text-forest text-2xl font-bold tracking-[-0.025em]">
+  const place = encodeURIComponent(siteConfig.address);
+  const mapEmbed = `https://www.google.com/maps?q=${place}&hl=${locale}&z=15&output=embed`;
+  const mapLink = `https://www.google.com/maps/search/?api=1&query=${place}`;
+
+  return (
+    <div data-nav-tone="dark" className="bg-ink text-canvas">
+      <section className="grain lg:px-24">
+        <div className="container-eiden pt-32 pb-14 sm:pt-40 sm:pb-20">
+          <Reveal direction="none" duration={0.5}>
+            <p className="eyebrow text-gold flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+              {page.eyebrow}
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.06}>
+            <h1 className="text-canvas mt-7 max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)]">
+              {page.title}
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <p className="text-canvas/60 mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
+              {page.lead}
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="container-eiden pb-20 sm:pb-28">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] lg:items-start lg:gap-16">
+            <Reveal>
+              <h2 className="font-label text-canvas/45 text-[0.8rem] font-bold tracking-[0.2em] uppercase">
                 {form.title}
               </h2>
 
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="mt-8 flex flex-col gap-5"
+                className="mt-8 flex flex-col gap-7"
               >
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
                   <Field id="name" label={form.name} error={errors.name} required>
                     <input
                       id="name"
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className={cn(fieldClass, errors.name && "border-red-500")}
+                      className={cn(fieldClass, errors.name && "border-red-400")}
                       aria-invalid={Boolean(errors.name)}
                       aria-describedby={errors.name ? "name-error" : undefined}
                     />
@@ -144,7 +179,7 @@ export function ContactView() {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className={cn(fieldClass, errors.email && "border-red-500")}
+                      className={cn(fieldClass, errors.email && "border-red-400")}
                       aria-invalid={Boolean(errors.email)}
                       aria-describedby={errors.email ? "email-error" : undefined}
                     />
@@ -162,14 +197,59 @@ export function ContactView() {
                 </div>
 
                 <Field id="subject" label={form.subject}>
-                  <select id="subject" name="subject" className={fieldClass}>
-                    {form.subjects.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={subjectIndex}
+                      onChange={(event) =>
+                        setSubjectIndex(Number(event.target.value))
+                      }
+                      className={cn(
+                        fieldClass,
+                        "[&_option]:bg-ink [&_option]:text-canvas appearance-none pr-8",
+                      )}
+                    >
+                      {form.subjects.map((option, index) => (
+                        <option key={option} value={index}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      aria-hidden
+                      strokeWidth={1.8}
+                      className="text-canvas/45 pointer-events-none absolute top-1/2 right-0 size-4 -translate-y-1/2"
+                    />
+                  </div>
                 </Field>
+
+                {needsDetail ? (
+                  <div className="animate-[eiden-fade-in_0.45s_var(--ease-brand)] motion-reduce:animate-none">
+                    <Field
+                      id="subjectDetail"
+                      label={form.otherLabel}
+                      error={errors.detail}
+                      required
+                    >
+                      <input
+                        id="subjectDetail"
+                        name="subjectDetail"
+                        type="text"
+                        autoFocus
+                        placeholder={form.otherPlaceholder}
+                        className={cn(
+                          fieldClass,
+                          errors.detail && "border-red-400",
+                        )}
+                        aria-invalid={Boolean(errors.detail)}
+                        aria-describedby={
+                          errors.detail ? "subjectDetail-error" : undefined
+                        }
+                      />
+                    </Field>
+                  </div>
+                ) : null}
 
                 <Field
                   id="message"
@@ -180,65 +260,143 @@ export function ContactView() {
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={4}
                     placeholder={form.messagePlaceholder}
                     className={cn(
                       fieldClass,
                       "resize-y",
-                      errors.message && "border-red-500",
+                      errors.message && "border-red-400",
                     )}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={errors.message ? "message-error" : undefined}
                   />
                 </Field>
 
-                <div className="flex flex-wrap items-center gap-4 pt-1">
-                  <Button type="submit" variant="dark" size="lg" dot>
+                <div className="flex flex-wrap items-center gap-5 pt-2">
+                  <Button type="submit" variant="light" size="lg">
                     {form.submit}
                   </Button>
-                  <p aria-live="polite" className="text-teal text-[0.9375rem]">
+                  <p aria-live="polite" className="text-gold text-[0.9375rem]">
                     {sent ? form.success : null}
                   </p>
                 </div>
               </form>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          {/* Direct details */}
-          <Reveal delay={0.08} direction="left">
-            <div className="bg-forest/10 flex flex-col gap-px overflow-hidden rounded-2xl">
+            <Reveal delay={0.08} direction="left">
+              <a
+                href={bookingHref}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={cn(
+                  "group border-canvas/15 focus-visible:outline-gold flex flex-col items-center",
+                  "rounded-[1.75rem] border px-8 py-12 text-center transition-colors duration-500 ease-[var(--ease-brand)]",
+                  "hover:bg-canvas hover:border-canvas",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-10 sm:py-14",
+                )}
+              >
+                <span className="relative flex size-40 items-center justify-center sm:size-44">
+                  <Seal text={book.stamp} />
+                  <CalendarClock
+                    aria-hidden
+                    strokeWidth={1.4}
+                    className="text-canvas group-hover:text-ink size-9 transition-[color,transform] duration-500 ease-[var(--ease-brand)] group-hover:scale-110 motion-reduce:transition-none"
+                  />
+                </span>
+
+                <span className="font-display text-canvas group-hover:text-ink mt-9 text-[clamp(1.25rem,2.4vw,1.65rem)] leading-tight font-extrabold tracking-[-0.02em] uppercase transition-colors duration-500 ease-[var(--ease-brand)]">
+                  {book.title}
+                </span>
+
+                <span className="text-canvas/55 group-hover:text-ink/60 mt-4 max-w-xs text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)]">
+                  {book.text}
+                </span>
+              </a>
+
+              <ul className="divide-canvas/10 border-canvas/10 mt-10 flex flex-wrap justify-between divide-y border-t">
               {details.map((detail) => (
-                <div
-                  key={detail.label}
-                  className="bg-canvas flex items-start gap-4 p-6"
-                >
+                <li key={detail.label} className="flex items-start gap-4 py-5">
                   <detail.icon
-                    className="text-teal mt-0.5 size-4 shrink-0"
+                    className="text-gold mt-1 size-4 shrink-0"
                     strokeWidth={1.8}
                     aria-hidden
                   />
                   <div className="min-w-0">
-                    <p className="eyebrow text-forest/40">{detail.label}</p>
+                    <p className="eyebrow text-canvas/35">{detail.label}</p>
                     {detail.href ? (
                       <a
                         href={detail.href}
-                        className="text-forest hover:text-teal mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
+                        className="text-canvas hover:text-gold mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
                       >
                         {detail.value}
                       </a>
                     ) : (
-                      <p className="text-forest mt-2 text-[0.9375rem] leading-relaxed">
+                      <p className="text-canvas/75 mt-2 text-[0.9375rem] leading-relaxed">
                         {detail.value}
                       </p>
                     )}
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-          </Reveal>
+            </ul>
+            </Reveal>
+          </div>
         </div>
       </section>
-    </>
+
+      <section aria-labelledby="contact-map-label">
+        <div className="container-eiden flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pb-6">
+          <p id="contact-map-label" className="eyebrow text-canvas/35">
+            {map.label}
+          </p>
+          <a
+            href={mapLink}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="font-label text-canvas/70 hover:text-gold inline-flex items-center gap-2 text-[0.8rem] font-bold tracking-[0.16em] uppercase transition-colors duration-300"
+          >
+            {map.action}
+            <ArrowUpRight className="size-3.5" strokeWidth={2} aria-hidden />
+          </a>
+        </div>
+
+        <div className="border-canvas/10 relative h-[68svh] max-h-[46rem] min-h-[22rem] w-full border-y sm:h-[76svh]">
+          <iframe
+            title={map.frameTitle}
+            src={mapEmbed}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="map-night absolute inset-0 size-full border-0"
+          />
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Seal({ text }: { text: string }) {
+  const id = useId();
+  const label = `${text} • ${text} • `;
+
+  return (
+    <svg
+      viewBox="0 0 200 200"
+      aria-hidden
+      className="absolute inset-0 size-full animate-spin [animation-duration:26s] motion-reduce:animate-none"
+    >
+      <defs>
+        <path id={id} fill="none" d="M 100 26 a 74 74 0 1 1 -0.01 0" />
+      </defs>
+      <text
+        className="font-label fill-canvas/70 group-hover:fill-ink/75 transition-[fill] duration-500 ease-[var(--ease-brand)]"
+        fontSize="12"
+        fontWeight="700"
+      >
+        <textPath href={`#${id}`} textLength="465" lengthAdjust="spacing">
+          {label.toUpperCase()}
+        </textPath>
+      </text>
+    </svg>
   );
 }
 
@@ -253,24 +411,24 @@ function Field({
   label: string;
   error?: string;
   required?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-label text-forest/55 text-[0.8rem] font-bold tracking-[0.16em] uppercase"
+        className="font-label text-canvas/45 text-[0.8rem] font-bold tracking-[0.16em] uppercase"
       >
         {label}
         {required ? (
-          <span aria-hidden className="text-teal ml-1">
+          <span aria-hidden className="text-gold ml-1">
             *
           </span>
         ) : null}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-[0.82rem] text-red-600">
+        <p id={`${id}-error`} className="text-[0.82rem] text-red-400">
           {error}
         </p>
       ) : null}
