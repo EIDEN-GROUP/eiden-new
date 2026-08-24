@@ -32,7 +32,7 @@ export function SolutionsView() {
                   <div>
                     <div className="flex items-start justify-between gap-6">
                       <div>
-                        <p className="font-label text-gold-dk text-sm font-semibold tracking-[0.2em]">
+                        <p className="font-label text-gold-dk text-[0.9375rem] font-bold tracking-[0.2em]">
                           0{index + 1}
                         </p>
                         <h2 className="font-display text-forest mt-4 text-[clamp(1.5rem,3vw,2.25rem)] leading-tight font-extrabold tracking-[-0.035em]">
@@ -95,7 +95,7 @@ export function SolutionsView() {
                 key={step.n}
                 className="bg-forest hover:bg-forest-md p-8 transition-colors duration-500"
               >
-                <span className="font-label text-gold text-sm font-semibold tracking-[0.2em]">
+                <span className="font-label text-gold text-[0.9375rem] font-bold tracking-[0.2em]">
                   {step.n}
                 </span>
                 <h3 className="font-display text-canvas mt-4 text-lg font-bold tracking-[-0.02em]">

@@ -67,7 +67,7 @@ export function Home2Closing() {
               )}
             </button>
 
-            <p className="font-label text-gold text-[0.65rem] font-semibold tracking-[0.28em] uppercase">
+            <p className="font-label text-gold text-[0.75rem] font-bold tracking-[0.28em] uppercase">
               {t.vsl.eyebrow}
             </p>
             <h2 className="font-display text-canvas mt-4 max-w-sm text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.02] font-extrabold tracking-[-0.04em]">
@@ -81,7 +81,7 @@ export function Home2Closing() {
               {t.vsl.chapters.map((chapter) => (
                 <li
                   key={chapter.n}
-                  className="border-canvas/25 text-canvas/75 rounded-full border px-3 py-1 text-xs"
+                  className="border-canvas/25 text-canvas/75 rounded-full border px-3 py-1 text-[0.82rem]"
                 >
                   {chapter.label}
                 </li>
@@ -105,7 +105,7 @@ export function Home2Closing() {
               className="from-teal via-teal/70 absolute inset-0 -z-10 bg-gradient-to-t to-transparent"
             />
 
-            <p className="font-label text-canvas/70 text-[0.65rem] font-semibold tracking-[0.28em] uppercase">
+            <p className="font-label text-canvas/70 text-[0.75rem] font-bold tracking-[0.28em] uppercase">
               {t.contact.eyebrow}
             </p>
             <h2 className="font-display text-canvas mt-4 max-w-sm text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.02] font-extrabold tracking-[-0.04em]">
@@ -127,7 +127,7 @@ export function Home2Closing() {
               </ButtonLink>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="text-canvas/80 hover:text-canvas text-sm underline-offset-4 transition-colors hover:underline"
+                className="text-canvas/80 hover:text-canvas text-[0.9375rem] underline-offset-4 transition-colors hover:underline"
               >
                 {siteConfig.email}
               </a>

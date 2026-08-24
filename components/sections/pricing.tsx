@@ -36,7 +36,7 @@ export function Pricing() {
                 )}
               >
                 {featured ? (
-                  <span className="bg-gold font-label text-forest absolute top-6 right-6 rounded-full px-3.5 py-1.5 text-[0.65rem] font-semibold tracking-[0.18em] uppercase">
+                  <span className="bg-gold font-label text-forest absolute top-6 right-6 rounded-full px-3.5 py-1.5 text-[0.75rem] font-bold tracking-[0.18em] uppercase">
                     {t.pricing.popular}
                   </span>
                 ) : null}
@@ -61,7 +61,7 @@ export function Pricing() {
                   </p>
                   <p
                     className={cn(
-                      "mt-2 text-sm",
+                      "mt-2 text-[0.9375rem]",
                       featured ? "text-canvas/50" : "text-forest/45",
                     )}
                   >
@@ -119,7 +119,9 @@ export function Pricing() {
           })}
         </RevealGroup>
 
-        <p className="text-forest/40 mt-8 text-center text-xs">{t.pricing.note}</p>
+        <p className="text-forest/40 mt-8 text-center text-[0.82rem]">
+          {t.pricing.note}
+        </p>
       </div>
     </section>
   );

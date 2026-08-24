@@ -20,7 +20,7 @@ export function Services() {
   const { t } = useLanguage();
 
   return (
-    <section id="services" className="bg-ink py-20 sm:py-28">
+    <section id="services" className="bg-ink pt-20 sm:pt-28">
       <div className="container-eiden">
         <Reveal direction="none" duration={0.5}>
           <p className="eyebrow text-gold flex items-center gap-3">
@@ -40,7 +40,7 @@ export function Services() {
         />
 
         <Reveal delay={0.1} direction="none">
-          <p className="eyebrow text-canvas/25 mt-8 hidden lg:block">
+          <p className="eyebrow text-canvas/50 mt-8 hidden lg:block">
             {t.services.hint}
           </p>
         </Reveal>
@@ -79,7 +79,7 @@ export function Services() {
               ) : null}
 
               <div className="container-eiden flex flex-col gap-5 py-9 sm:py-10 lg:flex-row lg:items-center lg:gap-10 lg:py-10 xl:gap-14">
-                <span className="border-canvas/25 text-canvas/50 group-hover:border-gold group-hover:text-gold flex size-9 shrink-0 items-center justify-center rounded-full border text-[0.7rem] transition-colors duration-500 ease-[var(--ease-brand)]">
+                <span className="border-canvas/25 text-canvas/50 group-hover:border-gold group-hover:text-gold flex size-9 shrink-0 items-center justify-center rounded-full border text-[0.8rem] transition-colors duration-500 ease-[var(--ease-brand)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -87,10 +87,10 @@ export function Services() {
                   {/* The card has room to say what the row is; the rank has
                       the name doing that job already. */}
                   <p className="eyebrow text-gold mb-2 lg:hidden">{item.kicker}</p>
-                  <p className="text-canvas/70 group-hover:text-canvas/85 text-[0.875rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.9375rem] lg:text-[0.8125rem]">
+                  <p className="text-canvas/70 group-hover:text-canvas/85 text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] lg:text-[0.875rem]">
                     {item.text}
                   </p>
-                  <p className="text-canvas/40 mt-3 text-xs transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
+                  <p className="text-canvas/40 mt-3 text-[0.82rem] transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
                     {item.deliverables.join(" · ")}
                   </p>
                 </div>

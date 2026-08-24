@@ -30,7 +30,7 @@ export function Home2Team() {
       <div className="mx-auto max-w-6xl">
         <div className="max-w-3xl">
           <Reveal direction="none" duration={0.5}>
-            <p className="font-label text-teal text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+            <p className="font-label text-teal text-[0.8rem] font-bold tracking-[0.32em] uppercase">
               {t.team.eyebrow}
             </p>
           </Reveal>
@@ -62,10 +62,10 @@ export function Home2Team() {
               <span className="font-display block text-[1.5rem] leading-tight font-extrabold tracking-[-0.035em]">
                 {t.team.founder.name}
               </span>
-              <span className="font-label text-gold mt-2 block text-[0.65rem] font-semibold tracking-[0.24em] uppercase">
+              <span className="font-label text-gold mt-2 block text-[0.75rem] font-bold tracking-[0.24em] uppercase">
                 {t.team.founder.role}
               </span>
-              <span className="text-canvas/60 mt-4 block text-sm leading-relaxed">
+              <span className="text-canvas/60 mt-4 block text-[0.9375rem] leading-relaxed">
                 {t.team.founder.text}
               </span>
             </span>
@@ -90,7 +90,7 @@ export function Home2Team() {
                 <span className="font-display block text-[1.0625rem] leading-tight font-bold tracking-[-0.02em]">
                   {member.name}
                 </span>
-                <span className="mt-1.5 block text-xs leading-relaxed opacity-65">
+                <span className="mt-1.5 block text-[0.82rem] leading-relaxed opacity-65">
                   {member.role}
                 </span>
               </span>
@@ -99,7 +99,7 @@ export function Home2Team() {
         </RevealGroup>
 
         <Reveal delay={0.12}>
-          <p className="text-forest/45 mt-8 text-sm">{t.team.note}</p>
+          <p className="text-forest/45 mt-8 text-[0.9375rem]">{t.team.note}</p>
         </Reveal>
       </div>
     </section>

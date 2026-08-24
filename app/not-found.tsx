@@ -12,7 +12,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="bg-forest text-canvas hover:bg-teal mt-9 inline-flex h-12 items-center rounded-full px-7 text-sm transition-colors duration-300"
+        className="bg-forest text-canvas hover:bg-teal mt-9 inline-flex h-12 items-center rounded-full px-7 text-[0.9375rem] transition-colors duration-300"
       >
         Retour à l&apos;accueil
       </Link>

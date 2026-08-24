@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Cormorant_Garamond,
-  DM_Serif_Display,
-  Inter,
-  Outfit,
-} from "next/font/google";
+import { Cormorant_Garamond, DM_Serif_Display, Inter, Outfit, } from "next/font/google";
 import "./globals.css";
 
 import { LanguageProvider } from "@/components/providers/language-provider";
@@ -17,7 +12,6 @@ import { FloatingActions } from "@/components/layout/floating-actions";
 import { SideTags } from "@/components/layout/side-tags";
 import { siteConfig } from "@/lib/data/site";
 
-/* Five typefaces, five roles — per the EIDEN brand identity system. */
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -49,8 +43,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "EIDEN GROUP — Agence digitale au Maroc",
-    template: `%s — ${siteConfig.name}`,
+    default: "EIDEN GROUP | Agence digitale au Maroc",
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "Agence digitale marocaine basée à Agadir. Stratégie, marque, site web, campagnes et contenu : nous construisons les systèmes digitaux qui font grandir votre entreprise.",
@@ -70,13 +64,13 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "EIDEN GROUP — Agence digitale au Maroc",
+    title: "EIDEN GROUP | Agence digitale au Maroc",
     description:
       "Marque, site web, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EIDEN GROUP — Agence digitale au Maroc",
+    title: "EIDEN GROUP | Agence digitale au Maroc",
     description:
       "Marque, site web, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
   },
@@ -94,11 +88,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="fr"
-      data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${dmSerif.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
-    >
+    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}>
       <head>
         <noscript>
           <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>

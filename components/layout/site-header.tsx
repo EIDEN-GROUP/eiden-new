@@ -12,13 +12,11 @@ import { menuMedia, navRoutes, siteConfig } from "@/lib/data/site";
 import { useFooterRevealed } from "@/lib/footer-reveal";
 import { cn } from "@/lib/utils";
 
-/** Milliseconds: the circle has to be most of the way open first. */
 const LINE_LEAD = 320;
 const LINE_STEP = 70;
 
 type Tone = "dark" | "light";
 
-/** Relative luminance, near enough for a light-or-dark decision. */
 function isDark(colour: string) {
   const parts = colour.match(/[\d.]+/g);
   if (!parts || parts.length < 3) return true;
@@ -26,17 +24,6 @@ function isDark(colour: string) {
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.5;
 }
 
-/**
- * What is behind a point on the screen, as something to draw against.
- *
- * A band may declare itself with `data-nav-tone` — the only way to be right
- * about a photograph or a ground that is cross-fading, neither of which a
- * computed colour describes. Everything else is read straight off the first
- * opaque background under the point, so an ordinary section needs no mark.
- *
- * Declarations are taken in a pass of their own, ahead of any colour: a band
- * that says what it is outranks a layer inside it that merely has a fill.
- */
 function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
   const stack = document
     .elementsFromPoint(x, y)
@@ -74,7 +61,6 @@ export function SiteHeader() {
   const originRef = useRef<HTMLSpanElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
 
-  /* The circle the panel opens as, centred on the button that opened it. */
   const placeOrigin = useCallback(() => {
     const origin = originRef.current;
     const veil = veilRef.current;
@@ -100,17 +86,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("resize", placeOrigin);
   }, [open, placeOrigin]);
 
-  /*
-   * The mark and the controls are drawn against whatever they happen to be
-   * over, and each is read where it sits — a picture wide enough to reach one
-   * of them need not reach both.
-   *
-   * Written straight onto the nodes from a frame loop: the tone changes a
-   * handful of times in a page, and re-rendering the panel and its five
-   * pictures to move two colours would be paying far too much for it. The hit
-   * test itself is skipped on any frame the page has not moved, so standing
-   * still costs one property read.
-   */
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -120,7 +95,6 @@ export function SiteHeader() {
     let forced = false;
 
     const paint = () => {
-      // The panel's own bar is ink, whatever the page underneath is doing.
       if (open) {
         if (!forced) {
           forced = true;
@@ -260,23 +234,27 @@ export function SiteHeader() {
                   this is only here to be read. */}
               <span
                 aria-hidden
-                className="font-label text-[0.68rem] font-semibold tracking-[0.26em] uppercase"
+                className="font-label text-[0.78rem] font-bold tracking-[0.26em] uppercase"
               >
                 {t.menu.label}
               </span>
 
-              <span ref={originRef} aria-hidden className="relative block h-3 w-5">
+              <span
+                ref={originRef}
+                aria-hidden
+                className="relative block h-3.5 w-[1.375rem]"
+              >
                 {/* Two rules of unequal length at rest — the mark of the
                     panel — crossing into a single X once it is open. */}
                 <span
                   className={cn(
-                    "absolute left-0 h-px bg-current transition-[transform,width] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                    "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     open ? "top-1/2 w-full rotate-45" : "top-0 w-full rotate-0",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 h-px bg-current transition-[transform,width] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                    "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     open ? "top-1/2 w-full -rotate-45" : "bottom-0 w-3/5 rotate-0",
                   )}
                 />
@@ -390,7 +368,7 @@ export function SiteHeader() {
                 <span
                   aria-hidden
                   className={cn(
-                    "editorial text-canvas/85 absolute bottom-5 left-6 hidden text-sm",
+                    "editorial text-canvas/85 absolute bottom-5 left-6 hidden text-[0.9375rem]",
                     "transition-opacity duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     "md:block md:opacity-0",
                     "md:group-hover/col:opacity-100 md:group-focus-visible/col:opacity-100",
@@ -424,7 +402,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noreferrer noopener"
                   tabIndex={open ? undefined : -1}
-                  className="font-label text-canvas/70 hover:text-gold inline-flex items-center gap-1.5 text-[0.65rem] font-semibold tracking-[0.2em] uppercase transition-colors duration-300"
+                  className="font-label text-canvas/70 hover:text-gold inline-flex items-center gap-1.5 text-[0.75rem] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
                 >
                   {account.label}
                   <ArrowUpRight className="size-3" strokeWidth={2} aria-hidden />
@@ -439,7 +417,7 @@ export function SiteHeader() {
                 <a
                   href={item.href}
                   tabIndex={open ? undefined : -1}
-                  className="text-canvas/70 hover:text-gold text-[0.8125rem] transition-colors duration-300"
+                  className="text-canvas/70 hover:text-gold text-[0.875rem] transition-colors duration-300"
                 >
                   {item.label}
                 </a>

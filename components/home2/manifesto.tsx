@@ -33,7 +33,7 @@ export function Home2Manifesto() {
         </span>
       </div>
 
-      <p className="font-label text-teal mt-4 text-[0.65rem] font-semibold tracking-[0.28em] uppercase">
+      <p className="font-label text-teal mt-4 text-[0.75rem] font-bold tracking-[0.28em] uppercase">
         {t.idea.eyebrow}
       </p>
 

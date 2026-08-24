@@ -305,7 +305,7 @@ export function Vsl() {
 
                 <span
                   style={withGrow}
-                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.7rem] tracking-[0.18em] tabular-nums sm:block"
+                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block"
                 >
                   <span ref={elapsedRef}>0:00</span>
                   <span className="text-canvas/40">
@@ -322,7 +322,7 @@ export function Vsl() {
                     type="button"
                     onClick={toggleMute}
                     aria-label={muted ? t.vsl.unmute : t.vsl.mute}
-                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.65rem] font-semibold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
                   >
                     {muted ? (
                       <VolumeX className="size-3.5" strokeWidth={1.7} aria-hidden />
@@ -335,7 +335,7 @@ export function Vsl() {
                   <button
                     type="button"
                     onClick={goFullscreen}
-                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.65rem] font-semibold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
                   >
                     <Maximize className="size-3.5" strokeWidth={1.7} aria-hidden />
                     {t.vsl.fullscreen}

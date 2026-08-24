@@ -58,7 +58,7 @@ function Row({
               aria-hidden
               className="absolute inset-x-0 bottom-0 translate-y-full bg-[linear-gradient(to_top,rgba(10,15,12,0.85),transparent)] px-4 pt-8 pb-3 transition-transform duration-500 ease-[var(--ease-brand)] group-hover/card:translate-y-0 motion-reduce:transition-none"
             >
-              <span className="font-label text-canvas text-[0.7rem] font-semibold tracking-[0.18em] uppercase">
+              <span className="font-label text-canvas text-[0.8rem] font-bold tracking-[0.18em] uppercase">
                 {item.client}
               </span>
             </span>

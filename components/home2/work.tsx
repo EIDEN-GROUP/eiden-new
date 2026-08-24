@@ -45,7 +45,7 @@ export function Home2Work() {
           {/* Left column — the claim and the controls */}
           <div>
             <Reveal direction="none" duration={0.5}>
-              <p className="font-label text-teal text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+              <p className="font-label text-teal text-[0.8rem] font-bold tracking-[0.32em] uppercase">
                 {t.proof.eyebrow}
               </p>
             </Reveal>
@@ -120,7 +120,7 @@ export function Home2Work() {
                         sizes="(max-width: 640px) 70vw, 304px"
                         className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:transition-none"
                       />
-                      <span className="bg-canvas/90 text-forest absolute top-4 left-4 rounded-full px-3 py-1 text-[0.7rem] font-semibold backdrop-blur-sm">
+                      <span className="bg-canvas/90 text-forest absolute top-4 left-4 rounded-full px-3 py-1 text-[0.8rem] font-semibold backdrop-blur-sm">
                         {media.metric}
                       </span>
                     </div>
@@ -128,7 +128,7 @@ export function Home2Work() {
                     <h3 className="font-display text-ink mt-5 text-[1.0625rem] leading-snug font-bold tracking-[-0.02em]">
                       {media.client}
                     </h3>
-                    <p className="text-forest/55 mt-1.5 line-clamp-2 text-sm leading-relaxed">
+                    <p className="text-forest/55 mt-1.5 line-clamp-2 text-[0.9375rem] leading-relaxed">
                       {entry.title}
                     </p>
                   </article>

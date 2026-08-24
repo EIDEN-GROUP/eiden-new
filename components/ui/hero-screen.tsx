@@ -85,7 +85,7 @@ export function HeroScreen({
           className="group border-canvas/15 bg-ink/40 hover:border-canvas/40 pointer-events-auto inline-flex items-center gap-3 rounded-full border py-2 pr-3 pl-4 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]"
         >
           <span className="eyebrow text-canvas/40">{label}</span>
-          <span className="text-canvas text-[0.8125rem] leading-none">
+          <span className="text-canvas text-[0.875rem] leading-none">
             {current.client}
           </span>
           <span className="bg-canvas/10 text-canvas group-hover:bg-canvas group-hover:text-ink flex size-6 items-center justify-center rounded-full transition-colors duration-500 ease-[var(--ease-brand)]">

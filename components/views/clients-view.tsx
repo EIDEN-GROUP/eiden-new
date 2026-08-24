@@ -88,7 +88,7 @@ export function ClientsView() {
                         {entry.tags.map((tag) => (
                           <li
                             key={tag}
-                            className="border-forest/15 text-forest/60 rounded-full border px-3 py-1 text-xs"
+                            className="border-forest/15 text-forest/60 rounded-full border px-3 py-1 text-[0.82rem]"
                           >
                             {tag}
                           </li>

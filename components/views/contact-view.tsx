@@ -196,7 +196,7 @@ export function ContactView() {
                   <Button type="submit" variant="dark" size="lg" dot>
                     {form.submit}
                   </Button>
-                  <p aria-live="polite" className="text-teal text-sm">
+                  <p aria-live="polite" className="text-teal text-[0.9375rem]">
                     {sent ? form.success : null}
                   </p>
                 </div>
@@ -259,7 +259,7 @@ function Field({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-label text-forest/55 text-[0.7rem] font-semibold tracking-[0.16em] uppercase"
+        className="font-label text-forest/55 text-[0.8rem] font-bold tracking-[0.16em] uppercase"
       >
         {label}
         {required ? (
@@ -270,7 +270,7 @@ function Field({
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-xs text-red-600">
+        <p id={`${id}-error`} className="text-[0.82rem] text-red-600">
           {error}
         </p>
       ) : null}

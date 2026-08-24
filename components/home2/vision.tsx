@@ -44,7 +44,7 @@ export function Home2Vision() {
         {/* The claim */}
         <div>
           <Reveal direction="none" duration={0.5}>
-            <p className="font-label text-forest/40 text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+            <p className="font-label text-forest/40 text-[0.8rem] font-bold tracking-[0.32em] uppercase">
               {t.idea.shiftLead}
             </p>
           </Reveal>
@@ -109,7 +109,7 @@ export function Home2Vision() {
                     <span className="bg-teal text-canvas mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full">
                       <Check className="size-3" strokeWidth={2.6} aria-hidden />
                     </span>
-                    <span className="text-canvas/65 text-sm leading-relaxed">
+                    <span className="text-canvas/65 text-[0.9375rem] leading-relaxed">
                       {point}
                     </span>
                   </li>

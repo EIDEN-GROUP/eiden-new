@@ -14,7 +14,7 @@ export function Home2Trust() {
     <section className="bg-cream px-4 pb-20 sm:px-6 sm:pb-28">
       <div className="mx-auto max-w-6xl">
         <Reveal direction="none" duration={0.5}>
-          <p className="font-label text-forest/40 text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+          <p className="font-label text-forest/40 text-[0.8rem] font-bold tracking-[0.32em] uppercase">
             {t.hero.clientsLabel}
           </p>
         </Reveal>

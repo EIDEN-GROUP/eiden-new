@@ -121,11 +121,15 @@
 /* Label / eyebrow — Cormorant Garamond, uppercase, wide tracking */
 @utility eyebrow {
   font-family: var(--font-label);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.2;
+
+  @media (width >= 48rem) {
+    font-size: 0.875rem;
+  }
 }
 
 /* Editorial italic — DM Serif Display */
@@ -888,9 +892,14 @@
   background: var(--color-gold-dk);
 }
 
+/* The extra pixel of travel keeps a parted leaf off the frame's own clip
+   line. The frame is sized in `svh`, so that boundary lands on a fraction
+   of a pixel, and a leaf whose edge sits exactly on it bleeds a hairline of
+   canvas — and of its seam — over the section underneath. Scaled by
+   `--split` so the shut curtain still meets exactly where it always did. */
 .vsl-leaf-top {
   top: 0;
-  transform: translate3d(0, calc(var(--split, 1) * -100%), 0);
+  transform: translate3d(0, calc(var(--split, 1) * (-100% - 1px)), 0);
 }
 
 .vsl-leaf-top::after {
@@ -899,7 +908,7 @@
 
 .vsl-leaf-bottom {
   bottom: 0;
-  transform: translate3d(0, calc(var(--split, 1) * 100%), 0);
+  transform: translate3d(0, calc(var(--split, 1) * (100% + 1px)), 0);
 }
 
 .vsl-leaf-bottom::after {

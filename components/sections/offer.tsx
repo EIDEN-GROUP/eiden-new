@@ -41,7 +41,7 @@ export function Offer() {
             </h2>
           </Reveal>
           <Reveal delay={0.12} direction="left">
-            <p className="text-canvas/50 max-w-sm text-sm leading-relaxed">
+            <p className="text-canvas/50 max-w-sm text-[0.9375rem] leading-relaxed">
               {t.offer.text}
             </p>
           </Reveal>
@@ -64,7 +64,7 @@ export function Offer() {
                 <div className="grid gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[auto_minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start lg:gap-10 lg:py-10">
                   <span
                     className={cn(
-                      "font-label text-sm font-semibold tracking-[0.2em] transition-colors duration-500",
+                      "font-label text-[0.9375rem] font-bold tracking-[0.2em] transition-colors duration-500",
                       isActive ? accents[index % accents.length] : "text-canvas/35",
                     )}
                   >
@@ -79,13 +79,13 @@ export function Offer() {
                     <p className="text-canvas/70 text-[0.9375rem] leading-relaxed">
                       {item.text}
                     </p>
-                    <p className="text-canvas/45 mt-4 text-sm leading-relaxed">
+                    <p className="text-canvas/45 mt-4 text-[0.9375rem] leading-relaxed">
                       {item.detail}
                     </p>
                     <Link
                       href={item.href}
                       className={cn(
-                        "mt-5 inline-flex items-center gap-1.5 text-sm underline-offset-4 transition-colors duration-300 hover:underline",
+                        "mt-5 inline-flex items-center gap-1.5 text-[0.9375rem] underline-offset-4 transition-colors duration-300 hover:underline",
                         accents[index % accents.length],
                       )}
                     >

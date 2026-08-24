@@ -30,7 +30,7 @@ export function Home2Expertise() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <Reveal direction="none" duration={0.5}>
-            <p className="font-label text-teal text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+            <p className="font-label text-teal text-[0.8rem] font-bold tracking-[0.32em] uppercase">
               {t.services.eyebrow}
             </p>
           </Reveal>
@@ -55,7 +55,7 @@ export function Home2Expertise() {
               )}
             >
               <div className="flex items-start justify-between gap-6">
-                <p className="font-label text-[0.65rem] font-semibold tracking-[0.28em] uppercase opacity-55">
+                <p className="font-label text-[0.75rem] font-bold tracking-[0.28em] uppercase opacity-55">
                   {item.kicker}
                 </p>
                 <ArrowUpRight
@@ -77,7 +77,7 @@ export function Home2Expertise() {
                 {item.deliverables.map((entry) => (
                   <li
                     key={entry}
-                    className="rounded-full border border-current/20 px-3 py-1 text-xs opacity-75"
+                    className="rounded-full border border-current/20 px-3 py-1 text-[0.82rem] opacity-75"
                   >
                     {entry}
                   </li>
@@ -91,7 +91,7 @@ export function Home2Expertise() {
             href="/nos-solutions"
             className="group bg-gold text-forest flex flex-col justify-between rounded-[1.6rem] p-7 shadow-[0_28px_64px_-38px_rgba(10,15,12,0.5)] transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none"
           >
-            <span className="font-label text-[0.65rem] font-semibold tracking-[0.28em] uppercase opacity-60">
+            <span className="font-label text-[0.75rem] font-bold tracking-[0.28em] uppercase opacity-60">
               {t.services.deliverablesLabel}
             </span>
             <span className="font-display mt-10 flex items-end justify-between gap-4 text-[clamp(1.5rem,3vw,2rem)] leading-[1] font-extrabold tracking-[-0.04em]">

@@ -6,7 +6,6 @@ import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { cn } from "@/lib/utils";
 
-/** Panel tint each portrait fades up into on hover. */
 const accents = [
   "from-teal/70 to-teal/25 text-canvas",
   "from-gold/70 to-gold/25 text-forest",
@@ -15,14 +14,6 @@ const accents = [
   "from-mint/70 to-mint/25 text-forest",
 ];
 
-/**
- * One person.
- *
- * No photography has been supplied yet, so the frame renders the monogram over
- * a brand-tinted panel — a deliberate placeholder rather than a broken image.
- * Dropping in a real portrait means putting an `<Image>` in this slot; the
- * grayscale-to-colour behaviour is on the wrapper and applies either way.
- */
 function Member({
   initials,
   name,
@@ -35,12 +26,7 @@ function Member({
   accent: string;
 }) {
   return (
-    <Link
-      href="/a-propos#equipe"
-      aria-label={`${name} — ${role}`}
-      className="group focus-visible:outline-gold relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2"
-    >
-      {/* Portrait — desaturated at rest, full colour once hovered */}
+    <Link href="/a-propos#equipe" aria-label={`${name} | ${role}`} className="group focus-visible:outline-gold relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2" >
       <div
         aria-hidden
         className={cn(
@@ -57,7 +43,6 @@ function Member({
         </span>
       </div>
 
-      {/* Scrim, so the caption stays legible over any portrait */}
       <div
         aria-hidden
         className={cn(
@@ -68,8 +53,6 @@ function Member({
         )}
       />
 
-      {/* Caption rides up from behind the bottom edge. The padding belongs to
-          the moving element, not the mask, or a sliver stays visible at rest. */}
       <div className="absolute inset-x-0 bottom-0 overflow-hidden">
         <div
           className={cn(
@@ -78,12 +61,10 @@ function Member({
             "motion-reduce:translate-y-0 motion-reduce:transition-none",
           )}
         >
-          <h3 className="font-label text-canvas text-sm font-semibold tracking-[0.08em] uppercase">
+          <h3 className="font-label text-canvas text-[0.9375rem] font-bold tracking-[0.08em] uppercase">
             {name}
           </h3>
-          <p className="text-canvas/65 mt-1 text-[0.8125rem] leading-snug">
-            {role}
-          </p>
+          <p className="text-canvas/65 mt-1 text-[0.875rem] leading-snug">{role}</p>
         </div>
       </div>
     </Link>
@@ -117,14 +98,8 @@ export function Team() {
           </Reveal>
         </div>
 
-        {/* The founder stands alone and at full width — he is on every file,
-            and the layout should say so before the roster does. */}
         <Reveal delay={0.12} duration={0.9} className="mt-16">
-          <Link
-            href="/a-propos#equipe"
-            aria-label={`${founder.name} — ${founder.role}`}
-            className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]"
-          >
+          <Link href="/a-propos#equipe" aria-label={`${founder.name} — ${founder.role}`} className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
             <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-[26rem]">
               <Image
                 src="/work/CEO.png"
@@ -148,7 +123,7 @@ export function Team() {
         </Reveal>
 
         {/* The specialists behind him. */}
-        <RevealGroup className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <RevealGroup className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {t.team.members.map((person, index) => (
             <Member
               key={person.initials}

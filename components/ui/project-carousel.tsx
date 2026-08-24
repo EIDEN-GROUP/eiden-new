@@ -20,18 +20,9 @@ export type CarouselSlide = {
 type ProjectCarouselProps = {
   slides: CarouselSlide[];
   className?: string;
-  /** Milliseconds each slide holds before advancing. */
   interval?: number;
 };
 
-/**
- * Autoplaying client-work carousel that sits in the corner of the hero.
- *
- * Slides are stacked in a single grid cell so the card keeps the height of its
- * tallest slide and never reflows mid-rotation. Autoplay stops while the card
- * is hovered or focused, while the tab is hidden, and for visitors who prefer
- * reduced motion — with a manual control so it can always be resumed.
- */
 export function ProjectCarousel({
   slides,
   className,
@@ -59,7 +50,6 @@ export function ProjectCarousel({
     return () => window.clearInterval(id);
   }, [playing, count, interval, go]);
 
-  // A hidden tab would otherwise burn through every slide in the background.
   useEffect(() => {
     const onVisibility = () => setHeld(document.hidden);
     document.addEventListener("visibilitychange", onVisibility);
@@ -78,9 +68,8 @@ export function ProjectCarousel({
       onBlurCapture={() => setHeld(false)}
       className={cn("w-full max-w-[26rem]", className)}
     >
-      {/* Counter rail — index, transport controls, autoplay toggle */}
       <div className="text-canvas/70 mb-3 flex items-center justify-end gap-2">
-        <p className="font-label text-[0.8125rem] tracking-[0.18em] tabular-nums">
+        <p className="font-label text-[0.875rem] tracking-[0.18em] tabular-nums">
           <span className="text-canvas">{String(index + 1).padStart(2, "0")}</span>
           <span className="mx-1 opacity-40">/</span>
           {String(count).padStart(2, "0")}
@@ -134,7 +123,6 @@ export function ProjectCarousel({
               className={cn(
                 "col-start-1 row-start-1 flex items-center gap-3.5",
                 "transition-[opacity,transform] ease-[var(--ease-brand)] motion-reduce:transition-none",
-                // The outgoing slide clears first, so the two never ghost.
                 position === index
                   ? "translate-y-0 opacity-100 delay-200 duration-600"
                   : "pointer-events-none translate-y-3 opacity-0 delay-0 duration-200",
@@ -158,7 +146,7 @@ export function ProjectCarousel({
                 <div className="flex items-center gap-3">
                   <Link
                     href="/clients"
-                    className="group bg-canvas text-forest hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-4 text-[0.8125rem] font-medium transition-colors duration-300"
+                    className="group bg-canvas text-forest hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-4 text-[0.875rem] font-medium transition-colors duration-300"
                   >
                     {t.common.seeCase}
                     <ArrowRight
@@ -176,7 +164,6 @@ export function ProjectCarousel({
           ))}
         </div>
 
-        {/* Autoplay progress — restarted by the key on every slide change */}
         <div
           aria-hidden
           className="bg-canvas/15 mt-3 h-px w-full overflow-hidden rounded-full"
@@ -193,8 +180,6 @@ export function ProjectCarousel({
           />
         </div>
       </div>
-
-      {/* Screen readers get the change announced without the visual churn. */}
       <p aria-live="polite" className="sr-only">
         {current.client} — {index + 1} / {count}
       </p>

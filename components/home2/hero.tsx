@@ -57,7 +57,7 @@ export function Home2Hero() {
 
       <div className="mx-auto max-w-6xl text-center">
         <Rise>
-          <p className="font-label text-teal text-[0.7rem] font-semibold tracking-[0.32em] uppercase">
+          <p className="font-label text-teal text-[0.8rem] font-bold tracking-[0.32em] uppercase">
             {t.hero.trustSub}
           </p>
         </Rise>

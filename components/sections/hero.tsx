@@ -166,14 +166,14 @@ export function Hero() {
             <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
               <Link
                 href="/nos-solutions"
-                className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-sm transition-colors duration-300"
+                className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
               >
                 {t.common.seeSolutions}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
               <Link
                 href="/contact"
-                className="group text-canvas/75 hover:text-canvas inline-flex h-9 items-center gap-2 text-sm transition-colors duration-300"
+                className="group text-canvas/75 hover:text-canvas inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300"
               >
                 {t.common.bookCall}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
@@ -195,7 +195,7 @@ export function Hero() {
                   />
                 ))}
               </span>
-              <p className="text-canvas/60 text-[0.8125rem]">{t.hero.trust}</p>
+              <p className="text-canvas/60 text-[0.875rem]">{t.hero.trust}</p>
             </div>
 
             {/* The claim above is a number; this is the project it came
@@ -223,10 +223,10 @@ export function Hero() {
                   <span className="eyebrow text-teal block font-bold">
                     {t.hero.featured.badge}
                   </span>
-                  <span className="text-ink mt-2 block text-[0.8125rem] leading-snug">
+                  <span className="text-ink mt-2 block text-[0.875rem] leading-snug">
                     {t.hero.featured.text}
                   </span>
-                  <span className="text-ink/50 mt-2 block text-xs">
+                  <span className="text-ink/50 mt-2 block text-[0.82rem]">
                     <span className="text-ink/80 font-medium">
                       {featured.metric}
                     </span>{" "}

@@ -41,7 +41,7 @@ export function ContactBanner() {
         >
           <Link
             href="/contact"
-            className="group text-canvas font-display relative inline-block pb-2 text-[0.75rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.8125rem]"
+            className="group text-canvas font-display relative inline-block pb-2 text-[0.82rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.875rem]"
           >
             {t.contact.cta}
             <span
@@ -56,7 +56,7 @@ export function ContactBanner() {
 
           <a
             href={`mailto:${siteConfig.email}`}
-            className="text-canvas/60 hover:text-gold text-[0.8125rem] tracking-wide transition-colors duration-300"
+            className="text-canvas/60 hover:text-gold text-[0.875rem] tracking-wide transition-colors duration-300"
           >
             {siteConfig.email}
           </a>

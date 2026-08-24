@@ -94,7 +94,7 @@ export function SiteFooter() {
                 <span className="flex flex-wrap items-center gap-3">
                   <Link
                     href={siteConfig.bookingUrl}
-                    className="group border-canvas/25 hover:bg-canvas hover:text-ink font-label inline-flex h-12 items-center gap-3 rounded-full border px-6 text-[0.7rem] font-semibold tracking-[0.18em] uppercase transition-colors duration-300"
+                    className="group border-canvas/25 hover:bg-canvas hover:text-ink font-label inline-flex h-12 items-center gap-3 rounded-full border px-6 text-[0.8rem] font-bold tracking-[0.18em] uppercase transition-colors duration-300"
                   >
                     {t.footer.bookCall}
                     <ArrowRight
@@ -105,7 +105,7 @@ export function SiteFooter() {
                   </Link>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="group border-canvas/25 hover:bg-canvas hover:text-ink font-label inline-flex h-12 items-center gap-3 rounded-full border px-6 text-[0.7rem] font-semibold tracking-[0.18em] uppercase transition-colors duration-300"
+                    className="group border-canvas/25 hover:bg-canvas hover:text-ink font-label inline-flex h-12 items-center gap-3 rounded-full border px-6 text-[0.8rem] font-bold tracking-[0.18em] uppercase transition-colors duration-300"
                   >
                     {t.footer.email}
                     <AtSign
@@ -167,7 +167,7 @@ export function SiteFooter() {
           </div>
 
           <Rise delay={0.28} className="mt-[clamp(1.25rem,3.5svh,2.5rem)]">
-            <span className="text-canvas/45 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+            <span className="text-canvas/45 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.9375rem]">
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="hover:text-canvas transition-colors duration-300"
@@ -195,7 +195,7 @@ export function SiteFooter() {
 
         {/* ── Bottom bar ────────────────────────────────────────────── */}
         <div className="container-eiden relative z-2 shrink-0">
-          <div className="border-canvas/10 text-canvas/45 flex flex-col gap-4 border-t py-[clamp(1rem,2.5svh,1.5rem)] text-[0.8125rem] md:flex-row md:items-center md:justify-between">
+          <div className="border-canvas/10 text-canvas/45 flex flex-col gap-4 border-t py-[clamp(1rem,2.5svh,1.5rem)] text-[0.875rem] md:flex-row md:items-center md:justify-between">
             <p>
               © {year} {siteConfig.name}. {t.footer.rights}.
             </p>
@@ -216,7 +216,7 @@ export function SiteFooter() {
                 type="button"
                 onClick={toggleLocale}
                 aria-label={t.common.langSwitch}
-                className="border-canvas/20 font-label hover:border-canvas/60 hover:text-canvas flex items-center gap-2 rounded-full border px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.2em] uppercase transition-colors duration-300"
+                className="border-canvas/20 font-label hover:border-canvas/60 hover:text-canvas flex items-center gap-2 rounded-full border px-3 py-1.5 text-[0.8rem] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
               >
                 {locale === "fr" ? "EN" : "FR"}
               </button>

@@ -16,7 +16,8 @@ export function AboutView() {
   const { t } = useLanguage();
   const page = t.pages.about;
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const arrow = "size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none";
+  const arrow =
+    "size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none";
 
   return (
     <>
@@ -28,7 +29,10 @@ export function AboutView() {
         lead={page.lead}
         imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
       >
-        <Link href="/nos-solutions" className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-sm transition-colors duration-300" >
+        <Link
+          href="/nos-solutions"
+          className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+        >
           {page.ctaAction}
           <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
         </Link>
@@ -67,7 +71,7 @@ export function AboutView() {
                 key={movement.n}
                 className="border-canvas/15 hover:border-gold/50 border-t pt-6 transition-colors duration-500"
               >
-                <p className="font-label text-gold text-sm font-semibold tracking-[0.24em]">
+                <p className="font-label text-gold text-[0.9375rem] font-bold tracking-[0.24em]">
                   {movement.n}
                 </p>
                 <h3 className="font-display text-canvas mt-4 text-xl font-bold tracking-[-0.02em]">
@@ -97,7 +101,7 @@ export function AboutView() {
                 key={principle.n}
                 className="bg-cream flex flex-col rounded-2xl p-8 sm:p-10"
               >
-                <p className="font-label text-gold-dk text-sm font-semibold tracking-[0.24em]">
+                <p className="font-label text-gold-dk text-[0.9375rem] font-bold tracking-[0.24em]">
                   {principle.n}
                 </p>
                 <h3 className="font-display text-forest mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
@@ -154,7 +158,7 @@ export function AboutView() {
                 <p className="font-display text-canvas text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.05em]">
                   {entry.value}
                 </p>
-                <p className="text-canvas/55 mt-3 text-sm leading-snug">
+                <p className="text-canvas/55 mt-3 text-[0.9375rem] leading-snug">
                   {entry.label}
                 </p>
               </div>
@@ -232,35 +236,42 @@ export function AboutView() {
       </section>
 
       {/* ── The way in ─────────────────────────────────────────────── */}
-      <section id="contact" data-nav-tone="dark" className="relative isolate w-full">
+      <section
+        id="contact"
+        data-nav-tone="dark"
+        className="relative isolate w-full"
+      >
         <FixedBackdrop src={aboutTexture} />
-        <span aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]"/>
-  
+        <span
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]"
+        />
+
         <div className="mx-auto flex h-svh max-w-full flex-col items-center justify-center px-5 py-16 text-center sm:px-8 sm:py-18">
           <Reveal direction="none" duration={0.5}>
             <p className="eyebrow text-gold mb-3">{t.contact.eyebrow}</p>
           </Reveal>
-  
+
           <RevealWords
             as="h2"
             text={page.ctaTitle}
             delay={0.06}
             className="font-display text-canvas mt-3 block text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase"
           />
-  
+
           <Reveal delay={0.45}>
             <p className="text-canvas/65 mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
               {page.ctaText}
             </p>
           </Reveal>
-  
+
           <Reveal
             delay={0.58}
             className="mt-11 flex flex-col items-center gap-5 sm:mt-12"
           >
             <Link
               href="/contact"
-              className="group text-canvas font-display relative inline-block pb-2 text-[0.75rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.8125rem]"
+              className="group text-canvas font-display relative inline-block pb-2 text-[0.82rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.875rem]"
             >
               {page.ctaAction}
               <span
@@ -272,10 +283,10 @@ export function AboutView() {
                 className="bg-gold absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:scale-x-100 motion-reduce:transition-none"
               />
             </Link>
-  
+
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-canvas/60 hover:text-gold text-[0.8125rem] tracking-wide transition-colors duration-300"
+              className="text-canvas/60 hover:text-gold text-[0.875rem] tracking-wide transition-colors duration-300"
             >
               {siteConfig.email}
             </a>

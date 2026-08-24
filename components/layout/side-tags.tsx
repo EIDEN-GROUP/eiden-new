@@ -76,7 +76,7 @@ function SideTag({
         )}
       >
         <span className="overflow-hidden">
-          <span className="font-display block pl-2 text-[0.8rem] font-bold tracking-[0.01em] whitespace-nowrap">
+          <span className="font-display block pl-2 text-[0.86rem] font-bold tracking-[0.01em] whitespace-nowrap">
             {label}
           </span>
         </span>

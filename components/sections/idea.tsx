@@ -14,16 +14,6 @@ const ramp = (value: number, from: number, to: number) =>
 
 export function Idea() {
   const { t } = useLanguage();
-
-  /*
-   * The split choreography is a wide-screen affordance: it needs three
-   * viewports of scroll room and a horizontal gap to open into. Below `lg`,
-   * and for anyone who asked for less motion, every transform below collapses
-   * to its resting value and the two cards simply stack.
-   *
-   * Both queries read through `useSyncExternalStore`, so the server and the
-   * hydrating client agree on `false` and the markup never mismatches.
-   */
   const wide = useMediaQuery("(min-width: 1024px)");
   const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
   const animate = wide && !reduced;
@@ -47,13 +37,6 @@ export function Idea() {
     const update = () => {
       frame = 0;
       const box = track.getBoundingClientRect();
-
-      /*
-       * Two readings of the same journey. Pinned, the honest ruler is how far
-       * the frame has been held; unpinned there is nothing to hold, so it is
-       * how far the block has climbed the screen. Both land on 0 → 1, and
-       * everything below is written against that.
-       */
       const span = track.offsetHeight - window.innerHeight;
       const p = animate
         ? span > 0
@@ -61,7 +44,6 @@ export function Idea() {
           : 0
         : clamp01((window.innerHeight - box.top) / (window.innerHeight * 0.9));
 
-      /* The room going out, and the bar above it told which way to draw. */
       const dim = animate ? ramp(p, 0.34, 0.6) : ramp(p, 0.05, 0.45);
       track.style.setProperty("--dim", `${dim}`);
       const tone = dim > 0.55 ? "dark" : "light";
@@ -70,16 +52,13 @@ export function Idea() {
       }
 
       if (!animate) {
-        // No room to walk them sideways: they arrive in turn from below.
         stage.style.setProperty("--mission-in", `${ramp(p, 0.1, 0.4)}`);
         stage.style.setProperty("--vision-in", `${ramp(p, 0.28, 0.58)}`);
         return;
       }
 
-      // Headline parts to either side, opening the gap the first card lands in.
       stage.style.setProperty("--head-x", `${ramp(p, 0, 0.42)}`);
       stage.style.setProperty("--head-o", `${1 - ramp(p, 0.3, 0.46)}`);
-      // One card, centred — then it walks left as the second one arrives.
       stage.style.setProperty("--mission-in", `${ramp(p, 0.16, 0.4)}`);
       stage.style.setProperty("--mission-x", `${1 - ramp(p, 0.5, 0.78)}`);
       stage.style.setProperty("--vision-in", `${ramp(p, 0.52, 0.78)}`);
@@ -100,10 +79,6 @@ export function Idea() {
     };
   }, [animate, reduced]);
 
-  /* Both cards are cut from the same white; what tells them apart is what
-     they say. The travel each one makes lives in `.idea-card-*`, so the
-     wide-screen walk and the stacked arrival are one switch in the sheet
-     rather than two sets of inline transforms. */
   const cards = [
     {
       label: t.idea.missionLabel,
@@ -123,14 +98,12 @@ export function Idea() {
 
   return (
     <section id="idee" className="bg-canvas relative">
-      {/* Faint architectural grid, kept under the 4% brand ceiling */}
       <div
         aria-hidden
         className="zellige text-forest pointer-events-none absolute inset-x-0 top-0 h-[70rem] [mask-image:radial-gradient(80%_50%_at_50%_0%,black,transparent)] opacity-70"
       />
 
       <div className="container-eiden relative pt-24 sm:pt-32">
-        {/* ── Statement — the title rises, the prose follows ─────────── */}
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Reveal direction="none" duration={0.5}>
@@ -150,7 +123,6 @@ export function Idea() {
               className="text-forest mt-6 text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]"
             />
 
-            {/* Held back until the headline has finished landing. */}
             <Reveal delay={0.55}>
               <p className="text-forest/65 mt-7 max-w-xl text-base leading-relaxed sm:text-[1.0625rem]">
                 {t.idea.lead}
@@ -172,7 +144,7 @@ export function Idea() {
                 className="group border-forest/12 hover:border-teal/40 border-t py-8 transition-colors duration-500 last:border-b"
               >
                 <div className="flex gap-6 sm:gap-8">
-                  <span className="font-label text-gold-dk group-hover:text-teal text-sm font-semibold tracking-[0.2em] transition-colors duration-500">
+                  <span className="font-label text-gold-dk group-hover:text-teal text-[0.9375rem] font-bold tracking-[0.2em] transition-colors duration-500">
                     {pillar.n}
                   </span>
                   <div className="min-w-0">
@@ -190,18 +162,15 @@ export function Idea() {
         </div>
       </div>
 
-      {/* ── Shift stage — headline parts, one card becomes two ─────── */}
       <div
         ref={trackRef}
         data-nav-tone="light"
         className="relative mt-24 lg:mt-0 lg:h-[300vh]"
       >
-        {/* The light going out, so the cards are handed a dark room. */}
         <span aria-hidden className="idea-wash" />
 
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
-            {/* Headline — one line that splits and clears the frame */}
             <div className="relative z-10 mb-12 flex flex-wrap justify-center gap-x-[0.3em] text-center lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2 lg:flex-nowrap lg:whitespace-nowrap">
               <span
                 style={{
@@ -224,20 +193,20 @@ export function Idea() {
             </div>
 
             {/* Cards */}
-            <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
+            <div className="mx-auto grid max-w-full gap-5 lg:grid-cols-2">
               {cards.map((card) => (
                 <article
                   key={card.label}
                   style={{ "--card-in": `var(${card.enter}, 1)` } as CSSProperties}
                   className={cn(
-                    "idea-card bg-canvas text-forest flex min-h-[22rem] flex-col justify-between rounded-[1.75rem] p-8 sm:p-10 lg:h-[66svh] lg:p-12",
+                    "idea-card bg-canvas text-forest flex flex-col rounded-[1.75rem] p-8 sm:p-10 lg:p-12",
                     "shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)]",
                     card.lane,
                   )}
                 >
                   <div>
-                    <p className="eyebrow text-teal/45">{card.label}</p>
-                    <p className="text-teal mt-6 max-w-xl text-[clamp(1.5rem,2.6vw,2.25rem)] leading-[1.14] font-medium tracking-[-0.02em]">
+                    <p className="eyebrow text-teal/85">{card.label}</p>
+                    <p className="text-teal mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
                       {card.body}
                     </p>
                   </div>
@@ -251,7 +220,7 @@ export function Idea() {
                         >
                           <Check className="size-3" strokeWidth={2.6} />
                         </span>
-                        <span className="text-forest/70 text-[0.9375rem] leading-snug">
+                        <span className="text-forest/80 text-[0.9375rem] leading-snug">
                           {point}
                         </span>
                       </li>

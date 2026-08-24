@@ -100,7 +100,6 @@ export function CaseShowcase({
 }: {
   cases: ShowcaseCase[];
   intro: ShowcaseIntro;
-  /** Eyebrow beside the running number, e.g. "Étude de cas". */
   label: string;
   cta: string;
 }) {
@@ -227,7 +226,7 @@ export function CaseShowcase({
                   backgroundColor: ground.bg,
                 } as CSSProperties
               }
-              className="curtain-layer absolute inset-0 flex items-center"
+              className="curtain-layer absolute inset-0 flex items-start"
             >
               {/* The leading edge of the panel. The sticky frame clips
                   anything past its top, so the shadow a stacked sheet would
@@ -264,12 +263,19 @@ export function CaseShowcase({
               {/* A panel is locked to the frame, so nothing in it may overrun:
                   what does not fit is not scrolled to, it is simply lost. The
                   short-screen sizes below are what keep the call to action on
-                  screen at 640px tall. */}
-              <div className="container-eiden relative grid w-full items-center gap-5 pt-20 pb-8 sm:gap-8 sm:pt-24 sm:pb-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:pt-0 lg:pb-0">
+                  screen at 640px tall.
+
+                  Centred on `my-auto` rather than on the parent's alignment,
+                  over padding deep enough to clear the running head: an auto
+                  margin centres on the padding box, so the reserve costs the
+                  panel nothing while there is room, and the moment there is
+                  not the margin gives up its share and the panel starts under
+                  the head instead of riding up through the project name. */}
+              <div className="container-eiden relative my-auto grid w-full items-center gap-5 py-28 sm:gap-8 sm:py-32 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-40">
                 <div className="min-w-0">
                   <p
                     className={cn(
-                      "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1",
+                      "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]",
                       ink.accent,
                     )}
                   >
@@ -291,7 +297,7 @@ export function CaseShowcase({
                       that pushes its own link off the bottom of the frame. */}
                   <p
                     className={cn(
-                      "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base",
+                      "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3",
                       ink.body,
                     )}
                   >
@@ -326,7 +332,7 @@ export function CaseShowcase({
                     href={entry.href}
                     tabIndex={index + 1 === active ? undefined : -1}
                     className={cn(
-                      "group font-label mt-5 inline-flex items-center gap-4 text-xs font-semibold tracking-[0.22em] uppercase sm:mt-9",
+                      "group font-label mt-5 inline-flex items-center gap-4 text-[0.82rem] font-bold tracking-[0.22em] uppercase sm:mt-9",
                       ink.title,
                     )}
                   >
@@ -349,7 +355,7 @@ export function CaseShowcase({
                 {/* The work itself. First in the frame on a phone — it is the
                     thing the section is here to show, and reading about a
                     project you cannot see is worth nothing. */}
-                <div className="relative order-first h-[20svh] w-full overflow-hidden rounded-sm sm:h-[26svh] lg:order-none lg:aspect-16/10 lg:h-auto">
+                <div className="relative order-first h-[18svh] w-full overflow-hidden rounded-sm sm:h-[24svh] lg:order-none lg:aspect-16/10 lg:h-auto">
                   <Image
                     src={entry.image}
                     alt={entry.imageAlt}
@@ -364,7 +370,7 @@ export function CaseShowcase({
         })}
 
         {/* Running head — the count, held still while the work turns. */}
-        <div className="container-eiden pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between pt-20 sm:pt-32">
+        <div className="container-eiden pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between pt-20 sm:pt-24 lg:pt-32">
           <p
             className={cn(
               "eyebrow transition-colors duration-500",
@@ -391,7 +397,7 @@ export function CaseShowcase({
             <li
               key={entry.slug}
               className={cn(
-                "font-label flex items-center justify-end gap-2 text-[0.65rem] tracking-[0.18em] tabular-nums transition-colors duration-500",
+                "font-label flex items-center justify-end gap-2 text-[0.75rem] tracking-[0.18em] tabular-nums transition-colors duration-500",
                 index + 1 === active ? activeInk.title : activeInk.muted,
               )}
             >

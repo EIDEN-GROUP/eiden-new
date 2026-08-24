@@ -134,7 +134,11 @@ export function ProjectArc({
                   animationDelay: `${delay + Math.abs(seat) * 0.13}s`,
                 }}
               >
-                <Link href={project.href} aria-label={`${project.client} — ${project.title}`} className="group/card relative block h-[var(--arc-card-h)] w-[var(--arc-card-w)] overflow-hidden rounded-lg" >
+                <Link
+                  href={project.href}
+                  aria-label={`${project.client} — ${project.title}`}
+                  className="group/card relative block h-[var(--arc-card-h)] w-[var(--arc-card-w)] overflow-hidden rounded-lg"
+                >
                   <Image
                     src={project.image}
                     alt=""
@@ -142,7 +146,10 @@ export function ProjectArc({
                     sizes="(max-width: 767px) 45vw, 24vw"
                     className="object-cover transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover/card:scale-[1.06] motion-reduce:transition-none"
                   />
-                  <span aria-hidden className="from-ink/90 via-ink/25 absolute inset-0 bg-gradient-to-t to-transparent transition-opacity duration-500 ease-[var(--ease-brand)] md:opacity-0 md:group-hover/card:opacity-100 md:group-focus-visible/card:opacity-100" />
+                  <span
+                    aria-hidden
+                    className="from-ink/90 via-ink/25 absolute inset-0 bg-gradient-to-t to-transparent transition-opacity duration-500 ease-[var(--ease-brand)] md:opacity-0 md:group-hover/card:opacity-100 md:group-focus-visible/card:opacity-100"
+                  />
 
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4 transition-[opacity,transform] duration-500 ease-[var(--ease-brand)] md:translate-y-2 md:opacity-0 md:group-hover/card:translate-y-0 md:group-hover/card:opacity-100 md:group-focus-visible/card:translate-y-0 md:group-focus-visible/card:opacity-100">
                     <div className="min-w-0">
@@ -153,7 +160,10 @@ export function ProjectArc({
                         {project.metric}
                       </p>
                     </div>
-                    <span aria-hidden className="bg-canvas text-forest flex size-8 shrink-0 items-center justify-center rounded-full" >
+                    <span
+                      aria-hidden
+                      className="bg-canvas text-forest flex size-8 shrink-0 items-center justify-center rounded-full"
+                    >
                       <ArrowUpRight className="size-4" strokeWidth={1.8} />
                     </span>
                   </div>
