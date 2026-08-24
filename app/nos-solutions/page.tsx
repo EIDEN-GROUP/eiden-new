@@ -4,7 +4,7 @@ import { SolutionsView } from "@/components/views/solutions-view";
 export const metadata: Metadata = {
   title: "Nos solutions",
   description:
-    "Création web et applications, SEO et visibilité IA, performance media et ads, stratégie de contenu : les solutions digitales EIDEN GROUP.",
+    "Gestio, Scholnexa, Kavo, StayDesk : les systèmes digitaux d'EIDEN GROUP. Nous concevons et construisons des systèmes qui réunissent vos opérations, vos informations et vos équipes au même endroit.",
 };
 
 export default function SolutionsPage() {

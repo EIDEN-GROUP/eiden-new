@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { LogoMarquee } from "@/components/ui/marquee";
 import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
+import { getProjectPage } from "@/lib/data/projects";
 import {
   clientLogos,
   portfolioProjectUrl,
@@ -211,7 +212,12 @@ export function ClientsView() {
                 {shown.map((project, index) => (
                   <ProjectCard
                     key={project.slug}
-                    href={portfolioProjectUrl(project.slug)}
+                    href={
+                      getProjectPage(project.slug)
+                        ? `/projects/${project.slug}`
+                        : portfolioProjectUrl(project.slug)
+                    }
+                    external={!getProjectPage(project.slug)}
                     name={project.name}
                     category={page.filters[project.category]}
                     line={page.projectLines[project.slug]}
@@ -269,6 +275,7 @@ export function ClientsView() {
 
 function ProjectCard({
   href,
+  external,
   name,
   category,
   line,
@@ -279,6 +286,8 @@ function ProjectCard({
   wide,
 }: {
   href: string;
+  /** A project with a page of its own opens here; the rest go to the portfolio. */
+  external: boolean;
   name: string;
   category: string;
   line: string;
@@ -303,8 +312,8 @@ function ProjectCard({
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noreferrer noopener"
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer noopener" : undefined}
       onPointerMove={track}
       className={cn(
         "group focus-visible:outline-gold relative block focus-visible:outline-2 focus-visible:outline-offset-4",
