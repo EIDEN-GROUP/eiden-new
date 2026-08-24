@@ -672,7 +672,7 @@ export const fr = {
       statLabel: "projets livrés",
       workTitle: "Ce dont nous sommes le plus fiers",
       workLead:
-        "Marque, site, contenu, campagnes — douze chantiers menés de bout en bout, chacun détaillé sur notre portfolio.",
+        "Marque, site, contenu, campagnes douze chantiers menés de bout en bout, chacun détaillé sur notre portfolio.",
       viewProject: "Voir le projet",
       filters: {
         all: "Tous les projets",

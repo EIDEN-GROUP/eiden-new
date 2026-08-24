@@ -2,18 +2,28 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { useMemo, useState, type PointerEvent } from "react";
+import { useMemo, useState, type CSSProperties, type PointerEvent } from "react";
 import { ContactBanner } from "@/components/sections/contact-banner";
 import { ButtonLink } from "@/components/ui/button";
 import { LogoMarquee } from "@/components/ui/marquee";
 import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
-import { clientLogos, portfolioProjectUrl, projects, type ProjectCategory,} from "@/lib/data/site";
+import {
+  clientLogos,
+  portfolioProjectUrl,
+  projects,
+  type ProjectCategory,
+} from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 type Filter = ProjectCategory | "all";
 
 const FILTERS: Filter[] = ["all", "web", "hospitality", "education", "health"];
+
+const COLUMNS = [0, 1, 2].map((column) => ({
+  seconds: [38, 30, 44][column],
+  items: projects.filter((_, index) => index % 3 === column),
+}));
 
 function isWide(index: number) {
   return index >= 2 && (index - 2) % 5 === 0;
@@ -43,8 +53,6 @@ export function ClientsView() {
     [active],
   );
 
-  const mosaic = projects.slice(0, 4);
-
   return (
     <div data-nav-tone="dark" className="bg-ink text-canvas">
       {/* ── The claim, with the work already showing beside it ────────── */}
@@ -73,7 +81,7 @@ export function ClientsView() {
 
               <Reveal delay={0.18}>
                 <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                  <ButtonLink href="/contact" variant="gold" size="lg" dot>
+                  <ButtonLink href="/contact" variant="gold" size="lg">
                     {t.common.bookCall}
                   </ButtonLink>
 
@@ -89,27 +97,56 @@ export function ClientsView() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.1} direction="left" className="hidden lg:block">
-              <div className="grid grid-cols-2 gap-3">
-                {mosaic.map((project, index) => (
-                  <div
-                    key={project.slug}
-                    className={cn(
-                      "ring-canvas/10 relative overflow-hidden rounded-2xl ring-1",
-                      index % 3 === 0 ? "aspect-4/5" : "aspect-4/3",
-                      index === 1 && "mt-8",
-                      index === 3 && "-mt-8",
-                    )}
-                  >
-                    <Image
-                      src={project.image}
-                      alt=""
-                      fill
-                      sizes="22vw"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
+            <Reveal delay={0.1} direction="left">
+              <div
+                aria-hidden
+                className={cn(
+                  "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[34rem]",
+                  "[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]",
+                )}
+              >
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+                  {COLUMNS.map((column, index) => (
+                    <div
+                      key={index}
+                      className={cn("min-w-0", index === 2 && "hidden lg:block")}
+                    >
+                      <div
+                        className="drift-y"
+                        style={
+                          {
+                            "--drift-duration": `${column.seconds}s`,
+                            "--drift-direction": index === 1 ? "reverse" : "normal",
+                          } as CSSProperties
+                        }
+                      >
+                        {/* Laid down twice: the loop closes on the copy. The
+                            spacing is the tile's own padding rather than a
+                            flex gap, which is what keeps the seam invisible. */}
+                        {[...column.items, ...column.items].map((project, i) => (
+                          <div key={`${project.slug}-${i}`} className="pb-3">
+                            <div
+                              className={cn(
+                                "ring-canvas/10 relative overflow-hidden rounded-2xl ring-1",
+                                i % column.items.length === 0
+                                  ? "aspect-4/5"
+                                  : "aspect-4/3",
+                              )}
+                            >
+                              <Image
+                                src={project.image}
+                                alt=""
+                                fill
+                                sizes="(max-width: 1024px) 45vw, 15vw"
+                                className="object-cover"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
           </div>
@@ -120,7 +157,7 @@ export function ClientsView() {
         </div>
 
         <div className="container-eiden pt-16 pb-24 sm:pt-20 sm:pb-32">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:items-start lg:gap-10 xl:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] xl:gap-12">
+          <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
             <div className="lg:sticky lg:top-32">
               <div className="border-canvas/10 bg-canvas/[0.03] rounded-[1.75rem] border p-4">
                 <ul className="flex flex-wrap gap-2.5">
@@ -157,7 +194,12 @@ export function ClientsView() {
                 </ul>
               </div>
 
-              <ButtonLink href="/contact" variant="gold" size="lg" className="mt-4 w-full">
+              <ButtonLink
+                href="/contact"
+                variant="gold"
+                size="lg"
+                className="mt-4 w-full"
+              >
                 {t.contact.cta}
               </ButtonLink>
             </div>
@@ -205,7 +247,9 @@ export function ClientsView() {
           <RevealGroup className="mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
             {page.sectors.map((sector) => (
               <article
-                key={sector.title} className="bg-canvas/[0.04] hover:bg-canvas/[0.08] p-8 transition-colors duration-500">
+                key={sector.title}
+                className="bg-canvas/[0.04] hover:bg-canvas/[0.08] p-8 transition-colors duration-500"
+              >
                 <h3 className="font-display text-canvas text-lg font-bold tracking-[-0.02em]">
                   {sector.title}
                 </h3>
@@ -267,7 +311,12 @@ function ProjectCard({
         wide && "sm:col-span-2",
       )}
     >
-      <div className={cn( "bg-canvas/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )}>
+      <div
+        className={cn(
+          "bg-canvas/[0.04] relative overflow-hidden rounded-[1.25rem]",
+          wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3",
+        )}
+      >
         <Image
           src={image}
           alt={imageAlt}
@@ -280,15 +329,27 @@ function ProjectCard({
           className="object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
         />
 
-        <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"/>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"
+        />
 
-        <p className="eyebrow text-canvas/80 absolute bottom-4 left-4 flex items-center gap-2">
+        <p className="eyebrow text-canvas/80 absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/80 px-5 py-2">
           <span className="text-gold tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
           <span aria-hidden className="bg-canvas/30 h-3 w-px" />
           {category}
         </p>
+
+        <div className="absolute inset-x-0 bottom-0 p-6">
+          <h3 className="font-display text-canvas group-hover:text-gold mt-5 text-[1.0625rem] leading-snug font-bold tracking-[-0.02em] transition-colors duration-300 sm:text-lg">
+            {name}
+          </h3>
+          <p className="text-canvas/50 mt-2 line-clamp-2 max-w-lg text-[0.9375rem] leading-relaxed">
+            {line}
+          </p>
+        </div>
 
         <span
           aria-hidden
@@ -306,13 +367,6 @@ function ProjectCard({
           </span>
         </span>
       </div>
-
-      <h3 className="font-display text-canvas group-hover:text-gold mt-5 text-[1.0625rem] leading-snug font-bold tracking-[-0.02em] transition-colors duration-300 sm:text-lg">
-        {name}
-      </h3>
-      <p className="text-canvas/50 mt-2 line-clamp-2 max-w-lg text-[0.9375rem] leading-relaxed">
-        {line}
-      </p>
     </a>
   );
 }

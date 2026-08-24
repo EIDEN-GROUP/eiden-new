@@ -111,59 +111,53 @@ export type ProjectCategory = "web" | "hospitality" | "education" | "health";
 
 export type ProjectRecord = {
   slug: string;
-  /** Proper noun — the same in every language, so it lives here. */
   name: string;
   category: ProjectCategory;
   image: string;
   imageAlt: string;
 };
 
-/**
- * The portfolio's project index, mirrored here so the clients page can show
- * the work without a round trip. `slug` is the portfolio's own, which is what
- * makes `portfolioProjectUrl` a link rather than a guess.
- */
 export const projects = [
   {
     slug: "bopassage",
     name: "Bôpassage",
     category: "hospitality",
-    image: "/work/bopassage-cover.png",
+    image: "/work/bopassage.png",
     imageAlt: "Identité et site web du restaurant Bôpassage",
   },
   {
     slug: "dmc-morocco",
     name: "DMC Hospitality Morocco",
     category: "hospitality",
-    image: "/work/dmc-cover.png",
+    image: "/work/dmc-brand-logo.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
   {
     slug: "educazen-kids",
     name: "EducazenKids",
     category: "education",
-    image: "/work/educazenkids-cover.png",
+    image: "/work/educazen-hero.png",
     imageAlt: "Plateforme et identité EducazenKids",
   },
   {
     slug: "lunja-village",
     name: "Lunja Village",
     category: "hospitality",
-    image: "/work/lunja-cover.png",
+    image: "/work/image lunja village portfoliio.png",
     imageAlt: "Univers de marque du village côtier Lunja Village",
   },
   {
     slug: "medical-bay",
     name: "Medical Bay",
     category: "health",
-    image: "/work/medical-bay-hero-flatlay.png",
+    image: "/work/medical-bay-brand.png",
     imageAlt: "Identité du centre médical Medical Bay",
   },
   {
     slug: "orsen",
     name: "ORSEN",
     category: "web",
-    image: "/work/orsen card.png",
+    image: "/work/orsen hero.png",
     imageAlt: "Site web ORSEN",
   },
   {
@@ -177,7 +171,7 @@ export const projects = [
     slug: "rihab-residence",
     name: "Résidence Rihab",
     category: "web",
-    image: "/work/card rihab.png",
+    image: "/work/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
   },
   {
