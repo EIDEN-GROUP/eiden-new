@@ -40,7 +40,6 @@ function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
     const bg = style.backgroundColor;
     const alpha = bg.match(/[\d.]+/g);
     if (!alpha) continue;
-    // `rgb(...)` is opaque; `rgba(...)` carries the alpha as a fourth value.
     if (alpha.length > 3 && Number(alpha[3]) < 0.5) continue;
     return isDark(bg) ? "dark" : "light";
   }
@@ -158,8 +157,6 @@ export function SiteHeader() {
     };
   }, []);
 
-  /* The footer is its own full frame with its own navigation; the bar has
-     nothing left to offer over it, so it stows itself. */
   const stowed = footerRevealed && !open;
 
   const reach = [
@@ -173,9 +170,6 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* The bar itself never paints and never takes the pointer — only the
-          mark and the controls do. That is what lets the tone read what is
-          behind them instead of finding the bar in its own way. */}
       <header
         ref={headerRef}
         aria-hidden={stowed || undefined}
@@ -229,23 +223,11 @@ export function SiteHeader() {
                   : "border-current/35 hover:border-current",
               )}
             >
-              {/* The word the control is, kept inside its own border. The
-                  button already carries the label for a screen reader, so
-                  this is only here to be read. */}
-              <span
-                aria-hidden
-                className="font-label text-[0.78rem] font-bold tracking-[0.26em] uppercase"
-              >
+              <span aria-hidden className="font-label text-[0.78rem] font-bold tracking-[0.26em] uppercase">
                 {t.menu.label}
               </span>
 
-              <span
-                ref={originRef}
-                aria-hidden
-                className="relative block h-3.5 w-[1.375rem]"
-              >
-                {/* Two rules of unequal length at rest — the mark of the
-                    panel — crossing into a single X once it is open. */}
+              <span ref={originRef} aria-hidden className="relative block h-3.5 w-[1.375rem]">
                 <span
                   className={cn(
                     "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
@@ -264,9 +246,6 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* ── The panel ───────────────────────────────────────────────────
-          Opens as a circle struck from the button that opened it, then the
-          routes rise into their columns behind it. */}
       <div
         id="site-menu"
         ref={veilRef}
@@ -278,13 +257,9 @@ export function SiteHeader() {
           !open && "pointer-events-none",
         )}
       >
-        {/* The bar sits over this, so the panel only has to leave it room. */}
         <div aria-hidden className="h-19 shrink-0 sm:h-24" />
 
-        <nav
-          aria-label={t.footer.navLabel}
-          className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-visible"
-        >
+        <nav aria-label={t.footer.navLabel} className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-visible">
           {navRoutes.map((route, index) => {
             const active = pathname === route.href;
             return (
@@ -300,10 +275,6 @@ export function SiteHeader() {
                   "last:border-b-0 md:last:border-r-0",
                 )}
               >
-                {/* The picture behind a column, on show while it is hovered
-                    — and left on for the route you are already reading. The
-                    open column is what says "you are here", so the label
-                    keeps the colour every other one has. */}
                 <span
                   aria-hidden
                   className={cn(
@@ -320,11 +291,9 @@ export function SiteHeader() {
                     sizes="(max-width: 768px) 100vw, 45vw"
                     className="object-cover"
                   />
-                  {/* What the type is read against, at every width. */}
                   <span className="bg-ink/60 absolute inset-0" />
                 </span>
 
-                {/* The cream the closed columns are cut from. */}
                 <span
                   aria-hidden
                   className={cn(

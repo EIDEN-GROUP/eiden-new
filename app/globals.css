@@ -195,6 +195,18 @@
   filter: grayscale(1) invert(0.92) contrast(0.92) brightness(1.04);
 }
 
+/* One drifting column. Duration and direction are handed in as custom
+   properties so a caller can vary them per column without an inline
+   `animation`, which would out-rank the reduced-motion stop below. */
+@utility drift-y {
+  animation: eiden-marquee-y var(--drift-duration, 36s) linear infinite;
+  animation-direction: var(--drift-direction, normal);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ============================================================
    Keyframes
    ============================================================ */
@@ -204,6 +216,20 @@
   }
   to {
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* The vertical twin, for the columns of work that drift past the claim on
+   the clients page. Each column lays its list down twice, so pulling the
+   track up by half its own height lands the copy exactly where the original
+   started. That only holds while the spacing is carried by the items — a
+   flex `gap` would leave one gap unaccounted for and the loop would jump. */
+@keyframes eiden-marquee-y {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
   }
 }
 

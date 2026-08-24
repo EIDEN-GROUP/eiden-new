@@ -669,6 +669,41 @@ export const fr = {
       titleTail: "",
       lead: "Hôtellerie, restauration, santé, éducation, commerce, services. Des structures différentes, un même besoin : de la clarté et des résultats mesurables.",
       sectorsTitle: "Les secteurs que nous connaissons le mieux",
+      statLabel: "projets livrés",
+      workTitle: "Ce dont nous sommes le plus fiers",
+      workLead:
+        "Marque, site, contenu, campagnes — douze chantiers menés de bout en bout, chacun détaillé sur notre portfolio.",
+      viewProject: "Voir le projet",
+      filters: {
+        all: "Tous les projets",
+        web: "Web design",
+        hospitality: "Hôtellerie",
+        education: "Éducation",
+        health: "Santé",
+      },
+      empty: "Aucun projet dans cette catégorie pour l'instant.",
+      /* One line per project, keyed by the portfolio's own slug. */
+      projectLines: {
+        bopassage:
+          "Le lieu où l'on revient toujours, avec la couche digitale qui va avec.",
+        "dmc-morocco":
+          "Authenticité et excellence : une expertise hôtelière traduite de la marque jusqu'à la demande.",
+        "educazen-kids":
+          "Une éducation sur mesure, avec la structure digitale et opérationnelle qui suit.",
+        "lunja-village":
+          "Surf, nomades, communauté : une marque de village côtier rebâtie pour ceux qui arrivent vraiment.",
+        "medical-bay":
+          "Un centre médical, pensé de l'expérience patient jusqu'à la logique de revenus.",
+        orsen: "La matière avant le décor.",
+        "lithos-materiaux": "La matière, racontée avec soin.",
+        "rihab-residence":
+          "Une adresse marocaine tranquille, à cinq minutes de l'Atlantique.",
+        "lunja-village-vibes": "Ta parenthèse ensoleillée à Imi Ouaddar.",
+        "chillout-lounge":
+          "Musique live, cocktails et couchers de soleil face à l'Atlantique.",
+        "one-retail": "Au cœur du commerce marocain moderne.",
+        "droguerie-souss": "Bâtissez avec les meilleurs matériaux.",
+      },
       sectors: [
         {
           title: "Hôtellerie & tourisme",

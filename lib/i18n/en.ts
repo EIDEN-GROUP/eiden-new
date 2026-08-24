@@ -661,6 +661,40 @@ export const en: Dictionary = {
       titleTail: "for.",
       lead: "Hospitality, food, healthcare, education, retail, services. Different structures, one shared need: clarity and measurable results.",
       sectorsTitle: "The sectors we know best",
+      statLabel: "projects delivered",
+      workTitle: "What we are proudest of",
+      workLead:
+        "Brand, site, content, campaigns — twelve projects carried end to end, each one written up in full on our portfolio.",
+      viewProject: "See the project",
+      filters: {
+        all: "All work",
+        web: "Web design",
+        hospitality: "Hospitality",
+        education: "Education",
+        health: "Healthcare",
+      },
+      empty: "Nothing in this category yet.",
+      projectLines: {
+        bopassage:
+          "The place you always come back to — now with the digital layer to match.",
+        "dmc-morocco":
+          "Authenticity and excellence: hotel expertise translated from the mark to the inquiry.",
+        "educazen-kids":
+          "Tailored education, with the digital and operational stack to match.",
+        "lunja-village":
+          "Surf, nomads, community — a coastal village brand rebuilt for who is actually arriving.",
+        "medical-bay":
+          "A medical centre, architected from patient experience to revenue logic.",
+        orsen: "Substance before decoration.",
+        "lithos-materiaux": "Material, told with care.",
+        "rihab-residence":
+          "A quiet Moroccan address, five minutes from the Atlantic.",
+        "lunja-village-vibes": "Your sunlit break in Imi Ouaddar.",
+        "chillout-lounge":
+          "Live music, cocktails and sunset sessions facing the Atlantic.",
+        "one-retail": "At the heart of modern Moroccan retail.",
+        "droguerie-souss": "Build with the best materials.",
+      },
       sectors: [
         {
           title: "Hospitality & tourism",
