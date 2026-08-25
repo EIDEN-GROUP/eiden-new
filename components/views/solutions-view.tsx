@@ -13,7 +13,7 @@ export function SolutionsView() {
       <SolutionsHero />
       <SolutionsIntro />
       <SystemsOverview />
-      <BeforeAfter />
+      {/* <BeforeAfter /> */}
       <Process />
       <Capabilities />
       {/* <LocalGlobal /> */}

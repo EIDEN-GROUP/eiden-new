@@ -4,6 +4,26 @@ import { Band, BandLabel, useSay } from "@/components/solutions/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
+/**
+ * How a system gets built. Five steps, one line each.
+ *
+ * A row carries only its name at rest. Point at it and the row inverts: the
+ * ground wipes in from the left, the name lifts away and the step says what it
+ * actually does.
+ *
+ * From `lg` the two halves share one grid cell, so the row is always as tall
+ * as the taller of them and its height never changes. That is what makes the
+ * swap smooth: only `opacity` and `transform` animate, both of which the
+ * compositor handles without laying the page out again — and a row that keeps
+ * its height cannot shift the rows under it, or slide out from under the
+ * cursor that is pointing at it. The text lands a beat after the ground, so
+ * the two read as one movement rather than a dissolve; the delay is on the
+ * hovered state alone, so leaving is immediate.
+ *
+ * There is no hover on a touch screen, so below `lg` the halves fall back into
+ * ordinary flow and the row simply reads name then description — the text is
+ * never behind an interaction that cannot happen.
+ */
 export function Process() {
   const say = useSay();
   const copy = solutionsCopy.process;
@@ -23,37 +43,39 @@ export function Process() {
         {copy.steps.map((step, index) => (
           <li
             key={say(step.title)}
-            className="group border-ink/15 relative isolate border-t last:border-b"
+            className="group border-ink/15 relative isolate border-t last:border-b lg:grid lg:items-center"
           >
+            {/* The ground, wiped in from the left. It runs a little past the
+                measure on either side so the bar reads as struck across the
+                page rather than boxed inside the column. */}
             <span
               aria-hidden
-              className="bg-ink absolute inset-y-0 -right-4 -left-4 -z-10 origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:-right-6 lg:-left-6 lg:group-hover:scale-x-100"
+              className="bg-teal absolute inset-y-0 -right-4 -left-4 -z-10 origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:-right-6 lg:-left-6 lg:group-hover:scale-x-100"
             />
 
             {/* At rest: the name, at size. */}
-            <div className="grid grid-rows-[1fr] transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:group-hover:grid-rows-[0fr] lg:group-hover:opacity-0">
-              <div className="overflow-hidden">
-                <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
-                  <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
-                    {say(step.title)}
-                  </h3>
-                  <span className="eyebrow text-ink/30 tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
+            <div className="transition-[opacity,transform] duration-300 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:group-hover:-translate-y-2 lg:group-hover:opacity-0">
+              <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
+                <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
+                  {say(step.title)}
+                </h3>
+                <span className="eyebrow text-ink/30 tabular-nums">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </div>
             </div>
 
-            <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:grid-rows-[0fr] lg:group-hover:grid-rows-[1fr]">
-              <div className="overflow-hidden">
-                <div className="pb-5 lg:py-6">
-                  <p className="eyebrow lg:text-canvas/45 hidden lg:block">
-                    {say(step.title)}
-                  </p>
-                  <p className="text-ink/65 lg:text-canvas max-w-3xl text-[0.9375rem] leading-relaxed lg:mt-2 lg:text-[clamp(1rem,1.5vw,1.25rem)]">
-                    {say(step.text)}
-                  </p>
-                </div>
+            {/* Pointed at: the same row, inverted, saying what the step does.
+                The small label repeats the name only where the big one has
+                just left — below `lg` it would be the title twice. */}
+            <div className="transition-[opacity,transform] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-hover:delay-100">
+              <div className="pb-5 lg:py-6">
+                <p className="eyebrow lg:text-canvas/45 hidden lg:block">
+                  {say(step.title)}
+                </p>
+                <p className="text-ink/65 lg:text-canvas max-w-3xl text-[0.9375rem] leading-relaxed lg:mt-2 lg:text-[clamp(1rem,1.5vw,1.25rem)]">
+                  {say(step.text)}
+                </p>
               </div>
             </div>
           </li>

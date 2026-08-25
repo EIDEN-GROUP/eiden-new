@@ -13,7 +13,7 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
   const hasCapabilities = system.capabilities.length > 0;
 
   return (
-    <article className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)_minmax(0,1fr)] lg:gap-12 xl:gap-14">
+    <article className="grid gap-10 items-center lg:grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)_minmax(0,1fr)] lg:gap-12 xl:gap-14">
       {/* ── What it is ─────────────────────────────────────────────── */}
       <div className="min-w-0 lg:self-start">
         <Reveal direction="none" duration={0.5}>
@@ -48,58 +48,15 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
             <p className="eyebrow text-canvas/30">{say(copy.builtFor)}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {system.audience.map((item) => (
-                <li
-                  key={say(item)}
-                  className="border-canvas/20 text-canvas/70 rounded-full border px-4 py-1.5 text-[0.875rem]"
-                >
+                <li key={say(item)} className="border-canvas/20 text-canvas/70 rounded-full border px-4 py-1.5 text-[0.875rem]">
                   {say(item)}
                 </li>
               ))}
             </ul>
           </div>
         </Reveal>
-      </div>
 
-      {/* ── The product, shown whole ───────────────────────────────── */}
-      <div className="min-w-0 lg:self-start">
-        <Reveal delay={0.08}>
-          {system.mockup ? (
-            /* The frame is cut to the art's own proportions, so the box and
-               the picture are the same rectangle: the corner radius lands on
-               the image itself rather than on empty margin beside it, and
-               nothing is cropped.
-
-               A panel is pinned to one screen, so the art still has to be
-               held to a share of the viewport — but the ceiling is put on the
-               width, scaled by the picture's own ratio. Capping the height
-               directly would leave the width untouched and pull the frame out
-               of shape; this way a tall composition gives up width and height
-               together, and a wide one never reaches the ceiling at all. */
-            <div
-              className="relative isolate mx-auto w-full overflow-hidden rounded-3xl"
-              style={{
-                aspectRatio: `${system.mockup.width} / ${system.mockup.height}`,
-                maxWidth: `calc(56svh * ${(system.mockup.width / system.mockup.height).toFixed(4)})`,
-              }}
-            >
-              <Image
-                src={system.mockup}
-                alt={`${system.name} — ${say(system.tagline)}`}
-                fill
-                sizes="(min-width: 64rem) 46vw, 92vw"
-                placeholder="blur"
-                className="object-cover"
-              />
-            </div>
-          ) : (
-            <SystemScreenshot
-              screenshot={system.screenshot}
-              alt={`${system.name} — ${say(system.tagline)}`}
-              url={system.url}
-            />
-          )}
-        </Reveal>
-
+        
         {/* The way in sits under the thing it opens. */}
         <Reveal delay={0.16}>
           <a
@@ -118,8 +75,29 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
         </Reveal>
       </div>
 
+      {/* ── The product, shown whole ───────────────────────────────── */}
+      <div className="min-w-0 lg:self-start">
+        <Reveal delay={0.08}>
+          {system.mockup ? (
+            <div className="relative isolate mx-auto w-full overflow-hidden rounded-3xl" style={{ aspectRatio: `${system.mockup.width} / ${system.mockup.height}`, maxWidth: `calc(56svh * ${(system.mockup.width / system.mockup.height).toFixed(4)})`, }}>
+              <Image
+                src={system.mockup}
+                alt={`${system.name} — ${say(system.tagline)}`}
+                fill
+                sizes="(min-width: 64rem) 46vw, 92vw"
+                placeholder="blur"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <SystemScreenshot screenshot={system.screenshot} alt={`${system.name} — ${say(system.tagline)}`} url={system.url}/>
+          )}
+        </Reveal>
+
+      </div>
+
       {/* ── What is inside ─────────────────────────────────────────── */}
-      <div className="min-w-0 lg:self-end">
+      <div className="min-w-0 lg:self-start">
         {hasCapabilities ? (
           <div>
             <Reveal direction="none" duration={0.5}>

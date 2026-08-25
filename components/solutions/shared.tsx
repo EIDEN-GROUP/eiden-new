@@ -8,13 +8,11 @@ import { Reveal } from "@/components/ui/reveal";
 import type { Localized } from "@/lib/data/localized";
 import { cn } from "@/lib/utils";
 
-/** Reads a `Localized` in the visitor's language. */
 export function useSay() {
   const { locale } = useLanguage();
   return (value: Localized) => value[locale];
 }
 
-/** The page's measure. Sections are separated by air, not by boxes. */
 export function Band({
   children,
   className,
@@ -29,7 +27,7 @@ export function Band({
       data-nav-tone={tone === "dark" ? "dark" : undefined}
       className={cn(
         tone === "dark" && "grain bg-ink text-canvas",
-        "py-20 sm:py-28",
+        "py-20",
         className,
       )}
     >
@@ -38,7 +36,6 @@ export function Band({
   );
 }
 
-/** Numbered rule, the same mark the project pages use. */
 export function BandLabel({
   number,
   children,
@@ -74,14 +71,6 @@ export function BandLabel({
   );
 }
 
-/**
- * A product shown in its own browser chrome.
- *
- * The frame is drawn whether or not a capture exists: with one it holds the
- * screenshot, without one it holds the live address and stays honest. What
- * it never does is stand in a mocked-up dashboard — a made-up screen would
- * be the one thing on this page that isn't a real product.
- */
 export function SystemScreenshot({
   screenshot,
   alt,
