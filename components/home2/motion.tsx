@@ -22,14 +22,24 @@ import { cn } from "@/lib/utils";
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 
 /**
- * A word's colour, ramped from muted to ink by the block's progress and the
- * word's own index. `var(--p, 0)` so the line is legible from the first paint,
+ * A step's colour, ramped from `dim` to `lit` by the block's progress and the
+ * step's own index. `var(--p, 0)` so the run is legible from the first paint,
  * before any scroll listener has had a chance to write anything.
+ *
+ * The caller reads `--n` (how many steps) off the run and `--i` (which one)
+ * off each step, so the same ramp lights a headline word by word or a list
+ * line by line.
  */
-const LIT =
-  "color-mix(in oklab, var(--color-ink) " +
-  "calc(clamp(0, calc(var(--p, 0) * var(--n) - var(--i)), 1) * 100%), " +
-  "var(--color-beige-dk))";
+export function litRamp(lit: string, dim: string) {
+  return (
+    `color-mix(in oklab, ${lit} ` +
+    `calc(clamp(0, calc(var(--p, 0) * var(--n) - var(--i)), 1) * 100%), ` +
+    `${dim})`
+  );
+}
+
+/** The headline ramp: muted beige up to ink. */
+const LIT = litRamp("var(--color-ink)", "var(--color-beige-dk)");
 
 /**
  * Write the element's travel through the viewport into `--p`.

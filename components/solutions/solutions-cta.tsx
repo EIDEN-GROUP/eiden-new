@@ -6,12 +6,6 @@ import { Band, useSay } from "@/components/solutions/shared";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
-/**
- * The custom-build section.
- *
- * It exists to stop the page reading as a catalogue of four products: the
- * four are examples of what we build, not the extent of it.
- */
 export function CustomSolution() {
   const say = useSay();
   const copy = solutionsCopy.custom;
@@ -49,10 +43,6 @@ export function CustomSolution() {
   );
 }
 
-/**
- * The close. A full frame of ink and one sentence — the page has spent its
- * length showing products, so it ends on the idea behind them.
- */
 export function SolutionsCTA() {
   const say = useSay();
   const copy = solutionsCopy.closing;

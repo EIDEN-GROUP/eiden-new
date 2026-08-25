@@ -204,10 +204,8 @@ export const projects = [
   },
 ] as const satisfies readonly ProjectRecord[];
 
-/** Every slug in `projects` — what keys the per-project copy in the dictionaries. */
 export type ProjectSlug = (typeof projects)[number]["slug"];
 
-/** Where a card sends you: the project's own page on the portfolio. */
 export function portfolioProjectUrl(slug: string) {
   return `${siteConfig.portfolioUrl}/projects/${slug}`;
 }
@@ -228,15 +226,11 @@ export const aboutTexture = "/work/contact-bg.png";
 
 export const proofTexture = "/work/contact-section-bg.png";
 
-/**
- * One frame per movement of the about-page origin sequence, in order.
- * Swap these paths to re-cast the section — the layout follows the array.
- */
 export const movementMedia = [
-  "/work/CEO.png",
-  "/work/contact-bg.png",
-  "/work/contact-section-bg.png",
-  "/work/hero.png",
+  "/media/heritage.jpg",
+  "/media/schema.jpg",
+  "/media/insight.jpg",
+  "/media/architecture-2.jpg",
 ] as const;
 
 export const serviceMedia: Record<string, string> = {

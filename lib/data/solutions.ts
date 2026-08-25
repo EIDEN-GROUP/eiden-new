@@ -1,4 +1,10 @@
+import type { StaticImageData } from "next/image";
 import type { Localized } from "@/lib/data/localized";
+
+import gestioMockup from "@/public/solutions/gestion-mockup.png";
+import kavoMockup from "@/public/solutions/kavo-mockup.png";
+import scholnexaMockup from "@/public/solutions/schoolnexa-mockup.png";
+import stayDeskMockup from "@/public/solutions/staydesk-mockup.png";
 
 export type SystemRecord = {
   slug: string;
@@ -10,7 +16,16 @@ export type SystemRecord = {
   url: string;
   audience: Localized[];
   capabilities: { group?: Localized; items: Localized[] }[];
+  /** A raw capture, shown in browser chrome. Used only without a `mockup`. */
   screenshot?: string;
+  /**
+   * An art-directed composition of the product, shown whole.
+   *
+   * Imported rather than pathed so its dimensions travel with it: the frame
+   * reserves the right box before the file lands, and swapping in art of a
+   * different shape needs no second edit.
+   */
+  mockup?: StaticImageData;
 };
 
 export const systems: SystemRecord[] = [
@@ -45,6 +60,7 @@ export const systems: SystemRecord[] = [
         ],
       },
     ],
+    mockup: gestioMockup,
   },
   {
     slug: "scholnexa",
@@ -67,6 +83,7 @@ export const systems: SystemRecord[] = [
     ],
     /* Behind a login: its modules are not public, so none are listed. */
     capabilities: [],
+    mockup: scholnexaMockup,
   },
   {
     slug: "kavo",
@@ -107,6 +124,7 @@ export const systems: SystemRecord[] = [
         ],
       },
     ],
+    mockup: kavoMockup,
   },
   {
     slug: "staydesk",
@@ -140,6 +158,7 @@ export const systems: SystemRecord[] = [
         ],
       },
     ],
+    mockup: stayDeskMockup,
   },
 ];
 
@@ -158,6 +177,7 @@ export const solutionsCopy = {
   },
 
   intro: {
+    eyebrow: { fr: "Le point de départ", en: "The starting point" },
     title: {
       fr: "Nous ne faisons pas que du logiciel.",
       en: "We don't just build software.",
