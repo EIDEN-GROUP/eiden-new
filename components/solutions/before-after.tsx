@@ -5,20 +5,13 @@ import { useSay } from "@/components/solutions/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
-/**
- * The shift, shown as two columns with the turn between them.
- *
- * The left column is set loose and unaligned-looking, the right one squared
- * up on a rule — the layout makes the same point the words do, which is why
- * neither side needs a paragraph explaining it.
- */
 export function BeforeAfter() {
   const say = useSay();
   const copy = solutionsCopy.shift;
 
   return (
     <section data-nav-tone="dark" className="grain bg-ink text-canvas">
-      <div className="container-eiden py-20 sm:py-28">
+      <div className="container-eiden py-20">
         <RevealWords
           as="h2"
           text={say(copy.title)}

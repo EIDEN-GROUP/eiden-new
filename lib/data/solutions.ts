@@ -81,8 +81,22 @@ export const systems: SystemRecord[] = [
       { fr: "Organismes de formation", en: "Educational organisations" },
       { fr: "Équipes pédagogiques", en: "Academic teams" },
     ],
-    /* Behind a login: its modules are not public, so none are listed. */
-    capabilities: [],
+    /* The product sits behind a login, so this list is read off the capture
+       beside it rather than the live app: its own section labels (Scolarité,
+       Finances), page titles and dashboard tiles. Keep the two in step — if
+       the mockup is replaced, these are the names that have to match it. */
+    capabilities: [
+      {
+        items: [
+          { fr: "Vue d'ensemble", en: "Overview" },
+          { fr: "Étudiants", en: "Students" },
+          { fr: "Filières", en: "Programmes" },
+          { fr: "Emploi du temps", en: "Timetable" },
+          { fr: "Examens", en: "Exams" },
+          { fr: "Paiements", en: "Payments" },
+        ],
+      },
+    ],
     mockup: scholnexaMockup,
   },
   {

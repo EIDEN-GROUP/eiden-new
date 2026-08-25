@@ -4,12 +4,6 @@ import { Band, BandLabel, useSay } from "@/components/solutions/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
-/**
- * How a system gets built. Five steps, one line each.
- *
- * Laid out as rows rather than cards: the process is a sequence, and rows
- * read in order where a grid of five boxes would not.
- */
 export function Process() {
   const say = useSay();
   const copy = solutionsCopy.process;
@@ -25,32 +19,50 @@ export function Process() {
         className="text-ink mt-12 block max-w-4xl text-[clamp(1.875rem,5vw,3.75rem)] uppercase"
       />
 
-      <RevealGroup className="mt-14 flex flex-col">
+      <RevealGroup as="ul" className="mt-14 flex flex-col">
         {copy.steps.map((step, index) => (
-          <div
+          <li
             key={say(step.title)}
-            className="border-ink/12 grid gap-2 border-b py-7 first:border-t sm:grid-cols-[4rem_minmax(0,14rem)_minmax(0,1fr)] sm:items-baseline sm:gap-8"
+            className="group border-ink/15 relative isolate border-t last:border-b"
           >
-            <p className="eyebrow text-ink/30 tabular-nums">
-              {String(index + 1).padStart(2, "0")}
-            </p>
-            <h3 className="font-display text-ink text-[clamp(1.25rem,2.2vw,1.75rem)] leading-none font-extrabold tracking-[-0.03em] uppercase">
-              {say(step.title)}
-            </h3>
-            <p className="text-ink/60 max-w-md text-[0.9375rem] leading-relaxed">
-              {say(step.text)}
-            </p>
-          </div>
+            <span
+              aria-hidden
+              className="bg-ink absolute inset-y-0 -right-4 -left-4 -z-10 origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:-right-6 lg:-left-6 lg:group-hover:scale-x-100"
+            />
+
+            {/* At rest: the name, at size. */}
+            <div className="grid grid-rows-[1fr] transition-[grid-template-rows,opacity] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:group-hover:grid-rows-[0fr] lg:group-hover:opacity-0">
+              <div className="overflow-hidden">
+                <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
+                  <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
+                    {say(step.title)}
+                  </h3>
+                  <span className="eyebrow text-ink/30 tabular-nums">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:grid-rows-[0fr] lg:group-hover:grid-rows-[1fr]">
+              <div className="overflow-hidden">
+                <div className="pb-5 lg:py-6">
+                  <p className="eyebrow lg:text-canvas/45 hidden lg:block">
+                    {say(step.title)}
+                  </p>
+                  <p className="text-ink/65 lg:text-canvas max-w-3xl text-[0.9375rem] leading-relaxed lg:mt-2 lg:text-[clamp(1rem,1.5vw,1.25rem)]">
+                    {say(step.text)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
         ))}
       </RevealGroup>
     </Band>
   );
 }
 
-/**
- * The layers a system can carry. Eight modules, one line each, on a grid
- * that keeps them equal — none of them is the headline feature.
- */
 export function Capabilities() {
   const say = useSay();
   const copy = solutionsCopy.layers;
@@ -79,7 +91,6 @@ export function Capabilities() {
   );
 }
 
-/** Local reality, global product thinking. Typography only, by design. */
 export function LocalGlobal() {
   const say = useSay();
   const copy = solutionsCopy.local;
