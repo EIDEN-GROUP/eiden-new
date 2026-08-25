@@ -228,6 +228,17 @@ export const aboutTexture = "/work/contact-bg.png";
 
 export const proofTexture = "/work/contact-section-bg.png";
 
+/**
+ * One frame per movement of the about-page origin sequence, in order.
+ * Swap these paths to re-cast the section — the layout follows the array.
+ */
+export const movementMedia = [
+  "/work/CEO.png",
+  "/work/contact-bg.png",
+  "/work/contact-section-bg.png",
+  "/work/hero.png",
+] as const;
+
 export const serviceMedia: Record<string, string> = {
   web: "/services/web-2.jpg",
   visibilite: "/services/op-1.jpg",

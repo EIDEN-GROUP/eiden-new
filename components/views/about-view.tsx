@@ -7,10 +7,11 @@ import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useLanguage } from "@/components/providers/language-provider";
-import { aboutTexture, siteConfig } from "@/lib/data/site";
+import { aboutTexture, movementMedia, siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 import { FixedBackdrop } from "../ui/fixed-backdrop";
 import Link from "next/link";
+import { AboutMovements } from "../about/movements";
 
 export function AboutView() {
   const { t } = useLanguage();
@@ -30,7 +31,7 @@ export function AboutView() {
         imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
       >
         <Link
-          href="/nos-solutions"
+          href="/contact"
           className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
         >
           {page.ctaAction}
@@ -40,7 +41,7 @@ export function AboutView() {
 
       {/* ── Where we stand ─────────────────────────────────────────── */}
       <section className="bg-canvas py-24 sm:py-32">
-        <div className="container-eiden grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="container-eiden grid items-end gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
           <SectionHeading
             eyebrow={page.positionEyebrow}
             title={page.positionTitle}
@@ -48,7 +49,7 @@ export function AboutView() {
           />
 
           <Reveal delay={0.06}>
-            <p className="editorial text-forest text-[clamp(1.25rem,2.4vw,1.75rem)] leading-snug">
+            <p className="editorial text-forest text-[clamp(1rem,2.4vw,1.5rem)] leading-snug">
               {page.positionBody}
             </p>
           </Reveal>
@@ -56,35 +57,12 @@ export function AboutView() {
       </section>
 
       {/* ── The origin, in four movements ──────────────────────────── */}
-      <section className="grain bg-ink py-24 sm:py-32">
-        <div className="container-eiden relative z-2">
-          <SectionHeading
-            eyebrow={page.storyEyebrow}
-            title={page.storyTitle}
-            tone="light"
-            className="max-w-2xl"
-          />
-
-          <RevealGroup className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
-            {page.movements.map((movement) => (
-              <article
-                key={movement.n}
-                className="border-canvas/15 hover:border-gold/50 border-t pt-6 transition-colors duration-500"
-              >
-                <p className="font-label text-gold text-[0.9375rem] font-bold tracking-[0.24em]">
-                  {movement.n}
-                </p>
-                <h3 className="font-display text-canvas mt-4 text-xl font-bold tracking-[-0.02em]">
-                  {movement.title}
-                </h3>
-                <p className="text-canvas/60 mt-3 text-[0.9375rem] leading-relaxed">
-                  {movement.text}
-                </p>
-              </article>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <AboutMovements
+        eyebrow={page.storyEyebrow}
+        title={page.storyTitle}
+        movements={page.movements}
+        media={movementMedia}
+      />
 
       {/* ── Principles ─────────────────────────────────────────────── */}
       <section className="bg-canvas py-24 sm:py-32">

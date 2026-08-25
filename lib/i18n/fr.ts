@@ -532,7 +532,7 @@ export const fr = {
         {
           n: "I",
           title: "L'héritage",
-          text: "Douze ans passés dans des entreprises marocaines et internationales — opérations, vente, marketing, stratégie. Le numéro qu'on appelle quand la croissance cale.",
+          text: "Notre fondateur a passé plus de dix ans au sein d’entreprises marocaines et internationales : d’abord comme opérateur, puis comme stratège commercial et marketing, et enfin comme celui que les entreprises appelaient lorsque la croissance ralentissait sans que personne ne sache vraiment pourquoi.",
         },
         {
           n: "II",

@@ -526,7 +526,7 @@ export const en: Dictionary = {
         {
           n: "I",
           title: "The inheritance",
-          text: "Twelve years inside Moroccan and international companies — operations, sales, marketing, strategy. The number people call when growth stalls.",
+          text: "Our founder spent over a decade working in Moroccan and international businesses as an operator, a sales and marketing strategist, and eventually, the person companies turned to when growth stalled and no one knew why.",
         },
         {
           n: "II",
