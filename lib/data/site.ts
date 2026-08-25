@@ -228,9 +228,9 @@ export const proofTexture = "/work/contact-section-bg.png";
 
 export const movementMedia = [
   "/media/heritage.jpg",
-  "/media/schema.jpg",
+  "/media/schema.webp",
   "/media/insight.jpg",
-  "/media/architecture-2.jpg",
+  "/media/architecture.jpg",
 ] as const;
 
 export const serviceMedia: Record<string, string> = {

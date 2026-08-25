@@ -985,3 +985,76 @@
     0
   );
 }
+
+/* ============================================================
+   About — a block that plays with the scroll, in both directions
+
+   `--p` is the block's travel through the viewport, written frame
+   by frame by `useTravel`; `--i` and `--n` place an element in the
+   sequence. Because `--p` is measured from the block's position on
+   every scroll rather than latched once at a threshold, all of this
+   runs backwards when the visitor scrolls back up — which is the
+   whole point of driving it this way instead of with a reveal.
+
+   Two rules the ramp has to follow:
+
+   · It is written out in full inside every `calc()` rather than
+     parked in one custom property. Substituting a `clamp()` through
+     a custom property resolves to zero in Chrome, which would
+     strand every card in the pile.
+   · `--p` falls back to 1, not 0. Before the script runs there is
+     no travel to read, and the finished layout is the honest thing
+     to show — never a heap of cards stacked in the middle.
+   ============================================================ */
+
+/* Cards gathered into a deck, then dealt out to their places. The
+   offsets are shares of a card's own size, so the pile lands on the
+   middle of the grid without anything having to be measured. */
+.deal-card {
+  z-index: calc(var(--n) - var(--i));
+  translate: calc(
+      var(--dx, 0px) * (1 - clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1))
+    )
+    calc(
+      var(--dy, 0px) * (1 - clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1))
+    );
+  rotate: calc(
+    var(--tilt, 0deg) * (1 - clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1))
+  );
+  scale: calc(
+    1 - var(--shrink, 0) *
+      (1 - clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1))
+  );
+  opacity: calc(
+    var(--dim, 1) + (1 - var(--dim, 1)) *
+      clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1)
+  );
+}
+
+/* A step that rises into place as the sequence reaches it. */
+.step-in {
+  translate: 0
+    calc(
+      var(--rise, 1.75rem) *
+        (1 - clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1))
+    );
+  opacity: calc(0.15 + 0.85 * clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1));
+}
+
+/* The run from one step to the next, drawn once its own step has arrived —
+   hence the half-step of lag before the ramp starts to open it. */
+.step-arrow {
+  transform-origin: left center;
+  scale: clamp(0, calc(var(--p, 1) * var(--n) - var(--i) - 0.4), 1) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deal-card,
+  .step-in,
+  .step-arrow {
+    translate: none;
+    rotate: none;
+    scale: none;
+    opacity: 1;
+  }
+}

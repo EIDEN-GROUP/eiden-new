@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Plus } from "lucide-react";
 import { FilmHero } from "@/components/layout/film-hero";
 import { ButtonLink } from "@/components/ui/button";
-import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
+import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useLanguage } from "@/components/providers/language-provider";
 import { aboutTexture, movementMedia, siteConfig } from "@/lib/data/site";
@@ -12,6 +12,8 @@ import { cn } from "@/lib/utils";
 import { FixedBackdrop } from "../ui/fixed-backdrop";
 import Link from "next/link";
 import { AboutMovements } from "../about/movements";
+import { AboutPrinciples } from "../about/principles";
+import { AboutMethods } from "../about/methods";
 
 export function AboutView() {
   const { t } = useLanguage();
@@ -30,7 +32,10 @@ export function AboutView() {
         lead={page.lead}
         imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
       >
-        <Link href="/contact" className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+        <Link
+          href="/contact"
+          className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+        >
           {page.ctaAction}
           <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
         </Link>
@@ -39,7 +44,11 @@ export function AboutView() {
       {/* ── Where we stand ─────────────────────────────────────────── */}
       <section className="bg-canvas py-24 sm:py-32">
         <div className="container-eiden grid items-end gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
-          <SectionHeading eyebrow={page.positionEyebrow} title={page.positionTitle} className="lg:sticky lg:top-28 lg:self-start" />
+          <SectionHeading
+            eyebrow={page.positionEyebrow}
+            title={page.positionTitle}
+            className="lg:sticky lg:top-28 lg:self-start"
+          />
 
           <Reveal delay={0.06}>
             <p className="editorial text-forest text-[clamp(1rem,2.4vw,1.5rem)] leading-snug">
@@ -50,87 +59,56 @@ export function AboutView() {
       </section>
 
       {/* ── The origin, in four movements ──────────────────────────── */}
-      <AboutMovements eyebrow={page.storyEyebrow} title={page.storyTitle} movements={page.movements} media={movementMedia} />
+      <AboutMovements
+        eyebrow={page.storyEyebrow}
+        title={page.storyTitle}
+        movements={page.movements}
+        media={movementMedia}
+      />
 
       {/* ── Principles ─────────────────────────────────────────────── */}
-      <section className="bg-canvas py-24 sm:py-32">
-        <div className="container-eiden">
-          <SectionHeading eyebrow={page.principlesEyebrow} title={page.principlesTitle} className="max-w-2xl" />
-
-          <RevealGroup className="mt-14 grid gap-4 lg:grid-cols-2">
-            {page.principles.map((principle) => (
-              <article key={principle.n} className="bg-cream flex flex-col rounded-2xl p-8 sm:p-10" >
-                <p className="font-label text-gold-dk text-[0.9375rem] font-bold tracking-[0.24em]">
-                  {principle.n}
-                </p>
-                <h3 className="font-display text-forest mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
-                  {principle.title}
-                </h3>
-                <p className="text-forest/65 mt-3 text-[0.9375rem] leading-relaxed">
-                  {principle.text}
-                </p>
-                <p className="editorial text-teal mt-auto pt-6 text-[0.9375rem] leading-snug">
-                  “{principle.quote}”
-                </p>
-              </article>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <AboutPrinciples
+        eyebrow={page.principlesEyebrow}
+        title={page.principlesTitle}
+        principles={page.principles}
+      />
 
       {/* ── Methods, then the count ────────────────────────────────── */}
-      <section className="grain bg-forest py-24 sm:py-32">
-        <div className="container-eiden relative z-2">
-          <SectionHeading eyebrow={page.methodsEyebrow} title={page.methodsTitle} tone="light" className="max-w-2xl" />
-
-          <RevealGroup className="bg-canvas/10 mt-14 grid gap-px overflow-hidden rounded-2xl lg:grid-cols-3">
-            {page.methods.map((method) => (
-              <article key={method.name} className="bg-forest hover:bg-forest-md flex flex-col p-8 transition-colors duration-500 sm:p-10" >
-                <h3 className="font-display text-canvas text-xl font-bold tracking-[-0.02em]">
-                  {method.name}
-                </h3>
-                <p className="text-canvas/60 mt-4 text-[0.9375rem] leading-relaxed">
-                  {method.text}
-                </p>
-                <p className="editorial text-gold mt-auto pt-6 text-[0.9375rem] leading-snug">
-                  “{method.quote}”
-                </p>
-              </article>
-            ))}
-          </RevealGroup>
-
-          <Reveal delay={0.1}>
-            <p className="eyebrow text-canvas/35 mt-16">{page.numbersEyebrow}</p>
-          </Reveal>
-
-          <RevealGroup className="border-canvas/12 mt-6 grid grid-cols-2 gap-x-8 gap-y-10 border-t pt-10 lg:grid-cols-4">
-            {page.numbers.map((entry) => (
-              <div key={entry.label}>
-                <p className="font-display text-canvas text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.05em]">
-                  {entry.value}
-                </p>
-                <p className="text-canvas/55 mt-3 text-[0.9375rem] leading-snug">
-                  {entry.label}
-                </p>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <AboutMethods
+        eyebrow={page.methodsEyebrow}
+        title={page.methodsTitle}
+        methods={page.methods}
+        numbersEyebrow={page.numbersEyebrow}
+        numbers={page.numbers}
+      />
 
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <section id="faq" className="bg-cream py-24 sm:py-32">
         <div className="container-eiden grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-20">
-          <SectionHeading eyebrow={page.faqEyebrow} title={page.faqTitle} className="lg:sticky lg:top-28 lg:self-start" />
+          <SectionHeading
+            eyebrow={page.faqEyebrow}
+            title={page.faqTitle}
+            className="lg:sticky lg:top-28 lg:self-start"
+          />
 
           <div>
             {page.faq.map((entry, index) => {
               const open = openFaq === index;
               return (
                 <Reveal key={entry.q} delay={0.04 * index} amount={0.15}>
-                  <div className={cn( "border-forest/12 border-t", index === page.faq.length - 1 && "border-b", )} >
+                  <div
+                    className={cn(
+                      "border-forest/12 border-t",
+                      index === page.faq.length - 1 && "border-b",
+                    )}
+                  >
                     <h3>
-                      <button type="button" onClick={() => setOpenFaq(open ? null : index)} aria-expanded={open} className="group flex w-full items-start justify-between gap-6 py-6 text-left" >
+                      <button
+                        type="button"
+                        onClick={() => setOpenFaq(open ? null : index)}
+                        aria-expanded={open}
+                        className="group flex w-full items-start justify-between gap-6 py-6 text-left"
+                      >
                         <span className="font-display text-forest group-hover:text-teal text-[1.0625rem] font-bold tracking-[-0.02em] transition-colors duration-300 sm:text-lg">
                           {entry.q}
                         </span>

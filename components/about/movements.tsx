@@ -40,11 +40,6 @@ export function AboutMovements({
     );
     if (panels.length === 0) return;
 
-    /* A reading line across the viewport — centred on the split layout, lifted
-       to sit just under the pinned frame once stacked. The insets deliberately
-       stop short of summing to 100%: a root rect of zero height is empty, and
-       an empty root never reports an intersection, so the line is given a
-       sliver of height to keep it live. */
     const rootMargin = split ? "-50% 0px -49% 0px" : "-47% 0px -52% 0px";
     const lit = new Set<number>();
 
@@ -76,14 +71,8 @@ export function AboutMovements({
 
   return (
     <section className="grain bg-ink">
-      <div
-        ref={trackRef}
-        className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]"
-      >
-        <div
-          aria-hidden
-          className="bg-forest-md sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh"
-        >
+      <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
+        <div aria-hidden className="bg-forest-md sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
           {movements.map((movement, index) => (
             <div
               key={movement.n}
