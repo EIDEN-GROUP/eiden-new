@@ -25,6 +25,55 @@ export type WorkImage = {
 
 export type Metric = { value: string; label: Localized };
 
+/* ------------------------------------------------------------------
+   The long form
+
+   Some records carry the project as a story rather than as a case:
+   the room before, the look of the thing, the identity underneath it,
+   the site it produced, and what the client says now. A record with a
+   `story` is laid out that way; one without keeps the short template,
+   so the two can live side by side while records are rewritten.
+   ------------------------------------------------------------------ */
+
+/** One colour of a brand palette, named and specified. */
+export type Swatch = { name: Localized; hex: string };
+
+export type StoryImage = { image: string; alt: Localized; caption?: Localized };
+
+/** An identity shown in place   a sign, a cup, a screen. */
+export type Application = StoryImage & { label: Localized };
+
+export type ProjectStory = {
+  /** One line under the masthead saying what the work was. */
+  summary: Localized;
+  /** The room as it stood before any of it. */
+  before: Localized;
+  visual: { title: Localized; text: Localized; slides: StoryImage[] };
+  /** The single line that carries the whole engagement. */
+  positioning: Localized;
+  brand: {
+    title: Localized;
+    text: Localized;
+    palette: Swatch[];
+    /** The wordmark, the line it carries, and the descriptor under it. */
+    type: { wordmark: string; line: Localized; descriptor: Localized };
+    book?: { label: Localized; href: string };
+    applicationsTitle: Localized;
+    applications: Application[];
+  };
+  website: {
+    title: Localized;
+    text: Localized;
+    desktop: string;
+    mobile: string;
+    alt: Localized;
+    href?: string;
+  };
+  social: { title: Localized; items: StoryImage[] };
+  /** What the client says now that it is running. */
+  after: Localized;
+};
+
 export type ProjectPage = {
   slug: ProjectSlug;
   number: string;
@@ -55,6 +104,9 @@ export type ProjectPage = {
   };
 
   info: { location: Localized };
+
+  /** Present only on records written as a story; see `ProjectStory`. */
+  story?: ProjectStory;
 };
 
 export const projectPages: ProjectPage[] = [
@@ -242,6 +294,202 @@ export const projectPages: ProjectPage[] = [
     },
 
     info: { location: { fr: "Agadir, Maroc", en: "Agadir, Morocco" } },
+
+    story: {
+      summary: {
+        fr: "Un café-restaurant de Founty reconstruit en ligne : site, voix et média payant pensés pour transformer la découverte en réservation.",
+        en: "A Founty café-restaurant rebuilt online: website, voice, and paid media engineered to turn discovery into reservations.",
+      },
+
+      before: {
+        fr: "Bôpassage avait la salle, les assiettes et les habitués   mais pas de site, pas de rythme social régulier, et aucun relais payant pour porter la marque au-delà de ses quatre murs. L'ambiance s'arrêtait à la porte.",
+        en: "Bôpassage had the room, the plates, and the loyalty   but no website, no consistent social rhythm, and no paid layer carrying the brand outside its four walls. The atmosphere stopped at the door.",
+      },
+
+      visual: {
+        title: {
+          fr: "Le lieu où l'on revient toujours.",
+          en: "The place you always come back to.",
+        },
+        text: {
+          fr: "Chaleur botanique, lumière dorée de fin de journée, un registre éditorial : ce que l'on ressent dans la salle, traduit en images.",
+          en: "Botanical warmth, golden-hour light, an editorial register: what the room feels like, translated into pictures.",
+        },
+        slides: [
+          {
+            image: "/work/bopassage-brand-board.png",
+            alt: { fr: "Planche de marque Bôpassage", en: "Bôpassage brand board" },
+            caption: { fr: "Planche de marque", en: "Brand board" },
+          },
+          {
+            image: "/work/bopassage-brand-palette.png",
+            alt: { fr: "Palette Forêt & Or", en: "Forest & gold palette" },
+            caption: { fr: "Forêt & or", en: "Forest & gold" },
+          },
+          {
+            image: "/work/bopassage-brand-logo-mark.png",
+            alt: { fr: "Monogramme Bôpassage", en: "Bôpassage monogram" },
+            caption: { fr: "Le monogramme", en: "The monogram" },
+          },
+          {
+            image: "/work/bopassage-brand-identity.png",
+            alt: { fr: "Système d'identité Bôpassage", en: "Bôpassage identity system" },
+            caption: { fr: "Le système", en: "The system" },
+          },
+          {
+            image: "/work/bopassage-brand-cup.png",
+            alt: { fr: "Tasse Bôpassage", en: "Bôpassage cup" },
+            caption: { fr: "Emballage", en: "Packaging" },
+          },
+          {
+            image: "/work/bopassage-brand-signage.png",
+            alt: { fr: "Signalétique Bôpassage", en: "Bôpassage signage" },
+            caption: { fr: "Signalétique", en: "Signage" },
+          },
+          {
+            image: "/work/bopassage-web.png",
+            alt: { fr: "Le site Bôpassage", en: "The Bôpassage site" },
+            caption: { fr: "Le site", en: "The site" },
+          },
+          {
+            image: "/work/bopassage-ooh-column.png",
+            alt: { fr: "Affichage extérieur Bôpassage", en: "Bôpassage out-of-home poster" },
+            caption: { fr: "Affichage", en: "Out of home" },
+          },
+        ],
+      },
+
+      positioning: {
+        fr: "Site, voix, média payant et optimisation du revenu pour le café emblématique de Founty, à Agadir.",
+        en: "Website, voice, paid media, and revenue optimisation for Agadir's signature café corridor.",
+      },
+
+      brand: {
+        title: {
+          fr: "Architecture de marque : Forêt & Or",
+          en: "Brand Architecture: Forêt & Or",
+        },
+        text: {
+          fr: "Un système d'identité complet qui porte la chaleur botanique et la lumière dorée de Bôpassage bien au-delà de sa salle.",
+          en: "A complete identity system that carries the botanical warmth and golden-hour light of Bôpassage well beyond its own room.",
+        },
+        palette: [
+          { name: { fr: "Forêt", en: "Forest" }, hex: "#18312e" },
+          { name: { fr: "Crème", en: "Cream" }, hex: "#f5eedf" },
+          { name: { fr: "Or", en: "Gold" }, hex: "#b8973a" },
+        ],
+        type: {
+          wordmark: "Bô Passage",
+          line: { fr: "L'endroit qu'on aime.", en: "L'endroit qu'on aime." },
+          descriptor: {
+            fr: "Café & restaurant · Agadir",
+            en: "Café & restaurant · Agadir",
+          },
+        },
+        book: {
+          label: {
+            fr: "Voir la planche de marque complète",
+            en: "View the full brand board",
+          },
+          href: "/work/bopassage-brand-board.png",
+        },
+        applicationsTitle: {
+          fr: "L'identité en contexte",
+          en: "Identity in context",
+        },
+        applications: [
+          {
+            image: "/work/bopassage-brand-logo-green.png",
+            alt: {
+              fr: "Logo Bôpassage en or sur forêt",
+              en: "Bôpassage logo in gold on forest",
+            },
+            label: { fr: "Logo", en: "Logo" },
+          },
+          {
+            image: "/work/bopassage-brand-signage.png",
+            alt: { fr: "Enseigne Bôpassage", en: "Bôpassage sign" },
+            label: { fr: "Signalétique", en: "Signage" },
+          },
+          {
+            image: "/work/bopassage-brand-cup.png",
+            alt: {
+              fr: "Tasse aux couleurs de Bôpassage",
+              en: "Cup in the Bôpassage colours",
+            },
+            label: { fr: "Emballage", en: "Packaging" },
+          },
+          {
+            image: "/work/bopassage-brand-application.png",
+            alt: {
+              fr: "Logo principal et secondaire Bôpassage",
+              en: "Bôpassage primary and secondary logo",
+            },
+            label: { fr: "Système", en: "System" },
+          },
+        ],
+      },
+
+      website: {
+        title: {
+          fr: "Une maison digitale pour la carte, la réservation et l'expérience Founty.",
+          en: "A digital home for menus, reservations, and the Founty experience.",
+        },
+        text: {
+          fr: "Le site reprend la matière éditoriale du lieu, tient la carte à jour, et met la réservation à un pouce de distance   là où arrive la plupart des visites : sur téléphone, à l'heure du déjeuner.",
+          en: "The site carries the room's editorial material, keeps the menu current, and puts booking a thumb away   which is where most visits arrive: on a phone, around lunchtime.",
+        },
+        desktop: "/work/bopassage-web-desktop.png",
+        mobile: "/work/bopassage-web-mobile.png",
+        alt: {
+          fr: "Le site Bôpassage sur écran et sur téléphone",
+          en: "The Bôpassage site on desktop and on a phone",
+        },
+        href: "https://bopassage.com",
+      },
+
+      social: {
+        title: {
+          fr: "Une présence sociale qui renforce la fidélité à la marque.",
+          en: "Social media excellence that strengthens brand loyalty.",
+        },
+        items: [
+          {
+            image: "/work/bopassage-social-savory-morning.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-waffle.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-matcha.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-good-morning.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-balance.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-slows-down.png",
+            alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+          },
+          {
+            image: "/work/bopassage-social-instagram.png",
+            alt: { fr: "Profil Instagram Bôpassage", en: "Bôpassage Instagram profile" },
+          },
+        ],
+      },
+
+      after: {
+        fr: "Notre site ressemble enfin au restaurant   chaleureux, clair, facile à réserver. Le social et les campagnes amènent maintenant des gens qui comprennent l'ambiance avant même d'entrer.",
+        en: "Our site finally feels like the restaurant   warm, clear, easy to book. Social and ads now bring in people who already understand the vibe before they walk in.",
+      },
+    },
   },
   {
     slug: "dmc-morocco",
@@ -282,8 +530,8 @@ export const projectPages: ProjectPage[] = [
         en: "Build the brand the expertise already deserved.",
       },
       text: {
-        fr: "Nous sommes partis du nom, puis vers l'extérieur : identité, site, et une voix LinkedIn adressée aux propriétaires d'hôtels et aux opérateurs internationaux — pas aux voyageurs.",
-        en: "We started from the name and worked outward: identity, site, and a LinkedIn voice aimed at hotel owners and international operators — not at travellers.",
+        fr: "Nous sommes partis du nom, puis vers l'extérieur : identité, site, et une voix LinkedIn adressée aux propriétaires d'hôtels et aux opérateurs internationaux   pas aux voyageurs.",
+        en: "We started from the name and worked outward: identity, site, and a LinkedIn voice aimed at hotel owners and international operators   not at travellers.",
       },
       image: "/work/dmc-brand-posters.png",
       alt: {
@@ -437,8 +685,8 @@ export const projectPages: ProjectPage[] = [
         en: "Make the outside feel like the inside.",
       },
       text: {
-        fr: "Ce qui se passe dans les salles inspire confiance. Nous avons construit la marque, le site et les outils autour de cette confiance-là — chaleureux, lisibles, et faciles pour un parent pressé.",
-        en: "What happens in the rooms earns trust. We built the brand, the site and the tools around that trust — warm, legible, and easy for a parent in a hurry.",
+        fr: "Ce qui se passe dans les salles inspire confiance. Nous avons construit la marque, le site et les outils autour de cette confiance-là   chaleureux, lisibles, et faciles pour un parent pressé.",
+        en: "What happens in the rooms earns trust. We built the brand, the site and the tools around that trust   warm, legible, and easy for a parent in a hurry.",
       },
       image: "/work/educazenkids-brand-book.png",
       alt: { fr: "Livre de marque EducazenKids", en: "EducazenKids brand book" },
@@ -615,8 +863,8 @@ export const projectPages: ProjectPage[] = [
         en: "Speak like someone who already lives there.",
       },
       text: {
-        fr: "Identité rétro-plage, lumière de l'Atlantique, grain de pellicule — et des contenus écrits comme un ami qui connaît l'endroit vous en parlerait.",
-        en: "Retro-beach identity, Atlantic light, film grain — and content written the way a friend who knows the place would tell you about it.",
+        fr: "Identité rétro-plage, lumière de l'Atlantique, grain de pellicule   et des contenus écrits comme un ami qui connaît l'endroit vous en parlerait.",
+        en: "Retro-beach identity, Atlantic light, film grain   and content written the way a friend who knows the place would tell you about it.",
       },
       image: "/work/lunja-brand-board.png",
       alt: {
@@ -952,8 +1200,8 @@ export const projectPages: ProjectPage[] = [
     },
     challenge: {
       text: {
-        fr: "Les architectes lisent des fiches techniques, pas des accroches marketing. Il fallait une seule plateforme pour le marbre, la pierre, le béton, le bois et le métal — avec une face publique et une face professionnelle derrière.",
-        en: "Architects read specification sheets, not marketing copy. One platform had to sell marble, stone, concrete, wood and metal — with a public face and a professional one behind it.",
+        fr: "Les architectes lisent des fiches techniques, pas des accroches marketing. Il fallait une seule plateforme pour le marbre, la pierre, le béton, le bois et le métal   avec une face publique et une face professionnelle derrière.",
+        en: "Architects read specification sheets, not marketing copy. One platform had to sell marble, stone, concrete, wood and metal   with a public face and a professional one behind it.",
       },
       points: [
         { fr: "Deux publics, une plateforme", en: "Two audiences, one platform" },
@@ -1067,8 +1315,8 @@ export const projectPages: ProjectPage[] = [
     },
     challenge: {
       text: {
-        fr: "Un fournisseur de calcaire, de travertin, de béton et de marbre dans le sud de la France. Le catalogue devait suivre la façon dont un architecte prescrit — par effet, par espace, par ambiance — et pas par référence.",
-        en: "A limestone, travertine, concrete and marble supplier in southern France. The catalogue had to follow the way an architect specifies — by effect, by space, by mood — not by reference number.",
+        fr: "Un fournisseur de calcaire, de travertin, de béton et de marbre dans le sud de la France. Le catalogue devait suivre la façon dont un architecte prescrit   par effet, par espace, par ambiance   et pas par référence.",
+        en: "A limestone, travertine, concrete and marble supplier in southern France. The catalogue had to follow the way an architect specifies   by effect, by space, by mood   not by reference number.",
       },
       points: [
         {
@@ -1112,8 +1360,8 @@ export const projectPages: ProjectPage[] = [
       {
         title: { fr: "E-commerce", en: "E-commerce" },
         text: {
-          fr: "Trois entrées — par effet, par espace, par moodboard — vers le même produit.",
-          en: "Three ways in — by effect, by space, by moodboard — to the same product.",
+          fr: "Trois entrées   par effet, par espace, par moodboard   vers le même produit.",
+          en: "Three ways in   by effect, by space, by moodboard   to the same product.",
         },
       },
     ],
@@ -1305,8 +1553,8 @@ export const projectPages: ProjectPage[] = [
     },
     challenge: {
       text: {
-        fr: "Trois couleurs saturées — corail, turquoise et jaune vif — qui n'avaient aucune raison de tenir ensemble, sur un lin chaud. Il fallait qu'elles cohabitent sans crier.",
-        en: "Three saturated colours — coral, teal and bright yellow — with no business working together, on warm linen. They had to live side by side without shouting.",
+        fr: "Trois couleurs saturées   corail, turquoise et jaune vif   qui n'avaient aucune raison de tenir ensemble, sur un lin chaud. Il fallait qu'elles cohabitent sans crier.",
+        en: "Three saturated colours   coral, teal and bright yellow   with no business working together, on warm linen. They had to live side by side without shouting.",
       },
       points: [
         { fr: "Trois couleurs qui se battent", en: "Three colours at war" },
@@ -1320,8 +1568,8 @@ export const projectPages: ProjectPage[] = [
         en: "Let the colour carry it, and give it room.",
       },
       text: {
-        fr: "Des espaces généreux et une typographie condensée épaisse pour équilibrer la palette. Une écriture manuscrite, gardée pour les apartés — c'est la voix humaine du site.",
-        en: "Generous spacing and a heavy condensed typeface to balance the palette. A hand-lettered script, kept for asides — it is the site's human voice.",
+        fr: "Des espaces généreux et une typographie condensée épaisse pour équilibrer la palette. Une écriture manuscrite, gardée pour les apartés   c'est la voix humaine du site.",
+        en: "Generous spacing and a heavy condensed typeface to balance the palette. A hand-lettered script, kept for asides   it is the site's human voice.",
       },
       image: "/work/web-lunja-vibes-desktop.jpg",
       alt: {
@@ -1558,8 +1806,8 @@ export const projectPages: ProjectPage[] = [
         en: "Turn the group into somewhere you can walk through.",
       },
       text: {
-        fr: "Un système éditorial chaud — briques et rouges profonds sur crème perle — et un explorateur d'écosystème qui laisse parcourir les sept enseignes et leurs secteurs.",
-        en: "A warm editorial system — brick and deep reds on pearl cream — and an ecosystem explorer that lets you move through the seven entities and their sectors.",
+        fr: "Un système éditorial chaud   briques et rouges profonds sur crème perle   et un explorateur d'écosystème qui laisse parcourir les sept enseignes et leurs secteurs.",
+        en: "A warm editorial system   brick and deep reds on pearl cream   and an ecosystem explorer that lets you move through the seven entities and their sectors.",
       },
       image: "/work/web-one-retail-cover.jpg",
       alt: {

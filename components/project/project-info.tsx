@@ -5,7 +5,7 @@ import { RevealGroup } from "@/components/ui/reveal";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 07 — Project info.
+ * 07   Project info.
  *
  * The facts, kept off the masthead and gathered here where someone who wants
  * them can find them. Read straight off the record rather than restated, so

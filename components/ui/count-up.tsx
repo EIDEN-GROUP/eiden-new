@@ -9,8 +9,8 @@ import { useEffect, useRef } from "react";
  * What is rendered is the finished value, so the real figure is what gets
  * served, indexed and read aloud; the count is written straight to the node
  * from an animation frame, which keeps a hundred-step count from costing a
- * hundred renders. Whatever surrounds the number — a `+`, a `%`, a leading
- * zero that makes it a label as much as a count — is held aside and put back
+ * hundred renders. Whatever surrounds the number   a `+`, a `%`, a leading
+ * zero that makes it a label as much as a count   is held aside and put back
  * on every frame, so `27+` counts and stays `27+`.
  */
 export function CountUp({
@@ -27,7 +27,7 @@ export function CountUp({
     if (!node) return;
 
     const parts = value.match(/^(\D*?)([\d.,\s]*\d)(.*)$/);
-    if (!parts) return; // nothing countable in it — leave the text alone
+    if (!parts) return; // nothing countable in it   leave the text alone
 
     const [, lead, digits, tail] = parts;
     const target = Number(digits.replace(/[\s,]/g, ""));
@@ -60,7 +60,7 @@ export function CountUp({
           return;
         }
 
-        // Out of sight, wound back — so coming back to it plays the count
+        // Out of sight, wound back   so coming back to it plays the count
         // again rather than showing a figure that has already landed.
         node.textContent = draw(0);
       },

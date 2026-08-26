@@ -181,7 +181,7 @@ export function ProjectCarousel({
         </div>
       </div>
       <p aria-live="polite" className="sr-only">
-        {current.client} — {index + 1} / {count}
+        {current.client}   {index + 1} / {count}
       </p>
     </section>
   );

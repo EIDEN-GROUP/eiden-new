@@ -9,7 +9,7 @@ import { getDictionary } from "@/lib/i18n";
 import { useIntroDone } from "@/lib/intro-store";
 import { cn } from "@/lib/utils";
 
-/** The WhatsApp mark, filled — the silhouette is what carries it at 18px. */
+/** The WhatsApp mark, filled   the silhouette is what carries it at 18px. */
 function WhatsAppGlyph(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -29,7 +29,7 @@ const shell =
  * to the right of it.
  *
  * The tag is pinned by its right edge, so the label has nowhere to grow but
- * into the page — it pushes the glyph ahead of it, and the tag reads as being
+ * into the page   it pushes the glyph ahead of it, and the tag reads as being
  * pulled open from the edge rather than as a pill sliding across the screen.
  */
 function SideTag({
@@ -102,11 +102,11 @@ function SideTag({
 /**
  * The right-edge stack: WhatsApp over the language switch.
  *
- * Each one answers its own pointer — hovering WhatsApp says nothing about the
+ * Each one answers its own pointer   hovering WhatsApp says nothing about the
  * language switch. What they do share is the arrival: both open themselves
  * once when the visitor lands, so each label is seen at least one time
  * without anyone having to go looking for it. Both step
- * aside as the footer comes up — the footer carries its own language switch,
+ * aside as the footer comes up   the footer carries its own language switch,
  * and its own way back to the top.
  */
 export function SideTags() {

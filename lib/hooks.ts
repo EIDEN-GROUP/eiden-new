@@ -16,7 +16,7 @@ const neverChanges = () => () => {};
  * `false` on the server and through hydration, `true` from the first client
  * render onwards.
  *
- * Use it to hold back markup that can only be computed in the browser — the
+ * Use it to hold back markup that can only be computed in the browser   the
  * server tree and the hydrating tree agree, and the browser value lands on the
  * re-render immediately after.
  */

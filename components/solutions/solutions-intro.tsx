@@ -8,7 +8,7 @@ import { solutionsCopy } from "@/lib/data/solutions";
 
 /**
  * The constat reads back muted and turns to ink one line at a time as the
- * block rises — the same ramp the home headline uses, pitched off gold so the
+ * block rises   the same ramp the home headline uses, pitched off gold so the
  * unlit state still holds its own on cream.
  */
 const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
@@ -17,8 +17,8 @@ const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
  * The starting point, told the way the about page states its position:
  * the heading pinned on the left, the reading column running past it.
  *
- * Three beats down that column — what we see, what we do instead, what it
- * leaves you with — each on its own motion. The constat lights as it is
+ * Three beats down that column   what we see, what we do instead, what it
+ * leaves you with   each on its own motion. The constat lights as it is
  * scrolled through, the turn rises word by word from behind its baseline, and
  * the outcome lands as three ruled lines. No boxes: the page is measured in
  * air, and every rule here is a hairline.

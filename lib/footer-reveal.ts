@@ -5,8 +5,8 @@ import { useSyncExternalStore } from "react";
 /**
  * Whether the footer curtain has been scrolled into view, kept outside React.
  *
- * `SiteFooter` owns the observer, but chrome that lives beside it — the
- * floating language badge, for one — has to react to the same flag without
+ * `SiteFooter` owns the observer, but chrome that lives beside it   the
+ * floating language badge, for one   has to react to the same flag without
  * being nested inside the footer. Same shape as the locale store.
  */
 

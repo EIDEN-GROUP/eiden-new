@@ -1,68 +1,51 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ProjectHero } from "@/components/project/project-hero";
-import { ProjectChallenge } from "@/components/project/project-challenge";
-import { ProjectIdea } from "@/components/project/project-idea";
-import { ProjectBuilt } from "@/components/project/project-built";
-import { ProjectWork } from "@/components/project/project-work";
-import { ProjectResult } from "@/components/project/project-result";
-import { ProjectInfo } from "@/components/project/project-info";
-import { ProjectNavigation } from "@/components/project/project-navigation";
+import { ProjectCaseStudy } from "@/components/project/case/case-study";
 import {
-  getProjectSuggestions,
-  getProjectPage,
-  projectPages,
-} from "@/lib/data/projects";
+  getNextCase,
+  getProjectCase,
+  projectCases,
+} from "@/lib/data/projects/index";
 
-/** One page per written record; anything else is a 404 rather than a stub. */
+/** One page per written case; anything else is a 404 rather than a stub. */
 export function generateStaticParams() {
-  return projectPages.map((project) => ({ slug: project.slug }));
+  return projectCases.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectPage(slug);
+  const project = getProjectCase(slug);
   if (!project) return {};
+
+  const description = project.hero.intro.fr;
 
   return {
     title: project.client,
-    description: project.title.fr,
+    description,
     openGraph: {
       title: `${project.client} | EIDEN GROUP`,
-      description: project.title.fr,
+      description,
       images: [{ url: project.hero.image }],
     },
   };
 }
 
 /**
- * The project template.
+ * The project route.
  *
- * Intro → problem → idea → what we built → the visual story → result →
- * info → next. The order is the argument, so it is fixed here rather than
- * left to the data; what varies between projects is what fills it.
+ * Every page is the same spine filled differently, so the route does nothing
+ * but resolve the record and hand it over — the shape of the page is decided
+ * in `ProjectCaseStudy`, and what appears in it is decided by the record.
  */
 export default async function ProjectPage({
   params,
 }: PageProps<"/projects/[slug]">) {
   const { slug } = await params;
-  const project = getProjectPage(slug);
+
+  const project = getProjectCase(slug);
   if (!project) notFound();
 
-  const suggestions = getProjectSuggestions(project.slug);
-
-  return (
-    <article className="bg-canvas text-ink" data-nav-tone="light">
-      <ProjectHero project={project} />
-      <ProjectChallenge challenge={project.challenge} />
-      <ProjectIdea idea={project.idea} />
-      <ProjectBuilt built={project.built} />
-      <ProjectWork work={project.work} />
-      <ProjectResult result={project.result} />
-      <ProjectInfo project={project} />
-      <ProjectNavigation suggestions={suggestions} />
-    </article>
-  );
+  return <ProjectCaseStudy project={project} next={getNextCase(slug)} />;
 }

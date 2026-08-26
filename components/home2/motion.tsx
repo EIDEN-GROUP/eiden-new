@@ -71,12 +71,6 @@ export function useTravel(
       const height = window.innerHeight;
       const top = node.getBoundingClientRect().top;
       const window_ = (from - to) * height;
-      /* A block taller than that window finishes its sequence long before
-         the last of it has been seen — the ramp is spent on the first
-         screenful and everything below arrives already lit. `cover`
-         stretches the ramp to the block's own height so the sequence keeps
-         pace with the block instead, which is what a column of stacked
-         steps needs and a headline never does. */
       const span = cover ? Math.max(window_, node.offsetHeight) : window_;
       node.style.setProperty("--p", `${clamp01((from * height - top) / span)}`);
     };
@@ -96,13 +90,6 @@ export function useTravel(
   }, [ref, from, to, cover]);
 }
 
-/**
- * A headline whose words light up one after another as the block rises.
- *
- * Each word mixes its own colour out of the shared progress and its index, so
- * the line stays one run of text — no stacked copies to fall out of register,
- * and nothing doubled for anyone selecting or reading the page aloud.
- */
 export function ScrollWords({
   text,
   as: Tag = "h2" as ElementType,

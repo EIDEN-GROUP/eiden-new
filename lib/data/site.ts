@@ -132,6 +132,13 @@ export const projects = [
     image: "/work/dmc-brand-logo.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
+   {
+    slug: "lunja-village",
+    name: "Lunja Village",
+    category: "hospitality",
+    image: "/work/image lunja village portfoliio.png",
+    imageAlt: "Univers de marque du village côtier Lunja Village",
+  },
   {
     slug: "educazen-kids",
     name: "EducazenKids",
@@ -140,18 +147,18 @@ export const projects = [
     imageAlt: "Plateforme et identité EducazenKids",
   },
   {
-    slug: "lunja-village",
-    name: "Lunja Village",
-    category: "hospitality",
-    image: "/work/image lunja village portfoliio.png",
-    imageAlt: "Univers de marque du village côtier Lunja Village",
-  },
-  {
     slug: "medical-bay",
     name: "Medical Bay",
     category: "health",
     image: "/work/medical-bay-brand.png",
     imageAlt: "Identité du centre médical Medical Bay",
+  },
+   {
+    slug: "droguerie-souss",
+    name: "Souss Droguerie",
+    category: "web",
+    image: "/work/drogurie souss card.png",
+    imageAlt: "Site web Souss Droguerie",
   },
   {
     slug: "orsen",
@@ -159,6 +166,13 @@ export const projects = [
     category: "web",
     image: "/work/orsen hero.png",
     imageAlt: "Site web ORSEN",
+  },
+  {
+    slug: "chillout-lounge",
+    name: "CHILLOUT Lounge",
+    category: "web",
+    image: "/work/chilout card.png",
+    imageAlt: "Site web du CHILLOUT Lounge",
   },
   {
     slug: "lithos-materiaux",
@@ -174,34 +188,22 @@ export const projects = [
     image: "/work/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
   },
-  {
-    slug: "lunja-village-vibes",
-    name: "Lunja Village Vibes",
-    category: "web",
-    image: "/work/web-lunja-vibes-cover.jpg",
-    imageAlt: "Site web Lunja Village Vibes",
-  },
-  {
-    slug: "chillout-lounge",
-    name: "CHILLOUT Lounge",
-    category: "web",
-    image: "/work/chilout card.png",
-    imageAlt: "Site web du CHILLOUT Lounge",
-  },
-  {
-    slug: "one-retail",
-    name: "One Retail",
-    category: "web",
-    image: "/work/one reail card.png",
-    imageAlt: "Site web One Retail",
-  },
-  {
-    slug: "droguerie-souss",
-    name: "Souss Droguerie",
-    category: "web",
-    image: "/work/drogurie souss card.png",
-    imageAlt: "Site web Souss Droguerie",
-  },
+  // {
+  //   slug: "lunja-village-vibes",
+  //   name: "Lunja Village Vibes",
+  //   category: "web",
+  //   image: "/work/web-lunja-vibes-cover.jpg",
+  //   imageAlt: "Site web Lunja Village Vibes",
+  // },
+  // {
+  //   slug: "one-retail",
+  //   name: "One Retail",
+  //   category: "web",
+  //   image: "/work/one reail card.png",
+  //   imageAlt: "Site web One Retail",
+  // },
+  
+ 
 ] as const satisfies readonly ProjectRecord[];
 
 export type ProjectSlug = (typeof projects)[number]["slug"];

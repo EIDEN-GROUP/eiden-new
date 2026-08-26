@@ -11,14 +11,14 @@ import { Home2Closing } from "@/components/home2/closing";
 /**
  * The homepage, rebuilt on the reference layout.
  *
- * Every word here came off the previous homepage — this is the same content
+ * Every word here came off the previous homepage   this is the same content
  * under a different composition: a light ground, one editorial column, cards
  * dealt across the page, and headlines that light up word by word as they
  * arrive.
  *
  * The sections it replaced are still in `components/sections`; several of them
  * are load-bearing for the about, clients and solutions pages, and the four
- * that are not — hero, idea, vsl, offer — are what a rollback would need.
+ * that are not   hero, idea, vsl, offer   are what a rollback would need.
  */
 export function Home2View() {
   return (

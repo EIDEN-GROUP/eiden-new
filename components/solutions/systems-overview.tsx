@@ -11,8 +11,8 @@ import { solutionsCopy, systems } from "@/lib/data/solutions";
  *
  * From `lg` a panel is exactly a window tall, so it is pinned at the top of
  * the frame and read whole while it waits there. Below that a panel stands
- * well over a window tall — the product carries a description, a mockup and
- * the list of what is inside it — and pinning its top would bury everything
+ * well over a window tall   the product carries a description, a mockup and
+ * the list of what is inside it   and pinning its top would bury everything
  * past the first screenful.
  *
  * So the pin is set at the panel's own overhang instead: `top` is however far
@@ -22,10 +22,19 @@ import { solutionsCopy, systems } from "@/lib/data/solutions";
  * exactly as at width. Nothing is dropped to make it fit, and a panel that is
  * only a window tall lands back on `top: 0` of its own accord.
  *
- * Until the measurement lands the fallback is deliberately larger than any
- * panel, which parks the pin out of reach and leaves the section scrolling
- * plainly. Nothing is ever held over content that has not been read — that is
- * the right way to be wrong here, and it is also the no-script state.
+ * The overhang is measured against `lvh`, not `svh`. A phone hides its address
+ * bar on the way down, which is the whole of the time the pin is engaged, so
+ * `lvh` is the height the panel is actually being held against; measuring
+ * against the short viewport instead leaves a band of the next panel showing
+ * under the one being held, and the band changes size as the bar comes and
+ * goes.
+ *
+ * Until the measurement lands the fallback has to put the pin somewhere the
+ * scroll cannot reach   otherwise a panel catches at an offset taken from a
+ * height that is not its own and holds with its opening lines already above
+ * the frame. A number no panel can be as tall as does that; nothing is ever
+ * held over content that has not been read, which is the right way to be wrong
+ * here, and it is also the no-script state.
  */
 export function SystemsOverview() {
   const say = useSay();
@@ -82,7 +91,7 @@ export function SystemsOverview() {
         </div>
         <div>
           {systems.map((system, index) => (
-            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-forest-md sticky top-[calc(100svh-var(--panel-h,200vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden lg:pt-[var(--systems-bar,14rem)]">
+            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-forest-md sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden lg:pt-[var(--systems-bar,14rem)]">
               <div className="container-eiden w-full py-16 lg:py-0">
                 <SystemFeature system={system} />
               </div>

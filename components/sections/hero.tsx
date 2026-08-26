@@ -199,7 +199,7 @@ export function Hero() {
             </div>
 
             {/* The claim above is a number; this is the project it came
-                from — cover, what it was, what it moved, and the way in. */}
+                from   cover, what it was, what it moved, and the way in. */}
             {featured ? (
               <Link
                 href="/clients"
@@ -243,7 +243,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* The roster keeps running — full width, under both columns, where
+        {/* The roster keeps running   full width, under both columns, where
             it has the room a marquee needs. */}
         <div
           className={cn(

@@ -13,8 +13,8 @@ type WordmarkProps = {
  * The EIDEN GROUP wordmark, drawn as a CSS mask over `currentColor`.
  *
  * Masking (rather than an `<img>`) keeps the mark crisp at any size and lets it
- * inherit the surrounding text colour — forest on light surfaces, canvas on dark
- * ones — without shipping a second asset.
+ * inherit the surrounding text colour   forest on light surfaces, canvas on dark
+ * ones   without shipping a second asset.
  */
 export function Wordmark({ className, label }: WordmarkProps) {
   return (

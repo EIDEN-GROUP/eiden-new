@@ -8,17 +8,8 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { projectGallery } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-/** Six covers cascading down and to the right, the text card cut into them. */
 const cascade = projectGallery.slice(2, 8);
 
-/**
- * The idea, told as a stack being dealt across the page.
- *
- * Wide screens get the diagonal: each card steps right and down from the last,
- * with the written card sitting proud of the run. Under `lg` the diagonal has
- * nowhere to go, so the same pieces stack — card first, covers behind it on a
- * rail — rather than being squeezed into an unreadable fan.
- */
 export function Home2Manifesto() {
   const { t } = useLanguage();
 

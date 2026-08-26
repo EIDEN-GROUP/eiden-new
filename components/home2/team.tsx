@@ -18,7 +18,7 @@ const tints = [
  * The people, as a grid with the founder cut into the middle of it.
  *
  * No portraits have been supplied, so each frame carries a monogram over a
- * brand tint — a deliberate placeholder. Dropping in real photography means
+ * brand tint   a deliberate placeholder. Dropping in real photography means
  * putting an `<Image>` in the same slot; nothing else has to move.
  */
 export function Home2Team() {
@@ -75,7 +75,7 @@ export function Home2Team() {
             <Link
               key={member.name}
               href="/a-propos#equipe"
-              aria-label={`${member.name} — ${member.role}`}
+              aria-label={`${member.name}   ${member.role}`}
               className={cn(
                 "group flex flex-col justify-between rounded-[1.6rem] p-6",
                 "shadow-[0_28px_64px_-40px_rgba(10,15,12,0.45)]",

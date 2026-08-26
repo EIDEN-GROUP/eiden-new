@@ -5,7 +5,7 @@ import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 02 — The challenge.
+ * 02   The challenge.
  *
  * Two or three sentences, then the problem broken into numbered points. The
  * points are deliberately short: they are the thing a visitor remembers, and

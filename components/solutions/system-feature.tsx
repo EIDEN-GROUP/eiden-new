@@ -82,7 +82,7 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
             <div className="relative isolate mx-auto w-full overflow-hidden rounded-3xl" style={{ aspectRatio: `${system.mockup.width} / ${system.mockup.height}`, maxWidth: `calc(56svh * ${(system.mockup.width / system.mockup.height).toFixed(4)})`, }}>
               <Image
                 src={system.mockup}
-                alt={`${system.name} — ${say(system.tagline)}`}
+                alt={`${system.name}   ${say(system.tagline)}`}
                 fill
                 sizes="(min-width: 64rem) 46vw, 92vw"
                 placeholder="blur"
@@ -90,7 +90,7 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
               />
             </div>
           ) : (
-            <SystemScreenshot screenshot={system.screenshot} alt={`${system.name} — ${say(system.tagline)}`} url={system.url}/>
+            <SystemScreenshot screenshot={system.screenshot} alt={`${system.name}   ${say(system.tagline)}`} url={system.url}/>
           )}
         </Reveal>
 

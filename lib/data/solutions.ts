@@ -83,7 +83,7 @@ export const systems: SystemRecord[] = [
     ],
     /* The product sits behind a login, so this list is read off the capture
        beside it rather than the live app: its own section labels (Scolarité,
-       Finances), page titles and dashboard tiles. Keep the two in step — if
+       Finances), page titles and dashboard tiles. Keep the two in step   if
        the mockup is replaced, these are the names that have to match it. */
     capabilities: [
       {

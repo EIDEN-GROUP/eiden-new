@@ -9,15 +9,9 @@ import { SwipeDeck } from "@/components/ui/swipe-deck";
 import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
-/**
- * The lead reads back muted and turns to ink one paragraph at a time as the
- * column rises — the same ramp the solutions intro uses on its constat,
- * pitched off gold so the unlit state still holds its own on cream.
- */
 const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
-/** 0 before `from`, 1 after `to`, linear in between. */
 const ramp = (value: number, from: number, to: number) =>
   clamp01((value - from) / (to - from));
 
@@ -190,7 +184,7 @@ export function Idea() {
         <span aria-hidden className="idea-wash" />
 
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
-          <div ref={stageRef} className="container-eiden relative w-full">
+          <div ref={stageRef} className="container-eiden relative w-full pt-24 sm:pt-0">
             <div className="relative z-10 mb-12 flex flex-wrap justify-center gap-x-[0.3em] text-center lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2 lg:flex-nowrap lg:whitespace-nowrap">
               <span
                 style={{
@@ -212,7 +206,6 @@ export function Idea() {
               </span>
             </div>
 
-            {/* Cards — side by side at lg, a swipeable pile below it */}
             <SwipeDeck className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
               {cards.map((card) => (
                 <article

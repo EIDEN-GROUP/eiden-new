@@ -19,7 +19,7 @@ export function Offer() {
       id="expertises"
       className="grain bg-ink relative overflow-hidden py-24 sm:py-32"
     >
-      {/* Geometric wash — architectural, never decorative noise */}
+      {/* Geometric wash   architectural, never decorative noise */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.16]"

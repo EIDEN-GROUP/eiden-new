@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * The way back to the top, alone in the bottom-right corner once the page has
  * scrolled about a screen.
  *
- * It steps aside as the footer curtain comes up — the footer carries its own,
+ * It steps aside as the footer curtain comes up   the footer carries its own,
  * and a light pill over the dark panel reads as a stray sticker.
  */
 export function FloatingActions() {

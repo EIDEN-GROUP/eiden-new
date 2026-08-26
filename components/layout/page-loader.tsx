@@ -29,7 +29,7 @@ const noopSubscribe = () => () => {};
 
 /**
  * First-visit intro: the wordmark fills left to right behind a block riding
- * its own edge, and the frame is then carried off by a train of curtains —
+ * its own edge, and the frame is then carried off by a train of curtains  
  * the ground leading, three brand colours crossing it from off-stage left, so
  * the page is uncovered a band at a time rather than in one cut.
  *
@@ -75,7 +75,7 @@ export function PageLoader() {
 
   /*
    * Release the chrome that waits behind the intro. Guarded on hydration
-   * because the server snapshot reports the intro as already seen — without
+   * because the server snapshot reports the intro as already seen   without
    * that, the very first commit would call this a beat before the loader
    * has even had a chance to appear.
    */
@@ -109,7 +109,7 @@ export function PageLoader() {
         )}
       >
         <span className="relative grid h-9 sm:h-12">
-          {/* The mark at rest, and the same mark lit — one on top of the
+          {/* The mark at rest, and the same mark lit   one on top of the
               other, with the clip opening the lit copy left to right. */}
           <Wordmark className="text-canvas/20 col-start-1 row-start-1 h-full" />
           <span

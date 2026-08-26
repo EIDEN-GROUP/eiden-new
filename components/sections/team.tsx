@@ -99,7 +99,7 @@ export function Team() {
         </div>
 
         <Reveal delay={0.12} duration={0.9} className="mt-16">
-          <Link href="/a-propos#equipe" aria-label={`${founder.name} — ${founder.role}`} className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
+          <Link href="/a-propos#equipe" aria-label={`${founder.name}   ${founder.role}`} className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
             <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-[26rem]">
               <Image
                 src="/work/CEO.png"

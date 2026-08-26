@@ -27,14 +27,6 @@ const callouts = [
   },
 ];
 
-/**
- * The opening: one centred line, a deck fanning out under it, and the two
- * actions.
- *
- * The deck lands as a square stack and opens into its arc a beat after mount,
- * which is the whole trick — the cards are laid out by index, so the resting
- * arc and the collapsed stack are the same markup with one class flipped.
- */
 export function Home2Hero() {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);

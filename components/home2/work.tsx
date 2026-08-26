@@ -42,7 +42,7 @@ export function Home2Work() {
     <section className="bg-cream px-4 py-20 sm:px-6 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-14">
-          {/* Left column — the claim and the controls */}
+          {/* Left column   the claim and the controls */}
           <div>
             <Reveal direction="none" duration={0.5}>
               <p className="font-label text-teal text-[0.8rem] font-bold tracking-[0.32em] uppercase">
@@ -93,7 +93,7 @@ export function Home2Work() {
             </Reveal>
           </div>
 
-          {/* Right column — the rail itself */}
+          {/* Right column   the rail itself */}
           <div>
             <div
               ref={railRef}

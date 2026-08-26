@@ -1,5 +1,5 @@
 /**
- * French content — the source of truth for the whole site.
+ * French content   the source of truth for the whole site.
  *
  * `lib/i18n/en.ts` is typed as `typeof fr`, so any key added here must be
  * translated there before the project type-checks.
@@ -9,7 +9,7 @@ export const fr = {
   htmlLang: "fr",
 
   meta: {
-    title: "EIDEN GROUP — Agence digitale au Maroc",
+    title: "EIDEN GROUP   Agence digitale au Maroc",
     description:
       "Agence digitale marocaine. Stratégie, marque, site web, campagnes et contenu : nous construisons les systèmes digitaux qui font grandir votre entreprise.",
   },
@@ -44,7 +44,7 @@ export const fr = {
     contact: "Contact",
   },
 
-  /* The full-screen menu. One caption per route — the line that runs under
+  /* The full-screen menu. One caption per route   the line that runs under
      the picture when a column is opened. */
   menu: {
     label: "Menu",
@@ -330,13 +330,13 @@ export const fr = {
         quote:
           "On savait qu'il fallait faire du digital sans savoir par où commencer. EIDEN a mis un ordre clair, étape par étape.",
         author: "Fondateur",
-        company: "Commerce & distribution — Casablanca",
+        company: "Commerce & distribution   Casablanca",
       },
       {
         quote:
           "Le suivi mensuel change tout. On voit ce que la publicité rapporte, en dirhams, pas en impressions.",
         author: "Direction marketing",
-        company: "Santé — Agadir",
+        company: "Santé   Agadir",
       },
       {
         quote:
@@ -503,7 +503,7 @@ export const fr = {
       submit: "Envoyer la demande",
       sending: "Envoi en cours…",
       success:
-        "Merci. Votre demande est prête — votre messagerie va s'ouvrir pour l'envoyer.",
+        "Merci. Votre demande est prête   votre messagerie va s'ouvrir pour l'envoyer.",
       error: "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
       required: "Champ obligatoire",
       invalidEmail: "Adresse e-mail invalide",
@@ -590,7 +590,7 @@ export const fr = {
         {
           n: "04",
           title: "Ancrés au Maroc, à l'aise partout",
-          text: "Le siège est marocain, la portée est internationale — Afrique, Europe, Amérique du Nord.",
+          text: "Le siège est marocain, la portée est internationale   Afrique, Europe, Amérique du Nord.",
           quote:
             "Agadir. Casablanca. Paris. Montréal. Floride. Dubaï. Un studio, plusieurs fuseaux.",
         },
@@ -652,7 +652,7 @@ export const fr = {
         },
         {
           q: "Comment se déroule une mission ?",
-          a: "Elle s'ouvre par le Hydra Scan™, qui relève les fractures visibles. Vient ensuite l'Onion Methodology™, qui descend couche par couche — marque, opérations, stratégie, fondations. La mise en œuvre suit le Fountain Operations™ : un service à la fois, jusqu'à ce qu'il déborde sur le suivant.",
+          a: "Elle s'ouvre par le Hydra Scan™, qui relève les fractures visibles. Vient ensuite l'Onion Methodology™, qui descend couche par couche   marque, opérations, stratégie, fondations. La mise en œuvre suit le Fountain Operations™ : un service à la fois, jusqu'à ce qu'il déborde sur le suivant.",
         },
         {
           q: "Qu'est-ce que le Hydra Scan™ ?",
@@ -660,7 +660,7 @@ export const fr = {
         },
         {
           q: "Combien de temps avant de voir des résultats ?",
-          a: "Le scan tient en deux heures et la carte est à vous le jour même. Pour le reste, la durée dépend de l'étendue des fractures — nous l'annonçons après le scan, jamais avant.",
+          a: "Le scan tient en deux heures et la carte est à vous le jour même. Pour le reste, la durée dépend de l'étendue des fractures   nous l'annonçons après le scan, jamais avant.",
         },
         {
           q: "Travaillez-vous en dehors du Maroc ?",
@@ -694,7 +694,6 @@ export const fr = {
         health: "Santé",
       },
       empty: "Aucun projet dans cette catégorie pour l'instant.",
-      /* One line per project, keyed by the portfolio's own slug. */
       projectLines: {
         bopassage:
           "Le lieu où l'on revient toujours, avec la couche digitale qui va avec.",
@@ -744,7 +743,7 @@ export const fr = {
       ],
       portfolioTitle: "Le portfolio complet",
       portfolioText:
-        "Chaque projet est détaillé — contexte, travail réalisé, résultats — sur notre portfolio.",
+        "Chaque projet est détaillé   contexte, travail réalisé, résultats   sur notre portfolio.",
       portfolioCta: "Ouvrir le portfolio",
     },
     solutions: {

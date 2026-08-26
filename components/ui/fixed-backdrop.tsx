@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils";
 /**
  * A picture pinned to the viewport, seen through the section it sits in.
  *
- * This is `background-attachment: fixed` — the image holds still while the
- * section slides over it, so scrolling wipes the band open like a window —
+ * This is `background-attachment: fixed`   the image holds still while the
+ * section slides over it, so scrolling wipes the band open like a window  
  * written as a transform instead, because Safari on iOS has never honoured
  * the fixed attachment and drops the effect on every phone. A layer exactly
  * one viewport tall is pushed back up by the section's own offset on each
  * frame, which lands it where the CSS would have, on every device.
  *
  * The loop ticks only while the band is near the screen, and not at all for
- * visitors who ask for reduced motion — they get the picture sitting still
+ * visitors who ask for reduced motion   they get the picture sitting still
  * inside the band.
  */
 export function FixedBackdrop({

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   EIDEN GROUP — Design tokens
+   EIDEN GROUP   Design tokens
    Palette & typography from the EIDEN Brand Identity System v2.0
    ============================================================ */
 @theme {
@@ -23,7 +23,7 @@
   --color-gold-dk: #b8a876;
   --color-mint: #34d399;
 
-  /* Typography — five voices, five roles */
+  /* Typography   five voices, five roles */
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-editorial: var(--font-dm-serif), ui-serif, Georgia, serif;
   --font-label: var(--font-cormorant), ui-serif, Georgia, serif;
@@ -118,7 +118,7 @@
   }
 }
 
-/* Label / eyebrow — Cormorant Garamond, uppercase, wide tracking */
+/* Label / eyebrow   Cormorant Garamond, uppercase, wide tracking */
 @utility eyebrow {
   font-family: var(--font-label);
   font-size: 12px;
@@ -132,7 +132,7 @@
   }
 }
 
-/* Editorial italic — DM Serif Display */
+/* Editorial italic   DM Serif Display */
 @utility editorial {
   font-family: var(--font-editorial);
   font-style: italic;
@@ -188,8 +188,8 @@
 }
 
 /* Google only draws its tiles in daylight, and the contact page is ink, so
-   the frame is turned back into a night map here. Greyscale first — without
-   it the inversion returns a road as orange — then the contrast pulled back
+   the frame is turned back into a night map here. Greyscale first   without
+   it the inversion returns a road as orange   then the contrast pulled back
    so the place names stay readable rather than glaring. */
 @utility map-night {
   filter: grayscale(1) invert(0.92) contrast(0.92) brightness(1.04);
@@ -222,7 +222,7 @@
 /* The vertical twin, for the columns of work that drift past the claim on
    the clients page. Each column lays its list down twice, so pulling the
    track up by half its own height lands the copy exactly where the original
-   started. That only holds while the spacing is carried by the items — a
+   started. That only holds while the spacing is carried by the items   a
    flex `gap` would leave one gap unaccounted for and the loop would jump. */
 @keyframes eiden-marquee-y {
   from {
@@ -306,8 +306,8 @@
    Scroll reveals
 
    The hidden state only exists under `prefers-reduced-motion:
-   no-preference`, so reduced-motion visitors — and anyone whose
-   JavaScript fails — always see fully rendered content.
+   no-preference`, so reduced-motion visitors   and anyone whose
+   JavaScript fails   always see fully rendered content.
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal="out"] {
@@ -432,7 +432,7 @@
 }
 
 /* ============================================================
-   Project arc — the hero's curved gallery
+   Project arc   the hero's curved gallery
 
    Five cards laid on the inside of a cylinder: the middle one is
    pushed away and the ends lean in towards it, so the row reads as
@@ -440,8 +440,8 @@
    on `.arc-slot` and entrance on the card inside it, so the two never
    fight over the same `transform`.
 
-   Below `md` the curve is dropped entirely — a 30° turn on a 170px
-   card is unreadable — and the row becomes a snap rail instead.
+   Below `md` the curve is dropped entirely   a 30° turn on a 170px
+   card is unreadable   and the row becomes a snap rail instead.
    ============================================================ */
 .arc-stage {
   --arc-gap: 0.75rem;
@@ -512,7 +512,7 @@
 /* Headline words pushed up from behind their own mask. Written as an
    animation rather than as the observer-driven `.word-rise` transition:
    the hero is on screen at mount, so it stages off a delay like the rest
-   of the entrance — and without JavaScript there is nothing to strand. */
+   of the entrance   and without JavaScript there is nothing to strand. */
 @keyframes eiden-word-rise {
   from {
     transform: translate3d(0, 110%, 0);
@@ -523,7 +523,7 @@
 }
 
 /* ============================================================
-   Intro — the wordmark fills, then a train of curtains crosses
+   Intro   the wordmark fills, then a train of curtains crosses
 
    The mark is drawn twice in one grid cell: a dim copy underneath
    and a lit one clipped back to nothing, which a `clip-path` opens
@@ -571,11 +571,11 @@
 }
 
 /* ============================================================
-   The shift stage — the light going out as the cards arrive
+   The shift stage   the light going out as the cards arrive
 
    The mirror of the film's wash: this one runs the other way,
    drawing ink over the canvas so the two cards are handed a
-   dark room to stand in. Same smoothstep, for the same reason —
+   dark room to stand in. Same smoothstep, for the same reason  
    slow to catch, quick through the middle, gentle to settle.
 
    `--dim` is written on the stage's track and defaults to 0, so
@@ -591,7 +591,7 @@
 }
 
 /* Type carried across the change of ground rather than swapped at a
-   threshold — the headline is still on screen while the room goes out. */
+   threshold   the headline is still on screen while the room goes out. */
 .idea-lit {
   color: color-mix(
     in oklab,
@@ -604,7 +604,7 @@
    The two cards
 
    One card is centred until the second arrives, then it steps
-   aside by exactly half its own width plus half the gap — which
+   aside by exactly half its own width plus half the gap   which
    is the centring offset at any width, so the stage can be
    widened without the number needing to be retuned.
 
@@ -653,7 +653,7 @@
 }
 
 /* ============================================================
-   Menu — one control at every width, opening as a circle
+   Menu   one control at every width, opening as a circle
 
    The panel is clipped to a circle centred on the button that
    opens it, grown in JavaScript to reach the corner of the frame
@@ -672,12 +672,12 @@
 }
 
 /* ------------------------------------------------------------
-   Menu columns — one per route, the opened one taking the room
+   Menu columns   one per route, the opened one taking the room
 
    Below `md` the routes stack and every picture is on show, since
    there is no pointer to open one with. From `md` up the route you
    are on is the open one, and it takes roughly two fifths of the
-   frame while the rest divide what is left — until a pointer or the
+   frame while the rest divide what is left   until a pointer or the
    keyboard asks for a different column, which takes over from it.
 
    `flex-grow` is the animated property rather than `width`: the
@@ -696,7 +696,7 @@
     transition: flex-grow 0.75s var(--ease-brand);
   }
 
-  /* The column being pointed at takes the room — and so does the route you
+  /* The column being pointed at takes the room   and so does the route you
      are already reading, so the panel opens on where you stand instead of
      marking it in another colour. The pointer outranks the page: ask for a
      different column and the open one gives its share straight back. */
@@ -719,7 +719,7 @@
 }
 
 /* ============================================================
-   Hero screen — the device unfolds on arrival
+   Hero screen   the device unfolds on arrival
 
    It lands turned away in three axes and scaled past the frame,
    then straightens into a flat rectangle. The perspective lives
@@ -741,7 +741,7 @@
 }
 
 /* ============================================================
-   Hero departure — the first frame recedes as it leaves
+   Hero departure   the first frame recedes as it leaves
 
    Scrolling past the hero pulls it back into a rounded panel and
    lets the cream page show along its edges, so the frame reads as
@@ -772,14 +772,14 @@
 }
 
 /* ============================================================
-   VSL — the player grows into the frame
+   VSL   the player grows into the frame
 
    The section pins for its own height and the card is scaled
    about a fixed centre while it holds, so the headline written
    under it stays where it was set and the picture grows over it
    rather than shoving it down the page. The stage is only as
-   tall as the card *starts* — that is what lets the card overrun
-   it — and the scale runs on the compositor, so nothing on the
+   tall as the card *starts*   that is what lets the card overrun
+   it   and the scale runs on the compositor, so nothing on the
    way down is ever re-laid out.
 
    `--grow` runs 0 → 1 across the pin and defaults to 1, so no-JS
@@ -843,8 +843,8 @@
    The band is laid on the dark ground and washed to the light
    one on the same `--grow` that opens the card, so the room
    brightens as the picture takes it rather than cutting to it.
-   The ramp is a smoothstep — slow to catch, quick through the
-   middle, gentle to settle — which is how a lamp reads.
+   The ramp is a smoothstep   slow to catch, quick through the
+   middle, gentle to settle   which is how a lamp reads.
 
    `--grow` is written on the section, not the track, so the
    wash, the bloom and the type all read the same number.
@@ -899,7 +899,7 @@
 
    The two heights are a pair and must be read together: the
    frame is pinned for `150svh − 100svh = 50svh`, and the leaves
-   open at 100svh of gap over that same 50svh of scroll — twice
+   open at 100svh of gap over that same 50svh of scroll   twice
    the rate. That is what holds the opening's top edge still in
    the page while it grows, so the section under it is uncovered
    from its own first line down and sits exactly at the top of
@@ -939,7 +939,7 @@
 /* The extra pixel of travel keeps a parted leaf off the frame's own clip
    line. The frame is sized in `svh`, so that boundary lands on a fraction
    of a pixel, and a leaf whose edge sits exactly on it bleeds a hairline of
-   canvas — and of its seam — over the section underneath. Scaled by
+   canvas   and of its seam   over the section underneath. Scaled by
    `--split` so the shut curtain still meets exactly where it always did. */
 .vsl-leaf-top {
   top: 0;
@@ -970,12 +970,12 @@
 }
 
 /* ============================================================
-   Case curtain — each panel rises over the one before it
+   Case curtain   each panel rises over the one before it
 
    `--seq` runs 0 → n−1 across the pinned track and every panel
    carries its own `--i`. A panel sits off-stage below while the
    sequence is short of it, travels as the difference closes, and
-   stays put once passed — so the motion is tied to the scroll
+   stays put once passed   so the motion is tied to the scroll
    rather than fired at a threshold, and reverses just as smoothly.
    ============================================================ */
 .curtain-layer {
@@ -987,13 +987,13 @@
 }
 
 /* ============================================================
-   About — a block that plays with the scroll, in both directions
+   About   a block that plays with the scroll, in both directions
 
    `--p` is the block's travel through the viewport, written frame
    by frame by `useTravel`; `--i` and `--n` place an element in the
    sequence. Because `--p` is measured from the block's position on
    every scroll rather than latched once at a threshold, all of this
-   runs backwards when the visitor scrolls back up — which is the
+   runs backwards when the visitor scrolls back up   which is the
    whole point of driving it this way instead of with a reveal.
 
    Two rules the ramp has to follow:
@@ -1004,7 +1004,7 @@
      strand every card in the pile.
    · `--p` falls back to 1, not 0. Before the script runs there is
      no travel to read, and the finished layout is the honest thing
-     to show — never a heap of cards stacked in the middle.
+     to show   never a heap of cards stacked in the middle.
    ============================================================ */
 
 /* Cards gathered into a deck, then dealt out to their places. The
@@ -1041,7 +1041,7 @@
   opacity: calc(0.15 + 0.85 * clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1));
 }
 
-/* The run from one step to the next, drawn once its own step has arrived —
+/* The run from one step to the next, drawn once its own step has arrived  
    hence the half-step of lag before the ramp starts to open it. */
 .step-arrow {
   transform-origin: left center;
@@ -1055,25 +1055,26 @@
 }
 
 /* ============================================================
-   The swipe deck — a pile of cards dealt sideways
+   The swipe deck   one lane, swiped sideways
 
-   Below `lg` a row of cards has nowhere to go, so they are piled
-   instead: one in hand, the rest leaning out behind it. The track
-   is a real scroller with one full-width slot per card, so the
-   swipe and its momentum belong to the browser; `SwipeDeck` only
-   reads `--deck-p` — the scroll position measured in slots — back
-   out of it.
+   Below `lg` a row of cards has nowhere to go, so they are laid
+   along a track instead: one full-width slot per card, snapped,
+   with the next card left a thumb proud of the frame so the edge
+   of it says there is another to come. The scroller is the
+   browser's own   no script, no transform, nothing to keep in
+   step with the scroll.
 
-   `--d`, how many cards back a card is, is 0 in hand, positive in
-   the pile and negative once it has been dealt away. It is written
-   out in full inside every function rather than parked in one
-   custom property: substituting a `clamp()` through a custom
-   property resolves to zero in Chrome, which would collapse the
-   whole pile onto one card.
+   The geometry is all in the padding. The deck bleeds out to the
+   edges of the frame and takes the container's gutter back as its
+   own start padding, so a card keeps the width it would have had.
+   The end padding is what the peek is made of: a slot is `100%`
+   of the content box, which that padding has already narrowed, so
+   the next card shows by exactly `--peek` at rest and the last
+   slot can still snap flush to the gutter with nothing to tune.
 
-   Everything here is scoped below `lg`, so the deck leaves no
-   trace on the grid the caller uses at width — including the
-   scroll-driven deal `.deal-card` runs there.
+   Everything is scoped below `lg`, so the deck leaves no trace on
+   the grid the caller uses at width   including the scroll-driven
+   deal `.deal-card` runs there.
    ============================================================ */
 
 /* Outside the deck's own width the slot is not a box at all, so the
@@ -1083,27 +1084,28 @@
 }
 
 @media (width < 64rem) {
-  /* The deck bleeds out to the edges of the frame and takes the
-     container's gutter back as its own padding: a card keeps the
-     width it would have had, and the pile still has somewhere to
-     lean. Equal padding on both sides is what puts the last slot
-     exactly at the end of the scroll, with nothing to tune. */
   .swipe-deck {
     --gutter: 1.25rem;
-    --pile-x: 1.15rem;
-    --pile-y: 1.35rem;
+    /* How much of the next card shows at rest. */
+    --peek: 2.25rem;
+    /* The dark between two cards. */
+    --deal: 0.75rem;
     display: flex;
-    gap: 0;
+    gap: var(--deal);
     margin-inline: calc(var(--gutter) * -1);
-    padding-inline: var(--gutter);
-    /* Room for the lean and the drop shadow, handed back to the
-       layout so the section keeps the height it had. */
+    padding-inline-start: var(--gutter);
+    padding-inline-end: calc(var(--peek) + var(--deal));
+    /* Room for the drop shadow and for whatever entrance transform
+       a card carries, handed back to the layout so the section
+       keeps the height it had. */
     padding-block: 3.5rem;
     margin-block: -3.5rem;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
+    /* Without this the last slot's snap position sits past the end
+       of the scroll and the track fights itself at the edge. */
+    scroll-padding-inline-start: var(--gutter);
     scrollbar-width: none;
   }
 
@@ -1111,61 +1113,22 @@
     display: none;
   }
 
-  /* The slot holds the place in the track; the card is moved off it. */
   .swipe-slot {
     display: flex;
     flex: 0 0 100%;
-    /* A little of the card's width traded back for lean room. */
-    padding-inline: 1rem;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    /* The card in hand on top, the pile behind it in order. */
-    z-index: calc(var(--n, 1) - var(--i, 0));
   }
 
   .swipe-slot > * {
     flex: 1 1 auto;
     min-width: 0;
   }
-
-  .swipe-deck > .swipe-slot > * {
-    /* The first term lifts the card out of its slot and onto the pile: it
-       cancels exactly the distance the track has carried that slot. What is
-       left is where the card stands in the deck — leaning behind while it
-       waits, thrown off the left edge once it has been dealt. */
-    translate: calc(
-        (var(--deck-p, 0) - var(--i)) * var(--deck-w, 0) * 1px + min(
-            0,
-            calc(var(--i) - var(--deck-p, 0))
-          ) * 116% - clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) *
-          var(--pile-x)
-      )
-      calc(clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) * var(--pile-y));
-    rotate: calc(
-      var(--tilt, 0deg) + min(0, calc(var(--i) - var(--deck-p, 0))) * 9deg
-    );
-    scale: calc(1 - clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) * 0.035);
-    /* Dealt away rather than merely behind: gone by the time the
-       next card is square. */
-    opacity: calc(1 + min(0, calc(var(--i) - var(--deck-p, 0))) * 1.15);
-    /* Cream over cream reads as one wide card; the pile needs an edge. */
-    box-shadow:
-      0 30px 70px -40px rgb(0 0 0 / 0.5),
-      0 4px 24px -12px rgb(0 0 0 / 0.35);
-  }
 }
 
 @media (width >= 48rem) and (width < 64rem) {
   .swipe-deck {
     --gutter: 2.5rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* The pile still stands — it is the layout at this width, not an
-     effect — but nothing is thrown off the edge to make the point. */
-  .swipe-deck > .swipe-slot > * {
-    opacity: 1;
   }
 }
 
@@ -1178,5 +1141,77 @@
     rotate: none;
     scale: none;
     opacity: 1;
+  }
+}
+
+/* ============================================================
+   The story carousel   a run of slides, one in hand
+
+   The track is a real scroller: one slot per slide, snapped to
+   its centre, so the swipe and its momentum belong to the
+   browser. `ProjectVisualStory` reads `--p`   the scroll
+   position measured in slots   back out of it, and everything
+   below is that number turned into depth.
+
+   `--d` is how far a slide stands from the one in hand, capped
+   at one slot so a run of twenty does not fade to nothing three
+   in. It is written out in full inside every function rather
+   than parked in one custom property: substituting a `min()`
+   through a custom property resolves to zero in Chrome, which
+   would flatten the whole run onto one plane.
+
+   The leading and trailing padding is half the track less half a
+   slide, which is what centres the first and last slide without
+   either of them having to be measured.
+   ============================================================ */
+.story-track {
+  --slide: min(78vw, 44rem);
+  display: flex;
+  gap: 1rem;
+  padding-inline: max(0px, calc((100% - var(--slide)) / 2));
+  /* Room for the drop shadow the clipping box would cut. */
+  padding-block: 2rem;
+  margin-block: -2rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.story-track::-webkit-scrollbar {
+  display: none;
+}
+
+.story-slide {
+  flex: 0 0 var(--slide);
+  scroll-snap-align: center;
+  /* The slide in hand in front, the rest behind it in order. */
+  z-index: calc(
+    100 - min(1, max(calc(var(--i) - var(--p, 0)), calc(var(--p, 0) - var(--i)))) *
+      100
+  );
+}
+
+.story-card {
+  transform-origin: center;
+  scale: calc(
+    1 - min(1, max(calc(var(--i) - var(--p, 0)), calc(var(--p, 0) - var(--i)))) *
+      0.12
+  );
+  opacity: calc(
+    1 - min(1, max(calc(var(--i) - var(--p, 0)), calc(var(--p, 0) - var(--i)))) *
+      0.5
+  );
+}
+
+.story-card > div {
+  box-shadow: 0 30px 70px -40px rgb(0 0 0 / 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The run still reads as a run   the fall-off is what says which
+     slide is in hand   but nothing is scaled to make the point. */
+  .story-card {
+    scale: none;
   }
 }

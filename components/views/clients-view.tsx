@@ -8,13 +8,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { LogoMarquee } from "@/components/ui/marquee";
 import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
-import { getProjectPage } from "@/lib/data/projects";
-import {
-  clientLogos,
-  portfolioProjectUrl,
-  projects,
-  type ProjectCategory,
-} from "@/lib/data/site";
+import { getProjectCase } from "@/lib/data/projects/index";
+import { clientLogos, portfolioProjectUrl, projects, type ProjectCategory, } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 type Filter = ProjectCategory | "all";
@@ -99,19 +94,10 @@ export function ClientsView() {
             </div>
 
             <Reveal delay={0.1} direction="left">
-              <div
-                aria-hidden
-                className={cn(
-                  "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[34rem]",
-                  "[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]",
-                )}
-              >
+              <div aria-hidden className={cn( "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[34rem]", "[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]", )}>
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                   {COLUMNS.map((column, index) => (
-                    <div
-                      key={index}
-                      className={cn("min-w-0", index === 2 && "hidden lg:block")}
-                    >
+                    <div key={index} className={cn("min-w-0", index === 2 && "hidden lg:block")} >
                       <div
                         className="drift-y"
                         style={
@@ -121,9 +107,6 @@ export function ClientsView() {
                           } as CSSProperties
                         }
                       >
-                        {/* Laid down twice: the loop closes on the copy. The
-                            spacing is the tile's own padding rather than a
-                            flex gap, which is what keeps the seam invisible. */}
                         {[...column.items, ...column.items].map((project, i) => (
                           <div key={`${project.slug}-${i}`} className="pb-3">
                             <div
@@ -195,12 +178,7 @@ export function ClientsView() {
                 </ul>
               </div>
 
-              <ButtonLink
-                href="/contact"
-                variant="gold"
-                size="lg"
-                className="mt-4 w-full"
-              >
+              <ButtonLink href="/contact" variant="gold" size="lg" className="mt-4 w-full" >
                 {t.contact.cta}
               </ButtonLink>
             </div>
@@ -213,11 +191,11 @@ export function ClientsView() {
                   <ProjectCard
                     key={project.slug}
                     href={
-                      getProjectPage(project.slug)
+                      getProjectCase(project.slug)
                         ? `/projects/${project.slug}`
                         : portfolioProjectUrl(project.slug)
                     }
-                    external={!getProjectPage(project.slug)}
+                    external={!getProjectCase(project.slug)}
                     name={project.name}
                     category={page.filters[project.category]}
                     line={page.projectLines[project.slug]}
@@ -252,10 +230,7 @@ export function ClientsView() {
 
           <RevealGroup className="mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
             {page.sectors.map((sector) => (
-              <article
-                key={sector.title}
-                className="bg-canvas/[0.04] hover:bg-canvas/[0.08] p-8 transition-colors duration-500"
-              >
+              <article key={sector.title} className="bg-canvas/[0.04] hover:bg-canvas/[0.08] p-8 transition-colors duration-500" >
                 <h3 className="font-display text-canvas text-lg font-bold tracking-[-0.02em]">
                   {sector.title}
                 </h3>
@@ -286,7 +261,6 @@ function ProjectCard({
   wide,
 }: {
   href: string;
-  /** A project with a page of its own opens here; the rest go to the portfolio. */
   external: boolean;
   name: string;
   category: string;
@@ -320,12 +294,7 @@ function ProjectCard({
         wide && "sm:col-span-2",
       )}
     >
-      <div
-        className={cn(
-          "bg-canvas/[0.04] relative overflow-hidden rounded-[1.25rem]",
-          wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3",
-        )}
-      >
+      <div className={cn( "bg-canvas/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )} >
         <Image
           src={image}
           alt={imageAlt}
@@ -338,15 +307,12 @@ function ProjectCard({
           className="object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
         />
 
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"
-        />
+        <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"/>
 
         <p className="eyebrow text-canvas/80 absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/80 px-5 py-2">
           <span className="text-gold tabular-nums">
             {String(index + 1).padStart(2, "0")}
-          </span>
+          </span>         
           <span aria-hidden className="bg-canvas/30 h-3 w-px" />
           {category}
         </p>

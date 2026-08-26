@@ -20,7 +20,7 @@ const LEAN = 32;
 const DEPTH = 190;
 /** Pixels the middle drops, so the row carries a slight smile. */
 const DIP = 14;
-/** Degrees the whole ring tilts under the pointer — vertical, horizontal. */
+/** Degrees the whole ring tilts under the pointer   vertical, horizontal. */
 const TILT_X = 5;
 const TILT_Y = 8;
 /** Share of the remaining distance the tilt closes each frame. */
@@ -136,7 +136,7 @@ export function ProjectArc({
               >
                 <Link
                   href={project.href}
-                  aria-label={`${project.client} — ${project.title}`}
+                  aria-label={`${project.client}   ${project.title}`}
                   className="group/card relative block h-[var(--arc-card-h)] w-[var(--arc-card-w)] overflow-hidden rounded-lg"
                 >
                   <Image

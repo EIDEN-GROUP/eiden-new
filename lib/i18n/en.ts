@@ -6,7 +6,7 @@ export const en: Dictionary = {
   htmlLang: "en",
 
   meta: {
-    title: "EIDEN GROUP — Digital agency in Morocco",
+    title: "EIDEN GROUP   Digital agency in Morocco",
     description:
       "Moroccan digital agency. Strategy, brand, website, campaigns and content: we build the digital systems that grow your business.",
   },
@@ -68,7 +68,7 @@ export const en: Dictionary = {
     clientsLabel: "Trusted by",
     featured: {
       badge: "Case study",
-      text: "How Lunja Village became a coastal brand its guests recognise — and book directly.",
+      text: "How Lunja Village became a coastal brand its guests recognise   and book directly.",
       metricLabel: "direct bookings in 6 months",
       cta: "Read the case study",
     },
@@ -110,7 +110,7 @@ export const en: Dictionary = {
     ],
     visionLabel: "Vision",
     vision:
-      "To become the reference in digital architecture — from Morocco, across Africa, and beyond.",
+      "To become the reference in digital architecture   from Morocco, across Africa, and beyond.",
     visionPoints: [
       "Morocco as the base, Africa as the ground.",
       "Digital architecture treated as a discipline, not an extra.",
@@ -319,19 +319,19 @@ export const en: Dictionary = {
         quote:
           "They started by listening and by looking at our numbers. The website came after, and it finally looks like who we actually are.",
         author: "Management",
-        company: "Hospitality — Agadir",
+        company: "Hospitality   Agadir",
       },
       {
         quote:
           "We knew we needed digital but not where to start. EIDEN put a clear order on it, step by step.",
         author: "Founder",
-        company: "Retail & distribution — Casablanca",
+        company: "Retail & distribution   Casablanca",
       },
       {
         quote:
           "The monthly follow-up changes everything. We see what the ads bring back, in dirhams, not impressions.",
         author: "Marketing director",
-        company: "Healthcare — Agadir",
+        company: "Healthcare   Agadir",
       },
       {
         quote:
@@ -497,7 +497,7 @@ export const en: Dictionary = {
       submit: "Send request",
       sending: "Sending…",
       success:
-        "Thank you. Your request is ready — your mail app will open to send it.",
+        "Thank you. Your request is ready   your mail app will open to send it.",
       error: "Something went wrong. Try again or email us directly.",
       required: "Required field",
       invalidEmail: "Invalid email address",
@@ -530,7 +530,7 @@ export const en: Dictionary = {
       positionEyebrow: "Where we stand",
       positionTitle: "We do not hand out advice. We lay the structure.",
       positionBody:
-        "Business architecture is the invisible structure that decides whether a company scales or suffocates. We treat it the way an architect treats a building: studied, structured, deliberate — with an engineer's rigour and a designer's eye.",
+        "Business architecture is the invisible structure that decides whether a company scales or suffocates. We treat it the way an architect treats a building: studied, structured, deliberate   with an engineer's rigour and a designer's eye.",
 
       storyEyebrow: "The origin",
       storyTitle: "Four movements.",
@@ -583,7 +583,7 @@ export const en: Dictionary = {
         {
           n: "04",
           title: "Rooted in Morocco, fluent anywhere",
-          text: "The base is Moroccan, the reach is international — Africa, Europe, North America.",
+          text: "The base is Moroccan, the reach is international   Africa, Europe, North America.",
           quote:
             "Agadir. Casablanca. Paris. Montréal. Florida. Dubai. One studio, many timezones.",
         },
@@ -644,7 +644,7 @@ export const en: Dictionary = {
         },
         {
           q: "How does an engagement run?",
-          a: "It opens with the Hydra Scan™, which surfaces the visible fractures. Then the Onion Methodology™ goes down layer by layer — brand, operations, strategy, foundation. The build follows Fountain Operations™: one function at a time, until it overflows into the next.",
+          a: "It opens with the Hydra Scan™, which surfaces the visible fractures. Then the Onion Methodology™ goes down layer by layer   brand, operations, strategy, foundation. The build follows Fountain Operations™: one function at a time, until it overflows into the next.",
         },
         {
           q: "What is the Hydra Scan™?",
@@ -652,7 +652,7 @@ export const en: Dictionary = {
         },
         {
           q: "How long before we see results?",
-          a: "The scan takes two hours and the map is yours the same day. Beyond that, the timeline follows the spread of the fractures — we quote it after the scan, never before.",
+          a: "The scan takes two hours and the map is yours the same day. Beyond that, the timeline follows the spread of the fractures   we quote it after the scan, never before.",
         },
         {
           q: "Do you work outside Morocco?",
@@ -676,7 +676,7 @@ export const en: Dictionary = {
       statLabel: "projects delivered",
       workTitle: "What we are proudest of",
       workLead:
-        "Brand, site, content, campaigns — twelve projects carried end to end, each one written up in full on our portfolio.",
+        "Brand, site, content, campaigns   twelve projects carried end to end, each one written up in full on our portfolio.",
       viewProject: "See the project",
       filters: {
         all: "All work",
@@ -688,13 +688,13 @@ export const en: Dictionary = {
       empty: "Nothing in this category yet.",
       projectLines: {
         bopassage:
-          "The place you always come back to — now with the digital layer to match.",
+          "The place you always come back to   now with the digital layer to match.",
         "dmc-morocco":
           "Authenticity and excellence: hotel expertise translated from the mark to the inquiry.",
         "educazen-kids":
           "Tailored education, with the digital and operational stack to match.",
         "lunja-village":
-          "Surf, nomads, community — a coastal village brand rebuilt for who is actually arriving.",
+          "Surf, nomads, community   a coastal village brand rebuilt for who is actually arriving.",
         "medical-bay":
           "A medical centre, architected from patient experience to revenue logic.",
         orsen: "Substance before decoration.",
@@ -735,7 +735,7 @@ export const en: Dictionary = {
       ],
       portfolioTitle: "The full portfolio",
       portfolioText:
-        "Every project is detailed — context, work delivered, results — on our portfolio.",
+        "Every project is detailed   context, work delivered, results   on our portfolio.",
       portfolioCta: "Open the portfolio",
     },
     solutions: {

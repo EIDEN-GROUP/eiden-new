@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/data/site";
  * First half of the closing pair.
  *
  * This panel and `ContactBanner` share a gutter, a corner radius, an eyebrow
- * treatment and the same drawn backdrop language — a light step followed by a
+ * treatment and the same drawn backdrop language   a light step followed by a
  * dark one, so the end of the page reads as one block rather than two unrelated
  * calls to action.
  */

@@ -6,11 +6,11 @@ import { Reveal, RevealWords } from "@/components/ui/reveal";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 03 — The idea.
+ * 03   The idea.
  *
  * The one section on the page that is allowed to be loud. It runs on ink so
  * the statement lands as a turn in the page rather than as another
- * paragraph, and it comes before any of the detail — the reader should know
+ * paragraph, and it comes before any of the detail   the reader should know
  * what the thinking was before being shown what it produced.
  */
 export function ProjectIdea({ idea }: { idea: ProjectPage["idea"] }) {

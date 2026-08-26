@@ -5,7 +5,7 @@ import Lenis from "lenis";
 
 /**
  * The live instance, held at module scope so chrome outside this tree can
- * hand a scroll to the same easing. `null` whenever Lenis is not running —
+ * hand a scroll to the same easing. `null` whenever Lenis is not running  
  * on the server, before mount, or when the visitor prefers reduced motion.
  */
 let instance: Lenis | null = null;

@@ -9,14 +9,14 @@ import { useLanguage } from "@/components/providers/language-provider";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 08 — Next projects.
+ * 08   Next projects.
  *
  * The way out of a case study should be into another one, so the page ends
  * on two of them rather than on a footer link. Two is the point: one would
  * read as a queue the visitor is being marched along, a pair reads as a
  * choice.
  *
- * With nothing to suggest — a single record, or a slug with no neighbours —
+ * With nothing to suggest   a single record, or a slug with no neighbours  
  * it falls back to the index rather than rendering an empty shelf.
  */
 export function ProjectNavigation({ suggestions }: { suggestions: ProjectPage[] }) {

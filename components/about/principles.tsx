@@ -7,27 +7,8 @@ import { SwipeDeck } from "@/components/ui/swipe-deck";
 
 type Principle = { n: string; title: string; text: string; quote: string };
 
-/** The lean each card carries in the pile, cycled down the deck. */
 const TILT = [-5, 3.5, 4.5, -3];
 
-/**
- * The principles, gathered into a deck and dealt out by the scroll.
- *
- * At the head of the block the cards are stacked over the middle of the grid,
- * squared off a little and leaning against each other. As the block travels up
- * the viewport each one slides out to the place it already occupies in the
- * layout — the grid never changes, only the transform on top of it, so nothing
- * is laid out twice and the cards cannot push each other around.
- *
- * The travel is read from the block's position rather than latched at a
- * threshold, so the deal runs backwards, at the same rate, the moment the
- * visitor scrolls back up.
- *
- * Below `lg` the pile never has to clear itself: there is room for one card,
- * so the cards stay a deck and `SwipeDeck` deals them sideways instead. The
- * scroll-driven machinery is left switched off at that width — the swipe is
- * the interaction there, and two hands on the same cards would fight.
- */
 export function AboutPrinciples({
   eyebrow,
   title,

@@ -16,7 +16,7 @@ const strip = projectGallery.slice(0, 6);
  * Where the house stands, as a two-tab folder.
  *
  * Mission and vision are the same shape of statement, so they get the same
- * panel and a tab each rather than two competing columns — the folder is what
+ * panel and a tab each rather than two competing columns   the folder is what
  * makes the second one read as a continuation instead of a rival.
  */
 export function Home2Vision() {

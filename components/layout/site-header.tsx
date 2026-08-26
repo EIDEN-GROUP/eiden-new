@@ -186,7 +186,7 @@ export function SiteHeader() {
             href="/"
             data-tone="dark"
             onClick={() => setOpen(false)}
-            aria-label={`${siteConfig.name} — ${t.nav.home}`}
+            aria-label={`${siteConfig.name}   ${t.nav.home}`}
             className={cn(
               "pointer-events-auto",
               "text-canvas data-[tone=light]:text-teal",

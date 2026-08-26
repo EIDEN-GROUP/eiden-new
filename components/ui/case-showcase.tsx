@@ -33,7 +33,7 @@ export type ShowcaseIntro = {
 };
 
 /**
- * One ground per case, in order — the primary, black, white, gold, grey.
+ * One ground per case, in order   the primary, black, white, gold, grey.
  *
  * Five grounds for five cases, so none of them repeats, and each carries the
  * `tone` its own copy has to be drawn in: the set deliberately alternates
@@ -41,7 +41,7 @@ export type ShowcaseIntro = {
  * that keeps changing its mind.
  */
 const GROUNDS = [
-  { bg: "#0c5752", tone: "dark" }, // teal — the primary
+  { bg: "#0c5752", tone: "dark" }, // teal   the primary
   { bg: "#fefdfb", tone: "light" }, // canvas
   { bg: "#0a0f0c", tone: "dark" }, // ink
   { bg: "#b8a876", tone: "light" }, // gold
@@ -230,7 +230,7 @@ export function CaseShowcase({
             >
               {/* The leading edge of the panel. The sticky frame clips
                   anything past its top, so the shadow a stacked sheet would
-                  cast is drawn just inside the edge instead — it is what makes
+                  cast is drawn just inside the edge instead   it is what makes
                   a case read as laid over the picture rather than swapped in
                   for it. Struck from the panel's own ink, so it reads on a
                   light ground as well as a dark one. */}
@@ -305,7 +305,7 @@ export function CaseShowcase({
                   </p>
 
                   {/* The client's own word on the project, on the same card as
-                      the claim. Rendered only when both halves are there — an
+                      the claim. Rendered only when both halves are there   an
                       unattributed quote is not a testimonial. */}
                   {entry.quote && entry.author ? (
                     <figure
@@ -352,7 +352,7 @@ export function CaseShowcase({
                   </Link>
                 </div>
 
-                {/* The work itself. First in the frame on a phone — it is the
+                {/* The work itself. First in the frame on a phone   it is the
                     thing the section is here to show, and reading about a
                     project you cannot see is worth nothing. */}
                 <div className="relative order-first h-[18svh] w-full overflow-hidden rounded-sm sm:h-[24svh] lg:order-none lg:aspect-16/10 lg:h-auto">
@@ -369,7 +369,7 @@ export function CaseShowcase({
           );
         })}
 
-        {/* Running head — the count, held still while the work turns. */}
+        {/* Running head   the count, held still while the work turns. */}
         <div className="container-eiden pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between pt-20 sm:pt-24 lg:pt-32">
           <p
             className={cn(

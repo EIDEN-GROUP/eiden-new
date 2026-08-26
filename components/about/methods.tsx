@@ -10,27 +10,6 @@ import { SectionHeading } from "@/components/ui/section-heading";
 type Method = { name: string; text: string; quote: string };
 type Count = { value: string; label: string };
 
-/**
- * The methods, read across as a sequence rather than down as a list.
- *
- * They are a sequence in fact — a diagnosis, then an analysis, then the
- * implementation — and setting them side by side under a numbered run says so
- * where three equal boxes said the opposite. Each step rises and lights as the
- * block's travel reaches it, one after the other, and the run to the next step
- * is drawn a half-step behind it; all of it settles back as that travel
- * unwinds, because the movement is measured from where the block sits rather
- * than fired once at a threshold.
- *
- * The run between steps is drawn along whichever axis the steps are laid on:
- * across the row from `lg`, and down through the gap below it, where an arrow
- * pointing right would be pointing at nothing. Both are the same ramp, a half
- * step behind their own step.
- *
- * Stacked in one column the block stands several screens tall, which is why
- * the travel is read with `cover`: a ramp the length of the viewport would be
- * spent before the second step had been reached, and the sequence would arrive
- * already finished.
- */
 export function AboutMethods({
   eyebrow,
   title,

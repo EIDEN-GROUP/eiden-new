@@ -14,14 +14,14 @@ import { solutionsCopy } from "@/lib/data/solutions";
  * From `lg` the two halves share one grid cell, so the row is always as tall
  * as the taller of them and its height never changes. That is what makes the
  * swap smooth: only `opacity` and `transform` animate, both of which the
- * compositor handles without laying the page out again — and a row that keeps
+ * compositor handles without laying the page out again   and a row that keeps
  * its height cannot shift the rows under it, or slide out from under the
  * cursor that is pointing at it. The text lands a beat after the ground, so
  * the two read as one movement rather than a dissolve; the delay is on the
  * hovered state alone, so leaving is immediate.
  *
  * There is no hover on a touch screen, so below `lg` the halves fall back into
- * ordinary flow and the row simply reads name then description — the text is
+ * ordinary flow and the row simply reads name then description   the text is
  * never behind an interaction that cannot happen.
  */
 export function Process() {
@@ -67,7 +67,7 @@ export function Process() {
 
             {/* Pointed at: the same row, inverted, saying what the step does.
                 The small label repeats the name only where the big one has
-                just left — below `lg` it would be the title twice. */}
+                just left   below `lg` it would be the title twice. */}
             <div className="transition-[opacity,transform] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-hover:delay-100">
               <div className="pb-5 lg:py-6">
                 <p className="eyebrow lg:text-canvas/45 hidden lg:block">

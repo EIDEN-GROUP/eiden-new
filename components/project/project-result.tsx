@@ -5,10 +5,10 @@ import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 06 — The result.
+ * 06   The result.
  *
  * A statement, then either the numbers or the changes. Never both, and never
- * a number the client did not give us — a case study that invents its own
+ * a number the client did not give us   a case study that invents its own
  * results is worth less than one that simply says what is different now.
  */
 export function ProjectResult({ result }: { result: ProjectPage["result"] }) {

@@ -1,4 +1,4 @@
-# EIDEN GROUP — site web
+# EIDEN GROUP   site web
 
 Site vitrine bilingue (FR par défaut / EN) de l'agence digitale EIDEN GROUP,
 basée à Agadir.
@@ -6,10 +6,10 @@ basée à Agadir.
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript**
-- **Tailwind CSS v4** — tokens de marque déclarés dans `app/globals.css`
-- **Framer Motion** — overlays et micro-interactions
-- **Lenis** — défilement fluide
-- **Lucide React** — icônes
+- **Tailwind CSS v4**   tokens de marque déclarés dans `app/globals.css`
+- **Framer Motion**   overlays et micro-interactions
+- **Lenis**   défilement fluide
+- **Lucide React**   icônes
 
 ## Démarrage
 
@@ -38,7 +38,7 @@ components/
 
 lib/
   data/site.ts          coordonnées, routes, logos clients, études de cas
-  i18n/fr.ts            contenu français — source de vérité
+  i18n/fr.ts            contenu français   source de vérité
   i18n/en.ts            traduction anglaise, typée `Dictionary`
   hooks.ts              media query / scroll via `useSyncExternalStore`
   utils.ts              `cn()`
@@ -62,8 +62,8 @@ choix de l'utilisateur.
 
 Les apparitions au défilement sont pilotées **en CSS**, pas en JavaScript :
 l'état masqué n'existe que sous `@media (prefers-reduced-motion: no-preference)`.
-Conséquence : les visiteurs qui demandent moins d'animations — et ceux dont le
-JavaScript échoue — voient toujours un contenu entièrement rendu.
+Conséquence : les visiteurs qui demandent moins d'animations   et ceux dont le
+JavaScript échoue   voient toujours un contenu entièrement rendu.
 
 Un `<noscript>` dans `app/layout.tsx` couvre le cas sans JavaScript.
 

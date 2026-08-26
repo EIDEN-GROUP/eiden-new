@@ -8,13 +8,6 @@ import { Reveal } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { heroTexture, siteConfig } from "@/lib/data/site";
 
-/**
- * The closing pair: the method on the left, the invitation on the right.
- *
- * Both are the same object — a full-bleed panel with the type sitting in its
- * bottom corner — so the two read as one closing gesture rather than as a
- * video block followed by a contact block.
- */
 export function Home2Closing() {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);

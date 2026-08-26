@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { Reveal } from "@/components/ui/reveal";
-import type { Localized } from "@/lib/data/projects";
+import type { Localized } from "@/lib/data/localized";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,7 +20,7 @@ export function useLocalized() {
 /**
  * The rule every section on the page hangs from: a numbered label on the
  * left, a hairline running out to the margin. It is the only thing marking
- * one section off from the next — there are no boxes on this page.
+ * one section off from the next   there are no boxes on this page.
  */
 export function SectionLabel({
   number,
@@ -41,7 +41,7 @@ export function SectionLabel({
   );
 }
 
-/** The page's own measure — wide gutters, and never wider than the eye. */
+/** The page's own measure   wide gutters, and never wider than the eye. */
 export function Section({
   children,
   className,

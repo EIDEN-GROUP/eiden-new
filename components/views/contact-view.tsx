@@ -63,7 +63,7 @@ export function ContactView() {
       company ? `${form.company}: ${company}` : null,
       `${form.email}: ${email}`,
       phone ? `${form.phone}: ${phone}` : null,
-      `${form.subject}: ${subject}${detail ? ` — ${detail}` : ""}`,
+      `${form.subject}: ${subject}${detail ? `   ${detail}` : ""}`,
       "",
       message,
     ]
@@ -71,7 +71,7 @@ export function ContactView() {
       .join("\n");
 
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      `${detail || subject} — ${name}`,
+      `${detail || subject}   ${name}`,
     )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };

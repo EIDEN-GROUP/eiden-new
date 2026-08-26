@@ -9,7 +9,7 @@ type RailItem = { src: string; client: string };
 
 /**
  * One infinite row. The track holds the items twice and travels exactly half
- * its own width, so the seam always lands on an identical frame — no measuring,
+ * its own width, so the seam always lands on an identical frame   no measuring,
  * and it stays correct at every breakpoint.
  */
 function Row({

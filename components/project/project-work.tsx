@@ -7,11 +7,11 @@ import type { Localized, WorkBlock, WorkImage } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 
 /**
- * 05 — The work.
+ * 05   The work.
  *
  * The pictures carry this section; the writing only names what is being
- * looked at. Each block in the record picks its own shape, so the rhythm —
- * plate, pair, plate, aside — is a property of the project rather than of
+ * looked at. Each block in the record picks its own shape, so the rhythm  
+ * plate, pair, plate, aside   is a property of the project rather than of
  * the template.
  */
 export function ProjectWork({ work }: { work: WorkBlock[] }) {

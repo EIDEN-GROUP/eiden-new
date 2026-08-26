@@ -20,7 +20,7 @@ const HOLD = 4600;
  * The client work shown on one screen, standing behind the statement.
  *
  * The device arrives turned away in three axes and straightens into a flat
- * rectangle, which is the whole entrance — nothing else in the hero moves for
+ * rectangle, which is the whole entrance   nothing else in the hero moves for
  * it. From then on it is a slow dissolve through the delivered projects, so
  * the proof is running behind the promise rather than listed beside it.
  *

@@ -6,10 +6,10 @@ import type { ProjectPage } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 
 /**
- * 04 — What we built.
+ * 04   What we built.
  *
  * Two to five cards, never a list of deliverables. A project that touched
- * eight things says "Brand", "Digital", "Marketing" — the grouping is the
+ * eight things says "Brand", "Digital", "Marketing"   the grouping is the
  * point, and it is what keeps this section one screen instead of six.
  */
 export function ProjectBuilt({ built }: { built: ProjectPage["built"] }) {

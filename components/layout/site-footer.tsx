@@ -63,7 +63,7 @@ export function SiteFooter() {
 
   return (
     <>
-      {/* Scroll room for the panel behind it — never painted. `dvh` and not
+      {/* Scroll room for the panel behind it   never painted. `dvh` and not
           `svh`: the panel below is sized by the viewport itself, so anything
           shorter leaves a strip of page permanently covering its top. */}
       <div ref={spacerRef} aria-hidden className="h-dvh shrink-0" />
@@ -118,7 +118,7 @@ export function SiteFooter() {
               </Rise>
             </div>
 
-            {/* Link stacks — navigation and accounts */}
+            {/* Link stacks   navigation and accounts */}
             <div className="grid grid-cols-2 gap-10 sm:gap-16">
               <Rise delay={0.16}>
                 <nav aria-label={t.footer.navLabel}>

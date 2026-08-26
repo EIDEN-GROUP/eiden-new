@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 import type { ProjectPage } from "@/lib/data/projects";
 
 /**
- * 01 — Intro.
+ * 01   Intro.
  *
  * Everything a visitor needs to place the project before they scroll: whose
  * it is, what it was, and one picture at full width. The rest of the facts
