@@ -2,10 +2,19 @@
 
 import { Check } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
-import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
+import { ScrollWords, litRamp, useTravel } from "@/components/home2/motion";
+import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
+import { SwipeDeck } from "@/components/ui/swipe-deck";
 import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
+
+/**
+ * The lead reads back muted and turns to ink one paragraph at a time as the
+ * column rises — the same ramp the solutions intro uses on its constat,
+ * pitched off gold so the unlit state still holds its own on cream.
+ */
+const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 /** 0 before `from`, 1 after `to`, linear in between. */
@@ -20,6 +29,10 @@ export function Idea() {
 
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const leadRef = useRef<HTMLDivElement>(null);
+
+  useTravel(leadRef, { from: 0.95, to: 0.6 });
+
   useEffect(() => {
     const track = trackRef.current;
     const stage = stageRef.current;
@@ -79,6 +92,8 @@ export function Idea() {
     };
   }, [animate, reduced]);
 
+  const leads = [t.idea.lead, t.idea.lead2];
+
   const cards = [
     {
       label: t.idea.missionLabel,
@@ -98,42 +113,47 @@ export function Idea() {
 
   return (
     <section id="idee" className="bg-canvas relative">
-      <div
-        aria-hidden
-        className="zellige text-forest pointer-events-none absolute inset-x-0 top-0 h-[70rem] [mask-image:radial-gradient(80%_50%_at_50%_0%,black,transparent)] opacity-70"
-      />
-
       <div className="container-eiden relative pt-24 sm:pt-32">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Reveal direction="none" duration={0.5}>
               <p className="eyebrow text-teal flex items-center gap-3">
-                <span
-                  aria-hidden
-                  className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.1s_both]"
-                />
+                <span aria-hidden className="h-px w-8 bg-current opacity-50" />
                 {t.idea.eyebrow}
               </p>
             </Reveal>
 
-            <RevealWords
+            <ScrollWords
               as="h2"
               text={t.idea.title}
-              delay={0.06}
               className="text-forest mt-6 text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]"
             />
-
-            <Reveal delay={0.55}>
-              <p className="text-forest/65 mt-7 max-w-xl text-base leading-relaxed sm:text-[1.0625rem]">
-                {t.idea.lead}
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.68}>
-              <p className="text-forest/65 mt-5 max-w-xl text-base leading-relaxed sm:text-[1.0625rem]">
-                {t.idea.lead2}
-              </p>
-            </Reveal>
+            <div
+              ref={leadRef}
+              style={
+                {
+                  "--n": `${leads.length}`,
+                  "--p": "0",
+                } as CSSProperties
+              }
+              className="mt-7 flex max-w-xl flex-col gap-5"
+            >
+              {leads.map((line, index) => (
+                <p
+                  key={line}
+                  style={
+                    {
+                      "--i": `${index}`,
+                      color: READ,
+                      transition: "color 0.25s linear",
+                    } as CSSProperties
+                  }
+                  className="text-base leading-relaxed sm:text-[1.0625rem]"
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Three-step method */}
@@ -192,8 +212,8 @@ export function Idea() {
               </span>
             </div>
 
-            {/* Cards */}
-            <div className="mx-auto grid max-w-full gap-5 lg:grid-cols-2">
+            {/* Cards — side by side at lg, a swipeable pile below it */}
+            <SwipeDeck className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
               {cards.map((card) => (
                 <article
                   key={card.label}
@@ -228,7 +248,7 @@ export function Idea() {
                   </ul>
                 </article>
               ))}
-            </div>
+            </SwipeDeck>
           </div>
         </div>
       </div>

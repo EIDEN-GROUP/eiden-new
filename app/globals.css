@@ -1048,10 +1048,132 @@
   scale: clamp(0, calc(var(--p, 1) * var(--n) - var(--i) - 0.4), 1) 1;
 }
 
+/* The same run turned down the column, drawn from the step it leaves. */
+.step-run {
+  transform-origin: center top;
+  scale: 1 clamp(0, calc(var(--p, 1) * var(--n) - var(--i) - 0.4), 1);
+}
+
+/* ============================================================
+   The swipe deck — a pile of cards dealt sideways
+
+   Below `lg` a row of cards has nowhere to go, so they are piled
+   instead: one in hand, the rest leaning out behind it. The track
+   is a real scroller with one full-width slot per card, so the
+   swipe and its momentum belong to the browser; `SwipeDeck` only
+   reads `--deck-p` — the scroll position measured in slots — back
+   out of it.
+
+   `--d`, how many cards back a card is, is 0 in hand, positive in
+   the pile and negative once it has been dealt away. It is written
+   out in full inside every function rather than parked in one
+   custom property: substituting a `clamp()` through a custom
+   property resolves to zero in Chrome, which would collapse the
+   whole pile onto one card.
+
+   Everything here is scoped below `lg`, so the deck leaves no
+   trace on the grid the caller uses at width — including the
+   scroll-driven deal `.deal-card` runs there.
+   ============================================================ */
+
+/* Outside the deck's own width the slot is not a box at all, so the
+   cards land in the caller's grid as if it had never been wrapped. */
+.swipe-slot {
+  display: contents;
+}
+
+@media (width < 64rem) {
+  /* The deck bleeds out to the edges of the frame and takes the
+     container's gutter back as its own padding: a card keeps the
+     width it would have had, and the pile still has somewhere to
+     lean. Equal padding on both sides is what puts the last slot
+     exactly at the end of the scroll, with nothing to tune. */
+  .swipe-deck {
+    --gutter: 1.25rem;
+    --pile-x: 1.15rem;
+    --pile-y: 1.35rem;
+    display: flex;
+    gap: 0;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    /* Room for the lean and the drop shadow, handed back to the
+       layout so the section keeps the height it had. */
+    padding-block: 3.5rem;
+    margin-block: -3.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .swipe-deck::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* The slot holds the place in the track; the card is moved off it. */
+  .swipe-slot {
+    display: flex;
+    flex: 0 0 100%;
+    /* A little of the card's width traded back for lean room. */
+    padding-inline: 1rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* The card in hand on top, the pile behind it in order. */
+    z-index: calc(var(--n, 1) - var(--i, 0));
+  }
+
+  .swipe-slot > * {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .swipe-deck > .swipe-slot > * {
+    /* The first term lifts the card out of its slot and onto the pile: it
+       cancels exactly the distance the track has carried that slot. What is
+       left is where the card stands in the deck — leaning behind while it
+       waits, thrown off the left edge once it has been dealt. */
+    translate: calc(
+        (var(--deck-p, 0) - var(--i)) * var(--deck-w, 0) * 1px + min(
+            0,
+            calc(var(--i) - var(--deck-p, 0))
+          ) * 116% - clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) *
+          var(--pile-x)
+      )
+      calc(clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) * var(--pile-y));
+    rotate: calc(
+      var(--tilt, 0deg) + min(0, calc(var(--i) - var(--deck-p, 0))) * 9deg
+    );
+    scale: calc(1 - clamp(0, calc(var(--i) - var(--deck-p, 0)), 2) * 0.035);
+    /* Dealt away rather than merely behind: gone by the time the
+       next card is square. */
+    opacity: calc(1 + min(0, calc(var(--i) - var(--deck-p, 0))) * 1.15);
+    /* Cream over cream reads as one wide card; the pile needs an edge. */
+    box-shadow:
+      0 30px 70px -40px rgb(0 0 0 / 0.5),
+      0 4px 24px -12px rgb(0 0 0 / 0.35);
+  }
+}
+
+@media (width >= 48rem) and (width < 64rem) {
+  .swipe-deck {
+    --gutter: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The pile still stands — it is the layout at this width, not an
+     effect — but nothing is thrown off the edge to make the point. */
+  .swipe-deck > .swipe-slot > * {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .deal-card,
   .step-in,
-  .step-arrow {
+  .step-arrow,
+  .step-run {
     translate: none;
     rotate: none;
     scale: none;

@@ -227,8 +227,8 @@ export const aboutTexture = "/work/contact-bg.png";
 export const proofTexture = "/work/contact-section-bg.png";
 
 export const movementMedia = [
-  "/media/heritage.jpg",
-  "/media/schema.webp",
+  "/media/heritage-1.jpeg",
+  "/media/schema.jpeg",
   "/media/insight.jpg",
   "/media/architecture.jpg",
 ] as const;
@@ -238,4 +238,5 @@ export const serviceMedia: Record<string, string> = {
   visibilite: "/services/op-1.jpg",
   media: "/services/audit-2.jpg",
   contenu: "/services/illustration.jpg",
+  photoVid: "/services/photoVid.jpeg",
 };

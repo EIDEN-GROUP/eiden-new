@@ -8,14 +8,6 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { serviceMedia } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-/**
- * The four expertises, as one list that changes shape rather than two.
- *
- * Above `lg` it is a rank of rules: number, copy, name, arrow, with the
- * picture waiting behind for the row to be pointed at. Below it, where there
- * is no pointer to wait for, each row becomes a card standing on its own
- * picture — which is the only way the work is ever seen on a phone.
- */
 export function Services() {
   const { t } = useLanguage();
 

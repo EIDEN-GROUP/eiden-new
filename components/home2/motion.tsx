@@ -49,7 +49,11 @@ const LIT = litRamp("var(--color-ink)", "var(--color-beige-dk)");
  */
 export function useTravel(
   ref: RefObject<HTMLElement | null>,
-  { from = 0.92, to = 0.4 }: { from?: number; to?: number } = {},
+  {
+    from = 0.92,
+    to = 0.4,
+    cover = false,
+  }: { from?: number; to?: number; cover?: boolean } = {},
 ) {
   useEffect(() => {
     const node = ref.current;
@@ -66,7 +70,14 @@ export function useTravel(
       frame = 0;
       const height = window.innerHeight;
       const top = node.getBoundingClientRect().top;
-      const span = (from - to) * height;
+      const window_ = (from - to) * height;
+      /* A block taller than that window finishes its sequence long before
+         the last of it has been seen — the ramp is spent on the first
+         screenful and everything below arrives already lit. `cover`
+         stretches the ramp to the block's own height so the sequence keeps
+         pace with the block instead, which is what a column of stacked
+         steps needs and a headline never does. */
+      const span = cover ? Math.max(window_, node.offsetHeight) : window_;
       node.style.setProperty("--p", `${clamp01((from * height - top) / span)}`);
     };
 
@@ -82,7 +93,7 @@ export function useTravel(
       window.removeEventListener("resize", onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, [ref, from, to]);
+  }, [ref, from, to, cover]);
 }
 
 /**

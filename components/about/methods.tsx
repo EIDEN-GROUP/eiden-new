@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { useRef, type CSSProperties } from "react";
 import { useTravel } from "@/components/home2/motion";
 import { CountUp } from "@/components/ui/count-up";
@@ -21,9 +21,15 @@ type Count = { value: string; label: string };
  * unwinds, because the movement is measured from where the block sits rather
  * than fired once at a threshold.
  *
- * The arrows are asked for only from `lg`. Below that the steps are stacked in
- * one column, and an arrow pointing right at the end of a column would be
- * pointing at nothing.
+ * The run between steps is drawn along whichever axis the steps are laid on:
+ * across the row from `lg`, and down through the gap below it, where an arrow
+ * pointing right would be pointing at nothing. Both are the same ramp, a half
+ * step behind their own step.
+ *
+ * Stacked in one column the block stands several screens tall, which is why
+ * the travel is read with `cover`: a ramp the length of the viewport would be
+ * spent before the second step had been reached, and the sequence would arrive
+ * already finished.
  */
 export function AboutMethods({
   eyebrow,
@@ -40,7 +46,7 @@ export function AboutMethods({
 }) {
   const stepsRef = useRef<HTMLOListElement>(null);
 
-  useTravel(stepsRef, { from: 0.92, to: 0.3 });
+  useTravel(stepsRef, { from: 0.92, to: 0.3, cover: true });
 
   const total = methods.length;
 
@@ -63,7 +69,7 @@ export function AboutMethods({
             <li
               key={method.name}
               style={{ "--i": `${index}` } as CSSProperties}
-              className="step-in"
+              className="step-in relative"
             >
               <div className="flex items-center gap-4">
                 <span className="font-display text-gold text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
@@ -83,6 +89,21 @@ export function AboutMethods({
                   </span>
                 ) : null}
               </div>
+
+              {/* The same run, turned down the column and drawn through the
+                  gap that separates this step from the next. */}
+              {index < total - 1 ? (
+                <span
+                  aria-hidden
+                  className="step-run absolute inset-x-0 -bottom-12 flex h-12 flex-col items-center lg:hidden"
+                >
+                  <span className="bg-gold/35 w-px flex-1" />
+                  <ArrowDown
+                    className="text-gold/60 -mt-1 size-4 shrink-0"
+                    strokeWidth={1.5}
+                  />
+                </span>
+              ) : null}
 
               <h3 className="font-display text-canvas mt-5 text-[clamp(1.125rem,2vw,1.5rem)] font-bold tracking-[-0.02em]">
                 {method.name}

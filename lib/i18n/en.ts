@@ -181,6 +181,18 @@ export const en: Dictionary = {
           "Online reputation & crisis handling",
         ],
       },
+      {
+        slug: "photoVid",
+        title: "Photos & videos",
+        kicker: "Production, content & brand imagery",
+        text: "We create photo and video content that brings your brand to life: photoshoots, videos, social content and campaigns. From art direction to editing, every production is designed to capture attention and strengthen your brand image.",
+        deliverables: [
+          "Photography shoots",
+          "Video production",
+          "Reels & social media content",
+          "Editing & post-production",
+        ],
+      },
     ],
   },
 

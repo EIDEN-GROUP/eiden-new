@@ -186,6 +186,18 @@ export const fr = {
           "E-réputation & gestion de crise",
         ],
       },
+      {
+        slug: "photoVid",
+        title: "Photos & vidéos",
+        kicker: "Production, contenu & image de marque",
+        text: "Nous créons des contenus photo et vidéo qui donnent vie à votre marque : shootings, vidéos, contenus sociaux et campagnes. De la direction artistique au montage, chaque production est pensée pour capter l’attention et renforcer votre image.",
+        deliverables: [
+          "Shooting photo",
+          "Production vidéo",
+          "Reels & contenus social media",
+          "Montage & post-production",
+        ],
+      },
     ],
   },
 
