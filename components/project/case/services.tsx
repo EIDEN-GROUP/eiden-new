@@ -7,13 +7,13 @@ import type { Service } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
 /**
- * 02 — What we did, on the solutions process rows.
+ * 02   What we did, on the solutions process rows.
  *
  * A row carries only the service name at rest. Point at it and the row
  * inverts: the teal ground wipes in from the left, the name lifts away, and
  * the line underneath says what the service actually was. The two halves
  * share one grid cell from `lg`, so the row is always as tall as the taller of
- * them and never changes height — only `opacity` and `transform` animate, so
+ * them and never changes height   only `opacity` and `transform` animate, so
  * the compositor handles the swap without laying the page out again, and a row
  * cannot slide out from under the cursor pointing at it.
  *
@@ -86,7 +86,7 @@ export function CaseServices({ services }: { services: Service[] }) {
 
                 {/* Pointed at: the same row, inverted, saying what the service
                     was. The small label repeats the name only where the big one
-                    has just left — below `lg` it would be the name twice. */}
+                    has just left   below `lg` it would be the name twice. */}
                 {hasNote ? (
                   <div className="transition-[opacity,transform] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-hover:delay-100">
                     <div className="pb-5 lg:py-6">

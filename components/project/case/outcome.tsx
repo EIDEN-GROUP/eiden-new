@@ -5,7 +5,7 @@ import { Reveal, RevealWords } from "@/components/ui/reveal";
 import type { ProjectCase } from "@/lib/data/projects/types";
 
 /**
- * 07 — Outcome.
+ * 07   Outcome.
  *
  * Short, and qualitative unless the client has already published a figure.
  * Half of these projects have no number attached to them and are none the
@@ -14,7 +14,7 @@ import type { ProjectCase } from "@/lib/data/projects/types";
  * than the percentage would buy.
  *
  * Where a figure does exist it is set beside the statement rather than under
- * a heading of its own — one number, stated once, is more convincing than a
+ * a heading of its own   one number, stated once, is more convincing than a
  * row of three.
  */
 export function CaseOutcome({

@@ -1,6 +1,6 @@
 import type { ProjectCase } from "./types";
 
-/** No `identity` block — art direction is sold here, but nothing on file shows it. */
+/** No `identity` block   art direction is sold here, but nothing on file shows it. */
 export const lithosMateriaux: ProjectCase = {
   slug: "lithos-materiaux",
   client: "LITHOS",
@@ -73,7 +73,7 @@ export const lithosMateriaux: ProjectCase = {
       },
       {
         fr: "La matière se trouve maintenant comme elle se choisit : par ce qu'elle donne.",
-        en: "The material is now found the way it is chosen — by what it gives you.",
+        en: "The material is now found the way it is chosen   by what it gives you.",
       },
     ],
   },
@@ -88,21 +88,6 @@ export const lithosMateriaux: ProjectCase = {
       fr: "Par effet, par espace, par ambiance. Le même catalogue, trois entrées, parce qu'un architecte qui cherche un sol de salle de bain et un architecte qui cherche « quelque chose de chaud » ne cherchent pas la même chose.",
       en: "By effect, by space, by mood. One catalogue, three ways in, because an architect looking for a bathroom floor and an architect looking for “something warm” are not looking for the same thing.",
     },
-    shots: [
-      {
-        image: "/work/web-lithos-cover.jpg",
-        alt: { fr: "Le catalogue LITHOS", en: "The LITHOS catalogue" },
-        label: { fr: "Catalogue", en: "Catalogue" },
-      },
-      {
-        image: "/work/web-lithos-desktop.jpg",
-        alt: {
-          fr: "La navigation du catalogue LITHOS",
-          en: "Browsing the LITHOS catalogue",
-        },
-        label: { fr: "E-commerce", en: "E-commerce" },
-      },
-    ],
   },
 
   work: [

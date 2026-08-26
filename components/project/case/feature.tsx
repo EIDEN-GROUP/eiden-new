@@ -6,7 +6,7 @@ import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import type { ProjectCase } from "@/lib/data/projects/types";
 
 /**
- * 05 — The second act. Conditional, and one per project at most.
+ * 05   The second act. Conditional, and one per project at most.
  *
  * Some of this work has a half nobody sees from the outside: the dashboard a
  * clinic runs on, the portal behind a catalogue, the three routes into a range
@@ -14,8 +14,8 @@ import type { ProjectCase } from "@/lib/data/projects/types";
  * section; where it is not, the project has six sections and is better for it.
  *
  * It runs on ink so it reads as a second turn rather than as more gallery, and
- * the label is written by the record — `Business System`, `Digital Platform`,
- * `Booking Experience` — because the name of the thing is half the point.
+ * the label is written by the record   `Business System`, `Digital Platform`,
+ * `Booking Experience`   because the name of the thing is half the point.
  */
 export function CaseFeature({
   feature,
@@ -44,25 +44,27 @@ export function CaseFeature({
           </p>
         </Reveal>
 
-        <RevealGroup className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-2">
-          {feature.shots.map((shot) => (
-            <figure
-              key={shot.image}
-              className="bg-canvas/5 relative aspect-16/10 overflow-hidden rounded-[1.6rem]"
-            >
-              <Image
-                src={shot.image}
-                alt={say(shot.alt)}
-                fill
-                sizes="(max-width: 64rem) 92vw, 44vw"
-                className="object-cover"
-              />
-              <figcaption className="eyebrow text-canvas/70 absolute bottom-4 left-5 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
-                {say(shot.label)}
-              </figcaption>
-            </figure>
-          ))}
-        </RevealGroup>
+        {feature.shots?.length ? (
+          <RevealGroup className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-2">
+            {feature.shots.map((shot) => (
+              <figure
+                key={shot.image}
+                className="bg-canvas/5 relative aspect-16/10 overflow-hidden rounded-[1.6rem]"
+              >
+                <Image
+                  src={shot.image}
+                  alt={say(shot.alt)}
+                  fill
+                  sizes="(max-width: 64rem) 92vw, 44vw"
+                  className="object-cover"
+                />
+                <figcaption className="eyebrow text-canvas/70 absolute bottom-4 left-5 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+                  {say(shot.label)}
+                </figcaption>
+              </figure>
+            ))}
+          </RevealGroup>
+        ) : null}
       </div>
     </section>
   );

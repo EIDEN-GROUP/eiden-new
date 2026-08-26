@@ -1,6 +1,6 @@
 import type { ProjectCase } from "./types";
 
-/** No `identity` block, and none is sold here — the three services are digital. */
+/** No `identity` block, and none is sold here   the three services are digital. */
 export const rihabResidence: ProjectCase = {
   slug: "rihab-residence",
   client: "Résidence Rihab",
@@ -35,8 +35,8 @@ export const rihabResidence: ProjectCase = {
     {
       name: { fr: "Expérience de réservation", en: "Booking Experience" },
       note: {
-        fr: "Réservation en direct — sans compte, sans carte.",
-        en: "Live booking — no account, no card.",
+        fr: "Réservation en direct   sans compte, sans carte.",
+        en: "Live booking   no account, no card.",
       },
     },
     {
@@ -83,24 +83,6 @@ export const rihabResidence: ProjectCase = {
       fr: "Pas de compte à créer, pas de carte à saisir, pas de formulaire qui redemande ce qui a déjà été dit. La réservation est le service ici, alors elle a sa section plutôt que d'être enterrée dans la galerie.",
       en: "No account to create, no card to enter, no form asking again for what was already said. Booking is the service here, so it gets a section rather than being buried in the gallery.",
     },
-    shots: [
-      {
-        image: "/work/web-rihab-desktop.jpg",
-        alt: {
-          fr: "La réservation Rihab sur écran",
-          en: "Rihab booking on desktop",
-        },
-        label: { fr: "Réservation", en: "Booking Experience" },
-      },
-      {
-        image: "/work/web-rihab-mobile.jpg",
-        alt: {
-          fr: "La réservation Rihab sur téléphone",
-          en: "Rihab booking on a phone",
-        },
-        label: { fr: "Mobile", en: "Mobile" },
-      },
-    ],
   },
 
   work: [

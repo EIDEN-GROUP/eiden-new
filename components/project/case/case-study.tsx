@@ -4,8 +4,10 @@ import { CaseHero } from "./hero";
 import { CaseServices } from "./services";
 import { CaseTransformation } from "./transformation";
 import { CaseIdentity } from "./identity";
+import { CasePaletteStory } from "./palette-story";
 import { CaseFeature } from "./feature";
 import { CaseWork } from "./work";
+import { CaseGallery } from "./gallery";
 import { CaseOutcome } from "./outcome";
 import { CaseNext } from "./next";
 import type { ProjectCase } from "@/lib/data/projects/types";
@@ -13,13 +15,13 @@ import type { ProjectCase } from "@/lib/data/projects/types";
 /**
  * The spine every project page hangs from.
  *
- * Hero → services → transformation → [identity] → [feature] → work → outcome →
- * next. The order is the argument, so it lives here rather than in the data;
+ * Hero → services → transformation → [identity] → [palette] → [feature] →
+ * work → outcome → [gallery] → next. The order is the argument, so it lives here rather than in the data;
  * what a record chooses is what fills it, and whether the two optional blocks
  * exist at all.
  *
- * The grounds alternate deliberately — canvas, canvas, ink, canvas, forest,
- * canvas, ink, cream — because that is the rhythm the rest of the site reads
+ * The grounds alternate deliberately   canvas, canvas, ink, canvas, forest,
+ * canvas, ink, cream   because that is the rhythm the rest of the site reads
  * in, and because a change of ground marks a turn faster than a heading does.
  */
 export function ProjectCaseStudy({
@@ -27,7 +29,7 @@ export function ProjectCaseStudy({
   next,
 }: {
   project: ProjectCase;
-  next?: ProjectCase;
+  next: ProjectCase[];
 }) {
   return (
     <article className="bg-canvas text-ink" data-nav-tone="light">
@@ -35,10 +37,14 @@ export function ProjectCaseStudy({
       <CaseServices services={project.services} />
       <CaseTransformation transformation={project.transformation} />
       {project.identity ? <CaseIdentity identity={project.identity} /> : null}
+      {project.paletteStory ? (
+        <CasePaletteStory story={project.paletteStory} />
+      ) : null}
       {project.feature ? <CaseFeature feature={project.feature} /> : null}
       <CaseWork work={project.work} />
       <CaseOutcome outcome={project.outcome} />
-      {next ? <CaseNext project={next} /> : null}
+      {project.gallery ? <CaseGallery gallery={project.gallery} /> : null}
+      <CaseNext projects={next} />
     </article>
   );
 }

@@ -8,13 +8,13 @@ import type { ProjectCase } from "@/lib/data/projects/types";
 
 /**
  * The account reads back muted and turns to ink one line at a time as the
- * block rises — the same ramp the solutions starting point uses, pitched off
+ * block rises   the same ramp the solutions starting point uses, pitched off
  * gold so the unlit state still holds its own on cream.
  */
 const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
 
 /**
- * 03 — The transformation, told the way the solutions page states its
+ * 03   The transformation, told the way the solutions page states its
  * starting point: the heading pinned on the left, the reading column running
  * past it.
  *

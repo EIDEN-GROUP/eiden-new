@@ -92,8 +92,8 @@ export const dmcMorocco: ProjectCase = {
       en: "A mark for a business that had never had one",
     },
     text: {
-      fr: "Monogramme, système typographique et livre de règles — puis reportés sur les objets que la société met réellement entre les mains des gens.",
-      en: "Monogram, typographic system and a guidelines book — then carried onto the things the company actually hands people.",
+      fr: "Monogramme, système typographique et livre de règles   puis reportés sur les objets que la société met réellement entre les mains des gens.",
+      en: "Monogram, typographic system and a guidelines book   then carried onto the things the company actually hands people.",
     },
     shots: [
       {
@@ -112,6 +112,77 @@ export const dmcMorocco: ProjectCase = {
     ],
   },
 
+  paletteStory: {
+    title: { fr: "Le langage visuel", en: "The visual language" },
+    lead: {
+      fr: "Une marque adressée à des opérateurs : elle doit être crue avant d'être aimée.",
+      en: "A brand addressed to operators: it has to be believed before it is liked.",
+    },
+    colors: [
+      {
+        name: "Forest",
+        hex: "#3D4F44",
+        role: { fr: "Fondation", en: "Foundation" },
+      },
+      {
+        name: "Gold",
+        hex: "#D4B896",
+        role: { fr: "Signature", en: "Signature" },
+      },
+      {
+        name: "Sand",
+        hex: "#F2E8D8",
+        role: { fr: "Contraste", en: "Contrast" },
+      },
+      {
+        name: "Ink",
+        hex: "#1A1F1C",
+        role: { fr: "Ancrage", en: "Anchor" },
+      },
+    ],
+    states: [
+      {
+        title: { fr: "L'assise", en: "The footing" },
+        text: {
+          fr: "Un vert sourd, sans éclat. C'est la couleur d'une maison qui gère des hôtels depuis trente ans et n'a pas besoin d'en faire la démonstration.",
+          en: "A muted green with no shine to it. It is the colour of a business that has run hotels for thirty years and does not need to perform the fact.",
+        },
+        colorIndex: 0,
+      },
+      {
+        title: { fr: "Trente ans, sans le dire", en: "Thirty years, unsaid" },
+        text: {
+          fr: "L'or n'est pas décoratif ici. Il signale l'expérience à un public qui achète précisément ça — et il reste rare, sinon il ne signale plus rien.",
+          en: "The gold is not decoration. It signals experience to an audience buying exactly that, and it stays rare, because a signal used everywhere stops signalling.",
+        },
+        colorIndex: 1,
+      },
+      {
+        title: { fr: "Le repos de l'œil", en: "Where the eye rests" },
+        text: {
+          fr: "Le sable tient les documents longs : dossiers, présentations, propositions. Un B2B se lit assis, et il faut que ça reste lisible page après page.",
+          en: "Sand carries the long documents — decks, proposals, dossiers. B2B gets read sitting down, and it has to stay readable page after page.",
+        },
+        colorIndex: 2,
+      },
+      {
+        title: { fr: "Ce qui se lit", en: "What gets read" },
+        text: {
+          fr: "L'encre garde la lisibilité là où le vert ne suffit pas. Elle n'est jamais la marque : elle est ce qui permet de la lire.",
+          en: "Ink holds legibility where the green cannot. It is never the brand itself — it is what lets the brand be read.",
+        },
+        colorIndex: 3,
+      },
+      {
+        title: { fr: "Une maison qui se présente", en: "A business that introduces itself" },
+        text: {
+          fr: "Ensemble, ces quatre tons donnent à une expertise longtemps invisible un visage qu'un directeur d'hôtel reconnaît en trois secondes.",
+          en: "Together the four give a long-invisible expertise a face a hotel director recognises in three seconds.",
+        },
+        colorIndex: 1,
+      },
+    ],
+  },
   work: [
     {
       image: "/work/dmc-web-desktop.png",
@@ -140,6 +211,40 @@ export const dmcMorocco: ProjectCase = {
     },
   ],
 
+  gallery: [
+    {
+      image: "/work/dmc-brand-logo.png",
+      alt: { fr: "Logo DMC Hospitality Morocco", en: "DMC Hospitality Morocco logo" },
+    },
+    {
+      image: "/work/dmc-brand-card.png",
+      alt: { fr: "Carte de visite DMC", en: "DMC business card" },
+    },
+    {
+      image: "/work/dmc-guidelines-hero.png",
+      alt: { fr: "Charte graphique DMC", en: "DMC brand guidelines" },
+    },
+    {
+      image: "/work/dmc-hero-2.png",
+      alt: { fr: "Univers de marque DMC", en: "The DMC brand world" },
+    },
+    {
+      image: "/work/dmc-social-c.png",
+      alt: { fr: "Publication sociale DMC", en: "DMC social post" },
+    },
+    {
+      image: "/work/dmc-social-d.png",
+      alt: { fr: "Publication sociale DMC", en: "DMC social post" },
+    },
+    {
+      image: "/work/dmc-social-m.png",
+      alt: { fr: "Publication sociale DMC", en: "DMC social post" },
+    },
+    {
+      image: "/work/dmc-portfolio-image.png",
+      alt: { fr: "Supports DMC", en: "DMC collateral" },
+    },
+  ],
   outcome: {
     title: {
       fr: "Une marque qui ouvre les portes que l'expertise méritait déjà.",

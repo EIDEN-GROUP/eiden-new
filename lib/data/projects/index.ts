@@ -15,8 +15,8 @@ export type { ProjectCase, Service, Shot, Localized } from "./types";
 /**
  * The portfolio, in reading order.
  *
- * The order is the running order of the site — it decides what "next project"
- * means at the foot of every page — so it is written here rather than sorted
+ * The order is the running order of the site   it decides what "next project"
+ * means at the foot of every page   so it is written here rather than sorted
  * at render. Hospitality, education and healthcare first, then the three
  * materials platforms, so a visitor walking the whole set meets the range
  * before the repetition.
@@ -38,9 +38,18 @@ export function getProjectCase(slug: string) {
   return projectCases.find((project) => project.slug === slug);
 }
 
-/** The next case in the running order, wrapping at the end. */
-export function getNextCase(slug: string) {
+/**
+ * The cases that follow this one in the running order, wrapping at the end.
+ *
+ * Two, because one reads as an afterthought and a grid of six reads as an
+ * index. Never the project being read, and never the same one twice.
+ */
+export function getNextCases(slug: string, count = 2) {
   const index = projectCases.findIndex((project) => project.slug === slug);
-  if (index < 0 || projectCases.length < 2) return undefined;
-  return projectCases[(index + 1) % projectCases.length];
+  if (index < 0) return [];
+
+  const size = projectCases.length;
+  return Array.from({ length: Math.min(count, size - 1) }, (_, step) => {
+    return projectCases[(index + step + 1) % size];
+  });
 }

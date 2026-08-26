@@ -1,6 +1,6 @@
 import type { ProjectCase } from "./types";
 
-/** No `identity` block — art direction is sold here, but nothing on file shows it. */
+/** No `identity` block   art direction is sold here, but nothing on file shows it. */
 export const droguerieSouss: ProjectCase = {
   slug: "droguerie-souss",
   client: "Souss Droguerie",
@@ -97,24 +97,6 @@ export const droguerieSouss: ProjectCase = {
       fr: "C'est ce que le négoce vient chercher : pas une brochure, mais l'état réel du stock. Un catalogue qui dit « en rupture » vaut mieux qu'un catalogue qui ne dit rien.",
       en: "This is what the trade actually comes for: not a brochure, but the real state of the stock. A catalogue that says “out of stock” is worth more than one that says nothing.",
     },
-    shots: [
-      {
-        image: "/work/web-droguerie-souss-cover.jpg",
-        alt: {
-          fr: "Le catalogue Souss Droguerie",
-          en: "The Souss Droguerie catalogue",
-        },
-        label: { fr: "Catalogue", en: "Catalogue" },
-      },
-      {
-        image: "/work/web-droguerie-souss-desktop.jpg",
-        alt: {
-          fr: "La gamme Souss Droguerie en ligne",
-          en: "The Souss Droguerie range online",
-        },
-        label: { fr: "E-commerce", en: "E-commerce" },
-      },
-    ],
   },
 
   work: [

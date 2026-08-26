@@ -103,6 +103,82 @@ export const lunjaVillage: ProjectCase = {
     ],
   },
 
+  paletteStory: {
+    title: { fr: "Le langage visuel", en: "The visual language" },
+    lead: {
+      fr: "La côte, pas le resort : une palette qui parle à qui arrive vraiment.",
+      en: "The coast, not the resort: a palette that speaks to who actually arrives.",
+    },
+    colors: [
+      {
+        name: "Keppel",
+        hex: "#2BBAA5",
+        role: { fr: "Fondation", en: "Foundation" },
+      },
+      {
+        name: "Celadon",
+        hex: "#93D3AE",
+        role: { fr: "Respiration", en: "Breath" },
+      },
+      {
+        name: "Amber",
+        hex: "#FFD100",
+        role: { fr: "Accent", en: "Accent" },
+      },
+      {
+        name: "Coral",
+        hex: "#F96635",
+        role: { fr: "Signal", en: "Signal" },
+      },
+      {
+        name: "Vanilla",
+        hex: "#FDF5D3",
+        role: { fr: "Repos", en: "Rest" },
+      },
+    ],
+    states: [
+      {
+        title: { fr: "L'eau, d'abord", en: "The water, first" },
+        text: {
+          fr: "Le keppel vient de l'Atlantique à cinq minutes. C'est la couleur que le lieu a déjà — la marque n'a eu qu'à cesser de la contredire.",
+          en: "Keppel came from the Atlantic five minutes away. It is the colour the place already had; the brand only had to stop contradicting it.",
+        },
+        colorIndex: 0,
+      },
+      {
+        title: { fr: "De la place pour respirer", en: "Space to breathe" },
+        text: {
+          fr: "Le céladon adoucit le keppel sans le diluer. Il rend possibles les grandes surfaces — un site, une façade, une page entière.",
+          en: "Celadon softens keppel without diluting it. It makes the large areas possible: a site, a façade, a whole page.",
+        },
+        colorIndex: 1,
+      },
+      {
+        title: { fr: "Le soleil, dosé", en: "Sun, measured" },
+        text: {
+          fr: "L'ambre est l'éclat du milieu de journée. Employé partout il deviendrait criard ; réservé aux appels à l'action, il fait exactement son travail.",
+          en: "Amber is the middle of the day. Used everywhere it would shout; kept for the calls to action, it does precisely its job.",
+        },
+        colorIndex: 2,
+      },
+      {
+        title: { fr: "Ce qui arrête l'œil", en: "What stops the eye" },
+        text: {
+          fr: "Le corail est le seul ton qui interrompt. Une date, une session de surf, une place restante : il ne sert qu'à ça.",
+          en: "Coral is the only tone that interrupts. A date, a surf session, a last place left — that is all it is for.",
+        },
+        colorIndex: 3,
+      },
+      {
+        title: { fr: "Un village, pas une brochure", en: "A village, not a brochure" },
+        text: {
+          fr: "La vanille laisse le reste exister. C'est elle qui fait que cinq couleurs cohabitent sans que rien ne ressemble à un dépliant touristique.",
+          en: "Vanilla lets the rest exist. It is why five colours can live together without any of it looking like a tourist leaflet.",
+        },
+        colorIndex: 4,
+      },
+    ],
+  },
   work: [
     {
       image: "/work/lunja-brand-mockup.png",
@@ -111,11 +187,6 @@ export const lunjaVillage: ProjectCase = {
         en: "The Lunja identity in place",
       },
       label: { fr: "Application de marque", en: "Brand Application" },
-    },
-    {
-      image: "/work/lunja-brand-logo-site.png",
-      alt: { fr: "Le site Lunja Village", en: "The Lunja Village site" },
-      label: { fr: "Site web", en: "Website" },
     },
     {
       image: "/work/lunja-social-1.png",
@@ -137,6 +208,40 @@ export const lunjaVillage: ProjectCase = {
     },
   ],
 
+  gallery: [
+    {
+      image: "/work/lunja-logo.png",
+      alt: { fr: "Logo Lunja Village", en: "Lunja Village logo" },
+    },
+    {
+      image: "/work/lunja-brand.png",
+      alt: { fr: "Identité Lunja Village", en: "Lunja Village identity" },
+    },
+    {
+      image: "/work/lunja-social-2.png",
+      alt: { fr: "Publication sociale Lunja", en: "Lunja social post" },
+    },
+    {
+      image: "/work/lunja-social-4.png",
+      alt: { fr: "Publication sociale Lunja", en: "Lunja social post" },
+    },
+    {
+      image: "/work/lunja-social-5.png",
+      alt: { fr: "Publication sociale Lunja", en: "Lunja social post" },
+    },
+    {
+      image: "/work/lunja-social-6.png",
+      alt: { fr: "Publication sociale Lunja", en: "Lunja social post" },
+    },
+    {
+      image: "/work/lunja-social-7.png",
+      alt: { fr: "Publication sociale Lunja", en: "Lunja social post" },
+    },
+    {
+      image: "/work/lunja-alt.png",
+      alt: { fr: "Univers de marque Lunja Village", en: "The Lunja Village brand world" },
+    },
+  ],
   outcome: {
     title: {
       fr: "Une marque qui correspond enfin à qui pousse la porte.",

@@ -1215,3 +1215,208 @@
     scale: none;
   }
 }
+
+/* ============================================================
+   The palette story — a disk turned by the page
+
+   `--p` (0 → 1) and `--turn` are written on the frame by one
+   rAF-throttled listener; everything below is those two numbers
+   read back out. Nothing here re-renders, and nothing here
+   animates a property the compositor cannot handle on its own.
+
+   `--live` is where along the run of beats the scroll currently
+   sits, as a real number — the whole numbers are the beats and
+   everything between them is the handover. It is written out in
+   full inside every function rather than parked in one custom
+   property: substituting a `clamp()` through a custom property
+   resolves to zero in Chrome, which would leave every ground at
+   full opacity and the disk flat.
+   ============================================================ */
+.palette-frame {
+  --live: calc(var(--p, 0) * (var(--n) - 1));
+}
+
+/* One ground per beat, faded by how far the scroll is from it. Two
+   are ever visible at once, which is what makes the change a
+   crossfade rather than a cut. The first and last hold past their
+   own end so the section never shows through to the page. */
+.palette-ground {
+  opacity: clamp(
+    0,
+    calc(1 - max(var(--k) - var(--live), var(--live) - var(--k))),
+    1
+  );
+}
+
+.palette-ground:first-of-type {
+  opacity: clamp(0, calc(1 - max(0, var(--live) - var(--k))), 1);
+}
+
+.palette-ground:last-of-type {
+  opacity: clamp(0, calc(1 - max(0, var(--k) - var(--live))), 1);
+}
+
+/* The writing takes whichever end of the scale the live ground is
+   not on, and eases across so the swap is never caught mid-beat. */
+.palette-scrim {
+  transition: opacity 0.7s var(--ease-brand);
+}
+
+.palette-on {
+  color: var(--on);
+  transition: color 0.7s var(--ease-brand);
+}
+
+.palette-rule {
+  border-color: color-mix(in oklab, var(--on) 22%, transparent);
+  transition: border-color 0.7s var(--ease-brand);
+}
+
+/* The disk itself. Rotation is bound straight to the scroll, so it
+   reads as something being turned rather than something animating
+   to a stop — no transition here on purpose. */
+.palette-wheel {
+  rotate: var(--turn, 0deg);
+  filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.28));
+}
+
+.palette-slice {
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+  opacity: 0.42;
+  scale: 0.955;
+  transition:
+    opacity 0.6s var(--ease-brand),
+    scale 0.6s var(--ease-brand);
+}
+
+.palette-slice.is-live {
+  opacity: 1;
+  scale: 1;
+}
+
+/* The hole. White rather than a tint of the ground: it is what turns the
+   wheel into a ring, and it has to stay the same object as the colour
+   behind it changes. */
+.palette-well {
+  fill: #ffffff;
+}
+
+/* The mark the live slice is turned to meet, at three o'clock —
+   the side the writing is on, so the disk points at what it is
+   describing. */
+.palette-pointer {
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  width: 1.5rem;
+  height: 1px;
+  translate: 0 -50%;
+  background: var(--on);
+  opacity: 0.5;
+  transition: background-color 0.7s var(--ease-brand);
+}
+
+/* Each beat is keyed on its index, so this runs on arrival only. */
+.palette-beat {
+  animation: palette-beat-in 0.75s var(--ease-brand) both;
+}
+
+@keyframes palette-beat-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.9rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .palette-wheel,
+  .palette-slice,
+  .palette-well,
+  .palette-on,
+  .palette-rule,
+  .palette-pointer {
+    transition: none;
+    rotate: none;
+  }
+
+  .palette-beat {
+    animation: none;
+  }
+}
+
+/* The frame's own height: a viewport to be held for, plus one handover
+   per beat. The handover is shorter on a phone — five screenfuls of
+   hold on a small device stops reading as an effect and starts reading
+   as a page that has stopped responding. */
+.palette-frame {
+  height: calc(100svh + var(--beats, 0) * var(--palette-beat-travel, 85svh));
+}
+
+@media (width < 64rem) {
+  .palette-frame {
+    --palette-beat-travel: 62svh;
+  }
+}
+
+/* ------------------------------------------------------------
+   The ring, held against the left edge
+
+   Half of it is off-screen on purpose: what is on screen is the
+   right-hand arc, which is where the live colour is turned to.
+   A whole wheel floating in the column would read as a diagram;
+   a wheel running off the frame reads as an object the page is
+   showing part of.
+
+   `--disk` is the full diameter, so exactly half of it is the
+   visible width — which is also what the writing has to clear.
+   ------------------------------------------------------------ */
+.palette-frame {
+  --disk: min(46rem, 82svh);
+  --disk-gap: 3.5rem;
+}
+
+.palette-shell {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--disk);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.palette-copy {
+  padding-left: calc(var(--disk) / 2 + var(--disk-gap));
+}
+
+/* On a phone there is no room to set a paragraph beside the arc, so the
+   ring goes up into the top of the frame and the writing takes the full
+   width underneath it. The arc still runs off the left edge — the
+   composition survives; only the axis it is read on changes. */
+@media (width < 64rem) {
+  .palette-frame {
+    --disk: min(19rem, 30svh);
+    --disk-gap: 1.25rem;
+  }
+
+  .palette-shell {
+    top: calc(var(--disk) / 2 + 3rem);
+  }
+
+  /* The writing takes the full width under the arc rather than beside it —
+     there is no room for a column next to it at this size. It starts below
+     the ring and grows downward: bottom-aligning it meant a long beat spilled
+     up over the arc instead, because flex overflow goes the way the content
+     is not anchored. */
+  .palette-copy {
+    justify-content: flex-start;
+    padding-top: calc(var(--disk) + 3rem);
+    padding-bottom: 2rem;
+    padding-left: 0;
+  }
+}

@@ -5,12 +5,12 @@ import { useLocalized } from "@/components/project/shared";
 import type { ProjectCase } from "@/lib/data/projects/types";
 
 /**
- * 01 — Hero.
+ * 01   Hero.
  *
  * The about page's opening, given a project to carry: the still settling in
  * behind a scrim, the name rising word by word off its baseline, and the whole
  * thing lifting away as the page departs. It is the loudest moment on the site
- * and a case study has earned it — this is the one screen a visitor decides
+ * and a case study has earned it   this is the one screen a visitor decides
  * from.
  *
  * The name takes the accent slot, so it arrives gold and underlined; the rail

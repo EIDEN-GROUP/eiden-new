@@ -2,7 +2,7 @@ import type { ProjectCase } from "./types";
 
 /**
  * No `identity` block. ORSEN sells art direction and there is not a single
- * identity asset on file — no logo, no specimen, no application shot. The
+ * identity asset on file   no logo, no specimen, no application shot. The
  * section is left out rather than padded with website screenshots.
  */
 export const orsen: ProjectCase = {
@@ -18,8 +18,8 @@ export const orsen: ProjectCase = {
       en: "Material before decoration.",
     },
     intro: {
-      fr: "Marbre, pierre, béton, bois et métal sur une seule plateforme — avec une face publique pour les architectes et une face professionnelle derrière, pour le négoce.",
-      en: "Marble, stone, concrete, wood and metal on one platform — with a public face for architects and a professional one behind it for the trade.",
+      fr: "Marbre, pierre, béton, bois et métal sur une seule plateforme   avec une face publique pour les architectes et une face professionnelle derrière, pour le négoce.",
+      en: "Marble, stone, concrete, wood and metal on one platform   with a public face for architects and a professional one behind it for the trade.",
     },
     image: "/work/orsen hero.png",
     alt: {
@@ -95,24 +95,6 @@ export const orsen: ProjectCase = {
       fr: "Le catalogue public et le portail professionnel partagent la même fondation : les mêmes références, le même stock, les mêmes fiches. Ce qui change, c'est ce que vous avez le droit d'en faire.",
       en: "The public catalogue and the professional portal share one foundation: the same references, the same stock, the same sheets. What changes is what you are allowed to do with them.",
     },
-    shots: [
-      {
-        image: "/work/web-orsen-desktop.jpg",
-        alt: {
-          fr: "Le portail B2B ORSEN",
-          en: "The ORSEN B2B portal",
-        },
-        label: { fr: "Portail B2B", en: "B2B Portal" },
-      },
-      {
-        image: "/work/web-orsen-cover.jpg",
-        alt: {
-          fr: "Le catalogue public ORSEN",
-          en: "The ORSEN public catalogue",
-        },
-        label: { fr: "E-commerce", en: "E-commerce" },
-      },
-    ],
   },
 
   work: [

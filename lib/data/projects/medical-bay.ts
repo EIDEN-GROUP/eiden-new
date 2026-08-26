@@ -13,8 +13,8 @@ export const medicalBay: ProjectCase = {
       en: "Design the clinic and its software as one thing.",
     },
     intro: {
-      fr: "Un centre médical qui existait sur le papier — une vision claire, et rien dessous. Nous avons construit l'activité, la marque et le système ensemble.",
-      en: "A medical centre that existed on paper — a clear vision, and nothing underneath it. We built the business, the brand and the system together.",
+      fr: "Un centre médical qui existait sur le papier   une vision claire, et rien dessous. Nous avons construit l'activité, la marque et le système ensemble.",
+      en: "A medical centre that existed on paper   a clear vision, and nothing underneath it. We built the business, the brand and the system together.",
     },
     image: "/work/medical-bay-lobby.png",
     alt: {
@@ -92,8 +92,8 @@ export const medicalBay: ProjectCase = {
       en: "Calm, before the appointment",
     },
     text: {
-      fr: "La marque, et l'espace physique avec lequel elle a été dessinée — les deux ont été pensés ensemble, et c'est ce que le patient rencontre en premier.",
-      en: "The mark, and the physical space it was designed alongside — the two were drawn together, and they are the first thing a patient meets.",
+      fr: "La marque, et l'espace physique avec lequel elle a été dessinée   les deux ont été pensés ensemble, et c'est ce que le patient rencontre en premier.",
+      en: "The mark, and the physical space it was designed alongside   the two were drawn together, and they are the first thing a patient meets.",
     },
     shots: [
       {
@@ -134,17 +134,80 @@ export const medicalBay: ProjectCase = {
         },
         label: { fr: "CRM", en: "CRM" },
       },
-      {
-        image: "/work/medical-bay-web-desktop.png",
-        alt: {
-          fr: "Le site Medical Bay, entrée du parcours",
-          en: "The Medical Bay site, the entry to the journey",
-        },
-        label: { fr: "Système digital", en: "Digital System" },
-      },
     ],
   },
 
+  paletteStory: {
+    title: { fr: "Le langage visuel", en: "The visual language" },
+    lead: {
+      fr: "Une clinique doit rassurer avant d'expliquer. La couleur s'en charge en premier.",
+      en: "A clinic has to reassure before it explains. Colour does that first.",
+    },
+    colors: [
+      {
+        name: "Teal",
+        hex: "#2BBAA5",
+        role: { fr: "Signature", en: "Signature" },
+      },
+      {
+        name: "Teal Deep",
+        hex: "#1F9187",
+        role: { fr: "Profondeur", en: "Depth" },
+      },
+      {
+        name: "Mist",
+        hex: "#E8F5F3",
+        role: { fr: "Calme", en: "Calm" },
+      },
+      {
+        name: "Ink",
+        hex: "#0D1A18",
+        role: { fr: "Ancrage", en: "Anchor" },
+      },
+    ],
+    states: [
+      {
+        title: { fr: "Ce qu'on ressent en entrant", en: "What you feel walking in" },
+        text: {
+          fr: "Le teal est choisi contre le bleu clinique. Il rassure sans avoir l'air d'un hôpital, ce qui est exactement la distance que le patient cherche.",
+          en: "The teal was chosen against clinical blue. It reassures without reading as a hospital, which is exactly the distance a patient is looking for.",
+        },
+        colorIndex: 0,
+      },
+      {
+        title: { fr: "La hiérarchie, sans hausser le ton", en: "Hierarchy, without raising the voice" },
+        text: {
+          fr: "Le teal profond sépare ce qui compte de ce qui accompagne. Sur un parcours de soin, savoir où regarder en premier fait partie du soin.",
+          en: "The deep teal separates what matters from what supports it. On a care journey, knowing where to look first is part of the care.",
+        },
+        colorIndex: 1,
+      },
+      {
+        title: { fr: "L'espace autour", en: "The space around it" },
+        text: {
+          fr: "La brume est ce qui manque à la plupart des cliniques : du vide. Elle porte les formulaires, les fiches et l'attente sans les charger.",
+          en: "Mist is what most clinics do without: emptiness. It carries the forms, the sheets and the waiting without weighing any of it down.",
+        },
+        colorIndex: 2,
+      },
+      {
+        title: { fr: "Ce qui doit être lu", en: "What has to be read" },
+        text: {
+          fr: "L'encre est réservée à l'information dont dépend un rendez-vous. Elle n'est jamais décorative — dans une clinique, la lisibilité est une question de confiance.",
+          en: "Ink is kept for the information an appointment depends on. It is never decorative: in a clinic, legibility is a question of trust.",
+        },
+        colorIndex: 3,
+      },
+      {
+        title: { fr: "Une clinique, pas un cabinet", en: "A clinic, not a practice" },
+        text: {
+          fr: "L'ensemble tient de l'accueil au tableau de bord. C'est la même marque qui rassure le patient et qui structure l'écran de l'équipe.",
+          en: "The set holds from the reception desk to the dashboard. The same brand reassures the patient and structures the team's screen.",
+        },
+        colorIndex: 0,
+      },
+    ],
+  },
   work: [
     {
       image: "/work/medical-bay-web-desktop.png",
@@ -165,16 +228,16 @@ export const medicalBay: ProjectCase = {
     {
       image: "/work/medical-bay-campaign-implant.png",
       alt: {
-        fr: "Campagne Medical Bay — implants",
-        en: "Medical Bay campaign — implants",
+        fr: "Campagne Medical Bay   implants",
+        en: "Medical Bay campaign   implants",
       },
       label: { fr: "Campagne", en: "Campaign" },
     },
     {
       image: "/work/medical-bay-campaign-veneer.png",
       alt: {
-        fr: "Campagne Medical Bay — facettes",
-        en: "Medical Bay campaign — veneers",
+        fr: "Campagne Medical Bay   facettes",
+        en: "Medical Bay campaign   veneers",
       },
       label: { fr: "Campagne", en: "Campaign" },
     },
@@ -185,6 +248,40 @@ export const medicalBay: ProjectCase = {
     },
   ],
 
+  gallery: [
+    {
+      image: "/work/medical-bay-brand.png",
+      alt: { fr: "Identité Medical Bay", en: "Medical Bay identity" },
+    },
+    {
+      image: "/work/medical-bay-brand-logo-3.png",
+      alt: { fr: "Logo Medical Bay", en: "Medical Bay logo" },
+    },
+    {
+      image: "/work/medical-bay-brand-reception-mockup.png",
+      alt: { fr: "L'accueil Medical Bay", en: "The Medical Bay reception" },
+    },
+    {
+      image: "/work/medical-bay-application.png",
+      alt: { fr: "L'identité Medical Bay en situation", en: "The Medical Bay identity in place" },
+    },
+    {
+      image: "/work/medical-bay-campaign-zirconia.png",
+      alt: { fr: "Campagne Medical Bay — zircone", en: "Medical Bay campaign — zirconia" },
+    },
+    {
+      image: "/work/medical-bay-dental-campaign.png",
+      alt: { fr: "Campagne dentaire Medical Bay", en: "Medical Bay dental campaign" },
+    },
+    {
+      image: "/work/medical-bay-tourism-medical.png",
+      alt: { fr: "Tourisme médical Medical Bay", en: "Medical Bay medical tourism" },
+    },
+    {
+      image: "/work/medical-bay-hero-flatlay.png",
+      alt: { fr: "Medical Bay", en: "Medical Bay" },
+    },
+  ],
   outcome: {
     title: {
       fr: "Une clinique qui tourne sur un système, plus sur des tableurs.",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectCaseStudy } from "@/components/project/case/case-study";
 import {
-  getNextCase,
+  getNextCases,
   getProjectCase,
   projectCases,
 } from "@/lib/data/projects/index";
@@ -36,7 +36,7 @@ export async function generateMetadata({
  * The project route.
  *
  * Every page is the same spine filled differently, so the route does nothing
- * but resolve the record and hand it over — the shape of the page is decided
+ * but resolve the record and hand it over   the shape of the page is decided
  * in `ProjectCaseStudy`, and what appears in it is decided by the record.
  */
 export default async function ProjectPage({
@@ -47,5 +47,5 @@ export default async function ProjectPage({
   const project = getProjectCase(slug);
   if (!project) notFound();
 
-  return <ProjectCaseStudy project={project} next={getNextCase(slug)} />;
+  return <ProjectCaseStudy project={project} next={getNextCases(slug)} />;
 }

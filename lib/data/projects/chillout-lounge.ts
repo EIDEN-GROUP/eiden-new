@@ -17,8 +17,8 @@ export const chilloutLounge: ProjectCase = {
       en: "Print the golden hour.",
     },
     intro: {
-      fr: "Musique live, cocktails et couchers de soleil face à l'Atlantique — avec un seul travail à faire en ligne : remplir ce soir.",
-      en: "Live music, cocktails and sunset sessions facing the Atlantic — with one job to do online: fill tonight.",
+      fr: "Musique live, cocktails et couchers de soleil face à l'Atlantique   avec un seul travail à faire en ligne : remplir ce soir.",
+      en: "Live music, cocktails and sunset sessions facing the Atlantic   with one job to do online: fill tonight.",
     },
     image: "/work/chilout hero.png",
     alt: {
