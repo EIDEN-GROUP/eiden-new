@@ -76,7 +76,7 @@ export const medicalBay: ProjectCase = {
       },
       shots: [
         {
-          image: "/work/medical-bay/medical-bay-brand-application.png",
+          image: "/work/medical-bay/medical-bay-brand-logo-1.jpg",
           alt: {
             fr: "L'identité Medical Bay en application",
             en: "The Medical Bay identity applied",

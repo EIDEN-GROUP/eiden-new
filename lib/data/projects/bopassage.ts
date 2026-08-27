@@ -63,7 +63,7 @@ export const bopassage: ProjectCase = {
       },
       shots: [
         {
-          image: "/work/bopassage/bopassage-brand-application.png",
+          image: "/work/bopassage/bopassage-brand-logo-green.png",
           alt: {
             fr: "Logotype principal et secondaire de Bôpassage",
             en: "Bôpassage primary and secondary wordmark",
@@ -291,7 +291,7 @@ export const bopassage: ProjectCase = {
       },
       shots: [
         {
-          image: "/work/bopassage/bopassage-ooh-column.png",
+          image: "/work/bopassage/bopassage-application.png",
           alt: {
             fr: "Affichage extérieur Bôpassage",
             en: "Bôpassage out-of-home poster",
