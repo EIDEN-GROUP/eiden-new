@@ -1,6 +1,10 @@
 import type { ProjectCase } from "./types";
 
-/** No `identity` block   art direction is sold here, but nothing on file shows it. */
+/**
+ * Five disciplines and four files. The shop side and the conditions the site is
+ * actually used in are set in type: both are decisions rather than screens, and
+ * a fourth screenshot of the same catalogue would say nothing about either.
+ */
 export const droguerieSouss: ProjectCase = {
   slug: "droguerie-souss",
   client: "Souss Droguerie",
@@ -17,50 +21,12 @@ export const droguerieSouss: ProjectCase = {
       fr: "Vingt ans de distribution de matériaux de construction, avec une présence digitale qui ne montrait ni la compétence, ni la réactivité, ni le stock.",
       en: "Twenty years of distributing building materials, with a digital presence that showed none of the competence, the speed, or the stock.",
     },
-    image: "/work/hero drougure.png",
+    image: "/work/droguerie-souss/hero drougure.png",
     alt: {
       fr: "Le comptoir Souss Droguerie",
       en: "The Souss Droguerie trade counter",
     },
   },
-
-  services: [
-    {
-      name: { fr: "Direction artistique", en: "Art Direction" },
-      note: {
-        fr: "Une présence qui montre la compétence au lieu de l'affirmer.",
-        en: "A presence that shows the competence instead of claiming it.",
-      },
-    },
-    {
-      name: { fr: "Site web", en: "Website" },
-      note: {
-        fr: "Construit autour d'un seul acte : passer l'appel.",
-        en: "Built around one act: making the call.",
-      },
-    },
-    {
-      name: { fr: "E-commerce", en: "E-commerce" },
-      note: {
-        fr: "La gamme, tarifée et commandable.",
-        en: "The range, priced and orderable.",
-      },
-    },
-    {
-      name: { fr: "Catalogue", en: "Catalogue" },
-      note: {
-        fr: "Honnête sur ce qui est réellement disponible.",
-        en: "Honest about what is actually available.",
-      },
-    },
-    {
-      name: { fr: "Expérience digitale", en: "Digital Experience" },
-      note: {
-        fr: "Utilisable par un chef de chantier, entre deux livraisons.",
-        en: "Usable by a site manager, between two deliveries.",
-      },
-    },
-  ],
 
   transformation: {
     title: {
@@ -87,42 +53,118 @@ export const droguerieSouss: ProjectCase = {
     ],
   },
 
-  feature: {
-    label: { fr: "Catalogue", en: "Catalogue" },
-    title: {
-      fr: "La gamme, et ce qu'il en reste.",
-      en: "The range, and what is left of it.",
-    },
-    text: {
-      fr: "C'est ce que le négoce vient chercher : pas une brochure, mais l'état réel du stock. Un catalogue qui dit « en rupture » vaut mieux qu'un catalogue qui ne dit rien.",
-      en: "This is what the trade actually comes for: not a brochure, but the real state of the stock. A catalogue that says “out of stock” is worth more than one that says nothing.",
-    },
-  },
-
-  work: [
+  chapters: [
     {
-      image: "/work/web-droguerie-souss-desktop.jpg",
-      alt: {
-        fr: "Le site Souss Droguerie sur écran",
-        en: "The Souss Droguerie site on desktop",
+      key: "art-direction",
+      labels: [{ fr: "Direction artistique", en: "Art Direction" }],
+      tone: "forest",
+      title: {
+        fr: "Une présence qui montre la compétence au lieu de l'affirmer.",
+        en: "A presence that shows the competence instead of claiming it.",
       },
-      label: { fr: "Site web", en: "Website" },
+      text: {
+        fr: "Le comptoir, les rayonnages, les mains qui servent : la direction artistique part de ce qui existe déjà dans le magasin plutôt que d'images de banque. Vingt ans de métier se montrent   ils ne se déclarent pas dans un slogan.",
+        en: "The counter, the shelves, the hands doing the serving: the art direction starts from what is already in the shop rather than from stock photography. Twenty years of trade is shown   it is not declared in a strapline.",
+      },
+      shots: [
+        {
+          image: "/work/droguerie-souss/drogurie souss card.png",
+          alt: {
+            fr: "La marque Souss Droguerie",
+            en: "The Souss Droguerie mark",
+          },
+          label: { fr: "Marque", en: "Brand" },
+        },
+        {
+          image: "/work/droguerie-souss/hero drougure.png",
+          alt: {
+            fr: "Le comptoir Souss Droguerie",
+            en: "The Souss Droguerie trade counter",
+          },
+          label: { fr: "Le comptoir", en: "The counter" },
+        },
+      ],
     },
     {
-      image: "/work/web-droguerie-souss-mobile.jpg",
-      alt: {
-        fr: "Le site Souss Droguerie sur téléphone",
-        en: "The Souss Droguerie site on a phone",
+      key: "website",
+      labels: [{ fr: "Site web", en: "Website" }],
+      tone: "canvas",
+      title: {
+        fr: "Construit autour d'un seul acte : passer l'appel.",
+        en: "Built around one act: making the call.",
       },
-      label: { fr: "Mobile", en: "Mobile" },
+      text: {
+        fr: "Dans ce métier la transaction se conclut au téléphone, quoi qu'en dise le e-commerce. Le numéro reste donc à l'écran du haut en bas de chaque page, et tout ce que le site fait par ailleurs sert à ce qu'on appelle déjà renseigné.",
+        en: "In this trade the transaction still closes on the phone, whatever e-commerce would like to believe. So the number stays on screen from the top of every page to the bottom, and everything else the site does is there so that the call starts already informed.",
+      },
+      shots: [
+        {
+          image: "/work/droguerie-souss/web-droguerie-souss-desktop.jpg",
+          alt: {
+            fr: "Le site Souss Droguerie sur écran",
+            en: "The Souss Droguerie site on desktop",
+          },
+          label: { fr: "Desktop", en: "Desktop" },
+        },
+        {
+          image: "/work/droguerie-souss/web-droguerie-souss-mobile.jpg",
+          fit: "contain",
+          alt: {
+            fr: "Le site Souss Droguerie sur téléphone",
+            en: "The Souss Droguerie site on a phone",
+          },
+          label: { fr: "Mobile", en: "Mobile" },
+        },
+      ],
     },
     {
-      image: "/work/web-droguerie-souss-cover.jpg",
-      alt: {
-        fr: "L'expérience catalogue Souss Droguerie",
-        en: "The Souss Droguerie catalogue experience",
+      key: "e-commerce",
+      labels: [{ fr: "E-commerce", en: "E-commerce" }],
+      tone: "ink",
+      title: {
+        fr: "La gamme, tarifée et commandable.",
+        en: "The range, priced and orderable.",
       },
-      label: { fr: "Expérience digitale", en: "Digital Experience" },
+      text: {
+        fr: "Un chef de chantier qui commande à sept heures du matin n'attend pas un devis : il veut un prix, une quantité et une date de livraison, et il veut les trois avant d'avoir fini son café.",
+        en: "A site manager ordering at seven in the morning is not waiting for a quote: they want a price, a quantity and a delivery date, and they want all three before the coffee is finished.",
+      },
+    },
+    {
+      key: "catalogue",
+      labels: [{ fr: "Catalogue", en: "Catalogue" }],
+      tone: "forest",
+      title: {
+        fr: "La gamme, et ce qu'il en reste.",
+        en: "The range, and what is left of it.",
+      },
+      text: {
+        fr: "C'est ce que le négoce vient chercher : pas une brochure, mais l'état réel du stock. Un catalogue qui dit « en rupture » vaut mieux qu'un catalogue qui ne dit rien.",
+        en: "This is what the trade actually comes for: not a brochure, but the real state of the stock. A catalogue that says “out of stock” is worth more than one that says nothing.",
+      },
+      shots: [
+        {
+          image: "/work/droguerie-souss/web-droguerie-souss-cover.jpg",
+          alt: {
+            fr: "Le catalogue Souss Droguerie",
+            en: "The Souss Droguerie catalogue",
+          },
+          label: { fr: "Catalogue", en: "Catalogue" },
+        },
+      ],
+    },
+    {
+      key: "digital-experience",
+      labels: [{ fr: "Expérience digitale", en: "Digital Experience" }],
+      tone: "canvas",
+      title: {
+        fr: "Utilisable par un chef de chantier, entre deux livraisons.",
+        en: "Usable by a site manager, between two deliveries.",
+      },
+      text: {
+        fr: "Une seule main, des gants, du soleil sur l'écran et une connexion qui tombe : ce sont les conditions réelles, et elles ont décidé de la taille des boutons plus sûrement que n'importe quelle grille.",
+        en: "One hand, gloves on, sun on the screen and a connection that drops: those are the real conditions, and they decided the size of the buttons more surely than any grid could.",
+      },
     },
   ],
 

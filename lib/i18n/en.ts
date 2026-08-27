@@ -682,6 +682,8 @@ export const en: Dictionary = {
         all: "All work",
         web: "Web design",
         hospitality: "Hospitality",
+        restaurants: "Cafés & Restaurants",
+        lounge: "Lounge",
         education: "Education",
         health: "Healthcare",
       },
@@ -706,6 +708,8 @@ export const en: Dictionary = {
           "Live music, cocktails and sunset sessions facing the Atlantic.",
         "one-retail": "At the heart of modern Moroccan retail.",
         "droguerie-souss": "Build with the best materials.",
+        mabrouk:
+          "A house you recognise by its light: brass, wood and velvet, held as a brand.",
       },
       sectors: [
         {

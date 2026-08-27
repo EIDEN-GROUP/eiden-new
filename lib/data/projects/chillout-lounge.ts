@@ -1,14 +1,14 @@
 import type { ProjectCase } from "./types";
 
 /**
- * The only project with no `feature` block either. Its whole story is one
- * venue and one site; a fourth section would be filling the page.
+ * The smallest case in the portfolio: one venue, one site, three disciplines.
+ * A fourth panel would be filling the page rather than showing the work.
  */
 export const chilloutLounge: ProjectCase = {
   slug: "chillout-lounge",
   client: "CHILLOUT Lounge",
   year: "2026",
-  category: { fr: "Hôtellerie", en: "Hospitality" },
+  category: { fr: "Lounge", en: "Lounge" },
   location: { fr: "Lunja Village, Agadir", en: "Lunja Village, Agadir" },
 
   hero: {
@@ -20,36 +20,12 @@ export const chilloutLounge: ProjectCase = {
       fr: "Musique live, cocktails et couchers de soleil face à l'Atlantique   avec un seul travail à faire en ligne : remplir ce soir.",
       en: "Live music, cocktails and sunset sessions facing the Atlantic   with one job to do online: fill tonight.",
     },
-    image: "/work/chilout hero.png",
+    image: "/work/chillout-lounge/chilout hero.png",
     alt: {
       fr: "Le CHILLOUT Lounge au coucher du soleil",
       en: "CHILLOUT Lounge at sunset",
     },
   },
-
-  services: [
-    {
-      name: { fr: "Direction artistique", en: "Art Direction" },
-      note: {
-        fr: "La personnalité du lieu, rendue visible.",
-        en: "The venue's own personality, made visible.",
-      },
-    },
-    {
-      name: { fr: "Site web", en: "Website" },
-      note: {
-        fr: "Un site léger, construit autour du programme de ce soir.",
-        en: "A light site built around tonight's programme.",
-      },
-    },
-    {
-      name: { fr: "Motion", en: "Motion" },
-      note: {
-        fr: "Du mouvement discret, sans dépendance supplémentaire.",
-        en: "Light motion, with no extra dependency.",
-      },
-    },
-  ],
 
   transformation: {
     title: {
@@ -76,30 +52,156 @@ export const chilloutLounge: ProjectCase = {
     ],
   },
 
-  work: [
+  chapters: [
     {
-      image: "/work/web-chillout-desktop.jpg",
-      alt: {
-        fr: "Le site CHILLOUT sur écran",
-        en: "The CHILLOUT site on desktop",
+      key: "art-direction",
+      labels: [{ fr: "Direction artistique", en: "Art Direction" }],
+      tone: "forest",
+      title: {
+        fr: "La personnalité du lieu, rendue visible.",
+        en: "The venue's own personality, made visible.",
       },
-      label: { fr: "Site web", en: "Website" },
+      text: {
+        fr: "Rien n'a été inventé : le logotype et la lumière viennent de ce que le lieu est déjà à dix-neuf heures. La direction artistique a consisté à choisir cette heure-là et à s'y tenir partout.",
+        en: "Nothing was invented: the wordmark and the light come from what the place already is at seven in the evening. The art direction was choosing that hour and holding to it everywhere.",
+      },
+      shots: [
+        {
+          image: "/work/chillout-lounge/chilout card.png",
+          alt: {
+            fr: "Le logotype CHILLOUT sur une soirée du lieu",
+            en: "The CHILLOUT wordmark over a night at the venue",
+          },
+          label: { fr: "Logo", en: "Logo" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC08999.jpg",
+          alt: {
+            fr: "Cocktails au bar du CHILLOUT",
+            en: "Cocktails at the CHILLOUT bar",
+          },
+          label: { fr: "Cocktails", en: "Cocktails" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09029.jpg",
+          alt: {
+            fr: "Le barman du CHILLOUT au travail",
+            en: "The CHILLOUT bartender at work",
+          },
+          label: { fr: "Le bar", en: "The bar" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09034.jpg",
+          alt: {
+            fr: "Une soirée au CHILLOUT Lounge",
+            en: "A night at CHILLOUT Lounge",
+          },
+          label: { fr: "Les soirées", en: "Nights" },
+        },
+      ],
+      wall: [
+        {
+          image: "/work/chillout-lounge/DSC09000.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09003.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09004.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09006.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09008.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09016.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09017.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09020.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09021.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09023.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/DSC09024.jpg",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+        {
+          image: "/work/chillout-lounge/chilout hero.png",
+          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+        },
+      ],
     },
     {
-      image: "/work/web-chillout-mobile.jpg",
-      alt: {
-        fr: "Le site CHILLOUT sur téléphone",
-        en: "The CHILLOUT site on a phone",
+      key: "website",
+      labels: [{ fr: "Site web", en: "Website" }],
+      tone: "canvas",
+      title: {
+        fr: "Un site léger, construit autour du programme de ce soir.",
+        en: "A light site built around tonight's programme.",
       },
-      label: { fr: "Mobile", en: "Mobile" },
+      text: {
+        fr: "Un bar n'a qu'une question à traiter en ligne : qui joue ce soir, et à quelle heure. Tout le reste du site est en dessous, et l'équipe met la soirée à jour elle-même depuis un téléphone, en salle.",
+        en: "A bar has one question to handle online: who is playing tonight, and at what time. Everything else on the site sits below that, and the team updates the evening themselves from a phone, on the floor.",
+      },
+      shots: [
+        {
+          image: "/work/chillout-lounge/web-chillout-desktop.jpg",
+          alt: {
+            fr: "Le site CHILLOUT sur écran",
+            en: "The CHILLOUT site on desktop",
+          },
+          label: { fr: "Desktop", en: "Desktop" },
+        },
+        {
+          image: "/work/chillout-lounge/web-chillout-mobile.jpg",
+          fit: "contain",
+          alt: {
+            fr: "Le site CHILLOUT sur téléphone",
+            en: "The CHILLOUT site on a phone",
+          },
+          label: { fr: "Mobile", en: "Mobile" },
+        },
+        {
+          image: "/work/chillout-lounge/web-chillout-cover.jpg",
+          alt: {
+            fr: "L'accueil du site CHILLOUT",
+            en: "The CHILLOUT site homepage",
+          },
+          label: { fr: "Accueil", en: "Home" },
+        },
+      ],
     },
     {
-      image: "/work/web-chillout-cover.jpg",
-      alt: {
-        fr: "Le programme CHILLOUT en mouvement",
-        en: "The CHILLOUT programme in motion",
+      key: "motion",
+      labels: [{ fr: "Motion", en: "Motion" }],
+      tone: "ink",
+      title: {
+        fr: "Du mouvement discret, sans dépendance supplémentaire.",
+        en: "Light motion, with no extra dependency.",
       },
-      label: { fr: "Motion", en: "Motion" },
+      text: {
+        fr: "Le mouvement est écrit en CSS plutôt qu'apporté par une librairie : le site reste léger sur un réseau de bord de mer, et rien ne casse le jour où la librairie change de version. C'est de la retenue, pas une limite.",
+        en: "The motion is written in CSS rather than brought in by a library: the site stays light on a seafront connection, and nothing breaks the day the library changes version. That is restraint, not a limitation.",
+      },
     },
   ],
 

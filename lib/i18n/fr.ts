@@ -690,6 +690,8 @@ export const fr = {
         all: "Tous les projets",
         web: "Web design",
         hospitality: "Hôtellerie",
+        restaurants: "Cafés & restaurants",
+        lounge: "Lounge",
         education: "Éducation",
         health: "Santé",
       },
@@ -714,6 +716,8 @@ export const fr = {
           "Musique live, cocktails et couchers de soleil face à l'Atlantique.",
         "one-retail": "Au cœur du commerce marocain moderne.",
         "droguerie-souss": "Bâtissez avec les meilleurs matériaux.",
+        mabrouk:
+          "Une maison qui se reconnaît à sa lumière : laiton, bois et velours, tenus en marque.",
       },
       sectors: [
         {

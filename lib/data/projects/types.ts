@@ -6,7 +6,7 @@ export type { Localized };
 /**
  * A picture, and what it is an example of.
  *
- * The label is the only writing a visual gets. It names the kind of work  
+ * The label is the only writing a visual gets. It names the kind of work
  * `Website`, `Campaign`, `B2B Portal`   rather than describing the picture,
  * because a reader scanning a wall of work is asking what they are looking at,
  * not what is in the frame.
@@ -15,17 +15,14 @@ export type Shot = {
   image: string;
   alt: Localized;
   label: Localized;
+  /**
+   * How the picture meets its frame. `cover` by default, which is right for a
+   * photograph   the crop costs nothing. A phone screenshot is the exception:
+   * it is much taller than any frame on the page, so covering it throws away
+   * the top and bottom of the screen being shown. Those ask for `contain`.
+   */
+  fit?: "cover" | "contain";
 };
-
-/**
- * A service as it was sold.
- *
- * Never a deliverable (`Homepage`), never a technology (`Next.js`). The `note`
- * is one line and is left off wherever the record cannot back the claim up  
- * a service listed bare is honest; a service given an invented description is
- * not.
- */
-export type Service = { name: Localized; note?: Localized };
 
 /**
  * A picture in the wall.
@@ -55,10 +52,10 @@ export type PaletteState = {
 /**
  * The palette, told rather than listed.
  *
- * Read as a held section the visitor scrolls through: the disk turns, the
- * ground changes colour under them, and each beat says what that colour is
- * for. Optional — a project with no identity work has no palette to tell,
- * and a grid of swatches was never the point.
+ * Read as a held run the visitor scrolls through: the disk turns, the ground
+ * changes colour under them, and each beat says what that colour is for. It
+ * belongs to the branding room and is written inside it   a palette is one of
+ * the things branding produced, not a subject of its own.
  */
 export type PaletteStory = {
   title: Localized;
@@ -68,16 +65,102 @@ export type PaletteStory = {
 };
 
 /**
+ * Somewhere the work is live.
+ *
+ * `kind` only decides which mark is drawn beside the label; the label is what
+ * is read. Never write a link that has not been checked   an account that has
+ * been renamed is worse than no link at all.
+ */
+export type ChapterLink = {
+  href: string;
+  label: Localized;
+  kind?: "site" | "instagram" | "facebook" | "linkedin" | "tiktok";
+};
+
+/**
+ * What the work came to.
+ *
+ * Short, and qualitative unless the client has already published a figure.
+ * `metric` is only ever a number the client has put its own name to.
+ */
+export type Outcome = {
+  title: Localized;
+  text: Localized;
+  metric?: string;
+};
+
+/**
+ * The ground a room stands on.
+ *
+ * Three, and only three. A case study is a set of rooms the reader walks
+ * through, and a room changes by changing its walls   canvas for the work that
+ * has to be looked at in daylight, ink for the work that was made for a
+ * screen, forest for the turns. A fourth ground would stop reading as a change
+ * and start reading as decoration.
+ */
+export type ChapterTone = "canvas" | "ink" | "forest";
+
+/**
+ * One room of the case.
+ *
+ * This replaced the single "what we did" list, and then replaced the panel-per-
+ * service that followed it. A service is not a section: branding and its
+ * palette are one piece of work, a site and the system behind it are one piece
+ * of work, and the money disciplines are only interesting next to the result
+ * they produced. So a room can cover more than one discipline   `labels` is
+ * what it covers   and carries whatever that work actually produced.
+ *
+ * The optional blocks are what make a room longer than a screen. `palette`
+ * belongs to branding, `wall` to the social work it is the volume behind, and
+ * `outcome` to the room that earned it. Each is rendered as a further held
+ * screen inside the same room, on the same ground, so the run still reads as
+ * one section rather than three.
+ *
+ * `shots` is allowed to be empty, and several rooms across this portfolio are:
+ * positioning, revenue and media buying were sold and delivered without
+ * producing an image, and a room that says so in type is honest where one
+ * padded with a borrowed screenshot is not.
+ */
+export type Chapter = {
+  /** Stable key, for React and for the hero's rail. */
+  key: string;
+  /** The disciplines this room covers, in the order they were sold. */
+  labels: Localized[];
+  /** The room's own headline   what this work did here, not in general. */
+  title: Localized;
+  /** One or two sentences. The first screen holds no more than that. */
+  text: Localized;
+  tone: ChapterTone;
+  /** Four at most: the first screen is a screen, and a fifth would scroll. */
+  shots?: Shot[];
+  /** The site, the accounts   wherever this work is live and checkable. */
+  links?: ChapterLink[];
+  /** Branding only: the palette, told as its own held run. */
+  palette?: PaletteStory;
+  /** The wider set, drifting. Belongs under the work it is the evidence for. */
+  wall?: GalleryImage[];
+  /**
+   * The figure this room moved, stated inside it.
+   *
+   * Only where revenue or paid media was sold: those disciplines are only worth
+   * reading next to the number they moved, so the result is written into this
+   * room's own text rather than given a section of its own. Only ever a figure
+   * the client has already published.
+   */
+  metric?: string;
+};
+
+/**
  * One project, written as a case rather than as a chronicle.
  *
- * The spine is fixed   hero, services, transformation, work, outcome   and the
- * two optional blocks are the only places a page is allowed to grow. That is
- * deliberate: a `sections[]` array would let any page sprout any number of
- * blocks, and the rule this portfolio needed was the opposite one.
+ * Hero → the turn → the rooms. `chapters` is the only place a page is allowed
+ * to grow, and the growth is bounded by what was actually sold, so a page can
+ * never sprout a section no invoice backs.
  *
- * `identity` appears only where there are real identity assets to show, and
- * `feature` only where the work has a genuine second act   a system, a portal,
- * a catalogue. Neither is a slot to fill.
+ * `outcome` closes the case on its own screen   unless one of the rooms has
+ * claimed it, which is what happens wherever revenue or paid media was sold:
+ * those disciplines are only worth reading next to the figure they moved. One
+ * or the other is always present; never both.
  */
 export type ProjectCase = {
   slug: ProjectSlug;
@@ -95,57 +178,18 @@ export type ProjectCase = {
     alt: Localized;
   };
 
-  /** Exactly the services that were sold, in the order they are sold in. */
-  services: Service[];
-
   /**
    * Where they were → what changed → where they are now.
    *
    * `text` is a run of lines rather than a paragraph because the section
-   * lights them one at a time as it is scrolled through   the reader is meant
-   * to arrive at the turn, not to be handed it.
+   * brings them in one at a time   the reader is meant to arrive at the turn,
+   * not to be handed it.
    */
   transformation: { title: Localized; text: Localized[] };
 
-  identity?: {
-    title: Localized;
-    text: Localized;
-    shots: Shot[];
-  };
+  /** The rooms, in reading order. Three to five. */
+  chapters: Chapter[];
 
-  /** The palette as an experience rather than a legend. See `PaletteStory`. */
-  paletteStory?: PaletteStory;
-
-  feature?: {
-    label: Localized;
-    title: Localized;
-    text: Localized;
-    /**
-     * Optional, and empty on the projects with four files to their name.
-     * Showing the same screenshot here and again under selected work is
-     * padding, and padding is what this section exists to avoid: where there
-     * is nothing new to show, the second act is made in words alone.
-     */
-    shots?: Shot[];
-  };
-
-  /** Three to six. The cap is the point   this is a portfolio, not an archive. */
-  work: Shot[];
-
-  /**
-   * The wider set, where one exists.
-   *
-   * Selected work is the argument; this is the evidence behind it. Optional
-   * for the same reason identity is: five of these projects have four files
-   * to their name, and a wall repeating the three pictures already shown
-   * above it is worse than no wall.
-   */
-  gallery?: GalleryImage[];
-
-  outcome: {
-    title: Localized;
-    text: Localized;
-    /** Only ever a figure the client has already published. Never derived. */
-    metric?: string;
-  };
+  /** The closing screen. Left out where a room states the result instead. */
+  outcome?: Outcome;
 };

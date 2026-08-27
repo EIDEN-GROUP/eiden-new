@@ -3,6 +3,7 @@ import { bopassage } from "./bopassage";
 import { dmcMorocco } from "./dmc-morocco";
 import { educazenKids } from "./educazen-kids";
 import { lunjaVillage } from "./lunja-village";
+import { mabrouk } from "./mabrouk";
 import { medicalBay } from "./medical-bay";
 import { orsen } from "./orsen";
 import { lithosMateriaux } from "./lithos-materiaux";
@@ -10,7 +11,14 @@ import { rihabResidence } from "./rihab-residence";
 import { chilloutLounge } from "./chillout-lounge";
 import { droguerieSouss } from "./droguerie-souss";
 
-export type { ProjectCase, Service, Shot, Localized } from "./types";
+export type {
+  Chapter,
+  ChapterTone,
+  GalleryImage,
+  Localized,
+  ProjectCase,
+  Shot,
+} from "./types";
 
 /**
  * The portfolio, in reading order.
@@ -26,6 +34,7 @@ export const projectCases: ProjectCase[] = [
   dmcMorocco,
   educazenKids,
   lunjaVillage,
+  mabrouk,
   medicalBay,
   rihabResidence,
   chilloutLounge,

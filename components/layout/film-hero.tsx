@@ -19,6 +19,7 @@ export function FilmHero({
   lead,
   image = "/media/eiden-hero-poster.jpg",
   imageClassName = "object-cover object-center",
+  className,
   children,
 }: {
   eyebrow: string;
@@ -30,6 +31,8 @@ export function FilmHero({
   /** How the still is framed and treated. A page carrying its own backdrop
       passes its own here rather than being re-cropped to this one. */
   imageClassName?: string;
+  /** How tall the still stands. A case study takes the whole screen. */
+  className?: string;
   children?: React.ReactNode;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -101,7 +104,10 @@ export function FilmHero({
     <section
       ref={sectionRef}
       data-nav-tone="dark"
-      className="hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-black sm:min-h-[74svh]"
+      className={cn(
+        "hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-black sm:min-h-[74svh]",
+        className,
+      )}
     >
       <div
         aria-hidden

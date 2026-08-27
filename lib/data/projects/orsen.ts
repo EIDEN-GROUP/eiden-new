@@ -1,9 +1,10 @@
 import type { ProjectCase } from "./types";
 
 /**
- * No `identity` block. ORSEN sells art direction and there is not a single
- * identity asset on file   no logo, no specimen, no application shot. The
- * section is left out rather than padded with website screenshots.
+ * Five disciplines and five files. The trade layer, the quoting and the motion
+ * are set in type: there is no screenshot of a portal behind a login, and
+ * showing the public catalogue a third time to stand in for one would be a
+ * quiet lie about what is on file.
  */
 export const orsen: ProjectCase = {
   slug: "orsen",
@@ -21,44 +22,12 @@ export const orsen: ProjectCase = {
       fr: "Marbre, pierre, béton, bois et métal sur une seule plateforme   avec une face publique pour les architectes et une face professionnelle derrière, pour le négoce.",
       en: "Marble, stone, concrete, wood and metal on one platform   with a public face for architects and a professional one behind it for the trade.",
     },
-    image: "/work/orsen hero.png",
+    image: "/work/orsen/orsen hero.png",
     alt: {
       fr: "La plateforme matériaux ORSEN",
       en: "The ORSEN materials platform",
     },
   },
-
-  services: [
-    {
-      name: { fr: "Direction artistique", en: "Art Direction" },
-      note: {
-        fr: "Un système visuel ramené à ce qui sert la matière.",
-        en: "A visual system cut back to what serves the material.",
-      },
-    },
-    {
-      name: { fr: "Site web", en: "Website" },
-      note: {
-        fr: "Un catalogue qui se lit comme une fiche technique.",
-        en: "A catalogue that reads like a spec sheet.",
-      },
-    },
-    {
-      name: { fr: "Portail B2B", en: "B2B Portal" },
-      note: {
-        fr: "Une couche professionnelle sur la même fondation.",
-        en: "A professional layer on the same foundation.",
-      },
-    },
-    {
-      name: { fr: "E-commerce & devis", en: "E-commerce / Quoting" },
-      note: {
-        fr: "Devis, commandes et stock au même endroit.",
-        en: "Quotes, orders and stock in one place.",
-      },
-    },
-    { name: { fr: "Motion", en: "Motion" } },
-  ],
 
   transformation: {
     title: {
@@ -85,36 +54,102 @@ export const orsen: ProjectCase = {
     ],
   },
 
-  feature: {
-    label: { fr: "Plateforme digitale", en: "Digital Platform" },
-    title: {
-      fr: "Deux visages, un seul système.",
-      en: "Two faces, one system.",
-    },
-    text: {
-      fr: "Le catalogue public et le portail professionnel partagent la même fondation : les mêmes références, le même stock, les mêmes fiches. Ce qui change, c'est ce que vous avez le droit d'en faire.",
-      en: "The public catalogue and the professional portal share one foundation: the same references, the same stock, the same sheets. What changes is what you are allowed to do with them.",
-    },
-  },
-
-  work: [
+  chapters: [
     {
-      image: "/work/web-orsen-desktop.jpg",
-      alt: { fr: "Le site ORSEN sur écran", en: "The ORSEN site on desktop" },
-      label: { fr: "Site web", en: "Website" },
-    },
-    {
-      image: "/work/web-orsen-mobile.jpg",
-      alt: { fr: "Le site ORSEN sur téléphone", en: "The ORSEN site on a phone" },
-      label: { fr: "Mobile", en: "Mobile" },
-    },
-    {
-      image: "/work/web-orsen-cover.jpg",
-      alt: {
-        fr: "Le catalogue matériaux ORSEN",
-        en: "The ORSEN materials catalogue",
+      key: "art-direction",
+      labels: [{ fr: "Direction artistique", en: "Art Direction" }],
+      tone: "forest",
+      title: {
+        fr: "Un système visuel ramené à ce qui sert la matière.",
+        en: "A visual system cut back to what serves the material.",
       },
-      label: { fr: "Système digital", en: "Digital System" },
+      text: {
+        fr: "Une seule couleur d'accent, un seul geste, et beaucoup de gris. Tout ce qui aurait pu concurrencer une photographie de pierre a été retiré   sur un catalogue de matériaux, la mise en page ne doit rien ajouter à ce qu'on regarde.",
+        en: "One accent colour, one gesture, and a great deal of grey. Anything that could have competed with a photograph of stone was taken out   on a materials catalogue, the layout must add nothing to what is being looked at.",
+      },
+      shots: [
+        {
+          image: "/work/orsen/orsen card.png",
+          alt: { fr: "La marque ORSEN en situation", en: "The ORSEN mark in place" },
+          label: { fr: "Marque", en: "Brand" },
+        },
+      ],
+    },
+    {
+      key: "website",
+      labels: [{ fr: "Site web", en: "Website" }],
+      tone: "canvas",
+      title: {
+        fr: "Un catalogue qui se lit comme une fiche technique.",
+        en: "A catalogue that reads like a spec sheet.",
+      },
+      text: {
+        fr: "Format, finition, épaisseur, provenance, délai. Un architecte cherche des valeurs, pas des arguments   alors la fiche est la page, et la photographie vient après ce qu'elle est censée prouver.",
+        en: "Format, finish, thickness, origin, lead time. An architect is looking for values, not arguments   so the spec is the page, and the photograph comes after what it is meant to prove.",
+      },
+      shots: [
+        {
+          image: "/work/orsen/web-orsen-desktop.jpg",
+          alt: { fr: "Le site ORSEN sur écran", en: "The ORSEN site on desktop" },
+          label: { fr: "Desktop", en: "Desktop" },
+        },
+        {
+          image: "/work/orsen/web-orsen-mobile.jpg",
+          fit: "contain",
+          alt: {
+            fr: "Le site ORSEN sur téléphone",
+            en: "The ORSEN site on a phone",
+          },
+          label: { fr: "Mobile", en: "Mobile" },
+        },
+        {
+          image: "/work/orsen/web-orsen-cover.jpg",
+          alt: {
+            fr: "Le catalogue matériaux ORSEN",
+            en: "The ORSEN materials catalogue",
+          },
+          label: { fr: "Catalogue", en: "Catalogue" },
+        },
+      ],
+    },
+    {
+      key: "b2b-portal",
+      labels: [{ fr: "Portail B2B", en: "B2B Portal" }],
+      tone: "ink",
+      title: {
+        fr: "Deux visages, un seul système.",
+        en: "Two faces, one system.",
+      },
+      text: {
+        fr: "Le catalogue public et le portail professionnel partagent la même fondation : les mêmes références, le même stock, les mêmes fiches. Ce qui change, c'est ce que vous avez le droit d'en faire.",
+        en: "The public catalogue and the professional portal share one foundation: the same references, the same stock, the same sheets. What changes is what you are allowed to do with them.",
+      },
+    },
+    {
+      key: "quoting",
+      labels: [{ fr: "E-commerce & devis", en: "E-commerce / Quoting" }],
+      tone: "forest",
+      title: {
+        fr: "Devis, commandes et stock au même endroit.",
+        en: "Quotes, orders and stock in one place.",
+      },
+      text: {
+        fr: "Une dalle ne se met pas au panier comme une paire de chaussures : il y a un métrage, une chute, un délai et une remise négociée. Le devis vit donc dans le catalogue plutôt que dans une boîte mail, à côté de la matière qu'il chiffre.",
+        en: "A slab does not go into a basket like a pair of shoes: there is an area, an offcut, a lead time and a negotiated discount. So the quote lives inside the catalogue rather than in an inbox, next to the material it prices.",
+      },
+    },
+    {
+      key: "motion",
+      labels: [{ fr: "Motion", en: "Motion" }],
+      tone: "canvas",
+      title: {
+        fr: "Le mouvement au service de la matière, jamais l'inverse.",
+        en: "Motion in service of the material, never the other way round.",
+      },
+      text: {
+        fr: "Assez pour qu'une surface prenne la lumière quand on la survole, et rien de plus. Sur une plateforme consultée depuis un chantier, chaque effet doit se justifier au poids qu'il coûte à charger.",
+        en: "Enough for a surface to catch the light when it is hovered, and nothing beyond that. On a platform opened from a building site, every effect has to justify the weight it costs to load.",
+      },
     },
   ],
 

@@ -1,92 +1,60 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
-import { ScrollWords, litRamp, useTravel } from "@/components/home2/motion";
 import { useLocalized } from "@/components/project/shared";
-import { Reveal } from "@/components/ui/reveal";
-import type { ProjectCase } from "@/lib/data/projects/types";
+import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
+import { CaseBlock, CaseRoom } from "./stack";
+import { TONES } from "./tone";
+import type { ChapterTone, ProjectCase } from "@/lib/data/projects/types";
+import { cn } from "@/lib/utils";
 
-/**
- * The account reads back muted and turns to ink one line at a time as the
- * block rises   the same ramp the solutions starting point uses, pitched off
- * gold so the unlit state still holds its own on cream.
- */
-const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
-
-/**
- * 03   The transformation, told the way the solutions page states its
- * starting point: the heading pinned on the left, the reading column running
- * past it.
- *
- * The heading lights word by word as the block travels, and the account lights
- * line by line beneath it, so the turn is arrived at rather than handed over.
- * Both run off one rAF-throttled listener writing `--p`; React never re-renders
- * mid-scroll, and everything resolves to its finished state under reduced
- * motion.
- *
- * No boxes and no ground of its own: the page is measured in air here, and the
- * hairline over the column is the only rule in the section.
- */
 export function CaseTransformation({
   transformation,
+  order,
+  tone = "canvas",
 }: {
   transformation: ProjectCase["transformation"];
+  order: number;
+  tone?: ChapterTone;
 }) {
   const say = useLocalized();
-  const accountRef = useRef<HTMLUListElement>(null);
-
-  useTravel(accountRef, { from: 0.85, to: 0.32 });
+  const skin = TONES[tone];
 
   return (
-    <section className="bg-cream py-24 sm:py-32">
-      <div className="container-eiden grid items-end gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
-        {/* ── The turn, held while the column moves ─────────────────── */}
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <Reveal direction="none" duration={0.5}>
-            <p className="eyebrow text-teal flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-              {say({ fr: "La transformation", en: "The transformation" })}
-            </p>
-          </Reveal>
+    <CaseRoom tone={tone} order={order}>
+      <CaseBlock>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] lg:items-start lg:gap-16 xl:gap-24">
+          <div>
+            <Reveal direction="none" duration={0.5} amount={0.3}>
+              <p className={cn("eyebrow flex items-center gap-3", skin.label)}>
+                <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+                {say({ fr: "La transformation", en: "The transformation" })}
+              </p>
+            </Reveal>
 
-          <ScrollWords
-            as="h2"
-            text={say(transformation.title)}
-            className="font-display text-ink mt-5 text-[clamp(1.75rem,4.2vw,3rem)] leading-[1.04] font-extrabold tracking-[-0.045em]"
-          />
-        </div>
+            <RevealWords
+              as="h2"
+              amount={0.3}
+              delay={0.05}
+              text={say(transformation.title)}
+              className={cn(
+                "font-display mt-7 block text-[clamp(1.75rem,4.2vw,3rem)] leading-[1.03] font-extrabold tracking-[-0.045em]",
+                skin.title,
+              )}
+            />
+          </div>
 
-        {/* ── The reading column ────────────────────────────────────── */}
-        <div>
-          {/* `--n` on the run, `--i` on each line: the ramp does the rest,
-              without a re-render per frame. */}
-          <ul
-            ref={accountRef}
-            style={
-              {
-                "--n": `${transformation.text.length}`,
-                "--p": "0",
-              } as CSSProperties
-            }
-            className="editorial flex flex-col gap-4 text-[clamp(1.125rem,2.4vw,1.75rem)] leading-snug sm:gap-5"
-          >
+          <RevealGroup as="ul" amount={0.2} className="editorial flex flex-col gap-4 text-[clamp(1.125rem,2.2vw,1.625rem)] leading-snug sm:gap-5">
             {transformation.text.map((line, index) => (
-              <li
-                key={say(line)}
-                style={
-                  {
-                    "--i": `${index}`,
-                    color: READ,
-                    transition: "color 0.25s linear",
-                  } as CSSProperties
-                }
-              >
-                {say(line)}
+              <li key={say(line)} className="flex gap-5">
+                <span aria-hidden className={cn( "font-label mt-[0.55em] shrink-0 text-[0.7rem] font-bold tracking-[0.2em] tabular-nums", skin.label, )} >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className={skin.title}>{say(line)}</span>
               </li>
             ))}
-          </ul>
+          </RevealGroup>
         </div>
-      </div>
-    </section>
+      </CaseBlock>
+    </CaseRoom>
   );
 }

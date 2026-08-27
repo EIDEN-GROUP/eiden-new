@@ -1390,33 +1390,185 @@
   pointer-events: none;
 }
 
+/* Half the disk is on screen, so half the disk is what the writing starts
+   after   plus the gap. Without this the arc is drawn straight over the type,
+   which is exactly what it looks like. */
 .palette-copy {
   padding-left: calc(var(--disk) / 2 + var(--disk-gap));
 }
 
-/* On a phone there is no room to set a paragraph beside the arc, so the
-   ring goes up into the top of the frame and the writing takes the full
-   width underneath it. The arc still runs off the left edge — the
-   composition survives; only the axis it is read on changes. */
+
+
 @media (width < 64rem) {
   .palette-frame {
-    --disk: min(19rem, 30svh);
-    --disk-gap: 1.25rem;
+    --disk: min(28rem, 50svh, 75vw);
+    --disk-gap: 1.5rem;
   }
 
   .palette-shell {
-    top: calc(var(--disk) / 2 + 3rem);
+    top: 50%;
+    left: 0;
+    translate: -50% -50%;
   }
 
-  /* The writing takes the full width under the arc rather than beside it —
-     there is no room for a column next to it at this size. It starts below
-     the ring and grows downward: bottom-aligning it meant a long beat spilled
-     up over the arc instead, because flex overflow goes the way the content
-     is not anchored. */
   .palette-copy {
-    justify-content: flex-start;
-    padding-top: calc(var(--disk) + 3rem);
-    padding-bottom: 2rem;
-    padding-left: 0;
+    justify-content: flex-end;
+    gap: 1.75rem;
+    padding-top: calc(5rem + var(--disk) + 1.75rem);
+    padding-bottom: 2.5rem;
+    padding-left: calc(var(--disk) / 2 + var(--disk-gap) + 1.25rem);
+  }
+}
+
+@media (48rem <= width < 64rem) {
+  .palette-shell {
+    left: 2.5rem;
+  }
+
+  .palette-copy {
+    padding-left: calc(var(--disk) / 2 + var(--disk-gap) + 2.5rem);
+  }
+}
+
+
+/* ============================================================
+   The curtain   a case study opening over the page it came from
+
+   Four movements, and they only ever run in pairs. Going in, the
+   case rises from the foot of the screen while the index it came
+   from sinks back and dims: the index is still there, underneath,
+   which is the whole claim the gesture makes. Coming back, the
+   case falls away and the index rises out of the same depth.
+
+   Named per project rather than per route   see the project page  
+   so that two cases in a row are two rooms rather than one room
+   morphing, and `case-next` runs the same rise as `case-open`.
+
+   The classes are put on the snapshots by React's `<ViewTransition>`;
+   the `z-index` is on the group because that is the only place the
+   two halves of a transition can be ordered against each other.
+   ============================================================ */
+::view-transition {
+  /* The overlay would otherwise swallow a click aimed at the page
+     underneath it for the length of the animation. */
+  pointer-events: none;
+}
+
+::view-transition-group(.case-rise),
+::view-transition-group(.case-fall) {
+  z-index: 20;
+}
+
+::view-transition-group(.case-under),
+::view-transition-group(.case-restore) {
+  z-index: 10;
+}
+
+::view-transition-new(.case-rise) {
+  animation: eiden-case-rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-old(.case-under) {
+  animation: eiden-case-under 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-old(.case-fall) {
+  animation: eiden-case-fall 0.75s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+::view-transition-new(.case-restore) {
+  animation: eiden-case-restore 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes eiden-case-rise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes eiden-case-fall {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* The page being left does not leave. It steps back into the dark
+   and waits, so the case reads as something laid over it. */
+@keyframes eiden-case-under {
+  from {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  to {
+    transform: scale(0.93);
+    filter: brightness(0.45);
+  }
+}
+
+@keyframes eiden-case-restore {
+  from {
+    transform: scale(0.93);
+    filter: brightness(0.45);
+  }
+  to {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* The curtain simulates a whole screen moving, which is the most
+   common trigger for motion sensitivity. Without it the pages
+   simply swap, which is the browser's own behaviour. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Browsers with no view transitions at all get the gesture as a
+   veil instead: ink over the page, sliding off the bottom of the
+   screen. It is a separate fixed layer rather than a transform on
+   the article, because a transformed ancestor would take the
+   case's own fixed bar down with it. */
+@keyframes eiden-case-veil {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* The veil itself. Present in the markup on every case page and
+   taken back out once it has run; `@supports` is what keeps it off
+   the browsers that have the real thing, since the feature query
+   and the API ship together. */
+.case-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  background: var(--color-ink);
+  animation: eiden-case-veil 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@supports (view-transition-name: none) {
+  .case-veil {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-veil {
+    display: none;
   }
 }

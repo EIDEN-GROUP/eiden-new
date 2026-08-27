@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectCaseStudy } from "@/components/project/case/case-study";
@@ -7,7 +8,6 @@ import {
   projectCases,
 } from "@/lib/data/projects/index";
 
-/** One page per written case; anything else is a 404 rather than a stub. */
 export function generateStaticParams() {
   return projectCases.map((project) => ({ slug: project.slug }));
 }
@@ -32,13 +32,6 @@ export async function generateMetadata({
   };
 }
 
-/**
- * The project route.
- *
- * Every page is the same spine filled differently, so the route does nothing
- * but resolve the record and hand it over   the shape of the page is decided
- * in `ProjectCaseStudy`, and what appears in it is decided by the record.
- */
 export default async function ProjectPage({
   params,
 }: PageProps<"/projects/[slug]">) {
@@ -47,5 +40,24 @@ export default async function ProjectPage({
   const project = getProjectCase(slug);
   if (!project) notFound();
 
-  return <ProjectCaseStudy project={project} next={getNextCases(slug)} />;
+  const [next] = getNextCases(slug, 1);
+
+  return (
+    <ViewTransition
+      name={`case-${project.slug}`}
+      enter={{
+        "case-open": "case-rise",
+        "case-next": "case-rise",
+        default: "none",
+      }}
+      exit={{
+        "case-close": "case-fall",
+        "case-next": "case-under",
+        default: "none",
+      }}
+      default="none"
+    >
+      <ProjectCaseStudy project={project} next={next ?? project} />
+    </ViewTransition>
+  );
 }

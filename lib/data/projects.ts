@@ -115,7 +115,7 @@ export const projectPages: ProjectPage[] = [
     number: "01",
     client: "Bôpassage",
     year: "2024",
-    sector: { fr: "Hôtellerie", en: "Hospitality" },
+    sector: { fr: "Cafés & restaurants", en: "Hospitality" },
     services: [
       { fr: "Image de marque", en: "Branding" },
       { fr: "Site web", en: "Website" },
@@ -126,7 +126,7 @@ export const projectPages: ProjectPage[] = [
       en: "A new digital identity for a place made for food, people and good moments.",
     },
     hero: {
-      image: "/work/bopassage-hero.png",
+      image: "/work/bopassage/bopassage-hero.png",
       alt: {
         fr: "La salle de Bôpassage à Agadir",
         en: "The Bôpassage dining room in Agadir",
@@ -154,7 +154,7 @@ export const projectPages: ProjectPage[] = [
         fr: "La salle fonctionnait déjà. Nous avons pris ce qu'on y ressent la chaleur, les plantes, la lumière de fin de journée et construit la marque et le site à partir de là, plutôt qu'à partir d'une carte.",
         en: "The room already worked. So we took what it feels like the warmth, the plants, the late golden light and built the brand and the site out of that, instead of starting from a menu.",
       },
-      image: "/work/bopassage-brand-board.png",
+      image: "/work/bopassage/bopassage-brand-board.png",
       alt: {
         fr: "Planche de marque Bôpassage : couleurs, typographies et logo",
         en: "Bôpassage brand board: colours, type and logo",
@@ -188,7 +188,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/bopassage-web-desktop.png",
+        image: "/work/bopassage/bopassage-web-desktop.png",
         alt: {
           fr: "Page d'accueil du site Bôpassage",
           en: "The Bôpassage homepage",
@@ -199,12 +199,12 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/bopassage-brand-logo-mark.png",
+            image: "/work/bopassage/bopassage-brand-logo-mark.png",
             alt: { fr: "Monogramme Bôpassage", en: "Bôpassage monogram" },
             caption: { fr: "Le monogramme", en: "The monogram" },
           },
           {
-            image: "/work/bopassage-brand-palette.png",
+            image: "/work/bopassage/bopassage-brand-palette.png",
             alt: {
               fr: "Palette de couleurs Bôpassage",
               en: "Bôpassage colour palette",
@@ -215,7 +215,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/bopassage-brand-signage.png",
+        image: "/work/bopassage/bopassage-brand-signage.png",
         alt: {
           fr: "Signalétique extérieure de Bôpassage",
           en: "Bôpassage exterior signage",
@@ -224,7 +224,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/bopassage-web-mobile.png",
+        image: "/work/bopassage/bopassage-web-mobile.png",
         alt: {
           fr: "Le site Bôpassage sur téléphone",
           en: "The Bôpassage site on a phone",
@@ -239,21 +239,21 @@ export const projectPages: ProjectPage[] = [
         kind: "trio",
         items: [
           {
-            image: "/work/bopassage-social-matcha.png",
+            image: "/work/bopassage/bopassage-social-matcha.png",
             alt: {
               fr: "Publication sociale Bôpassage",
               en: "Bôpassage social post",
             },
           },
           {
-            image: "/work/bopassage-social-waffle.png",
+            image: "/work/bopassage/bopassage-social-waffle.png",
             alt: {
               fr: "Publication sociale Bôpassage",
               en: "Bôpassage social post",
             },
           },
           {
-            image: "/work/bopassage-social-good-morning.png",
+            image: "/work/bopassage/bopassage-social-good-morning.png",
             alt: {
               fr: "Publication sociale Bôpassage",
               en: "Bôpassage social post",
@@ -263,7 +263,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/bopassage-ooh-column.png",
+        image: "/work/bopassage/bopassage-ooh-column.png",
         alt: {
           fr: "Affichage extérieur Bôpassage",
           en: "Bôpassage out-of-home poster",
@@ -317,42 +317,42 @@ export const projectPages: ProjectPage[] = [
         },
         slides: [
           {
-            image: "/work/bopassage-brand-board.png",
+            image: "/work/bopassage/bopassage-brand-board.png",
             alt: { fr: "Planche de marque Bôpassage", en: "Bôpassage brand board" },
             caption: { fr: "Planche de marque", en: "Brand board" },
           },
           {
-            image: "/work/bopassage-brand-palette.png",
+            image: "/work/bopassage/bopassage-brand-palette.png",
             alt: { fr: "Palette Forêt & Or", en: "Forest & gold palette" },
             caption: { fr: "Forêt & or", en: "Forest & gold" },
           },
           {
-            image: "/work/bopassage-brand-logo-mark.png",
+            image: "/work/bopassage/bopassage-brand-logo-mark.png",
             alt: { fr: "Monogramme Bôpassage", en: "Bôpassage monogram" },
             caption: { fr: "Le monogramme", en: "The monogram" },
           },
           {
-            image: "/work/bopassage-brand-identity.png",
+            image: "/work/bopassage/bopassage-brand-identity.png",
             alt: { fr: "Système d'identité Bôpassage", en: "Bôpassage identity system" },
             caption: { fr: "Le système", en: "The system" },
           },
           {
-            image: "/work/bopassage-brand-cup.png",
+            image: "/work/bopassage/bopassage-brand-cup.png",
             alt: { fr: "Tasse Bôpassage", en: "Bôpassage cup" },
             caption: { fr: "Emballage", en: "Packaging" },
           },
           {
-            image: "/work/bopassage-brand-signage.png",
+            image: "/work/bopassage/bopassage-brand-signage.png",
             alt: { fr: "Signalétique Bôpassage", en: "Bôpassage signage" },
             caption: { fr: "Signalétique", en: "Signage" },
           },
           {
-            image: "/work/bopassage-web.png",
+            image: "/work/bopassage/bopassage-web.png",
             alt: { fr: "Le site Bôpassage", en: "The Bôpassage site" },
             caption: { fr: "Le site", en: "The site" },
           },
           {
-            image: "/work/bopassage-ooh-column.png",
+            image: "/work/bopassage/bopassage-ooh-column.png",
             alt: { fr: "Affichage extérieur Bôpassage", en: "Bôpassage out-of-home poster" },
             caption: { fr: "Affichage", en: "Out of home" },
           },
@@ -391,7 +391,7 @@ export const projectPages: ProjectPage[] = [
             fr: "Voir la planche de marque complète",
             en: "View the full brand board",
           },
-          href: "/work/bopassage-brand-board.png",
+          href: "/work/bopassage/bopassage-brand-board.png",
         },
         applicationsTitle: {
           fr: "L'identité en contexte",
@@ -399,7 +399,7 @@ export const projectPages: ProjectPage[] = [
         },
         applications: [
           {
-            image: "/work/bopassage-brand-logo-green.png",
+            image: "/work/bopassage/bopassage-brand-logo-green.png",
             alt: {
               fr: "Logo Bôpassage en or sur forêt",
               en: "Bôpassage logo in gold on forest",
@@ -407,12 +407,12 @@ export const projectPages: ProjectPage[] = [
             label: { fr: "Logo", en: "Logo" },
           },
           {
-            image: "/work/bopassage-brand-signage.png",
+            image: "/work/bopassage/bopassage-brand-signage.png",
             alt: { fr: "Enseigne Bôpassage", en: "Bôpassage sign" },
             label: { fr: "Signalétique", en: "Signage" },
           },
           {
-            image: "/work/bopassage-brand-cup.png",
+            image: "/work/bopassage/bopassage-brand-cup.png",
             alt: {
               fr: "Tasse aux couleurs de Bôpassage",
               en: "Cup in the Bôpassage colours",
@@ -420,7 +420,7 @@ export const projectPages: ProjectPage[] = [
             label: { fr: "Emballage", en: "Packaging" },
           },
           {
-            image: "/work/bopassage-brand-application.png",
+            image: "/work/bopassage/bopassage-brand-application.png",
             alt: {
               fr: "Logo principal et secondaire Bôpassage",
               en: "Bôpassage primary and secondary logo",
@@ -439,8 +439,8 @@ export const projectPages: ProjectPage[] = [
           fr: "Le site reprend la matière éditoriale du lieu, tient la carte à jour, et met la réservation à un pouce de distance   là où arrive la plupart des visites : sur téléphone, à l'heure du déjeuner.",
           en: "The site carries the room's editorial material, keeps the menu current, and puts booking a thumb away   which is where most visits arrive: on a phone, around lunchtime.",
         },
-        desktop: "/work/bopassage-web-desktop.png",
-        mobile: "/work/bopassage-web-mobile.png",
+        desktop: "/work/bopassage/bopassage-web-desktop.png",
+        mobile: "/work/bopassage/bopassage-web-mobile.png",
         alt: {
           fr: "Le site Bôpassage sur écran et sur téléphone",
           en: "The Bôpassage site on desktop and on a phone",
@@ -455,31 +455,31 @@ export const projectPages: ProjectPage[] = [
         },
         items: [
           {
-            image: "/work/bopassage-social-savory-morning.png",
+            image: "/work/bopassage/bopassage-social-savory-morning.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-waffle.png",
+            image: "/work/bopassage/bopassage-social-waffle.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-matcha.png",
+            image: "/work/bopassage/bopassage-social-matcha.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-good-morning.png",
+            image: "/work/bopassage/bopassage-social-good-morning.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-balance.png",
+            image: "/work/bopassage/bopassage-social-balance.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-slows-down.png",
+            image: "/work/bopassage/bopassage-social-slows-down.png",
             alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
           },
           {
-            image: "/work/bopassage-social-instagram.png",
+            image: "/work/bopassage/bopassage-social-instagram.png",
             alt: { fr: "Profil Instagram Bôpassage", en: "Bôpassage Instagram profile" },
           },
         ],
@@ -507,7 +507,7 @@ export const projectPages: ProjectPage[] = [
       en: "Thirty years of hotel expertise, finally given a name and a face.",
     },
     hero: {
-      image: "/work/dmc-hero.png",
+      image: "/work/dmc-morocco/dmc-hero.png",
       alt: {
         fr: "Identité DMC Hospitality Morocco",
         en: "DMC Hospitality Morocco identity",
@@ -533,7 +533,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Nous sommes partis du nom, puis vers l'extérieur : identité, site, et une voix LinkedIn adressée aux propriétaires d'hôtels et aux opérateurs internationaux   pas aux voyageurs.",
         en: "We started from the name and worked outward: identity, site, and a LinkedIn voice aimed at hotel owners and international operators   not at travellers.",
       },
-      image: "/work/dmc-brand-posters.png",
+      image: "/work/dmc-morocco/dmc-brand-posters.png",
       alt: {
         fr: "Affiches de marque DMC Hospitality Morocco",
         en: "DMC Hospitality Morocco brand posters",
@@ -565,7 +565,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/dmc-web-desktop.png",
+        image: "/work/dmc-morocco/dmc-web-desktop.png",
         alt: {
           fr: "Site DMC Hospitality Morocco",
           en: "DMC Hospitality Morocco website",
@@ -576,12 +576,12 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/dmc-brand-logo-mark.png",
+            image: "/work/dmc-morocco/dmc-brand-logo-mark.png",
             alt: { fr: "Symbole DMC", en: "DMC brand mark" },
             caption: { fr: "Le symbole", en: "The mark" },
           },
           {
-            image: "/work/dmc-brand-card.png",
+            image: "/work/dmc-morocco/dmc-brand-card.png",
             alt: { fr: "Carte de visite DMC", en: "DMC business card" },
             caption: { fr: "Papeterie", en: "Stationery" },
           },
@@ -589,13 +589,13 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/dmc-guidelines.png",
+        image: "/work/dmc-morocco/dmc-guidelines.png",
         alt: { fr: "Guide de marque DMC", en: "DMC brand guidelines" },
         caption: { fr: "Le guide de marque", en: "Brand guidelines" },
       },
       {
         kind: "note",
-        image: "/work/dmc-web-mobile.png",
+        image: "/work/dmc-morocco/dmc-web-mobile.png",
         alt: { fr: "Le site DMC sur téléphone", en: "The DMC site on a phone" },
         title: { fr: "Sur téléphone", en: "Mobile experience" },
         text: {
@@ -607,22 +607,22 @@ export const projectPages: ProjectPage[] = [
         kind: "trio",
         items: [
           {
-            image: "/work/dmc-social-excellence.png",
+            image: "/work/dmc-morocco/dmc-social-excellence.png",
             alt: { fr: "Publication LinkedIn DMC", en: "DMC LinkedIn post" },
           },
           {
-            image: "/work/dmc-social-c.png",
+            image: "/work/dmc-morocco/dmc-social-c.png",
             alt: { fr: "Publication LinkedIn DMC", en: "DMC LinkedIn post" },
           },
           {
-            image: "/work/dmc-social-m.png",
+            image: "/work/dmc-morocco/dmc-social-m.png",
             alt: { fr: "Publication LinkedIn DMC", en: "DMC LinkedIn post" },
           },
         ],
       },
       {
         kind: "full",
-        image: "/work/dmc-brand-uniform.png",
+        image: "/work/dmc-morocco/dmc-brand-uniform.png",
         alt: { fr: "Uniformes DMC", en: "DMC uniforms" },
         caption: { fr: "Sur le terrain", en: "On the ground" },
       },
@@ -665,7 +665,7 @@ export const projectPages: ProjectPage[] = [
       en: "A school that finally handles enrolment and its reputation in one place.",
     },
     hero: {
-      image: "/work/educazen-hero.png",
+      image: "/work/educazen-kids/educazen-hero.png",
       alt: { fr: "Univers EducazenKids", en: "The EducazenKids world" },
     },
     challenge: {
@@ -688,7 +688,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Ce qui se passe dans les salles inspire confiance. Nous avons construit la marque, le site et les outils autour de cette confiance-là   chaleureux, lisibles, et faciles pour un parent pressé.",
         en: "What happens in the rooms earns trust. We built the brand, the site and the tools around that trust   warm, legible, and easy for a parent in a hurry.",
       },
-      image: "/work/educazenkids-brand-book.png",
+      image: "/work/educazen-kids/educazenkids-brand-book.png",
       alt: { fr: "Livre de marque EducazenKids", en: "EducazenKids brand book" },
     },
     built: [
@@ -724,7 +724,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/educazenkids-web-desktop.png",
+        image: "/work/educazen-kids/educazenkids-web-desktop.png",
         alt: { fr: "Site EducazenKids", en: "The EducazenKids website" },
         caption: { fr: "Page d'accueil", en: "Homepage" },
       },
@@ -732,7 +732,7 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/educazenkids-before.png",
+            image: "/work/educazen-kids/educazenkids-before.png",
             alt: {
               fr: "L'ancien site EducazenKids",
               en: "The old EducazenKids site",
@@ -740,7 +740,7 @@ export const projectPages: ProjectPage[] = [
             caption: { fr: "Avant", en: "Before" },
           },
           {
-            image: "/work/educazenkids-after.png",
+            image: "/work/educazen-kids/educazenkids-after.png",
             alt: {
               fr: "Le nouveau site EducazenKids",
               en: "The new EducazenKids site",
@@ -751,7 +751,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/educazenkids-dashboard.png",
+        image: "/work/educazen-kids/educazenkids-dashboard.png",
         alt: {
           fr: "Tableau de bord des inscriptions EducazenKids",
           en: "EducazenKids enrolment dashboard",
@@ -760,7 +760,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/educazenkids-web-mobile.png",
+        image: "/work/educazen-kids/educazenkids-web-mobile.png",
         alt: {
           fr: "Le site EducazenKids sur téléphone",
           en: "The EducazenKids site on a phone",
@@ -775,12 +775,12 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/educazenkids-logo.png",
+            image: "/work/educazen-kids/educazenkids-logo.png",
             alt: { fr: "Logo EducazenKids", en: "EducazenKids logo" },
             caption: { fr: "Le logo", en: "The logo" },
           },
           {
-            image: "/work/educazenkids-brand-identity.png",
+            image: "/work/educazen-kids/educazenkids-brand-identity.png",
             alt: {
               fr: "Système visuel EducazenKids",
               en: "EducazenKids visual system",
@@ -791,7 +791,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/educazenkids-crm.png",
+        image: "/work/educazen-kids/educazenkids-crm.png",
         alt: { fr: "CRM EducazenKids", en: "The EducazenKids CRM" },
         caption: { fr: "Le suivi des familles", en: "Following up families" },
       },
@@ -834,7 +834,7 @@ export const projectPages: ProjectPage[] = [
       en: "A coastal village brand, rebuilt for the people actually arriving.",
     },
     hero: {
-      image: "/work/lunja-hero.png",
+      image: "/work/lunja-village/lunja-hero.png",
       alt: {
         fr: "Lunja Village à Imi Ouaddar",
         en: "Lunja Village in Imi Ouaddar",
@@ -866,7 +866,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Identité rétro-plage, lumière de l'Atlantique, grain de pellicule   et des contenus écrits comme un ami qui connaît l'endroit vous en parlerait.",
         en: "Retro-beach identity, Atlantic light, film grain   and content written the way a friend who knows the place would tell you about it.",
       },
-      image: "/work/lunja-brand-board.png",
+      image: "/work/lunja-village/lunja-brand-board.png",
       alt: {
         fr: "Planche de marque Lunja Village",
         en: "Lunja Village brand board",
@@ -898,7 +898,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/lunja-brand-mockup.png",
+        image: "/work/lunja-village/lunja-brand-mockup.png",
         alt: {
           fr: "Système de marque Lunja Village",
           en: "Lunja Village brand system",
@@ -909,12 +909,12 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/lunja-logo.png",
+            image: "/work/lunja-village/lunja-logo.png",
             alt: { fr: "Logo Lunja Village", en: "Lunja Village logo" },
             caption: { fr: "Le logo", en: "The logo" },
           },
           {
-            image: "/work/lunja-brand-tote.png",
+            image: "/work/lunja-village/lunja-brand-tote.png",
             alt: { fr: "Tote bag Lunja Village", en: "Lunja Village tote bag" },
             caption: { fr: "Sur le terrain", en: "On the ground" },
           },
@@ -922,7 +922,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/lunja-application.png",
+        image: "/work/lunja-village/lunja-application.png",
         alt: {
           fr: "Applications de la marque Lunja Village",
           en: "Lunja Village brand applications",
@@ -931,7 +931,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/lunja-brand-logo-site.png",
+        image: "/work/lunja-village/lunja-brand-logo-site.png",
         alt: {
           fr: "La marque Lunja Village en ligne",
           en: "The Lunja Village brand online",
@@ -946,21 +946,21 @@ export const projectPages: ProjectPage[] = [
         kind: "trio",
         items: [
           {
-            image: "/work/lunja-social-1.png",
+            image: "/work/lunja-village/lunja-social-1.png",
             alt: {
               fr: "Publication Lunja Village",
               en: "Lunja Village social post",
             },
           },
           {
-            image: "/work/lunja-social-3.png",
+            image: "/work/lunja-village/lunja-social-3.png",
             alt: {
               fr: "Publication Lunja Village",
               en: "Lunja Village social post",
             },
           },
           {
-            image: "/work/lunja-social-5.png",
+            image: "/work/lunja-village/lunja-social-5.png",
             alt: {
               fr: "Publication Lunja Village",
               en: "Lunja Village social post",
@@ -970,7 +970,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/lunja-alt.png",
+        image: "/work/lunja-village/lunja-alt.png",
         alt: { fr: "Univers Lunja Village", en: "The Lunja Village world" },
       },
     ],
@@ -1017,7 +1017,7 @@ export const projectPages: ProjectPage[] = [
       en: "A medical centre, built from the patient's first click to the follow-up.",
     },
     hero: {
-      image: "/work/medical-bay-lobby.png",
+      image: "/work/medical-bay/medical-bay-lobby.png",
       alt: { fr: "L'accueil de Medical Bay", en: "The Medical Bay lobby" },
     },
     challenge: {
@@ -1043,7 +1043,7 @@ export const projectPages: ProjectPage[] = [
         fr: "L'environnement de marque, l'expérience patient et l'infrastructure digitale ne sont pas trois chantiers. C'est un seul système, du premier contact jusqu'au suivi.",
         en: "Brand environment, patient experience and digital infrastructure are not three projects. They are one system, from first contact to follow-up care.",
       },
-      image: "/work/medical-bay-brand.png",
+      image: "/work/medical-bay/medical-bay-brand.png",
       alt: { fr: "Identité Medical Bay", en: "Medical Bay identity" },
     },
     built: [
@@ -1086,7 +1086,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/medical-bay-web-desktop.png",
+        image: "/work/medical-bay/medical-bay-web-desktop.png",
         alt: { fr: "Le site Medical Bay", en: "The Medical Bay website" },
         caption: { fr: "Page d'accueil", en: "Homepage" },
       },
@@ -1094,12 +1094,12 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/medical-bay-brand-logo-2.png",
+            image: "/work/medical-bay/medical-bay-brand-logo-2.png",
             alt: { fr: "Logo Medical Bay", en: "Medical Bay logo" },
             caption: { fr: "Le logo", en: "The logo" },
           },
           {
-            image: "/work/medical-bay-reception.png",
+            image: "/work/medical-bay/medical-bay-reception.png",
             alt: {
               fr: "L'accueil de Medical Bay",
               en: "The Medical Bay reception",
@@ -1110,7 +1110,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "full",
-        image: "/work/medical-bay-dashboard.png",
+        image: "/work/medical-bay/medical-bay-dashboard.png",
         alt: {
           fr: "Tableau de bord opérationnel Medical Bay",
           en: "Medical Bay operations dashboard",
@@ -1119,7 +1119,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/medical-bay-web-mobile.png",
+        image: "/work/medical-bay/medical-bay-web-mobile.png",
         alt: {
           fr: "Le site Medical Bay sur téléphone",
           en: "The Medical Bay site on a phone",
@@ -1134,22 +1134,22 @@ export const projectPages: ProjectPage[] = [
         kind: "trio",
         items: [
           {
-            image: "/work/medical-bay-campaign-implant.png",
+            image: "/work/medical-bay/medical-bay-campaign-implant.png",
             alt: { fr: "Campagne Medical Bay", en: "Medical Bay campaign" },
           },
           {
-            image: "/work/medical-bay-campaign-veneer.png",
+            image: "/work/medical-bay/medical-bay-campaign-veneer.png",
             alt: { fr: "Campagne Medical Bay", en: "Medical Bay campaign" },
           },
           {
-            image: "/work/medical-bay-campaign-zirconia.png",
+            image: "/work/medical-bay/medical-bay-campaign-zirconia.png",
             alt: { fr: "Campagne Medical Bay", en: "Medical Bay campaign" },
           },
         ],
       },
       {
         kind: "full",
-        image: "/work/medical-bay-tourism-medical.png",
+        image: "/work/medical-bay/medical-bay-tourism-medical.png",
         alt: {
           fr: "Tourisme médical Medical Bay",
           en: "Medical Bay medical tourism",
@@ -1195,7 +1195,7 @@ export const projectPages: ProjectPage[] = [
       en: "A materials platform built for architects, not for browsers.",
     },
     hero: {
-      image: "/work/orsen hero.png",
+      image: "/work/orsen/orsen hero.png",
       alt: { fr: "Site ORSEN", en: "The ORSEN site" },
     },
     challenge: {
@@ -1218,7 +1218,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Des sections posées comme des plaques, une seule typographie, une seule couleur de signal. Tout ce qui n'aide pas à lire la matière a été retiré.",
         en: "Sections laid down like plates, a single typeface, one signal colour. Anything that did not help read the material was taken out.",
       },
-      image: "/work/web-orsen-cover.jpg",
+      image: "/work/orsen/web-orsen-cover.jpg",
       alt: { fr: "Direction artistique ORSEN", en: "ORSEN art direction" },
     },
     built: [
@@ -1254,7 +1254,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/web-orsen-desktop.jpg",
+        image: "/work/orsen/web-orsen-desktop.jpg",
         alt: {
           fr: "Le site ORSEN sur ordinateur",
           en: "The ORSEN site on desktop",
@@ -1263,7 +1263,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/web-orsen-mobile.jpg",
+        image: "/work/orsen/web-orsen-mobile.jpg",
         alt: { fr: "Le site ORSEN sur téléphone", en: "The ORSEN site on a phone" },
         title: { fr: "Sur chantier", en: "On site" },
         text: {
@@ -1310,7 +1310,7 @@ export const projectPages: ProjectPage[] = [
       en: "An e-commerce built the way an architect actually picks stone.",
     },
     hero: {
-      image: "/work/luthos hero.png",
+      image: "/work/lithos-materiaux/luthos hero.png",
       alt: { fr: "Site LITHOS", en: "The LITHOS site" },
     },
     challenge: {
@@ -1339,7 +1339,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Une palette tirée de la carrière, des angles presque droits comme la pierre taillée, une typographie condensée qui rappelle la gravure. Et trois portes d'entrée dans le catalogue plutôt qu'une.",
         en: "A palette taken from the quarry, near-square corners like cut stone, a condensed typeface that recalls engraving. And three ways into the catalogue instead of one.",
       },
-      image: "/work/web-lithos-cover.jpg",
+      image: "/work/lithos-materiaux/web-lithos-cover.jpg",
       alt: { fr: "Direction artistique LITHOS", en: "LITHOS art direction" },
     },
     built: [
@@ -1368,7 +1368,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/web-lithos-desktop.jpg",
+        image: "/work/lithos-materiaux/web-lithos-desktop.jpg",
         alt: {
           fr: "Le site LITHOS sur ordinateur",
           en: "The LITHOS site on desktop",
@@ -1377,7 +1377,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/web-lithos-mobile.jpg",
+        image: "/work/lithos-materiaux/web-lithos-mobile.jpg",
         alt: {
           fr: "Le site LITHOS sur téléphone",
           en: "The LITHOS site on a phone",
@@ -1429,7 +1429,7 @@ export const projectPages: ProjectPage[] = [
       en: "A quiet Moroccan address, five minutes from the Atlantic.",
     },
     hero: {
-      image: "/work/HERO PAGE RIHAB.png",
+      image: "/work/rihab-residence/HERO PAGE RIHAB.png",
       alt: { fr: "Résidence Rihab à Agadir", en: "Résidence Rihab in Agadir" },
     },
     challenge: {
@@ -1452,7 +1452,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Une palette marine, bleu acier et crème, prise sur le bâtiment lui-même. Des photos non retouchées et de vrais mots de clients. L'honnêteté comme argument.",
         en: "A navy, steel-blue and cream palette taken from the building itself. Unfiltered photography and real guest words. Honesty as the argument.",
       },
-      image: "/work/web-rihab-cover.jpg",
+      image: "/work/rihab-residence/web-rihab-cover.jpg",
       alt: {
         fr: "Direction artistique Résidence Rihab",
         en: "Résidence Rihab art direction",
@@ -1484,7 +1484,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/web-rihab-desktop.jpg",
+        image: "/work/rihab-residence/web-rihab-desktop.jpg",
         alt: {
           fr: "Le site Résidence Rihab sur ordinateur",
           en: "The Résidence Rihab site on desktop",
@@ -1493,7 +1493,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/web-rihab-mobile.jpg",
+        image: "/work/rihab-residence/web-rihab-mobile.jpg",
         alt: {
           fr: "Le site Résidence Rihab sur téléphone",
           en: "The Résidence Rihab site on a phone",
@@ -1548,7 +1548,7 @@ export const projectPages: ProjectPage[] = [
       en: "Live music, cocktails and sunset sessions facing the Atlantic.",
     },
     hero: {
-      image: "/work/chilout hero.png",
+      image: "/work/chillout-lounge/chilout hero.png",
       alt: { fr: "Le CHILLOUT Lounge", en: "The CHILLOUT Lounge" },
     },
     challenge: {
@@ -1577,7 +1577,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Une palette de jardin au coucher du soleil, et un grain d'imprimerie posé en CSS sur les gros titres. L'esthétique du papier, sans le poids des images.",
         en: "A garden palette at sunset, and a print grain laid over the display type in CSS. The look of paper, without the weight of images.",
       },
-      image: "/work/web-chillout-cover.jpg",
+      image: "/work/chillout-lounge/web-chillout-cover.jpg",
       alt: { fr: "Direction artistique CHILLOUT", en: "CHILLOUT art direction" },
     },
     built: [
@@ -1606,7 +1606,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/web-chillout-desktop.jpg",
+        image: "/work/chillout-lounge/web-chillout-desktop.jpg",
         alt: {
           fr: "Le site CHILLOUT sur ordinateur",
           en: "The CHILLOUT site on desktop",
@@ -1615,7 +1615,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/web-chillout-mobile.jpg",
+        image: "/work/chillout-lounge/web-chillout-mobile.jpg",
         alt: {
           fr: "Le site CHILLOUT sur téléphone",
           en: "The CHILLOUT site on a phone",
@@ -1670,7 +1670,7 @@ export const projectPages: ProjectPage[] = [
       en: "Build with the best materials.",
     },
     hero: {
-      image: "/work/hero drougure.png",
+      image: "/work/droguerie-souss/hero drougure.png",
       alt: { fr: "Souss Droguerie à Agadir", en: "Souss Droguerie in Agadir" },
     },
     challenge: {
@@ -1693,7 +1693,7 @@ export const projectPages: ProjectPage[] = [
         fr: "Indigo, encre, cramoisi et blanc, et une typographie de marchand professionnel. Chaque section pousse vers le même geste : un appel dans les vingt-quatre heures.",
         en: "Indigo, ink, crimson and white, with the typography of a professional merchant. Every section pushes toward the same act: a call within twenty-four hours.",
       },
-      image: "/work/web-droguerie-souss-cover.jpg",
+      image: "/work/droguerie-souss/web-droguerie-souss-cover.jpg",
       alt: {
         fr: "Direction artistique Souss Droguerie",
         en: "Souss Droguerie art direction",
@@ -1725,7 +1725,7 @@ export const projectPages: ProjectPage[] = [
     work: [
       {
         kind: "full",
-        image: "/work/web-droguerie-souss-desktop.jpg",
+        image: "/work/droguerie-souss/web-droguerie-souss-desktop.jpg",
         alt: {
           fr: "Le site Souss Droguerie sur ordinateur",
           en: "The Souss Droguerie site on desktop",
@@ -1734,7 +1734,7 @@ export const projectPages: ProjectPage[] = [
       },
       {
         kind: "note",
-        image: "/work/web-droguerie-souss-mobile.jpg",
+        image: "/work/droguerie-souss/web-droguerie-souss-mobile.jpg",
         alt: {
           fr: "Le site Souss Droguerie sur téléphone",
           en: "The Souss Droguerie site on a phone",

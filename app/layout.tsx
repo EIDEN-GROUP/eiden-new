@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/components/providers/language-provider";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { PageLoader } from "@/components/layout/page-loader";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
@@ -106,7 +107,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <div className="bg-canvas relative z-10 flex-1">
               <main id="main">{children}</main>
             </div>
-            <SiteFooter />
+            <SiteChrome>
+              <SiteFooter />
+            </SiteChrome>
             <FloatingActions />
             <SideTags />
           </MotionProvider>

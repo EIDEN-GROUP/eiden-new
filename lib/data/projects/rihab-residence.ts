@@ -1,6 +1,10 @@
 import type { ProjectCase } from "./types";
 
-/** No `identity` block, and none is sold here   the three services are digital. */
+/**
+ * Three disciplines, and only one of them left a picture behind. The booking
+ * flow and the bilingual work are set in type rather than illustrated with the
+ * same screenshot a third time.
+ */
 export const rihabResidence: ProjectCase = {
   slug: "rihab-residence",
   client: "Résidence Rihab",
@@ -17,36 +21,12 @@ export const rihabResidence: ProjectCase = {
       fr: "Une adresse familiale à cinq minutes de l'Atlantique, dans un marché où les voisins vendaient un luxe qu'ils n'avaient pas.",
       en: "A family-run address five minutes from the Atlantic, in a market where neighbours were selling a luxury they did not have.",
     },
-    image: "/work/HERO PAGE RIHAB.png",
+    image: "/work/rihab-residence/HERO PAGE RIHAB.png",
     alt: {
       fr: "La Résidence Rihab à Agadir",
       en: "Résidence Rihab in Agadir",
     },
   },
-
-  services: [
-    {
-      name: { fr: "Site web", en: "Website" },
-      note: {
-        fr: "Un ton qui ne promet que ce que la résidence tient.",
-        en: "A tone that promises only what the residence delivers.",
-      },
-    },
-    {
-      name: { fr: "Expérience de réservation", en: "Booking Experience" },
-      note: {
-        fr: "Réservation en direct   sans compte, sans carte.",
-        en: "Live booking   no account, no card.",
-      },
-    },
-    {
-      name: { fr: "Digital bilingue", en: "Bilingual Digital" },
-      note: {
-        fr: "Se lit aussi naturellement en anglais qu'en français.",
-        en: "Reads as naturally in English as in French.",
-      },
-    },
-  ],
 
   transformation: {
     title: {
@@ -73,39 +53,66 @@ export const rihabResidence: ProjectCase = {
     ],
   },
 
-  feature: {
-    label: { fr: "Expérience de réservation", en: "Booking Experience" },
-    title: {
-      fr: "Trois gestes, et c'est réservé.",
-      en: "Three taps, and it is booked.",
-    },
-    text: {
-      fr: "Pas de compte à créer, pas de carte à saisir, pas de formulaire qui redemande ce qui a déjà été dit. La réservation est le service ici, alors elle a sa section plutôt que d'être enterrée dans la galerie.",
-      en: "No account to create, no card to enter, no form asking again for what was already said. Booking is the service here, so it gets a section rather than being buried in the gallery.",
-    },
-  },
-
-  work: [
+  chapters: [
     {
-      image: "/work/web-rihab-cover.jpg",
-      alt: { fr: "Le site Résidence Rihab", en: "The Résidence Rihab site" },
-      label: { fr: "Site web", en: "Website" },
-    },
-    {
-      image: "/work/web-rihab-desktop.jpg",
-      alt: {
-        fr: "Le site Rihab sur écran",
-        en: "The Rihab site on desktop",
+      key: "website",
+      labels: [{ fr: "Site web", en: "Website" }],
+      tone: "forest",
+      title: {
+        fr: "Un ton qui ne promet que ce que la résidence tient.",
+        en: "A tone that promises only what the residence delivers.",
       },
-      label: { fr: "Site web", en: "Website" },
+      text: {
+        fr: "Autour d'Agadir, tout le monde écrivait « luxe ». Rihab avait besoin de l'inverse : des photos non retouchées, des mètres carrés exacts, et une distance à la plage donnée en minutes de marche plutôt qu'en adjectifs.",
+        en: "Around Agadir everyone was writing “luxury”. Rihab needed the opposite: unretouched photographs, exact square metres, and a distance to the beach given in minutes on foot rather than in adjectives.",
+      },
+      shots: [
+        {
+          image: "/work/rihab-residence/web-rihab-desktop.jpg",
+          alt: { fr: "Le site Rihab sur écran", en: "The Rihab site on desktop" },
+          label: { fr: "Desktop", en: "Desktop" },
+        },
+        {
+          image: "/work/rihab-residence/web-rihab-mobile.jpg",
+          fit: "contain",
+          alt: {
+            fr: "Le site Rihab sur téléphone",
+            en: "The Rihab site on a phone",
+          },
+          label: { fr: "Mobile", en: "Mobile" },
+        },
+        {
+          image: "/work/rihab-residence/web-rihab-cover.jpg",
+          alt: { fr: "L'accueil du site Rihab", en: "The Rihab site homepage" },
+          label: { fr: "Accueil", en: "Home" },
+        },
+      ],
     },
     {
-      image: "/work/web-rihab-mobile.jpg",
-      alt: {
-        fr: "Le site Rihab sur téléphone",
-        en: "The Rihab site on a phone",
+      key: "booking",
+      labels: [{ fr: "Expérience de réservation", en: "Booking Experience" }],
+      tone: "canvas",
+      title: {
+        fr: "Trois gestes, et c'est réservé.",
+        en: "Three taps, and it is booked.",
       },
-      label: { fr: "Mobile", en: "Mobile" },
+      text: {
+        fr: "Pas de compte à créer, pas de carte à saisir, pas de formulaire qui redemande ce qui a déjà été dit. La réservation est le service ici : elle n'a pas été ajoutée au site, c'est le site qui a été construit autour d'elle.",
+        en: "No account to create, no card to enter, no form asking again for what was already said. Booking is the service here: it was not added to the site   the site was built around it.",
+      },
+    },
+    {
+      key: "bilingual",
+      labels: [{ fr: "Digital bilingue", en: "Bilingual Digital" }],
+      tone: "ink",
+      title: {
+        fr: "Se lit aussi naturellement en anglais qu'en français.",
+        en: "Reads as naturally in English as in French.",
+      },
+      text: {
+        fr: "Deux langues écrites séparément plutôt qu'une traduite. Une famille française et un couple britannique ne cherchent pas les mêmes garanties, et une version traduite mot à mot se reconnaît immédiatement   ce qui, sur une adresse qui vend son honnêteté, coûte cher.",
+        en: "Two languages written separately rather than one translated. A French family and a British couple are not looking for the same reassurances, and a word-for-word version is recognised instantly   which, on an address selling its honesty, is expensive.",
+      },
     },
   ],
 

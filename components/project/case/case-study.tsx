@@ -1,50 +1,67 @@
 "use client";
 
+import { useEffect } from "react";
+import { jumpToTop } from "@/components/providers/smooth-scroll";
 import { CaseHero } from "./hero";
-import { CaseServices } from "./services";
 import { CaseTransformation } from "./transformation";
-import { CaseIdentity } from "./identity";
-import { CasePaletteStory } from "./palette-story";
-import { CaseFeature } from "./feature";
-import { CaseWork } from "./work";
-import { CaseGallery } from "./gallery";
-import { CaseOutcome } from "./outcome";
-import { CaseNext } from "./next";
+import { CaseChapter } from "./chapter";
+import { CaseOutcomeRoom } from "./outcome";
+import { CaseNextScroll } from "./next-scroll";
+import { CaseStack } from "./stack";
+import { CaseVeil } from "./veil";
 import type { ProjectCase } from "@/lib/data/projects/types";
 
-/**
- * The spine every project page hangs from.
- *
- * Hero → services → transformation → [identity] → [palette] → [feature] →
- * work → outcome → [gallery] → next. The order is the argument, so it lives here rather than in the data;
- * what a record chooses is what fills it, and whether the two optional blocks
- * exist at all.
- *
- * The grounds alternate deliberately   canvas, canvas, ink, canvas, forest,
- * canvas, ink, cream   because that is the rhythm the rest of the site reads
- * in, and because a change of ground marks a turn faster than a heading does.
- */
 export function ProjectCaseStudy({
   project,
   next,
 }: {
   project: ProjectCase;
-  next: ProjectCase[];
+  next: ProjectCase;
 }) {
+  const chapters = project.chapters;
+
+  useEffect(() => {
+    jumpToTop();
+  }, [project.slug]);
+
+  let order = 0;
+  const turn = order++;
+  const chapterOrders = chapters.map(() => order++);
+  const claimed = chapters.some((chapter) => chapter.metric);
+  const outcomeTone =
+    chapters.at(-1)?.tone === "forest" ? "ink" : ("forest" as const);
+
   return (
-    <article className="bg-canvas text-ink" data-nav-tone="light">
-      <CaseHero project={project} />
-      <CaseServices services={project.services} />
-      <CaseTransformation transformation={project.transformation} />
-      {project.identity ? <CaseIdentity identity={project.identity} /> : null}
-      {project.paletteStory ? (
-        <CasePaletteStory story={project.paletteStory} />
-      ) : null}
-      {project.feature ? <CaseFeature feature={project.feature} /> : null}
-      <CaseWork work={project.work} />
-      <CaseOutcome outcome={project.outcome} />
-      {project.gallery ? <CaseGallery gallery={project.gallery} /> : null}
-      <CaseNext projects={next} />
+    <article className="bg-ink">
+      <CaseVeil />
+
+      <CaseHero project={project} chapters={chapters} />
+
+      <CaseStack>
+        <CaseTransformation transformation={project.transformation} order={turn} tone="canvas" />
+
+        {chapters.map((chapter, index) => (
+          <CaseChapter
+            key={chapter.key}
+            chapter={chapter}
+            order={chapterOrders[index]}
+            number={index + 1}
+            /* Where a room states the result, that room is the last section of
+               the case and lets go on a phone. */
+            release={claimed && index === chapters.length - 1}
+          />
+        ))}
+
+        {!claimed && project.outcome ? (
+          <CaseOutcomeRoom
+            outcome={project.outcome}
+            order={order}
+            tone={outcomeTone}
+          />
+        ) : null}
+
+        <CaseNextScroll next={next} order={order + 1} />
+      </CaseStack>
     </article>
   );
 }

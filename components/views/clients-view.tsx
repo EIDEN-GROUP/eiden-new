@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo, useState, type CSSProperties, type PointerEvent } from "react";
 import { ContactBanner } from "@/components/sections/contact-banner";
@@ -14,7 +15,15 @@ import { cn } from "@/lib/utils";
 
 type Filter = ProjectCategory | "all";
 
-const FILTERS: Filter[] = ["all", "web", "hospitality", "education", "health"];
+const FILTERS: Filter[] = [
+  "all",
+  "web",
+  "hospitality",
+  "restaurants",
+  "lounge",
+  "education",
+  "health",
+];
 
 const COLUMNS = [0, 1, 2].map((column) => ({
   seconds: [38, 30, 44][column],
@@ -283,11 +292,19 @@ function ProjectCard({
     );
   };
 
+  /* A written case opens over this page rather than replacing it, so it goes
+     through the router carrying the transition type the curtain listens for.
+     A project we only host a screenshot of still leaves the site, and leaving
+     the site is an ordinary link. */
+  const Tag = external ? "a" : Link;
+  const opening = external
+    ? { target: "_blank" as const, rel: "noreferrer noopener" }
+    : { transitionTypes: ["case-open"] };
+
   return (
-    <a
+    <Tag
       href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer noopener" : undefined}
+      {...opening}
       onPointerMove={track}
       className={cn(
         "group focus-visible:outline-gold relative block focus-visible:outline-2 focus-visible:outline-offset-4",
@@ -342,6 +359,6 @@ function ProjectCard({
           </span>
         </span>
       </div>
-    </a>
+    </Tag>
   );
 }

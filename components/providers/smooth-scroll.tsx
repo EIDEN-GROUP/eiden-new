@@ -21,6 +21,20 @@ export function scrollToTop() {
 }
 
 /**
+ * Snap to the top with no easing at all.
+ *
+ * Landing on a new page has to put the reader at the top of it, and Lenis is
+ * the one thing that can stop that happening: it owns the scroll position, so a
+ * bare `window.scrollTo` is overwritten on its next frame. Both are called   the
+ * instance for the case where it is running, the window for the case where it
+ * is not.
+ */
+export function jumpToTop() {
+  instance?.scrollTo(0, { immediate: true });
+  window.scrollTo(0, 0);
+}
+
+/**
  * Lenis smooth scrolling, mounted once at the root.
  * Disabled entirely when the visitor prefers reduced motion.
  */
@@ -56,7 +70,13 @@ export function SmoothScroll() {
       const target = document.getElementById(id);
       if (!target) return;
       event.preventDefault();
-      lenis.scrollTo(target, { offset: -96 });
+      /* Far enough short of the target to clear the fixed header, unless the
+         anchor says otherwise: a room in a case study is pinned to the very
+         top of the frame and stopping short of it shows a seam. */
+      const asked = Number(anchor.dataset.scrollOffset);
+      lenis.scrollTo(target, {
+        offset: Number.isFinite(asked) ? asked : -96,
+      });
     };
 
     document.addEventListener("click", onAnchorClick);

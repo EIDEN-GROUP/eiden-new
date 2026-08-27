@@ -29,18 +29,18 @@ export const navRoutes: NavRoute[] = [
 ];
 
 export const projectGallery = [
-  { src: "/work/lunja-cover.png", client: "Lunja Village" },
-  { src: "/work/bopassage-web-desktop.png", client: "Bôpassage" },
-  { src: "/work/medical-bay-brand.png", client: "Medical Bay" },
-  { src: "/work/dmc-brand-posters.png", client: "DMC Hospitality Morocco" },
-  { src: "/work/educazenkids-cover.png", client: "EducazenKids" },
-  { src: "/work/lunja-brand-board.png", client: "Lunja Village" },
-  { src: "/work/bopassage-brand-identity.png", client: "Bôpassage" },
-  { src: "/work/medical-bay-web-desktop.png", client: "Medical Bay" },
-  { src: "/work/dmc-web-desktop.png", client: "DMC Hospitality Morocco" },
-  { src: "/work/educazenkids-brand-identity.png", client: "EducazenKids" },
-  { src: "/work/lunja-brand-tote.png", client: "Lunja Village" },
-  { src: "/work/dmc-cover.png", client: "DMC Hospitality Morocco" },
+  { src: "/work/lunja-village/lunja-hero.png", client: "Lunja Village" },
+  { src: "/work/bopassage/bopassage-web-desktop.png", client: "Bôpassage" },
+  { src: "/work/medical-bay/medical-bay-brand.png", client: "Medical Bay" },
+  { src: "/work/dmc-morocco/dmc-brand-posters.png", client: "DMC Hospitality Morocco" },
+  { src: "/work/educazen-kids/educazenkids-cover.png", client: "EducazenKids" },
+  { src: "/work/lunja-village/lunja-brand-board.png", client: "Lunja Village" },
+  { src: "/work/bopassage/bopassage-brand-identity.png", client: "Bôpassage" },
+  { src: "/work/medical-bay/medical-bay-web-desktop.png", client: "Medical Bay" },
+  { src: "/work/dmc-morocco/dmc-web-desktop.png", client: "DMC Hospitality Morocco" },
+  { src: "/work/educazen-kids/educazenkids-brand-identity.png", client: "EducazenKids" },
+  { src: "/work/lunja-village/lunja-brand-tote.png", client: "Lunja Village" },
+  { src: "/work/dmc-morocco/dmc-cover.png", client: "DMC Hospitality Morocco" },
 ] as const;
 
 export const clientLogos = [
@@ -68,7 +68,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "lunja-village",
     client: "Lunja Village",
-    image: "/work/lunja-social-2.png",
+    image: "/work/lunja-village/lunja-social-2.png",
     imageAlt:
       "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
     website: "https://www.lunjavillage.com",
@@ -77,7 +77,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "bopassage",
     client: "Bôpassage",
-    image: "/work/bopassage.png",
+    image: "/work/bopassage/bopassage.png",
     imageAlt: "Site web Bôpassage présenté sur tablette dans le restaurant",
     website: "https://bopassage.com",
     metric: "x3",
@@ -85,7 +85,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "medical-bay",
     client: "Medical Bay",
-    image: "/work/medical-bay.png",
+    image: "/work/medical-bay/medical-bay.png",
     imageAlt: "Accueil de la clinique Medical Bay à Agadir",
     website: "https://medicalbay.vercel.app/",
     metric: "+120",
@@ -93,7 +93,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "dmc-morocco",
     client: "DMC Hospitality Morocco",
-    image: "/work/dmc-alt.png",
+    image: "/work/dmc-morocco/dmc-alt.png",
     imageAlt: "Affiches de marque DMC Hospitality Morocco",
     website: "https://dmchm.com",
     metric: "0 → 1",
@@ -101,13 +101,19 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "educazen-kids",
     client: "EducazenKids",
-    image: "/work/educazenkids-web-desktop.png",
+    image: "/work/educazen-kids/educazenkids-web-desktop.png",
     imageAlt: "Site web et plateforme EducazenKids sur ordinateur",
     metric: "+62%",
   },
 ];
 
-export type ProjectCategory = "web" | "hospitality" | "education" | "health";
+export type ProjectCategory =
+  | "web"
+  | "hospitality"
+  | "restaurants"
+  | "lounge"
+  | "education"
+  | "health";
 
 export type ProjectRecord = {
   slug: string;
@@ -121,85 +127,92 @@ export const projects = [
   {
     slug: "bopassage",
     name: "Bôpassage",
-    category: "hospitality",
-    image: "/work/bopassage.png",
+    category: "restaurants",
+    image: "/work/bopassage/bopassage.png",
     imageAlt: "Identité et site web du restaurant Bôpassage",
   },
   {
     slug: "dmc-morocco",
     name: "DMC Hospitality Morocco",
     category: "hospitality",
-    image: "/work/dmc-brand-logo.png",
+    image: "/work/dmc-morocco/dmc-brand-logo.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
    {
     slug: "lunja-village",
     name: "Lunja Village",
     category: "hospitality",
-    image: "/work/image lunja village portfoliio.png",
+    image: "/work/lunja-village/image lunja village portfoliio.png",
     imageAlt: "Univers de marque du village côtier Lunja Village",
   },
   {
     slug: "educazen-kids",
     name: "EducazenKids",
     category: "education",
-    image: "/work/educazen-hero.png",
+    image: "/work/educazen-kids/educazen-hero.png",
     imageAlt: "Plateforme et identité EducazenKids",
   },
   {
     slug: "medical-bay",
     name: "Medical Bay",
     category: "health",
-    image: "/work/medical-bay-brand.png",
+    image: "/work/medical-bay/medical-bay-brand.png",
     imageAlt: "Identité du centre médical Medical Bay",
   },
    {
     slug: "droguerie-souss",
     name: "Souss Droguerie",
     category: "web",
-    image: "/work/drogurie souss card.png",
+    image: "/work/droguerie-souss/drogurie souss card.png",
     imageAlt: "Site web Souss Droguerie",
   },
   {
     slug: "orsen",
     name: "ORSEN",
     category: "web",
-    image: "/work/orsen hero.png",
+    image: "/work/orsen/orsen hero.png",
     imageAlt: "Site web ORSEN",
   },
   {
     slug: "chillout-lounge",
     name: "CHILLOUT Lounge",
-    category: "web",
-    image: "/work/chilout card.png",
+    category: "lounge",
+    image: "/work/chillout-lounge/chilout card.png",
     imageAlt: "Site web du CHILLOUT Lounge",
   },
   {
     slug: "lithos-materiaux",
     name: "LITHOS",
     category: "web",
-    image: "/work/lotus card.png",
+    image: "/work/lithos-materiaux/lotus card.png",
     imageAlt: "Site web LITHOS Matériaux",
   },
   {
     slug: "rihab-residence",
     name: "Résidence Rihab",
     category: "web",
-    image: "/work/web-rihab-desktop.jpg",
+    image: "/work/rihab-residence/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
+  },
+  {
+    slug: "mabrouk",
+    name: "Mabrouk Hôtel",
+    category: "hospitality",
+    image: "/work/mabrouk/imgg1 (1).png",
+    imageAlt: "L’accueil du Mabrouk Hôtel",
   },
   // {
   //   slug: "lunja-village-vibes",
   //   name: "Lunja Village Vibes",
   //   category: "web",
-  //   image: "/work/web-lunja-vibes-cover.jpg",
+  //   image: "/work/lunja-village/web-lunja-vibes-cover.jpg",
   //   imageAlt: "Site web Lunja Village Vibes",
   // },
   // {
   //   slug: "one-retail",
   //   name: "One Retail",
   //   category: "web",
-  //   image: "/work/one reail card.png",
+  //   image: "/work/one-retail/one reail card.png",
   //   imageAlt: "Site web One Retail",
   // },
   
