@@ -2,9 +2,9 @@
 
 import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
-import { CaseBlock, CaseRoom } from "./stack";
-import { TONES } from "./tone";
-import type { ChapterTone, Impact, Localized } from "@/lib/data/projects/types";
+import { CaseBlock, CaseSection } from "./stack";
+import { TONES, type DisplayTone } from "./tone";
+import type { Impact, Localized } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -21,15 +21,10 @@ import { cn } from "@/lib/utils";
  */
 export function CaseImpact({
   impact,
-  order,
   tone,
-  release = false,
 }: {
   impact: Impact;
-  order: number;
-  tone: ChapterTone;
-  /** True where the gallery does not follow. See `CaseRoom`. */
-  release?: boolean;
+  tone: DisplayTone;
 }) {
   const say = useLocalized();
   const skin = TONES[tone];
@@ -39,7 +34,7 @@ export function CaseImpact({
   const echoed = rows.length === 1 && rows[0].metric === impact.metric;
 
   return (
-    <CaseRoom tone={tone} order={order} release={release}>
+    <CaseSection tone={tone}>
       <CaseBlock>
         <Reveal direction="none" duration={0.5} amount={0.3}>
           <p className={cn("eyebrow flex items-center gap-3", skin.label)}>
@@ -134,7 +129,7 @@ export function CaseImpact({
           </div>
         ) : null}
       </CaseBlock>
-    </CaseRoom>
+    </CaseSection>
   );
 }
 

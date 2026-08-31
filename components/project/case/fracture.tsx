@@ -2,14 +2,10 @@
 
 import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
-import { CaseBlock, CaseRoom } from "./stack";
+import { CaseBlock, CaseSection } from "./stack";
 import { CaseArchitectureBlock } from "./architecture";
-import { TONES } from "./tone";
-import type {
-  Architecture,
-  ChapterTone,
-  Fracture,
-} from "@/lib/data/projects/types";
+import { TONES, type DisplayTone } from "./tone";
+import type { Architecture, Fracture } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -33,19 +29,17 @@ import { cn } from "@/lib/utils";
 export function CaseFracture({
   fracture,
   architecture,
-  order,
   tone = "canvas",
 }: {
   fracture: Fracture;
   architecture: Architecture;
-  order: number;
-  tone?: ChapterTone;
+  tone?: DisplayTone;
 }) {
   const say = useLocalized();
   const skin = TONES[tone];
 
   return (
-    <CaseRoom tone={tone} order={order}>
+    <CaseSection tone={tone}>
       <CaseBlock>
         <Reveal direction="none" duration={0.5} amount={0.3}>
           <p className={cn("eyebrow flex items-center gap-3", skin.label)}>
@@ -90,7 +84,7 @@ export function CaseFracture({
       {/* The answer to the diagnosis, on the same ground and under the same
           curtain: what was decided, and the system it set in motion. */}
       <CaseArchitectureBlock architecture={architecture} skin={skin} />
-    </CaseRoom>
+    </CaseSection>
   );
 }
 

@@ -2,10 +2,10 @@
 
 import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
-import { CaseRoom } from "./stack";
+import { CaseSection } from "./stack";
 import { CaseWall } from "./wall";
-import { TONES } from "./tone";
-import type { ChapterTone, GalleryImage } from "@/lib/data/projects/types";
+import { TONES, type DisplayTone } from "./tone";
+import type { GalleryImage } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,14 +22,10 @@ import { cn } from "@/lib/utils";
  */
 export function CaseWorkRoom({
   work,
-  order,
   tone = "canvas",
-  release = false,
 }: {
   work: GalleryImage[];
-  order: number;
-  tone?: ChapterTone;
-  release?: boolean;
+  tone?: DisplayTone;
 }) {
   const say = useLocalized();
   const skin = TONES[tone];
@@ -37,8 +33,8 @@ export function CaseWorkRoom({
   if (!work.length) return null;
 
   return (
-    <CaseRoom tone={tone} order={order} release={release}>
-      <div className="container-eiden pt-20 sm:pt-24 lg:pt-28">
+    <CaseSection tone={tone}>
+      <div className="container-eiden pt-24 sm:pt-28 lg:pt-32">
         <Reveal direction="none" duration={0.5} amount={0.3}>
           <p className={cn("eyebrow flex items-center gap-3", skin.label)}>
             <span aria-hidden className="h-px w-8 bg-current opacity-50" />
@@ -61,9 +57,9 @@ export function CaseWorkRoom({
         />
       </div>
 
-      <div className="mt-10 sm:mt-12">
+      <div className="mt-10 pb-24 sm:mt-12 sm:pb-28 lg:pb-32">
         <CaseWall wall={work} skin={skin} />
       </div>
-    </CaseRoom>
+    </CaseSection>
   );
 }

@@ -97,7 +97,7 @@ export function Hero() {
 
       {/* Heaviest under the type, lightest where the mark sits. */}
       <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]" />
-      <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-8 sm:pt-36 sm:pb-10">
+      <div className="relative flex flex-1 flex-col justify-end p-20">
         <h1 className="text-balance-tight text-canvas max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
           {words.map((word, index) => {
             const rise = stage(WORD_LEAD + index * WORD_STEP);
@@ -161,14 +161,14 @@ export function Hero() {
 
             {featured ? (
               <Link
-                href="/clients"
+                href="/projects/lunja-village"
                 className={cn(
                   enter,
                   "group border-canvas bg-canvas hover:border-canvas/80 hover:bg-canvas/80 mt-5 flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
                 )}
                 style={stage(0.76)}
               >
-                <span className="relative size-30 shrink-0 overflow-hidden rounded-xl">
+                <span className="relative size-30 h-40! shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={featured.image}
                     alt=""

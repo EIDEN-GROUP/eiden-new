@@ -4,38 +4,27 @@ import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
-const enter = "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
-const stage = (seconds: number) =>
+export const heroEnter =
+  "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
+export const heroStage = (seconds: number) =>
   ({ animationDelay: `${seconds}s` }) as CSSProperties;
-const WORD_LEAD = 0.18;
-const WORD_STEP = 0.075;
+export const HERO_WORD_LEAD = 0.18;
+export const HERO_WORD_STEP = 0.075;
+
 const DEPART_OVER = 0.55;
 
-export function FilmHero({
-  eyebrow,
-  titleLead,
-  titleAccent,
-  titleTail,
-  lead,
-  image = "/media/eiden-hero-poster.jpg",
-  imageClassName = "object-cover object-center",
-  className,
-  children,
-}: {
-  eyebrow: string;
-  titleLead: string;
-  titleAccent: string;
-  titleTail: string;
-  lead: string;
-  image?: string;
-  /** How the still is framed and treated. A page carrying its own backdrop
-      passes its own here rather than being re-cropped to this one. */
-  imageClassName?: string;
-  /** How tall the still stands. A case study takes the whole screen. */
-  className?: string;
-  children?: React.ReactNode;
-}) {
-  const sectionRef = useRef<HTMLElement>(null);
+/**
+ * The still stepping back as the page leaves it.
+ *
+ * `--depart` runs 0 → 1 across the first `DEPART_OVER` of the hero's own
+ * height, and `.hero-depart` turns it into a scale and a growing corner
+ * radius, so the frame recedes like a card being lifted rather than sliding
+ * off. Exported because a case study opens on the same gesture: two heroes
+ * that look alike but drift apart in their timing would be worse than one
+ * hero used twice.
+ */
+export function useHeroDepart<T extends HTMLElement>() {
+  const sectionRef = useRef<T>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -88,6 +77,35 @@ export function FilmHero({
     };
   }, []);
 
+  return sectionRef;
+}
+
+export function FilmHero({
+  eyebrow,
+  titleLead,
+  titleAccent,
+  titleTail,
+  lead,
+  image = "/media/eiden-hero-poster.jpg",
+  imageClassName = "object-cover object-center",
+  className,
+  children,
+}: {
+  eyebrow: string;
+  titleLead: string;
+  titleAccent: string;
+  titleTail: string;
+  lead: string;
+  image?: string;
+  /** How the still is framed and treated. A page carrying its own backdrop
+      passes its own here rather than being re-cropped to this one. */
+  imageClassName?: string;
+  /** How tall the still stands. A case study takes the whole screen. */
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  const sectionRef = useHeroDepart<HTMLElement>();
+
   const words = [
     ...titleLead
       .split(" ")
@@ -130,8 +148,8 @@ export function FilmHero({
 
       <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-10 sm:pt-36 sm:pb-14">
         <p
-          className={cn(enter, "eyebrow text-gold flex items-center gap-3")}
-          style={stage(0.06)}
+          className={cn(heroEnter, "eyebrow text-gold flex items-center gap-3")}
+          style={heroStage(0.06)}
         >
           <span aria-hidden className="h-px w-8 bg-current opacity-50" />
           {eyebrow}
@@ -139,7 +157,7 @@ export function FilmHero({
 
         <h1 className="text-balance-tight text-canvas mt-6 max-w-full text-[clamp(2.25rem,6.4vw,4.5rem)] leading-[1.02] font-medium">
           {words.map((word, index) => {
-            const rise = stage(WORD_LEAD + index * WORD_STEP);
+            const rise = heroStage(HERO_WORD_LEAD + index * HERO_WORD_STEP);
             const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
 
             if (!word.accent) {
@@ -185,16 +203,16 @@ export function FilmHero({
 
         <p
           className={cn(
-            enter,
+            heroEnter,
             "text-canvas/70 mt-6 max-w-full text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
           )}
-          style={stage(0.58)}
+          style={heroStage(0.58)}
         >
           {lead}
         </p>
 
         {children ? (
-          <div className={cn(enter, "mt-7")} style={stage(0.68)}>
+          <div className={cn(heroEnter, "mt-7")} style={heroStage(0.68)}>
             {children}
           </div>
         ) : null}

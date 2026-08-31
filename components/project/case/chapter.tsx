@@ -4,9 +4,9 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
-import { CaseBlock, CaseRoom } from "./stack";
+import { CaseBlock, CaseSection } from "./stack";
 import { CasePaletteStory } from "./palette-story";
-import { TONES, type ToneSkin } from "./tone";
+import { TONES, type DisplayTone, type ToneSkin } from "./tone";
 import type {
   Chapter,
   ChapterBlock,
@@ -18,67 +18,32 @@ import { cn } from "@/lib/utils";
 
 type Say = (value: Localized) => string;
 
-/** Where the hero's rail sends a reader who picks this section. */
 export function chapterId(key: string) {
   return `chapter-${key}`;
 }
 
-/**
- * Every part of the business a room covers, in reading order.
- *
- * The room is numbered and named once, at the top; this is what the hero's rail
- * prints, because a rail that named only the first block would promise less
- * than the room delivers.
- */
 export function chapterCovers(chapter: Chapter) {
   return [...chapter.labels, ...(chapter.blocks ?? []).flatMap((b) => b.labels)];
 }
 
-/**
- * One chapter of what was built.
- *
- * The chapters are the answer to the architecture: one decision each, the work
- * it produced, and the proof it left   on one ground, behind one rounded edge.
- * The number and the part of the business it covers run along the top, so a
- * reader walking the run knows they are still inside "what we built" without
- * the phrase being printed over every room.
- *
- * A room can hold more than one piece of work. Where a second piece is only
- * legible next to the first   a position under the branding it argues for, the
- * money under the content it paid for   it is a block inside the same room
- * rather than a room of its own, and the curtain covers both. The palette,
- * where there is one, always closes the room.
- *
- * A chapter whose disciplines produced nothing to photograph is set in type
- * alone, at size, with its number ghosted behind it. The figure it moved is not
- * stated here   every result in a case is read together, in the impact room.
- */
 export function CaseChapter({
   chapter,
-  order,
+  tone,
   number,
-  release = false,
 }: {
   chapter: Chapter;
-  order: number;
-  /** What the rail prints. 1-based, counted across sections. */
+  /** Decided by the run, not by the chapter. See `case-study`. */
+  tone: DisplayTone;
   number: number;
-  /** True on the last section of the case. See `CaseRoom`. */
-  release?: boolean;
 }) {
   const say = useLocalized();
-  const skin = TONES[chapter.tone];
+  const skin = TONES[tone];
   const shots = chapter.shots ?? [];
   const index = String(number).padStart(2, "0");
   const bare = shots.length === 0;
 
   return (
-    <CaseRoom
-      tone={chapter.tone}
-      order={order}
-      id={chapterId(chapter.key)}
-      release={release}
-    >
+    <CaseSection tone={tone} id={chapterId(chapter.key)}>
       <CaseBlock className={cn("relative", bare && "overflow-hidden")}>
         {bare ? (
           <span
@@ -98,35 +63,24 @@ export function CaseChapter({
           say={say}
           index={index}
           lead
-          first={order === 0}
+          first={number === 1}
         />
       </CaseBlock>
 
-      {/* The work that only means something next to the work above it. Same
-          ground, no second curtain   read as the next screen of one room. */}
       {chapter.blocks?.map((block) => (
         <CaseBlock key={block.key} tight>
           <Body piece={block} skin={skin} say={say} />
         </CaseBlock>
       ))}
 
-      {/* The palette is part of the branding chapter rather than a subject of
-          its own: same ground, same room, one curtain over both. */}
       {chapter.palette ? (
         <CasePaletteStory story={chapter.palette} skin={skin} />
       ) : null}
-    </CaseRoom>
+    </CaseSection>
   );
 }
 
-/**
- * One piece of work: what it covers, what it decided, and what it produced.
- *
- * The same shape whether it opens a room or follows inside one   only the size
- * changes. `lead` is the room's own first piece and is set at headline size;
- * everything after it is set one step down, so a room reads as one argument
- * carried further rather than as two arguments competing.
- */
+
 function Body({
   piece,
   skin,
@@ -138,19 +92,12 @@ function Body({
   piece: Chapter | ChapterBlock;
   skin: ToneSkin;
   say: Say;
-  /** The room's number. Printed on the opening piece only. */
   index?: string;
   lead?: boolean;
   first?: boolean;
 }) {
   const shots = piece.shots ?? [];
   const bare = shots.length === 0;
-
-  /* A piece that follows another inside the same room is mirrored: pictures
-     to the left, writing to the right. Two pieces set out identically read as
-     one screen printed twice, and the second stops being looked at. Below the
-     breakpoint nothing swaps   the writing is what a phone should meet
-     first, whichever side it would have sat on. */
   const mirrored = !lead;
 
   return (
@@ -159,11 +106,7 @@ function Body({
         "relative",
         !bare && "grid gap-12 lg:items-start lg:gap-16 xl:gap-20",
         !bare &&
-          (mirrored
-            ? "lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]"
-            : "lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]"),
-      )}
-    >
+          (mirrored && "lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]"))} >
       <Writing
         piece={piece}
         skin={skin}
@@ -187,7 +130,6 @@ function Body({
   );
 }
 
-/** The rule, the headline, the line under it, and the ways out to the live work. */
 function Writing({
   piece,
   skin,
@@ -205,8 +147,6 @@ function Writing({
   bare: boolean;
   className?: string;
 }) {
-  /* Type alone is allowed to run wide, but only where it opens the room: a
-     block set as large as the piece above it would read as a new argument. */
   const loud = lead && bare;
 
   return (
@@ -270,13 +210,7 @@ function Writing({
   );
 }
 
-/**
- * The pictures.
- *
- * One column on a phone, two from `sm`, and an odd first picture runs the width
- * so the grid never ends on a hole. The same at every size   the layout reflows,
- * nothing behaves differently.
- */
+
 function Shots({
   shots,
   skin,
@@ -290,15 +224,33 @@ function Shots({
   first: boolean;
   className?: string;
 }) {
-  const odd = shots.length % 2 === 1;
+  const count = shots.length;
+  const odd = count % 2 === 1;
+
+  const gridCols =
+    count === 1
+      ? "grid-cols-1"
+      : count === 2
+        ? "sm:grid-cols-2"
+        : count === 3
+          ? "sm:grid-cols-3"
+          : count === 4
+            ? "sm:grid-cols-4"
+            : "sm:grid-cols-3";
 
   return (
     <RevealGroup
       amount={0.12}
-      className={cn("grid gap-3 sm:grid-cols-2 sm:gap-4", className)}
+      className={cn(
+        "grid gap-3 sm:gap-4",
+        gridCols,
+        className,
+      )}
     >
       {shots.map((shot, i) => {
-        const wide = shots.length === 1 || (odd && i === 0);
+        // Wide uniquement pour 1 image ou nombre impair
+        const wide =
+          count === 1 || (odd && count !== 1 && i === 0);
 
         return (
           <figure
@@ -306,21 +258,30 @@ function Shots({
             className={cn(
               "relative overflow-hidden rounded-[1.1rem] sm:rounded-[1.4rem]",
               skin.frame,
-              wide ? "aspect-16/10 sm:col-span-2" : "aspect-4/3",
+              wide && "aspect-16/10 sm:col-span-2",
+              !wide && "aspect-4/3",
             )}
           >
             <Image
               src={shot.image}
               alt={say(shot.alt)}
               fill
-              sizes="(max-width: 40rem) 92vw, (max-width: 64rem) 46vw, 36vw"
+              quality={90}
+              sizes={
+                count === 1
+                  ? "(max-width: 640px) 92vw, 72vw"
+                  : count === 2
+                    ? "(max-width: 640px) 92vw, 46vw"
+                    : "(max-width: 640px) 92vw, 23vw"
+              }
               className={cn(
                 shot.fit === "contain"
                   ? "object-contain p-4 sm:p-6"
-                  : "object-cover",
+                  : "object-cover size-full",
               )}
               priority={first && i === 0}
             />
+
             <figcaption className="eyebrow text-canvas/85 absolute bottom-3 left-4 [text-shadow:0_1px_12px_rgba(0,0,0,0.85)] sm:bottom-4 sm:left-5">
               {say(shot.label)}
             </figcaption>
@@ -331,7 +292,6 @@ function Shots({
   );
 }
 
-/** Where the work is live: the site, and the accounts it runs on. */
 function Links({
   links,
   skin,

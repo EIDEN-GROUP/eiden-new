@@ -17,7 +17,6 @@ export type ShowcaseCase = {
   image: string;
   imageAlt: string;
   href: string;
-  /** What the client said about this project. Both or neither. */
   quote?: string;
   author?: string;
 };
@@ -26,34 +25,20 @@ export type ShowcaseIntro = {
   eyebrow: string;
   title: string;
   text: string;
-  /** Cue under the copy, e.g. "Les projets". */
   cue: string;
-  /** The picture the statement is read against, pinned like the banner's. */
   texture: string;
 };
 
-/**
- * One ground per case, in order   the primary, black, white, gold, grey.
- *
- * Five grounds for five cases, so none of them repeats, and each carries the
- * `tone` its own copy has to be drawn in: the set deliberately alternates
- * dark and light, which is what stops the sequence reading as one long panel
- * that keeps changing its mind.
- */
 const GROUNDS = [
-  { bg: "#0c5752", tone: "dark" }, // teal   the primary
+  { bg: "#0e1b17", tone: "dark" }, // teal   the primary
   { bg: "#fefdfb", tone: "light" }, // canvas
   { bg: "#0a0f0c", tone: "dark" }, // ink
   { bg: "#b8a876", tone: "light" }, // gold
   { bg: "#2a2c2b", tone: "dark" }, // grey
 ] as const;
 
-/** The ground the statement stands on, under its own picture. */
 const INTRO_GROUND = "#0a0f0c";
-
 type Tone = (typeof GROUNDS)[number]["tone"];
-
-/** Everything a case panel has to know to be drawn on its own ground. */
 const INK: Record<
   Tone,
   {
@@ -118,7 +103,6 @@ export function CaseShowcase({
 
     const paint = () => {
       const { top, height } = track.getBoundingClientRect();
-      // The frame is pinned for `height − viewport`; that span is the sequence.
       const travel = height - window.innerHeight;
       const share = travel > 0 ? -top / travel : 0;
       const seq = Math.min(Math.max(share, 0), 1) * (panels - 1);
@@ -156,33 +140,19 @@ export function CaseShowcase({
 
   if (cases.length === 0) return null;
 
-  /* The statement is panel 0, so a case's number is one behind its layer. */
   const onCase = active > 0;
   const caseNumber = String(active).padStart(2, "0");
-
-  /* The chrome floats over every panel in turn, so it is drawn in the tone of
-     whichever one is currently up rather than in one fixed colour. */
   const activeInk =
     active > 0 ? INK[GROUNDS[(active - 1) % GROUNDS.length].tone] : INK.dark;
 
   return (
-    <div
-      ref={trackRef}
-      className="relative"
-      style={{ height: `${panels * 100}svh` }}
-    >
+    <div ref={trackRef} className="relative" style={{ height: `${panels * 100}svh` }}>
       <div className="text-canvas sticky top-0 h-svh overflow-hidden">
-        <section
-          className="absolute inset-0 isolate z-0 flex items-center justify-center"
-          style={{ backgroundColor: INTRO_GROUND }}
-        >
+        <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }} >
           <FixedBackdrop src={intro.texture} />
 
           {/* Darkest through the middle, where the type lands. */}
-          <span
-            aria-hidden
-            className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]"
-          />
+          <span aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]" />
 
           <div className="container-eiden flex flex-col items-center py-16 text-center">
             <Reveal direction="none" duration={0.5}>
@@ -228,12 +198,6 @@ export function CaseShowcase({
               }
               className="curtain-layer absolute inset-0 flex items-start"
             >
-              {/* The leading edge of the panel. The sticky frame clips
-                  anything past its top, so the shadow a stacked sheet would
-                  cast is drawn just inside the edge instead   it is what makes
-                  a case read as laid over the picture rather than swapped in
-                  for it. Struck from the panel's own ink, so it reads on a
-                  light ground as well as a dark one. */}
               <span
                 aria-hidden
                 className={cn(
@@ -259,18 +223,6 @@ export function CaseShowcase({
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-
-              {/* A panel is locked to the frame, so nothing in it may overrun:
-                  what does not fit is not scrolled to, it is simply lost. The
-                  short-screen sizes below are what keep the call to action on
-                  screen at 640px tall.
-
-                  Centred on `my-auto` rather than on the parent's alignment,
-                  over padding deep enough to clear the running head: an auto
-                  margin centres on the padding box, so the reserve costs the
-                  panel nothing while there is room, and the moment there is
-                  not the margin gives up its share and the panel starts under
-                  the head instead of riding up through the project name. */}
               <div className="container-eiden relative my-auto grid w-full items-center gap-5 py-28 sm:gap-8 sm:py-32 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-40">
                 <div className="min-w-0">
                   <p
@@ -292,28 +244,16 @@ export function CaseShowcase({
                     {entry.title}
                   </h3>
 
-                  {/* Held to four lines on a phone. The whole of it is a tap
-                      away on the case itself, and the alternative is a panel
-                      that pushes its own link off the bottom of the frame. */}
-                  <p
-                    className={cn(
-                      "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3",
-                      ink.body,
-                    )}
-                  >
+                  <p className={cn( "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3", ink.body, )}>
                     {entry.text}
                   </p>
 
-                  {/* The client's own word on the project, on the same card as
-                      the claim. Rendered only when both halves are there   an
-                      unattributed quote is not a testimonial. */}
                   {entry.quote && entry.author ? (
                     <figure
                       className={cn(
                         "mt-5 max-w-md border-l pl-5 sm:mt-8",
                         ink.rule,
-                      )}
-                    >
+                      )} >
                       <blockquote
                         className={cn(
                           "text-[0.9375rem] leading-relaxed",
@@ -337,30 +277,17 @@ export function CaseShowcase({
                     )}
                   >
                     {cta}
-                    <span
-                      className={cn(
-                        "flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]",
-                        ink.ring,
-                      )}
-                    >
-                      <ArrowRight
-                        className="size-4"
-                        strokeWidth={1.6}
-                        aria-hidden
-                      />
+                    <span className={cn( "flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]", ink.ring, )} >
+                      <ArrowRight className="size-4" strokeWidth={1.6} aria-hidden />
                     </span>
                   </Link>
                 </div>
-
-                {/* The work itself. First in the frame on a phone   it is the
-                    thing the section is here to show, and reading about a
-                    project you cannot see is worth nothing. */}
                 <div className="relative order-first h-[18svh] w-full overflow-hidden rounded-sm sm:h-[24svh] lg:order-none lg:aspect-16/10 lg:h-auto">
                   <Image
                     src={entry.image}
                     alt={entry.imageAlt}
                     fill
-                    sizes="(max-width: 1024px) 92vw, 55vw"
+                    sizes="(max-width: 1024px) 80vw, 40vw"
                     className="object-cover"
                   />
                 </div>

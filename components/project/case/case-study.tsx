@@ -7,33 +7,32 @@ import { CaseFracture } from "./fracture";
 import { CaseChapter } from "./chapter";
 import { CaseImpact } from "./impact";
 import { CaseWorkRoom } from "./work";
-import { CaseNextScroll } from "./next-scroll";
+import { CaseNext } from "./next";
 import { CaseStack } from "./stack";
 import { CaseVeil } from "./veil";
+import type { DisplayTone } from "./tone";
 import type { ProjectCase } from "@/lib/data/projects/types";
 
 /**
- * One case, read as a business argument.
+ * The grounds, decided by the run rather than by the chapter.
  *
- * The running order is the same on every project and it is the whole point of
- * the system:
- *
- *   hero → fracture + architecture → what we built → impact → the work → next
- *
- * What was broken, what EIDEN decided, what that produced, what it changed, and
- * only then the pictures. Nothing about a project chooses its own order   the
- * depth varies, the sequence never does, which is what makes eleven different
- * businesses read as one practice.
- *
- * `order` is the z-index each room is stacked at, counted straight through the
- * run, because the rooms are drawn over one another as the reader scrolls.
+ * A chapter still declares a tone in its data, and that tone still means
+ * something   but it means it about the work, not about the wall, and eleven
+ * cases each choosing their own walls produced pages that were three-quarters
+ * dark and read as one long night. So the run assigns them now: the two light
+ * grounds alternate the whole way down, and the deep ground is spent once, on
+ * the impact, which is the only section making a claim rather than describing
+ * something.
  */
+const LIGHT: DisplayTone[] = ["canvas", "cream"];
+
 export function ProjectCaseStudy({
   project,
   next,
 }: {
   project: ProjectCase;
-  next: ProjectCase;
+  /** One or two, and never more. See `CaseNext`. */
+  next: ProjectCase[];
 }) {
   const chapters = project.chapters;
   const work = project.work ?? [];
@@ -42,20 +41,9 @@ export function ProjectCaseStudy({
     jumpToTop();
   }, [project.slug]);
 
-  let order = 0;
-  const fractureOrder = order++;
-  const chapterOrders = chapters.map(() => order++);
-  const impactOrder = order++;
-  const workOrder = work.length ? order++ : null;
-
-  /* The impact never stands on the ground the chapter before it used, and the
-     gallery is always read in daylight. */
-  const impactTone = chapters.at(-1)?.tone === "forest" ? "ink" : "forest";
-
   return (
     <article
-      className="bg-ink"
-      /* The deep ground every forest room in this case stands on. */
+      className="bg-canvas"
       style={
         {
           "--case-ground": project.ground ?? "var(--color-forest)",
@@ -64,39 +52,30 @@ export function ProjectCaseStudy({
     >
       <CaseVeil />
 
-      <CaseHero project={project} chapters={chapters} />
+      <CaseHero project={project} />
 
       <CaseStack>
         <CaseFracture
           fracture={project.fracture}
           architecture={project.architecture}
-          order={fractureOrder}
-          tone="canvas"
+          tone="cream"
         />
 
         {chapters.map((chapter, index) => (
           <CaseChapter
             key={chapter.key}
             chapter={chapter}
-            order={chapterOrders[index]}
+            tone={LIGHT[index % LIGHT.length]}
             number={index + 1}
           />
         ))}
 
-        <CaseImpact
-          impact={project.impact}
-          order={impactOrder}
-          tone={impactTone}
-          /* Whichever room is last lets go on a phone, so the switch to the
-             next project scrolls up after it rather than over it. */
-          release={workOrder === null}
-        />
+        {/* The one deep room, drawn as a panel inset from the edges. */}
+        <CaseImpact impact={project.impact} tone="forest" />
 
-        {workOrder !== null ? (
-          <CaseWorkRoom work={work} order={workOrder} tone="canvas" release />
-        ) : null}
+        {work.length ? <CaseWorkRoom work={work} tone="canvas" /> : null}
 
-        <CaseNextScroll next={next} order={order + 1} />
+        <CaseNext next={next} />
       </CaseStack>
     </article>
   );

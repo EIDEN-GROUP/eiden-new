@@ -107,7 +107,12 @@
 @utility container-eiden {
   width: 100%;
   margin-inline: auto;
-  max-width: 100%;
+  /* The page measure. Every section of every page is drawn on it, so the site
+     reads as one column of work on a laptop and stops stretching to the edges
+     of a wide desktop. Written as a token so a full-bleed exception   a rail
+     that has to run off the screen   can widen it locally rather than opting
+     out of the container altogether. */
+  max-width: var(--page-measure, 80rem);
   padding-inline: 1.25rem;
 
   @media (width >= 48rem) {
@@ -116,6 +121,20 @@
   @media (width >= 80rem) {
     padding-inline: 3rem;
   }
+}
+
+/* The same measure, for anything laid beside the container rather than inside
+   it   a fixed bar, an absolutely positioned overlay. */
+@utility page-measure {
+  width: 100%;
+  margin-inline: auto;
+  max-width: var(--page-measure, 80rem);
+}
+
+/* A section that has to reach the edges of the screen while its writing stays
+   on the measure   a drifting wall, a marquee. */
+@utility container-bleed {
+  --page-measure: 100%;
 }
 
 /* Label / eyebrow   Cormorant Garamond, uppercase, wide tracking */
@@ -1567,7 +1586,7 @@
   inset: 0;
   z-index: 95;
   pointer-events: none;
-  background: var(--color-ink);
+  background: var(--color-canvas);
   animation: eiden-case-veil 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

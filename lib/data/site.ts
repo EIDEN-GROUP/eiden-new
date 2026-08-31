@@ -84,7 +84,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "medical-bay",
     client: "Medical Bay",
-    image: "/work/medical-bay/medical-bay.png",
+    image: "/work/medical-bay/medical-bay-brand.png",
     imageAlt: "Accueil de la clinique Medical Bay à Agadir",
     website: "https://medicalbay-agadir.vercel.app/",
     metric: "+120",
@@ -92,7 +92,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "dmc-morocco",
     client: "DMC Hospitality Morocco",
-    image: "/work/dmc-morocco/dmc-alt.png",
+    image: "/work/dmc-morocco/dmc-portfolio-image.png",
     imageAlt: "Affiches de marque DMC Hospitality Morocco",
     website: "https://dmchm.com",
     metric: "0 → 1",
@@ -100,7 +100,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "educazen-kids",
     client: "EducazenKids",
-    image: "/work/educazen-kids/educazenkids-web-desktop.png",
+    image: "/work/educazen-kids/educazen-hero.png",
     imageAlt: "Site web et plateforme EducazenKids sur ordinateur",
     metric: "+62%",
   },
@@ -173,6 +173,13 @@ export const projects = [
     imageAlt: "Site web ORSEN",
   },
   {
+    slug: "mabrouk",
+    name: "Mabrouk Hôtel",
+    category: "hospitality",
+    image: "/work/mabrouk/imgg1 (1).png",
+    imageAlt: "L’accueil du Mabrouk Hôtel",
+  },
+  {
     slug: "chillout-lounge",
     name: "CHILLOUT Lounge",
     category: "lounge",
@@ -193,13 +200,7 @@ export const projects = [
     image: "/work/rihab-residence/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
   },
-  {
-    slug: "mabrouk",
-    name: "Mabrouk Hôtel",
-    category: "hospitality",
-    image: "/work/mabrouk/imgg1 (1).png",
-    imageAlt: "L’accueil du Mabrouk Hôtel",
-  },
+  
   // {
   //   slug: "lunja-village-vibes",
   //   name: "Lunja Village Vibes",

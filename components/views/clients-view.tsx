@@ -130,8 +130,8 @@ export function ClientsView() {
                                 src={project.image}
                                 alt=""
                                 fill
-                                sizes="(max-width: 1024px) 45vw, 15vw"
-                                className="object-cover"
+                                sizes="(max-width: 1024px) 70vw, 30vw"
+                                className="object-cover size-full"
                               />
                             </div>
                           </div>
@@ -319,9 +319,9 @@ function ProjectCard({
           sizes={
             wide
               ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 62vw"
-              : "(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
+              : "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 50vw"
           }
-          className="object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
+          className="object-cover size-full transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
         />
 
         <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"/>

@@ -1,253 +1,422 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState, type CSSProperties } from "react";
-import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Maximize2, Pause, Play } from "lucide-react";
 import { useLocalized } from "@/components/project/shared";
 import { Reveal } from "@/components/ui/reveal";
+import { useMediaQuery } from "@/lib/hooks";
 import { CaseLightbox } from "./lightbox";
 import type { GalleryImage } from "@/lib/data/projects/types";
 import type { ToneSkin } from "./tone";
 import { cn } from "@/lib/utils";
 
-/**
- * Most pictures a page will hold.
- *
- * Pages are then evened out against it rather than filled to it: a set of eight
- * reads as two pages of four, not as a full page followed by a stub.
- */
-const MOST = 6;
+/** How long a picture is held before the rail moves on. */
+const DWELL = 4200;
+
+/** How long one picture takes to travel, and on what curve. */
+const TRAVEL = 620;
+const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+/** How long the rail has to be still before its position is normalised. */
+const SETTLE = 160;
 
 /**
- * Where each picture sits, by how many the page is holding.
+ * The gallery, run edge to edge.
  *
- * The mosaic is drawn, not flowed. A page is a fixed set of cells   two columns
- * on a phone, three from `lg`   and every plan fills its grid exactly, so a
- * page can never open with a hole in the middle of it. Tall cells and wide ones
- * alternate down the page, which is the whole difference between a gallery and
- * a contact sheet.
+ * The pictures are the widest thing in the case and they are given the whole
+ * screen: the rail starts at one edge and ends at the other, with the next
+ * frame always part in view so the set reads as something continuing rather
+ * than as a page that has run out. Only the controls come back onto the page
+ * measure   they are writing, and writing belongs in the column everything
+ * else on the page is set in.
  *
- * Written as literal classes because Tailwind reads the source, not the
- * runtime, and as start/end pairs rather than spans because a span is shorthand
- * and would out-rank the start it is sitting next to.
- */
-const PLANS: Record<number, string[]> = {
-  1: ["col-start-1 col-end-3 row-start-1 row-end-2 lg:col-end-4"],
-  2: [
-    "col-start-1 col-end-2 row-start-1 row-end-2 lg:col-end-3",
-    "col-start-2 col-end-3 row-start-1 row-end-2 lg:col-start-3 lg:col-end-4",
-  ],
-  3: [
-    "col-start-1 col-end-2 row-start-1 row-end-3 lg:col-end-3 lg:row-end-2",
-    "col-start-2 col-end-3 row-start-1 row-end-2 lg:col-start-3 lg:col-end-4 lg:row-end-3",
-    "col-start-2 col-end-3 row-start-2 row-end-3 lg:col-start-1 lg:col-end-3",
-  ],
-  4: [
-    "col-start-1 col-end-2 row-start-1 row-end-3",
-    "col-start-2 col-end-3 row-start-1 row-end-2 lg:col-end-4",
-    "col-start-2 col-end-3 row-start-2 row-end-3",
-    "col-start-1 col-end-3 row-start-3 row-end-4 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3",
-  ],
-  5: [
-    "col-start-1 col-end-2 row-start-1 row-end-3",
-    "col-start-2 col-end-3 row-start-1 row-end-2 lg:col-end-4",
-    "col-start-2 col-end-3 row-start-2 row-end-3 lg:row-end-4",
-    "col-start-1 col-end-2 row-start-3 row-end-4 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
-    "col-start-2 col-end-3 row-start-3 row-end-4 lg:col-start-1 lg:col-end-2",
-  ],
-  6: [
-    "col-start-1 col-end-2 row-start-1 row-end-3",
-    "col-start-2 col-end-3 row-start-1 row-end-2 lg:col-end-4",
-    "col-start-2 col-end-3 row-start-2 row-end-3",
-    "col-start-1 col-end-2 row-start-3 row-end-4 lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
-    "col-start-2 col-end-3 row-start-3 row-end-5 lg:col-start-1 lg:col-end-2 lg:row-end-4",
-    "col-start-1 col-end-2 row-start-4 row-end-5 lg:col-start-2 lg:col-end-3 lg:row-start-3 lg:row-end-4",
-  ],
-};
-
-/**
- * The gallery   the volume behind the work above it.
+ * It is a real scroller rather than a track being transformed, so a finger, a
+ * trackpad and a keyboard all work with no code at all, and the snap points
+ * are the browser's own.
  *
- * The writing above is the argument, made a few pictures at a time. This is
- * everything else that came out of the same work, and it is turned rather than
- * scrolled: a mosaic of six, a page at a time, so the whole set is reachable
- * without the section growing another screen for every third picture.
+ * The travel is animated here rather than handed to `scrollTo({ behavior:
+ * "smooth" })`, for three reasons: that call is silently inert on a nested
+ * scroller in more than one engine, mandatory snapping fights it where it is
+ * not, and it eases on the browser's curve instead of the brand's. Sixteen
+ * lines buys the same motion as everything else on the page, everywhere.
  *
- * Every picture opens. The grid is for scanning; once something in it catches a
- * reader they click it and look at it whole, and step through the rest from
- * there   including across pages, which is why the page follows the picture the
- * lightbox is on rather than the other way round.
+ * The set is carried twice and the rail steps back by one copy once it has
+ * settled, which is what makes the loop seamless   normalising mid-travel
+ * would show as a jump, so it waits for the rail to stop. Nothing about the
+ * position goes through React: the counter and the progress rule are written
+ * onto their own nodes, because a re-render per scroll frame would mutate the
+ * snap container under the very animation running inside it.
  *
- * It is a block of the section it belongs to, not a section of its own   same
- * ground, same measure, no second curtain.
+ * It moves on its own, and stops the moment there is reason to think someone
+ * is reading rather than watching: a pointer on it, focus inside it, a picture
+ * opened, the tab in the background, the section off screen, the control
+ * paused, or the visitor asking for less motion   in which case it never
+ * starts.
  */
 export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin }) {
   const say = useLocalized();
+  const still = useMediaQuery("(prefers-reduced-motion: reduce)");
+
+  const railRef = useRef<HTMLDivElement>(null);
+  const countRef = useRef<HTMLSpanElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+
   const [open, setOpen] = useState<number | null>(null);
-  const [page, setPage] = useState(0);
+  const [playing, setPlaying] = useState(true);
 
-  const pages = Math.max(1, Math.ceil(wall.length / MOST));
-  const per = Math.max(1, Math.ceil(wall.length / pages));
+  /* Live reasons to hold, read inside the tick rather than closed over: a
+     dependency on each would tear the timer down and rebuild it every time the
+     pointer crossed the rail. */
+  const held = useRef(false);
+  const seen = useRef(true);
+  const opened = useRef(false);
+  const tween = useRef(0);
 
-  /* Each tile keeps the index it has in the whole set, which is what the
-     lightbox steps through   the page is only how it is being shown. */
-  const shown = useMemo(() => {
-    const from = page * per;
-    return wall.slice(from, from + per).map((item, i) => ({ item, at: from + i }));
-  }, [wall, page, per]);
+  const total = wall.length;
+  const loops = total > 1;
 
-  if (!wall.length) return null;
+  useEffect(() => {
+    opened.current = open !== null;
+  }, [open]);
 
-  const plan = PLANS[shown.length] ?? PLANS[MOST];
-  const turn = (by: number) => setPage((at) => (at + by + pages) % pages);
+  /** The distance from one picture to the next, measured rather than assumed. */
+  const pitch = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return 0;
+    const [first, second] = [rail.children[0], rail.children[1]] as (
+      | HTMLElement
+      | undefined
+    )[];
+    if (!first) return 0;
+    if (!second) return first.offsetWidth;
+    return second.offsetLeft - first.offsetLeft;
+  }, []);
 
-  const arrow =
+  /** Put the rail back inside the first copy of the set. Never mid-travel. */
+  const normalise = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail || !loops || tween.current) return;
+    const copy = pitch() * total;
+    if (copy && rail.scrollLeft >= copy) rail.scrollLeft -= copy;
+  }, [loops, pitch, total]);
+
+  /**
+   * End the travel, however it ended.
+   *
+   * Snapping is stood down for the length of a travel, so the one thing that
+   * must never be conditional is putting it back: a tween that is interrupted,
+   * or that never gets a frame at all   a background tab throttles
+   * `requestAnimationFrame` while leaving the timer that started it running
+   * would otherwise leave the rail unsnappable for the rest of the visit.
+   */
+  const settle = useCallback(() => {
+    if (tween.current) {
+      cancelAnimationFrame(tween.current);
+      tween.current = 0;
+    }
+    const rail = railRef.current;
+    if (rail) rail.style.scrollSnapType = "";
+  }, []);
+
+  const step = useCallback(
+    (by: number) => {
+      const rail = railRef.current;
+      const span = pitch();
+      if (!rail || !span) return;
+
+      settle();
+
+      let from = rail.scrollLeft;
+
+      /* Going back from the first picture: step forward by one copy of the
+         set first, so there is something to the left to travel to. */
+      if (loops && by < 0 && from < span * 0.5) {
+        from += span * total;
+        rail.scrollLeft = from;
+      }
+
+      const to = from + by * span;
+
+      if (still) {
+        rail.scrollLeft = to;
+        normalise();
+        return;
+      }
+
+      /* A mandatory snap container re-snaps on every write, and would drag the
+         rail back to the picture it started from. `settle` puts it back. */
+      rail.style.scrollSnapType = "none";
+      const began = performance.now();
+
+      const travel = (now: number) => {
+        const t = Math.min((now - began) / TRAVEL, 1);
+        rail.scrollLeft = from + (to - from) * ease(t);
+
+        if (t < 1) {
+          tween.current = requestAnimationFrame(travel);
+          return;
+        }
+
+        settle();
+        normalise();
+      };
+
+      tween.current = requestAnimationFrame(travel);
+    },
+    [loops, normalise, pitch, settle, still, total],
+  );
+
+  /* Where the rail is, written straight onto the two nodes that say so. */
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    let raf = 0;
+    let idle = 0;
+    let shown = -1;
+
+    const read = () => {
+      raf = 0;
+      const span = pitch();
+      if (!span) return;
+
+      const at = Math.round(rail.scrollLeft / span) % total;
+      if (at === shown) return;
+      shown = at;
+
+      if (countRef.current) {
+        countRef.current.textContent = String(at + 1).padStart(2, "0");
+      }
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${(at + 1) / total})`;
+      }
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(read);
+      window.clearTimeout(idle);
+      idle = window.setTimeout(normalise, SETTLE);
+    };
+
+    read();
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.clearTimeout(idle);
+      rail.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [normalise, pitch, total]);
+
+  /* Nothing runs while the section is off screen. */
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        seen.current = entry.isIntersecting;
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(rail);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (still || !playing || !loops) return;
+
+    const id = window.setInterval(() => {
+      if (held.current || opened.current || !seen.current) return;
+      if (document.visibilityState !== "visible") return;
+      step(1);
+    }, DWELL);
+
+    return () => window.clearInterval(id);
+  }, [loops, playing, still, step]);
+
+  useEffect(() => settle, [settle]);
+
+  if (!total) return null;
+
+  /* The set twice over. The second copy is what the first one loops into, and
+     nothing in it is announced or reachable a second time. */
+  const run = loops ? [...wall, ...wall] : wall;
+
+  const control =
     "flex size-10 items-center justify-center rounded-full border transition-colors duration-400 ease-[var(--ease-brand)] sm:size-11 motion-reduce:transition-none";
 
   return (
-    <div className="container-eiden relative pb-20 sm:pb-24 lg:pb-28">
-      {/* The set's own word, ghosted behind the top of the grid. */}
-      <span
-        aria-hidden
-        className={cn(
-          "font-display pointer-events-none absolute -top-4 right-4 text-[16vw] leading-[0.8] font-extrabold tracking-[-0.06em] opacity-[0.055] select-none lg:right-12 lg:text-[11vw]",
-          skin.title,
-        )}
-      >
-        {say({ fr: "galerie", en: "gallery" })}
-      </span>
-
+    <div
+      className="relative"
+      onPointerEnter={() => {
+        held.current = true;
+      }}
+      onPointerLeave={() => {
+        held.current = false;
+      }}
+      onFocusCapture={() => {
+        held.current = true;
+      }}
+      onBlurCapture={() => {
+        held.current = false;
+      }}
+    >
+      {/* ── What it is, on the measure ──────────────────────────────── */}
       <Reveal direction="none" duration={0.5} amount={0.3}>
-        <div className="relative flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <p
-            className={cn("editorial text-[1.15rem] sm:text-[1.35rem]", skin.body)}
-          >
+        <div className="container-eiden flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+          <p className={cn("editorial text-[1.15rem] sm:text-[1.35rem]", skin.body)}>
             {say({ fr: "Cliquez pour agrandir", en: "Click to open" })}
           </p>
 
           <p className={cn("eyebrow tabular-nums", skin.caption)}>
-            {wall.length} {say({ fr: "images", en: "images" })}
+            {total} {say({ fr: "images", en: "images" })}
           </p>
         </div>
       </Reveal>
 
-      <Reveal delay={0.06} amount={0.12}>
-        <div
-          className={cn(
-            "mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-3.5 lg:grid-cols-3 lg:gap-4",
-            "[grid-auto-rows:var(--wall-row)] [--wall-row:clamp(4.5rem,30vw,20rem)]",
-            "lg:[--wall-row:clamp(6rem,19vw,19rem)]",
-          )}
-        >
-          {shown.map(({ item, at }, i) => (
+      {/* ── The rail, edge to edge ──────────────────────────────────── */}
+      <div
+        ref={railRef}
+        className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-2.5 overflow-x-auto overscroll-x-contain sm:mt-8 sm:gap-4"
+      >
+        {run.map(({ image, alt }, i) => {
+          const index = i % total;
+          const copy = i >= total;
+
+          return (
             <button
-              /* Keyed by page as well as picture: turning the page swaps the
-                 nodes out, which is what restarts the arrival. */
-              key={`${page}-${item.image}`}
+              key={`${copy ? "b" : "a"}-${image}-${i}`}
               type="button"
-              onClick={() => setOpen(at)}
-              aria-label={say(item.alt)}
-              style={{ "--tile-delay": `${i * 70}ms` } as CSSProperties}
+              onClick={() => setOpen(index)}
+              aria-hidden={copy || undefined}
+              tabIndex={copy ? -1 : undefined}
+              aria-label={say(alt)}
               className={cn(
-                "group/tile focus-visible:outline-gold relative block h-full w-full cursor-zoom-in overflow-hidden rounded-xl ring-1 sm:rounded-2xl",
-                "focus-visible:outline-2 focus-visible:outline-offset-2",
-                "motion-safe:[animation:eiden-tile-in_0.7s_var(--ease-brand)_var(--tile-delay)_both]",
+                "group/tile focus-visible:outline-gold relative block shrink-0 cursor-zoom-in snap-start overflow-hidden rounded-xl ring-1 sm:rounded-2xl",
+                "aspect-4/3 w-[86vw] sm:w-[56vw] lg:w-[40vw]",
+                "focus-visible:outline-2 focus-visible:-outline-offset-2",
                 skin.frame,
                 skin.ring,
-                plan[i],
               )}
             >
               <Image
-                src={item.image}
+                src={image}
                 alt=""
                 aria-hidden
                 fill
-                sizes="(max-width: 64rem) 50vw, 34vw"
-                className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover/tile:scale-[1.06] motion-reduce:transition-none"
+                sizes="(max-width: 40rem) 86vw, (max-width: 64rem) 56vw, 40vw"
+                className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover/tile:scale-[1.05] motion-reduce:transition-none"
               />
 
               {/* The number is always on, the way a price is in a shop window.
                   What it is of arrives with the pointer. */}
               <span
                 aria-hidden
-                className="from-ink/75 via-ink/25 pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t to-transparent p-2.5 pt-10 text-left sm:p-3.5 sm:pt-12"
+                className="from-ink/75 via-ink/25 pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t to-transparent p-3 pt-12 text-left sm:p-4 sm:pt-14"
               >
                 <span className="font-display text-canvas block text-[0.95rem] leading-none font-extrabold tracking-[-0.03em] tabular-nums sm:text-[1.1rem]">
-                  {String(at + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="text-canvas/75 mt-1 block truncate text-[0.68rem] opacity-0 transition-opacity duration-500 ease-[var(--ease-brand)] group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none sm:text-[0.75rem]">
-                  {say(item.alt)}
+                  {say(alt)}
                 </span>
               </span>
 
               <span
                 aria-hidden
-                className="bg-canvas/90 text-ink absolute top-2.5 right-2.5 flex size-8 items-center justify-center rounded-full opacity-0 transition-opacity duration-400 ease-[var(--ease-brand)] group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none sm:top-3.5 sm:right-3.5"
+                className="bg-canvas/90 text-ink absolute top-3 right-3 flex size-8 items-center justify-center rounded-full opacity-0 transition-opacity duration-400 ease-[var(--ease-brand)] group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none sm:top-4 sm:right-4"
               >
                 <Maximize2 className="size-3.5" strokeWidth={2} />
               </span>
             </button>
-          ))}
-        </div>
-      </Reveal>
+          );
+        })}
+      </div>
 
-      {pages > 1 ? (
-        <Reveal delay={0.1} amount={0.4}>
-          <div className="mt-7 flex items-end gap-5 sm:mt-9 sm:gap-7">
-            <p className="leading-none">
-              <span
-                className={cn(
-                  "font-display block text-[clamp(2.25rem,6vw,3.5rem)] leading-[0.8] font-extrabold tracking-[-0.05em] tabular-nums",
-                  skin.title,
-                )}
-              >
-                {page + 1}
-              </span>
-              <span
-                className={cn(
-                  "font-display mt-1.5 block pl-2 text-[0.85rem] font-bold tabular-nums",
-                  skin.caption,
-                )}
-              >
-                / {pages}
-              </span>
-            </p>
+      {/* ── The controls, back on the measure ───────────────────────── */}
+      {loops ? (
+        <div className="container-eiden mt-7 flex items-end gap-5 sm:mt-9 sm:gap-7">
+          <p className="leading-none">
+            <span
+              ref={countRef}
+              className={cn(
+                "font-display block text-[clamp(2.25rem,6vw,3.5rem)] leading-[0.8] font-extrabold tracking-[-0.05em] tabular-nums",
+                skin.title,
+              )}
+            >
+              01
+            </span>
+            <span
+              className={cn(
+                "font-display mt-1.5 block pl-2 text-[0.85rem] font-bold tabular-nums",
+                skin.caption,
+              )}
+            >
+              / {String(total).padStart(2, "0")}
+            </span>
+          </p>
 
-            <div className="flex items-center gap-2 pb-1.5">
-              <button
-                type="button"
-                onClick={() => turn(-1)}
-                aria-label={say({
-                  fr: "Page précédente",
-                  en: "Previous page",
-                })}
-                className={cn(arrow, skin.control)}
-              >
-                <ChevronLeft className="size-5" strokeWidth={1.6} aria-hidden />
-              </button>
-              <button
-                type="button"
-                onClick={() => turn(1)}
-                aria-label={say({ fr: "Page suivante", en: "Next page" })}
-                className={cn(arrow, skin.control)}
-              >
-                <ChevronRight className="size-5" strokeWidth={1.6} aria-hidden />
-              </button>
-            </div>
+          {/* How far through the set the rail has come. */}
+          <span
+            aria-hidden
+            className={cn("mb-4 hidden h-px flex-1 sm:block", skin.frame)}
+          >
+            <span
+              ref={barRef}
+              className="bg-gold block h-full w-full origin-left transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
+              style={{ transform: `scaleX(${1 / total})` }}
+            />
+          </span>
+
+          <div className="flex items-center gap-2 pb-1.5">
+            <button
+              type="button"
+              onClick={() => setPlaying((on) => !on)}
+              aria-label={
+                playing
+                  ? say({ fr: "Mettre en pause", en: "Pause" })
+                  : say({ fr: "Lancer le défilement", en: "Play" })
+              }
+              className={cn(control, skin.control)}
+            >
+              {playing ? (
+                <Pause className="size-4" strokeWidth={1.8} aria-hidden />
+              ) : (
+                <Play className="size-4" strokeWidth={1.8} aria-hidden />
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => step(-1)}
+              aria-label={say({ fr: "Image précédente", en: "Previous image" })}
+              className={cn(control, skin.control)}
+            >
+              <ChevronLeft className="size-5" strokeWidth={1.6} aria-hidden />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => step(1)}
+              aria-label={say({ fr: "Image suivante", en: "Next image" })}
+              className={cn(control, skin.control)}
+            >
+              <ChevronRight className="size-5" strokeWidth={1.6} aria-hidden />
+            </button>
           </div>
-        </Reveal>
+        </div>
       ) : null}
 
       <CaseLightbox
         items={wall}
         index={open}
         onClose={() => setOpen(null)}
-        /* The page follows the picture, so closing the lightbox leaves the
-           reader looking at the page the picture came from. */
-        onMove={(next) => {
-          setOpen(next);
-          setPage(Math.floor(next / per));
-        }}
+        onMove={setOpen}
       />
     </div>
   );

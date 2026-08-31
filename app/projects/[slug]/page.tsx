@@ -40,7 +40,8 @@ export default async function ProjectPage({
   const project = getProjectCase(slug);
   if (!project) notFound();
 
-  const [next] = getNextCases(slug, 1);
+  /* Two doors at the end of the case, not one. */
+  const next = getNextCases(slug, 2);
 
   return (
     <ViewTransition
@@ -57,7 +58,7 @@ export default async function ProjectPage({
       }}
       default="none"
     >
-      <ProjectCaseStudy project={project} next={next ?? project} />
+      <ProjectCaseStudy project={project} next={next.length ? next : [project]} />
     </ViewTransition>
   );
 }

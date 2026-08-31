@@ -14,6 +14,12 @@ import { cn } from "@/lib/utils";
 
 const LINE_LEAD = 320;
 const LINE_STEP = 70;
+const SETTLE = 88;
+const SLACK = 6;
+const REACH = 96;
+
+/** Below this the bar is still standing on the page's own first screen. */
+const LIFT = 24;
 
 type Tone = "dark" | "light";
 
@@ -24,6 +30,13 @@ function isDark(colour: string) {
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.5;
 }
 
+/**
+ * What is under a point, and whether the bar has to be light or dark over it.
+ *
+ * Only ever asked while the bar is transparent, which is only ever at the top
+ * of a page. A section that knows its own answer says so with `data-nav-tone`;
+ * everything else is read off the first painted background in the stack.
+ */
 function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
   const stack = document
     .elementsFromPoint(x, y)
@@ -47,16 +60,127 @@ function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
   return "dark";
 }
 
+/**
+ * The bar's two questions, answered on the same frame.
+ *
+ * **Is it wanted?** Reading is the default state of every page here, so the
+ * bar leaves as soon as the reader commits to going down, and comes back the
+ * instant they ask: scrolling up, bringing the pointer to the top edge, or
+ * tabbing into it. Nothing is on a timer   a bar that returns on its own is a
+ * bar the reader has to dismiss.
+ *
+ * **What is it standing on?** At the very top of a page it has no ground of
+ * its own: it is transparent, laid straight over whatever the page opens on,
+ * so it has to take its colour from that   canvas over a film hero, ink over
+ * a daylight one. Past the first inch it brings its own white and the question
+ * stops being asked, which is also why the probe costs nothing on a long
+ * scroll: `elementsFromPoint` only runs while the bar is see-through.
+ *
+ * All of it is written onto the node rather than held in React. It is read on
+ * every scroll frame, and a re-render per frame would be paid for by whatever
+ * the reader is actually looking at.
+ */
+function useSummoned(open: boolean) {
+  const ref = useRef<HTMLElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  /* Live inputs, kept out of React for the same reason. */
+  const near = useRef(false);
+  const held = useRef(false);
+
+  useEffect(() => {
+    const frame = ref.current;
+    const bar = barRef.current;
+    if (!frame || !bar) return;
+
+    let last = window.scrollY;
+    let shown = true;
+    let lifted = false;
+    let tone: Tone | null = null;
+    let raf = 0;
+
+    const draw = () => {
+      raf = 0;
+      const y = window.scrollY;
+      const moved = y - last;
+
+      /* The menu, the top of the page, the pointer at the edge and the
+         keyboard all out-rank the direction of travel. */
+      let next = shown;
+      if (open || y <= SETTLE || near.current || held.current) next = true;
+      else if (Math.abs(moved) >= SLACK) next = moved < 0;
+
+      if (Math.abs(moved) >= SLACK) last = y;
+
+      if (next !== shown) {
+        shown = next;
+        frame.dataset.shown = String(next);
+      }
+
+      /* The menu is ink from edge to edge: the bar keeps its glass over it
+         rather than laying white across the top of it. */
+      const nowLifted = !open && y > LIFT;
+      if (nowLifted !== lifted) {
+        lifted = nowLifted;
+        bar.dataset.lifted = String(nowLifted);
+      }
+
+      /* On its own white, or over the open menu, the answer is already known
+         and the page is never touched for it. */
+      const nowTone: Tone = open
+        ? "dark"
+        : lifted
+          ? "light"
+          : toneAt(24, bar.getBoundingClientRect().height / 2, frame);
+
+      if (nowTone !== tone) {
+        tone = nowTone;
+        bar.dataset.tone = nowTone;
+      }
+    };
+
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(draw);
+    };
+
+    /* Only the crossing of the top band is acted on   a pointer moving about
+       the middle of the page never reaches this. */
+    const onPointer = (event: PointerEvent) => {
+      const within = event.clientY <= REACH;
+      if (within === near.current) return;
+      near.current = within;
+      queue();
+    };
+
+    const onFocus = () => {
+      held.current = frame.contains(document.activeElement);
+      queue();
+    };
+
+    draw();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    window.addEventListener("pointermove", onPointer, { passive: true });
+    document.addEventListener("focusin", onFocus);
+
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+      window.removeEventListener("pointermove", onPointer);
+      document.removeEventListener("focusin", onFocus);
+    };
+  }, [open]);
+
+  return { ref, barRef };
+}
+
 export function SiteHeader() {
   const { t } = useLanguage();
   const pathname = usePathname();
   const footerRevealed = useFooterRevealed();
   const [open, setOpen] = useState(false);
 
-  const headerRef = useRef<HTMLElement>(null);
-  const markRef = useRef<HTMLAnchorElement>(null);
-  const actionsRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { ref: headerRef, barRef } = useSummoned(open);
   const originRef = useRef<HTMLSpanElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
 
@@ -86,57 +210,6 @@ export function SiteHeader() {
   }, [open, placeOrigin]);
 
   useEffect(() => {
-    const header = headerRef.current;
-    if (!header) return;
-
-    let raf = 0;
-    let painted = Number.NaN;
-    let forced = false;
-
-    const paint = () => {
-      if (open) {
-        if (!forced) {
-          forced = true;
-          painted = Number.NaN;
-          markRef.current?.setAttribute("data-tone", "dark");
-          actionsRef.current?.setAttribute("data-tone", "dark");
-        }
-        raf = requestAnimationFrame(paint);
-        return;
-      }
-      forced = false;
-
-      const y = window.scrollY;
-      if (y !== painted) {
-        painted = y;
-        for (const node of [markRef.current, actionsRef.current]) {
-          if (!node) continue;
-          const box = node.getBoundingClientRect();
-          const tone = toneAt(
-            box.left + box.width / 2,
-            box.top + box.height / 2,
-            header,
-          );
-          if (node.getAttribute("data-tone") !== tone) {
-            node.setAttribute("data-tone", tone);
-          }
-        }
-      }
-      raf = requestAnimationFrame(paint);
-    };
-
-    paint();
-    const remeasure = () => {
-      painted = Number.NaN;
-    };
-    window.addEventListener("resize", remeasure);
-    return () => {
-      window.removeEventListener("resize", remeasure);
-      cancelAnimationFrame(raf);
-    };
-  }, [open]);
-
-  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
@@ -161,10 +234,7 @@ export function SiteHeader() {
 
   const reach = [
     { label: siteConfig.email, href: `mailto:${siteConfig.email}` },
-    {
-      label: siteConfig.phoneMa,
-      href: `tel:${siteConfig.phoneMa.replace(/\s/g, "")}`,
-    },
+    { label: siteConfig.phoneMa, href: `tel:${siteConfig.phoneMa.replace(/\s/g, "")}`,},
     { label: t.menu.booking, href: siteConfig.bookingUrl },
   ];
 
@@ -172,77 +242,80 @@ export function SiteHeader() {
     <>
       <header
         ref={headerRef}
+        data-shown="true"
         aria-hidden={stowed || undefined}
         inert={stowed ? true : undefined}
         className={cn(
-          "pointer-events-none fixed inset-x-0 top-0 z-[70] py-4 sm:py-6",
+          "pointer-events-none fixed inset-x-0 top-0 z-[70]",
           "transition-[opacity,transform] duration-600 ease-[var(--ease-brand)] motion-reduce:transition-none",
-          stowed ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100",
+          "data-[shown=false]:-translate-y-full data-[shown=false]:opacity-0",
+          stowed && "-translate-y-full opacity-0",
         )}
       >
-        <div className="container-eiden flex items-center justify-between gap-4">
+        {/* The bar is the width of the screen, not the width of the page. It
+            is chrome laid over the site rather than a row inside it, so it
+            keeps its own margins and never lines up with the column of work
+            the sections are set on. */}
+        <div
+          ref={barRef}
+          data-lifted="false"
+          data-tone="dark"
+          className={cn(
+            "flex h-16 items-center justify-between gap-4 px-5 sm:h-18 sm:px-10 lg:px-12",
+            "border-b border-transparent transition-[background-color,border-color,backdrop-filter,color] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+            /* Transparent on the first screen, its own white after it. */
+            "data-[lifted=true]:bg-canvas/88 data-[lifted=true]:border-ink/8 data-[lifted=true]:pointer-events-auto data-[lifted=true]:backdrop-blur-xl",
+            "text-canvas data-[tone=light]:text-ink",
+          )}
+        >
           <Link
-            ref={markRef}
             href="/"
-            data-tone="dark"
             onClick={() => setOpen(false)}
             aria-label={`${siteConfig.name}   ${t.nav.home}`}
             className={cn(
-              "pointer-events-auto",
-              "text-canvas data-[tone=light]:text-teal",
-              "transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+              "pointer-events-auto transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+              "hover:text-gold",
             )}
           >
-            <Wordmark className="h-8 sm:h-10" />
+            <Wordmark className="h-7 sm:h-8" />
           </Link>
 
-          <div
-            ref={actionsRef}
-            data-tone="dark"
+          <button
+            type="button"
+            onClick={() => {
+              placeOrigin();
+              setOpen((current) => !current);
+            }}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            aria-label={open ? t.common.close : t.common.menu}
             className={cn(
-              "pointer-events-auto flex items-center",
-              "text-canvas data-[tone=light]:text-ink",
-              "transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+              "pointer-events-auto flex h-10 shrink-0 items-center gap-3.5 rounded-full border pr-4 pl-5 sm:h-11 sm:gap-4 sm:pr-5 sm:pl-6",
+              "transition-[background-color,border-color,color] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+              open
+                ? "bg-canvas border-canvas text-ink"
+                : "border-current/35 hover:border-current",
             )}
           >
-            <button
-              ref={buttonRef}
-              type="button"
-              onClick={() => {
-                placeOrigin();
-                setOpen((current) => !current);
-              }}
-              aria-expanded={open}
-              aria-controls="site-menu"
-              aria-label={open ? t.common.close : t.common.menu}
-              className={cn(
-                "flex h-11 shrink-0 items-center gap-3.5 rounded-full border pr-4 pl-5 sm:h-12 sm:gap-4 sm:pr-5 sm:pl-6",
-                "transition-[background-color,border-color,color] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                open
-                  ? "bg-ink border-ink text-canvas"
-                  : "border-current/35 hover:border-current",
-              )}
-            >
-              <span aria-hidden className="font-label text-[0.78rem] font-bold tracking-[0.26em] uppercase">
-                {t.menu.label}
-              </span>
+            <span aria-hidden className="font-label text-[0.78rem] font-bold tracking-[0.26em] uppercase">
+              {t.menu.label}
+            </span>
 
-              <span ref={originRef} aria-hidden className="relative block h-3.5 w-[1.375rem]">
-                <span
-                  className={cn(
-                    "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                    open ? "top-1/2 w-full rotate-45" : "top-0 w-full rotate-0",
-                  )}
-                />
-                <span
-                  className={cn(
-                    "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                    open ? "top-1/2 w-full -rotate-45" : "bottom-0 w-3/5 rotate-0",
-                  )}
-                />
-              </span>
-            </button>
-          </div>
+            <span ref={originRef} aria-hidden className="relative block h-3.5 w-[1.375rem]">
+              <span
+                className={cn(
+                  "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                  open ? "top-1/2 w-full rotate-45" : "top-0 w-full rotate-0",
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute left-0 h-0.5 rounded-full bg-current transition-[rotate,width,top] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                  open ? "top-1/2 w-full -rotate-45" : "bottom-0 w-3/5 rotate-0",
+                )}
+              />
+            </span>
+          </button>
         </div>
       </header>
 
@@ -257,7 +330,7 @@ export function SiteHeader() {
           !open && "pointer-events-none",
         )}
       >
-        <div aria-hidden className="h-19 shrink-0 sm:h-24" />
+        <div aria-hidden className="h-16 shrink-0 sm:h-18" />
 
         <nav aria-label={t.footer.navLabel} className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-visible">
           {navRoutes.map((route, index) => {
