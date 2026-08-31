@@ -12,9 +12,13 @@ import { chilloutLounge } from "./chillout-lounge";
 import { droguerieSouss } from "./droguerie-souss";
 
 export type {
+  Architecture,
   Chapter,
   ChapterTone,
+  Fracture,
   GalleryImage,
+  Impact,
+  ImpactRow,
   Localized,
   ProjectCase,
   Shot,

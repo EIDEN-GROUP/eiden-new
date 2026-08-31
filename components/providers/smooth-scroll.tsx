@@ -21,6 +21,31 @@ export function scrollToTop() {
 }
 
 /**
+ * Hold the page still while an overlay owns the screen.
+ *
+ * Two things scroll this site and both have to stop. `overflow: hidden` on the
+ * body handles the browser; Lenis has to be told, because it drives the scroll
+ * position itself and would go on running underneath a lightbox that only
+ * clipped the page. The width the scrollbar gives back is paid to the body as
+ * padding, so nothing behind the overlay moves while it is open.
+ */
+export function setScrollLock(locked: boolean) {
+  const { body } = document;
+
+  if (!locked) {
+    body.style.overflow = "";
+    body.style.paddingRight = "";
+    instance?.start();
+    return;
+  }
+
+  const gap = window.innerWidth - document.documentElement.clientWidth;
+  body.style.overflow = "hidden";
+  if (gap > 0) body.style.paddingRight = `${gap}px`;
+  instance?.stop();
+}
+
+/**
  * Snap to the top with no easing at all.
  *
  * Landing on a new page has to put the reader at the top of it, and Lenis is
@@ -43,11 +68,16 @@ export function SmoothScroll() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (prefersReduced.matches) return;
 
+    /* Longer than a browser's own scroll, and shorter per gesture than one.
+       The case studies are read rather than skimmed   a notch of the wheel
+       should move the page by less than a screen and land softly, so a room
+       arrives instead of snapping into place. */
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.45,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.35,
     });
 
     instance = lenis;

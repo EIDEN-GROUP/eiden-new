@@ -7,6 +7,9 @@ export const bopassage: ProjectCase = {
   category: { fr: "Cafés & restaurants", en: "Cafés & Restaurants" },
   location: { fr: "Agadir, Maroc", en: "Agadir, Morocco" },
 
+  /** Forêt #18312e, out of the brand book. */
+  ground: "#18312e",
+
   hero: {
     statement: {
       fr: "Le lieu où l'on revient toujours.",
@@ -23,29 +26,58 @@ export const bopassage: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'une salle qui se vidait à la fermeture, à une marque qui tourne entre deux visites.",
-      en: "From a room that emptied at closing to a brand that keeps running between visits.",
-    },
-    text: [
+  fracture: {
+    reality: [
+      {
+        fr: "Une salle qui a déjà son ambiance.",
+        en: "A room that already has its own atmosphere.",
+      },
+      { fr: "Des clients qui reviennent.", en: "Guests who come back." },
+      {
+        fr: "Un quartier qui passe devant la porte.",
+        en: "A neighbourhood that walks past the door.",
+      },
+    ],
+    fracture: [
       {
         fr: "L'ambiance s'arrêtait à la porte.",
         en: "The atmosphere stopped at the front door.",
       },
       {
-        fr: "Pas de site, pas de présence sociale régulière, rien de payant.",
-        en: "No site, no consistent social presence, nothing paid.",
+        fr: "Pas de site : ni carte, ni adresse, ni réservation.",
+        en: "No site: no menu, no address, no booking.",
       },
       {
-        fr: "Nous avons pris ce que la salle fait ressentir et construit vers l'extérieur à partir de là.",
-        en: "We took what the room feels like and built outward from it.",
+        fr: "Pas de présence sociale régulière.",
+        en: "No consistent social presence.",
       },
       {
-        fr: "La marque se lit maintenant de la même façon sur un écran et à table.",
-        en: "The brand now reads the same on a screen as it does at the table.",
+        fr: "Rien de payant, et donc aucune découverte.",
+        en: "Nothing paid, and so no discovery.",
       },
     ],
+    statement: {
+      fr: "La salle savait recevoir. Personne, dehors, ne le savait.",
+      en: "The room knew how to host. Nobody outside knew it.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Prendre ce que la salle fait ressentir, et construire vers l'extérieur à partir de là.",
+      en: "Take what the room feels like, and build outward from it.",
+    },
+    chain: [
+      { fr: "Marque", en: "Brand" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Contenu", en: "Content" },
+      { fr: "Média payant", en: "Paid Media" },
+      { fr: "Commercial", en: "Commercial" },
+    ],
+    text: {
+      fr: "La marque a fixé la chaleur et la lumière de la salle en système. Le site répond aux deux seules questions qu'on pose à un restaurant : où, et quand. Le contenu a donné à l'équipe un rythme qu'elle peut tenir seule. Le payant est allé chercher l'intention plutôt que l'audience. Et l'ensemble est réglé chaque mois sur une seule mesure : les couverts servis.",
+      en: "The brand fixed the room's warmth and light into a system. The site answers the only two questions anyone asks a restaurant: where, and when. Content gave the team a rhythm it can hold on its own. Paid media went after intent rather than audience. And all of it is retuned every month against one measure: covers served.",
+    },
   },
 
   chapters: [
@@ -58,8 +90,8 @@ export const bopassage: ProjectCase = {
         en: "Forêt & Or, an identity drawn from the room itself.",
       },
       text: {
-        fr: "La chaleur botanique et la lumière dorée, fixées en système : un logotype manuscrit, trois couleurs, et des applications de la tasse à l'enseigne.",
-        en: "Botanical warmth and golden-hour light, fixed into a system: a script wordmark, three colours, and applications from the cup to the sign.",
+        fr: "La chaleur botanique et la lumière dorée, fixées en système : le vert forêt installe l'ambiance, l'or du café donne le caractère, et les deux suffisent à reconnaître la marque partout. Playfair pour les titres et la carte, Montserrat pour ce qui oriente, et des applications de la tasse à l'enseigne.",
+        en: "Botanical warmth and golden-hour light, fixed into a system: the forest green sets the room, the coffee gold gives it its character, and the two are enough to recognise the brand anywhere. Playfair for the titles and the menu, Montserrat for whatever has to direct, and applications from the cup to the sign.",
       },
       shots: [
         {
@@ -108,15 +140,24 @@ export const bopassage: ProjectCase = {
             role: { fr: "Fondation", en: "Foundation" },
           },
           {
-            name: "Crème",
+            name: "Ivoire",
             hex: "#f5eedf",
-            role: { fr: "Contraste", en: "Contrast" },
+            role: { fr: "Fond clair", en: "Light ground" },
           },
-          { name: "Or", hex: "#b8973a", role: { fr: "Accent", en: "Accent" } },
           {
-            name: "Or clair",
+            name: "Or du Café",
+            hex: "#b8973a",
+            role: { fr: "Caractère", en: "Character" },
+          },
+          {
+            name: "Or Doux",
             hex: "#d4b06a",
-            role: { fr: "Lumière", en: "Light" },
+            role: { fr: "Textes & légendes", en: "Text & captions" },
+          },
+          {
+            name: "Sauge",
+            hex: "#6b8c74",
+            role: { fr: "Botanique", en: "Botanical" },
           },
         ],
         states: [
@@ -232,74 +273,102 @@ export const bopassage: ProjectCase = {
         },
         {
           image: "/work/bopassage/bopassage-social-instagram.png",
-          alt: { fr: "Profil Instagram Bôpassage", en: "Bôpassage Instagram profile" },
+          alt: {
+            fr: "Profil Instagram Bôpassage",
+            en: "Bôpassage Instagram profile",
+          },
           label: { fr: "Profil", en: "Profile" },
         },
       ],
-      wall: [
+      blocks: [
         {
-          image: "/work/bopassage/bopassage-brand-board.png",
-          alt: { fr: "Planche de marque Bôpassage", en: "Bôpassage brand board" },
-        },
-        {
-          image: "/work/bopassage/bopassage-brand-logo-green.png",
-          alt: {
-            fr: "Logo Bôpassage en or sur forêt",
-            en: "Bôpassage logo in gold on forest",
+          key: "revenue",
+          labels: [
+            { fr: "Revenu", en: "Revenue" },
+            { fr: "Média payant", en: "Paid Media" },
+          ],
+          title: {
+            fr: "Une seule mesure : les couverts.",
+            en: "One measure: covers.",
           },
-        },
-        {
-          image: "/work/bopassage/bopassage-brand-palette.png",
-          alt: { fr: "Palette Bôpassage", en: "Bôpassage palette" },
-        },
-        {
-          image: "/work/bopassage/bopassage-social-savory-morning.png",
-          alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-        },
-        {
-          image: "/work/bopassage/bopassage-social-balance.png",
-          alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-        },
-        {
-          image: "/work/bopassage/bopassage-social-slows-down.png",
-          alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-        },
-        {
-          image: "/work/bopassage/bopassage-brand-logo-mark.png",
-          alt: { fr: "Le monogramme Bôpassage", en: "The Bôpassage monogram" },
-        },
-        {
-          image: "/work/bopassage/bopassage-web.png",
-          alt: { fr: "Le site Bôpassage", en: "The Bôpassage site" },
+          text: {
+            fr: "Google Ads sur l’intention plutôt que sur l’audience, de l’affichage là où le quartier passe, et le tout réglé chaque mois sur ce que la salle a réellement servi. La découverte se transforme en réservation, et le rythme payant continue de tourner entre deux visites.",
+            en: "Google Ads on intent rather than on audience, out-of-home where the neighbourhood actually walks, and all of it retuned every month against what the room actually served. Discovery turns into reservations, and the paid rhythm keeps working between visits.",
+          },
+          shots: [
+            {
+              image: "/work/bopassage/bopassage-application.png",
+              alt: {
+                fr: "Affichage extérieur Bôpassage",
+                en: "Bôpassage out-of-home poster",
+              },
+              label: { fr: "Affichage", en: "Out of home" },
+            },
+          ],
         },
       ],
     },
-    {
-      key: "revenue",
-      labels: [
-        { fr: "Revenu", en: "Revenue" },
-        { fr: "Média payant", en: "Paid Media" },
-      ],
-      tone: "forest",
-      title: {
-        fr: "Une seule mesure : les couverts.",
-        en: "One measure: covers.",
-      },
-      text: {
-        fr: "Google Ads sur l’intention plutôt que sur l’audience, de l’affichage là où le quartier passe, et le tout réglé chaque mois sur ce que la salle a réellement servi. La découverte se transforme en réservation, et le rythme payant continue de tourner entre deux visites.",
-        en: "Google Ads on intent rather than on audience, out-of-home where the neighbourhood actually walks, and all of it retuned every month against what the room actually served. Discovery turns into reservations, and the paid rhythm keeps working between visits.",
-      },
-      shots: [
-        {
-          image: "/work/bopassage/bopassage-application.png",
-          alt: {
-            fr: "Affichage extérieur Bôpassage",
-            en: "Bôpassage out-of-home poster",
-          },
-          label: { fr: "Affichage", en: "Out of home" },
+  ],
+
+  impact: {
+    title: {
+      fr: "La marque se lit de la même façon sur un écran et à table.",
+      en: "The brand reads the same on a screen as it does at the table.",
+    },
+    text: {
+      fr: "Une identité tirée de la salle elle-même, un site construit pour le téléphone, et un rythme payant qui continue de tourner entre deux visites.",
+      en: "An identity taken from the room itself, a site built for the phone, and a paid rhythm that keeps working between visits.",
+    },
+    metric: "×3",
+    rows: [
+      {
+        metric: "×3",
+        measures: { fr: "Les couverts servis", en: "Covers served" },
+        /* TODO(brand book): la période sur laquelle le chiffre est tenu. */
+        period: null,
+        meaning: {
+          fr: "La découverte se transforme en réservation.",
+          en: "Discovery turns into reservations.",
         },
-      ],
-      metric: "×3",
+      },
+    ],
+  },
+
+  work: [
+    {
+      image: "/work/bopassage/bopassage-brand-board.png",
+      alt: { fr: "Planche de marque Bôpassage", en: "Bôpassage brand board" },
+    },
+    {
+      image: "/work/bopassage/bopassage-brand-logo-green.png",
+      alt: {
+        fr: "Logo Bôpassage en or sur forêt",
+        en: "Bôpassage logo in gold on forest",
+      },
+    },
+    {
+      image: "/work/bopassage/bopassage-brand-palette.png",
+      alt: { fr: "Palette Bôpassage", en: "Bôpassage palette" },
+    },
+    {
+      image: "/work/bopassage/bopassage-social-savory-morning.png",
+      alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+    },
+    {
+      image: "/work/bopassage/bopassage-social-balance.png",
+      alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+    },
+    {
+      image: "/work/bopassage/bopassage-social-slows-down.png",
+      alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+    },
+    {
+      image: "/work/bopassage/bopassage-brand-logo-mark.png",
+      alt: { fr: "Le monogramme Bôpassage", en: "The Bôpassage monogram" },
+    },
+    {
+      image: "/work/bopassage/bopassage-web.png",
+      alt: { fr: "Le site Bôpassage", en: "The Bôpassage site" },
     },
   ],
 };

@@ -10,6 +10,9 @@ export const lunjaVillage: ProjectCase = {
     en: "Imi Ouaddar, Taghazout",
   },
 
+  /** Mud #3D2C1E, out of the brand book. */
+  ground: "#3D2C1E",
+
   hero: {
     statement: {
       fr: "Parler comme quelqu'un qui y vit déjà.",
@@ -19,50 +22,80 @@ export const lunjaVillage: ProjectCase = {
       fr: "Un village côtier dont la marque disait encore « resort » alors que ceux qui arrivaient étaient surfeurs, nomades et collectifs créatifs. Nous l'avons reconstruite pour le client qui vient vraiment.",
       en: "A coastal village whose brand still said “resort” while the people turning up were surfers, nomads and creative groups. We rebuilt it for the guest actually arriving.",
     },
-    image: "/work/lunja-village/Copie de imgg5.png",
+    image: "/work/lunja-village/image lunja village portfoliio.png",
     alt: {
       fr: "La piscine de Lunja Village au coucher du soleil",
       en: "The Lunja Village pool at sunset",
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'une marque adressée au mauvais client à une marque que le bon client reconnaît.",
-      en: "From a brand aimed at the wrong guest to one the right guest recognises.",
-    },
-    text: [
+  fracture: {
+    reality: [
+      { fr: "Une identité déjà en place.", en: "An identity already in place." },
+      { fr: "Une vraie communauté.", en: "A real community." },
       {
-        fr: "Lunja avait le lieu, l'esprit et l'audience.",
-        en: "Lunja had the location, the spirit and the audience.",
+        fr: "Une atmosphère reconnaissable.",
+        en: "A recognisable atmosphere.",
       },
       {
-        fr: "Et une marque qui décrivait un autre endroit.",
-        en: "And a brand describing a different place.",
-      },
-      {
-        fr: "Nous l'avons repositionnée autour de ceux qui arrivent vraiment.",
-        en: "We repositioned it around who actually arrives.",
-      },
-      {
-        fr: "Les réservations entrent maintenant en comprenant déjà le village.",
-        en: "Bookings now come in already understanding the village.",
+        fr: "Une audience qui venait déjà.",
+        en: "An audience already turning up.",
       },
     ],
+    fracture: [
+      { fr: "Un vocabulaire de « resort ».", en: "The language of a resort." },
+      {
+        fr: "Le mauvais client, adressé comme si c'était le bon.",
+        en: "The wrong guest, addressed as if they were the right one.",
+      },
+      {
+        fr: "Un positionnement décroché du lieu.",
+        en: "A position disconnected from the place.",
+      },
+      {
+        fr: "Une communication qui ne racontait pas le séjour réel.",
+        en: "Communication that did not describe the actual stay.",
+      },
+    ],
+    statement: {
+      fr: "Le lieu savait qui il était. La marque, non.",
+      en: "The place knew who it was. The brand did not.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Aligner l'entreprise sur ceux qui arrivent vraiment.",
+      en: "Align the business around the people who actually arrive.",
+    },
+    chain: [
+      { fr: "Positionnement", en: "Positioning" },
+      { fr: "Marque", en: "Brand" },
+      { fr: "Contenu", en: "Content" },
+      { fr: "Média", en: "Media" },
+      { fr: "Commercial", en: "Commercial" },
+    ],
+    text: {
+      fr: "Le positionnement a nommé l'audience réelle. La marque lui a donné un langage visuel qu'elle reconnaît. Le contenu a tenu le récit à un rythme que l'équipe peut réellement soutenir. Le média a dirigé le budget de la saison vers ceux qui préparent déjà le voyage. Et le commercial a transformé tout cela en réservations qui arrivent en comprenant déjà le village.",
+      en: "Positioning named the real audience. The brand gave that audience a visual language it recognises. Content held the story at a pace the team can actually sustain. Media pointed the season's budget at people already planning the trip. And the commercial work turned all of it into bookings that arrive already understanding the village.",
+    },
   },
 
   chapters: [
     {
       key: "rebranding",
-      labels: [{ fr: "Rebranding", en: "Rebranding" }],
+      labels: [
+        { fr: "Rebranding", en: "Rebranding" },
+        { fr: "Positionnement", en: "Positioning" },
+      ],
       tone: "forest",
       title: {
         fr: "Un village, pas un resort.",
         en: "A village, not a resort.",
       },
       text: {
-        fr: "Le logotype, la planche dont il est sorti, et les objets sur lesquels il vit. Une identité qui correspond enfin à qui pousse la porte : une côte, du sel, du bois, et rien qui ressemble à une réception d'hôtel.",
-        en: "The wordmark, the board it came from, and the objects it lives on. An identity that finally matches who walks through the door: a coastline, salt, wood, and nothing that looks like a hotel reception.",
+        fr: "Le village disait « resort » à des surfeurs, des nomades et des collectifs créatifs ; le repositionnement n'a rien inventé, il a écrit ce que les gens racontaient déjà en repartant   Surf & Nomad Cottages. Le logotype, les cinq caractères du système et les objets sur lesquels ils vivent disent la même chose : une côte, du sel, du bois, et rien qui ressemble à une réception d'hôtel.",
+        en: "The village was saying “resort” to surfers, nomads and creative collectives; the reposition invented nothing, it wrote down what people were already saying on the way out   Surf & Nomad Cottages. The wordmark, the five faces of the system and the objects they live on say the same thing: a coastline, salt, wood, and nothing that looks like a hotel reception.",
       },
       links: [
         {
@@ -99,23 +132,31 @@ export const lunjaVillage: ProjectCase = {
       palette: {
         title: { fr: "Le langage visuel", en: "The visual language" },
         lead: {
-          fr: "La côte, pas le resort : une palette qui parle à qui arrive vraiment.",
-          en: "The coast, not the resort: a palette that speaks to who actually arrives.",
+          fr: "Retro Beach : la côte, pas le resort, une palette qui parle à qui arrive vraiment.",
+          en: "Retro Beach: the coast, not the resort   a palette that speaks to who actually arrives.",
         },
         colors: [
           {
             name: "Keppel",
             hex: "#2BBAA5",
-            role: { fr: "Fondation", en: "Foundation" },
+            role: { fr: "Primaire", en: "Primary" },
           },
           {
-            name: "Celadon",
+            name: "Céladon",
             hex: "#93D3AE",
-            role: { fr: "Respiration", en: "Breath" },
+            role: { fr: "Secondaire", en: "Secondary" },
           },
-          { name: "Amber", hex: "#FFD100", role: { fr: "Accent", en: "Accent" } },
-          { name: "Coral", hex: "#F96635", role: { fr: "Signal", en: "Signal" } },
-          { name: "Vanilla", hex: "#FDF5D3", role: { fr: "Repos", en: "Rest" } },
+          {
+            name: "Jo&Joe Yellow",
+            hex: "#FFD100",
+            role: { fr: "Accent partenaire", en: "Partnership accent" },
+          },
+          { name: "Corail", hex: "#F96635", role: { fr: "Action", en: "Action" } },
+          {
+            name: "Crème Douce",
+            hex: "#FDF5D3",
+            role: { fr: "Fond", en: "Background" },
+          },
         ],
         states: [
           {
@@ -135,10 +176,10 @@ export const lunjaVillage: ProjectCase = {
             colorIndex: 1,
           },
           {
-            title: { fr: "Le soleil, dosé", en: "Sun, measured" },
+            title: { fr: "Le jaune du partenaire", en: "The partner's yellow" },
             text: {
-              fr: "L'ambre est l'éclat du milieu de journée. Employé partout il deviendrait criard ; réservé aux appels à l'action, il fait exactement son travail.",
-              en: "Amber is the middle of the day. Used everywhere it would shout; kept for the calls to action, it does precisely its job.",
+              fr: "Ce jaune n'est pas un choix esthétique : c'est celui de Jo&Joe, la plateforme avec laquelle le village co-signe. Employé partout il deviendrait criard ; réservé aux appels à l'action, il fait exactement son travail.",
+              en: "That yellow is not an aesthetic choice: it is Jo&Joe's, the platform the village co-signs with. Used everywhere it would shout; kept for the calls to action, it does precisely its job.",
             },
             colorIndex: 2,
           },
@@ -156,25 +197,12 @@ export const lunjaVillage: ProjectCase = {
               en: "A village, not a brochure",
             },
             text: {
-              fr: "La vanille laisse le reste exister. C'est elle qui fait que cinq couleurs cohabitent sans que rien ne ressemble à un dépliant touristique.",
-              en: "Vanilla lets the rest exist. It is why five colours can live together without any of it looking like a tourist leaflet.",
+              fr: "La crème douce laisse le reste exister. C'est elle qui fait que cinq couleurs cohabitent sans que rien ne ressemble à un dépliant touristique.",
+              en: "Crème douce lets the rest exist. It is why five colours can live together without any of it looking like a tourist leaflet.",
             },
             colorIndex: 4,
           },
         ],
-      },
-    },
-    {
-      key: "positioning",
-      labels: [{ fr: "Positionnement", en: "Positioning" }],
-      tone: "canvas",
-      title: {
-        fr: "Adressé au vrai client, pas à celui qu'on imaginait.",
-        en: "Aimed at the real guest, not the imagined one.",
-      },
-      text: {
-        fr: "Le village disait « resort » à des surfeurs, des nomades et des collectifs créatifs. Le repositionnement n'a rien inventé : il a écrit ce que les gens qui arrivaient racontaient déjà en repartant.",
-        en: "The village was saying “resort” to surfers, nomads and creative collectives. The reposition invented nothing: it wrote down what the people who did turn up were already saying on the way out.",
       },
     },
     {
@@ -211,97 +239,122 @@ export const lunjaVillage: ProjectCase = {
           label: { fr: "Social", en: "Social" },
         },
       ],
-      wall: [
+      blocks: [
         {
-          image: "/work/lunja-village/Copie de imgg16.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de imggg3.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de imggg9.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg13.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg20.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg24.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg27.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg28.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg38.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg39.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg41.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de immgg42.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/img1 (3).png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/img1 (6).png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/img1 (13).png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/img12.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/img15.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
-        },
-        {
-          image: "/work/lunja-village/Copie de imgg8.png",
-          alt: { fr: "Lunja Village", en: "Lunja Village" },
+          key: "revenue",
+          labels: [
+            { fr: "Revenu", en: "Revenue" },
+            { fr: "Achat média", en: "Media Buying" },
+          ],
+          title: {
+            fr: "Une côte ne se remplit pas de la même façon en février et en août.",
+            en: "A coastline does not fill the same way in February and in August.",
+          },
+          text: {
+            fr: "L’offre, le calendrier et la dépense ont été réglés ensemble sur la saison plutôt que sur le mois, et le budget dirigé vers ceux qui préparent déjà le voyage : une date en tête, un billet en attente, une planche à transporter. Les réservations arrivent maintenant en connaissant déjà le lieu.",
+            en: "The offer, the calendar and the spend were tuned together against the season rather than the month, and the budget pointed at people already planning the trip: a date in mind, a flight on hold, a board to carry. Bookings now arrive already knowing the place.",
+          },
         },
       ],
     },
+  ],
+
+  impact: {
+    title: {
+      fr: "Les réservations arrivent en comprenant déjà le village.",
+      en: "Bookings now arrive already understanding the village.",
+    },
+    text: {
+      fr: "Une marque adressée au client qui vient vraiment, un rythme de contenu que la maison tient seule, et une dépense réglée sur la saison plutôt que sur le mois.",
+      en: "A brand aimed at the guest who actually arrives, a content rhythm the house can hold on its own, and spend tuned to the season rather than to the month.",
+    },
+    metric: "+38%",
+    rows: [
+      {
+        metric: "+38%",
+        /* TODO(brand book): ce que le chiffre compte, et sur quelle période. */
+        measures: null,
+        period: null,
+        meaning: {
+          fr: "Des réservations qui arrivent en connaissant déjà le lieu.",
+          en: "Bookings that arrive already knowing the place.",
+        },
+      },
+    ],
+  },
+
+  work: [
     {
-      key: "revenue",
-      labels: [
-        { fr: "Revenu", en: "Revenue" },
-        { fr: "Achat média", en: "Media Buying" },
-      ],
-      tone: "forest",
-      title: {
-        fr: "Une côte ne se remplit pas de la même façon en février et en août.",
-        en: "A coastline does not fill the same way in February and in August.",
-      },
-      text: {
-        fr: "L’offre, le calendrier et la dépense ont été réglés ensemble sur la saison plutôt que sur le mois, et le budget dirigé vers ceux qui préparent déjà le voyage : une date en tête, un billet en attente, une planche à transporter. Les réservations arrivent maintenant en connaissant déjà le lieu.",
-        en: "The offer, the calendar and the spend were tuned together against the season rather than the month, and the budget pointed at people already planning the trip: a date in mind, a flight on hold, a board to carry. Bookings now arrive already knowing the place.",
-      },
-      metric: "+38%",
+      image: "/work/lunja-village/Copie de imgg16.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de imggg3.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de imggg9.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg13.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg20.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg24.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg27.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg28.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg38.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg39.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg41.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de immgg42.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/img1 (3).png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/img1 (6).png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/img1 (13).png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/img12.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/img15.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
+    },
+    {
+      image: "/work/lunja-village/Copie de imgg8.png",
+      alt: { fr: "Lunja Village", en: "Lunja Village" },
     },
   ],
 };

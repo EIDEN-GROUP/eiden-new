@@ -7,6 +7,9 @@ export const dmcMorocco: ProjectCase = {
   category: { fr: "Hôtellerie", en: "Hospitality" },
   location: { fr: "Maroc", en: "Morocco" },
 
+  /** Forêt Profonde #2C3830, out of the brand book. */
+  ground: "#2C3830",
+
   hero: {
     statement: {
       fr: "Trente ans d'expertise, enfin dotés d'un nom.",
@@ -23,29 +26,56 @@ export const dmcMorocco: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'une réputation qu'il fallait déjà connaître, à une marque qui se présente elle-même.",
-      en: "From a reputation you had to already know about, to a brand that introduces itself.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Trois décennies de gestion hôtelière, sans marque, sans site et sans voix.",
-        en: "Three decades of hospitality management, with no brand, no site and no voice.",
+        fr: "Trois décennies de gestion hôtelière.",
+        en: "Three decades of hospitality management.",
       },
       {
-        fr: "L'expertise ne circulait que de bouche à oreille.",
-        en: "The expertise only ever travelled by word of mouth.",
+        fr: "Une réputation solide à l'intérieur du métier.",
+        en: "A solid reputation inside the trade.",
       },
       {
-        fr: "Nous avons construit le nom et le visage qu'elle avait déjà mérités.",
-        en: "We built the name and the face it had already earned.",
-      },
-      {
-        fr: "Et pointé les deux vers ceux qui l'achètent.",
-        en: "And pointed both at the people who buy it.",
+        fr: "Un marché de quelques centaines de personnes, qui se connaissent toutes.",
+        en: "A market of a few hundred people who all know each other.",
       },
     ],
+    fracture: [
+      {
+        fr: "Pas de marque, pas de site, pas de voix.",
+        en: "No brand, no site, no voice.",
+      },
+      {
+        fr: "Une expertise qui ne circulait que de bouche à oreille.",
+        en: "Expertise that only ever travelled by word of mouth.",
+      },
+      {
+        fr: "Chaque contrat commencé par un appel passé par la maison.",
+        en: "Every contract started by a call the business made.",
+      },
+    ],
+    statement: {
+      fr: "Le métier était là depuis trente ans. Rien ne le disait.",
+      en: "The know-how had been there for thirty years. Nothing said so.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Construire le nom et le visage que l'expertise avait déjà mérités.",
+      en: "Build the name and the face the expertise had already earned.",
+    },
+    chain: [
+      { fr: "Positionnement", en: "Positioning" },
+      { fr: "Marque", en: "Brand" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Contenu", en: "Content" },
+    ],
+    text: {
+      fr: "Le positionnement a réduit trente ans de métier à ce qu'un concurrent ne peut pas recopier sans mentir. La marque   nom, monogramme, règles   lui a donné un visage. Le site a été écrit pour des propriétaires plutôt que pour des voyageurs. Et la voix LinkedIn tient cette position devant un public de pairs, jusqu'à ce que ce soit le propriétaire qui écrive le premier.",
+      en: "Positioning reduced thirty years of trade to what a competitor could not copy without lying. The brand   name, monogram, rules   gave it a face. The site was written for owners rather than for guests. And the LinkedIn voice holds that position in front of a room of peers, until it is the owner who writes first.",
+    },
   },
 
   chapters: [
@@ -58,8 +88,8 @@ export const dmcMorocco: ProjectCase = {
         en: "Name, identity and the rules that go with them, from nothing.",
       },
       text: {
-        fr: "Monogramme, système typographique et livre de règles   puis reportés sur les objets que la société met réellement entre les mains des gens : une carte, une tenue, un dossier.",
-        en: "Monogram, typographic system and a guidelines book   then carried onto the things the company actually hands people: a card, a uniform, a dossier.",
+        fr: "Monogramme, système typographique et livre de règles   puis reportés sur les objets que la société met réellement entre les mains des gens : une carte, une tenue, un dossier. Playfair pour le nom, Cormorant pour ce qui se cite, Source Sans pour ce qui se lit longtemps : une maison qui a travaillé pour Hyatt, ACCOR et One&Only devait se présenter au même niveau.",
+        en: "Monogram, typographic system and a guidelines book   then carried onto the things the company actually hands people: a card, a uniform, a dossier. Playfair for the name, Cormorant for what gets quoted, Source Sans for what gets read at length: a business that has worked for Hyatt, ACCOR and One&Only had to introduce itself at the same level.",
       },
       shots: [
         {
@@ -92,6 +122,20 @@ export const dmcMorocco: ProjectCase = {
           label: { fr: "Application", en: "Application" },
         },
       ],
+      blocks: [
+        {
+          key: "positioning",
+          labels: [{ fr: "Positionnement", en: "Positioning" }],
+          title: {
+            fr: "Trente ans de métier, énoncés simplement.",
+            en: "Thirty years of know-how, stated plainly.",
+          },
+          text: {
+            fr: "Le plus dur n'était pas de trouver quoi dire, mais d'accepter d'en dire moins. Une phrase sur ce que la maison fait, une sur pour qui, une sur ce qui change   et rien qu'un concurrent puisse recopier sans mentir.",
+            en: "The hard part was not finding something to say but agreeing to say less. One line on what the business does, one on who for, one on what changes   and nothing a competitor could copy without lying.",
+          },
+        },
+      ],
       palette: {
         title: { fr: "Le langage visuel", en: "The visual language" },
         lead: {
@@ -100,21 +144,25 @@ export const dmcMorocco: ProjectCase = {
         },
         colors: [
           {
-            name: "Forest",
+            name: "Forêt",
             hex: "#3D4F44",
             role: { fr: "Fondation", en: "Foundation" },
           },
           {
-            name: "Gold",
+            name: "Or",
             hex: "#D4B896",
             role: { fr: "Signature", en: "Signature" },
           },
           {
-            name: "Sand",
-            hex: "#F2E8D8",
-            role: { fr: "Contraste", en: "Contrast" },
+            name: "Sable Doré",
+            hex: "#E8D5B5",
+            role: { fr: "Fond clair", en: "Light ground" },
           },
-          { name: "Ink", hex: "#1A1F1C", role: { fr: "Ancrage", en: "Anchor" } },
+          {
+            name: "Encre",
+            hex: "#1A1F1C",
+            role: { fr: "Ancrage", en: "Anchor" },
+          },
         ],
         states: [
           {
@@ -197,22 +245,9 @@ export const dmcMorocco: ProjectCase = {
       ],
     },
     {
-      key: "positioning",
-      labels: [{ fr: "Positionnement", en: "Positioning" }],
-      tone: "canvas",
-      title: {
-        fr: "Trente ans de métier, énoncés simplement.",
-        en: "Thirty years of know-how, stated plainly.",
-      },
-      text: {
-        fr: "Le plus dur n'était pas de trouver quoi dire, mais d'accepter d'en dire moins. Une phrase sur ce que la maison fait, une sur pour qui, une sur ce qui change   et rien qu'un concurrent puisse recopier sans mentir.",
-        en: "The hard part was not finding something to say but agreeing to say less. One line on what the business does, one on who for, one on what changes   and nothing a competitor could copy without lying.",
-      },
-    },
-    {
       key: "content",
       labels: [{ fr: "Contenu", en: "Content" }],
-      tone: "ink",
+      tone: "canvas",
       title: {
         fr: "Une voix LinkedIn que le marché reconnaît.",
         en: "A LinkedIn voice the market recognises.",
@@ -243,54 +278,65 @@ export const dmcMorocco: ProjectCase = {
           label: { fr: "Social", en: "Social" },
         },
       ],
-      wall: [
-        {
-          image: "/work/dmc-morocco/dmc-brand-card.png",
-          alt: { fr: "Carte de visite DMC", en: "DMC business card" },
+    },
+  ],
+
+  impact: {
+    title: {
+      fr: "Le premier propriétaire qui écrit le premier.",
+      en: "The first owner who writes first.",
+    },
+    text: {
+      fr: "Une marque qui se présente elle-même, un site adressé à ceux qui achètent la gestion, et une voix que le marché reconnaît.",
+      en: "A brand that introduces itself, a site addressed to the people who buy management, and a voice the market recognises.",
+    },
+    metric: "0 → 1",
+    rows: [
+      {
+        metric: "0 → 1",
+        measures: { fr: "Contacts entrants", en: "Inbound enquiries" },
+        /* TODO(brand book): la période, et le volume atteint depuis. */
+        period: null,
+        meaning: {
+          fr: "D'aucun contact entrant à une présence qui en amène.",
+          en: "From no inbound at all to a presence that brings it.",
         },
-        {
-          image: "/work/dmc-morocco/dmc-guidelines-hero.png",
-          alt: { fr: "Charte graphique DMC", en: "DMC brand guidelines" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc-brand-posters.png",
-          alt: { fr: "Affiches DMC", en: "DMC posters" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc-hero-2.png",
-          alt: { fr: "Univers de marque DMC", en: "The DMC brand world" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc-portfolio-image.png",
-          alt: { fr: "Supports DMC", en: "DMC collateral" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc-cover.png",
-          alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc-alt.png",
-          alt: { fr: "Affiches de marque DMC", en: "DMC brand posters" },
-        },
-        {
-          image: "/work/dmc-morocco/dmc.png",
-          alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
-        },
-      ],
+      },
+    ],
+  },
+
+  work: [
+    {
+      image: "/work/dmc-morocco/dmc-brand-card.png",
+      alt: { fr: "Carte de visite DMC", en: "DMC business card" },
     },
     {
-      key: "lead-generation",
-      labels: [{ fr: "Génération de leads", en: "Lead Generation" }],
-      tone: "forest",
-      title: {
-        fr: "Les premières conversations qui arrivent d'elles-mêmes.",
-        en: "The first conversations arriving inbound at last.",
-      },
-      text: {
-        fr: "Trente ans durant, chaque contrat avait commencé par un appel passé par la maison. Le site et la voix ont été réglés pour inverser ce sens-là, et la première fois qu’un propriétaire a écrit le premier, la marque avait fait son travail : d’aucun contact entrant à une présence qui en amène.",
-        en: "For thirty years every contract had started with a call the business made. The site and the voice were tuned to reverse that direction, and the first time an owner wrote first the brand had done its job: from no inbound at all to a presence that brings it.",
-      },
-      metric: "0 → 1",
+      image: "/work/dmc-morocco/dmc-guidelines-hero.png",
+      alt: { fr: "Charte graphique DMC", en: "DMC brand guidelines" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc-brand-posters.png",
+      alt: { fr: "Affiches DMC", en: "DMC posters" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc-hero-2.png",
+      alt: { fr: "Univers de marque DMC", en: "The DMC brand world" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc-portfolio-image.png",
+      alt: { fr: "Supports DMC", en: "DMC collateral" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc-cover.png",
+      alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc-alt.png",
+      alt: { fr: "Affiches de marque DMC", en: "DMC brand posters" },
+    },
+    {
+      image: "/work/dmc-morocco/dmc.png",
+      alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
     },
   ],
 };

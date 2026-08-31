@@ -29,29 +29,57 @@ export const orsen: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'un catalogue à une plateforme qui sert deux publics sans sacrifier ni l'un ni l'autre.",
-      en: "From a catalogue to a platform that serves two audiences without compromising either.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Les architectes lisent des spécifications, pas du marketing.",
-        en: "Architects read specifications, not marketing.",
+        fr: "Une gamme que les architectes prescrivent déjà.",
+        en: "A range architects already specify.",
       },
       {
-        fr: "Le catalogue public a été construit en le respectant.",
-        en: "The public catalogue was built to respect that.",
+        fr: "Un négoce qui travaille au devis et au métrage.",
+        en: "A trade business working on quotes and square metres.",
       },
       {
-        fr: "Le portail négoce, sur la même fondation plutôt qu'à côté.",
-        en: "The trade portal, on the same foundation instead of beside it.",
-      },
-      {
-        fr: "Devis, commandes et stock se traitent là où la matière se choisit.",
-        en: "Quotes, orders and stock are handled where the material is chosen.",
+        fr: "Deux publics pour une seule matière.",
+        en: "Two audiences for one material.",
       },
     ],
+    fracture: [
+      {
+        fr: "Un catalogue qui parlait marketing à des lecteurs de spécifications.",
+        en: "A catalogue talking marketing to readers of specifications.",
+      },
+      {
+        fr: "Le négoce traité à côté du catalogue, jamais dedans.",
+        en: "The trade side handled beside the catalogue, never inside it.",
+      },
+      {
+        fr: "Devis, commandes et stock dans trois endroits différents.",
+        en: "Quotes, orders and stock in three different places.",
+      },
+    ],
+    statement: {
+      fr: "Deux publics, un seul catalogue. Il ne servait ni l'un ni l'autre.",
+      en: "Two audiences, one catalogue. It served neither.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Poser le portail négoce sur la même fondation que le catalogue, pas à côté.",
+      en: "Put the trade portal on the same foundation as the catalogue, not beside it.",
+    },
+    chain: [
+      { fr: "Direction artistique", en: "Art Direction" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Portail B2B", en: "B2B Portal" },
+      { fr: "E-commerce & devis", en: "E-commerce / Quoting" },
+      { fr: "Motion", en: "Motion" },
+    ],
+    text: {
+      fr: "La direction artistique a retiré tout ce qui pouvait concurrencer une photographie de pierre. Le catalogue public se lit comme une fiche technique, parce qu'un architecte cherche des valeurs et pas des arguments. Le portail professionnel partage cette fondation   mêmes références, même stock, mêmes fiches   et seuls les droits changent. Le devis vit dans le catalogue plutôt que dans une boîte mail, à côté de la matière qu'il chiffre. Et le mouvement ne sert qu'à faire prendre la lumière à une surface.",
+      en: "Art direction took away everything that could compete with a photograph of stone. The public catalogue reads like a spec sheet, because an architect is looking for values rather than arguments. The trade portal shares that foundation   same references, same stock, same sheets   and only the permissions change. The quote lives inside the catalogue rather than in an inbox, beside the material it prices. And the motion does one thing: let a surface catch the light.",
+    },
   },
 
   chapters: [
@@ -70,7 +98,10 @@ export const orsen: ProjectCase = {
       shots: [
         {
           image: "/work/orsen/orsen card.png",
-          alt: { fr: "La marque ORSEN en situation", en: "The ORSEN mark in place" },
+          alt: {
+            fr: "La marque ORSEN en situation",
+            en: "The ORSEN mark in place",
+          },
           label: { fr: "Marque", en: "Brand" },
         },
       ],
@@ -87,6 +118,13 @@ export const orsen: ProjectCase = {
         fr: "Format, finition, épaisseur, provenance, délai. Un architecte cherche des valeurs, pas des arguments   alors la fiche est la page, et la photographie vient après ce qu'elle est censée prouver.",
         en: "Format, finish, thickness, origin, lead time. An architect is looking for values, not arguments   so the spec is the page, and the photograph comes after what it is meant to prove.",
       },
+      links: [
+        {
+          href: "https://orsen.vercel.app",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/orsen/web-orsen-desktop.jpg",
@@ -153,7 +191,7 @@ export const orsen: ProjectCase = {
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Une plateforme qui se lit comme une fiche technique et se tient comme une marque.",
       en: "A platform that reads like a spec sheet and holds itself like a brand.",

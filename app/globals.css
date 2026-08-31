@@ -422,6 +422,19 @@
   }
 }
 
+/* One tile of a gallery page arriving. An animation rather than a reveal
+   transition because it has to run again on every page turn, not once. */
+@keyframes eiden-tile-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes eiden-underline {
   from {
     transform: scaleX(0);
@@ -1397,8 +1410,6 @@
   padding-left: calc(var(--disk) / 2 + var(--disk-gap));
 }
 
-
-
 @media (width < 64rem) {
   .palette-frame {
     --disk: min(28rem, 50svh, 75vw);
@@ -1429,7 +1440,6 @@
     padding-left: calc(var(--disk) / 2 + var(--disk-gap) + 2.5rem);
   }
 }
-
 
 /* ============================================================
    The curtain   a case study opening over the page it came from

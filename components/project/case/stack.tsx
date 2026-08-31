@@ -13,31 +13,65 @@ const LIP =
   "rounded-t-[1.5rem] shadow-[0_-32px_80px_-28px_rgba(0,0,0,0.6)] sm:rounded-t-[2rem] lg:rounded-t-[2.75rem]";
 
 /**
- * Hold a section by its bottom edge once it has been read.
+ * How long a room waits, once it has been read, before the next one starts to
+ * climb over it   as a share of the screen.
+ *
+ * Without it the curtain has no pause in it at all: a room finishes arriving on
+ * the exact scroll position where the next one begins to cover it, so the
+ * reader is always being moved on from something they have only just been
+ * given. Half a screen of scroll that changes nothing is what turns the run
+ * from a mechanism into a pace   the room simply stays, and the reader decides
+ * when to leave it.
+ *
+ * It is scroll distance, not time: nothing is locked, nothing is waited on. A
+ * reader in a hurry spins through it and a reader who is reading never notices
+ * it is there.
+ */
+const HOLD = 0.5;
+
+/**
+ * Hold a section by its own edge once it has been read.
  *
  * This is the whole curtain, and it is one line of CSS that cannot be written
- * in CSS: `position: sticky; top: calc(100vh - <own height>)`. A section taller
- * than the screen cannot be pinned at `top: 0`   everything below the fold
- * would become unreachable   so it is pinned by its bottom instead. It scrolls
- * up normally until all of it has been seen, then it stops dead, and the
- * section after it climbs over it while it waits.
+ * in CSS: `position: sticky; top: calc(100vh - <content height>)`. A room
+ * taller than the screen cannot be pinned at `top: 0`   everything below the
+ * fold would become unreachable   so it is pinned by its bottom instead. It
+ * scrolls up normally until all of it has been seen, then it stops dead, and
+ * the room after it climbs over it while it waits.
  *
- * `top` has no way to refer to the element's own height, so it is measured
- * here and written back. A `ResizeObserver` catches the images finishing, the
- * fonts landing, and the reader turning their phone.
+ * Two things are measured rather than declared, because CSS can express
+ * neither. `top` is the screen less the room's own content. `--hold` is the
+ * empty run of scroll added under that content, and it is the reason the pin
+ * is computed from the content rather than from the section: the hold is part
+ * of the section's height, never part of what is looked at, and a room pinned
+ * by its full height would show the reader that emptiness instead of its own
+ * last screen.
  *
- * Under reduced motion nothing is held: the sections simply stack, which is
- * what that setting is asking for.
+ * A `ResizeObserver` catches the images finishing, the fonts landing, and the
+ * reader turning their phone.
+ *
+ * Under reduced motion nothing is held and nothing waits: the rooms simply
+ * stack, which is what that setting is asking for.
  */
 function useHeld<T extends HTMLElement>(release = false) {
   const ref = useRef<T>(null);
+  const body = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    /* A room with no inner measure of its own   the hero   is its own body. */
+    const measured = () => body.current ?? node;
+
+    const loosen = () => {
       node.style.position = "relative";
+      node.style.top = "";
+      node.style.setProperty("--hold", "0px");
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      loosen();
       return;
     }
 
@@ -51,15 +85,17 @@ function useHeld<T extends HTMLElement>(release = false) {
          width   it should scroll up after the result rather than be drawn over
          it, which is what a section still being held would look like. */
       if (release && !window.matchMedia("(min-width: 64rem)").matches) {
-        node.style.position = "relative";
-        node.style.top = "";
+        loosen();
         return;
       }
       node.style.position = "";
 
-      /* Never positive: a section shorter than the screen would otherwise stop
-         with the section behind it still showing above. */
-      const top = Math.min(0, window.innerHeight - node.offsetHeight);
+      const screen = window.innerHeight;
+      node.style.setProperty("--hold", `${Math.round(screen * HOLD)}px`);
+
+      /* Never positive: a room shorter than the screen would otherwise stop
+         with the room behind it still showing above. */
+      const top = Math.min(0, screen - measured().offsetHeight);
       node.style.top = `${Math.round(top)}px`;
     };
 
@@ -70,7 +106,7 @@ function useHeld<T extends HTMLElement>(release = false) {
     place();
 
     const observer = new ResizeObserver(queue);
-    observer.observe(node);
+    observer.observe(measured());
     window.addEventListener("resize", queue);
 
     return () => {
@@ -80,7 +116,7 @@ function useHeld<T extends HTMLElement>(release = false) {
     };
   }, [release]);
 
-  return ref;
+  return { ref, body };
 }
 
 /**
@@ -110,40 +146,65 @@ export function CaseRoom({
   children: ReactNode;
 }) {
   const skin = TONES[tone];
-  const ref = useHeld<HTMLElement>(release);
+  const { ref, body } = useHeld<HTMLElement>(release);
 
   return (
     <section
       ref={ref}
       id={id}
       data-nav-tone={skin.nav}
-      style={{ zIndex: order + 1 } as CSSProperties}
+      /* The hold starts at nothing: it is scroll the server cannot know the
+         size of, and a room that rendered it before being measured would open
+         with a screen of empty ground under it. */
+      style={{ zIndex: order + 1, "--hold": "0px" } as CSSProperties}
       className={cn(
-        "sticky min-h-svh",
+        "sticky",
         skin.panel,
         LIP,
         order > 0 && "-mt-6 sm:-mt-8 lg:-mt-10",
       )}
     >
-      {children}
+      {/* What is looked at, and what the pin is measured from. */}
+      <div ref={body} className="min-h-svh">
+        {children}
+      </div>
+
+      {/* The wait. Same ground, never on screen, and nothing but scroll. */}
+      <div aria-hidden className="h-[var(--hold)]" />
     </section>
   );
 }
 
 export function useHeldHero() {
-  return useHeld<HTMLElement>();
+  return useHeld<HTMLElement>().ref;
 }
 
-/** One block of writing or pictures inside a section, on the section's measure. */
+/**
+ * One block of writing or pictures inside a room, on the room's measure.
+ *
+ * `tight` drops the top margin, for a block that carries on from the one above
+ * it rather than opening the room. The two paddings are written separately
+ * because a variant of one cannot override the shorthand of the other: a bare
+ * `pt-0` would lose to `lg:py-28` at exactly the width where the padding
+ * matters most.
+ */
 export function CaseBlock({
   className,
+  tight = false,
   children,
 }: {
   className?: string;
+  tight?: boolean;
   children: ReactNode;
 }) {
   return (
-    <div className={cn("container-eiden py-20 sm:py-24 lg:py-28", className)}>
+    <div
+      className={cn(
+        "container-eiden pb-20 sm:pb-24 lg:pb-28",
+        !tight && "pt-20 sm:pt-24 lg:pt-28",
+        className,
+      )}
+    >
       {children}
     </div>
   );

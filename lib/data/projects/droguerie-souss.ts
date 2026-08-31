@@ -28,29 +28,54 @@ export const droguerieSouss: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "De vingt ans de compétence invisible à un comptoir qu'on peut vérifier avant d'appeler.",
-      en: "From twenty years of invisible competence to a counter you can check before you call.",
-    },
-    text: [
+  fracture: {
+    reality: [
+      {
+        fr: "Vingt ans de métier au comptoir.",
+        en: "Twenty years of trade at the counter.",
+      },
+      {
+        fr: "Un stock réel, et le conseil qui va avec.",
+        en: "Real stock, and the advice that comes with it.",
+      },
+      {
+        fr: "Une transaction qui se conclut toujours au téléphone.",
+        en: "A transaction that still finishes on the phone.",
+      },
+    ],
+    fracture: [
       {
         fr: "Personne ne voyait le savoir-faire.",
         en: "Nobody could see the expertise.",
       },
+      { fr: "Personne ne voyait le stock.", en: "Nobody could see the stock." },
       {
-        fr: "Et personne ne voyait le stock.",
-        en: "And nobody could see the stock.",
-      },
-      {
-        fr: "Le site montre maintenant les deux.",
-        en: "The site now shows both.",
-      },
-      {
-        fr: "Et garde le numéro à l'écran, parce que la transaction se conclut toujours au téléphone.",
-        en: "And keeps the number on screen, because the transaction still finishes on the phone.",
+        fr: "Rien à vérifier avant d'appeler.",
+        en: "Nothing to check before calling.",
       },
     ],
+    statement: {
+      fr: "La compétence était au comptoir. Elle s'arrêtait à la porte.",
+      en: "The expertise was at the counter. It stopped at the door.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Montrer la compétence et le stock avant le premier appel.",
+      en: "Show the expertise and the stock before the first call.",
+    },
+    chain: [
+      { fr: "Direction artistique", en: "Art Direction" },
+      { fr: "Site web", en: "Website" },
+      { fr: "E-commerce", en: "E-commerce" },
+      { fr: "Catalogue", en: "Catalogue" },
+      { fr: "Expérience digitale", en: "Digital Experience" },
+    ],
+    text: {
+      fr: "La direction artistique part du magasin lui-même   le comptoir, les rayonnages, les mains qui servent   parce que vingt ans de métier se montrent au lieu de se déclarer. Le site est construit autour d'un seul acte, l'appel, et garde le numéro à l'écran du haut en bas. Le e-commerce donne un prix, une quantité et une date à qui commande à sept heures du matin. Le catalogue dit l'état réel du stock, rupture comprise. Et l'expérience a été réglée sur les conditions réelles : une seule main, des gants, du soleil sur l'écran.",
+      en: "Art direction starts from the shop itself   the counter, the shelving, the hands doing the serving   because twenty years of trade are shown rather than claimed. The site is built around one act, the call, and keeps the number on screen from top to bottom. E-commerce gives a price, a quantity and a date to whoever orders at seven in the morning. The catalogue states the real stock, out-of-stock included. And the experience was tuned to the real conditions: one hand, gloves, sun on the screen.",
+    },
   },
 
   chapters: [
@@ -97,6 +122,13 @@ export const droguerieSouss: ProjectCase = {
         fr: "Dans ce métier la transaction se conclut au téléphone, quoi qu'en dise le e-commerce. Le numéro reste donc à l'écran du haut en bas de chaque page, et tout ce que le site fait par ailleurs sert à ce qu'on appelle déjà renseigné.",
         en: "In this trade the transaction still closes on the phone, whatever e-commerce would like to believe. So the number stays on screen from the top of every page to the bottom, and everything else the site does is there so that the call starts already informed.",
       },
+      links: [
+        {
+          href: "https://www.soussdroguerie.com",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/droguerie-souss/web-droguerie-souss-desktop.jpg",
@@ -168,7 +200,7 @@ export const droguerieSouss: ProjectCase = {
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Vingt ans de métier, enfin visibles avant le premier appel.",
       en: "Twenty years of trade, finally visible before the first call.",

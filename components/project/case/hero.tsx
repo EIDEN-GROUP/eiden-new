@@ -5,39 +5,18 @@ import Link from "next/link";
 import { ArrowUp, ChevronLeft } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useLocalized } from "@/components/project/shared";
-import { chapterId } from "./chapter";
+import { chapterCovers, chapterId } from "./chapter";
 import { useHeldHero } from "./stack";
 import type { Chapter, Localized, ProjectCase } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
-/** The staged entrance the rest of the site opens on. */
 const ENTER = "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
 const stage = (seconds: number) =>
   ({ animationDelay: `${seconds}s` }) as CSSProperties;
 const WORD_LEAD = 0.18;
 const WORD_STEP = 0.075;
 
-/**
- * The opening screen.
- *
- * The still is set as a card inside the measure rather than bled to the edges:
- * the case that follows is a stack of rooms drawn up over one another, and a
- * hero with its own edges is the first of them rather than a backdrop the page
- * happens to start on.
- *
- * Along the foot of the card runs the case's own contents   one tab per room,
- * in reading order. Point at one and it opens upward into the card to say what
- * that room covers; click it and the page goes there. It is the only navigation
- * a case study needs, and it is on the one screen every visitor sees.
- *
- * Below `lg` the tabs are not drawn. There is no hover on a touch screen, a
- * five-column rail of them would be unreadable at that width, and a reader on a
- * phone is going to scroll rather than pick   which is also how the reference
- * this was built against behaves.
- *
- * The entrance is the site's own: the still settling out of a slight push, the
- * name rising word by word off its baseline, the rest fading up behind it.
- */
+
 export function CaseHero({
   project,
   chapters,
@@ -46,10 +25,7 @@ export function CaseHero({
   chapters: Chapter[];
 }) {
   const say = useLocalized();
-  /* Held by its bottom edge like every section, so the first curtain has
-     something still to be drawn over. */
   const ref = useHeldHero();
-
   const rail = [
     say(project.category),
     project.location ? say(project.location) : null,
@@ -61,11 +37,7 @@ export function CaseHero({
   const words = project.client.split(" ").filter(Boolean);
 
   return (
-    <section
-      ref={ref}
-      data-nav-tone="dark"
-      className="bg-ink sticky isolate z-0 min-h-svh"
-    >
+    <section ref={ref} data-nav-tone="dark" className="bg-ink sticky isolate z-0 min-h-svh" >
       <div className="container-eiden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32">
         <Link
           href="/clients"
@@ -76,15 +48,9 @@ export function CaseHero({
           )}
           style={stage(0.02)}
         >
-          <ChevronLeft
-            className="size-4 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:-translate-x-0.5 motion-reduce:transition-none"
-            strokeWidth={2}
-            aria-hidden
-          />
+          <ChevronLeft className="size-4 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:-translate-x-0.5 motion-reduce:transition-none" strokeWidth={2} aria-hidden />
           {say({ fr: "Clients", en: "Clients" })}
-          <span aria-hidden className="text-canvas/25 mx-1">
-            /
-          </span>
+          <span aria-hidden className="text-canvas/25 mx-1"> / </span>
           <span className="text-canvas/80">{project.client}</span>
         </Link>
 
@@ -99,18 +65,12 @@ export function CaseHero({
               sizes="100vw"
               className="object-cover object-center motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]"
             />
-            <span
-              aria-hidden
-              className="absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,12,0.72)_0%,rgba(10,15,12,0.12)_45%,rgba(10,15,12,0.28)_100%)]"
-            />
+            <span aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,12,0.72)_0%,rgba(10,15,12,0.12)_45%,rgba(10,15,12,0.28)_100%)]" />
           </div>
 
           <nav
             aria-label={say({ fr: "Sections du projet", en: "Case contents" })}
-            className={cn(
-              ENTER,
-              "absolute inset-x-0 bottom-0 hidden lg:grid",
-            )}
+            className={cn(ENTER, "absolute inset-x-0 bottom-0 hidden lg:grid")}
             style={{
               ...stage(0.72),
               gridTemplateColumns: `repeat(${chapters.length}, minmax(0, 1fr))`,
@@ -125,10 +85,7 @@ export function CaseHero({
         {/* ── The name, and the line the project reduces to ───────────── */}
         <div className="mt-10 grid gap-8 sm:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-end lg:gap-16">
           <div>
-            <p
-              className={cn(ENTER, "eyebrow text-gold flex items-center gap-3")}
-              style={stage(0.06)}
-            >
+            <p className={cn(ENTER, "eyebrow text-gold flex items-center gap-3")} style={stage(0.06)} >
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {rail}
             </p>
@@ -142,10 +99,7 @@ export function CaseHero({
                     index < words.length - 1 && "mr-[0.22em]",
                   )}
                 >
-                  <span
-                    className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
-                    style={stage(WORD_LEAD + index * WORD_STEP)}
-                  >
+                  <span className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={stage(WORD_LEAD + index * WORD_STEP)} >
                     {word}
                   </span>
                 </span>
@@ -154,24 +108,19 @@ export function CaseHero({
           </div>
 
           <div>
-            <p
-              className={cn(
-                ENTER,
-                "text-balance-tight text-canvas text-[clamp(1.25rem,2.6vw,1.875rem)] leading-[1.18] font-medium",
-              )}
-              style={stage(0.5)}
-            >
+            <p className={cn( ENTER, "text-balance-tight text-canvas text-[clamp(1.25rem,2.6vw,1.875rem)] leading-[1.18] font-medium", )} style={stage(0.5)} >
               {say(project.hero.statement)}
             </p>
-            <p
-              className={cn(
-                ENTER,
-                "text-canvas/50 mt-5 max-w-2xl text-[0.9375rem] leading-relaxed",
-              )}
-              style={stage(0.62)}
-            >
+            <p className={cn( ENTER, "text-canvas/50 mt-5 max-w-2xl text-[0.9375rem] leading-relaxed", )} style={stage(0.62)} >
               {say(project.hero.intro)}
             </p>
+            <ul className={cn(ENTER, "mt-7 flex flex-wrap gap-2")} style={stage(0.74)} >
+              {project.architecture.chain.map((item) => (
+                <li key={say(item)} className="border-canvas/15 text-canvas/70 font-label rounded-full border px-3.5 py-1.5 text-[0.7rem] font-bold tracking-[0.16em] uppercase sm:text-[0.75rem]">
+                  {say(item)}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -179,18 +128,6 @@ export function CaseHero({
   );
 }
 
-/**
- * One room, named along the foot of the still.
- *
- * At rest it is a bar with the room's disciplines on it. Pointed at, a card
- * rises out of it into the picture: what the room is, and the pieces of work
- * inside it, taken from the labels the pictures already carry rather than
- * written a second time.
- *
- * The card is anchored to the top edge of its own bar with `bottom-full`, so it
- * grows into the still and is clipped by it   the frame's `overflow-hidden` is
- * what keeps the card inside the picture instead of over the page.
- */
 function Tab({
   chapter,
   say,
@@ -198,20 +135,20 @@ function Tab({
   chapter: Chapter;
   say: (value: Localized) => string;
 }) {
-  const covers = chapter.labels.map(say);
-  const pieces = Array.from(
-    new Set(chapter.shots?.map((shot) => say(shot.label)) ?? []),
-  );
+  const covers = chapterCovers(chapter).map(say);
+  const shots = [
+    ...(chapter.shots ?? []),
+    ...(chapter.blocks ?? []).flatMap((block) => block.shots ?? []),
+  ];
+  const pieces = Array.from(new Set(shots.map((shot) => say(shot.label))));
 
   return (
     <a
       href={`#${chapterId(chapter.key)}`}
-      /* A room is pinned to the very top of the frame; stopping short of it to
-         clear the header would show the room before it instead. */
       data-scroll-offset="0"
       className={cn(
         "group/tab border-canvas/10 text-canvas relative flex items-center justify-between gap-4 border-l px-6 py-4 first:border-l-0",
-        "bg-ink/70 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)] hover:bg-ink/85 motion-reduce:transition-none",
+        "bg-ink/70 hover:bg-ink/85 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
       )}
     >
       <span className="font-label truncate text-[0.82rem] font-bold tracking-[0.02em]">

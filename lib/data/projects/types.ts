@@ -25,10 +25,10 @@ export type Shot = {
 };
 
 /**
- * A picture in the wall.
+ * A picture in the gallery.
  *
  * No label, unlike a `Shot`: a gallery is looked at rather than read, and
- * captioning nine images turns a wall back into a list.
+ * captioning nine images turns it back into a list.
  */
 export type GalleryImage = { image: string; alt: Localized };
 
@@ -54,8 +54,8 @@ export type PaletteState = {
  *
  * Read as a held run the visitor scrolls through: the disk turns, the ground
  * changes colour under them, and each beat says what that colour is for. It
- * belongs to the branding room and is written inside it   a palette is one of
- * the things branding produced, not a subject of its own.
+ * belongs to the branding chapter and is written inside it   a palette is one
+ * of the things branding produced, not a subject of its own.
  */
 export type PaletteStory = {
   title: Localized;
@@ -78,18 +78,6 @@ export type ChapterLink = {
 };
 
 /**
- * What the work came to.
- *
- * Short, and qualitative unless the client has already published a figure.
- * `metric` is only ever a number the client has put its own name to.
- */
-export type Outcome = {
-  title: Localized;
-  text: Localized;
-  metric?: string;
-};
-
-/**
  * The ground a room stands on.
  *
  * Three, and only three. A case study is a set of rooms the reader walks
@@ -101,32 +89,129 @@ export type Outcome = {
 export type ChapterTone = "canvas" | "ink" | "forest";
 
 /**
- * One room of the case.
+ * The diagnosis: what was already true, and what was out of joint.
  *
- * This replaced the single "what we did" list, and then replaced the panel-per-
- * service that followed it. A service is not a section: branding and its
- * palette are one piece of work, a site and the system behind it are one piece
- * of work, and the money disciplines are only interesting next to the result
- * they produced. So a room can cover more than one discipline   `labels` is
- * what it covers   and carries whatever that work actually produced.
+ * This is the section that makes a case unmistakably EIDEN, and it is the one
+ * place the reader is allowed to see the business before the design. It is
+ * written as two columns because a fracture is only legible next to the thing
+ * it broke away from   a list of problems on its own reads as a pitch, and a
+ * list of strengths on its own reads as a compliment.
  *
- * The optional blocks are what make a room longer than a screen. `palette`
- * belongs to branding, `wall` to the social work it is the volume behind, and
- * `outcome` to the room that earned it. Each is rendered as a further held
+ * `statement` closes it in one line. Two short clauses, the second turning on
+ * the first: "Le lieu savait qui il était. La marque, non."
+ */
+export type Fracture = {
+  /** What the business already had. Three or four, short. */
+  reality: Localized[];
+  /** What was misaligned with it. Three or four, short. */
+  fracture: Localized[];
+  /** The line the diagnosis reduces to. */
+  statement: Localized;
+};
+
+/**
+ * The decision, and the system it set in motion.
+ *
+ * The difference between EIDEN and an agency is written here: one business
+ * problem answered by connected disciplines rather than by a list of
+ * deliverables. `chain` is that system in order   positioning → brand →
+ * content → media → commercial   and `text` says how each link holds the next
+ * one up. Never more than five links: a chain nobody can hold in their head is
+ * an org chart, not an architecture.
+ */
+export type Architecture = {
+  /** What EIDEN understood and decided, in one sentence. */
+  decision: Localized;
+  /** The connected system, in the order it runs. */
+  chain: Localized[];
+  /** How the links hold together. One paragraph. */
+  text: Localized;
+};
+
+/**
+ * One figure, and everything that makes it mean something.
+ *
+ * A number alone is not evidence   "+38%" with no unit and no period is a
+ * decoration. Every field except the figure is allowed to be `null`, and a
+ * `null` is rendered as nothing rather than as a guess: on this portfolio a
+ * missing timeframe is written by the client or it is not written at all.
+ */
+export type ImpactRow = {
+  /** The figure, as the client publishes it. */
+  metric: string;
+  /** What it counts. `null` until the client has said. */
+  measures: Localized | null;
+  /** Over what period. `null` until the client has said. */
+  period: Localized | null;
+  /** Why it matters commercially. `null` until the client has said. */
+  meaning: Localized | null;
+};
+
+/**
+ * What changed.
+ *
+ * The close of the case, on its own screen. `metric` is only ever a number the
+ * client has put its own name to, and `rows` is where that number is given its
+ * unit, its period and its commercial meaning   the three things that turn a
+ * figure into an argument.
+ */
+export type Impact = {
+  title: Localized;
+  text: Localized;
+  /** The headline figure. Left out wherever the result is qualitative. */
+  metric?: string;
+  /** The headline figure, read out. Left out until there is something to say. */
+  rows?: ImpactRow[];
+};
+
+/**
+ * A further piece of work, read inside the room it belongs to.
+ *
+ * Some work only means anything next to the work beside it: a position is the
+ * argument the branding then draws, and the money is what the content it sits
+ * under was for. Those are blocks rather than rooms   same ground, same
+ * curtain, one after the other   because a curtain between them would say they
+ * were bought separately, which is the opposite of what the case is claiming.
+ *
+ * It carries everything a chapter does except the two things that belong to a
+ * room rather than to a piece of work: the ground it stands on, and the
+ * palette.
+ */
+export type ChapterBlock = {
+  /** Stable key, for React. */
+  key: string;
+  /** The parts of the business this block covers. */
+  labels: Localized[];
+  /** The decision, stated. */
+  title: Localized;
+  /** One or two sentences. */
+  text: Localized;
+  /** Four at most, as in a chapter. */
+  shots?: Shot[];
+  /** Wherever this work is live and checkable. */
+  links?: ChapterLink[];
+};
+
+/**
+ * One chapter of what was built.
+ *
+ * A chapter is not a service and not a deliverable   it is one decision, the
+ * work it produced, and the proof it left behind, in that order. `labels` is
+ * what part of the business it covers, `title` is the decision stated as a
+ * sentence, `text` explains it in two, and `shots` prove it. A chapter whose
+ * disciplines produced nothing to photograph is set in type alone, which is
+ * honest where a borrowed screenshot is not.
+ *
+ * `palette` belongs to the branding chapter and is rendered as a further held
  * screen inside the same room, on the same ground, so the run still reads as
- * one section rather than three.
- *
- * `shots` is allowed to be empty, and several rooms across this portfolio are:
- * positioning, revenue and media buying were sold and delivered without
- * producing an image, and a room that says so in type is honest where one
- * padded with a borrowed screenshot is not.
+ * one chapter rather than two.
  */
 export type Chapter = {
   /** Stable key, for React and for the hero's rail. */
   key: string;
-  /** The disciplines this room covers, in the order they were sold. */
+  /** The parts of the business this chapter covers. */
   labels: Localized[];
-  /** The room's own headline   what this work did here, not in general. */
+  /** The decision, stated. Not "Branding" but what the branding decided. */
   title: Localized;
   /** One or two sentences. The first screen holds no more than that. */
   text: Localized;
@@ -135,32 +220,32 @@ export type Chapter = {
   shots?: Shot[];
   /** The site, the accounts   wherever this work is live and checkable. */
   links?: ChapterLink[];
-  /** Branding only: the palette, told as its own held run. */
-  palette?: PaletteStory;
-  /** The wider set, drifting. Belongs under the work it is the evidence for. */
-  wall?: GalleryImage[];
   /**
-   * The figure this room moved, stated inside it.
-   *
-   * Only where revenue or paid media was sold: those disciplines are only worth
-   * reading next to the number they moved, so the result is written into this
-   * room's own text rather than given a section of its own. Only ever a figure
-   * the client has already published.
+   * The work that is only legible next to this chapter's, read after it and
+   * before the palette. Never a second subject   always the same one, carried
+   * one step further.
    */
-  metric?: string;
+  blocks?: ChapterBlock[];
+  /** Branding only: the palette, told as its own held run   always last. */
+  palette?: PaletteStory;
 };
 
 /**
- * One project, written as a case rather than as a chronicle.
+ * One project, written as a business case rather than as a portfolio entry.
  *
- * Hero → the turn → the rooms. `chapters` is the only place a page is allowed
- * to grow, and the growth is bounded by what was actually sold, so a page can
- * never sprout a section no invoice backs.
+ * The running order is fixed and every case is read through it:
  *
- * `outcome` closes the case on its own screen   unless one of the rooms has
- * claimed it, which is what happens wherever revenue or paid media was sold:
- * those disciplines are only worth reading next to the figure they moved. One
- * or the other is always present; never both.
+ *   hero → fracture → architecture → chapters → impact → work → next
+ *
+ * Which is: who this is, what was broken, what EIDEN decided, what that
+ * produced, what it changed, and the pictures that prove it. The structure
+ * never varies   it is what makes eleven different businesses read as one
+ * practice   while the depth does: a project that needed three chapters gets
+ * three, and a result the client has never published stays qualitative.
+ *
+ * The order is deliberate on one point in particular: the pictures come last.
+ * A gallery placed before the argument becomes the argument, and the case stops
+ * being about the business.
  */
 export type ProjectCase = {
   slug: ProjectSlug;
@@ -169,27 +254,47 @@ export type ProjectCase = {
   category: Localized;
   location?: Localized;
 
+  /**
+   * The dark ground this case is read on, as a hex.
+   *
+   * The three grounds are the portfolio's, not the client's   but the deep one
+   * is where a case spends half its length, and running eleven different
+   * businesses over the same green makes them look like one. So the forest
+   * ground is swapped for a colour out of the project's own brand book: the
+   * Forêt of a restaurant, the Bois of a hotel, the Violet of a children's
+   * centre. Dark enough for the canvas type to hold, always   and left out
+   * wherever there is no brand palette to take one from, which falls back to
+   * the portfolio's own forest.
+   */
+  ground?: string;
+
   hero: {
-    /** The line the project reduces to. Short enough to set large. */
+    /** WHY   the line the project reduces to. Short enough to set large. */
     statement: Localized;
-    /** Two sentences at most: who they are, and what we did. */
+    /** WHAT   two sentences at most: who they are, and what we did. */
     intro: Localized;
     image: string;
     alt: Localized;
   };
 
-  /**
-   * Where they were → what changed → where they are now.
-   *
-   * `text` is a run of lines rather than a paragraph because the section
-   * brings them in one at a time   the reader is meant to arrive at the turn,
-   * not to be handed it.
-   */
-  transformation: { title: Localized; text: Localized[] };
+  /** The diagnosis. */
+  fracture: Fracture;
 
-  /** The rooms, in reading order. Three to five. */
+  /**
+   * The decision, and the system it set in motion.
+   *
+   * Its chain is also the hero's scope   the parts of the business are named
+   * once, in one place, so what the hero promises before the visitor scrolls
+   * is exactly what the case then walks them through.
+   */
+  architecture: Architecture;
+
+  /** What was built, chapter by chapter. Three to five. */
   chapters: Chapter[];
 
-  /** The closing screen. Left out where a room states the result instead. */
-  outcome?: Outcome;
+  /** What changed. */
+  impact: Impact;
+
+  /** The proof, after the argument. Left out where there is no set to show. */
+  work?: GalleryImage[];
 };

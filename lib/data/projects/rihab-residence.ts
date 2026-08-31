@@ -28,29 +28,56 @@ export const rihabResidence: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'un marché de la surenchère à une adresse qui se réserve honnêtement.",
-      en: "From a market of overstatement to an address that books itself honestly.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Autour d'Agadir, des appartements modestes étaient vendus comme du luxe.",
-        en: "Around Agadir, modest apartments were being oversold as luxury.",
+        fr: "Une adresse familiale à cinq minutes de l'Atlantique.",
+        en: "A family-run address five minutes from the Atlantic.",
       },
       {
-        fr: "Rihab avait besoin de l'inverse.",
-        en: "Rihab needed the opposite.",
+        fr: "Des appartements exactement tels qu'ils sont.",
+        en: "Apartments exactly as they are.",
       },
       {
-        fr: "Un site qui montre le lieu tel qu'il est, dans les deux langues.",
-        en: "A site that shows the place as it is, in both languages.",
-      },
-      {
-        fr: "Et qui laisse réserver en trois gestes, sans créer de compte.",
-        en: "And lets a guest book in three taps, without creating an account.",
+        fr: "Deux publics, français et britannique.",
+        en: "Two audiences, French and British.",
       },
     ],
+    fracture: [
+      {
+        fr: "Autour d'Agadir, des appartements modestes vendus comme du luxe.",
+        en: "Around Agadir, modest apartments oversold as luxury.",
+      },
+      {
+        fr: "Rien qui distingue une adresse honnête de celles qui exagèrent.",
+        en: "Nothing separating an honest address from the ones overstating.",
+      },
+      {
+        fr: "Deux publics, et une seule langue pour les deux.",
+        en: "Two audiences, and one language for both.",
+      },
+    ],
+    statement: {
+      fr: "Le marché promettait trop. Rihab n'avait qu'à dire vrai.",
+      en: "The market was promising too much. Rihab only had to tell the truth.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Vendre l'exactitude, dans les deux langues, jusqu'à la réservation.",
+      en: "Sell accuracy, in both languages, all the way to the booking.",
+    },
+    chain: [
+      { fr: "Positionnement", en: "Positioning" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Réservation", en: "Booking" },
+      { fr: "Digital bilingue", en: "Bilingual Digital" },
+    ],
+    text: {
+      fr: "Le positionnement a pris le contre-pied du marché : des photos non retouchées, des mètres carrés exacts, et une distance à la plage donnée en minutes de marche. Le site tient ce ton du haut en bas. La réservation n'a pas été ajoutée au site   c'est le site qui a été construit autour d'elle, en trois gestes et sans compte à créer. Et les deux langues ont été écrites séparément, parce qu'une famille française et un couple britannique ne cherchent pas les mêmes garanties.",
+      en: "Positioning took the opposite side of the market: unretouched photographs, exact square metres, and a distance to the beach given in minutes on foot. The site holds that tone from top to bottom. Booking was not added to the site   the site was built around it, in three taps and with no account to create. And the two languages were written separately, because a French family and a British couple are not looking for the same reassurances.",
+    },
   },
 
   chapters: [
@@ -66,6 +93,13 @@ export const rihabResidence: ProjectCase = {
         fr: "Autour d'Agadir, tout le monde écrivait « luxe ». Rihab avait besoin de l'inverse : des photos non retouchées, des mètres carrés exacts, et une distance à la plage donnée en minutes de marche plutôt qu'en adjectifs.",
         en: "Around Agadir everyone was writing “luxury”. Rihab needed the opposite: unretouched photographs, exact square metres, and a distance to the beach given in minutes on foot rather than in adjectives.",
       },
+      links: [
+        {
+          href: "https://rihab-hotel.vercel.app",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/rihab-residence/web-rihab-desktop.jpg",
@@ -116,7 +150,7 @@ export const rihabResidence: ProjectCase = {
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Une adresse qui se présente honnêtement, et se réserve en trois gestes.",
       en: "An address that presents itself honestly, and books in three taps.",

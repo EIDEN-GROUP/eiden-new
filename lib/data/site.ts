@@ -68,9 +68,8 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "lunja-village",
     client: "Lunja Village",
-    image: "/work/lunja-village/lunja-social-2.png",
-    imageAlt:
-      "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
+    image: "/work/lunja-village/lunja-social-1.png",
+    imageAlt: "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
     website: "https://www.lunjavillage.com",
     metric: "+38%",
   },
@@ -87,7 +86,7 @@ export const caseStudies: CaseStudyRecord[] = [
     client: "Medical Bay",
     image: "/work/medical-bay/medical-bay.png",
     imageAlt: "Accueil de la clinique Medical Bay à Agadir",
-    website: "https://medicalbay.vercel.app/",
+    website: "https://medicalbay-agadir.vercel.app/",
     metric: "+120",
   },
   {

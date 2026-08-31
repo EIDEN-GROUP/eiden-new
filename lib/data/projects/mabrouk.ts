@@ -8,6 +8,9 @@ export const mabrouk: ProjectCase = {
   year: "2026",
   category: { fr: "Hôtellerie", en: "Hospitality" },
 
+  /** Bois #2A211B, out of the brand book. */
+  ground: "#2A211B",
+
   hero: {
     statement: {
       fr: "Une maison qui se reconnaît à sa lumière.",
@@ -24,29 +27,57 @@ export const mabrouk: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'un hôtel qu'il fallait avoir vu, à une maison qui se reconnaît avant d'y entrer.",
-      en: "From a hotel you had to have seen, to a house you recognise before walking in.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Le caractère était entièrement dans le bâtiment.",
-        en: "The character was entirely inside the building.",
+        fr: "Un bâtiment qui a tout son caractère : le laiton, le bois, le velours.",
+        en: "A building with all its character: brass, wood, velvet.",
       },
       {
-        fr: "Et rien n'en sortait : ni photographie, ni ton, ni direction.",
-        en: "And none of it got out: no photography, no tone, no direction.",
+        fr: "Une lumière qui n'appartient qu'à cette maison.",
+        en: "A light that belongs to this house alone.",
       },
       {
-        fr: "Nous avons pris la matière et la lumière comme point de départ.",
-        en: "We took the materials and the light as the starting point.",
-      },
-      {
-        fr: "La maison se reconnaît maintenant sur un écran comme dans son hall.",
-        en: "The house now reads the same on a screen as it does in its own lobby.",
+        fr: "Des clients qui repartent en parlant du calme et de l'accueil.",
+        en: "Guests who leave talking about the quiet and the welcome.",
       },
     ],
+    fracture: [
+      {
+        fr: "Rien de tout cela n'arrivait au client avant sa réservation.",
+        en: "None of it reached a guest before they booked.",
+      },
+      {
+        fr: "Ni photographie, ni ton, ni direction.",
+        en: "No photography, no tone, no direction.",
+      },
+      {
+        fr: "Un marché qui ne vend que des étoiles et des équipements.",
+        en: "A market that sells nothing but stars and amenities.",
+      },
+    ],
+    statement: {
+      fr: "La maison avait un caractère. Personne ne le voyait avant d'entrer.",
+      en: "The house had a character. Nobody saw it before walking in.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Partir de la matière et de la lumière plutôt que de la catégorie.",
+      en: "Start from the materials and the light rather than from the category.",
+    },
+    chain: [
+      { fr: "Positionnement", en: "Positioning" },
+      { fr: "Marque", en: "Brand" },
+      { fr: "Photographie", en: "Photography" },
+      { fr: "Média", en: "Media" },
+      { fr: "Commercial", en: "Commercial" },
+    ],
+    text: {
+      fr: "Le positionnement a laissé la liste d'équipements aux comparateurs et écrit ce qu'un client raconte réellement en repartant. La marque a relevé la palette et la lumière sur le bâtiment lui-même. La photographie montre la maison à l'heure où elle est le plus elle-même. Et l'offre comme la dépense ont été réglées séparément sur la haute saison et sur le reste de l'année, dirigées vers la réservation directe plutôt que vers les plateformes.",
+      en: "Positioning left the amenity list to the comparison sites and wrote down what a guest actually tells people afterwards. The brand took its palette and its light off the building itself. The photography shows the house at the hour it is most itself. And the offer and the spend were tuned separately against high season and against the rest of the year, pointed at direct booking rather than at the platforms.",
+    },
   },
 
   chapters: [
@@ -94,6 +125,20 @@ export const mabrouk: ProjectCase = {
             en: "The Mabrouk Hôtel lounge behind its fretwork screen",
           },
           label: { fr: "Salon", en: "Lounge" },
+        },
+      ],
+      blocks: [
+        {
+          key: "positioning",
+          labels: [{ fr: "Positionnement", en: "Positioning" }],
+          title: {
+            fr: "Une maison, pas une catégorie d'étoiles.",
+            en: "A house, not a star rating.",
+          },
+          text: {
+            fr: "Le marché vend des équipements : le nombre d'étoiles, la taille de la piscine, la liste de ce qui est inclus. Rien de tout cela ne distingue une maison d'une autre. Le repositionnement a écrit ce qu'un client raconte réellement en repartant   la lumière, le calme, l'accueil   et a laissé la liste aux comparateurs.",
+            en: "The market sells amenities: the star count, the size of the pool, the list of what is included. None of it separates one house from another. The reposition wrote down what a guest actually tells people afterwards   the light, the quiet, the welcome   and left the list to the comparison sites.",
+          },
         },
       ],
       palette: {
@@ -158,7 +203,10 @@ export const mabrouk: ProjectCase = {
             colorIndex: 3,
           },
           {
-            title: { fr: "Une maison, pas un standard", en: "A house, not a standard" },
+            title: {
+              fr: "Une maison, pas un standard",
+              en: "A house, not a standard",
+            },
             text: {
               fr: "Les quatre ensemble se reconnaissent sur une chambre comme sur un hall. C'est ce qui distingue un hôtel de la catégorie à laquelle il appartient.",
               en: "The four together are recognisable in a bedroom and in a lobby. That is what separates a hotel from the category it belongs to.",
@@ -166,19 +214,6 @@ export const mabrouk: ProjectCase = {
             colorIndex: 0,
           },
         ],
-      },
-    },
-    {
-      key: "positioning",
-      labels: [{ fr: "Positionnement", en: "Positioning" }],
-      tone: "canvas",
-      title: {
-        fr: "Une maison, pas une catégorie d'étoiles.",
-        en: "A house, not a star rating.",
-      },
-      text: {
-        fr: "Le marché vend des équipements : le nombre d'étoiles, la taille de la piscine, la liste de ce qui est inclus. Rien de tout cela ne distingue une maison d'une autre. Le repositionnement a écrit ce qu'un client raconte réellement en repartant   la lumière, le calme, l'accueil   et a laissé la liste aux comparateurs.",
-        en: "The market sells amenities: the star count, the size of the pool, the list of what is included. None of it separates one house from another. The reposition wrote down what a guest actually tells people afterwards   the light, the quiet, the welcome   and left the list to the comparison sites.",
       },
     },
     {
@@ -227,44 +262,27 @@ export const mabrouk: ProjectCase = {
           label: { fr: "Salon", en: "Lounge" },
         },
       ],
-      wall: [
-        { image: "/work/mabrouk/imgg1 (2).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (13).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (14).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (15).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (21).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (22).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (23).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (24).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (25).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (26).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (27).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (32).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (44).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (50).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (56).png", alt: MABROUK },
-        { image: "/work/mabrouk/imgg1 (9).png", alt: MABROUK },
+      blocks: [
+        {
+          key: "revenue",
+          labels: [
+            { fr: "Revenu", en: "Revenue" },
+            { fr: "Achat média", en: "Media Buying" },
+          ],
+          title: {
+            fr: "Vendre les nuits que personne ne vient chercher.",
+            en: "Selling the nights nobody comes looking for.",
+          },
+          text: {
+            fr: "Un hôtel n'a pas un problème de remplissage : il en a deux, et ils ne se ressemblent pas. La haute saison se vend seule et se défend sur le prix ; le reste de l'année se gagne en donnant une raison de venir. L'offre et la dépense ont été réglées séparément sur ces deux-là, et le budget dirigé vers la réservation directe plutôt que vers les plateformes.",
+            en: "A hotel does not have one occupancy problem: it has two, and they look nothing alike. High season sells itself and is defended on price; the rest of the year is won by giving someone a reason to come. The offer and the spend were tuned separately against each, and the budget pointed at direct booking rather than at the platforms.",
+          },
+        },
       ],
-    },
-    {
-      key: "revenue",
-      labels: [
-        { fr: "Revenu", en: "Revenue" },
-        { fr: "Achat média", en: "Media Buying" },
-      ],
-      tone: "forest",
-      title: {
-        fr: "Vendre les nuits que personne ne vient chercher.",
-        en: "Selling the nights nobody comes looking for.",
-      },
-      text: {
-        fr: "Un hôtel n'a pas un problème de remplissage : il en a deux, et ils ne se ressemblent pas. La haute saison se vend seule et se défend sur le prix ; le reste de l'année se gagne en donnant une raison de venir. L'offre et la dépense ont été réglées séparément sur ces deux-là, et le budget dirigé vers la réservation directe plutôt que vers les plateformes.",
-        en: "A hotel does not have one occupancy problem: it has two, and they look nothing alike. High season sells itself and is defended on price; the rest of the year is won by giving someone a reason to come. The offer and the spend were tuned separately against each, and the budget pointed at direct booking rather than at the platforms.",
-      },
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Un hôtel qui ressemble enfin à ce qu'il fait ressentir.",
       en: "A hotel that finally looks like what it feels like.",
@@ -274,4 +292,23 @@ export const mabrouk: ProjectCase = {
       en: "A brand taken from the building rather than from its category, photography that shows the house at its own hour, and a position that leaves the amenity list to the comparison sites.",
     },
   },
+
+  work: [
+    { image: "/work/mabrouk/imgg1 (2).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (13).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (14).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (15).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (21).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (22).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (23).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (24).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (25).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (26).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (27).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (32).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (44).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (50).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (56).png", alt: MABROUK },
+    { image: "/work/mabrouk/imgg1 (9).png", alt: MABROUK },
+  ],
 };

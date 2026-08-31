@@ -6,10 +6,10 @@ import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { CaseBlock, CaseRoom } from "./stack";
 import { CasePaletteStory } from "./palette-story";
-import { CaseWall } from "./wall";
 import { TONES, type ToneSkin } from "./tone";
 import type {
   Chapter,
+  ChapterBlock,
   ChapterLink,
   Localized,
   Shot,
@@ -24,16 +24,34 @@ export function chapterId(key: string) {
 }
 
 /**
- * One section of the case.
+ * Every part of the business a room covers, in reading order.
  *
- * Everything a piece of work produced is in here, on one ground, behind one
- * rounded edge: what it covers, what it did, the pictures that came out of it,
- * and then whatever else belongs to it   the palette, the wall, the figure it
- * moved. It is as tall as it needs to be and it simply rides up over the
- * section before it.
+ * The room is numbered and named once, at the top; this is what the hero's rail
+ * prints, because a rail that named only the first block would promise less
+ * than the room delivers.
+ */
+export function chapterCovers(chapter: Chapter) {
+  return [...chapter.labels, ...(chapter.blocks ?? []).flatMap((b) => b.labels)];
+}
+
+/**
+ * One chapter of what was built.
  *
- * A section whose disciplines produced nothing to photograph is set in type
- * alone, at size, with its number ghosted behind it.
+ * The chapters are the answer to the architecture: one decision each, the work
+ * it produced, and the proof it left   on one ground, behind one rounded edge.
+ * The number and the part of the business it covers run along the top, so a
+ * reader walking the run knows they are still inside "what we built" without
+ * the phrase being printed over every room.
+ *
+ * A room can hold more than one piece of work. Where a second piece is only
+ * legible next to the first   a position under the branding it argues for, the
+ * money under the content it paid for   it is a block inside the same room
+ * rather than a room of its own, and the curtain covers both. The palette,
+ * where there is one, always closes the room.
+ *
+ * A chapter whose disciplines produced nothing to photograph is set in type
+ * alone, at size, with its number ghosted behind it. The figure it moved is not
+ * stated here   every result in a case is read together, in the impact room.
  */
 export function CaseChapter({
   chapter,
@@ -74,53 +92,125 @@ export function CaseChapter({
           </span>
         ) : null}
 
-        <div
-          className={cn(
-            "relative",
-            !bare &&
-              "grid gap-12 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start lg:gap-16 xl:gap-20",
-          )}
-        >
-          <Writing
-            chapter={chapter}
-            skin={skin}
-            index={index}
-            say={say}
-            bare={bare}
-          />
-
-          {bare ? null : (
-            <Shots shots={shots} skin={skin} say={say} first={order === 0} />
-          )}
-        </div>
+        <Body
+          piece={chapter}
+          skin={skin}
+          say={say}
+          index={index}
+          lead
+          first={order === 0}
+        />
       </CaseBlock>
 
-      {/* Everything else the same work produced, on the same ground, inside the
-          same section   one curtain covers all of it. */}
-      {chapter.palette ? <CasePaletteStory story={chapter.palette} skin={skin} /> : null}
+      {/* The work that only means something next to the work above it. Same
+          ground, no second curtain   read as the next screen of one room. */}
+      {chapter.blocks?.map((block) => (
+        <CaseBlock key={block.key} tight>
+          <Body piece={block} skin={skin} say={say} />
+        </CaseBlock>
+      ))}
 
-      {chapter.wall?.length ? <CaseWall wall={chapter.wall} skin={skin} /> : null}
-
+      {/* The palette is part of the branding chapter rather than a subject of
+          its own: same ground, same room, one curtain over both. */}
+      {chapter.palette ? (
+        <CasePaletteStory story={chapter.palette} skin={skin} />
+      ) : null}
     </CaseRoom>
   );
 }
 
-/** The rail, the headline, the line under it, and the ways out to the live work. */
-function Writing({
-  chapter,
+/**
+ * One piece of work: what it covers, what it decided, and what it produced.
+ *
+ * The same shape whether it opens a room or follows inside one   only the size
+ * changes. `lead` is the room's own first piece and is set at headline size;
+ * everything after it is set one step down, so a room reads as one argument
+ * carried further rather than as two arguments competing.
+ */
+function Body({
+  piece,
   skin,
-  index,
   say,
-  bare,
+  index,
+  lead = false,
+  first = false,
 }: {
-  chapter: Chapter;
+  piece: Chapter | ChapterBlock;
   skin: ToneSkin;
-  index: string;
   say: Say;
-  bare: boolean;
+  /** The room's number. Printed on the opening piece only. */
+  index?: string;
+  lead?: boolean;
+  first?: boolean;
 }) {
+  const shots = piece.shots ?? [];
+  const bare = shots.length === 0;
+
+  /* A piece that follows another inside the same room is mirrored: pictures
+     to the left, writing to the right. Two pieces set out identically read as
+     one screen printed twice, and the second stops being looked at. Below the
+     breakpoint nothing swaps   the writing is what a phone should meet
+     first, whichever side it would have sat on. */
+  const mirrored = !lead;
+
   return (
-    <div className={cn(bare && "max-w-4xl")}>
+    <div
+      className={cn(
+        "relative",
+        !bare && "grid gap-12 lg:items-start lg:gap-16 xl:gap-20",
+        !bare &&
+          (mirrored
+            ? "lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]"
+            : "lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]"),
+      )}
+    >
+      <Writing
+        piece={piece}
+        skin={skin}
+        say={say}
+        index={index}
+        lead={lead}
+        bare={bare}
+        className={cn(mirrored && "lg:order-2")}
+      />
+
+      {bare ? null : (
+        <Shots
+          shots={shots}
+          skin={skin}
+          say={say}
+          first={first}
+          className={cn(mirrored && "lg:order-1")}
+        />
+      )}
+    </div>
+  );
+}
+
+/** The rule, the headline, the line under it, and the ways out to the live work. */
+function Writing({
+  piece,
+  skin,
+  say,
+  index,
+  lead,
+  bare,
+  className,
+}: {
+  piece: Chapter | ChapterBlock;
+  skin: ToneSkin;
+  say: Say;
+  index?: string;
+  lead: boolean;
+  bare: boolean;
+  className?: string;
+}) {
+  /* Type alone is allowed to run wide, but only where it opens the room: a
+     block set as large as the piece above it would read as a new argument. */
+  const loud = lead && bare;
+
+  return (
+    <div className={cn(bare && "max-w-4xl", className)}>
       <Reveal direction="none" duration={0.5} amount={0.3}>
         <div
           className={cn(
@@ -128,10 +218,12 @@ function Writing({
             skin.rule,
           )}
         >
-          <span className={cn("eyebrow mr-1 tabular-nums", skin.label)}>
-            {index}
-          </span>
-          {chapter.labels.map((label, i) => (
+          {index ? (
+            <span className={cn("eyebrow mr-1 tabular-nums", skin.label)}>
+              {index}
+            </span>
+          ) : null}
+          {piece.labels.map((label, i) => (
             <span key={say(label)} className="flex items-baseline gap-3">
               {i > 0 ? (
                 <span
@@ -149,10 +241,10 @@ function Writing({
         as="h2"
         amount={0.3}
         delay={0.05}
-        text={say(chapter.title)}
+        text={say(piece.title)}
         className={cn(
           "font-display mt-7 block font-extrabold tracking-[-0.045em]",
-          bare
+          loud
             ? "text-[clamp(2rem,5.6vw,4.25rem)] leading-[0.99]"
             : "text-[clamp(1.75rem,4vw,3rem)] leading-[1.03]",
           skin.title,
@@ -169,29 +261,11 @@ function Writing({
             skin.body,
           )}
         >
-          {say(chapter.text)}
+          {say(piece.text)}
         </p>
       </Reveal>
 
-      <Links links={chapter.links} skin={skin} say={say} />
-
-      {chapter.metric ? (
-        <Reveal delay={0.26} amount={0.3}>
-          <p
-            className={cn(
-              "mt-10 flex items-baseline gap-4 border-t pt-6",
-              skin.rule,
-            )}
-          >
-            <span className="font-display text-gold text-[clamp(2.75rem,7vw,4.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
-              {chapter.metric}
-            </span>
-            <span className={cn("eyebrow", skin.caption)}>
-              {say({ fr: "Résultat", en: "Outcome" })}
-            </span>
-          </p>
-        </Reveal>
-      ) : null}
+      <Links links={piece.links} skin={skin} say={say} />
     </div>
   );
 }
@@ -208,16 +282,21 @@ function Shots({
   skin,
   say,
   first,
+  className,
 }: {
   shots: Shot[];
   skin: ToneSkin;
   say: Say;
   first: boolean;
+  className?: string;
 }) {
   const odd = shots.length % 2 === 1;
 
   return (
-    <RevealGroup amount={0.12} className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+    <RevealGroup
+      amount={0.12}
+      className={cn("grid gap-3 sm:grid-cols-2 sm:gap-4", className)}
+    >
       {shots.map((shot, i) => {
         const wide = shots.length === 1 || (odd && i === 0);
 

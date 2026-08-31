@@ -7,6 +7,9 @@ export const educazenKids: ProjectCase = {
   category: { fr: "Éducation", en: "Education" },
   location: { fr: "Agadir, Maroc", en: "Agadir, Morocco" },
 
+  /** Violet #7B1FA2, out of the brand book. */
+  ground: "#7B1FA2",
+
   hero: {
     statement: {
       fr: "Que le dehors ressemble au dedans.",
@@ -23,29 +26,57 @@ export const educazenKids: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'inscriptions tenues à la main à un seul endroit qui gère l'admission et la réputation.",
-      en: "From admissions run by hand to one place that handles enrolment and reputation together.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Les familles peinaient à trouver le centre.",
-        en: "Families struggled to find the centre.",
+        fr: "Un centre qui change la vie d'enfants tous les jours.",
+        en: "A centre changing children's lives every day.",
       },
       {
-        fr: "L'équipe suivait les places sur papier.",
-        en: "The team was tracking places on paper.",
+        fr: "Des familles qui se parlent entre elles.",
+        en: "Families who talk to each other.",
       },
       {
-        fr: "La refonte a aligné la marque sur la salle, et le système a mis l'inscription sur un seul chemin.",
-        en: "The refresh aligned the brand with the room, and the system put enrolment on a single path.",
-      },
-      {
-        fr: "Du premier clic à la place confirmée.",
-        en: "From the first click to the confirmed place.",
+        fr: "Un nombre de places fini, dans un rayon de vingt minutes.",
+        en: "A finite number of places, within a twenty-minute radius.",
       },
     ],
+    fracture: [
+      {
+        fr: "Une présence digitale qui n'en montrait rien.",
+        en: "A digital presence that showed none of it.",
+      },
+      {
+        fr: "Des familles qui peinaient à trouver le centre.",
+        en: "Families who struggled to find the centre.",
+      },
+      {
+        fr: "Des places suivies sur papier.",
+        en: "Places tracked on paper.",
+      },
+    ],
+    statement: {
+      fr: "Le dedans était juste. Le dehors ne lui ressemblait pas.",
+      en: "The inside was right. The outside looked nothing like it.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Aligner la marque sur la salle, et mettre l'inscription sur un seul chemin.",
+      en: "Align the brand with the room, and put enrolment on a single path.",
+    },
+    chain: [
+      { fr: "Marque", en: "Brand" },
+      { fr: "Site web", en: "Website" },
+      { fr: "CRM", en: "CRM" },
+      { fr: "Contenu", en: "Content" },
+      { fr: "Média payant", en: "Paid Media" },
+    ],
+    text: {
+      fr: "La refonte a fait ressembler le dehors au dedans. Le site répond aux deux questions d'un parent avant de parler du centre. Derrière lui, le CRM compte les places et ne laisse plus les relances à la mémoire de quelqu'un. Le contenu a été construit pour être reconnu une deuxième fois plutôt que vu une première. Et le payant vise une ville, pas un pays   coupé dès que les places sont prises.",
+      en: "The refresh made the outside look like the inside. The site answers a parent's two questions before it talks about the centre. Behind it, the CRM counts the places and no longer leaves follow-ups to someone's memory. Content was built to be recognised a second time rather than seen a first. And the paid spend is aimed at one city, not one country   switched off the moment the places are taken.",
+    },
   },
 
   chapters: [
@@ -58,8 +89,8 @@ export const educazenKids: ProjectCase = {
         en: "An identity that finally looks like what happens inside.",
       },
       text: {
-        fr: "Le seul projet du portfolio où la refonte peut se montrer en comparaison : l'ancienne marque à côté de la nouvelle. Le cœur-puzzle vient du centre lui-même   quatre pièces différentes, et c'est ce qui le rend entier.",
-        en: "The one project in this portfolio where the refresh can be shown as a comparison: the old mark beside the new one. The puzzle heart came out of the centre itself   four different pieces, which is what makes it whole.",
+        fr: "Le seul projet du portfolio où la refonte peut se montrer en comparaison : l'ancienne marque à côté de la nouvelle. Le cœur-puzzle vient du centre lui-même   quatre pièces différentes, et c'est ce qui le rend entier. Il vit seul en avatar, en favicon et en filigrane à trois pour cent, toujours sans le slogan, et jamais sur un fond sombre.",
+        en: "The one project in this portfolio where the refresh can be shown as a comparison: the old mark beside the new one. The puzzle heart came out of the centre itself   four different pieces, which is what makes it whole. It stands alone as an avatar, a favicon and a three per cent watermark, always without the strapline, and never on a dark ground.",
       },
       shots: [
         {
@@ -175,6 +206,13 @@ export const educazenKids: ProjectCase = {
         fr: "Devant, un site qui répond aux deux questions d'un parent avant de parler du centre : est-ce qu'on prend un profil comme le sien, et combien de temps il faut attendre. Derrière, le tableau de bord où arrivent les demandes, où se comptent les places, et où les relances ne dépendent plus de la mémoire de quelqu'un.",
         en: "In front, a site that answers a parent's two questions before it talks about the centre: is a profile like theirs taken, and how long is the wait. Behind it, the dashboard where enquiries land, places are counted, and follow-ups no longer depend on someone remembering.",
       },
+      links: [
+        {
+          href: "https://educazenkids.com",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/educazen-kids/educazenkids-web-desktop.png",
@@ -235,53 +273,78 @@ export const educazenKids: ProjectCase = {
           label: { fr: "Application", en: "Application" },
         },
       ],
-      wall: [
+      blocks: [
         {
-          image: "/work/educazen-kids/educazenkids-brand-book.png",
-          alt: { fr: "Livre de marque EducazenKids", en: "EducazenKids brand book" },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-scroll-1.png",
-          alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-scroll-2.png",
-          alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-scroll-3.png",
-          alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-brand-logo-site.png",
-          alt: {
-            fr: "Le logo EducazenKids appliqué",
-            en: "The EducazenKids logo applied",
+          key: "paid-media",
+          labels: [{ fr: "Média payant", en: "Paid Media" }],
+          title: {
+            fr: "Un budget qui vise une ville, pas un pays.",
+            en: "A budget aimed at one city, not one country.",
           },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-web.png",
-          alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-        },
-        {
-          image: "/work/educazen-kids/educazenkids-cover.png",
-          alt: { fr: "EducazenKids", en: "EducazenKids" },
+          text: {
+            fr: "Le centre a un nombre de places fini et un rayon d’une vingtaine de minutes en voiture. Le payant est réglé sur cette contrainte-là : peu de portée, beaucoup d’intention, et coupé dès que les places sont prises. Les familles trouvent le centre seules, et l’équipe ne court plus après l’administratif.",
+            en: "The centre has a finite number of places and a radius of about twenty minutes by car. The paid spend is tuned to that constraint: little reach, a lot of intent, and switched off the moment the places are taken. Families find the centre on their own, and the team is no longer chasing admin.",
+          },
         },
       ],
     },
+  ],
+
+  impact: {
+    title: {
+      fr: "Du premier clic à la place confirmée.",
+      en: "From the first click to the confirmed place.",
+    },
+    text: {
+      fr: "Une marque qui ressemble enfin à ce qui se passe à l'intérieur, une inscription qui tient sur un seul chemin, et une équipe qui ne court plus après l'administratif.",
+      en: "A brand that finally looks like what happens inside, enrolment held on a single path, and a team no longer chasing admin.",
+    },
+    metric: "+62%",
+    rows: [
+      {
+        metric: "+62%",
+        /* TODO(brand book): ce que le chiffre compte, et sur quelle période. */
+        measures: null,
+        period: null,
+        meaning: {
+          fr: "Les familles trouvent le centre seules.",
+          en: "Families find the centre on their own.",
+        },
+      },
+    ],
+  },
+
+  work: [
     {
-      key: "paid-media",
-      labels: [{ fr: "Média payant", en: "Paid Media" }],
-      tone: "forest",
-      title: {
-        fr: "Un budget qui vise une ville, pas un pays.",
-        en: "A budget aimed at one city, not one country.",
+      image: "/work/educazen-kids/educazenkids-brand-book.png",
+      alt: { fr: "Livre de marque EducazenKids", en: "EducazenKids brand book" },
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-scroll-1.png",
+      alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-scroll-2.png",
+      alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-scroll-3.png",
+      alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-brand-logo-site.png",
+      alt: {
+        fr: "Le logo EducazenKids appliqué",
+        en: "The EducazenKids logo applied",
       },
-      text: {
-        fr: "Le centre a un nombre de places fini et un rayon d’une vingtaine de minutes en voiture. Le payant est réglé sur cette contrainte-là : peu de portée, beaucoup d’intention, et coupé dès que les places sont prises. Les familles trouvent le centre seules, et l’équipe ne court plus après l’administratif.",
-        en: "The centre has a finite number of places and a radius of about twenty minutes by car. The paid spend is tuned to that constraint: little reach, a lot of intent, and switched off the moment the places are taken. Families find the centre on their own, and the team is no longer chasing admin.",
-      },
-      metric: "+62%",
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-web.png",
+      alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
+    },
+    {
+      image: "/work/educazen-kids/educazenkids-cover.png",
+      alt: { fr: "EducazenKids", en: "EducazenKids" },
     },
   ],
 };

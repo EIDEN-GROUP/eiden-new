@@ -7,6 +7,9 @@ export const medicalBay: ProjectCase = {
   category: { fr: "Santé", en: "Healthcare" },
   location: { fr: "Agadir, Maroc", en: "Agadir, Morocco" },
 
+  /** Slate #2A3A38, out of the brand book. */
+  ground: "#2A3A38",
+
   hero: {
     statement: {
       fr: "Concevoir la clinique et son logiciel comme une seule chose.",
@@ -23,29 +26,54 @@ export const medicalBay: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'une clinique sur le papier à une clinique qui tourne sur un système.",
-      en: "From a clinic on paper to a clinic running on a system.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Pas de marque, pas de parcours patient, pas de CRM, aucun tunnel.",
-        en: "No brand, no patient journey, no CRM, no funnel.",
+        fr: "Une vision claire du centre à ouvrir.",
+        en: "A clear vision of the centre to open.",
       },
+      {
+        fr: "Des traitements que les patients cherchent séparément.",
+        en: "Treatments patients search for separately.",
+      },
+      {
+        fr: "Des patients qui viennent parfois de l'étranger.",
+        en: "Patients who sometimes fly in.",
+      },
+    ],
+    fracture: [
       {
         fr: "La clinique existait sur le papier.",
         en: "The clinic existed on paper.",
       },
       {
-        fr: "Nous avons conçu l'espace et le logiciel comme un seul travail.",
-        en: "We designed the space and the software as one piece of work.",
+        fr: "Pas de marque, pas de parcours patient.",
+        en: "No brand, no patient journey.",
       },
-      {
-        fr: "L'équipe suit maintenant chaque rendez-vous depuis un écran, et le patient voit un chemin continu.",
-        en: "The team now follows every appointment from one screen, and the patient sees one continuous path.",
-      },
+      { fr: "Pas de CRM, aucun tunnel.", en: "No CRM, no funnel." },
     ],
+    statement: {
+      fr: "La vision était claire. Il n'y avait rien dessous.",
+      en: "The vision was clear. There was nothing underneath it.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Concevoir l'espace et le logiciel comme un seul travail.",
+      en: "Design the space and the software as one piece of work.",
+    },
+    chain: [
+      { fr: "Architecture d'activité", en: "Business Architecture" },
+      { fr: "Marque", en: "Brand" },
+      { fr: "Site web", en: "Website" },
+      { fr: "CRM", en: "CRM" },
+      { fr: "Campagnes", en: "Campaigns" },
+    ],
+    text: {
+      fr: "Le premier livrable n'était pas une maquette : c'était le chemin qu'un patient parcourt, de la recherche au suivi. La marque et l'espace physique ont été dessinés ensemble pour ce chemin-là. Le site en est la porte d'entrée, le tableau de bord la salle des machines. Et chaque traitement a sa campagne, sa page et sa preuve, parce qu'un implant et une facette ne se cherchent pas au même moment.",
+      en: "The first deliverable was not a mockup: it was the path a patient walks, from search to follow-up. The brand and the physical space were drawn together for that path. The site is its front door, the dashboard its engine room. And each treatment has its own campaign, page and proof, because an implant and a veneer are not searched for at the same moment.",
+    },
   },
 
   chapters: [
@@ -71,8 +99,8 @@ export const medicalBay: ProjectCase = {
         en: "Calm, before the appointment.",
       },
       text: {
-        fr: "La marque, et l'espace physique avec lequel elle a été dessinée   les deux ont été pensés ensemble, et c'est ce que le patient rencontre en premier. Une identité qui rassure avant d'expliquer quoi que ce soit.",
-        en: "The mark, and the physical space it was designed alongside   the two were drawn together, and they are the first thing a patient meets. An identity that reassures before it explains anything.",
+        fr: "Medical Bay n'est pas une clinique : c'est le pont entre un patient et le bon spécialiste, et la marque devait porter cette confiance-là avant d'expliquer quoi que ce soit. Montserrat pour l'autorité, Cormorant en italique pour la part humaine, et un teal choisi contre le bleu clinique   une identité qui rassure en français, en anglais et en arabe.",
+        en: "Medical Bay is not a clinic: it is the bridge between a patient and the right specialist, and the brand had to carry that trust before it explained anything. Montserrat for the authority, Cormorant italic for the human half, and a teal chosen against clinical blue   an identity that reassures in French, in English and in Arabic.",
       },
       shots: [
         {
@@ -100,8 +128,8 @@ export const medicalBay: ProjectCase = {
       palette: {
         title: { fr: "Le langage visuel", en: "The visual language" },
         lead: {
-          fr: "Une clinique doit rassurer avant d'expliquer. La couleur s'en charge en premier.",
-          en: "A clinic has to reassure before it explains. Colour does that first.",
+          fr: "Un parcours de soin doit rassurer avant d'expliquer. La couleur s'en charge en premier.",
+          en: "A care journey has to reassure before it explains. Colour does that first.",
         },
         colors: [
           {
@@ -110,12 +138,16 @@ export const medicalBay: ProjectCase = {
             role: { fr: "Signature", en: "Signature" },
           },
           {
-            name: "Teal Deep",
+            name: "Teal Profond",
             hex: "#1F9187",
             role: { fr: "Profondeur", en: "Depth" },
           },
           { name: "Mist", hex: "#E8F5F3", role: { fr: "Calme", en: "Calm" } },
-          { name: "Ink", hex: "#0D1A18", role: { fr: "Ancrage", en: "Anchor" } },
+          {
+            name: "Encre",
+            hex: "#0D1A18",
+            role: { fr: "Ancrage", en: "Anchor" },
+          },
         ],
         states: [
           {
@@ -266,56 +298,10 @@ export const medicalBay: ProjectCase = {
           label: { fr: "Tourisme médical", en: "Medical tourism" },
         },
       ],
-      wall: [
-        {
-          image: "/work/medical-bay/medical-bay-brand-logo-3.png",
-          alt: { fr: "Logo Medical Bay", en: "Medical Bay logo" },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-brand-reception-mockup.png",
-          alt: { fr: "L'accueil Medical Bay", en: "The Medical Bay reception" },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-application.png",
-          alt: {
-            fr: "L'identité Medical Bay en situation",
-            en: "The Medical Bay identity in place",
-          },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-office.png",
-          alt: {
-            fr: "Un cabinet de Medical Bay",
-            en: "A Medical Bay treatment room",
-          },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-dental-campaign.png",
-          alt: {
-            fr: "Campagne dentaire Medical Bay",
-            en: "Medical Bay dental campaign",
-          },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-brand-logo-site.png",
-          alt: {
-            fr: "Le logo Medical Bay en ligne",
-            en: "The Medical Bay logo online",
-          },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-hero-flatlay.png",
-          alt: { fr: "Medical Bay", en: "Medical Bay" },
-        },
-        {
-          image: "/work/medical-bay/medical-bay-lobby.png",
-          alt: { fr: "Le hall de Medical Bay", en: "The Medical Bay lobby" },
-        },
-      ],
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Une clinique qui tourne sur un système, plus sur des tableurs.",
       en: "A clinic that runs on a system instead of on spreadsheets.",
@@ -324,6 +310,55 @@ export const medicalBay: ProjectCase = {
       fr: "Un parcours patient continu, une équipe qui travaille depuis un seul écran, et une marque qui rassure avant que quiconque ait poussé la porte.",
       en: "One continuous patient journey, a team working from a single screen, and a brand that reassures before anyone walks in.",
     },
+    /* TODO(brand book): ce que « +120 » compte, sur quelle période, et ce que
+       ça change pour la clinique. */
     metric: "+120",
   },
+
+  work: [
+    {
+      image: "/work/medical-bay/medical-bay-brand-logo-3.png",
+      alt: { fr: "Logo Medical Bay", en: "Medical Bay logo" },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-brand-reception-mockup.png",
+      alt: { fr: "L'accueil Medical Bay", en: "The Medical Bay reception" },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-application.png",
+      alt: {
+        fr: "L'identité Medical Bay en situation",
+        en: "The Medical Bay identity in place",
+      },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-office.png",
+      alt: {
+        fr: "Un cabinet de Medical Bay",
+        en: "A Medical Bay treatment room",
+      },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-dental-campaign.png",
+      alt: {
+        fr: "Campagne dentaire Medical Bay",
+        en: "Medical Bay dental campaign",
+      },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-brand-logo-site.png",
+      alt: {
+        fr: "Le logo Medical Bay en ligne",
+        en: "The Medical Bay logo online",
+      },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-hero-flatlay.png",
+      alt: { fr: "Medical Bay", en: "Medical Bay" },
+    },
+    {
+      image: "/work/medical-bay/medical-bay-lobby.png",
+      alt: { fr: "Le hall de Medical Bay", en: "The Medical Bay lobby" },
+    },
+  ],
 };

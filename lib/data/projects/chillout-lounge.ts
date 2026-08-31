@@ -27,29 +27,52 @@ export const chilloutLounge: ProjectCase = {
     },
   },
 
-  transformation: {
-    title: {
-      fr: "D'invisible tant qu'on n'y était pas, à un lieu qui se lit comme il se vit au coucher du soleil.",
-      en: "From invisible until you arrived, to a venue that reads the way it feels at sunset.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
         fr: "Un endroit fait à la main, avec un vrai caractère.",
         en: "A hand-made place, with a real character.",
       },
       {
-        fr: "Et aucun moyen de le montrer.",
-        en: "And no way to show it.",
+        fr: "Une heure   dix-neuf heures   que le lieu a déjà.",
+        en: "An hour   seven in the evening   the place already owns.",
       },
       {
-        fr: "Le site porte maintenant la personnalité avant qu'on y arrive.",
-        en: "The site now carries that personality before you get there.",
-      },
-      {
-        fr: "Et l'équipe met le programme à jour elle-même.",
-        en: "And the team updates the programme themselves.",
+        fr: "Un programme qui change tous les soirs.",
+        en: "A programme that changes every night.",
       },
     ],
+    fracture: [
+      { fr: "Aucun moyen de le montrer.", en: "No way to show it." },
+      {
+        fr: "Invisible tant qu'on n'y était pas.",
+        en: "Invisible until you had arrived.",
+      },
+      {
+        fr: "Un programme que l'équipe ne pouvait pas tenir à jour elle-même.",
+        en: "A programme the team could not keep up to date itself.",
+      },
+    ],
+    statement: {
+      fr: "Le lieu se vivait très bien. Il ne se voyait pas.",
+      en: "The place was easy to experience. It was impossible to see.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Faire porter au site la personnalité du lieu, avant qu'on y arrive.",
+      en: "Make the site carry the personality of the place, before you get there.",
+    },
+    chain: [
+      { fr: "Direction artistique", en: "Art Direction" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Motion", en: "Motion" },
+    ],
+    text: {
+      fr: "La direction artistique a choisi dix-neuf heures et s'y tient partout : le logotype et la lumière viennent de ce que le lieu est déjà à cette heure-là. Le site ne traite qu'une question   qui joue ce soir   et l'équipe met la soirée à jour elle-même, depuis la salle. Et le mouvement est écrit en CSS plutôt qu'apporté par une librairie, pour que le site reste léger sur un réseau de bord de mer.",
+      en: "Art direction picked seven in the evening and holds to it everywhere: the wordmark and the light come from what the place already is at that hour. The site handles one question   who is playing tonight   and the team updates the evening itself, from the floor. And the motion is written in CSS rather than brought in by a library, so the site stays light on a seafront network.",
+    },
   },
 
   chapters: [
@@ -99,56 +122,6 @@ export const chilloutLounge: ProjectCase = {
           label: { fr: "Les soirées", en: "Nights" },
         },
       ],
-      wall: [
-        {
-          image: "/work/chillout-lounge/DSC09000.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09003.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09004.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09006.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09008.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09016.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09017.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09020.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09021.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09023.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/DSC09024.jpg",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-        {
-          image: "/work/chillout-lounge/chilout hero.png",
-          alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
-        },
-      ],
     },
     {
       key: "website",
@@ -162,6 +135,13 @@ export const chilloutLounge: ProjectCase = {
         fr: "Un bar n'a qu'une question à traiter en ligne : qui joue ce soir, et à quelle heure. Tout le reste du site est en dessous, et l'équipe met la soirée à jour elle-même depuis un téléphone, en salle.",
         en: "A bar has one question to handle online: who is playing tonight, and at what time. Everything else on the site sits below that, and the team updates the evening themselves from a phone, on the floor.",
       },
+      links: [
+        {
+          href: "https://chill-vibes-studio.vercel.app",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/chillout-lounge/web-chillout-desktop.jpg",
@@ -205,7 +185,7 @@ export const chilloutLounge: ProjectCase = {
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Une personnalité visible avant d'y arriver.",
       en: "A personality visible before you get there.",
@@ -215,4 +195,55 @@ export const chilloutLounge: ProjectCase = {
       en: "A programme the team maintains itself, and a light site with no heavy imagery to load.",
     },
   },
+
+  work: [
+    {
+      image: "/work/chillout-lounge/DSC09000.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09003.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09004.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09006.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09008.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09016.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09017.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09020.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09021.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09023.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/DSC09024.jpg",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+    {
+      image: "/work/chillout-lounge/chilout hero.png",
+      alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
+    },
+  ],
 };

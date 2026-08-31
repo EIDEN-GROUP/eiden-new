@@ -25,29 +25,57 @@ export const lithosMateriaux: ProjectCase = {
     alt: { fr: "Le catalogue LITHOS", en: "The LITHOS catalogue" },
   },
 
-  transformation: {
-    title: {
-      fr: "D'une liste de références à un catalogue parcouru par effet, par espace et par ambiance.",
-      en: "From a list of reference numbers to a catalogue browsed by effect, space and mood.",
-    },
-    text: [
+  fracture: {
+    reality: [
       {
-        fr: "Un architecte ne prescrit pas une pierre par numéro d'article.",
-        en: "Architects do not specify stone by reference number.",
+        fr: "Une gamme tirée de la carrière elle-même.",
+        en: "A range that comes out of the quarry itself.",
       },
       {
-        fr: "Il cherche par effet, par espace, par ambiance.",
-        en: "They search by effect, by space, by mood.",
+        fr: "Des architectes qui savent ce qu'ils cherchent.",
+        en: "Architects who know what they are looking for.",
       },
       {
-        fr: "Nous avons reconstruit le catalogue autour de ces trois façons.",
-        en: "We rebuilt the catalogue around those three ways.",
-      },
-      {
-        fr: "La matière se trouve maintenant comme elle se choisit : par ce qu'elle donne.",
-        en: "The material is now found the way it is chosen   by what it gives you.",
+        fr: "Une matière qui se choisit par ce qu'elle donne.",
+        en: "A material chosen by what it gives you.",
       },
     ],
+    fracture: [
+      {
+        fr: "Un catalogue organisé par numéro d'article.",
+        en: "A catalogue organised by reference number.",
+      },
+      {
+        fr: "Aucune entrée par effet, par espace ou par ambiance.",
+        en: "No way in by effect, by space or by mood.",
+      },
+      {
+        fr: "Une liste de références là où il fallait une gamme.",
+        en: "A list of reference numbers where a range was needed.",
+      },
+    ],
+    statement: {
+      fr: "La pierre se choisit à l'œil. Le catalogue se lisait au numéro.",
+      en: "Stone is chosen by eye. The catalogue was read by number.",
+    },
+  },
+
+  architecture: {
+    decision: {
+      fr: "Reconstruire le catalogue autour des trois façons dont une pierre se choisit.",
+      en: "Rebuild the catalogue around the three ways a stone is actually chosen.",
+    },
+    chain: [
+      { fr: "Direction artistique", en: "Art Direction" },
+      { fr: "Design system", en: "Design System" },
+      { fr: "Site web", en: "Website" },
+      { fr: "Expérience catalogue", en: "Catalogue Experience" },
+      { fr: "Motion", en: "Motion" },
+    ],
+    text: {
+      fr: "Les tons de l'identité sont relevés sur les pierres elles-mêmes plutôt que choisis dans un nuancier. Le design system   une échelle, six espacements, trois façons de poser une image   permet d'ajouter une matière sans redessiner une page. Le site fait du catalogue le produit plutôt qu'une annexe. L'expérience catalogue ouvre trois chemins vers la même pierre : par effet, par espace, par ambiance. Et le mouvement ne sert qu'à faire tourner la lumière sur une surface.",
+      en: "The identity's tones were taken off the stones themselves rather than picked from a swatch book. The design system   one scale, six spacings, three ways to place an image   lets a material be added without redrawing a page. The site makes the catalogue the product rather than an appendix. The catalogue experience opens three routes to the same stone: by effect, by space, by mood. And the motion does one thing: turn the light across a surface.",
+    },
   },
 
   chapters: [
@@ -101,6 +129,13 @@ export const lithosMateriaux: ProjectCase = {
         fr: "Sur la plupart des sites de fournisseurs, le catalogue est ce qui vient après la présentation de la société. Ici c'est l'inverse : la gamme est la page d'accueil, et l'entreprise se raconte à travers ce qu'elle a en carrière.",
         en: "On most supplier sites the catalogue is what comes after the company introduction. Here it is the other way round: the range is the homepage, and the company tells its story through what it has in the quarry.",
       },
+      links: [
+        {
+          href: "https://lithos-materiaux.vercel.app",
+          label: { fr: "Voir le site", en: "View the site" },
+          kind: "site",
+        },
+      ],
       shots: [
         {
           image: "/work/lithos-materiaux/web-lithos-desktop.jpg",
@@ -153,7 +188,7 @@ export const lithosMateriaux: ProjectCase = {
     },
   ],
 
-  outcome: {
+  impact: {
     title: {
       fr: "Un catalogue parcouru comme une pierre se choisit.",
       en: "A catalogue browsed the way a stone is chosen.",

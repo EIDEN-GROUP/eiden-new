@@ -90,27 +90,13 @@ export function Hero() {
     "size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none";
 
   return (
-    <section
-      ref={sectionRef}
-      data-nav-tone="dark"
-      className="hero-depart bg-ink relative isolate flex min-h-svh flex-col overflow-hidden"
-    >
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]"
-      >
-        <HeroVideo
-          src="/media/eiden-hero.mp4"
-          poster="/media/eiden-hero-poster.jpg"
-          className="object-[50%_62%]"
-        />
+    <section ref={sectionRef} data-nav-tone="dark" className="hero-depart bg-ink relative isolate flex min-h-svh flex-col overflow-hidden">
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
+        <HeroVideo src="/media/eiden-hero.mp4" poster="/media/eiden-hero-poster.jpg" className="object-[50%_62%]" />
       </div>
 
       {/* Heaviest under the type, lightest where the mark sits. */}
-      <span
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]"
-      />
+      <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]" />
       <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-8 sm:pt-36 sm:pb-10">
         <h1 className="text-balance-tight text-canvas max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
           {words.map((word, index) => {
@@ -126,10 +112,7 @@ export function Hero() {
                     spacing,
                   )}
                 >
-                  <span
-                    className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
-                    style={rise}
-                  >
+                  <span className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
                     {word.text}
                   </span>
                 </span>
@@ -137,22 +120,13 @@ export function Hero() {
             }
 
             return (
-              <span
-                key={`${word.text}-${index}`}
-                className={cn("relative inline-block", spacing)}
-              >
+              <span key={`${word.text}-${index}`} className={cn("relative inline-block", spacing)}>
                 <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-                  <span
-                    className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
-                    style={rise}
-                  >
+                  <span className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
                     {word.text}
                   </span>
                 </span>
-                <span
-                  aria-hidden
-                  className="bg-gold/60 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
-                />
+                <span aria-hidden className="bg-gold/60 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"/>
               </span>
             );
           })}
@@ -164,17 +138,11 @@ export function Hero() {
               {t.hero.description}
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
-              <Link
-                href="/nos-solutions"
-                className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
-              >
+              <Link href="/nos-solutions" className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
                 {t.common.seeSolutions}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
-              <Link
-                href="/contact"
-                className="group text-canvas/75 hover:text-canvas inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300"
-              >
+              <Link href="/contact" className="group text-canvas/75 hover:text-canvas inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
                 {t.common.bookCall}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
@@ -182,24 +150,15 @@ export function Hero() {
           </div>
 
           <div className="min-w-0 md:justify-self-end">
-            <div
-              className={cn(enter, "flex items-center gap-3 md:justify-end")}
-              style={stage(0.68)}
-            >
+            <div className={cn(enter, "flex items-center gap-3 md:justify-end")} style={stage(0.68)} >
               <span className="flex items-center gap-1" aria-hidden>
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <Star
-                    key={index}
-                    className="fill-mint text-mint size-2.5"
-                    strokeWidth={0}
-                  />
+                  <Star key={index} className="fill-mint text-mint size-2.5" strokeWidth={0} />
                 ))}
               </span>
               <p className="text-canvas/60 text-[0.875rem]">{t.hero.trust}</p>
             </div>
 
-            {/* The claim above is a number; this is the project it came
-                from   cover, what it was, what it moved, and the way in. */}
             {featured ? (
               <Link
                 href="/clients"
@@ -214,7 +173,7 @@ export function Hero() {
                     src={featured.image}
                     alt=""
                     fill
-                    sizes="64px"
+                    sizes="500px"
                     className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:transition-none"
                   />
                 </span>
@@ -243,15 +202,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* The roster keeps running   full width, under both columns, where
-            it has the room a marquee needs. */}
-        <div
-          className={cn(
-            enter,
-            "border-canvas/12 mt-8 flex flex-col gap-4 border-t pt-6 sm:mt-10 sm:flex-row sm:items-center sm:gap-10 sm:pt-7",
-          )}
-          style={stage(0.78)}
-        >
+        <div className={cn( enter, "border-canvas/12 mt-8 flex flex-col gap-4 border-t pt-6 sm:mt-10 sm:flex-row sm:items-center sm:gap-10 sm:pt-7" ,)} style={stage(0.78)}>
           <p className="eyebrow text-canvas/35 shrink-0">{t.hero.clientsLabel}</p>
           <LogoMarquee
             logos={clientLogos}
