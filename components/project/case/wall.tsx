@@ -11,49 +11,11 @@ import type { GalleryImage } from "@/lib/data/projects/types";
 import type { ToneSkin } from "./tone";
 import { cn } from "@/lib/utils";
 
-/** How long a picture is held before the rail moves on. */
 const DWELL = 4200;
-
-/** How long one picture takes to travel, and on what curve. */
 const TRAVEL = 620;
 const ease = (t: number) => 1 - Math.pow(1 - t, 3);
-
-/** How long the rail has to be still before its position is normalised. */
 const SETTLE = 160;
 
-/**
- * The gallery, run edge to edge.
- *
- * The pictures are the widest thing in the case and they are given the whole
- * screen: the rail starts at one edge and ends at the other, with the next
- * frame always part in view so the set reads as something continuing rather
- * than as a page that has run out. Only the controls come back onto the page
- * measure   they are writing, and writing belongs in the column everything
- * else on the page is set in.
- *
- * It is a real scroller rather than a track being transformed, so a finger, a
- * trackpad and a keyboard all work with no code at all, and the snap points
- * are the browser's own.
- *
- * The travel is animated here rather than handed to `scrollTo({ behavior:
- * "smooth" })`, for three reasons: that call is silently inert on a nested
- * scroller in more than one engine, mandatory snapping fights it where it is
- * not, and it eases on the browser's curve instead of the brand's. Sixteen
- * lines buys the same motion as everything else on the page, everywhere.
- *
- * The set is carried twice and the rail steps back by one copy once it has
- * settled, which is what makes the loop seamless   normalising mid-travel
- * would show as a jump, so it waits for the rail to stop. Nothing about the
- * position goes through React: the counter and the progress rule are written
- * onto their own nodes, because a re-render per scroll frame would mutate the
- * snap container under the very animation running inside it.
- *
- * It moves on its own, and stops the moment there is reason to think someone
- * is reading rather than watching: a pointer on it, focus inside it, a picture
- * opened, the tab in the background, the section off screen, the control
- * paused, or the visitor asking for less motion   in which case it never
- * starts.
- */
 export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin }) {
   const say = useLocalized();
   const still = useMediaQuery("(prefers-reduced-motion: reduce)");
@@ -64,10 +26,6 @@ export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin 
 
   const [open, setOpen] = useState<number | null>(null);
   const [playing, setPlaying] = useState(true);
-
-  /* Live reasons to hold, read inside the tick rather than closed over: a
-     dependency on each would tear the timer down and rebuild it every time the
-     pointer crossed the rail. */
   const held = useRef(false);
   const seen = useRef(true);
   const opened = useRef(false);

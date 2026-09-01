@@ -430,6 +430,36 @@
   [data-reveal-group="in"] > *:nth-child(n + 7) {
     transition-delay: 480ms;
   }
+
+  /* Blocks that arrive from the side, and keep arriving.
+     Unlike the reveals above, which are spent the first time they are read,
+     this one is re-armed every time the block leaves the window   `data-slide`
+     is toggled back to "out" and `data-slide-from` is set to the side the
+     block will next be met from. The distance is a clamp rather than a fixed
+     offset so a phone gets a nudge where a desktop gets a stride. */
+  [data-slide] {
+    --slide-distance: clamp(1.75rem, 5vw, 4.5rem);
+    transition:
+      opacity var(--slide-duration, 0.9s) var(--ease-brand),
+      transform var(--slide-duration, 0.9s) var(--ease-brand);
+  }
+
+  [data-slide="out"] {
+    opacity: 0;
+  }
+
+  [data-slide="out"][data-slide-from="right"] {
+    transform: translate3d(var(--slide-distance), 0, 0);
+  }
+
+  [data-slide="out"][data-slide-from="left"] {
+    transform: translate3d(calc(-1 * var(--slide-distance)), 0, 0);
+  }
+
+  [data-slide="in"] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes eiden-fade {

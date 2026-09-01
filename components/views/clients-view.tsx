@@ -59,42 +59,42 @@ export function ClientsView() {
   );
 
   return (
-    <div data-nav-tone="dark" className="bg-ink text-canvas">
+    <div data-nav-tone="light" className="bg-canvas text-forest">
       {/* ── The claim, with the work already showing beside it ────────── */}
       <section className="grain">
-        <div className="container-eiden pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <div className="container-eiden">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
-            <div>
+            <div className="pt-20 pb-0 sm:pt-28 sm:pb-20">
               <Reveal direction="none" duration={0.5}>
-                <p className="eyebrow text-gold flex items-center gap-3">
+                <p className="eyebrow text-teal flex items-center gap-3">
                   <span aria-hidden className="h-px w-8 bg-current opacity-50" />
                   {page.eyebrow}
                 </p>
               </Reveal>
 
               <Reveal delay={0.06}>
-                <h1 className="text-canvas mt-7 max-w-2xl text-[clamp(2.25rem,5.4vw,4.25rem)]">
+                <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,5.4vw,4.25rem)]">
                   {page.workTitle}
                 </h1>
               </Reveal>
 
               <Reveal delay={0.12}>
-                <p className="text-canvas/60 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
+                <p className="text-forest/65 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
                   {page.workLead}
                 </p>
               </Reveal>
 
               <Reveal delay={0.18}>
                 <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                  <ButtonLink href="/contact" variant="gold" size="lg">
+                  <ButtonLink href="/contact" variant="primary" size="lg">
                     {t.common.bookCall}
                   </ButtonLink>
 
-                  <div className="border-canvas/15 flex items-baseline gap-3 border-l pl-8">
-                    <span className="font-display text-canvas text-[1.75rem] leading-none font-extrabold tracking-[-0.04em]">
+                  <div className="border-forest/15 flex items-baseline gap-3 border-l pl-8">
+                    <span className="font-display text-forest text-[1.75rem] leading-none font-extrabold tracking-[-0.04em]">
                       {projects.length}
                     </span>
-                    <span className="text-canvas/50 text-[0.9375rem]">
+                    <span className="text-forest/60 text-[0.9375rem]">
                       {page.statLabel}
                     </span>
                   </div>
@@ -103,7 +103,7 @@ export function ClientsView() {
             </div>
 
             <Reveal delay={0.1} direction="left">
-              <div aria-hidden className={cn( "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[34rem]", "[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]", )}>
+              <div aria-hidden className={cn( "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[40rem] , [mask-image:linear-gradient(to_bottom,black_85%,transparent)]", )}>
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                   {COLUMNS.map((column, index) => (
                     <div key={index} className={cn("min-w-0", index === 2 && "hidden lg:block")} >
@@ -120,7 +120,7 @@ export function ClientsView() {
                           <div key={`${project.slug}-${i}`} className="pb-3">
                             <div
                               className={cn(
-                                "ring-canvas/10 relative overflow-hidden rounded-2xl ring-1",
+                                "ring-forest/10 relative overflow-hidden rounded-2xl ring-1",
                                 i % column.items.length === 0
                                   ? "aspect-4/5"
                                   : "aspect-4/3",
@@ -145,14 +145,14 @@ export function ClientsView() {
           </div>
         </div>
 
-        <div className="container-eiden border-canvas/10 border-y py-8">
-          <LogoMarquee logos={clientLogos} tone="light" speed={44} />
+        <div className="container-eiden border-forest/12 border-y py-3">
+          <LogoMarquee logos={clientLogos} tone="dark" speed={44} />
         </div>
 
         <div className="container-eiden pt-16 pb-24 sm:pt-20 sm:pb-32">
           <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
             <div className="lg:sticky lg:top-32">
-              <div className="border-canvas/10 bg-canvas/[0.03] rounded-[1.75rem] border p-4">
+              <div className="border-forest/12 bg-forest/[0.03] rounded-[1.75rem] border p-4">
                 <ul className="flex flex-wrap gap-2.5">
                   {FILTERS.map((filter) => {
                     const on = filter === active;
@@ -163,19 +163,19 @@ export function ClientsView() {
                           onClick={() => setActive(filter)}
                           aria-pressed={on}
                           className={cn(
-                            "font-label focus-visible:outline-gold inline-flex items-center gap-2 rounded-full px-5 py-3",
+                            "font-label focus-visible:outline-teal inline-flex items-center gap-2 rounded-full px-5 py-3",
                             "text-[0.875rem] font-bold tracking-[0.05em] transition-colors duration-300 ease-[var(--ease-brand)]",
                             "focus-visible:outline-2 focus-visible:outline-offset-2",
                             on
-                              ? "bg-canvas text-ink"
-                              : "bg-canvas/[0.06] text-canvas/70 hover:bg-canvas/12 hover:text-canvas",
+                              ? "bg-forest text-canvas"
+                              : "bg-forest/[0.05] text-forest/70 hover:bg-forest/10 hover:text-forest",
                           )}
                         >
                           {page.filters[filter]}
                           <span
                             className={cn(
                               "text-[0.78rem] tabular-nums",
-                              on ? "text-ink/45" : "text-canvas/35",
+                              on ? "text-canvas/50" : "text-forest/45",
                             )}
                           >
                             {counts[filter]}
@@ -187,13 +187,13 @@ export function ClientsView() {
                 </ul>
               </div>
 
-              <ButtonLink href="/contact" variant="gold" size="lg" className="mt-4 w-full" >
+              <ButtonLink href="/contact" variant="primary" size="lg" className="mt-4 w-full" >
                 {t.contact.cta}
               </ButtonLink>
             </div>
 
             {shown.length === 0 ? (
-              <p className="text-canvas/45 text-[0.9375rem]">{page.empty}</p>
+              <p className="text-forest/55 text-[0.9375rem]">{page.empty}</p>
             ) : (
               <RevealGroup key={active} className="grid gap-4 sm:grid-cols-2">
                 {shown.map((project, index) => (
@@ -222,28 +222,28 @@ export function ClientsView() {
       </section>
 
       {/* ── The ground the work stands on ────────────────────────────── */}
-      <section className="border-canvas/10 border-t">
+      <section className="border-forest/12 border-t">
         <div className="container-eiden py-24 sm:py-32">
           <Reveal direction="none" duration={0.5}>
-            <p className="eyebrow text-gold flex items-center gap-3">
+            <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {page.eyebrow}
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h2 className="text-canvas mt-7 max-w-2xl text-[clamp(1.75rem,3.6vw,2.75rem)]">
+            <h2 className="text-forest mt-7 max-w-2xl text-[clamp(1.75rem,3.6vw,2.75rem)]">
               {page.sectorsTitle}
             </h2>
           </Reveal>
 
           <RevealGroup className="mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
             {page.sectors.map((sector) => (
-              <article key={sector.title} className="bg-canvas/[0.04] hover:bg-canvas/[0.08] p-8 transition-colors duration-500" >
-                <h3 className="font-display text-canvas text-lg font-bold tracking-[-0.02em]">
+              <article key={sector.title} className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500" >
+                <h3 className="font-display text-forest text-lg font-bold tracking-[-0.02em]">
                   {sector.title}
                 </h3>
-                <p className="text-canvas/55 mt-3 text-[0.9375rem] leading-relaxed">
+                <p className="text-forest/65 mt-3 text-[0.9375rem] leading-relaxed">
                   {sector.text}
                 </p>
               </article>
@@ -307,11 +307,11 @@ function ProjectCard({
       {...opening}
       onPointerMove={track}
       className={cn(
-        "group focus-visible:outline-gold relative block focus-visible:outline-2 focus-visible:outline-offset-4",
+        "group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:outline-offset-4",
         wide && "sm:col-span-2",
       )}
     >
-      <div className={cn( "bg-canvas/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )} >
+      <div className={cn( "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )} >
         <Image
           src={image}
           alt={imageAlt}

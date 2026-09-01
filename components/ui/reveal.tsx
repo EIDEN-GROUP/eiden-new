@@ -153,6 +153,131 @@ export function RevealWords({
   );
 }
 
+/**
+ * Which way the page is going, kept once for every block that asks rather than
+ * once per block: the listener is passive and does nothing but compare two
+ * numbers, and a page carrying a dozen sliding blocks should not carry a dozen
+ * scroll handlers to tell them all the same thing.
+ */
+let scrollingUp = false;
+let watchingScroll = false;
+
+function watchScrollDirection() {
+  if (typeof window === "undefined" || watchingScroll) return;
+  watchingScroll = true;
+
+  let last = window.scrollY;
+  window.addEventListener(
+    "scroll",
+    () => {
+      const y = window.scrollY;
+      if (y !== last) scrollingUp = y < last;
+      last = y;
+    },
+    { passive: true },
+  );
+}
+
+/**
+ * A block that arrives from the side, and keeps arriving.
+ *
+ * Every other reveal here is spent the first time it is read: the observer
+ * disconnects and the element stays put. This one never disconnects, so the
+ * block is re-armed each time it leaves the window and moves again on the way
+ * back. That is the difference between an entrance and a rhythm, and a page
+ * that is scrolled up and down as much as this one is wants the second.
+ *
+ * It is re-armed on the side it will next be met from, which is the whole
+ * trick: a block left behind on the way down is next seen on the way back up,
+ * so it is parked on the far side and returns from there. Read downward the
+ * two halves of a chapter converge   the writing from one edge, the pictures
+ * from the other   and read upward they converge from the sides they left by,
+ * instead of snapping back to a replay of the first pass.
+ *
+ * `from` is the side it arrives from going down; going up it is the other one.
+ * The distance lives in CSS so it can shrink on a narrow screen, and the whole
+ * behaviour is inside `prefers-reduced-motion: no-preference` with the rest.
+ */
+export function SlideIn({
+  children,
+  className,
+  as: Tag = "div",
+  from,
+  /** Seconds. */
+  duration,
+}: {
+  children: ReactNode;
+  className?: string;
+  as?: ElementType;
+  from: "left" | "right";
+  duration?: number;
+}) {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    watchScrollDirection();
+    const opposite = from === "left" ? "right" : "left";
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          /* Out of the window, which side it is out on says everything: above
+             it, the block is next reached on the way up and is parked on the
+             far edge; below it, on the way down and on its own. Position is
+             read here rather than direction, because a block can be reported
+             out while the reader is going the other way   on the first
+             observation, most of all, when nothing has been scrolled at all. */
+          node.setAttribute(
+            "data-slide-from",
+            entry.boundingClientRect.top < 0 ? opposite : from,
+          );
+          node.setAttribute("data-slide", "out");
+          return;
+        }
+
+        /* Arriving, it is the direction of travel that decides, not position:
+           an observer reports a crossing and not the frame it happened on, so
+           a block thrown past in one gesture   a flicked wheel, a dragged
+           scrollbar, an anchor   is already somewhere else by the time the
+           callback runs, and where it sits then says nothing about which way
+           the reader was going.
+             When that leaves it parked on the wrong edge it is moved, and the
+           move is flushed to the page before the transition is released, or it
+           would slide in from an edge it was never on. */
+        const side = scrollingUp ? opposite : from;
+        if (node.dataset.slideFrom !== side) {
+          node.setAttribute("data-slide-from", side);
+          void node.offsetWidth;
+        }
+        node.setAttribute("data-slide", "in");
+      },
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [from]);
+
+  return (
+    <Tag
+      ref={ref}
+      data-slide="out"
+      data-slide-from={from}
+      className={cn(className)}
+      style={
+        duration
+          ? ({ "--slide-duration": `${duration}s` } as CSSProperties)
+          : undefined
+      }
+    >
+      {children}
+    </Tag>
+  );
+}
+
 /** Reveals its direct children in sequence. */
 export function RevealGroup({
   children,
@@ -173,3 +298,4 @@ export function RevealGroup({
     </Tag>
   );
 }
+

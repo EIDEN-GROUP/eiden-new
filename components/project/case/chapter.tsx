@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useLocalized } from "@/components/project/shared";
-import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
+import { Reveal, RevealGroup, RevealWords, SlideIn } from "@/components/ui/reveal";
 import { CaseBlock, CaseSection } from "./stack";
 import { CasePaletteStory } from "./palette-story";
 import { TONES, type DisplayTone, type ToneSkin } from "./tone";
@@ -100,13 +100,26 @@ function Body({
   const bare = shots.length === 0;
   const mirrored = !lead;
 
+  /* A pair stands as a column beside the writing rather than as a strip under
+     it: two pictures laid across the whole measure read as the start of a
+     contact sheet that never arrives, while the same two stacked in a rail
+     read as evidence held next to the claim. Three or more still want the
+     full width, where they have room to be looked at. */
+  const paired = lead && shots.length === 2;
+
   return (
-    <div
+    <SlideIn
+      /* The two kinds of block converge from opposite edges: the chapter, whose
+         writing is on the left, arrives from the right; the block under it,
+         whose writing is on the right, arrives from the left. */
+      from={mirrored ? "left" : "right"}
       className={cn(
         "relative",
         !bare && "grid gap-12 lg:items-start lg:gap-16 xl:gap-20",
-        !bare &&
-          (mirrored && "lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]"))} >
+        !bare && mirrored && "lg:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)]",
+        paired && "lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]",
+      )}
+    >
       <Writing
         piece={piece}
         skin={skin}
@@ -123,10 +136,11 @@ function Body({
           skin={skin}
           say={say}
           first={first}
+          stacked={paired}
           className={cn(mirrored && "lg:order-1")}
         />
       )}
-    </div>
+    </SlideIn>
   );
 }
 
@@ -216,19 +230,23 @@ function Shots({
   skin,
   say,
   first,
+  stacked = false,
   className,
 }: {
   shots: Shot[];
   skin: ToneSkin;
   say: Say;
   first: boolean;
+  /** One under the other, in a rail beside the writing. */
+  stacked?: boolean;
   className?: string;
 }) {
   const count = shots.length;
   const odd = count % 2 === 1;
 
-  const gridCols =
-    count === 1
+  const gridCols = stacked
+    ? "grid-cols-1"
+    : count === 1
       ? "grid-cols-1"
       : count === 2
         ? "sm:grid-cols-2"
@@ -250,7 +268,7 @@ function Shots({
       {shots.map((shot, i) => {
         // Wide uniquement pour 1 image ou nombre impair
         const wide =
-          count === 1 || (odd && count !== 1 && i === 0);
+          !stacked && (count === 1 || (odd && count !== 1 && i === 0));
 
         return (
           <figure
@@ -268,11 +286,13 @@ function Shots({
               fill
               quality={90}
               sizes={
-                count === 1
-                  ? "(max-width: 640px) 92vw, 72vw"
-                  : count === 2
-                    ? "(max-width: 640px) 92vw, 46vw"
-                    : "(max-width: 640px) 92vw, 23vw"
+                stacked
+                  ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 38vw"
+                  : count === 1
+                    ? "(max-width: 640px) 92vw, 72vw"
+                    : count === 2
+                      ? "(max-width: 640px) 92vw, 46vw"
+                      : "(max-width: 640px) 92vw, 23vw"
               }
               className={cn(
                 shot.fit === "contain"

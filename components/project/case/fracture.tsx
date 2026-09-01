@@ -8,24 +8,6 @@ import { TONES, type DisplayTone } from "./tone";
 import type { Architecture, Fracture } from "@/lib/data/projects/types";
 import { cn } from "@/lib/utils";
 
-/**
- * The diagnosis, read as two columns and closed by one line.
- *
- * This is the first room of every case and the one that decides how the rest is
- * read. It is not a before/after: a before/after is about the work, and this is
- * about the business. What the company already had stands on the left, what was
- * out of joint with it on the right, and neither column means anything without
- * the other   which is why they are set side by side at the same size rather
- * than as a problem section followed by a solution section.
- *
- * The statement underneath is the whole diagnosis in one line, and it is the
- * only thing above it set at headline size. Everything before it is evidence
- * for it.
- *
- * The architecture reads on directly underneath, inside this same room: the
- * diagnosis and the answer to it are one thought, and a curtain between them
- * would announce them as two.
- */
 export function CaseFracture({
   fracture,
   architecture,
@@ -40,112 +22,155 @@ export function CaseFracture({
 
   return (
     <CaseSection tone={tone}>
-      <CaseBlock>
-        <Reveal direction="none" duration={0.5} amount={0.3}>
-          <p className={cn("eyebrow flex items-center gap-3", skin.label)}>
-            <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-            {say({ fr: "La fracture", en: "The fracture" })}
-          </p>
-        </Reveal>
+      <CaseArchitectureBlock architecture={architecture} skin={skin} />
 
-        <div className="mt-10 grid gap-10 sm:mt-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
-          <Column
+      <CaseBlock className="pb-28 sm:pb-36 lg:pb-48">
+        {/* <Insight
+          text={say(fracture.statement)}
+          skinTitle={skin.title}
+          skinFlag={skin.flag}
+          skinLabel={skin.label}
+        /> */}
+        {/* <Reveal direction="none" duration={0.5} amount={0.3}>
+          <div className={cn("border-t pt-5", skin.rule)}>
+            <p className={cn("eyebrow", skin.label)}>
+              {say({ fr: "La fracture", en: "The fracture" })}
+            </p>
+          </div>
+        </Reveal> */}
+
+        <div className=" grid gap-y-16 lg:grid-cols-12 lg:gap-x-8 xl:gap-x-12">
+          {/* What was already true. Quiet: it is the ground, not the news. */}
+          <Track
             title={say({ fr: "La réalité", en: "The reality" })}
             items={fracture.reality.map(say)}
-            mark="✓"
-            markClass={skin.label}
-            textClass={skin.title}
-            skinRule={skin.rule}
+            labelClass={skin.label}
+            indexClass={skin.label}
+            textClass={cn("font-sans", skin.body)}
+            ruleClass={skin.rule}
+            className="lg:col-span-5"
           />
-          <Column
-            title={say({ fr: "La fracture", en: "The fracture" })}
-            items={fracture.fracture.map(say)}
-            mark="—"
-            markClass={skin.flag}
-            textClass={skin.body}
-            titleClass={skin.flag}
-            skinRule={skin.rule}
-          />
+
+          <div className="relative lg:col-span-6 lg:col-start-7 lg:mt-28 lg:pl-10 xl:pl-14">
+            <FaultLine className={skin.flag} />
+            <Track
+              title={say({ fr: "La fracture", en: "The fracture" })}
+              items={fracture.fracture.map(say)}
+              labelClass={skin.flag}
+              indexClass={skin.flag}
+              textClass={cn(
+                "font-display font-bold tracking-[-0.02em] sm:text-[1.3125rem]",
+                skin.title,
+              )}
+              ruleClass={skin.rule}
+            />
+          </div>
         </div>
 
-        <div className={cn("mt-14 border-t pt-10 sm:mt-16 sm:pt-12", skin.rule)}>
-          <RevealWords
-            as="p"
-            amount={0.3}
-            text={say(fracture.statement)}
-            className={cn(
-              "font-display block max-w-3xl text-[clamp(1.75rem,4.6vw,3.25rem)] leading-[1.06] font-extrabold tracking-[-0.045em]",
-              skin.title,
-            )}
-          />
-        </div>
+       
       </CaseBlock>
 
-      {/* The answer to the diagnosis, on the same ground and under the same
-          curtain: what was decided, and the system it set in motion. */}
-      <CaseArchitectureBlock architecture={architecture} skin={skin} />
     </CaseSection>
   );
 }
 
-/**
- * One side of the diagnosis.
- *
- * The mark carries the meaning and the type stays quiet: a tick against what
- * was already working, a dash against what was not. A row is a line rather
- * than a card, because a card would make four short observations look like four
- * findings in a report.
- */
-function Column({
+function Track({
   title,
   items,
-  mark,
-  markClass,
+  labelClass,
+  indexClass,
   textClass,
-  titleClass,
-  skinRule,
+  ruleClass,
+  className,
 }: {
   title: string;
   items: string[];
-  mark: string;
-  markClass: string;
+  labelClass: string;
+  indexClass: string;
   textClass: string;
-  titleClass?: string;
-  skinRule: string;
+  ruleClass: string;
+  className?: string;
 }) {
   return (
-    <div>
-      <p className={cn("eyebrow", titleClass ?? markClass)}>{title}</p>
+    <div className={className}>
+      <p className={cn("eyebrow", labelClass)}>{title}</p>
 
-      <RevealGroup as="ul" amount={0.15} className="mt-5 sm:mt-6">
-        {items.map((item) => (
+      <RevealGroup as="ol" amount={0.15} className="mt-8 sm:mt-9">
+        {items.map((item, index) => (
           <li
             key={item}
             className={cn(
-              "flex items-start gap-4 border-t py-4 first:border-t-0 first:pt-0 sm:py-5",
-              skinRule,
+              "grid grid-cols-[2.25rem_1fr] items-baseline border-t py-5 first:border-t-0 first:pt-0 sm:py-6",
+              ruleClass,
             )}
           >
             <span
               aria-hidden
               className={cn(
-                "font-display mt-[0.15em] shrink-0 text-[0.95rem] leading-snug font-bold",
-                markClass,
+                "font-label text-[0.72rem] font-bold tracking-[0.16em] tabular-nums",
+                indexClass,
               )}
             >
-              {mark}
+              {String(index + 1).padStart(2, "0")}
             </span>
-            <span
-              className={cn(
-                "text-[1.0625rem] leading-snug sm:text-[1.1875rem]",
-                textClass,
-              )}
-            >
+            <span className={cn("text-[1.0625rem] leading-snug", textClass)}>
               {item}
             </span>
           </li>
         ))}
       </RevealGroup>
+    </div>
+  );
+}
+
+function FaultLine({ className }: { className: string }) {
+  return (
+    <span aria-hidden className={cn("hidden lg:block", className)}>
+      <span className="absolute top-0 left-0 h-[38%] w-px bg-current opacity-55" />
+      <span className="absolute bottom-0 left-[3px] h-[54%] w-px bg-current opacity-55" />
+    </span>
+  );
+}
+
+function Insight({
+  text,
+  skinTitle,
+  skinFlag,
+  skinLabel,
+}: {
+  text: string;
+  skinTitle: string;
+  skinFlag: string;
+  skinLabel: string;
+}) {
+  const clauses = text.match(/[^.!?]+[.!?]*/g)?.map((part) => part.trim()).filter(Boolean) ?? [text];
+
+  return (
+    <div className="mb-28 sm:mb-36 lg:mb-48">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-x-8">
+        <Reveal direction="none" duration={0.5} amount={0.4} className="lg:col-span-3">
+          <span
+            aria-hidden
+            className={cn("block h-px w-16 bg-current lg:mt-[0.85em]", skinLabel)}
+          />
+        </Reveal>
+
+        <div className="mb-3 lg:col-span-9 lg:mb-0">
+          {clauses.map((clause, index) => (
+            <RevealWords
+              key={clause}
+              as="p"
+              amount={0.25}
+              delay={index * 0.2}
+              text={clause}
+              className={cn(
+                "font-display block text-[clamp(2rem,6.2vw,4.5rem)] leading-[1.02] font-extrabold tracking-[-0.05em]",
+                index === 0 ? skinTitle : cn(skinFlag),
+              )}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

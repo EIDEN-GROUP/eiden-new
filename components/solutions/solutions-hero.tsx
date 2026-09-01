@@ -1,59 +1,46 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
+import { FilmHero } from "@/components/layout/film-hero";
 import { useSay } from "@/components/solutions/shared";
-import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
 /**
- * The masthead. One claim, one line under it, one way down.
+ * The masthead, on the same still frame as the about page: the picture settles
+ * over 2.4s, the eyebrow fades in, the title rises a word at a time with the
+ * accented one ruled in gold, and the whole frame steps back as the page is
+ * scrolled off it.
  *
- * Deliberately without a picture: the products further down the page are the
- * visual argument, and putting an image here would only compete with them.
+ * Only the still differs   a lit architectural model rather than the company
+ * portrait, so the two pages open on the same gesture without opening on the
+ * same picture. The one way down is kept: this page's argument is the systems
+ * under the fold.
  */
 export function SolutionsHero() {
   const say = useSay();
   const copy = solutionsCopy.hero;
 
   return (
-    <header className="grain bg-ink text-canvas" data-nav-tone="dark">
-      <div className="container-eiden flex min-h-svh flex-col justify-center pt-32 pb-20 sm:pt-40 sm:pb-28">
-        <Reveal direction="none" duration={0.5}>
-          <p className="eyebrow text-gold flex items-center gap-3">
-            <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-            {say(copy.eyebrow)}
-          </p>
-        </Reveal>
-
-        <RevealWords
-          as="h1"
-          text={say(copy.title)}
-          delay={0.06}
-          className="text-canvas mt-10 block max-w-5xl text-[clamp(2.5rem,7.5vw,6rem)] uppercase"
+    <FilmHero
+      eyebrow={say(copy.eyebrow)}
+      titleLead={say(copy.titleLead)}
+      titleAccent={say(copy.titleAccent)}
+      titleTail={say(copy.titleTail)}
+      lead={say(copy.lead)}
+      image="/media/architecture-1.jpg"
+      imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
+    >
+      <a
+        href="#systemes"
+        className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+      >
+        {say(copy.cta)}
+        <ArrowDown
+          className="size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-y-1 motion-reduce:transition-none"
+          strokeWidth={1.8}
+          aria-hidden
         />
-
-        <Reveal delay={0.35}>
-          <p className="text-canvas/60 mt-10 max-w-2xl text-base leading-relaxed sm:text-lg">
-            {say(copy.lead)}
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.45}>
-          <a
-            href="#systemes"
-            className="group border-canvas/20 hover:border-gold hover:text-gold text-canvas mt-14 inline-flex items-center gap-4 border-b pb-3 transition-colors duration-500 ease-[var(--ease-brand)]"
-          >
-            <span className="font-label text-[0.875rem] font-bold tracking-[0.16em] uppercase">
-              {say(copy.cta)}
-            </span>
-            <ArrowDown
-              className="size-4 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:translate-y-1 motion-reduce:transition-none"
-              strokeWidth={2}
-              aria-hidden
-            />
-          </a>
-        </Reveal>
-      </div>
-    </header>
+      </a>
+    </FilmHero>
   );
 }

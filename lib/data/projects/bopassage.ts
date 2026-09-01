@@ -262,16 +262,6 @@ export const bopassage: ProjectCase = {
           label: { fr: "Social", en: "Social" },
         },
         {
-          image: "/work/bopassage/bopassage-social-waffle.png",
-          alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-          label: { fr: "Social", en: "Social" },
-        },
-        {
-          image: "/work/bopassage/bopassage-social-good-morning.png",
-          alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-          label: { fr: "Social", en: "Social" },
-        },
-        {
           image: "/work/bopassage/bopassage-social-instagram.png",
           alt: {
             fr: "Profil Instagram Bôpassage",

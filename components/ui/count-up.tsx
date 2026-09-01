@@ -1,68 +1,90 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 /**
- * A figure that counts up from zero when it is scrolled to, and again on each
- * return to it.
+ * A figure that counts up to itself the first time it is read.
  *
- * What is rendered is the finished value, so the real figure is what gets
- * served, indexed and read aloud; the count is written straight to the node
- * from an animation frame, which keeps a hundred-step count from costing a
- * hundred renders. Whatever surrounds the number   a `+`, a `%`, a leading
- * zero that makes it a label as much as a count   is held aside and put back
- * on every frame, so `27+` counts and stays `27+`.
+ * The value is written as the client publishes it   "+38%", "×3", "+120"
+ * and only the number inside is animated: the sign, the multiplier and the
+ * unit are part of what the figure means and are never invented, reordered or
+ * dropped. A value with no single number in it ("0 → 1") is a statement rather
+ * than a count, and is simply shown.
+ *
+ * The digits are written straight onto the node rather than held in state: a
+ * re-render per frame, on a page carrying several of these, would be paid for
+ * by the scrolling.
+ *
+ * It runs once. A number that recounted every time it came back on screen
+ * would read as a widget, and this is a result.
  */
 export function CountUp({
   value,
   className,
+  /** Seconds. */
+  duration = 1.6,
 }: {
   value: string;
   className?: string;
+  duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
 
+  /* prefix · number · suffix, e.g. "+" "38" "%" */
+  const parts = value.match(/^(\D*?)(\d+(?:[.,]\d+)?)(\D*)$/);
+
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
-
-    const parts = value.match(/^(\D*?)([\d.,\s]*\d)(.*)$/);
-    if (!parts) return; // nothing countable in it   leave the text alone
-
-    const [, lead, digits, tail] = parts;
-    const target = Number(digits.replace(/[\s,]/g, ""));
-    if (!Number.isFinite(target)) return;
-
-    /* A leading zero is part of how the figure reads, so it is kept. */
-    const width = /^0\d/.test(digits) ? digits.length : 0;
-    const draw = (n: number) => `${lead}${String(n).padStart(width, "0")}${tail}`;
+    if (!node || !parts) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let frame = 0;
-    let started = 0;
+    const [, head, digits, tail] = parts;
+    const decimals = (digits.split(/[.,]/)[1] ?? "").length;
+    const separator = digits.includes(",") ? "," : ".";
+    const target = Number(digits.replace(",", "."));
+    if (!Number.isFinite(target)) return;
 
-    const step = (now: number) => {
-      if (!started) started = now;
-      const t = Math.min((now - started) / 1400, 1);
-      // Fast off the mark, easing into the true figure.
-      node.textContent = draw(Math.round(target * (1 - Math.pow(1 - t, 3))));
-      if (t < 1) frame = requestAnimationFrame(step);
+    let raf = 0;
+    let guard = 0;
+    let began = 0;
+
+    const write = (n: number) =>
+      head + n.toFixed(decimals).replace(".", separator) + tail;
+
+    /* Whatever happens to the frame loop, the figure ends up reading what the
+       client published. */
+    const land = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      node.textContent = value;
+    };
+
+    const run = (now: number) => {
+      if (!began) began = now;
+      const t = Math.min((now - began) / (duration * 1000), 1);
+      /* The same curve the rest of the page eases on, so the number settles
+         rather than stopping dead. */
+      const eased = 1 - Math.pow(1 - t, 3);
+      if (t < 1) {
+        node.textContent = write(target * eased);
+        raf = requestAnimationFrame(run);
+      } else {
+        land();
+      }
     };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        cancelAnimationFrame(frame);
-
-        if (entry.isIntersecting) {
-          started = 0;
-          frame = requestAnimationFrame(step);
-          return;
-        }
-
-        // Out of sight, wound back   so coming back to it plays the count
-        // again rather than showing a figure that has already landed.
-        node.textContent = draw(0);
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        node.textContent = write(0);
+        raf = requestAnimationFrame(run);
+        /* A backgrounded tab, a hidden pane or a frame budget under strain all
+           stop `requestAnimationFrame`, and a result frozen half-counted is a
+           wrong number rather than a missing animation. This lands it. */
+        guard = window.setTimeout(land, duration * 1000 + 400);
       },
       { threshold: 0.4 },
     );
@@ -70,13 +92,15 @@ export function CountUp({
     observer.observe(node);
     return () => {
       observer.disconnect();
-      cancelAnimationFrame(frame);
-      node.textContent = value;
+      if (raf) cancelAnimationFrame(raf);
+      if (guard) window.clearTimeout(guard);
     };
-  }, [value]);
+  }, [value, duration, parts]);
 
+  /* Rendered at its final value, so it is right with no JavaScript, right for
+     a reader who asked for less motion, and right in a search result. */
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={cn("tabular-nums", className)}>
       {value}
     </span>
   );

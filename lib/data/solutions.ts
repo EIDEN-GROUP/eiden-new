@@ -179,9 +179,13 @@ export const systems: SystemRecord[] = [
 export const solutionsCopy = {
   hero: {
     eyebrow: { fr: "Nos systèmes", en: "Our systems" },
-    title: {
-      fr: "Des systèmes construits autour de votre métier.",
-      en: "Systems built around your business.",
+    /* Split for the film hero, which raises the title a word at a time and
+       rules the accented one in gold. Same three parts the about page uses. */
+    titleLead: { fr: "Des", en: "" },
+    titleAccent: { fr: "systèmes", en: "Systems" },
+    titleTail: {
+      fr: "construits autour de votre métier.",
+      en: "built around your business.",
     },
     lead: {
       fr: "Nous concevons et construisons des systèmes digitaux qui réunissent vos opérations, vos informations et vos équipes au même endroit.",

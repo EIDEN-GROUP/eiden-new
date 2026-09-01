@@ -35,7 +35,7 @@ export const en: Dictionary = {
 
   nav: {
     home: "Home",
-    about: "About",
+    about: "Architecture",
     clients: "Clients",
     solutions: "Solutions",
     contact: "Contact",
@@ -45,7 +45,7 @@ export const en: Dictionary = {
     label: "Menu",
     captions: {
       home: "Where it all begins.",
-      about: "The people holding the thread.",
+      about: "The structure before the façade.",
       clients: "The work, unfiltered.",
       solutions: "What we know how to do.",
       contact: "We open the door.",
@@ -125,16 +125,16 @@ export const en: Dictionary = {
   },
 
   services: {
-    eyebrow: "Our 4 areas of expertise",
-    title: "Complete digital services, from Morocco.",
+    eyebrow: "Four capabilities. One architecture.",
+    title: "These are not four services. They are one system.",
     hint: "Hover an expertise to see the detail",
     deliverablesLabel: "Scope & deliverables",
     items: [
       {
         slug: "web",
-        title: "Web & app creation",
-        kicker: "Sites, e-commerce & apps",
-        text: "We design digital solutions that are fast and built to last: high-performance sites, online stores, native apps and internal tools. The code is yours.",
+        title: "Build",
+        kicker: "The foundation everything else stands on",
+        text: "Websites, e-commerce, applications and internal platforms. The codebase is yours outright. Outcome: infrastructure that holds when the business doubles.",
         deliverables: [
           "Marketing sites",
           "E-commerce",
@@ -144,9 +144,9 @@ export const en: Dictionary = {
       },
       {
         slug: "visibilite",
-        title: "SEO, GEO & AI visibility",
-        kicker: "Visibility on Google & AI engines",
-        text: "Technical SEO, content, link building and GEO (Generative Engine Optimization) so you appear in ChatGPT, Gemini and Perplexity. The goal: become the reference in your market.",
+        title: "Visibility",
+        kicker: "Being found where the next search actually happens",
+        text: "Technical SEO, GEO, content and netlinking — ranking in Google, and in ChatGPT, Gemini, Perplexity. Outcome: becoming the reference in the category, not just a result in it.",
         deliverables: [
           "Technical SEO",
           "Content & link building",
@@ -156,9 +156,9 @@ export const en: Dictionary = {
       },
       {
         slug: "media",
-        title: "Performance media & ads",
-        kicker: "Campaigns & lead generation",
-        text: "Media buying and lead generation. We steer your budgets on ROI, with clear monthly reporting and continuous conversion-rate work.",
+        title: "Acquisition",
+        kicker: "Buying traffic is not the same as building acquisition",
+        text: "Google Ads, social advertising, media buying, lead generation and CRO. Outcome: a funnel with attribution, not just a campaign report.",
         deliverables: [
           "Google Ads",
           "Paid social",
@@ -169,9 +169,9 @@ export const en: Dictionary = {
       },
       {
         slug: "contenu",
-        title: "Strategy, content & image",
-        kicker: "From audit to production",
-        text: "Community management, competitive monitoring and crisis handling. We protect your online reputation and give your audience a reason to follow you.",
+        title: "Brand",
+        kicker: "The identity that makes the rest recognizable",
+        text: "Positioning, identity, content, community and e-reputation. Outcome: a brand people search for by name.",
         deliverables: [
           "Audit & strategy",
           "Video & motion design",
@@ -183,9 +183,9 @@ export const en: Dictionary = {
       },
       {
         slug: "photoVid",
-        title: "Photos & videos",
-        kicker: "Production, content & brand imagery",
-        text: "We create photo and video content that brings your brand to life: photoshoots, videos, social content and campaigns. From art direction to editing, every production is designed to capture attention and strengthen your brand image.",
+        title: "Brand imagery",
+        kicker: "What the brand actually gives people to look at",
+        text: "Photo, video, motion and social content — the material a brand has to produce to hold its rhythm. Outcome: enough to feed the system without starting from nothing every month.",
         deliverables: [
           "Photography shoots",
           "Video production",
@@ -590,23 +590,29 @@ export const en: Dictionary = {
       ],
 
       methodsEyebrow: "Our methods",
-      methodsTitle: "Three tools, built in-house.",
+      methodsTitle: "Four frameworks, built in-house.",
       methods: [
         {
           name: "Hydra Analysis™",
-          text: "The diagnosis. It maps the fractures across marketing, operations, strategy and positioning.",
+          text: "The diagnosis. A 360° read of the business — brand, digital presence, operations, customer experience — every pillar scored on its own, before a single recommendation.",
           quote:
             "Cut one head. Two more appear. Every fracture holds to the others.",
         },
         {
-          name: "Onion Methodology™",
-          text: "The analysis, in four layers: brand, operations, strategy, foundation.",
-          quote: "Peel layer by layer. Each one reveals the truth beneath it.",
+          name: "Architecture of Scale",
+          text: "The sequence. Four pillars, always in this order: Infrastructure → Process → Human Capital → Revenue Engine. Marketing plugs into the fourth, never the first.",
+          quote:
+            "You don't dress a façade before you know what the building has to carry.",
         },
         {
-          name: "Fountain Operations™",
-          text: "The build. One function is brought up to level, then it overflows into the next.",
+          name: "Fountain Build™",
+          text: "The build. It happens alongside your own team, department by department, until the business can run the system on its own.",
           quote: "Fill one tier. Let it overflow. Then the next.",
+        },
+        {
+          name: "B-Arch Labs™",
+          text: "The internal lab. Ad formats, funnels and creative systems are tested here before they touch a client account.",
+          quote: "Your budget is not there to find out what doesn't work.",
         },
       ],
 
@@ -644,10 +650,10 @@ export const en: Dictionary = {
         },
         {
           q: "How does an engagement run?",
-          a: "It opens with the Hydra Scan™, which surfaces the visible fractures. Then the Onion Methodology™ goes down layer by layer   brand, operations, strategy, foundation. The build follows Fountain Operations™: one function at a time, until it overflows into the next.",
+          a: "It opens with the Hydra Analysis™, the 360° diagnosis that scores every pillar before a single recommendation. Architecture of Scale then sets the order of the build: Infrastructure, Process, Human Capital, Revenue Engine. Fountain Build™ implements alongside your own team, department by department, until you run the system without us.",
         },
         {
-          q: "What is the Hydra Scan™?",
+          q: "What is the Hydra Analysis™?",
           a: "Two hours, one conversation. You leave with the Hydra Map: the state of your visible fractures and the way they hold to one another.",
         },
         {
@@ -664,7 +670,7 @@ export const en: Dictionary = {
       ctaTitle: "Your first move.",
       ctaText:
         "Two hours. One conversation. We map every visible fracture in your business, and you leave with the Hydra Map.",
-      ctaAction: "Book a Hydra Scan",
+      ctaAction: "Book a Hydra Analysis",
     },
     clients: {
       eyebrow: "Clients",

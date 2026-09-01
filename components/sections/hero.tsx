@@ -98,7 +98,7 @@ export function Hero() {
       {/* Heaviest under the type, lightest where the mark sits. */}
       <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]" />
       <div className="relative flex flex-1 flex-col justify-end p-20">
-        <h1 className="text-balance-tight text-canvas max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
+        <h1 className="text-balance-tight text-canvas pt-24 max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
           {words.map((word, index) => {
             const rise = stage(WORD_LEAD + index * WORD_STEP);
             const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";

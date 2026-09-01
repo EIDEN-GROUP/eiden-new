@@ -49,8 +49,8 @@ export const clientLogos = [
   { name: "Lunja Village", src: "/clients/lunja-village.png" },
   { name: "EducazenKids", src: "/clients/educazenkids.png" },
   { name: "Medical Bay", src: "/clients/medical-bay.png" },
-  { name: "EIDEN Academy", src: "/clients/eiden-academy.png" },
-  { name: "One Retail", src: "/clients/onereetail.png" },
+  // { name: "EIDEN Academy", src: "/clients/eiden-academy.png" },
+  { name: "One Retail", src: "/clients/one-retail.png" },
   { name: "Droguerie Souss", src: "/clients/souss-drougerie.png" },
   { name: "Chill Out", src: "/clients/chill-out.png" },
 ] as const;

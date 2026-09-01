@@ -38,7 +38,7 @@ export const fr = {
 
   nav: {
     home: "Accueil",
-    about: "À propos",
+    about: "Architecture",
     clients: "Clients",
     solutions: "Nos solutions",
     contact: "Contact",
@@ -50,7 +50,7 @@ export const fr = {
     label: "Menu",
     captions: {
       home: "Là où tout commence.",
-      about: "Ceux qui tiennent le fil.",
+      about: "La structure avant la façade.",
       clients: "Le travail, sans filtre.",
       solutions: "Ce que nous savons faire.",
       contact: "On vous ouvre la porte.",
@@ -130,16 +130,16 @@ export const fr = {
   },
 
   services: {
-    eyebrow: "Nos 4 expertises",
-    title: "Des services digitaux complets, depuis le Maroc.",
+    eyebrow: "Quatre capacités. Une architecture.",
+    title: "Ce ne sont pas quatre prestations. C'est un seul système.",
     hint: "Survolez une expertise pour voir le détail",
     deliverablesLabel: "Prestations & livrables",
     items: [
       {
         slug: "web",
-        title: "Création web & apps",
-        kicker: "Sites, e-commerce & applications",
-        text: "Nous concevons des solutions digitales rapides et durables : sites ultra-performants, boutiques en ligne, applications natives et outils internes. Le code vous appartient.",
+        title: "Build",
+        kicker: "La fondation sur laquelle tout le reste tient",
+        text: "Sites, e-commerce, applications et plateformes métier. Le code vous appartient. Ce qu'on livre : une infrastructure qui tient quand l'activité double.",
         deliverables: [
           "Sites vitrines",
           "E-commerce",
@@ -149,9 +149,9 @@ export const fr = {
       },
       {
         slug: "visibilite",
-        title: "SEO, GEO & visibilité IA",
-        kicker: "Visibilité Google & moteurs IA",
-        text: "SEO technique, contenu, netlinking et GEO (Generative Engine Optimization) pour apparaître dans ChatGPT, Gemini et Perplexity. Objectif : devenir la référence de votre marché.",
+        title: "Visibilité",
+        kicker: "Être trouvé là où se fait la prochaine recherche",
+        text: "SEO technique, GEO, contenu et netlinking — pour être classé dans Google, et dans ChatGPT, Gemini, Perplexity. Ce qu'on livre : devenir la référence de la catégorie, pas juste un résultat dedans.",
         deliverables: [
           "SEO technique",
           "Contenu & netlinking",
@@ -161,9 +161,9 @@ export const fr = {
       },
       {
         slug: "media",
-        title: "Performance media & ads",
-        kicker: "Campagnes & génération de leads",
-        text: "Media buying et génération de prospects. Nous pilotons vos budgets au ROI, avec un suivi mensuel clair et un travail continu sur le taux de conversion.",
+        title: "Acquisition",
+        kicker: "Acheter du trafic n'est pas construire une acquisition",
+        text: "Google Ads, publicité sociale, media buying, génération de leads et CRO. Ce qu'on livre : un tunnel avec de l'attribution, pas un rapport de campagne.",
         deliverables: [
           "Google Ads",
           "Publicité réseaux sociaux",
@@ -174,9 +174,9 @@ export const fr = {
       },
       {
         slug: "contenu",
-        title: "Stratégie, contenu & image",
-        kicker: "De l'audit à la production",
-        text: "Community management, veille concurrentielle et gestion de crise. Nous protégeons votre e-réputation et donnons à votre audience une raison de vous suivre.",
+        title: "Marque",
+        kicker: "L'identité qui rend le reste reconnaissable",
+        text: "Positionnement, identité, contenu, communauté et e-réputation. Ce qu'on livre : une marque que les gens cherchent par son nom.",
         deliverables: [
           "Audit & stratégie",
           "Vidéo & motion design",
@@ -188,9 +188,9 @@ export const fr = {
       },
       {
         slug: "photoVid",
-        title: "Photos & vidéos",
-        kicker: "Production, contenu & image de marque",
-        text: "Nous créons des contenus photo et vidéo qui donnent vie à votre marque : shootings, vidéos, contenus sociaux et campagnes. De la direction artistique au montage, chaque production est pensée pour capter l’attention et renforcer votre image.",
+        title: "Image de marque",
+        kicker: "Ce que la marque donne à voir",
+        text: "Photo, vidéo, motion et contenus sociaux — la matière que la marque a besoin de produire pour tenir son rythme. Ce qu'on livre : de quoi alimenter le système sans repartir de zéro chaque mois.",
         deliverables: [
           "Shooting photo",
           "Production vidéo",
@@ -597,24 +597,29 @@ export const fr = {
       ],
 
       methodsEyebrow: "Nos méthodes",
-      methodsTitle: "Trois outils, développés en interne.",
+      methodsTitle: "Quatre cadres, développés en interne.",
       methods: [
         {
           name: "Hydra Analysis™",
-          text: "Le diagnostic. Il cartographie les fractures à travers le marketing, les opérations, la stratégie et le positionnement.",
+          text: "Le diagnostic. Une lecture à 360° de l'entreprise — marque, présence digitale, opérations, expérience client — chaque pilier noté séparément, avant la moindre recommandation.",
           quote:
             "Coupez une tête. Deux repoussent. Chaque fracture tient aux autres.",
         },
         {
-          name: "Onion Methodology™",
-          text: "L'analyse en quatre couches : marque, opérations, stratégie, fondations.",
+          name: "Architecture of Scale",
+          text: "La séquence. Quatre piliers, toujours dans cet ordre : Infrastructure → Process → Capital humain → Moteur de revenus. Le marketing se branche sur le quatrième, jamais sur le premier.",
           quote:
-            "On pèle couche après couche. Chacune découvre la vérité d'en dessous.",
+            "On ne décore pas une façade avant de savoir ce que le bâtiment doit porter.",
         },
         {
-          name: "Fountain Operations™",
-          text: "La mise en œuvre. Un service est porté à niveau, puis il déborde sur le suivant.",
+          name: "Fountain Build™",
+          text: "La mise en œuvre. Elle se fait aux côtés de vos équipes, service par service, jusqu'à ce que l'entreprise fasse tourner le système seule.",
           quote: "On remplit un étage. On le laisse déborder. Puis le suivant.",
+        },
+        {
+          name: "B-Arch Labs™",
+          text: "Le laboratoire interne. Formats publicitaires, tunnels et systèmes créatifs sont testés ici avant de toucher un compte client.",
+          quote: "Votre budget ne sert pas à découvrir ce qui ne marche pas.",
         },
       ],
 
@@ -652,10 +657,10 @@ export const fr = {
         },
         {
           q: "Comment se déroule une mission ?",
-          a: "Elle s'ouvre par le Hydra Scan™, qui relève les fractures visibles. Vient ensuite l'Onion Methodology™, qui descend couche par couche   marque, opérations, stratégie, fondations. La mise en œuvre suit le Fountain Operations™ : un service à la fois, jusqu'à ce qu'il déborde sur le suivant.",
+          a: "Elle s'ouvre par la Hydra Analysis™, le diagnostic à 360° qui note chaque pilier avant la moindre recommandation. L'Architecture of Scale fixe ensuite l'ordre du chantier : Infrastructure, Process, Capital humain, Moteur de revenus. Le Fountain Build™ met en œuvre aux côtés de vos équipes, service par service, jusqu'à ce que vous fassiez tourner le système seuls.",
         },
         {
-          q: "Qu'est-ce que le Hydra Scan™ ?",
+          q: "Qu'est-ce que la Hydra Analysis™ ?",
           a: "Deux heures, une conversation. Vous repartez avec la Hydra Map : l'état de vos fractures visibles et la façon dont elles se tiennent les unes aux autres.",
         },
         {
@@ -672,7 +677,7 @@ export const fr = {
       ctaTitle: "Votre premier mouvement.",
       ctaText:
         "Deux heures. Une conversation. Nous cartographions chaque fracture visible de votre activité, et vous repartez avec la Hydra Map.",
-      ctaAction: "Réserver un Hydra Scan",
+      ctaAction: "Réserver une Hydra Analysis",
     },
     clients: {
       eyebrow: "Clients",
