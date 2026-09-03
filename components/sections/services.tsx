@@ -49,7 +49,7 @@ export function Services() {
                 <div className="lg:w-[15rem] lg:shrink-0 xl:w-[17rem]">
                   <p className="eyebrow text-canvas mb-2 lg:hidden">{item.kicker}</p>
                   <p className="text-ink/70 group-hover:text-canvas text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] lg:text-[0.875rem]">
-                     {item.deliverables.join(" · ")}
+                     {item.text}
                   </p>
                   {/* <p className="text-ink/40 group-hover:text-canvas mt-3 text-[0.82rem] transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
                     {item.deliverables.join(" · ")}

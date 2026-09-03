@@ -59,16 +59,16 @@ export const fr = {
   },
 
   hero: {
-    titleLead: "Votre",
-    titleAccent: "croissance",
-    titleTail: "commence ici.",
+    titleLead: "La structure digitale qui fait",
+    titleAccent: "grandir",
+    titleTail: "votre entreprise.",
     description:
-      "Nous créons des écosystèmes digitaux qui donnent aux marques les moyens de mieux se faire connaître, mieux communiquer et mieux convertir.",
+      "Web-apps, marque, marketing & ads : la plupart des entreprises ajoutent ces éléments un par un, chacun de son côté. Nous faisons l’inverse. Nous construisons d’abord une base solide, puis nous ajoutons chaque pièce dessus pour que tout fonctionne ensemble.",
     stats: [
       { value: "25+", label: "Entreprises accompagnées" },
       { value: "92%", label: "Clients en accompagnement continu" },
     ],
-    trust: "Plus de 25 entreprises accompagnées",
+    trust: "Plus de 10 entreprises accompagnées",
     trustSub: "Maroc, Afrique et Moyen-Orient",
     clientsLabel: "Ils nous font confiance",
     featured: {
@@ -108,20 +108,26 @@ export const fr = {
     cards: [
       {
         label: "Ce qui s'arrête",
-        body: "Vous arrêtez de payer des pièces qui ne se parlent pas : le site d'un côté, les réseaux de l'autre, la publicité qui coûte sans qu'on sache ce qu'elle rapporte.",
+        body: "Le digital en pièces détachées.",
         points: [
-          "Plus de prestataire qui repart avec vos accès et votre code.",
-          "Plus de décision prise au ressenti, faute de chiffre à regarder.",
-          "Plus de refonte tous les deux ans parce que la base ne suivait plus.",
+          "Un site fait par une personne, des publicités par une autre, un logo par une troisième. Personne ne se parle.",
+          "Vous ne savez pas d’où viennent vos clients, ni combien chacun vous coûte.",
+          "Vos accès site, comptes publicitaires, données sont chez le prestataire, pas chez vous.",
+          "Les décisions se prennent au ressenti : « ça marchait bien le mois dernier",
+          "À chaque nouveau besoin, il faut tout recommencer de zéro.",
+          "Vous payez, mais vous ne construisez rien qui reste.",
         ],
       },
       {
         label: "Ce qui commence",
-        body: "Vous repartez avec un système qui vous appartient : une marque claire, un site qui convertit, des campagnes mesurées, et de quoi les lire chaque mois.",
+        body: " Une structure qui tient dans le temps",
         points: [
-          "Le code, les comptes et les données à votre nom.",
-          "Un chiffre derrière chaque décision, revu tous les mois.",
-          "Une base qui tient quand l'activité double.",
+          "Une seule équipe, un seul plan. Site, marque, publicité et contenu avancent ensemble, dans la même direction.",
+          "Chaque mois, un rapport clair : ce qui a marché, ce qui n’a pas marché, ce qu’on change.",
+          "Tout est à votre nom. Site, comptes, données, mots de passe. Si vous partez un jour, vous partez avec tout.",
+          "Les décisions viennent des chiffres, pas des opinions.",
+          "On ajoute sans tout casser. La base est faite pour recevoir la suite.",
+          "Chaque mois, vous êtes plus solide que le mois précédent."
         ],
       },
     ],
@@ -143,7 +149,7 @@ export const fr = {
         slug: "web",
         title: "Création web & apps",
         kicker: "La fondation sur laquelle tout le reste tient",
-        text: "Sites, e-commerce, applications et plateformes métier. Le code vous appartient. Ce qu'on livre : une infrastructure qui tient quand l'activité double.",
+        text: "Sites vitrines, boutiques en ligne, réservation directe, applications métier. Vous en êtes propriétaire et vous pouvez modifier vos textes et vos images vous-même.",
         deliverables: [
           "Sites vitrines",
           "E-commerce",
@@ -155,7 +161,7 @@ export const fr = {
         slug: "visibilite",
         title: "SEO, GEO & visibilité IA",
         kicker: "Être trouvé là où se fait la prochaine recherche",
-        text: "SEO technique, GEO, contenu et netlinking   pour être classé dans Google, et dans ChatGPT, Gemini, Perplexity. Ce qu'on livre : devenir la référence de la catégorie, pas juste un résultat dedans.",
+        text: "Un site que Google comprend, une fiche Google Business complète et active, et un contenu écrit pour que les moteurs classiques ou IA vous citent avant vos concurrents.",
         deliverables: [
           "SEO technique",
           "Contenu & netlinking",
@@ -167,7 +173,7 @@ export const fr = {
         slug: "media",
         title: "Performance media & ads",
         kicker: "Acheter du trafic n'est pas construire une acquisition",
-        text: "Google Ads, publicité sociale, media buying, génération de leads et CRO. Ce qu'on livre : un tunnel avec de l'attribution, pas un rapport de campagne.",
+        text: "Un budget qui va là où il rapporte. Vous savez combien vous coûte un client, quelles campagnes s’arrêtent et lesquelles on renforce. Aucune dépense sans explication.",
         deliverables: [
           "Google Ads",
           "Publicité réseaux sociaux",
@@ -180,7 +186,7 @@ export const fr = {
         slug: "contenu",
         title: "Stratégie, contenu & image",
         kicker: "L'identité qui rend le reste reconnaissable",
-        text: "Positionnement, identité, contenu, communauté et e-réputation. Ce qu'on livre : une marque que les gens cherchent par son nom.",
+        text: "Un positionnement clair, une identité visuelle complète, des messages simples à répéter partout, et le contenu qui les fait vivre : réseaux sociaux, articles, présentations.",
         deliverables: [
           "Audit & stratégie",
           "Vidéo & motion design",
@@ -194,7 +200,7 @@ export const fr = {
         slug: "photoVid",
         title: "Photos & vidéos",
         kicker: "Ce que la marque donne à voir",
-        text: "Photo, vidéo, motion et contenus sociaux   la matière que la marque a besoin de produire pour tenir son rythme. Ce qu'on livre : de quoi alimenter le système sans repartir de zéro chaque mois.",
+        text: "Tournage et prise de vue sur place, photos retouchées, vidéos courtes formatées pour les réseaux. Livré prêt à publier.",
         deliverables: [
           "Shooting photo",
           "Production vidéo",

@@ -150,24 +150,11 @@ export function Vsl() {
   const withGrow = { opacity: "var(--grow, 1)" } as CSSProperties;
 
   return (
-    <section
-      id="methode"
-      ref={sectionRef}
-      className="pointer-events-none relative z-10"
-    >
-      <div
-        ref={litRef}
-        data-nav-tone="light"
-        className="grain bg-beige pointer-events-auto relative"
-      >
+    <section id="methode" ref={sectionRef} className="pointer-events-none relative z-10">
+      <div ref={litRef} data-nav-tone="light" className="grain bg-beige pointer-events-auto relative">
         <span aria-hidden className="vsl-wash" />
         <div ref={trackRef} className="vsl-track relative z-2">
-          <div
-            className={cn(
-              "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8",
-              "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14",
-            )}
-          >
+          <div className={cn( "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8", "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14", )}>
             <span aria-hidden className="vsl-bloom" />
             <div className="flex flex-1 flex-col justify-end pb-12 md:pb-8">
               <Reveal direction="none" duration={0.5}>
@@ -255,10 +242,7 @@ export function Vsl() {
                   </span>
                 </button>
 
-                <span
-                  style={withGrow}
-                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block"
-                >
+                <span style={withGrow} className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block">
                   <span ref={elapsedRef}>0:00</span>
                   <span className="text-canvas/40">
                     {" / "}
@@ -266,10 +250,7 @@ export function Vsl() {
                   </span>
                 </span>
 
-                <div
-                  style={withGrow}
-                  className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2.5 p-4 sm:p-5"
-                >
+                <div style={withGrow} className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2.5 p-4 sm:p-5">
                   <button
                     type="button"
                     onClick={toggleMute}
@@ -284,36 +265,20 @@ export function Vsl() {
                     {t.vsl.sound}
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={goFullscreen}
-                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
-                  >
+                  <button type="button" onClick={goFullscreen} className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300">
                     <Maximize className="size-3.5" strokeWidth={1.7} aria-hidden />
                     {t.vsl.fullscreen}
                   </button>
                 </div>
 
-                <span
-                  aria-hidden
-                  className="bg-canvas/15 absolute inset-x-0 bottom-0 h-px"
-                >
-                  <span
-                    ref={barRef}
-                    className="bg-gold absolute inset-0 origin-left"
-                    style={{ transform: "scaleX(0)" } as CSSProperties}
-                  />
+                <span aria-hidden className="bg-canvas/15 absolute inset-x-0 bottom-0 h-px">
+                  <span ref={barRef} className="bg-gold absolute inset-0 origin-left" style={{ transform: "scaleX(0)" } as CSSProperties} />
                 </span>
               </div>
             </div>
 
             <div className="flex flex-1 flex-col justify-start pt-14 md:pt-6">
-              <RevealWords
-                as="h2"
-                text={t.vsl.title}
-                delay={0.08}
-                className="font-display vsl-ink block max-w-4xl text-center text-[clamp(1.5rem,4.2vw,3.25rem)] leading-[1.04] font-medium tracking-[-0.03em]"
-              />
+              <RevealWords as="h2" text={t.vsl.title} delay={0.08} className="font-display vsl-ink block max-w-4xl text-center text-[clamp(1.5rem,4.2vw,3.25rem)] leading-[1.04] font-medium tracking-[-0.03em]" />
             </div>
           </div>
         </div>

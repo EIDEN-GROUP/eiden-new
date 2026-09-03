@@ -11,10 +11,12 @@ const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const ramp = (value: number, from: number, to: number) =>
   clamp01((value - from) / (to - from));
 
-/** The order the two cards arrive in, and the lane each one travels. */
+/** The order the two cards arrive in, the lane each one travels, and
+ *  which way its plate leans   outward, away from the pair's middle, so
+ *  the two backings never meet in the gutter between the cards. */
 const lanes = [
-  { lane: "idea-card-first", enter: "--first-in" },
-  { lane: "idea-card-second", enter: "--second-in" },
+  { lane: "idea-card-first", enter: "--first-in", lean: "-1" },
+  { lane: "idea-card-second", enter: "--second-in", lean: "1" },
 ];
 
 export function Idea() {
@@ -128,35 +130,48 @@ export function Idea() {
               {cards.map((card) => (
                 <article
                   key={card.label}
-                  style={{ "--card-in": `var(${card.enter}, 1)` } as CSSProperties}
+                  style={
+                    {
+                      "--card-in": `var(${card.enter}, 1)`,
+                      "--lean": card.lean,
+                    } as CSSProperties
+                  }
                   className={cn(
-                    "idea-card bg-canvas text-forest flex flex-col rounded-[1.75rem] p-8 sm:p-10 lg:p-12",
-                    "shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)]",
+                    "idea-card relative flex flex-col rounded-[1.75rem]",
                     card.lane,
                   )}
                 >
-                  <div>
-                    <p className="eyebrow text-teal/85">{card.label}</p>
-                    <p className="text-teal mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
-                      {card.body}
-                    </p>
-                  </div>
+                  {/* The plate the face sits on, offset so its edge shows
+                      along two sides and the card reads as the top of a
+                      short stack rather than a single sheet. It rides
+                      inside the article, which is what keeps it under the
+                      same transform as the card. */}
+                  <span aria-hidden className="idea-plate" />
 
-                  <ul className="mt-10 flex flex-col gap-3.5">
-                    {card.points.map((point) => (
-                      <li key={point} className="flex items-start gap-3">
-                        <span
-                          aria-hidden
-                          className="bg-teal/10 text-teal mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full"
-                        >
-                          <Check className="size-3" strokeWidth={2.6} />
-                        </span>
-                        <span className="text-forest/80 text-[0.9375rem] leading-snug">
-                          {point}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="idea-face text-forest relative flex flex-1 flex-col p-8 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)] sm:p-10 lg:p-12">
+                    <div>
+                      <p className="eyebrow text-teal/85">{card.label}</p>
+                      <p className="text-teal mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
+                        {card.body}
+                      </p>
+                    </div>
+
+                    <ul className="mt-10 flex flex-col gap-3.5">
+                      {card.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <span
+                            aria-hidden
+                            className="bg-teal/10 text-teal mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full"
+                          >
+                            <Check className="size-3" strokeWidth={2.6} />
+                          </span>
+                          <span className="text-forest/80 text-[0.9375rem] leading-snug">
+                            {point}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </article>
               ))}
             </SwipeDeck>

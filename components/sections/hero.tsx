@@ -96,60 +96,61 @@ export function Hero() {
         <Image src="/media/hero.png" alt="" fill priority sizes="100vw" className="-z-10 object-cover"/>
       </div>
       <span aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-[62%] bg-[linear-gradient(to_top,rgba(244,235,208,0.94)_0%,rgba(244,235,208,0.78)_22%,rgba(244,235,208,0.42)_52%,rgba(244,235,208,0)_100%)]" />
-      <div className="relative flex flex-1 flex-col justify-end p-20">
-        <h1 className="text-balance-tight text-ink pt-24 max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
-          {words.map((word, index) => {
-            const rise = stage(WORD_LEAD + index * WORD_STEP);
-            const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
+      <div className="relative flex flex-1 flex-col justify-around px-20">
+        <div>
+          <h1 className="text-balance-tight mb-10 text-ink pt-24 max-w-7xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
+            {words.map((word, index) => {
+              const rise = stage(WORD_LEAD + index * WORD_STEP);
+              const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
 
-            if (!word.accent) {
-              return (
-                <span
-                  key={`${word.text}-${index}`}
-                  className={cn(
-                    "inline-block overflow-hidden pb-[0.14em] align-bottom",
-                    spacing,
-                  )}
-                >
-                  <span className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
-                    {word.text}
+              if (!word.accent) {
+                return (
+                  <span
+                    key={`${word.text}-${index}`}
+                    className={cn(
+                      "inline-block overflow-hidden pb-[0.14em] align-bottom",
+                      spacing,
+                    )}
+                  >
+                    <span className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
+                      {word.text}
+                    </span>
                   </span>
+                );
+              }
+
+              return (
+                <span key={`${word.text}-${index}`} className={cn("relative inline-block", spacing)}>
+                  <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
+                    <span className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
+                      {word.text}
+                    </span>
+                  </span>
+                  <span aria-hidden className="bg-gold/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"/>
                 </span>
               );
-            }
-
-            return (
-              <span key={`${word.text}-${index}`} className={cn("relative inline-block", spacing)}>
-                <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-                  <span className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise}>
-                    {word.text}
-                  </span>
-                </span>
-                <span aria-hidden className="bg-gold/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"/>
-              </span>
-            );
-          })}
-        </h1>
-
-        <div className="grid gap-8 pt-3 sm:gap-10 sm:pt-5 md:grid-cols-2 md:gap-16">
+            })}
+          </h1>
           <div className={cn(enter, "min-w-0")} style={stage(0.58)}>
-            <p className="text-ink max-w-3xl text-[14px] leading-relaxed sm:text-[18px]">
-              {t.hero.description}
-            </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
-              <Link href="/nos-solutions" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
-                {t.common.seeSolutions}
-                <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
-              </Link>
-              <Link href="/contact" className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
-                {t.common.bookCall}
-                <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
-              </Link>
+              <p className="text-ink max-w-3xl text-[14px] leading-relaxed sm:text-[18px]">
+                {t.hero.description}
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
+                <Link href="/nos-solutions" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+                  {t.common.seeSolutions}
+                  <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
+                </Link>
+                <Link href="/contact" className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
+                  {t.common.bookCall}
+                  <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
+                </Link>
+              </div>
             </div>
-          </div>
+        </div>
 
-          <div className="min-w-0 md:justify-self-end">
-            <div className={cn(enter, "flex items-center gap-3 md:justify-end")} style={stage(0.68)} >
+        <div className="grid lg:grid-cols-2 pt-3 items-center sm:gap-10 sm:pt-5">
+          <div>
+            <div className={cn(enter, "flex items-center gap-3 md:justify-start")} style={stage(0.68)} >
               <span className="flex items-center gap-1" aria-hidden>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Star key={index} className="fill-gold text-gold size-2.5" strokeWidth={0} />
@@ -157,7 +158,17 @@ export function Hero() {
               </span>
               <p className="text-ink text-[0.875rem]">{t.hero.trust}</p>
             </div>
-
+            <div className={cn( enter, "border-ink/12 mt-3 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:gap-10 sm:pt-7" ,)} style={stage(0.78)}>
+              <p className="eyebrow text-ink shrink-0">{t.hero.clientsLabel}</p>
+              <LogoMarquee
+                logos={clientLogos}
+                tone="dark"
+                speed={46}
+                className="min-w-0 flex-1"
+              />
+            </div>
+          </div>
+           <div className="md:justify-self-end">
             {featured ? (
               <Link
                 href="/projects/lunja-village"
@@ -199,16 +210,6 @@ export function Hero() {
               </Link>
             ) : null}
           </div>
-        </div>
-
-        <div className={cn( enter, "border-ink/12 mt-8 flex flex-col gap-4 border-t pt-6 sm:mt-10 sm:flex-row sm:items-center sm:gap-10 sm:pt-7" ,)} style={stage(0.78)}>
-          <p className="eyebrow text-ink shrink-0">{t.hero.clientsLabel}</p>
-          <LogoMarquee
-            logos={clientLogos}
-            tone="dark"
-            speed={46}
-            className="min-w-0 flex-1"
-          />
         </div>
       </div>
     </section>

@@ -666,6 +666,63 @@
   opacity: var(--card-in, 1);
 }
 
+/* ------------------------------------------------------------
+   The card as the top of a short stack
+
+   The article itself carries nothing but the corner radius and the
+   travel   the colour lives on a face inside it, and behind that
+   face sits a plate, offset far enough that its edge shows along
+   two sides. That edge is what gives the card a thickness a single
+   sheet cannot have.
+
+   `--lean` sends the plate outward, away from the middle of the
+   pair. Both cards leaning the same way would put one plate's edge
+   into the gutter a hand's width from the other's, and the two
+   would read as a single dark rule dividing the section.
+
+   The plate has to be *inside* the article rather than behind it:
+   the card animates its own opacity, and an element under full
+   opacity is a stacking context of its own   a pseudo-element at a
+   negative `z-index` would come back up over the face rather than
+   stay beneath it.
+
+   Radius is inherited, so the layers can never come apart.
+   ------------------------------------------------------------ */
+.idea-plate,
+.idea-face {
+  border-radius: inherit;
+}
+
+.idea-plate {
+  position: absolute;
+  inset: 0;
+  background: var(--color-forest);
+  translate: calc(var(--lean, 1) * 0.75rem) 0.75rem;
+}
+
+.idea-face {
+  /* A wash, not a flat fill: mint low on the left, gold high on the
+     right, over a ground that warms from canvas towards beige as it
+     falls. Both tints stay well under a quarter, so the card still
+     reads as paper catching light rather than as a coloured panel. */
+  background:
+    radial-gradient(
+      120% 100% at 8% 96%,
+      color-mix(in oklab, var(--color-mint) 20%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      110% 100% at 96% 22%,
+      color-mix(in oklab, var(--color-gold) 16%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(
+      145deg,
+      var(--color-canvas) 0%,
+      color-mix(in oklab, var(--color-beige) 45%, var(--color-canvas)) 100%
+    );
+}
+
 @media (width >= 64rem) {
   .idea-card-first {
     transform: translate3d(
@@ -892,7 +949,7 @@
   /* Capped on the viewport's *height*, not on a rem ceiling: the card is
      16/9, so a width cap alone lets it grow taller than the pin on a wide
      screen and spill over the sections either side of it. */
-  --vsl-w: min(92vw, calc(62svh * 16 / 9));
+  --vsl-w: min(100vw, calc(90svh * 16 / 9));
   /* Phones open the card gently: a short 16/9 card cannot grow far enough
      to swallow a three-line headline, so there it clears it instead. */
   --vsl-start: 0.62;
@@ -992,6 +1049,10 @@
    sequence is short of it, travels as the difference closes, and
    stays put once passed   so the motion is tied to the scroll
    rather than fired at a threshold, and reverses just as smoothly.
+
+   Panels can share an `--i`. Two that do rise together, and which of
+   them is seen is settled by `z-index` alone   which is what lets one
+   ride up hidden behind another and be uncovered later.
    ============================================================ */
 .curtain-layer {
   transform: translate3d(
@@ -999,6 +1060,78 @@
     calc(clamp(0, calc(var(--i) - var(--seq, 0)), 1) * 100%),
     0
   );
+}
+
+/* The one panel that leaves. Where a plain curtain stops once the
+   sequence has passed its number, this one keeps going and lifts off
+   the top of the screen, so what the scroll uncovers is whatever was
+   already sitting behind it   which is how the suite arrives: not
+   climbing over the last case, but waiting under it.
+
+   The second `clamp()` is the exit and it is written out in full here
+   rather than shared with the entrance above, because a `clamp()` put
+   through a custom property resolves to zero in Chrome and would drop
+   the panel off the screen for good. */
+.curtain-exit {
+  transform: translate3d(
+    0,
+    calc(
+      (
+          clamp(0, calc(var(--i) - var(--seq, 0)), 1) - clamp(0, calc(var(--seq, 0) - var(--i)), 1)
+        ) * 100%
+    ),
+    0
+  );
+}
+
+/* ------------------------------------------------------------
+   The suite   two cards swung in off the edges of the screen
+
+   The last curtain rises on a ground with nothing on it, and the
+   panel after it is scroll of its own. `--suite` runs 0 → 1 across
+   that span, so the pair comes up under the visitor's own hand and
+   goes back down the same way the moment they scroll up   never
+   fired at a threshold, never played once.
+
+   Each card waits off the screen and comes in on a corner. `--dir` is
+   which side it is held on, minus one or one, and it carries the
+   sideways travel and the lean together, so the pair swings in from
+   the two bottom corners and levels off as it arrives.
+
+   The sideways travel is the larger of the card's own width and a
+   slice of the viewport   a card has to be past the edge on a phone
+   and still past it on a wide screen, where its own width alone
+   would leave it sitting in view.
+
+   Nothing fades. The panel is clipped, so a card is out of sight
+   until it is on the screen, and a fade on top of that would only
+   read as the card arriving twice.
+
+   `--suite` falls back to 1: with no script the pair is simply
+   there, level and in place, which is the honest thing to show.
+   ------------------------------------------------------------ */
+.suite-card {
+  translate: calc((1 - var(--suite, 1)) * var(--dir) * max(120%, 52vw))
+    calc((1 - var(--suite, 1)) * 22vh);
+  rotate: calc((1 - var(--suite, 1)) * var(--dir) * 5deg);
+  scale: calc(0.96 + 0.04 * var(--suite, 1));
+  /* The scroll drives these straight, so a wheel notch would otherwise
+     land as a step. A short ease sitting behind the value carries the
+     card across the gap between one notch and the next; it is short
+     enough to stay under the hand rather than read as lag. */
+  transition:
+    translate 340ms var(--ease-brand),
+    rotate 340ms var(--ease-brand),
+    scale 340ms var(--ease-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suite-card {
+    translate: none;
+    rotate: none;
+    scale: none;
+    transition: none;
+  }
 }
 
 /* ============================================================

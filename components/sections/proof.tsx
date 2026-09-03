@@ -45,12 +45,14 @@ export function Proof() {
               text: t.proof.outro.projectsText,
               cta: t.proof.ctaPortfolio,
               href: "/clients",
+              image: "/media/insight.jpg",
             },
             {
               title: t.proof.outro.solutionsTitle,
               text: t.proof.outro.solutionsText,
               cta: t.proof.ctaSolutions,
               href: "/nos-solutions",
+              image: "/media/architecture.jpg",
             },
           ],
         }}

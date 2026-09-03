@@ -54,11 +54,11 @@ export const en: Dictionary = {
   },
 
   hero: {
-    titleLead: "Your",
-    titleAccent: "growth",
-    titleTail: "starts here.",
+    titleLead: "The digital structure that",
+    titleAccent: "grows",
+    titleTail: "your business.",
     description:
-      "We create digital ecosystems that help brands get noticed, communicate better and convert more effectively.",
+      "Web-apps, marque, marketing & ads : most companies add these one at a time, each on its own. We do the opposite. We build a solid base first, then add each piece on top of it, so everything works together ",
     stats: [
       { value: "25+", label: "Businesses supported" },
       { value: "92%", label: "Clients on a continuous retainer" },
@@ -103,20 +103,26 @@ export const en: Dictionary = {
     cards: [
       {
         label: "What stops",
-        body: "You stop paying for parts that never speak to each other: the website on one side, social on another, advertising that costs without anyone knowing what it returns.",
+        body: "Digital in scattered pieces",
         points: [
-          "No more agency leaving with your logins and your code.",
-          "No more decisions taken on instinct, for want of a number to look at.",
-          "No more rebuild every two years because the base stopped keeping up.",
+          "One person built your website, another runs your ads, a third made your logo. None of them talk to each other.",
+          "You don’t know where your customers come from, or what each one costs you.",
+          "Your access website, ad accounts, data sits with the agency, not with you.",
+          "Decisions get made on gut feeling: “it worked well last month.”",
+          "Every new need means starting again from zero.",
+          "You’re paying, but you’re not building anything that lasts.",
         ],
       },
       {
         label: "What starts",
-        body: "You end up with a system that is yours: a clear brand, a site that converts, campaigns that are measured, and the means to read them every month.",
+        body: "A structure that holds",
         points: [
-          "The code, the accounts and the data in your name.",
-          "A number behind every decision, reviewed every month.",
-          "A base that holds when the business doubles.",
+          "One team, one plan. Website, brand, advertising and content all move in the same direction.",
+          "A clear report every month: what worked, what didn’t, what we’re changing.",
+          "Everything is in your name. Website, accounts, data, passwords. If you ever leave, you leave with all of it.",
+          "Decisions come from numbers, not opinions.",
+          "We add without breaking. The base is built to carry what comes next.",
+          "Every month, you’re stronger than the month before.",
         ],
       },
     ],
