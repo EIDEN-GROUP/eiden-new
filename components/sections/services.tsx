@@ -42,21 +42,31 @@ export function Services() {
               ) : null}
 
               <div className="container-eiden flex flex-col gap-5 py-9 sm:py-10 lg:flex-row lg:items-center lg:gap-10 lg:py-10 xl:gap-14">
-                <span className="border-ink/25 text-ink/50 group-hover:border-canvas group-hover:text-canvas flex size-9 shrink-0 items-center justify-center rounded-full border text-[0.8rem] transition-colors duration-500 ease-[var(--ease-brand)]">
+                <span className="border-canvas/40 text-canvas lg:border-ink/25 lg:text-ink/50 lg:group-hover:border-canvas lg:group-hover:text-canvas flex size-9 shrink-0 items-center justify-center rounded-full border text-[0.8rem] transition-colors duration-500 ease-[var(--ease-brand)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <div className="lg:w-[15rem] lg:shrink-0 xl:w-[17rem]">
+                <div className="lg:w-[15rem] lg:shrink-0 xl:w-[30rem]">
                   <p className="eyebrow text-canvas mb-2 lg:hidden">{item.kicker}</p>
-                  <p className="text-ink/70 group-hover:text-canvas text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] lg:text-[0.875rem]">
-                     {item.text}
+                  <p className="flex flex-wrap items-center gap-1 text-canvas/90 lg:text-ink/70 lg:group-hover:text-canvas text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] lg:text-[0.875rem]">
+                    {item.deliverables.map((deliverable, index) => (
+                      <span key={deliverable} className="flex items-center gap-2">
+                        <span className="border border-canvas/30 lg:border-ink/20 rounded-full px-2 py-1 transition-colors duration-500 lg:group-hover:border-canvas/30">
+                          {deliverable}
+                        </span>
+
+                        {/* {index < item.deliverables.length - 1 && (
+                          <span className="opacity-50">·</span>
+                        )} */}
+                      </span>
+                    ))}
                   </p>
-                  {/* <p className="text-ink/40 group-hover:text-canvas mt-3 text-[0.82rem] transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
-                    {item.deliverables.join(" · ")}
-                  </p> */}
+                  <p className="text-canvas/75 lg:text-ink/40 lg:group-hover:text-canvas mt-3 text-[0.82rem] transition-opacity delay-100 duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:opacity-0 lg:group-hover:opacity-100">
+                    {item.text}
+                  </p>
                 </div>
 
-                <h3 className="font-display text-ink group-hover:text-canvas min-w-0 flex-1 text-[clamp(2.25rem,9vw,4rem)] leading-[1.04] font-light tracking-[-0.03em] lg:text-center">
+                <h3 className="font-display text-canvas lg:text-ink lg:group-hover:text-canvas min-w-0 flex-1 text-[clamp(2.25rem,9vw,4rem)] leading-[1.04] font-light tracking-[-0.03em] lg:text-center">
                   <span className="relative inline-block pb-2">
                     {item.title}
                     <span aria-hidden className="bg-canvas absolute bottom-0 left-0 h-1 w-full origin-left scale-x-100 transition-transform duration-600 ease-[var(--ease-brand)] motion-reduce:transition-none lg:scale-x-0 lg:group-hover:scale-x-100" />
@@ -64,7 +74,7 @@ export function Services() {
                 </h3>
 
                 <span className="flex justify-end lg:block lg:shrink-0">
-                  <span className="border-ink/25 text-ink/70 group-hover:text-canvas flex size-11 items-center justify-center rounded-full border transition-[transform,color] duration-500 ease-[var(--ease-brand)] group-hover:translate-x-2 motion-reduce:transition-none lg:size-auto lg:border-0">
+                  <span className="border-canvas/40 text-canvas lg:border-ink/25 lg:text-ink/70 lg:group-hover:text-canvas flex size-11 items-center justify-center rounded-full border transition-[transform,color] duration-500 ease-[var(--ease-brand)] group-hover:translate-x-2 motion-reduce:transition-none lg:size-auto lg:border-0">
                     <ArrowRight aria-hidden strokeWidth={1.4} className="size-5 lg:size-12 xl:size-14" />
                   </span>
                 </span>

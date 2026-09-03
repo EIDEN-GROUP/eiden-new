@@ -96,7 +96,7 @@ export function Hero() {
         <Image src="/media/hero.png" alt="" fill priority sizes="100vw" className="-z-10 object-cover"/>
       </div>
       <span aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-[62%] bg-[linear-gradient(to_top,rgba(244,235,208,0.94)_0%,rgba(244,235,208,0.78)_22%,rgba(244,235,208,0.42)_52%,rgba(244,235,208,0)_100%)]" />
-      <div className="relative flex flex-1 flex-col justify-around px-20">
+      <div className="relative flex flex-1 flex-col justify-around px-5 sm:px-10 lg:px-20">
         <div>
           <h1 className="text-balance-tight mb-10 text-ink pt-24 max-w-7xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
             {words.map((word, index) => {
@@ -148,7 +148,7 @@ export function Hero() {
             </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 pt-3 items-center sm:gap-10 sm:pt-5">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-2 pt-3 items-center sm:pt-5 pb-5">
           <div>
             <div className={cn(enter, "flex items-center gap-3 md:justify-start")} style={stage(0.68)} >
               <span className="flex items-center gap-1" aria-hidden>

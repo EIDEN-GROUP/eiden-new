@@ -149,7 +149,7 @@ export const fr = {
         slug: "web",
         title: "Création web & apps",
         kicker: "La fondation sur laquelle tout le reste tient",
-        text: "Sites vitrines, boutiques en ligne, réservation directe, applications métier. Vous en êtes propriétaire et vous pouvez modifier vos textes et vos images vous-même.",
+        text: "Nous créons votre site ou votre application. Rapide à charger, clair à lire, pensé pour transformer un visiteur en client pas seulement pour être joli.",
         deliverables: [
           "Sites vitrines",
           "E-commerce",
@@ -161,7 +161,7 @@ export const fr = {
         slug: "visibilite",
         title: "SEO, GEO & visibilité IA",
         kicker: "Être trouvé là où se fait la prochaine recherche",
-        text: "Un site que Google comprend, une fiche Google Business complète et active, et un contenu écrit pour que les moteurs classiques ou IA vous citent avant vos concurrents.",
+        text: "Être trouvé au moment où quelqu’un vous cherche. Sur Google, sur la carte quand on cherche « près de moi », et désormais dans les réponses des IA comme ChatGPT.",
         deliverables: [
           "SEO technique",
           "Contenu & netlinking",
@@ -173,7 +173,7 @@ export const fr = {
         slug: "media",
         title: "Performance media & ads",
         kicker: "Acheter du trafic n'est pas construire une acquisition",
-        text: "Un budget qui va là où il rapporte. Vous savez combien vous coûte un client, quelles campagnes s’arrêtent et lesquelles on renforce. Aucune dépense sans explication.",
+        text: "Vos publicités sur Google, Instagram, Facebook et TikTok, lancées et surveillées chaque semaine. Pas « on booste un post », mais un vrai pilotage.",
         deliverables: [
           "Google Ads",
           "Publicité réseaux sociaux",
@@ -186,7 +186,7 @@ export const fr = {
         slug: "contenu",
         title: "Stratégie, contenu & image",
         kicker: "L'identité qui rend le reste reconnaissable",
-        text: "Un positionnement clair, une identité visuelle complète, des messages simples à répéter partout, et le contenu qui les fait vivre : réseaux sociaux, articles, présentations.",
+        text: "Le travail qui vient avant tout le reste. Qui vous êtes, à qui vous parlez, et pourquoi on vous choisit vous plutôt qu’un autre.",
         deliverables: [
           "Audit & stratégie",
           "Vidéo & motion design",
@@ -200,7 +200,7 @@ export const fr = {
         slug: "photoVid",
         title: "Photos & vidéos",
         kicker: "Ce que la marque donne à voir",
-        text: "Tournage et prise de vue sur place, photos retouchées, vidéos courtes formatées pour les réseaux. Livré prêt à publier.",
+        text: "Des images qui vous ressemblent vraiment. Vos lieux, vos produits, votre équipe pas des banques d’images achetées que tout le monde utilise déjà.",
         deliverables: [
           "Shooting photo",
           "Production vidéo",
@@ -221,12 +221,6 @@ export const fr = {
     unmute: "Activer le son",
     sound: "Son",
     fullscreen: "Plein écran",
-    cta: "Réserver un appel",
-    chapters: [
-      { n: "01", label: "Le diagnostic", text: "Ce qui bloque, en chiffres." },
-      { n: "02", label: "La construction", text: "Marque, site, campagnes." },
-      { n: "03", label: "Le suivi", text: "Mesure et ajustement mensuels." },
-    ],
   },
 
   team: {

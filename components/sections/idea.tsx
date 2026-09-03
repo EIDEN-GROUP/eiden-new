@@ -1,6 +1,5 @@
 "use client";
 
-import { Check } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SwipeDeck } from "@/components/ui/swipe-deck";
@@ -11,9 +10,6 @@ const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const ramp = (value: number, from: number, to: number) =>
   clamp01((value - from) / (to - from));
 
-/** The order the two cards arrive in, the lane each one travels, and
- *  which way its plate leans   outward, away from the pair's middle, so
- *  the two backings never meet in the gutter between the cards. */
 const lanes = [
   { lane: "idea-card-first", enter: "--first-in", lean: "-1" },
   { lane: "idea-card-second", enter: "--second-in", lean: "1" },
@@ -93,18 +89,12 @@ export function Idea() {
   }));
 
   return (
-    <section id="idee" className="bg-canvas relative">
-      <div
-        ref={trackRef}
-        data-nav-tone="light"
-        className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0"
-      >
+    <section id="idee" className="bg-cream relative">
+      <div ref={trackRef} data-nav-tone="light" className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0">
         <span aria-hidden className="idea-wash" />
 
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
-            {/* The section's heading, set as two halves so the cards can
-                walk out through the middle of it. */}
             <h2 className="relative z-10 mb-12 flex flex-wrap justify-center gap-x-[0.3em] text-center lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2 lg:flex-nowrap lg:whitespace-nowrap">
               <span
                 style={{
@@ -141,36 +131,34 @@ export function Idea() {
                     card.lane,
                   )}
                 >
-                  {/* The plate the face sits on, offset so its edge shows
-                      along two sides and the card reads as the top of a
-                      short stack rather than a single sheet. It rides
-                      inside the article, which is what keeps it under the
-                      same transform as the card. */}
-                  <span aria-hidden className="idea-plate" />
+                  {/* <span aria-hidden className="idea-plate" /> */}
 
-                  <div className="idea-face text-forest relative flex flex-1 flex-col p-8 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)] sm:p-10 lg:p-12">
+                  <div className="idea-face bg-teal text-forest relative flex flex-1 flex-col p-8 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)] sm:p-10 lg:p-12">
                     <div>
-                      <p className="eyebrow text-teal/85">{card.label}</p>
-                      <p className="text-teal mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
+                      <p className="eyebrow text-canvas/85">{card.label}</p>
+                      <p className="text-canvas mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
                         {card.body}
                       </p>
                     </div>
 
-                    <ul className="mt-10 flex flex-col gap-3.5">
-                      {card.points.map((point) => (
-                        <li key={point} className="flex items-start gap-3">
-                          <span
-                            aria-hidden
-                            className="bg-teal/10 text-teal mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full"
-                          >
-                            <Check className="size-3" strokeWidth={2.6} />
+                    <ol className="border-canvas/10 mt-10 border-t">
+                      {card.points.map((point, index) => (
+                        <li
+                          key={point}
+                          className={cn(
+                            "grid grid-cols-[2.25rem_1fr] gap-4 py-4 sm:py-5",
+                            index > 0 && "border-canvas/10 border-t",
+                          )}
+                        >
+                          <span aria-hidden className="eyebrow text-cream pt-0.5">
+                            {String(index + 1).padStart(2, "0")}
                           </span>
-                          <span className="text-forest/80 text-[0.9375rem] leading-snug">
+                          <span className="text-canvas/80 text-[0.9375rem] leading-snug">
                             {point}
                           </span>
                         </li>
                       ))}
-                    </ul>
+                    </ol>
                   </div>
                 </article>
               ))}

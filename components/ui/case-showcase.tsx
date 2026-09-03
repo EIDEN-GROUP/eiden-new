@@ -37,9 +37,6 @@ export type ShowcaseOutro = {
     text: string;
     cta: string;
     href: string;
-    /* Decorative: the heading beside it carries the meaning, so it is
-       rendered with an empty alt rather than described twice. */
-    image: string;
   }[];
 };
 
@@ -52,10 +49,6 @@ const GROUNDS = [
 ] as const;
 
 const INTRO_GROUND = "#f4ebd0";
-/* The closing panel keeps nothing behind the cards   no picture, no
-   wash. They are the only thing on it, which is why they can be this
-   large and still read as objects rather than as the panel itself. */
-const SUITE_GROUND = "#FEFDFB";
 /* Both are read against the span the last case takes to lift away.
    `LEAD` lets that lift get under way on its own before anything moves
    underneath it; `SHARE` is what the cards travel over, and it ends
@@ -64,6 +57,11 @@ const SUITE_GROUND = "#FEFDFB";
    the pair comes to before the track releases. */
 const SUITE_LEAD = 0.2;
 const SUITE_SHARE = 0.7;
+/* How much real scroll one panel costs. `--seq`, the lift-away and the
+   suite's own reveal are all fractions of a panel, so this is the one
+   knob for the whole track's length   drop it and every stage still
+   plays in the same order, just over less of the wheel. */
+const PANEL_VH = 60;
 type Tone = (typeof GROUNDS)[number]["tone"];
 const INK: Record<
   Tone,
@@ -107,10 +105,11 @@ export function CaseShowcase({
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  /* Two panels beyond the run of work   the intro it opens on and the
-     outro it closes on   and one more after those, so the outro has a
-     span of its own to bring the suite cards in on and hold them. */
-  const panels = cases.length + 3;
+  /* One panel per case, plus the intro it opens on and the outro it
+     closes on   nothing held past that, so the track releases as soon
+     as the suite has settled rather than making the wheel pay for a
+     beat no one asked for. */
+  const panels = cases.length + 2;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -118,30 +117,21 @@ export function CaseShowcase({
 
     let raf = 0;
     let painted = Number.NaN;
-    /* The last case's own index   `panels` is that plus the intro, the
-       span it lifts away over, and the rest at the end. `--seq` passing
-       it is the case leaving, and the cards come in across that span. */
-    const suiteFrom = panels - 3;
+    /* The last case's own index, not derived from `panels`: the lift
+       away starts exactly when that curtain is due, whether or not
+       there's any track left after it to hold the reveal on. */
+    const suiteFrom = cases.length;
 
     const paint = () => {
       const { top, height } = track.getBoundingClientRect();
       const travel = height - window.innerHeight;
       const share = travel > 0 ? -top / travel : 0;
       const seq = Math.min(Math.max(share, 0), 1) * (panels - 1);
-      /* Thousandths, not hundredths. A unit of `--seq` is a whole
-         viewport of curtain travel, so at 0.01 a panel moves in eight
-         pixel steps and the wheel notches show in the motion. */
       const value = Math.round(seq * 1000) / 1000;
 
       if (value !== painted) {
         painted = value;
         track.style.setProperty("--seq", `${value}`);
-
-        /* The cards ride the span left over once the last curtain is up
-           and the panel has held a beat on its own. Smootherstep, not
-           smoothstep: it is flat in the second derivative at both ends
-           as well as the first, so the pair leaves and arrives without
-           the corner a plain smoothstep still puts in the motion. */
         const run = Math.min(
           Math.max((value - suiteFrom - SUITE_LEAD) / SUITE_SHARE, 0),
           1,
@@ -174,7 +164,7 @@ export function CaseShowcase({
       observer.disconnect();
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [panels]);
+  }, [panels, cases.length]);
 
   if (cases.length === 0) return null;
 
@@ -185,7 +175,7 @@ export function CaseShowcase({
     : INK.light;
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: `${panels * 100}svh` }}>
+    <div ref={trackRef} className="relative" style={{ height: `${panels * PANEL_VH}svh` }}>
       <div className="text-canvas sticky top-0 h-svh overflow-hidden">
         <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }}>
           <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
@@ -210,8 +200,6 @@ export function CaseShowcase({
           </div>
         </section>
 
-        {/* ── One curtain per case, each rising over the last, and the
-               last of them lifting away again to uncover the suite ── */}
         {cases.map((entry, index) => {
           const ground = GROUNDS[index % GROUNDS.length];
           const ink = INK[ground.tone];
@@ -223,8 +211,6 @@ export function CaseShowcase({
               style={
                 {
                   "--i": index + 1,
-                  /* Doubled, so the suite can take an odd number and sit
-                     between the last case and the one before it. */
                   zIndex: (index + 1) * 2,
                   backgroundColor: ground.bg,
                 } as CSSProperties
@@ -298,84 +284,51 @@ export function CaseShowcase({
           );
         })}
 
-        {/* The run of work closes on a clear ground   nothing behind the
-            pair, so the two cards are the whole of the panel and can come
-            in off the edges of the screen with nothing to cross.
-
-            It carries the last case's own number rather than one past it,
-            so it rises *with* that curtain instead of after it   held out
-            of sight underneath while the case is up, and uncovered as the
-            case lifts off. The odd `zIndex` is what holds it there: under
-            the last case, over every case before it. */}
         <article
           aria-hidden={active < cases.length + 1}
           style={
             {
               "--i": cases.length,
               zIndex: cases.length * 2 - 1,
-              backgroundColor: SUITE_GROUND,
+              backgroundColor: INTRO_GROUND,
             } as CSSProperties
           }
           className="curtain-layer absolute inset-0 isolate flex items-center justify-center"
         >
-          <div className="container-eiden text-ink py-16">
+          <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
+
+          <div className="container-eiden py-16">
             <p className="eyebrow text-teal text-center">{outro.eyebrow}</p>
 
-            <div className="mx-auto mt-8 flex max-w-6xl flex-col gap-8 sm:mt-10 sm:gap-12">
-              {outro.blocks.map((block, index) => {
-                /* The rows alternate, so the two cards are held on opposite
-                   corners and swing in past each other rather than over the
-                   same one. `--dir` carries both the travel and the lean;
-                   `order` puts the card on the side it comes in from. */
-                const held = index % 2 === 0 ? "-1" : "1";
+            <div className="mx-auto mt-9 grid max-w-4xl gap-9 sm:mt-12 sm:gap-12 md:grid-cols-2">
+              {outro.blocks.map((block, index) => (
+                <div
+                  key={block.href}
+                  style={{ "--dir": index % 2 === 0 ? "-1" : "1" } as CSSProperties}
+                  className={cn(
+                    "suite-block flex flex-col items-center text-center md:items-start md:text-left",
+                    index > 0 && "md:border-canvas/15 md:border-l md:pl-12",
+                  )}
+                >
+                  <h3 className="font-display text-canvas text-[clamp(1.375rem,3vw,2rem)] leading-[1.1] font-medium tracking-[-0.02em]">
+                    {block.title}
+                  </h3>
 
-                return (
-                  <div
-                    key={block.href}
-                    className="grid items-center gap-6 md:grid-cols-2 md:gap-14"
+                  <p className="text-canvas/65 mt-3 max-w-sm text-[0.9375rem] leading-relaxed">
+                    {block.text}
+                  </p>
+
+                  <ButtonLink
+                    href={block.href}
+                    variant={index === 0 ? "light" : "outline"}
+                    size="lg"
+                    className="mt-7"
+                    tabIndex={active >= cases.length + 1 ? undefined : -1}
                   >
-                    {/* Held back below `md`: two pictures and two blocks of
-                        words will not stand in one viewport on a phone, and
-                        the panel is pinned   it cannot spill. */}
-                    <figure
-                      style={{ "--dir": held } as CSSProperties}
-                      className={cn(
-                        "suite-card relative hidden h-[26svh] overflow-hidden rounded-[1.75rem] md:block",
-                        "shadow-[0_40px_90px_-45px_rgba(18,38,32,0.45)]",
-                        held === "1" && "md:order-last",
-                      )}
-                    >
-                      <Image
-                        src={block.image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 45vw"
-                        className="object-cover"
-                      />
-                    </figure>
-
-                    <div className="flex flex-col items-center text-center md:items-start md:text-left">
-                      <h3 className="font-display text-ink text-[clamp(1.375rem,3vw,2.125rem)] leading-[1.06] font-medium tracking-[-0.02em]">
-                        {block.title}
-                      </h3>
-
-                      <p className="text-ink/70 mt-3 max-w-sm text-[0.9375rem] leading-relaxed sm:text-base">
-                        {block.text}
-                      </p>
-
-                      <ButtonLink
-                        href={block.href}
-                        variant="primary"
-                        size="lg"
-                        className="mt-6"
-                        tabIndex={active >= cases.length + 1 ? undefined : -1}
-                      >
-                        {block.cta}
-                      </ButtonLink>
-                    </div>
-                  </div>
-                );
-              })}
+                    {block.cta}
+                  </ButtonLink>
+                </div>
+              ))}
             </div>
           </div>
         </article>

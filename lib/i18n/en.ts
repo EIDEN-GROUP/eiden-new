@@ -144,7 +144,7 @@ export const en: Dictionary = {
         slug: "web",
         title: "Web & app creation",
         kicker: "The foundation everything else stands on",
-        text: "Websites, e-commerce, applications and internal platforms. The codebase is yours outright. Outcome: infrastructure that holds when the business doubles.",
+        text: "Brochure sites, online shops, direct booking, business apps. You own it, and you can update your own text and images.",
         deliverables: [
           "Marketing sites",
           "E-commerce",
@@ -156,7 +156,7 @@ export const en: Dictionary = {
         slug: "visibilite",
         title: "SEO, GEO & AI visibility",
         kicker: "Being found where the next search actually happens",
-        text: "Technical SEO, GEO, content and netlinking   ranking in Google, and in ChatGPT, Gemini, Perplexity. Outcome: becoming the reference in the category, not just a result in it.",
+        text: "A site Google understands, a complete and active Google Business profile, and content written so that search engines classic and AI mention you before your competitors.",
         deliverables: [
           "Technical SEO",
           "Content & link building",
@@ -168,7 +168,7 @@ export const en: Dictionary = {
         slug: "media",
         title: "Performance media & ads",
         kicker: "Buying traffic is not the same as building acquisition",
-        text: "Google Ads, social advertising, media buying, lead generation and CRO. Outcome: a funnel with attribution, not just a campaign report.",
+        text: "A budget that goes where it returns. You know what a customer costs you, which campaigns we stop and which we scale. No spending without an explanation.",
         deliverables: [
           "Google Ads",
           "Paid social",
@@ -181,7 +181,7 @@ export const en: Dictionary = {
         slug: "contenu",
         title: "Strategy, content & image",
         kicker: "The identity that makes the rest recognizable",
-        text: "Positioning, identity, content, community and e-reputation. Outcome: a brand people search for by name.",
+        text: "Clear positioning, a full visual identity, simple messages you can repeat everywhere, and the content that brings them to life: social media, articles, presentations.",
         deliverables: [
           "Audit & strategy",
           "Video & motion design",
@@ -195,7 +195,7 @@ export const en: Dictionary = {
         slug: "photoVid",
         title: "Photos & videos",
         kicker: "What the brand actually gives people to look at",
-        text: "Photo, video, motion and social content   the material a brand has to produce to hold its rhythm. Outcome: enough to feed the system without starting from nothing every month.",
+        text: " On-location shoots, retouched photos, short videos formatted for social. Delivered ready to publish.",
         deliverables: [
           "Photography shoots",
           "Video production",
@@ -216,12 +216,6 @@ export const en: Dictionary = {
     unmute: "Unmute",
     sound: "Sound",
     fullscreen: "Fullscreen",
-    cta: "Book a call",
-    chapters: [
-      { n: "01", label: "The diagnosis", text: "What's blocking you, in numbers." },
-      { n: "02", label: "The build", text: "Brand, site, campaigns." },
-      { n: "03", label: "The follow-up", text: "Monthly measurement and tuning." },
-    ],
   },
 
   team: {

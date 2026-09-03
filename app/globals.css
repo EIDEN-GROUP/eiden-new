@@ -100,7 +100,7 @@
 @utility container-eiden {
   width: 100%;
   margin-inline: auto;
-  max-width: var(--page-measure, 90rem);
+  max-width: var(--page-measure, 100rem);
   padding-inline: 1.25rem;
 
   @media (width >= 48rem) {
@@ -634,7 +634,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: var(--color-beige);
+  /* background: var(--color-teal); */
   opacity: calc(var(--dim, 0) * var(--dim, 0) * (3 - 2 * var(--dim, 0)));
 }
 
@@ -699,12 +699,8 @@
   background: var(--color-forest);
   translate: calc(var(--lean, 1) * 0.75rem) 0.75rem;
 }
-
+/* 
 .idea-face {
-  /* A wash, not a flat fill: mint low on the left, gold high on the
-     right, over a ground that warms from canvas towards beige as it
-     falls. Both tints stay well under a quarter, so the card still
-     reads as paper catching light rather than as a coloured panel. */
   background:
     radial-gradient(
       120% 100% at 8% 96%,
@@ -721,7 +717,7 @@
       var(--color-canvas) 0%,
       color-mix(in oklab, var(--color-beige) 45%, var(--color-canvas)) 100%
     );
-}
+} */
 
 @media (width >= 64rem) {
   .idea-card-first {
@@ -1041,6 +1037,7 @@
   );
 }
 
+
 /* ============================================================
    Case curtain   each panel rises over the one before it
 
@@ -1085,51 +1082,42 @@
 }
 
 /* ------------------------------------------------------------
-   The suite   two cards swung in off the edges of the screen
+   The suite   the closing pair, settling into place on the same
+   wash the run of work opened on
 
-   The last curtain rises on a ground with nothing on it, and the
-   panel after it is scroll of its own. `--suite` runs 0 → 1 across
-   that span, so the pair comes up under the visitor's own hand and
-   goes back down the same way the moment they scroll up   never
-   fired at a threshold, never played once.
+   The last curtain rises on the intro's own ground, and the panel
+   after it is scroll of its own. `--suite` runs 0 → 1 across that
+   span, so the pair comes up under the visitor's own hand and goes
+   back down the same way the moment they scroll up   never fired at
+   a threshold, never played once.
 
-   Each card waits off the screen and comes in on a corner. `--dir` is
-   which side it is held on, minus one or one, and it carries the
-   sideways travel and the lean together, so the pair swings in from
-   the two bottom corners and levels off as it arrives.
-
-   The sideways travel is the larger of the card's own width and a
-   slice of the viewport   a card has to be past the edge on a phone
-   and still past it on a wide screen, where its own width alone
-   would leave it sitting in view.
-
-   Nothing fades. The panel is clipped, so a card is out of sight
-   until it is on the screen, and a fade on top of that would only
-   read as the card arriving twice.
+   `--dir` is which side a block is held on, minus one or one: each
+   settles in from the corner its own column sits toward and fades in
+   as it arrives, rather than swinging the full width of the screen
+   the way a clipped card could   there is no mask here to keep the
+   travel hidden, so the distance stays small and the opacity carries
+   the rest of the arrival.
 
    `--suite` falls back to 1: with no script the pair is simply
    there, level and in place, which is the honest thing to show.
    ------------------------------------------------------------ */
-.suite-card {
-  translate: calc((1 - var(--suite, 1)) * var(--dir) * max(120%, 52vw))
-    calc((1 - var(--suite, 1)) * 22vh);
-  rotate: calc((1 - var(--suite, 1)) * var(--dir) * 5deg);
-  scale: calc(0.96 + 0.04 * var(--suite, 1));
+.suite-block {
+  opacity: var(--suite, 1);
+  translate: calc((1 - var(--suite, 1)) * var(--dir) * 2rem)
+    calc((1 - var(--suite, 1)) * 1.5rem);
   /* The scroll drives these straight, so a wheel notch would otherwise
      land as a step. A short ease sitting behind the value carries the
-     card across the gap between one notch and the next; it is short
+     block across the gap between one notch and the next; it is short
      enough to stay under the hand rather than read as lag. */
   transition:
-    translate 340ms var(--ease-brand),
-    rotate 340ms var(--ease-brand),
-    scale 340ms var(--ease-brand);
+    translate 420ms var(--ease-brand),
+    opacity 420ms var(--ease-brand);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .suite-card {
+  .suite-block {
+    opacity: 1;
     translate: none;
-    rotate: none;
-    scale: none;
     transition: none;
   }
 }

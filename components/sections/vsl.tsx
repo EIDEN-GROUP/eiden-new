@@ -151,14 +151,14 @@ export function Vsl() {
 
   return (
     <section id="methode" ref={sectionRef} className="pointer-events-none relative z-10">
-      <div ref={litRef} data-nav-tone="light" className="grain bg-beige pointer-events-auto relative">
+      <div ref={litRef} data-nav-tone="light" className="grain bg-canvas pointer-events-auto relative">
         <span aria-hidden className="vsl-wash" />
         <div ref={trackRef} className="vsl-track relative z-2">
           <div className={cn( "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8", "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14", )}>
             <span aria-hidden className="vsl-bloom" />
             <div className="flex flex-1 flex-col justify-end pb-12 md:pb-8">
               <Reveal direction="none" duration={0.5}>
-                <p className="eyebrow vsl-ink-gold">{t.vsl.eyebrow}</p>
+                <p className="eyebrow text-teal">{t.vsl.eyebrow}</p>
               </Reveal>
             </div>
             <div className="vsl-stage w-full">
