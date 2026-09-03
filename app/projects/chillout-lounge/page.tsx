@@ -5,7 +5,7 @@
  *
  * This page owns its own structure and its own words. Nothing is handed in
  * by a shared case component and nothing is read out of `lib/data/projects`
- * — change the design or the copy here and it changes this case and no
+ *   change the design or the copy here and it changes this case and no
  * other. The repetition across the eleven case pages is deliberate.
  *
  * Still shared, because they are behaviour rather than this page's design:
@@ -251,8 +251,8 @@ export default function ChilloutLoungePage() {
       {/* ══ HERO ═══════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        data-nav-tone="dark"
-        className="hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-black sm:min-h-[74svh]"
+        data-nav-tone="light"
+        className="hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-beige sm:min-h-[74svh]"
       >
         <div
           aria-hidden
@@ -270,7 +270,7 @@ export default function ChilloutLoungePage() {
 
         <span
           aria-hidden
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(244,235,208,1)_16%,rgba(244,235,208,0.94)_44%,rgba(244,235,208,0.86)_100%)]"
         />
 
         <div className="container-eiden relative flex flex-1 flex-col pt-28 pb-10 sm:pt-20 sm:pb-10">
@@ -279,7 +279,7 @@ export default function ChilloutLoungePage() {
             transitionTypes={["case-close"]}
             className={cn(
               ENTER,
-              "group text-canvas/50 hover:text-canvas font-label inline-flex w-fit items-center gap-1.5 text-[0.72rem] font-bold tracking-[0.2em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.78rem]",
+              "group text-ink/50 hover:text-ink font-label inline-flex w-fit items-center gap-1.5 text-[0.72rem] font-bold tracking-[0.2em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.78rem]",
             )}
             style={stage(0.02)}
           >
@@ -293,14 +293,14 @@ export default function ChilloutLoungePage() {
 
           <div className="mt-10 pt-3">
             <p
-              className={cn(ENTER, "eyebrow text-gold flex items-center gap-3")}
+              className={cn(ENTER, "eyebrow text-teal flex items-center gap-3")}
               style={stage(0.06)}
             >
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {say({ fr: "Étude de cas", en: "Case study" })}
             </p>
 
-            <h1 className="text-balance-tight text-canvas mt-2 text-[clamp(2.75rem,8vw,6rem)] leading-[0.96] font-extrabold">
+            <h1 className="text-balance-tight text-ink mt-2 text-[clamp(2.75rem,8vw,6rem)] leading-[0.96] font-extrabold">
               {words.map((word, index) => {
                 const rise = stage(HERO_WORD_LEAD + index * HERO_WORD_STEP);
                 const last = index === words.length - 1;
@@ -325,7 +325,7 @@ export default function ChilloutLoungePage() {
                   <span key={`${word}-${index}`} className="relative inline-block">
                     <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
                       <span
-                        className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
+                        className="text-[#8a6412] inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
                         style={rise}
                       >
                         {word}
@@ -333,29 +333,29 @@ export default function ChilloutLoungePage() {
                     </span>
                     <span
                       aria-hidden
-                      className="bg-gold/60 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
+                      className="bg-[#8a6412]/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
                     />
                   </span>
                 );
               })}
             </h1>
 
-            {/* WHY — the reasoning, out-ranking the description under it. */}
+            {/* WHY   the reasoning, out-ranking the description under it. */}
             <p
               className={cn(
                 ENTER,
-                "editorial text-canvas mt-8 max-w-[34ch] text-[clamp(1.375rem,3vw,2.125rem)]",
+                "editorial text-ink mt-8 max-w-[34ch] text-[clamp(1.375rem,3vw,2.125rem)]",
               )}
               style={stage(0.5)}
             >
               {say(HERO.statement)}
             </p>
 
-            {/* WHAT — one short paragraph, never two. */}
+            {/* WHAT   one short paragraph, never two. */}
             <p
               className={cn(
                 ENTER,
-                "text-canvas/60 mt-6 max-w-[52ch] text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
+                "text-ink/60 mt-6 max-w-[52ch] text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
               )}
               style={stage(0.6)}
             >
@@ -365,7 +365,7 @@ export default function ChilloutLoungePage() {
             <p
               className={cn(
                 ENTER,
-                "border-canvas/12 text-canvas/45 mt-9 border-t pt-5 text-[0.8125rem] tracking-[0.02em]",
+                "border-ink/12 text-ink/45 mt-9 border-t pt-5 text-[0.8125rem] tracking-[0.02em]",
               )}
               style={stage(0.78)}
             >
@@ -655,7 +655,7 @@ export default function ChilloutLoungePage() {
             className="font-display text-ink mt-7 block max-w-3xl text-[clamp(1.375rem,3vw,2.125rem)] leading-[1.08] font-extrabold tracking-[-0.04em]"
           />
 
-          {/* `gap-px` over a hairline ground draws the rules — the same trick
+          {/* `gap-px` over a hairline ground draws the rules   the same trick
               the sectors grid uses on the clients page. */}
           <RevealGroup
             amount={0.1}
@@ -678,14 +678,14 @@ export default function ChilloutLoungePage() {
                 className="object-contain transition-transform duration-[1200ms] ease-[var(--ease-brand)] group-hover/id:scale-[1.04] motion-reduce:transition-none"
               />
               <span className="eyebrow text-ink/55 absolute top-6 left-7 z-10">
-                01 — {say({ fr: "Identité", en: "Identity" })}
+                01   {say({ fr: "Identité", en: "Identity" })}
               </span>
             </div>
 
             {/* ── 02 · The essence, in the case's own words ────── */}
             <div className="bg-canvas relative p-8 sm:p-10 lg:col-span-7">
               <span className="eyebrow text-ink/35">
-                02 — {say({ fr: "Essence", en: "Essence" })}
+                02   {say({ fr: "Essence", en: "Essence" })}
               </span>
               <p className="editorial text-ink mt-5 max-w-[34ch] text-[clamp(1.125rem,2.1vw,1.5rem)] leading-snug">
                 {say(BRAND.essence)}
@@ -696,7 +696,7 @@ export default function ChilloutLoungePage() {
                    pointed at, so the hex reads without a legend. ───────── */}
             <div className="bg-canvas relative p-8 sm:p-10 lg:col-span-7">
               <span className="eyebrow text-ink/35">
-                03 — {say({ fr: "Système colorimétrique", en: "Colour system" })}
+                03   {say({ fr: "Système colorimétrique", en: "Colour system" })}
               </span>
 
               <ul className="mt-6 flex flex-col gap-px overflow-hidden rounded-[0.75rem] sm:h-[11rem] sm:flex-row">
@@ -915,8 +915,8 @@ export default function ChilloutLoungePage() {
 
       {/* ══ THE IMPACT ═════════════════════════════════════════════ */}
       <section
-        data-nav-tone="dark"
-        className="grain text-canvas relative isolate scroll-mt-24 overflow-hidden bg-[var(--case-ground)]"
+        data-nav-tone="light"
+        className="grain text-ink relative isolate scroll-mt-24 overflow-hidden bg-beige"
       >
         {/* The place, kept far enough back that a figure set on it still
             reads. The ground colour is laid over the picture rather than the
@@ -928,14 +928,14 @@ export default function ChilloutLoungePage() {
             fill
             quality={70}
             sizes="100vw"
-            className="object-cover object-center opacity-[0.14]"
+            className="object-cover object-center opacity-[0.10]"
           />
-          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--case-ground)_75%)]" />
+          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--color-beige)_75%)]" />
         </div>
 
         <div className="container-eiden pt-20 pb-20 sm:pt-24 sm:pb-24 lg:pt-28 lg:pb-28">
           <Reveal direction="none" duration={0.5} amount={0.3}>
-            <p className="eyebrow text-gold flex items-center gap-3">
+            <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {say({ fr: "L'impact", en: "The impact" })}
             </p>
@@ -948,11 +948,11 @@ export default function ChilloutLoungePage() {
                 amount={0.25}
                 delay={0.05}
                 text={say(IMPACT_TITLE)}
-                className="font-display text-canvas block text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.06] font-extrabold tracking-[-0.045em]"
+                className="font-display text-ink block text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.06] font-extrabold tracking-[-0.045em]"
               />
 
               <Reveal delay={0.16} amount={0.25}>
-                <p className="text-canvas/60 mt-6 max-w-[44ch] text-[0.9375rem] leading-relaxed">
+                <p className="text-ink/60 mt-6 max-w-[44ch] text-[0.9375rem] leading-relaxed">
                   {say(IMPACT_TEXT)}
                 </p>
               </Reveal>
@@ -1045,7 +1045,7 @@ export default function ChilloutLoungePage() {
               key={project.slug}
               href={`/projects/${project.slug}`}
               transitionTypes={["case-next"]}
-              aria-label={`${project.client} — ${say(project.category)}`}
+              aria-label={`${project.client}   ${say(project.category)}`}
               className="group focus-visible:outline-teal relative block overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-4"
             >
               <div className="bg-ink/[0.05] relative h-[42svh] min-h-[17rem] lg:h-[52svh]">

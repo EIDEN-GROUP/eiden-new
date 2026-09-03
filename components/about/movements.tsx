@@ -70,9 +70,9 @@ export function AboutMovements({
   if (total === 0) return null;
 
   return (
-    <section className="grain bg-ink">
+    <section className="grain bg-canvas">
       <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
-        <div aria-hidden className="bg-forest-md sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
+        <div aria-hidden className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
           {movements.map((movement, index) => (
             <div
               key={movement.n}
@@ -103,8 +103,8 @@ export function AboutMovements({
                 className={cn(
                   "h-8 w-px transition-[background-color,transform] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                   active !== null && index === current
-                    ? "bg-gold scale-y-100"
-                    : "bg-canvas/25 scale-y-75",
+                    ? "bg-teal scale-y-100"
+                    : "bg-ink/25 scale-y-75",
                 )}
               />
             ))}
@@ -127,13 +127,13 @@ export function AboutMovements({
                       : "translate-y-3 opacity-0",
                   )}
                 >
-                  <p className="font-label text-gold text-[0.8125rem] font-bold tracking-[0.28em]">
+                  <p className="font-label text-teal text-[0.8125rem] font-bold tracking-[0.28em]">
                     {String(index + 1).padStart(2, "0")}
-                    <span className="text-canvas/40">
+                    <span className="text-ink/40">
                       {` / ${String(total).padStart(2, "0")}`}
                     </span>
                   </p>
-                  <p className="font-display text-canvas mt-3 text-[clamp(1.25rem,2.1vw,1.875rem)] leading-[1.06] font-extrabold tracking-[-0.03em]">
+                  <p className="font-display text-ink mt-3 text-[clamp(1.25rem,2.1vw,1.875rem)] leading-[1.06] font-extrabold tracking-[-0.03em]">
                     {movement.title}
                   </p>
                 </div>
@@ -152,7 +152,6 @@ export function AboutMovements({
           <SectionHeading
             eyebrow={eyebrow}
             title={title}
-            tone="light"
             className="max-w-2xl"
           />
         </div>
@@ -164,7 +163,7 @@ export function AboutMovements({
               key={movement.n}
               data-movement={index}
               className={cn(
-                "border-canvas/10 flex min-h-[62svh] flex-col justify-center border-t py-14 lg:min-h-svh lg:py-24",
+                "border-ink/10 flex min-h-[62svh] flex-col justify-center border-t py-14 lg:min-h-svh lg:py-24",
                 COLUMN,
               )}
             >
@@ -172,17 +171,17 @@ export function AboutMovements({
                 <span
                   aria-hidden
                   className={cn(
-                    "bg-gold block h-px w-12 origin-left transition-transform duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                    "bg-teal block h-px w-12 origin-left transition-transform duration-700 ease-[var(--ease-brand)] motion-reduce:transition-none",
                     active === index ? "scale-x-100" : "scale-x-0",
                   )}
                 />
-                <p className="font-label text-gold mt-6 text-[0.9375rem] font-bold tracking-[0.24em]">
+                <p className="font-label text-teal mt-6 text-[0.9375rem] font-bold tracking-[0.24em]">
                   {movement.n}
                 </p>
-                <h3 className="font-display text-canvas mt-4 text-[clamp(1.75rem,3.2vw,3.25rem)] leading-[1.02] font-extrabold tracking-[-0.03em]">
+                <h3 className="font-display text-ink mt-4 text-[clamp(1.75rem,3.2vw,3.25rem)] leading-[1.02] font-extrabold tracking-[-0.03em]">
                   {movement.title}
                 </h3>
-                <p className="text-canvas/60 mt-6 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
+                <p className="text-ink/60 mt-6 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
                   {movement.text}
                 </p>
               </Reveal>

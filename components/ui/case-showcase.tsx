@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { ButtonLink } from "@/components/ui/button";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
@@ -29,15 +30,25 @@ export type ShowcaseIntro = {
   texture: string;
 };
 
+export type ShowcaseOutro = {
+  eyebrow: string;
+  blocks: readonly {
+    title: string;
+    text: string;
+    cta: string;
+    href: string;
+  }[];
+};
+
 const GROUNDS = [
-  { bg: "#0e1b17", tone: "dark" }, // teal   the primary
-  { bg: "#fefdfb", tone: "light" }, // canvas
-  { bg: "#0a0f0c", tone: "dark" }, // ink
-  { bg: "#b8a876", tone: "light" }, // gold
-  { bg: "#2a2c2b", tone: "dark" }, // grey
+  { bg: "#FEFDFB", tone: "light" }, // canvas
+  { bg: "#f4ebd0", tone: "light" }, // beige
+  { bg: "#e3d3a8", tone: "light" }, // beige
+  { bg: "#FEFDFB", tone: "light" }, // canvas
+  { bg: "#f4ebd0", tone: "light" }, // beige
 ] as const;
 
-const INTRO_GROUND = "#0a0f0c";
+const INTRO_GROUND = "#f4ebd0";
 type Tone = (typeof GROUNDS)[number]["tone"];
 const INK: Record<
   Tone,
@@ -53,17 +64,6 @@ const INK: Record<
     bar: string;
   }
 > = {
-  dark: {
-    title: "text-canvas",
-    body: "text-canvas/65",
-    quote: "text-canvas/85",
-    muted: "text-canvas/40",
-    accent: "text-gold",
-    rule: "border-canvas/20",
-    ghost: "text-white/[0.06]",
-    ring: "border-canvas/40 group-hover:bg-canvas group-hover:text-ink",
-    bar: "bg-canvas",
-  },
   light: {
     title: "text-ink",
     body: "text-ink/70",
@@ -80,19 +80,19 @@ const INK: Record<
 export function CaseShowcase({
   cases,
   intro,
+  outro,
   label,
   cta,
 }: {
   cases: ShowcaseCase[];
   intro: ShowcaseIntro;
+  outro: ShowcaseOutro;
   label: string;
   cta: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-
-  /** The statement, then the cases. */
-  const panels = cases.length + 1;
+  const panels = cases.length + 2;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -140,32 +140,23 @@ export function CaseShowcase({
 
   if (cases.length === 0) return null;
 
-  const onCase = active > 0;
+  const onCase = active > 0 && active <= cases.length;
   const caseNumber = String(active).padStart(2, "0");
-  const activeInk =
-    active > 0 ? INK[GROUNDS[(active - 1) % GROUNDS.length].tone] : INK.dark;
+  const activeInk = onCase
+    ? INK[GROUNDS[(active - 1) % GROUNDS.length].tone]
+    : INK.light;
 
   return (
     <div ref={trackRef} className="relative" style={{ height: `${panels * 100}svh` }}>
       <div className="text-canvas sticky top-0 h-svh overflow-hidden">
-        <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }} >
-          <FixedBackdrop src={intro.texture} />
-
-          {/* Darkest through the middle, where the type lands. */}
-          <span aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]" />
-
+        <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }}>
+          <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
           <div className="container-eiden flex flex-col items-center py-16 text-center">
             <Reveal direction="none" duration={0.5}>
-              <p className="eyebrow text-gold mb-3">{intro.eyebrow}</p>
+              <p className="eyebrow text-teal mb-3">{intro.eyebrow}</p>
             </Reveal>
 
-            <RevealWords
-              as="h2"
-              text={intro.title}
-              delay={0.06}
-              className="font-display text-canvas mt-3 block max-w-4xl text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase"
-            />
-
+            <RevealWords as="h2" text={intro.title} delay={0.06} className="font-display text-canvas mt-3 block max-w-4xl text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase" />
             <Reveal delay={0.45}>
               <p className="text-canvas/65 mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
                 {intro.text}
@@ -198,68 +189,31 @@ export function CaseShowcase({
               }
               className="curtain-layer absolute inset-0 flex items-start"
             >
-              <span
-                aria-hidden
-                className={cn(
-                  "pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b to-transparent",
-                  ground.tone === "light" ? "from-black/15" : "from-black/40",
-                )}
-              />
-              <span
-                aria-hidden
-                className={cn(
-                  "pointer-events-none absolute inset-x-0 top-0 z-10 h-px",
-                  ground.tone === "light" ? "bg-black/10" : "bg-white/15",
-                )}
-              />
+              <span aria-hidden className={cn( "pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b to-transparent", "from-black/15", )} />
+              <span aria-hidden className={cn( "pointer-events-none absolute inset-x-0 top-0 z-10 h-px", "bg-black/10", )} />
 
               {/* The number the case stands on. */}
-              <span
-                aria-hidden
-                className={cn(
-                  "font-display pointer-events-none absolute right-2 bottom-[-4vw] text-[26vw] leading-none font-extrabold tracking-[-0.06em] select-none",
-                  ink.ghost,
-                )}
-              >
+              <span aria-hidden className={cn( "font-display pointer-events-none absolute right-2 bottom-[-4vw] text-[26vw] leading-none font-extrabold tracking-[-0.06em] select-none", ink.ghost, )} >
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="container-eiden relative my-auto grid w-full items-center gap-5 py-28 sm:gap-8 sm:py-32 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-40">
                 <div className="min-w-0">
-                  <p
-                    className={cn(
-                      "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]",
-                      ink.accent,
-                    )}
-                  >
+                  <p className={cn( "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]", ink.accent, )} >
                     <span>{entry.client}</span>
                     <span className={ink.muted}>· {entry.tags.join(" · ")}</span>
                   </p>
 
-                  <h3
-                    className={cn(
-                      "font-display mt-4 text-[clamp(1.625rem,4vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6",
-                      ink.title,
-                    )}
-                  >
+                  <h3 className={cn( "font-display mt-4 text-[clamp(1.625rem,4vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6", ink.title, )} >
                     {entry.title}
                   </h3>
 
-                  <p className={cn( "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3", ink.body, )}>
+                  <p className={cn( "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3", ink.body, )} >
                     {entry.text}
                   </p>
 
                   {entry.quote && entry.author ? (
-                    <figure
-                      className={cn(
-                        "mt-5 max-w-md border-l pl-5 sm:mt-8",
-                        ink.rule,
-                      )} >
-                      <blockquote
-                        className={cn(
-                          "text-[0.9375rem] leading-relaxed",
-                          ink.quote,
-                        )}
-                      >
+                    <figure className={cn( "mt-5 max-w-md border-l pl-5 sm:mt-8", ink.rule, )}>
+                      <blockquote className={cn( "text-[0.9375rem] leading-relaxed", ink.quote, )}>
                         “{entry.quote}”
                       </blockquote>
                       <figcaption className={cn("eyebrow mt-3", ink.muted)}>
@@ -268,17 +222,19 @@ export function CaseShowcase({
                     </figure>
                   ) : null}
 
-                  <Link
-                    href={entry.href}
-                    tabIndex={index + 1 === active ? undefined : -1}
-                    className={cn(
-                      "group font-label mt-5 inline-flex items-center gap-4 text-[0.82rem] font-bold tracking-[0.22em] uppercase sm:mt-9",
-                      ink.title,
-                    )}
-                  >
+                  <Link href={entry.href} tabIndex={index + 1 === active ? undefined : -1} className={cn( "group font-label mt-5 inline-flex items-center gap-4 text-[0.82rem] font-bold tracking-[0.22em] uppercase sm:mt-9", ink.title, )} >
                     {cta}
-                    <span className={cn( "flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]", ink.ring, )} >
-                      <ArrowRight className="size-4" strokeWidth={1.6} aria-hidden />
+                    <span
+                      className={cn(
+                        "flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]",
+                        ink.ring,
+                      )}
+                    >
+                      <ArrowRight
+                        className="size-4"
+                        strokeWidth={1.6}
+                        aria-hidden
+                      />
                     </span>
                   </Link>
                 </div>
@@ -295,6 +251,56 @@ export function CaseShowcase({
             </article>
           );
         })}
+
+        {/* The last curtain is the first ground again: same picture, same
+            wash, so the run of work reads as having come back to where it
+            started   only now the panel is asking for something. */}
+        <article
+          aria-hidden={active !== cases.length + 1}
+          style={
+            {
+              "--i": cases.length + 1,
+              backgroundColor: INTRO_GROUND,
+            } as CSSProperties
+          }
+          className="curtain-layer absolute inset-0 isolate flex items-center justify-center"
+        >
+          <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
+
+          <div className="container-eiden py-16">
+            <p className="eyebrow text-teal text-center">{outro.eyebrow}</p>
+
+            <div className="mx-auto mt-9 grid max-w-4xl gap-9 sm:mt-12 sm:gap-12 md:grid-cols-2">
+              {outro.blocks.map((block, index) => (
+                <div
+                  key={block.href}
+                  className={cn(
+                    "flex flex-col items-center text-center md:items-start md:text-left",
+                    index > 0 && "md:border-canvas/15 md:border-l md:pl-12",
+                  )}
+                >
+                  <h3 className="font-display text-canvas text-[clamp(1.375rem,3vw,2rem)] leading-[1.1] font-medium tracking-[-0.02em]">
+                    {block.title}
+                  </h3>
+
+                  <p className="text-canvas/65 mt-3 max-w-sm text-[0.9375rem] leading-relaxed">
+                    {block.text}
+                  </p>
+
+                  <ButtonLink
+                    href={block.href}
+                    variant={index === 0 ? "light" : "outline"}
+                    size="lg"
+                    className="mt-7"
+                    tabIndex={active === cases.length + 1 ? undefined : -1}
+                  >
+                    {block.cta}
+                  </ButtonLink>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
 
         {/* Running head   the count, held still while the work turns. */}
         <div className="container-eiden pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between pt-20 sm:pt-24 lg:pt-32">

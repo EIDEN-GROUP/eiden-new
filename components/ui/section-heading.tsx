@@ -2,31 +2,30 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
 
-type Tone = "dark" | "light";
-
 type SectionHeadingProps = {
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
-  tone?: Tone;
   align?: "left" | "center";
   className?: string;
   /** Extra content rendered under the lead (buttons, meta…). */
   children?: ReactNode;
 };
 
-/** Eyebrow + title + lead, in the brand's five-voice type hierarchy. */
+/**
+ * Eyebrow + title + lead, in the brand's five-voice type hierarchy.
+ *
+ * There is no tone to pick any more: every ground on the site is canvas or the
+ * warm one, so the heading is always written for daylight.
+ */
 export function SectionHeading({
   eyebrow,
   title,
   lead,
-  tone = "dark",
   align = "left",
   className,
   children,
 }: SectionHeadingProps) {
-  const onDark = tone === "light";
-
   return (
     <div
       className={cn(
@@ -39,9 +38,8 @@ export function SectionHeading({
         <Reveal direction="none" duration={0.5}>
           <p
             className={cn(
-              "eyebrow flex items-center gap-3",
+              "eyebrow text-teal flex items-center gap-3",
               align === "center" && "justify-center",
-              onDark ? "text-gold" : "text-teal",
             )}
           >
             <span aria-hidden className="h-px w-8 bg-current opacity-50" />
@@ -51,12 +49,7 @@ export function SectionHeading({
       ) : null}
 
       <Reveal delay={0.05}>
-        <h2
-          className={cn(
-            "mt-5 text-[clamp(2rem,5vw,3.75rem)]",
-            onDark ? "text-canvas" : "text-forest",
-          )}
-        >
+        <h2 className="text-forest mt-5 text-[clamp(2rem,5vw,3.75rem)]">
           {title}
         </h2>
       </Reveal>
@@ -65,9 +58,8 @@ export function SectionHeading({
         <Reveal delay={0.12}>
           <p
             className={cn(
-              "mt-6 max-w-2xl text-base leading-relaxed sm:text-lg",
+              "text-forest/65 mt-6 max-w-2xl text-base leading-relaxed sm:text-lg",
               align === "center" && "mx-auto",
-              onDark ? "text-canvas/65" : "text-forest/65",
             )}
           >
             {lead}

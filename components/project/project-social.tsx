@@ -27,15 +27,15 @@ export function ProjectSocial({
   const odd = social.items.length % 2 === 1;
 
   return (
-    <section data-nav-tone="dark" className="bg-ink text-canvas">
-      <div className="container-eiden border-canvas/12 flex flex-col gap-4 border-t py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
-        <p className="eyebrow text-canvas/30 shrink-0">{label}</p>
+    <section data-nav-tone="light" className="bg-canvas text-ink">
+      <div className="container-eiden border-ink/12 flex flex-col gap-4 border-t py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
+        <p className="eyebrow text-ink/30 shrink-0">{label}</p>
         <Reveal direction="none" duration={0.5}>
-          <p className="text-canvas max-w-2xl text-center text-[0.9375rem] leading-relaxed">
+          <p className="text-ink max-w-2xl text-center text-[0.9375rem] leading-relaxed">
             {say(social.title)}
           </p>
         </Reveal>
-        <p className="eyebrow text-canvas/30 shrink-0">
+        <p className="eyebrow text-ink/30 shrink-0">
           {say({ fr: "Réseaux", en: "Social" })}
         </p>
       </div>
@@ -45,7 +45,7 @@ export function ProjectSocial({
           <figure
             key={item.image}
             className={cn(
-              "bg-canvas/5 relative aspect-square overflow-hidden",
+              "bg-ink/5 relative aspect-square overflow-hidden",
               odd &&
                 index === social.items.length - 1 &&
                 "col-span-2 aspect-2/1 lg:col-span-1 lg:aspect-square",

@@ -162,7 +162,7 @@ export const lunjaVillage: ProjectCase = {
           {
             title: { fr: "L'eau, d'abord", en: "The water, first" },
             text: {
-              fr: "Le keppel vient de l'Atlantique à cinq minutes. C'est la couleur que le lieu a déjà — la marque n'a eu qu'à cesser de la contredire.",
+              fr: "Le keppel vient de l'Atlantique à cinq minutes. C'est la couleur que le lieu a déjà   la marque n'a eu qu'à cesser de la contredire.",
               en: "Keppel came from the Atlantic five minutes away. It is the colour the place already had; the brand only had to stop contradicting it.",
             },
             colorIndex: 0,
@@ -170,7 +170,7 @@ export const lunjaVillage: ProjectCase = {
           {
             title: { fr: "De la place pour respirer", en: "Space to breathe" },
             text: {
-              fr: "Le céladon adoucit le keppel sans le diluer. Il rend possibles les grandes surfaces — un site, une façade, une page entière.",
+              fr: "Le céladon adoucit le keppel sans le diluer. Il rend possibles les grandes surfaces   un site, une façade, une page entière.",
               en: "Celadon softens keppel without diluting it. It makes the large areas possible: a site, a façade, a whole page.",
             },
             colorIndex: 1,
@@ -187,7 +187,7 @@ export const lunjaVillage: ProjectCase = {
             title: { fr: "Ce qui arrête l'œil", en: "What stops the eye" },
             text: {
               fr: "Le corail est le seul ton qui interrompt. Une date, une session de surf, une place restante : il ne sert qu'à ça.",
-              en: "Coral is the only tone that interrupts. A date, a surf session, a last place left — that is all it is for.",
+              en: "Coral is the only tone that interrupts. A date, a surf session, a last place left   that is all it is for.",
             },
             colorIndex: 3,
           },

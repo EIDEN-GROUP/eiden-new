@@ -40,12 +40,10 @@ export function SystemsOverview() {
   const say = useSay();
   const copy = solutionsCopy.systems;
   const sectionRef = useRef<HTMLElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const bar = barRef.current;
     const section = sectionRef.current;
-    if (!bar || !section) return;
+    if (!section) return;
 
     const panels = section.querySelectorAll<HTMLElement>("[data-system-panel]");
 
@@ -54,11 +52,6 @@ export function SystemsOverview() {
         const node = entry.target as HTMLElement;
         const { height } = node.getBoundingClientRect();
 
-        if (node === bar) {
-          section.style.setProperty("--systems-bar", `${Math.round(height)}px`);
-          continue;
-        }
-
         /* How far this panel hangs below one window, which is what its own
            sticky offset is measured against. Writing it back on the panel
            cannot change the panel's size, so this settles in one pass. */
@@ -66,33 +59,33 @@ export function SystemsOverview() {
       }
     });
 
-    observer.observe(bar);
     panels.forEach((panel) => observer.observe(panel));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={sectionRef} id="systemes" data-nav-tone="dark" className="grain bg-forest-md text-canvas scroll-mt-24">
+    <section ref={sectionRef} id="systemes" data-nav-tone="light" className="grain bg-beige text-ink scroll-mt-24">
       <div className="relative z-2">
-        <div className="container-eiden pt-20 sm:pt-28">
-          <BandLabel number="01" tone="dark">
-            {say(copy.eyebrow)}
-          </BandLabel>
-        </div>
+        {/* The title takes the frame on its own first, centred, and is
+            then left there: it holds the lowest layer of the section, so
+            every panel that follows draws over it as it climbs. Nothing is
+            pinned above the panels any more, which gives each of them a
+            whole window to be read in. */}
+        <div className="bg-beige sticky top-0 z-0 flex min-h-svh flex-col">
+          <div className="container-eiden pt-20 sm:pt-28">
+            <BandLabel number="01" tone="dark">
+              {say(copy.eyebrow)}
+            </BandLabel>
+          </div>
 
-        {/* Pinned only where the panels leave a gap for it. Below `lg` they
-            are pinned to the foot of the frame instead and travel over each
-            other through the whole height of the window, so a bar held at the
-            top would sit on top of every one of them. */}
-        <div ref={barRef} className="bg-forest-md z-30 pt-20 pb-6 sm:pt-28 sm:pb-10 lg:sticky lg:top-0">
-          <div className="container-eiden">
-            <RevealWords as="h2" text={say(copy.title)} delay={0.06} className="text-canvas block text-center text-[clamp(1.75rem,5vw,3.75rem)] uppercase" />
+          <div className="container-eiden flex flex-1 items-center justify-center py-16">
+            <RevealWords as="h2" text={say(copy.title)} delay={0.06} className="text-ink mx-auto block max-w-4xl text-center text-[clamp(1.75rem,5vw,3.75rem)] uppercase" />
           </div>
         </div>
         <div>
           {systems.map((system, index) => (
-            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-forest-md sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden lg:pt-[var(--systems-bar,14rem)]">
-              <div className="container-eiden w-full py-16 lg:py-0">
+            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-beige sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+              <div className="container-eiden w-full py-16 lg:py-12">
                 <SystemFeature system={system} />
               </div>
             </div>

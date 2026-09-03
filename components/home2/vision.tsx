@@ -23,19 +23,7 @@ export function Home2Vision() {
   const { t } = useLanguage();
   const [tab, setTab] = useState(0);
 
-  const tabs = [
-    {
-      label: t.idea.missionLabel,
-      body: t.idea.mission,
-      points: t.idea.missionPoints,
-    },
-    {
-      label: t.idea.visionLabel,
-      body: t.idea.vision,
-      points: t.idea.visionPoints,
-    },
-  ];
-
+  const tabs = t.idea.cards;
   const active = tabs[tab];
 
   return (
@@ -98,7 +86,7 @@ export function Home2Vision() {
               ))}
             </div>
 
-            <div className="bg-ink text-canvas relative -mt-2 rounded-[1.6rem] p-6 shadow-[0_36px_80px_-40px_rgba(10,15,12,0.7)] sm:p-8">
+            <div className="bg-ink text-canvas relative -mt-2 rounded-[1.6rem] p-6 shadow-[0_36px_80px_-40px_rgba(18,38,32,0.7)] sm:p-8">
               <p className="text-canvas/85 text-[1.0625rem] leading-relaxed">
                 {active.body}
               </p>

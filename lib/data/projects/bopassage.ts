@@ -165,7 +165,7 @@ export const bopassage: ProjectCase = {
             title: { fr: "La salle, d'abord", en: "The room, first" },
             text: {
               fr: "Le vert profond ne vient pas d'une palette : il vient des plantes et de la lumière basse du soir. C'est ce que le lieu fait ressentir avant qu'on ait lu quoi que ce soit.",
-              en: "The deep green did not come from a palette. It came from the plants and the low evening light — what the room makes you feel before you have read a word.",
+              en: "The deep green did not come from a palette. It came from the plants and the low evening light   what the room makes you feel before you have read a word.",
             },
             colorIndex: 0,
           },
@@ -189,7 +189,7 @@ export const bopassage: ProjectCase = {
             title: { fr: "L'heure dorée", en: "Golden hour" },
             text: {
               fr: "La nuance claire porte la lumière de fin de journée là où l'or plein serait trop lourd : l'affichage, l'imprimé, les grands aplats.",
-              en: "The lighter tone carries the late light where full gold would sit too heavy — out of home, print, the large flat areas.",
+              en: "The lighter tone carries the late light where full gold would sit too heavy   out of home, print, the large flat areas.",
             },
             colorIndex: 3,
           },

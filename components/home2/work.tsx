@@ -112,7 +112,7 @@ export function Home2Work() {
                     key={entry.slug}
                     className="group w-[16rem] shrink-0 snap-start sm:w-[19rem]"
                   >
-                    <div className="ring-forest/5 relative aspect-4/5 overflow-hidden rounded-[1.4rem] shadow-[0_28px_64px_-38px_rgba(10,15,12,0.5)] ring-1">
+                    <div className="ring-forest/5 relative aspect-4/5 overflow-hidden rounded-[1.4rem] shadow-[0_28px_64px_-38px_rgba(18,38,32,0.5)] ring-1">
                       <Image
                         src={media.image}
                         alt={media.imageAlt}

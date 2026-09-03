@@ -95,7 +95,7 @@ export function Home2Hero() {
               }
               className={cn(
                 "absolute top-0 left-1/2 aspect-square w-[clamp(7rem,15vw,12.5rem)]",
-                "bg-canvas overflow-hidden rounded-[1.4rem] shadow-[0_28px_60px_-30px_rgba(10,15,12,0.55)]",
+                "bg-canvas overflow-hidden rounded-[1.4rem] shadow-[0_28px_60px_-30px_rgba(18,38,32,0.55)]",
                 "ring-forest/5 ring-1",
                 "transition-[translate,rotate] duration-[1100ms] ease-[var(--ease-brand)] motion-reduce:transition-none",
                 open
@@ -125,7 +125,7 @@ export function Home2Hero() {
             style={{ animationDelay: `${1 + index * 0.18}s` }}
             className={cn(
               "absolute z-20 rounded-full px-3.5 py-1.5 text-[0.72rem] font-semibold",
-              "font-display shadow-[0_10px_30px_-12px_rgba(10,15,12,0.6)]",
+              "font-display shadow-[0_10px_30px_-12px_rgba(18,38,32,0.6)]",
               callout.className,
               callout.tone,
               "motion-safe:[animation:eiden-fade-in_0.7s_var(--ease-brand)_both]",

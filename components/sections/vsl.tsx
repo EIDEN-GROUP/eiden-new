@@ -26,7 +26,6 @@ export function Vsl() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const litRef = useRef<HTMLDivElement>(null);
-  const splitRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
   const elapsedRef = useRef<HTMLSpanElement>(null);
   const totalRef = useRef<HTMLSpanElement>(null);
@@ -46,7 +45,6 @@ export function Vsl() {
 
     const paint = () => {
       const { top, height } = track.getBoundingClientRect();
-      // The frame is pinned for `height − viewport`; that span is the growth.
       const travel = height - window.innerHeight;
       const share = travel > 0 ? -top / travel : 1;
       const eased = Math.min(Math.max(share / GROWTH_SHARE, 0), 1);
@@ -55,9 +53,7 @@ export function Vsl() {
       if (value !== painted) {
         painted = value;
         section.style.setProperty("--grow", `${value}`);
-        // Past the halfway point the room is lit, and anything fixed over it
-        // has to be drawn the other way round.
-        const tone = value > 0.55 ? "light" : "dark";
+        const tone = "light";
         if (litRef.current?.dataset.navTone !== tone) {
           litRef.current?.setAttribute("data-nav-tone", tone);
         }
@@ -67,8 +63,6 @@ export function Vsl() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Painted straight away rather than on the next frame: `--grow`
-        // defaults to lit, so one unpainted frame is a flash of white.
         if (entry.isIntersecting) {
           if (!raf) paint();
           return;
@@ -82,48 +76,6 @@ export function Vsl() {
     );
 
     observer.observe(track);
-    return () => {
-      observer.disconnect();
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  useEffect(() => {
-    const split = splitRef.current;
-    if (!split) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let raf = 0;
-    let painted = Number.NaN;
-
-    const paint = () => {
-      const { top, height } = split.getBoundingClientRect();
-      const travel = height - window.innerHeight;
-      const share = travel > 0 ? -top / travel : 1;
-      const value = Math.round(Math.min(Math.max(share, 0), 1) * 500) / 500;
-
-      if (value !== painted) {
-        painted = value;
-        split.style.setProperty("--split", `${value}`);
-      }
-      raf = requestAnimationFrame(paint);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!raf) paint();
-          return;
-        }
-        if (raf) {
-          cancelAnimationFrame(raf);
-          raf = 0;
-        }
-      },
-      { rootMargin: "25% 0px" },
-    );
-
-    observer.observe(split);
     return () => {
       observer.disconnect();
       if (raf) cancelAnimationFrame(raf);
@@ -205,8 +157,8 @@ export function Vsl() {
     >
       <div
         ref={litRef}
-        data-nav-tone="dark"
-        className="grain bg-forest pointer-events-auto relative"
+        data-nav-tone="light"
+        className="grain bg-beige pointer-events-auto relative"
       >
         <span aria-hidden className="vsl-wash" />
         <div ref={trackRef} className="vsl-track relative z-2">
@@ -223,7 +175,7 @@ export function Vsl() {
               </Reveal>
             </div>
             <div className="vsl-stage w-full">
-              <div className="vsl-grow group bg-ink overflow-hidden">
+              <div className="vsl-grow group bg-beige overflow-hidden">
                 <video
                   ref={videoRef}
                   className="size-full object-cover"
@@ -242,7 +194,7 @@ export function Vsl() {
                 <div
                   aria-hidden
                   className={cn(
-                    "pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(10,15,12,0.88),transparent_52%)]",
+                    "pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(18,38,32,0.88),transparent_52%)]",
                     "transition-opacity duration-700",
                     playing ? "opacity-45" : "opacity-100",
                   )}
@@ -364,17 +316,6 @@ export function Vsl() {
               />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div
-        ref={splitRef}
-        aria-hidden
-        className="vsl-split pointer-events-none relative z-2"
-      >
-        <div className="sticky top-0 h-svh overflow-hidden">
-          <span className="vsl-leaf vsl-leaf-top" />
-          <span className="vsl-leaf vsl-leaf-bottom" />
         </div>
       </div>
     </section>

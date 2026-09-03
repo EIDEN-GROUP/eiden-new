@@ -15,6 +15,9 @@ import {
 } from "@/components/layout/film-hero";
 import { Reveal, RevealGroup, RevealWords, SlideIn } from "@/components/ui/reveal";
 import { CaseWall } from "@/components/project/case/wall";
+import { CasePaletteStory } from "@/components/project/case/palette-story";
+import { TONES } from "@/components/project/case/tone";
+import type { PaletteStory } from "@/lib/data/projects/types";
 import { CountUp } from "@/components/ui/count-up";
 import { cn } from "@/lib/utils";
 
@@ -362,6 +365,29 @@ const BRAND = {
   ],
 };
 
+/**
+ * The palette, told rather than listed.
+ *
+ * The card above shows the five colours; this is the run that says what each
+ * one is for   the disk turns, the ground changes under the reader, and one
+ * beat holds per colour. Nothing here is written twice: the colours are the
+ * card’s own, and the beats are the notes already set beside them, which is
+ * why the two can never fall out of step.
+ */
+const PALETTE: PaletteStory = {
+  title: { fr: "Le langage visuel", en: "The visual language" },
+  lead: BRAND.lead,
+  colors: BRAND.colors.map(({ name, hex, role }) => ({ name, hex, role })),
+  /* Which colour each beat turns the room. Written out rather than counted
+     off the beats: here they happen to run one to one, and leaning on that
+     would break the day a sixth beat returns to a colour already used. */
+  states: BRAND.notes.map((note, index) => ({
+    title: note.title,
+    text: note.text,
+    colorIndex: [0, 1, 2, 3, 4][index] ?? 0,
+  })),
+};
+
 const NEXT = [
   {
     slug: "mabrouk",
@@ -391,14 +417,11 @@ export default function LunjaVillagePage() {
   const rail = [say(CATEGORY), say(LOCATION), YEAR].join(" · ");
 
   return (
-    <article
-      className="bg-canvas"
-      style={{ "--case-ground": GROUND } as React.CSSProperties}
-    >
+    <article className="bg-canvas" style={{ "--case-ground": GROUND } as React.CSSProperties}>
       <CaseVeil />
 
       {/* ══ HERO ═══════════════════════════════════════════════════ */}
-      <section ref={heroRef} data-nav-tone="dark" className="hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-black sm:min-h-[74svh]">
+      <section ref={heroRef} data-nav-tone="light" className="hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-beige sm:min-h-[74svh]">
         <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
           <Image
             src={HERO.image}
@@ -410,14 +433,14 @@ export default function LunjaVillagePage() {
           />
         </div>
 
-        <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]"/>
+        <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(244,235,208,1)_16%,rgba(244,235,208,0.94)_44%,rgba(244,235,208,0.86)_100%)]"/>
         <div className="container-eiden relative flex flex-1 flex-col pt-28 pb-10 sm:pt-20 sm:pb-10">
           <Link
             href="/clients"
             transitionTypes={["case-close"]}
             className={cn(
               ENTER,
-              "group text-canvas/50 hover:text-canvas font-label inline-flex w-fit items-center gap-1.5 text-[0.72rem] font-bold tracking-[0.2em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.78rem]",
+              "group text-ink/50 hover:text-ink font-label inline-flex w-fit items-center gap-1.5 text-[0.72rem] font-bold tracking-[0.2em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.78rem]",
             )}
             style={stage(0.02)}
           >
@@ -430,12 +453,12 @@ export default function LunjaVillagePage() {
           </Link>
 
           <div className="mt-10 pt-3">
-            <p className={cn(ENTER, "eyebrow text-gold flex items-center gap-3")} style={stage(0.06)}>
+            <p className={cn(ENTER, "eyebrow text-teal flex items-center gap-3")} style={stage(0.06)}>
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {say({ fr: "Étude de cas", en: "Case study" })}
             </p>
 
-            <h1 className="text-balance-tight text-canvas mt-2 text-[clamp(2.75rem,8vw,6rem)] leading-[0.96] font-extrabold">
+            <h1 className="text-balance-tight text-ink mt-2 text-[clamp(2.75rem,8vw,6rem)] leading-[0.96] font-extrabold">
               {words.map((word, index) => {
                 const rise = stage(HERO_WORD_LEAD + index * HERO_WORD_STEP);
                 const last = index === words.length - 1;
@@ -453,32 +476,32 @@ export default function LunjaVillagePage() {
                 return (
                   <span key={`${word}-${index}`} className="relative inline-block">
                     <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-                      <span className="text-gold inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
+                      <span className="text-[#8a6412] inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
                         {word}
                       </span>
                     </span>
-                    <span aria-hidden className="bg-gold/60 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]" />
+                    <span aria-hidden className="bg-[#8a6412]/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]" />
                   </span>
                 );
               })}
             </h1>
 
-            {/* WHY — the reasoning, out-ranking the description under it. */}
+            {/* WHY   the reasoning, out-ranking the description under it. */}
             <p
               className={cn(
                 ENTER,
-                "editorial text-canvas mt-8 max-w-[34ch] text-[clamp(1.375rem,3vw,2.125rem)]",
+                "editorial text-ink mt-8 max-w-[34ch] text-[clamp(1.375rem,3vw,2.125rem)]",
               )}
               style={stage(0.5)}
             >
               {say(HERO.statement)}
             </p>
 
-            {/* WHAT — one short paragraph, never two. */}
+            {/* WHAT   one short paragraph, never two. */}
             <p
               className={cn(
                 ENTER,
-                "text-canvas/60 mt-6 max-w-[52ch] text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
+                "text-ink/60 mt-6 max-w-[52ch] text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
               )}
               style={stage(0.6)}
             >
@@ -488,7 +511,7 @@ export default function LunjaVillagePage() {
             <p
               className={cn(
                 ENTER,
-                "border-canvas/12 text-canvas/45 mt-9 border-t pt-5 text-[0.8125rem] tracking-[0.02em]",
+                "border-ink/12 text-ink/45 mt-9 border-t pt-5 text-[0.8125rem] tracking-[0.02em]",
               )}
               style={stage(0.78)}
             >
@@ -772,22 +795,14 @@ export default function LunjaVillagePage() {
                 {say({ fr: "La planche de marque", en: "The brand board" })}
               </p>
               <p className="eyebrow text-ink/30 tabular-nums">
-                {BRAND.colors.length} {say({ fr: "couleurs", en: "colours" })} ·{" "}
                 {BRAND.type.length} {say({ fr: "polices", en: "typefaces" })}
               </p>
             </div>
           </Reveal>
 
-          <RevealWords
-            as="h3"
-            amount={0.3}
-            delay={0.05}
-            text={say(BRAND.lead)}
-            className="font-display text-ink mt-7 block max-w-3xl text-[clamp(1.375rem,3vw,2.125rem)] leading-[1.08] font-extrabold tracking-[-0.04em]"
-          />
           <RevealGroup
             amount={0.1}
-            className="bg-ink/12 mt-12 grid gap-px overflow-hidden rounded-[1.25rem] border border-black/10 sm:mt-14 sm:rounded-[1.75rem] lg:grid-cols-12"
+            className="bg-ink/12 mt-8 grid gap-px overflow-hidden rounded-[1.25rem] border border-black/10 sm:mt-10 sm:rounded-[1.75rem] lg:grid-cols-12"
           >
             {/* ── 01 · Identity, full bleed ─────────────────────────
                 The mark carries its own ground inside the picture, so it fills
@@ -806,58 +821,24 @@ export default function LunjaVillagePage() {
                 className="object-contain transition-transform duration-[1200ms] ease-[var(--ease-brand)] group-hover/id:scale-[1.04] motion-reduce:transition-none"
               />
               <span className="eyebrow text-ink/55 absolute top-6 left-7 z-10">
-                01 — {say({ fr: "Identité", en: "Identity" })}
+                01   {say({ fr: "Identité", en: "Identity" })}
               </span>
             </div>
 
             {/* ── 02 · The essence, in the case's own words ────── */}
             <div className="bg-canvas relative p-8 sm:p-10 lg:col-span-7">
               <span className="eyebrow text-ink/35">
-                02 — {say({ fr: "Essence", en: "Essence" })}
+                02   {say({ fr: "Essence", en: "Essence" })}
               </span>
               <p className="editorial text-ink mt-5 max-w-[34ch] text-[clamp(1.125rem,2.1vw,1.5rem)] leading-snug">
                 {say(BRAND.essence)}
               </p>
             </div>
 
-            {/* ── 03 · The colour system. A swatch grows when it is
-                   pointed at, so the hex reads without a legend. ───────── */}
+            {/* ── 03 · The type, named and shown ───────────────── */}
             <div className="bg-canvas relative p-8 sm:p-10 lg:col-span-7">
               <span className="eyebrow text-ink/35">
-                03 — {say({ fr: "Système colorimétrique", en: "Colour system" })}
-              </span>
-
-              <ul className="mt-6 flex flex-col gap-px overflow-hidden rounded-[0.75rem] sm:h-[11rem] sm:flex-row">
-                {BRAND.colors.map((colour) => (
-                  <li
-                    key={colour.hex}
-                    style={{ backgroundColor: colour.hex }}
-                    className={cn(
-                      "flex min-h-[4.5rem] flex-1 flex-col justify-end p-4",
-                      "transition-[flex-grow] duration-500 ease-[var(--ease-brand)] sm:hover:grow-[2.5]",
-                      "motion-reduce:transition-none",
-                      colour.dark ? "text-canvas" : "text-ink",
-                    )}
-                  >
-                    {colour.name ? (
-                      <span className="font-display text-[0.875rem] leading-none font-bold">
-                        {colour.name}
-                      </span>
-                    ) : null}
-                    <span className="font-label mt-1.5 text-[0.7rem] font-bold tracking-[0.14em] uppercase tabular-nums opacity-70">
-                      {colour.hex}
-                    </span>
-                    <span className="font-label mt-0.5 text-[0.65rem] tracking-[0.1em] uppercase opacity-45">
-                      {say(colour.role)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* ── 04 · The type, named and shown ───────────────── */}
-            <div className="bg-canvas relative p-8 sm:p-10 lg:col-span-5">
-              <span className="eyebrow text-ink/35">
-                04 — {say({ fr: "Typographie", en: "Typography" })}
+                03   {say({ fr: "Typographie", en: "Typography" })}
               </span>
 
               <ul className="mt-6 flex flex-col gap-5">
@@ -885,28 +866,12 @@ export default function LunjaVillagePage() {
                 ))}
               </ul>
             </div>
-            {/* ── 05 · Why the colours are what they are ───────── */}
-            <div className="bg-cream/70 relative p-8 sm:p-10 lg:col-span-7">
-              <span className="eyebrow text-ink/35">
-                05 — {say({ fr: "Le langage", en: "The language" })}
-              </span>
-
-              <dl className="mt-6 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-                {BRAND.notes.map((note) => (
-                  <div key={note.title.fr}>
-                    <dt className="font-display text-ink text-[0.9375rem] leading-tight font-bold tracking-[-0.01em]">
-                      {say(note.title)}
-                    </dt>
-                    <dd className="text-ink/55 mt-1.5 text-[0.8125rem] leading-relaxed">
-                      {say(note.text)}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
           </RevealGroup>
         </div>
       </section>
+
+      {/* ══ 01b · THE PALETTE, TOLD ═════════════════ */}
+      <CasePaletteStory story={PALETTE} skin={TONES.canvas} />
 
       {/* ══ 02 · MARKETING ══════════════════════════ */}
       <section id={"chapter-marketing"} data-nav-tone="light" className="bg-cream text-ink relative scroll-mt-24">
@@ -1054,8 +1019,8 @@ export default function LunjaVillagePage() {
 
       {/* ══ THE IMPACT ═════════════════════════════════════════════ */}
       <section
-        data-nav-tone="dark"
-        className="grain text-canvas relative isolate scroll-mt-24 overflow-hidden bg-[var(--case-ground)]"
+        data-nav-tone="light"
+        className="grain text-ink relative isolate scroll-mt-24 overflow-hidden bg-beige"
       >
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <Image
@@ -1066,12 +1031,12 @@ export default function LunjaVillagePage() {
             sizes="100vw"
             className="object-cover object-center opacity-[0.2]"
           />
-          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--case-ground)_75%)]" />
+          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--color-beige)_75%)]" />
         </div>
 
         <div className="container-eiden pt-20 pb-20 sm:pt-24 sm:pb-24 lg:pt-28 lg:pb-28">
           <Reveal direction="none" duration={0.5} amount={0.3}>
-            <p className="eyebrow text-gold flex items-center gap-3">
+            <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {say({ fr: "L'impact", en: "The impact" })}
             </p>
@@ -1084,21 +1049,21 @@ export default function LunjaVillagePage() {
                 amount={0.25}
                 delay={0.05}
                 text={say(IMPACT_TITLE)}
-                className="font-display text-canvas block text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.06] font-extrabold tracking-[-0.045em]"
+                className="font-display text-ink block text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.06] font-extrabold tracking-[-0.045em]"
               />
               <Reveal delay={0.16} amount={0.25}>
-                <p className="text-canvas/60 mt-6 max-w-[44ch] text-[0.9375rem] leading-relaxed">
+                <p className="text-ink/60 mt-6 max-w-[44ch] text-[0.9375rem] leading-relaxed">
                   {say(IMPACT_TEXT)}
                 </p>
               </Reveal>
             </div>
 
             <RevealGroup amount={0.2} className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:grid-cols-1">
-              <div className="border-canvas/12 border-t pt-6 sm:pt-7">
-                <p className="font-display text-canvas text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.85] font-extrabold tracking-[-0.055em]">
+              <div className="border-ink/12 border-t pt-6 sm:pt-7">
+                <p className="font-display text-ink text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.85] font-extrabold tracking-[-0.055em]">
                   <CountUp value={"+38%"} />
                 </p>
-                <p className="text-canvas/55 mt-4 max-w-[26ch] text-[0.9375rem] leading-relaxed">
+                <p className="text-ink/55 mt-4 max-w-[26ch] text-[0.9375rem] leading-relaxed">
                   {say({
                     fr: "Des réservations qui arrivent en connaissant déjà le lieu.",
                     en: "Bookings that arrive already knowing the place.",
@@ -1188,7 +1153,7 @@ export default function LunjaVillagePage() {
               key={project.slug}
               href={`/projects/${project.slug}`}
               transitionTypes={["case-next"]}
-              aria-label={`${project.client} — ${say(project.category)}`}
+              aria-label={`${project.client}   ${say(project.category)}`}
               className="group focus-visible:outline-teal relative block overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-4"
             >
               <div className="bg-ink/[0.05] relative h-[42svh] min-h-[17rem] lg:h-[52svh]">

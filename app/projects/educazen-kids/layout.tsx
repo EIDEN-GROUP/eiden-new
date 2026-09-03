@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * EducazenKids — the case's own title, description and share card.
+ * EducazenKids   the case's own title, description and share card.
  *
  * Held in a layout rather than in the page because the page is a client
  * component: `generateMetadata` is server-only, and the page is where the

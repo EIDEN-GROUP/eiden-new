@@ -105,21 +105,25 @@ export const fr = {
     ],
     shiftLead: "Ce qui change",
     shiftTail: "quand vous travaillez avec nous.",
-    missionLabel: "Mission",
-    mission:
-      "Donner aux entreprises marocaines et africaines une infrastructure digitale solide : des systèmes qui tiennent quand l'activité grandit.",
-    missionPoints: [
-      "Des systèmes que vous possédez, pas des prestations qui s'arrêtent.",
-      "Les chiffres avant les décisions, jamais l'inverse.",
-      "Une base qui tient quand l'activité double.",
-    ],
-    visionLabel: "Vision",
-    vision:
-      "Devenir la référence de l'architecture digitale depuis le Maroc, à travers l'Afrique, et au-delà.",
-    visionPoints: [
-      "Le Maroc comme base, l'Afrique comme terrain.",
-      "L'architecture digitale traitée comme un métier, pas comme un extra.",
-      "Des marques d'ici reconnues bien au-delà d'ici.",
+    cards: [
+      {
+        label: "Ce qui s'arrête",
+        body: "Vous arrêtez de payer des pièces qui ne se parlent pas : le site d'un côté, les réseaux de l'autre, la publicité qui coûte sans qu'on sache ce qu'elle rapporte.",
+        points: [
+          "Plus de prestataire qui repart avec vos accès et votre code.",
+          "Plus de décision prise au ressenti, faute de chiffre à regarder.",
+          "Plus de refonte tous les deux ans parce que la base ne suivait plus.",
+        ],
+      },
+      {
+        label: "Ce qui commence",
+        body: "Vous repartez avec un système qui vous appartient : une marque claire, un site qui convertit, des campagnes mesurées, et de quoi les lire chaque mois.",
+        points: [
+          "Le code, les comptes et les données à votre nom.",
+          "Un chiffre derrière chaque décision, revu tous les mois.",
+          "Une base qui tient quand l'activité double.",
+        ],
+      },
     ],
     stats: [
       { value: "25+", label: "Entreprises accompagnées" },
@@ -137,7 +141,7 @@ export const fr = {
     items: [
       {
         slug: "web",
-        title: "Build",
+        title: "Création web & apps",
         kicker: "La fondation sur laquelle tout le reste tient",
         text: "Sites, e-commerce, applications et plateformes métier. Le code vous appartient. Ce qu'on livre : une infrastructure qui tient quand l'activité double.",
         deliverables: [
@@ -149,9 +153,9 @@ export const fr = {
       },
       {
         slug: "visibilite",
-        title: "Visibilité",
+        title: "SEO, GEO & visibilité IA",
         kicker: "Être trouvé là où se fait la prochaine recherche",
-        text: "SEO technique, GEO, contenu et netlinking — pour être classé dans Google, et dans ChatGPT, Gemini, Perplexity. Ce qu'on livre : devenir la référence de la catégorie, pas juste un résultat dedans.",
+        text: "SEO technique, GEO, contenu et netlinking   pour être classé dans Google, et dans ChatGPT, Gemini, Perplexity. Ce qu'on livre : devenir la référence de la catégorie, pas juste un résultat dedans.",
         deliverables: [
           "SEO technique",
           "Contenu & netlinking",
@@ -161,7 +165,7 @@ export const fr = {
       },
       {
         slug: "media",
-        title: "Acquisition",
+        title: "Performance media & ads",
         kicker: "Acheter du trafic n'est pas construire une acquisition",
         text: "Google Ads, publicité sociale, media buying, génération de leads et CRO. Ce qu'on livre : un tunnel avec de l'attribution, pas un rapport de campagne.",
         deliverables: [
@@ -174,7 +178,7 @@ export const fr = {
       },
       {
         slug: "contenu",
-        title: "Marque",
+        title: "Stratégie, contenu & image",
         kicker: "L'identité qui rend le reste reconnaissable",
         text: "Positionnement, identité, contenu, communauté et e-réputation. Ce qu'on livre : une marque que les gens cherchent par son nom.",
         deliverables: [
@@ -188,9 +192,9 @@ export const fr = {
       },
       {
         slug: "photoVid",
-        title: "Image de marque",
+        title: "Photos & vidéos",
         kicker: "Ce que la marque donne à voir",
-        text: "Photo, vidéo, motion et contenus sociaux — la matière que la marque a besoin de produire pour tenir son rythme. Ce qu'on livre : de quoi alimenter le système sans repartir de zéro chaque mois.",
+        text: "Photo, vidéo, motion et contenus sociaux   la matière que la marque a besoin de produire pour tenir son rythme. Ce qu'on livre : de quoi alimenter le système sans repartir de zéro chaque mois.",
         deliverables: [
           "Shooting photo",
           "Production vidéo",
@@ -263,6 +267,17 @@ export const fr = {
     title: "Le travail parle avant nous.",
     text: "Des marques, des sites et des campagnes livrés pour des entreprises marocaines qui voulaient passer à l'échelle.",
     statsNote: "Chiffres consolidés sur nos missions 2024–2026.",
+    ctaPortfolio: "Portfolio",
+    ctaSolutions: "Solutions",
+    outro: {
+      eyebrow: "La suite",
+      projectsTitle: "Ce n'est qu'une partie du travail.",
+      projectsText:
+        "Marques, sites et campagnes : le reste des projets vous attend dans le portfolio.",
+      solutionsTitle: "Vous voulez la même chose chez vous ?",
+      solutionsText:
+        "Ce que nous savons faire, comment nous le faisons, et ce que vous gardez à la fin.",
+    },
     railTitle: "Le portfolio, en continu.",
     railText:
       "Marques, sites et campagnes livrés pour des entreprises marocaines. Laissez défiler, ou ouvrez le portfolio complet.",
@@ -601,7 +616,7 @@ export const fr = {
       methods: [
         {
           name: "Hydra Analysis™",
-          text: "Le diagnostic. Une lecture à 360° de l'entreprise — marque, présence digitale, opérations, expérience client — chaque pilier noté séparément, avant la moindre recommandation.",
+          text: "Le diagnostic. Une lecture à 360° de l'entreprise   marque, présence digitale, opérations, expérience client   chaque pilier noté séparément, avant la moindre recommandation.",
           quote:
             "Coupez une tête. Deux repoussent. Chaque fracture tient aux autres.",
         },

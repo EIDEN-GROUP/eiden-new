@@ -31,7 +31,7 @@ export function Pricing() {
                 className={cn(
                   "relative flex h-full flex-col rounded-[1.5rem] p-8 transition-[transform,box-shadow] duration-500 ease-[var(--ease-brand)] sm:p-10",
                   featured
-                    ? "grain bg-forest text-canvas shadow-[0_40px_90px_-40px_rgba(18,38,32,0.65)] lg:-my-4 lg:py-14"
+                    ? "grain bg-beige text-ink shadow-[0_40px_90px_-40px_rgba(18,38,32,0.22)] lg:-my-4 lg:py-14"
                     : "border-forest/10 bg-cream text-forest border hover:-translate-y-1.5",
                 )}
               >
@@ -45,7 +45,7 @@ export function Pricing() {
                   <h3
                     className={cn(
                       "font-display text-xl font-bold tracking-[-0.02em]",
-                      featured ? "text-canvas" : "text-forest",
+                      featured ? "text-ink" : "text-forest",
                     )}
                   >
                     {plan.name}
@@ -54,7 +54,7 @@ export function Pricing() {
                   <p
                     className={cn(
                       "font-display mt-6 text-[clamp(1.5rem,3vw,2rem)] leading-none font-extrabold tracking-[-0.04em]",
-                      featured ? "text-gold" : "text-teal",
+                      featured ? "text-[#8a6412]" : "text-teal",
                     )}
                   >
                     {plan.price}
@@ -62,7 +62,7 @@ export function Pricing() {
                   <p
                     className={cn(
                       "mt-2 text-[0.9375rem]",
-                      featured ? "text-canvas/50" : "text-forest/45",
+                      featured ? "text-ink/55" : "text-forest/45",
                     )}
                   >
                     {plan.billing}
@@ -71,7 +71,7 @@ export function Pricing() {
                   <p
                     className={cn(
                       "mt-6 text-[0.9375rem] leading-relaxed",
-                      featured ? "text-canvas/70" : "text-forest/60",
+                      featured ? "text-ink/70" : "text-forest/60",
                     )}
                   >
                     {plan.text}
@@ -85,7 +85,7 @@ export function Pricing() {
                           className={cn(
                             "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full",
                             featured
-                              ? "bg-gold/20 text-gold"
+                              ? "bg-[#8a6412]/15 text-[#8a6412]"
                               : "bg-teal/10 text-teal",
                           )}
                         >
@@ -94,7 +94,7 @@ export function Pricing() {
                         <span
                           className={cn(
                             "text-[0.9375rem] leading-snug",
-                            featured ? "text-canvas/80" : "text-forest/70",
+                            featured ? "text-ink/80" : "text-forest/70",
                           )}
                         >
                           {feature}

@@ -90,15 +90,14 @@ export function Hero() {
     "size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none";
 
   return (
-    <section ref={sectionRef} data-nav-tone="dark" className="hero-depart bg-ink relative isolate flex min-h-svh flex-col overflow-hidden">
+    <section ref={sectionRef} data-nav-tone="light" className="hero-depart lg:p-10 relative isolate flex min-h-svh flex-col overflow-hidden">
       <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
-        <HeroVideo src="/media/eiden-hero.mp4" poster="/media/eiden-hero-poster.jpg" className="object-[50%_62%]" />
+        {/* <HeroVideo src="/media/eiden-hero.mp4" poster="/media/eiden-hero-poster.jpg" className="object-[50%_62%]" /> */}
+        <Image src="/media/hero.png" alt="" fill priority sizes="100vw" className="-z-10 object-cover"/>
       </div>
-
-      {/* Heaviest under the type, lightest where the mark sits. */}
-      <span aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(10,15,12,1)_16%,rgba(10,15,12,0.90)_44%,rgba(10,15,12,0.80)_100%)]" />
+      <span aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-[62%] bg-[linear-gradient(to_top,rgba(244,235,208,0.94)_0%,rgba(244,235,208,0.78)_22%,rgba(244,235,208,0.42)_52%,rgba(244,235,208,0)_100%)]" />
       <div className="relative flex flex-1 flex-col justify-end p-20">
-        <h1 className="text-balance-tight text-canvas pt-24 max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
+        <h1 className="text-balance-tight text-ink pt-24 max-w-4xl text-[50px] leading-[1.02] font-medium sm:text-[100px]">
           {words.map((word, index) => {
             const rise = stage(WORD_LEAD + index * WORD_STEP);
             const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
@@ -126,7 +125,7 @@ export function Hero() {
                     {word.text}
                   </span>
                 </span>
-                <span aria-hidden className="bg-gold/60 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"/>
+                <span aria-hidden className="bg-gold/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"/>
               </span>
             );
           })}
@@ -134,15 +133,15 @@ export function Hero() {
 
         <div className="grid gap-8 pt-3 sm:gap-10 sm:pt-5 md:grid-cols-2 md:gap-16">
           <div className={cn(enter, "min-w-0")} style={stage(0.58)}>
-            <p className="text-canvas/70 max-w-3xl text-[14px] leading-relaxed sm:text-[18px]">
+            <p className="text-ink max-w-3xl text-[14px] leading-relaxed sm:text-[18px]">
               {t.hero.description}
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
-              <Link href="/nos-solutions" className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+              <Link href="/nos-solutions" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
                 {t.common.seeSolutions}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
-              <Link href="/contact" className="group text-canvas/75 hover:text-canvas inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
+              <Link href="/contact" className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
                 {t.common.bookCall}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
@@ -153,10 +152,10 @@ export function Hero() {
             <div className={cn(enter, "flex items-center gap-3 md:justify-end")} style={stage(0.68)} >
               <span className="flex items-center gap-1" aria-hidden>
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <Star key={index} className="fill-mint text-mint size-2.5" strokeWidth={0} />
+                  <Star key={index} className="fill-gold text-gold size-2.5" strokeWidth={0} />
                 ))}
               </span>
-              <p className="text-canvas/60 text-[0.875rem]">{t.hero.trust}</p>
+              <p className="text-ink text-[0.875rem]">{t.hero.trust}</p>
             </div>
 
             {featured ? (
@@ -164,7 +163,7 @@ export function Hero() {
                 href="/projects/lunja-village"
                 className={cn(
                   enter,
-                  "group border-canvas bg-canvas hover:border-canvas/80 hover:bg-canvas/80 mt-5 flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
+                  "group border-ink/10 bg-canvas hover:border-ink/25 mt-5 flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
                 )}
                 style={stage(0.76)}
               >
@@ -193,7 +192,7 @@ export function Hero() {
                   </span>
                 </span>
 
-                <span className="border-canvas/20 text-teal group-hover:bg-canvas group-hover:text-teal flex size-9 shrink-0 items-center justify-center self-end rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
+                <span className="border-teal/30 text-teal group-hover:bg-teal group-hover:text-canvas flex size-9 shrink-0 items-center justify-center self-end rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
                   <ArrowUpRight className="size-4" strokeWidth={1.8} aria-hidden />
                   <span className="sr-only">{t.common.seeAllCases}</span>
                 </span>
@@ -202,11 +201,11 @@ export function Hero() {
           </div>
         </div>
 
-        <div className={cn( enter, "border-canvas/12 mt-8 flex flex-col gap-4 border-t pt-6 sm:mt-10 sm:flex-row sm:items-center sm:gap-10 sm:pt-7" ,)} style={stage(0.78)}>
-          <p className="eyebrow text-canvas/35 shrink-0">{t.hero.clientsLabel}</p>
+        <div className={cn( enter, "border-ink/12 mt-8 flex flex-col gap-4 border-t pt-6 sm:mt-10 sm:flex-row sm:items-center sm:gap-10 sm:pt-7" ,)} style={stage(0.78)}>
+          <p className="eyebrow text-ink shrink-0">{t.hero.clientsLabel}</p>
           <LogoMarquee
             logos={clientLogos}
-            tone="light"
+            tone="dark"
             speed={46}
             className="min-w-0 flex-1"
           />

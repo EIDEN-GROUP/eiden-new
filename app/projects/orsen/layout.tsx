@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * ORSEN — the case's own title, description and share card.
+ * ORSEN   the case's own title, description and share card.
  *
  * Held in a layout rather than in the page because the page is a client
  * component: `generateMetadata` is server-only, and the page is where the

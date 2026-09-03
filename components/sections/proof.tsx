@@ -37,6 +37,23 @@ export function Proof() {
           cue: t.hero.scroll,
           texture: proofTexture,
         }}
+        outro={{
+          eyebrow: t.proof.outro.eyebrow,
+          blocks: [
+            {
+              title: t.proof.outro.projectsTitle,
+              text: t.proof.outro.projectsText,
+              cta: t.proof.ctaPortfolio,
+              href: "/clients",
+            },
+            {
+              title: t.proof.outro.solutionsTitle,
+              text: t.proof.outro.solutionsText,
+              cta: t.proof.ctaSolutions,
+              href: "/nos-solutions",
+            },
+          ],
+        }}
         label={t.hero.featured.badge}
         cta={t.common.seeCase}
       />

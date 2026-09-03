@@ -34,7 +34,7 @@ export type GalleryImage = { image: string; alt: Localized };
 
 /** One colour of a brand palette, as the brand book itself names it. */
 export type PaletteColor = {
-  /** The brand's own name for it — "Forêt", "Keppel", "Magenta". */
+  /** The brand's own name for it   "Forêt", "Keppel", "Magenta". */
   name: string;
   hex: string;
   /** What it does in the system, not what it looks like. */

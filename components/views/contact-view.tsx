@@ -19,9 +19,9 @@ import { cn } from "@/lib/utils";
 type Errors = Partial<Record<"name" | "email" | "message" | "detail", string>>;
 
 const fieldClass =
-  "w-full border-b border-canvas/25 bg-transparent px-0 py-3 text-[0.9375rem] text-canvas " +
-  "placeholder:text-canvas/30 transition-colors duration-300 " +
-  "hover:border-canvas/45 focus:border-gold focus:outline-none focus-visible:outline-none";
+  "w-full border-b border-ink/25 bg-transparent px-0 py-3 text-[0.9375rem] text-ink " +
+  "placeholder:text-ink/30 transition-colors duration-300 " +
+  "hover:border-ink/45 focus:border-teal focus:outline-none focus-visible:outline-none";
 
 export function ContactView() {
   const { t, locale } = useLanguage();
@@ -110,24 +110,24 @@ export function ContactView() {
   const mapLink = `https://www.google.com/maps/search/?api=1&query=${place}`;
 
   return (
-    <div data-nav-tone="dark" className="bg-ink text-canvas">
+    <div data-nav-tone="light" className="bg-canvas text-ink">
       <section className="grain lg:px-24">
         <div className="container-eiden pt-32 pb-14 sm:pt-40 sm:pb-20">
           <Reveal direction="none" duration={0.5}>
-            <p className="eyebrow text-gold flex items-center gap-3">
+            <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
               {page.eyebrow}
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="text-canvas mt-7 max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)]">
+            <h1 className="text-ink mt-7 max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)]">
               {page.title}
             </h1>
           </Reveal>
 
           <Reveal delay={0.12}>
-            <p className="text-canvas/60 mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
+            <p className="text-ink/60 mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
               {page.lead}
             </p>
           </Reveal>
@@ -136,7 +136,7 @@ export function ContactView() {
         <div className="container-eiden pb-20 sm:pb-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.85fr)] lg:items-start lg:gap-16">
             <Reveal>
-              <h2 className="font-label text-canvas/45 text-[0.8rem] font-bold tracking-[0.2em] uppercase">
+              <h2 className="font-label text-ink/45 text-[0.8rem] font-bold tracking-[0.2em] uppercase">
                 {form.title}
               </h2>
 
@@ -207,7 +207,7 @@ export function ContactView() {
                       }
                       className={cn(
                         fieldClass,
-                        "[&_option]:bg-ink [&_option]:text-canvas appearance-none pr-8",
+                        "[&_option]:bg-canvas [&_option]:text-ink appearance-none pr-8",
                       )}
                     >
                       {form.subjects.map((option, index) => (
@@ -219,7 +219,7 @@ export function ContactView() {
                     <ChevronDown
                       aria-hidden
                       strokeWidth={1.8}
-                      className="text-canvas/45 pointer-events-none absolute top-1/2 right-0 size-4 -translate-y-1/2"
+                      className="text-ink/45 pointer-events-none absolute top-1/2 right-0 size-4 -translate-y-1/2"
                     />
                   </div>
                 </Field>
@@ -276,7 +276,7 @@ export function ContactView() {
                   <Button type="submit" variant="light" size="lg">
                     {form.submit}
                   </Button>
-                  <p aria-live="polite" className="text-gold text-[0.9375rem]">
+                  <p aria-live="polite" className="text-teal text-[0.9375rem]">
                     {sent ? form.success : null}
                   </p>
                 </div>
@@ -289,9 +289,9 @@ export function ContactView() {
                 target="_blank"
                 rel="noreferrer noopener"
                 className={cn(
-                  "group border-canvas/15 focus-visible:outline-gold flex flex-col items-center",
+                  "group border-ink/15 focus-visible:outline-teal flex flex-col items-center",
                   "rounded-[1.75rem] border px-8 py-12 text-center transition-colors duration-500 ease-[var(--ease-brand)]",
-                  "hover:bg-canvas hover:border-canvas",
+                  "hover:bg-beige hover:border-ink/30",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-10 sm:py-14",
                 )}
               >
@@ -300,38 +300,38 @@ export function ContactView() {
                   <CalendarClock
                     aria-hidden
                     strokeWidth={1.4}
-                    className="text-canvas group-hover:text-ink size-9 transition-[color,transform] duration-500 ease-[var(--ease-brand)] group-hover:scale-110 motion-reduce:transition-none"
+                    className="text-ink group-hover:text-ink size-9 transition-[color,transform] duration-500 ease-[var(--ease-brand)] group-hover:scale-110 motion-reduce:transition-none"
                   />
                 </span>
 
-                <span className="font-display text-canvas group-hover:text-ink mt-9 text-[clamp(1.25rem,2.4vw,1.65rem)] leading-tight font-extrabold tracking-[-0.02em] uppercase transition-colors duration-500 ease-[var(--ease-brand)]">
+                <span className="font-display text-ink group-hover:text-ink mt-9 text-[clamp(1.25rem,2.4vw,1.65rem)] leading-tight font-extrabold tracking-[-0.02em] uppercase transition-colors duration-500 ease-[var(--ease-brand)]">
                   {book.title}
                 </span>
 
-                <span className="text-canvas/55 group-hover:text-ink/60 mt-4 max-w-xs text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)]">
+                <span className="text-ink/55 group-hover:text-ink/60 mt-4 max-w-xs text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)]">
                   {book.text}
                 </span>
               </a>
 
-              <ul className="divide-canvas/10 border-canvas/10 mt-10 flex flex-wrap justify-between divide-y border-t">
+              <ul className="divide-ink/10 border-ink/10 mt-10 flex flex-wrap justify-between divide-y border-t">
               {details.map((detail) => (
                 <li key={detail.label} className="flex items-start gap-4 py-5">
                   <detail.icon
-                    className="text-gold mt-1 size-4 shrink-0"
+                    className="text-teal mt-1 size-4 shrink-0"
                     strokeWidth={1.8}
                     aria-hidden
                   />
                   <div className="min-w-0">
-                    <p className="eyebrow text-canvas/35">{detail.label}</p>
+                    <p className="eyebrow text-ink/35">{detail.label}</p>
                     {detail.href ? (
                       <a
                         href={detail.href}
-                        className="text-canvas hover:text-gold mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
+                        className="text-ink hover:text-teal mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
                       >
                         {detail.value}
                       </a>
                     ) : (
-                      <p className="text-canvas/75 mt-2 text-[0.9375rem] leading-relaxed">
+                      <p className="text-ink/75 mt-2 text-[0.9375rem] leading-relaxed">
                         {detail.value}
                       </p>
                     )}
@@ -346,21 +346,21 @@ export function ContactView() {
 
       <section aria-labelledby="contact-map-label">
         <div className="container-eiden flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pb-6">
-          <p id="contact-map-label" className="eyebrow text-canvas/35">
+          <p id="contact-map-label" className="eyebrow text-ink/35">
             {map.label}
           </p>
           <a
             href={mapLink}
             target="_blank"
             rel="noreferrer noopener"
-            className="font-label text-canvas/70 hover:text-gold inline-flex items-center gap-2 text-[0.8rem] font-bold tracking-[0.16em] uppercase transition-colors duration-300"
+            className="font-label text-ink/70 hover:text-teal inline-flex items-center gap-2 text-[0.8rem] font-bold tracking-[0.16em] uppercase transition-colors duration-300"
           >
             {map.action}
             <ArrowUpRight className="size-3.5" strokeWidth={2} aria-hidden />
           </a>
         </div>
 
-        <div className="border-canvas/10 relative h-[68svh] max-h-[46rem] min-h-[22rem] w-full border-y sm:h-[76svh]">
+        <div className="border-ink/10 relative h-[68svh] max-h-[46rem] min-h-[22rem] w-full border-y sm:h-[76svh]">
           <iframe
             title={map.frameTitle}
             src={mapEmbed}
@@ -417,11 +417,11 @@ function Field({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-label text-canvas/45 text-[0.8rem] font-bold tracking-[0.16em] uppercase"
+        className="font-label text-ink/45 text-[0.8rem] font-bold tracking-[0.16em] uppercase"
       >
         {label}
         {required ? (
-          <span aria-hidden className="text-gold ml-1">
+          <span aria-hidden className="text-teal ml-1">
             *
           </span>
         ) : null}

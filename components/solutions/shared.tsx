@@ -24,9 +24,9 @@ export function Band({
 }) {
   return (
     <section
-      data-nav-tone={tone === "dark" ? "dark" : undefined}
+      data-nav-tone="light"
       className={cn(
-        tone === "dark" && "grain bg-ink text-canvas",
+        tone === "dark" && "grain bg-beige text-ink",
         "py-20",
         className,
       )}
@@ -50,19 +50,19 @@ export function BandLabel({
       <div
         className={cn(
           "flex items-baseline gap-4 border-t pt-5",
-          tone === "dark" ? "border-canvas/15" : "border-ink/15",
+          tone === "dark" ? "border-ink/20" : "border-ink/15",
         )}
       >
         <span
           className={cn(
             "eyebrow tabular-nums",
-            tone === "dark" ? "text-canvas/35" : "text-ink/35",
+            tone === "dark" ? "text-ink/40" : "text-ink/35",
           )}
         >
           {number}
         </span>
         <span
-          className={cn("eyebrow", tone === "dark" ? "text-canvas" : "text-ink")}
+          className={cn("eyebrow", "text-ink")}
         >
           {children}
         </span>
@@ -87,7 +87,7 @@ export function SystemScreenshot({
   return (
     <div
       className={cn(
-        "border-ink/12 bg-cream overflow-hidden rounded-xl border shadow-[0_40px_80px_-60px_rgba(10,15,12,0.55)]",
+        "border-ink/12 bg-cream overflow-hidden rounded-xl border shadow-[0_40px_80px_-60px_rgba(18,38,32,0.55)]",
         className,
       )}
     >
@@ -118,7 +118,7 @@ export function SystemScreenshot({
           href={url}
           target="_blank"
           rel="noreferrer noopener"
-          className="group bg-cream hover:bg-beige flex aspect-16/10 w-full flex-col items-center justify-center gap-4 transition-colors duration-500"
+          className="group bg-beige hover:bg-canvas flex aspect-16/10 w-full flex-col items-center justify-center gap-4 transition-colors duration-500"
         >
           <span className="border-ink/20 text-ink group-hover:bg-ink group-hover:text-canvas flex size-14 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
             <ArrowUpRight className="size-5" strokeWidth={1.6} aria-hidden />

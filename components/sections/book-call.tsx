@@ -27,7 +27,7 @@ export function BookCall() {
           {/* Same drawn field as the hero, tuned for a light surface */}
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute -top-[16rem] -right-[10rem] size-[34rem] rounded-full bg-[radial-gradient(circle,rgba(12,87,82,0.18),transparent_66%)] blur-3xl motion-safe:[animation:eiden-orb_32s_ease-in-out_infinite]" />
-            <div className="absolute -bottom-[18rem] -left-[12rem] size-[30rem] rounded-full bg-[radial-gradient(circle,rgba(212,175,88,0.28),transparent_68%)] blur-3xl motion-safe:[animation:eiden-orb_40s_ease-in-out_infinite_reverse]" />
+            <div className="absolute -bottom-[18rem] -left-[12rem] size-[30rem] rounded-full bg-[radial-gradient(circle,rgba(218,165,32,0.28),transparent_68%)] blur-3xl motion-safe:[animation:eiden-orb_40s_ease-in-out_infinite_reverse]" />
             <div className="zellige text-forest absolute inset-0 [mask-image:radial-gradient(85%_75%_at_20%_10%,black,transparent)] opacity-70" />
           </div>
 

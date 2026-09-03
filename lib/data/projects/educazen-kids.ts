@@ -123,8 +123,8 @@ export const educazenKids: ProjectCase = {
       palette: {
         title: { fr: "Le langage visuel", en: "The visual language" },
         lead: {
-          fr: "Quatre couleurs, quatre promesses — une par pièce du cœur-puzzle.",
-          en: "Four colours, four promises — one for each piece of the puzzle heart.",
+          fr: "Quatre couleurs, quatre promesses   une par pièce du cœur-puzzle.",
+          en: "Four colours, four promises   one for each piece of the puzzle heart.",
         },
         colors: [
           {
@@ -167,8 +167,8 @@ export const educazenKids: ProjectCase = {
           {
             title: { fr: "Le zen du nom", en: "The zen in the name" },
             text: {
-              fr: "Le teal est l'équilibre — littéralement le « zen » d'EducazenKids. Il calme ce que le magenta a d'intense et rend l'ensemble tenable au quotidien.",
-              en: "Teal is the balance — literally the “zen” in EducazenKids. It settles what magenta makes intense and keeps the set liveable day to day.",
+              fr: "Le teal est l'équilibre   littéralement le « zen » d'EducazenKids. Il calme ce que le magenta a d'intense et rend l'ensemble tenable au quotidien.",
+              en: "Teal is the balance   literally the “zen” in EducazenKids. It settles what magenta makes intense and keeps the set liveable day to day.",
             },
             colorIndex: 2,
           },
@@ -176,7 +176,7 @@ export const educazenKids: ProjectCase = {
             title: { fr: "Le potentiel", en: "The potential" },
             text: {
               fr: "L'or, c'est la lumière et l'optimisme : le progrès d'un enfant, célébré. Il n'apparaît jamais en fond, seulement là où il y a quelque chose à saluer.",
-              en: "Gold is light and optimism — a child's progress, marked. It never becomes a ground, only an accent where there is something to acknowledge.",
+              en: "Gold is light and optimism   a child's progress, marked. It never becomes a ground, only an accent where there is something to acknowledge.",
             },
             colorIndex: 3,
           },

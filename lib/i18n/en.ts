@@ -100,21 +100,25 @@ export const en: Dictionary = {
     ],
     shiftLead: "What changes",
     shiftTail: "when you work with us.",
-    missionLabel: "Mission",
-    mission:
-      "Give Moroccan and African businesses solid digital infrastructure: systems that hold up as the business grows.",
-    missionPoints: [
-      "Systems you own, not retainers that stop when we do.",
-      "Numbers before decisions, never the other way round.",
-      "A base that holds when the business doubles.",
-    ],
-    visionLabel: "Vision",
-    vision:
-      "To become the reference in digital architecture   from Morocco, across Africa, and beyond.",
-    visionPoints: [
-      "Morocco as the base, Africa as the ground.",
-      "Digital architecture treated as a discipline, not an extra.",
-      "Brands from here, recognised well beyond here.",
+    cards: [
+      {
+        label: "What stops",
+        body: "You stop paying for parts that never speak to each other: the website on one side, social on another, advertising that costs without anyone knowing what it returns.",
+        points: [
+          "No more agency leaving with your logins and your code.",
+          "No more decisions taken on instinct, for want of a number to look at.",
+          "No more rebuild every two years because the base stopped keeping up.",
+        ],
+      },
+      {
+        label: "What starts",
+        body: "You end up with a system that is yours: a clear brand, a site that converts, campaigns that are measured, and the means to read them every month.",
+        points: [
+          "The code, the accounts and the data in your name.",
+          "A number behind every decision, reviewed every month.",
+          "A base that holds when the business doubles.",
+        ],
+      },
     ],
     stats: [
       { value: "25+", label: "Businesses supported" },
@@ -132,7 +136,7 @@ export const en: Dictionary = {
     items: [
       {
         slug: "web",
-        title: "Build",
+        title: "Web & app creation",
         kicker: "The foundation everything else stands on",
         text: "Websites, e-commerce, applications and internal platforms. The codebase is yours outright. Outcome: infrastructure that holds when the business doubles.",
         deliverables: [
@@ -144,9 +148,9 @@ export const en: Dictionary = {
       },
       {
         slug: "visibilite",
-        title: "Visibility",
+        title: "SEO, GEO & AI visibility",
         kicker: "Being found where the next search actually happens",
-        text: "Technical SEO, GEO, content and netlinking — ranking in Google, and in ChatGPT, Gemini, Perplexity. Outcome: becoming the reference in the category, not just a result in it.",
+        text: "Technical SEO, GEO, content and netlinking   ranking in Google, and in ChatGPT, Gemini, Perplexity. Outcome: becoming the reference in the category, not just a result in it.",
         deliverables: [
           "Technical SEO",
           "Content & link building",
@@ -156,7 +160,7 @@ export const en: Dictionary = {
       },
       {
         slug: "media",
-        title: "Acquisition",
+        title: "Performance media & ads",
         kicker: "Buying traffic is not the same as building acquisition",
         text: "Google Ads, social advertising, media buying, lead generation and CRO. Outcome: a funnel with attribution, not just a campaign report.",
         deliverables: [
@@ -169,7 +173,7 @@ export const en: Dictionary = {
       },
       {
         slug: "contenu",
-        title: "Brand",
+        title: "Strategy, content & image",
         kicker: "The identity that makes the rest recognizable",
         text: "Positioning, identity, content, community and e-reputation. Outcome: a brand people search for by name.",
         deliverables: [
@@ -183,9 +187,9 @@ export const en: Dictionary = {
       },
       {
         slug: "photoVid",
-        title: "Brand imagery",
+        title: "Photos & videos",
         kicker: "What the brand actually gives people to look at",
-        text: "Photo, video, motion and social content — the material a brand has to produce to hold its rhythm. Outcome: enough to feed the system without starting from nothing every month.",
+        text: "Photo, video, motion and social content   the material a brand has to produce to hold its rhythm. Outcome: enough to feed the system without starting from nothing every month.",
         deliverables: [
           "Photography shoots",
           "Video production",
@@ -258,6 +262,16 @@ export const en: Dictionary = {
     title: "The work speaks before we do.",
     text: "Brands, websites and campaigns delivered for Moroccan businesses that wanted to scale.",
     statsNote: "Consolidated figures across our 2024–2026 engagements.",
+    ctaPortfolio: "Portfolio",
+    ctaSolutions: "Solutions",
+    outro: {
+      eyebrow: "What next",
+      projectsTitle: "This is only part of the work.",
+      projectsText:
+        "Brands, sites and campaigns: the rest of the projects are waiting in the portfolio.",
+      solutionsTitle: "Want the same for your business?",
+      solutionsText: "What we do, how we do it, and what stays yours at the end.",
+    },
     railTitle: "The portfolio, on a loop.",
     railText:
       "Brands, sites and campaigns delivered for Moroccan businesses. Let it run, or open the full portfolio.",
@@ -594,7 +608,7 @@ export const en: Dictionary = {
       methods: [
         {
           name: "Hydra Analysis™",
-          text: "The diagnosis. A 360° read of the business — brand, digital presence, operations, customer experience — every pillar scored on its own, before a single recommendation.",
+          text: "The diagnosis. A 360° read of the business   brand, digital presence, operations, customer experience   every pillar scored on its own, before a single recommendation.",
           quote:
             "Cut one head. Two more appear. Every fracture holds to the others.",
         },

@@ -176,7 +176,7 @@ export const dmcMorocco: ProjectCase = {
           {
             title: { fr: "Trente ans, sans le dire", en: "Thirty years, unsaid" },
             text: {
-              fr: "L'or n'est pas décoratif ici. Il signale l'expérience à un public qui achète précisément ça — et il reste rare, sinon il ne signale plus rien.",
+              fr: "L'or n'est pas décoratif ici. Il signale l'expérience à un public qui achète précisément ça   et il reste rare, sinon il ne signale plus rien.",
               en: "The gold is not decoration. It signals experience to an audience buying exactly that, and it stays rare, because a signal used everywhere stops signalling.",
             },
             colorIndex: 1,
@@ -185,7 +185,7 @@ export const dmcMorocco: ProjectCase = {
             title: { fr: "Le repos de l'œil", en: "Where the eye rests" },
             text: {
               fr: "Le sable tient les documents longs : dossiers, présentations, propositions. Un B2B se lit assis, et il faut que ça reste lisible page après page.",
-              en: "Sand carries the long documents — decks, proposals, dossiers. B2B gets read sitting down, and it has to stay readable page after page.",
+              en: "Sand carries the long documents   decks, proposals, dossiers. B2B gets read sitting down, and it has to stay readable page after page.",
             },
             colorIndex: 2,
           },
@@ -193,7 +193,7 @@ export const dmcMorocco: ProjectCase = {
             title: { fr: "Ce qui se lit", en: "What gets read" },
             text: {
               fr: "L'encre garde la lisibilité là où le vert ne suffit pas. Elle n'est jamais la marque : elle est ce qui permet de la lire.",
-              en: "Ink holds legibility where the green cannot. It is never the brand itself — it is what lets the brand be read.",
+              en: "Ink holds legibility where the green cannot. It is never the brand itself   it is what lets the brand be read.",
             },
             colorIndex: 3,
           },

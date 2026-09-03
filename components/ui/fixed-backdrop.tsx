@@ -8,10 +8,12 @@ export function FixedBackdrop({
   src,
   sizes = "100vw",
   className,
+  imageClassName,
 }: {
   src: string;
   sizes?: string;
   className?: string;
+  imageClassName?: string;
 }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
@@ -59,7 +61,7 @@ export function FixedBackdrop({
   return (
     <div ref={frameRef} aria-hidden className={cn("absolute inset-0 -z-10 overflow-hidden", className)}>
       <div ref={layerRef} className="absolute inset-x-0 top-0 h-lvh will-change-transform motion-reduce:h-full motion-reduce:will-change-auto">
-        <Image src={src} alt="" fill sizes={sizes} className="object-cover" />
+        <Image src={src} alt="" fill sizes={sizes} className={cn("object-cover", imageClassName)} />
       </div>
     </div>
   );

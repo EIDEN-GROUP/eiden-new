@@ -28,11 +28,11 @@ export function SolutionsHero() {
       titleTail={say(copy.titleTail)}
       lead={say(copy.lead)}
       image="/media/architecture-1.jpg"
-      imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
+      imageClassName="scale-110 object-cover object-center opacity-40 blur-[6px]"
     >
       <a
         href="#systemes"
-        className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+        className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
       >
         {say(copy.cta)}
         <ArrowDown

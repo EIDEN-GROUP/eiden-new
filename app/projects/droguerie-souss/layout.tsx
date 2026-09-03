@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 /**
- * Souss Droguerie — the case's own title, description and share card.
+ * Souss Droguerie   the case's own title, description and share card.
  *
  * Held in a layout rather than in the page because the page is a client
  * component: `generateMetadata` is server-only, and the page is where the

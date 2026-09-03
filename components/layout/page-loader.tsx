@@ -103,7 +103,7 @@ export function PageLoader() {
       {/* The ground, already covering the frame and first to leave it. */}
       <div
         className={cn(
-          "bg-ink absolute inset-0 flex items-center justify-center",
+          "bg-beige absolute inset-0 flex items-center justify-center",
           sweeping &&
             "motion-safe:[animation:eiden-curtain-out_0.8s_var(--ease-brand)_both]",
         )}
@@ -111,19 +111,19 @@ export function PageLoader() {
         <span className="relative grid h-9 sm:h-12">
           {/* The mark at rest, and the same mark lit   one on top of the
               other, with the clip opening the lit copy left to right. */}
-          <Wordmark className="text-canvas/20 col-start-1 row-start-1 h-full" />
+          <Wordmark className="text-ink/15 col-start-1 row-start-1 h-full" />
           <span
             className="col-start-1 row-start-1 motion-safe:[animation:eiden-mark-fill_var(--fill)]"
             style={{ "--fill": fill } as React.CSSProperties}
           >
-            <Wordmark className="text-canvas h-full" />
+            <Wordmark className="text-ink h-full" />
           </span>
 
           {/* The block riding the edge of the fill, and left standing just
               past the mark when it lands. */}
           <span
             aria-hidden
-            className="bg-gold absolute top-0 h-full motion-safe:[animation:eiden-mark-head_var(--fill)]"
+            className="bg-[#8a6412] absolute top-0 h-full motion-safe:[animation:eiden-mark-head_var(--fill)]"
             style={{ aspectRatio: 0.55, "--fill": fill } as React.CSSProperties}
           />
         </span>

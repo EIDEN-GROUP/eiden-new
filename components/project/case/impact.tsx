@@ -71,7 +71,7 @@ export function CaseImpact({
           {impact.metric ? (
             <Reveal delay={0.22} amount={0.25}>
               <div className={cn("border-t pt-6", skin.rule)}>
-                <p className="font-display text-gold text-[clamp(3.25rem,9vw,6rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
+                <p className="font-display text-teal text-[clamp(3.25rem,9vw,6rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
                   {impact.metric}
                 </p>
               </div>

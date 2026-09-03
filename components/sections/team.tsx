@@ -11,7 +11,7 @@ const accents = [
   "from-gold/70 to-gold/25 text-forest",
   "from-teal-lt/70 to-teal-lt/25 text-canvas",
   "from-gold-dk/70 to-gold-dk/25 text-canvas",
-  "from-mint/70 to-mint/25 text-forest",
+  "from-beige/80 to-beige/30 text-forest",
 ];
 
 function Member({
@@ -26,7 +26,7 @@ function Member({
   accent: string;
 }) {
   return (
-    <Link href="/a-propos#equipe" aria-label={`${name} | ${role}`} className="group focus-visible:outline-gold relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2" >
+    <Link href="/a-propos#equipe" aria-label={`${name} | ${role}`} className="group focus-visible:outline-teal relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2" >
       <div
         aria-hidden
         className={cn(
@@ -46,7 +46,7 @@ function Member({
       <div
         aria-hidden
         className={cn(
-          "absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(8,13,11,0.88),transparent)]",
+          "absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(18,38,32,0.88),transparent)]",
           "opacity-0 transition-opacity duration-500 ease-[var(--ease-brand)]",
           "group-focus-within:opacity-100 group-hover:opacity-100",
           "motion-reduce:transition-none",
@@ -76,7 +76,7 @@ export function Team() {
   const founder = t.team.founder;
 
   return (
-    <section id="equipe" className="grain bg-ink text-canvas py-24 sm:py-32">
+    <section id="equipe" className="grain bg-canvas text-ink py-24 sm:py-32">
       <div className="container-eiden">
         <RevealWords
           as="h2"
@@ -87,19 +87,19 @@ export function Team() {
 
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <Reveal delay={0.5}>
-            <p className="text-canvas/55 max-w-xl text-base leading-relaxed">
+            <p className="text-ink/55 max-w-xl text-base leading-relaxed">
               {t.team.text}
             </p>
           </Reveal>
           <Reveal delay={0.58} direction="left">
-            <p className="editorial text-canvas/35 max-w-xs text-base lg:text-right">
+            <p className="editorial text-ink/45 max-w-xs text-base lg:text-right">
               {t.team.note}
             </p>
           </Reveal>
         </div>
 
         <Reveal delay={0.12} duration={0.9} className="mt-16">
-          <Link href="/a-propos#equipe" aria-label={`${founder.name}   ${founder.role}`} className="group border-canvas/10 focus-visible:outline-gold grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
+          <Link href="/a-propos#equipe" aria-label={`${founder.name}   ${founder.role}`} className="group border-ink/10 focus-visible:outline-teal grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
             <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-[26rem]">
               <Image
                 src="/work/CEO.png"
@@ -111,11 +111,11 @@ export function Team() {
             </div>
 
             <div className="flex flex-col justify-center gap-5 p-7 sm:p-10">
-              <p className="eyebrow text-gold">{founder.role}</p>
-              <p className="font-display text-canvas text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.05] font-medium tracking-[-0.03em]">
+              <p className="eyebrow text-teal">{founder.role}</p>
+              <p className="font-display text-ink text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.05] font-medium tracking-[-0.03em]">
                 {founder.name}
               </p>
-              <p className="text-canvas/60 max-w-xl text-[0.9375rem] leading-relaxed">
+              <p className="text-ink/60 max-w-xl text-[0.9375rem] leading-relaxed">
                 {founder.text}
               </p>
             </div>

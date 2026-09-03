@@ -183,7 +183,7 @@ export const medicalBay: ProjectCase = {
           {
             title: { fr: "Ce qui doit être lu", en: "What has to be read" },
             text: {
-              fr: "L'encre est réservée à l'information dont dépend un rendez-vous. Elle n'est jamais décorative — dans une clinique, la lisibilité est une question de confiance.",
+              fr: "L'encre est réservée à l'information dont dépend un rendez-vous. Elle n'est jamais décorative   dans une clinique, la lisibilité est une question de confiance.",
               en: "Ink is kept for the information an appointment depends on. It is never decorative: in a clinic, legibility is a question of trust.",
             },
             colorIndex: 3,

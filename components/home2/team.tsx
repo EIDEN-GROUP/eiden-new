@@ -53,7 +53,7 @@ export function Home2Team() {
               lands on him before it reads the rest of the grid. */}
           <Link
             href="/a-propos#equipe"
-            className="group bg-ink text-canvas flex flex-col justify-between rounded-[1.6rem] p-7 shadow-[0_30px_70px_-38px_rgba(10,15,12,0.6)] transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none sm:col-span-2"
+            className="group bg-ink text-canvas flex flex-col justify-between rounded-[1.6rem] p-7 shadow-[0_30px_70px_-38px_rgba(18,38,32,0.6)] transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none sm:col-span-2"
           >
             <span className="font-display text-canvas/15 text-[clamp(3rem,7vw,5.5rem)] leading-none font-extrabold tracking-[-0.05em]">
               {t.team.founder.initials}
@@ -78,7 +78,7 @@ export function Home2Team() {
               aria-label={`${member.name}   ${member.role}`}
               className={cn(
                 "group flex flex-col justify-between rounded-[1.6rem] p-6",
-                "shadow-[0_28px_64px_-40px_rgba(10,15,12,0.45)]",
+                "shadow-[0_28px_64px_-40px_rgba(18,38,32,0.45)]",
                 "transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none",
                 tints[index % tints.length],
               )}

@@ -17,12 +17,12 @@ export function ProjectIdea({ idea }: { idea: ProjectPage["idea"] }) {
   const say = useLocalized();
 
   return (
-    <section data-nav-tone="dark" className="grain bg-ink text-canvas">
+    <section data-nav-tone="light" className="grain bg-beige text-ink">
       <div className="container-eiden py-20 sm:py-28">
         <Reveal direction="none" duration={0.5}>
-          <div className="border-canvas/15 flex items-baseline gap-4 border-t pt-5">
-            <span className="eyebrow text-canvas/35 tabular-nums">03</span>
-            <span className="eyebrow text-canvas">The idea</span>
+          <div className="border-ink/15 flex items-baseline gap-4 border-t pt-5">
+            <span className="eyebrow text-ink/35 tabular-nums">03</span>
+            <span className="eyebrow text-ink">The idea</span>
           </div>
         </Reveal>
 
@@ -30,11 +30,11 @@ export function ProjectIdea({ idea }: { idea: ProjectPage["idea"] }) {
           as="p"
           text={say(idea.statement)}
           delay={0.06}
-          className="font-display text-canvas mt-12 block max-w-5xl text-[clamp(1.875rem,5vw,4rem)] leading-[1.05] font-medium tracking-[-0.03em]"
+          className="font-display text-ink mt-12 block max-w-5xl text-[clamp(1.875rem,5vw,4rem)] leading-[1.05] font-medium tracking-[-0.03em]"
         />
 
         <Reveal delay={0.3}>
-          <p className="text-canvas/55 mt-10 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
+          <p className="text-ink/55 mt-10 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
             {say(idea.text)}
           </p>
         </Reveal>

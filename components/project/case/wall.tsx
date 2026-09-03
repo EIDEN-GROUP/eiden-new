@@ -326,7 +326,7 @@ export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin 
           >
             <span
               ref={barRef}
-              className="bg-gold block h-full w-full origin-left transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
+              className="bg-teal block h-full w-full origin-left transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
               style={{ transform: `scaleX(${1 / total})` }}
             />
           </span>

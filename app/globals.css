@@ -1,27 +1,23 @@
 @import "tailwindcss";
-
-/* ============================================================
-   EIDEN GROUP   Design tokens
-   Palette & typography from the EIDEN Brand Identity System v2.0
-   ============================================================ */
 @theme {
   /* Surfaces */
-  --color-canvas: #fefdfb;
-  --color-cream: #f8f3e8;
+  --color-canvas: #FEFDFB;
+  --color-cream: #FEFDFB;
   --color-beige: #f4ebd0;
-  --color-beige-dk: #e8dcc8;
+  --color-beige-dk: #e3d3a8;
 
   /* Ink & dark surfaces */
-  --color-ink: #0a0f0c;
+  --color-ink: #122620;
   --color-forest: #122620;
-  --color-forest-md: #0e1b17;
+  --color-forest-md: #0c5752;
 
   /* Brand accents */
-  --color-teal: #0c5752;
-  --color-teal-lt: #0e7a73;
-  --color-gold: #cfc292;
-  --color-gold-dk: #b8a876;
-  --color-mint: #34d399;
+  --color-teal: #0e7a73;
+  --color-teal-dk: #0c5752;
+  --color-teal-lt: #14a79b;
+  --color-gold: #daa520;
+  --color-gold-dk: #b8860b;
+  --color-mint: #14a79b;
 
   /* Typography   five voices, five roles */
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
@@ -36,9 +32,6 @@
   --spacing-gutter: 1.5rem;
 }
 
-/* ============================================================
-   Base
-   ============================================================ */
 @layer base {
   * {
     border-color: color-mix(in oklab, var(--color-forest) 10%, transparent);
@@ -80,7 +73,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-teal-lt);
+    outline: 2px solid var(--color-teal);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -107,12 +100,7 @@
 @utility container-eiden {
   width: 100%;
   margin-inline: auto;
-  /* The page measure. Every section of every page is drawn on it, so the site
-     reads as one column of work on a laptop and stops stretching to the edges
-     of a wide desktop. Written as a token so a full-bleed exception   a rail
-     that has to run off the screen   can widen it locally rather than opting
-     out of the container altogether. */
-  max-width: var(--page-measure, 80rem);
+  max-width: var(--page-measure, 90rem);
   padding-inline: 1.25rem;
 
   @media (width >= 48rem) {
@@ -123,8 +111,6 @@
   }
 }
 
-/* The same measure, for anything laid beside the container rather than inside
-   it   a fixed bar, an absolutely positioned overlay. */
 @utility page-measure {
   width: 100%;
   margin-inline: auto;
@@ -383,7 +369,7 @@
     inset: 0;
     z-index: 3;
     pointer-events: none;
-    background: var(--color-ink);
+    background: var(--color-beige);
     transform: translateY(0);
     transition: transform 1.15s var(--ease-brand);
   }
@@ -648,7 +634,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: var(--color-ink);
+  background: var(--color-beige);
   opacity: calc(var(--dim, 0) * var(--dim, 0) * (3 - 2 * var(--dim, 0)));
 }
 
@@ -657,7 +643,7 @@
 .idea-lit {
   color: color-mix(
     in oklab,
-    var(--color-canvas) calc(var(--dim, 0) * 100%),
+    var(--color-teal) calc(var(--dim, 0) * 100%),
     var(--color-forest)
   );
 }
@@ -681,23 +667,23 @@
 }
 
 @media (width >= 64rem) {
-  .idea-card-mission {
+  .idea-card-first {
     transform: translate3d(
-        calc(var(--mission-x, 0) * (50% + var(--idea-gap) / 2)),
+        calc(var(--first-x, 0) * (50% + var(--idea-gap) / 2)),
         0,
         0
       )
-      scale(calc(0.94 + var(--mission-in, 1) * 0.06));
-    opacity: var(--mission-in, 1);
+      scale(calc(0.94 + var(--first-in, 1) * 0.06));
+    opacity: var(--first-in, 1);
   }
 
-  .idea-card-vision {
+  .idea-card-second {
     transform: translate3d(
-      calc(var(--vision-x, 0) * (100% + var(--idea-gap))),
+      calc(var(--second-x, 0) * (100% + var(--idea-gap))),
       0,
       0
     );
-    opacity: var(--vision-in, 1);
+    opacity: var(--second-in, 1);
   }
 }
 
@@ -707,11 +693,57 @@
   }
 
   .idea-card,
-  .idea-card-mission,
-  .idea-card-vision {
+  .idea-card-first,
+  .idea-card-second {
     transform: none;
     opacity: 1;
   }
+}
+
+/* ============================================================
+   Site bar   two capsules that arrive as one
+
+   At rest the white is only around the mark and the routes;
+   contact keeps to itself at the far edge of the window. Once
+   the page has moved, the shell narrows and takes the white
+   over, closing around contact so the three read as a single
+   pill. Widths and heights travel for the whole of it, but the
+   white is handed between the two surfaces late and quickly:
+   a shell that faded in from the start would flash a bar the
+   width of the window across the hero on its way in. Going the
+   other way there is nothing to hide, so the handover is
+   immediate and the capsule is white again before the shell
+   has finished opening out.
+   ============================================================ */
+.nav-shell {
+  transition:
+    max-width 0.7s var(--ease-brand),
+    height 0.7s var(--ease-brand),
+    background-color 0.26s var(--ease-brand),
+    box-shadow 0.26s var(--ease-brand);
+}
+
+/* Both capsules   the white one and contact   lose their shadow to the
+   shell on the same beat. Contact keeps a colour transition of its own for
+   the hover, which is why the shorthand carries both. */
+.nav-capsule {
+  transition:
+    background-color 0.5s var(--ease-brand),
+    box-shadow 0.26s var(--ease-brand);
+}
+
+[data-lifted="true"] .nav-shell {
+  transition:
+    max-width 0.7s var(--ease-brand),
+    height 0.7s var(--ease-brand),
+    background-color 0.3s var(--ease-brand) 0.42s,
+    box-shadow 0.3s var(--ease-brand) 0.42s;
+}
+
+[data-lifted="true"] .nav-capsule {
+  transition:
+    background-color 0.5s var(--ease-brand),
+    box-shadow 0.3s var(--ease-brand) 0.42s;
 }
 
 /* ============================================================
@@ -940,7 +972,7 @@
   color: color-mix(
     in oklab,
     var(--color-forest) calc(var(--grow, 1) * 100%),
-    var(--color-canvas)
+    var(--color-teal)
   );
 }
 
@@ -948,87 +980,8 @@
   color: color-mix(
     in oklab,
     var(--color-gold-dk) calc(var(--grow, 1) * 100%),
-    var(--color-gold)
+    #8a6412
   );
-}
-
-/* ============================================================
-   The curtain the team is behind
-
-   Two leaves meet across the middle of a pinned frame and are
-   drawn apart on `--split`, uncovering the section that was
-   pulled up underneath them.
-
-   The two heights are a pair and must be read together: the
-   frame is pinned for `150svh − 100svh = 50svh`, and the leaves
-   open at 100svh of gap over that same 50svh of scroll   twice
-   the rate. That is what holds the opening's top edge still in
-   the page while it grows, so the section under it is uncovered
-   from its own first line down and sits exactly at the top of
-   the frame when the leaves are gone.
-
-   `--split` defaults to 1: no-JS never traps the page behind a
-   shut curtain.
-   ============================================================ */
-.vsl-split {
-  height: 150svh;
-}
-
-.vsl-split-under {
-  margin-top: -100svh;
-}
-
-.vsl-leaf {
-  position: absolute;
-  right: 0;
-  left: 0;
-  pointer-events: auto;
-  /* A hair over half, so the two never part on a rounding error. */
-  height: 50.5%;
-  background: var(--color-canvas);
-}
-
-/* The seam, which rides away on the leaves that carried it. */
-.vsl-leaf::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  left: 0;
-  height: 1px;
-  background: var(--color-gold-dk);
-}
-
-/* The extra pixel of travel keeps a parted leaf off the frame's own clip
-   line. The frame is sized in `svh`, so that boundary lands on a fraction
-   of a pixel, and a leaf whose edge sits exactly on it bleeds a hairline of
-   canvas   and of its seam   over the section underneath. Scaled by
-   `--split` so the shut curtain still meets exactly where it always did. */
-.vsl-leaf-top {
-  top: 0;
-  transform: translate3d(0, calc(var(--split, 1) * (-100% - 1px)), 0);
-}
-
-.vsl-leaf-top::after {
-  bottom: 0;
-}
-
-.vsl-leaf-bottom {
-  bottom: 0;
-  transform: translate3d(0, calc(var(--split, 1) * (100% + 1px)), 0);
-}
-
-.vsl-leaf-bottom::after {
-  top: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vsl-split {
-    display: none;
-  }
-
-  .vsl-split-under {
-    margin-top: 0;
-  }
 }
 
 /* ============================================================
@@ -1279,7 +1232,7 @@
 }
 
 /* ============================================================
-   The palette story — a disk turned by the page
+   The palette story   a disk turned by the page
 
    `--p` (0 → 1) and `--turn` are written on the frame by one
    rAF-throttled listener; everything below is those two numbers
@@ -1287,7 +1240,7 @@
    animates a property the compositor cannot handle on its own.
 
    `--live` is where along the run of beats the scroll currently
-   sits, as a real number — the whole numbers are the beats and
+   sits, as a real number   the whole numbers are the beats and
    everything between them is the handover. It is written out in
    full inside every function rather than parked in one custom
    property: substituting a `clamp()` through a custom property
@@ -1336,7 +1289,7 @@
 
 /* The disk itself. Rotation is bound straight to the scroll, so it
    reads as something being turned rather than something animating
-   to a stop — no transition here on purpose. */
+   to a stop   no transition here on purpose. */
 .palette-wheel {
   rotate: var(--turn, 0deg);
   filter: drop-shadow(0 30px 60px rgb(0 0 0 / 0.28));
@@ -1364,7 +1317,7 @@
   fill: #ffffff;
 }
 
-/* The mark the live slice is turned to meet, at three o'clock —
+/* The mark the live slice is turned to meet, at three o'clock  
    the side the writing is on, so the disk points at what it is
    describing. */
 .palette-pointer {
@@ -1412,7 +1365,7 @@
 }
 
 /* The frame's own height: a viewport to be held for, plus one handover
-   per beat. The handover is shorter on a phone — five screenfuls of
+   per beat. The handover is shorter on a phone   five screenfuls of
    hold on a small device stops reading as an effect and starts reading
    as a page that has stopped responding. */
 .palette-frame {
@@ -1435,7 +1388,7 @@
    showing part of.
 
    `--disk` is the full diameter, so exactly half of it is the
-   visible width — which is also what the writing has to clear.
+   visible width   which is also what the writing has to clear.
    ------------------------------------------------------------ */
 .palette-frame {
   --disk: min(46rem, 82svh);

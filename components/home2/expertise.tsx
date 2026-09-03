@@ -48,7 +48,7 @@ export function Home2Expertise() {
               key={item.slug}
               className={cn(
                 "group relative flex flex-col overflow-hidden rounded-[1.6rem] p-7",
-                "shadow-[0_28px_64px_-38px_rgba(10,15,12,0.5)]",
+                "shadow-[0_28px_64px_-38px_rgba(18,38,32,0.5)]",
                 "transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none",
                 tones[index % tones.length],
                 index === 0 && "lg:col-span-2",
@@ -89,7 +89,7 @@ export function Home2Expertise() {
           {/* The grid's odd slot, given over to the next step. */}
           <Link
             href="/nos-solutions"
-            className="group bg-gold text-forest flex flex-col justify-between rounded-[1.6rem] p-7 shadow-[0_28px_64px_-38px_rgba(10,15,12,0.5)] transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none"
+            className="group bg-gold text-forest flex flex-col justify-between rounded-[1.6rem] p-7 shadow-[0_28px_64px_-38px_rgba(18,38,32,0.5)] transition-transform duration-500 ease-[var(--ease-brand)] hover:-translate-y-1.5 motion-reduce:transition-none"
           >
             <span className="font-label text-[0.75rem] font-bold tracking-[0.28em] uppercase opacity-60">
               {t.services.deliverablesLabel}

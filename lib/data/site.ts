@@ -74,22 +74,6 @@ export const caseStudies: CaseStudyRecord[] = [
     metric: "+38%",
   },
   {
-    slug: "bopassage",
-    client: "Bôpassage",
-    image: "/work/bopassage/bopassage.png",
-    imageAlt: "Site web Bôpassage présenté sur tablette dans le restaurant",
-    website: "https://bopassage.com",
-    metric: "x3",
-  },
-  {
-    slug: "medical-bay",
-    client: "Medical Bay",
-    image: "/work/medical-bay/medical-bay-brand.png",
-    imageAlt: "Accueil de la clinique Medical Bay à Agadir",
-    website: "https://medicalbay-agadir.vercel.app/",
-    metric: "+120",
-  },
-  {
     slug: "dmc-morocco",
     client: "DMC Hospitality Morocco",
     image: "/work/dmc-morocco/dmc-portfolio-image.png",
@@ -98,12 +82,27 @@ export const caseStudies: CaseStudyRecord[] = [
     metric: "0 → 1",
   },
   {
-    slug: "educazen-kids",
-    client: "EducazenKids",
-    image: "/work/educazen-kids/educazen-hero.png",
-    imageAlt: "Site web et plateforme EducazenKids sur ordinateur",
-    metric: "+62%",
+    slug: "mabrouk",
+    client: "Hôtel Mabrouk",
+    image: "/work/mabrouk-hotel/mabrouk-hotel-brand.png",
+    imageAlt: "Identité du hotel Mabrouk à Agadir",
+    metric: "+120",
   },
+  {
+    slug: "bopassage",
+    client: "Bôpassage",
+    image: "/work/bopassage/bopassage.png",
+    imageAlt: "Site web Bôpassage présenté sur tablette dans le restaurant",
+    website: "https://bopassage.com",
+    metric: "x3",
+  },
+  // {
+  //   slug: "educazen-kids",
+  //   client: "EducazenKids",
+  //   image: "/work/educazen-kids/educazen-hero.png",
+  //   imageAlt: "Site web et plateforme EducazenKids sur ordinateur",
+  //   metric: "+62%",
+  // },
 ];
 
 export type ProjectCategory =

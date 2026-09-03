@@ -14,7 +14,7 @@ export function Home2Manifesto() {
   const { t } = useLanguage();
 
   const card = (
-    <article className="bg-canvas ring-forest/5 flex h-full flex-col rounded-[1.6rem] p-6 shadow-[0_30px_70px_-34px_rgba(10,15,12,0.5)] ring-1 sm:p-7">
+    <article className="bg-canvas ring-forest/5 flex h-full flex-col rounded-[1.6rem] p-6 shadow-[0_30px_70px_-34px_rgba(18,38,32,0.5)] ring-1 sm:p-7">
       <div className="flex items-start justify-between gap-4">
         <p className="font-display text-ink max-w-[14ch] text-[1.35rem] leading-[1.08] font-extrabold tracking-[-0.035em]">
           {t.idea.title}
@@ -56,7 +56,7 @@ export function Home2Manifesto() {
                   style={{ rotate: `${(index % 2 ? 1 : -1) * 2.2}deg` }}
                   className={cn(
                     "ring-forest/5 relative aspect-4/5 w-[17rem] overflow-hidden rounded-[1.4rem] ring-1",
-                    "shadow-[0_30px_70px_-34px_rgba(10,15,12,0.55)]",
+                    "shadow-[0_30px_70px_-34px_rgba(18,38,32,0.55)]",
                     "transition-transform duration-700 ease-[var(--ease-brand)] hover:-translate-y-3 motion-reduce:transition-none",
                   )}
                 >

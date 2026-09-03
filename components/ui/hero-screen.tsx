@@ -60,7 +60,7 @@ export function HeroScreen({
         className="pointer-events-none absolute inset-0 -z-10 flex items-start justify-center overflow-hidden pt-24 [perspective:1600px] sm:pt-28"
       >
         <div className="relative w-[min(94vw,70rem)] motion-safe:[animation:eiden-screen-unfold_1.7s_var(--ease-brand)_0.35s_both]">
-          <div className="border-canvas/12 bg-forest-md relative aspect-16/10 overflow-hidden rounded-xl border shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)]">
+          <div className="border-ink/12 bg-beige relative aspect-16/10 overflow-hidden rounded-xl border shadow-[0_60px_140px_-40px_rgba(18,38,32,0.35)]">
             {projects.map((project, position) => (
               <Image
                 key={project.slug}
@@ -82,13 +82,13 @@ export function HeroScreen({
       <div className="container-eiden pointer-events-none absolute inset-x-0 top-28 z-10 sm:top-36">
         <Link
           href={current.href}
-          className="group border-canvas/15 bg-ink/40 hover:border-canvas/40 pointer-events-auto inline-flex items-center gap-3 rounded-full border py-2 pr-3 pl-4 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]"
+          className="group border-ink/15 bg-canvas/70 hover:border-ink/35 pointer-events-auto inline-flex items-center gap-3 rounded-full border py-2 pr-3 pl-4 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]"
         >
-          <span className="eyebrow text-canvas/40">{label}</span>
-          <span className="text-canvas text-[0.875rem] leading-none">
+          <span className="eyebrow text-ink/45">{label}</span>
+          <span className="text-ink text-[0.875rem] leading-none">
             {current.client}
           </span>
-          <span className="bg-canvas/10 text-canvas group-hover:bg-canvas group-hover:text-ink flex size-6 items-center justify-center rounded-full transition-colors duration-500 ease-[var(--ease-brand)]">
+          <span className="bg-ink/10 text-ink group-hover:bg-ink group-hover:text-canvas flex size-6 items-center justify-center rounded-full transition-colors duration-500 ease-[var(--ease-brand)]">
             <ArrowUpRight className="size-3.5" strokeWidth={2} aria-hidden />
           </span>
         </Link>

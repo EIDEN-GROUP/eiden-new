@@ -30,9 +30,9 @@ export function AboutView() {
         titleAccent={page.titleAccent}
         titleTail={page.titleTail}
         lead={page.lead}
-        imageClassName="scale-110 object-cover object-center opacity-70 blur-[6px]"
+        imageClassName="scale-110 object-cover object-center opacity-40 blur-[6px]"
       >
-        <Link href="/contact" className="group bg-canvas text-ink hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+        <Link href="/contact" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
           {page.ctaAction}
           <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
         </Link>
@@ -150,29 +150,29 @@ export function AboutView() {
       {/* ── The way in ─────────────────────────────────────────────── */}
       <section
         id="contact"
-        data-nav-tone="dark"
+        data-nav-tone="light"
         className="relative isolate w-full"
       >
         <FixedBackdrop src={aboutTexture} />
         <span
           aria-hidden
-          className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(10,15,12,0.84),rgba(10,15,12,0.55))]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(115%_100%_at_50%_50%,rgba(244,235,208,0.94),rgba(244,235,208,0.72))]"
         />
 
         <div className="mx-auto flex h-svh max-w-full flex-col items-center justify-center px-5 py-16 text-center sm:px-8 sm:py-18">
           <Reveal direction="none" duration={0.5}>
-            <p className="eyebrow text-gold mb-3">{t.contact.eyebrow}</p>
+            <p className="eyebrow text-teal mb-3">{t.contact.eyebrow}</p>
           </Reveal>
 
           <RevealWords
             as="h2"
             text={page.ctaTitle}
             delay={0.06}
-            className="font-display text-canvas mt-3 block text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase"
+            className="font-display text-ink mt-3 block text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase"
           />
 
           <Reveal delay={0.45}>
-            <p className="text-canvas/65 mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
+            <p className="text-ink/65 mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
               {page.ctaText}
             </p>
           </Reveal>
@@ -183,22 +183,22 @@ export function AboutView() {
           >
             <Link
               href="/contact"
-              className="group text-canvas font-display relative inline-block pb-2 text-[0.82rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.875rem]"
+              className="group text-ink font-display relative inline-block pb-2 text-[0.82rem] font-semibold tracking-[0.24em] uppercase sm:text-[0.875rem]"
             >
               {page.ctaAction}
               <span
                 aria-hidden
-                className="bg-canvas/40 absolute inset-x-0 bottom-0 h-px"
+                className="bg-ink/30 absolute inset-x-0 bottom-0 h-px"
               />
               <span
                 aria-hidden
-                className="bg-gold absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:scale-x-100 motion-reduce:transition-none"
+                className="bg-teal absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:scale-x-100 motion-reduce:transition-none"
               />
             </Link>
 
             <a
               href={`mailto:${siteConfig.email}`}
-              className="text-canvas/60 hover:text-gold text-[0.875rem] tracking-wide transition-colors duration-300"
+              className="text-ink/60 hover:text-teal text-[0.875rem] tracking-wide transition-colors duration-300"
             >
               {siteConfig.email}
             </a>
