@@ -69,17 +69,6 @@ export function Home2Closing() {
             <p className="text-canvas/70 mt-4 max-w-md text-[0.9375rem] leading-relaxed">
               {t.vsl.text}
             </p>
-
-            <ul className="mt-6 flex flex-wrap gap-1.5">
-              {t.vsl.chapters.map((chapter) => (
-                <li
-                  key={chapter.n}
-                  className="border-canvas/25 text-canvas/75 rounded-full border px-3 py-1 text-[0.82rem]"
-                >
-                  {chapter.label}
-                </li>
-              ))}
-            </ul>
           </article>
         </Reveal>
 

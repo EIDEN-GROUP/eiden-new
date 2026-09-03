@@ -123,7 +123,7 @@ export function FilmHero({
       ref={sectionRef}
       data-nav-tone="light"
       className={cn(
-        "hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-beige sm:min-h-[74svh]",
+        "hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-cream sm:min-h-[74svh]",
         className,
       )}
     >
@@ -143,7 +143,7 @@ export function FilmHero({
 
       <span
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(244,235,208,1)_16%,rgba(244,235,208,0.94)_44%,rgba(244,235,208,0.86)_100%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(244,235,208,1)_16%,rgba(244,235,208,0.94)_24%,rgba(244,235,208,0.86)_100%)]"
       />
 
       <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-10 sm:pt-36 sm:pb-14">

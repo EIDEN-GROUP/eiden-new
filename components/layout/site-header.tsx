@@ -14,8 +14,6 @@ import { cn } from "@/lib/utils";
 
 const LINE_LEAD = 320;
 const LINE_STEP = 70;
-
-/** Below this the bar is still standing on the page's own first screen. */
 const LIFT = 24;
 
 type Tone = "dark" | "light";
@@ -27,14 +25,6 @@ function isDark(colour: string) {
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.5;
 }
 
-/**
- * What is under a point, and whether the bar has to be light or dark over it.
- *
- * Only ever asked while the small-screen bar is transparent, which is only
- * ever at the top of a page. A section that knows its own answer says so with
- * `data-nav-tone`; everything else is read off the first painted background in
- * the stack.
- */
 function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
   const stack = document
     .elementsFromPoint(x, y)
@@ -58,23 +48,6 @@ function toneAt(x: number, y: number, ignore: HTMLElement | null): Tone {
   return "light";
 }
 
-/**
- * The one question the bar still asks itself, once per scroll frame.
- *
- * The bar never leaves: it is there at rest, on the way down, and on the way
- * back up, so there is nothing to decide about whether it is wanted. What is
- * left is what it is standing on. On a wide screen it brings its own white
- * from the first pixel and the answer is fixed; on a small one it is still
- * transparent over the opening screen and has to take its colour from
- * whatever is under it   canvas over a film hero, ink over a daylight one.
- * Past the first inch that bar brings its own white too, which is why the
- * probe costs nothing on a long scroll: `elementsFromPoint` only runs while
- * it is see-through.
- *
- * Both answers are written onto the node rather than held in React. They are
- * read on every scroll frame, and a re-render per frame would be paid for by
- * whatever the reader is actually looking at.
- */
 function useGround(open: boolean) {
   const ref = useRef<HTMLElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -90,17 +63,11 @@ function useGround(open: boolean) {
 
     const draw = () => {
       raf = 0;
-
-      /* The menu is the warm ground edge to edge: the bar keeps its glass over it
-         rather than laying white across the top of it. */
       const nowLifted = !open && window.scrollY > LIFT;
       if (nowLifted !== lifted) {
         lifted = nowLifted;
         bar.dataset.lifted = String(nowLifted);
       }
-
-      /* On its own white, or over the open menu, the answer is already known
-         and the page is never touched for it. */
       const nowTone: Tone =
         open || lifted
           ? "light"
@@ -130,8 +97,6 @@ function useGround(open: boolean) {
   return { ref, barRef };
 }
 
-/* Contact is the call to action at the far end of the bar, so it is not also
-   a link in the middle of it. */
 const inlineRoutes = navRoutes.filter((route) => route.key !== "contact");
 
 export function SiteHeader() {
@@ -214,10 +179,6 @@ export function SiteHeader() {
           stowed && "-translate-y-full opacity-0",
         )}
       >
-        {/* The bar is the width of the screen, not the width of the page. It
-            is chrome laid over the site rather than a row inside it, so it
-            keeps its own margins and never lines up with the column of work
-            the sections are set on. */}
         <div
           ref={barRef}
           data-lifted="false"
@@ -227,8 +188,6 @@ export function SiteHeader() {
             "text-ink data-[tone=dark]:text-canvas",
           )}
         >
-          {/* Small screens keep the wordmark and the toggle they have always
-              had; the routes stay behind it, in the veil. */}
           <div
             className={cn(
               "flex h-16 items-center justify-between gap-4 px-5 sm:h-18 sm:px-10 lg:hidden",
@@ -294,13 +253,6 @@ export function SiteHeader() {
             </button>
           </div>
 
-          {/* On a wide screen the bar opens as two things: a white capsule
-              holding the mark and the routes on the left edge, and contact on
-              its own at the right. The shell between them carries no white at
-              rest   it is only a measure. Past the fold that measure narrows,
-              which walks the two toward each other, and the shell takes the
-              white over so it closes around contact as well. See `.nav-shell`
-              in globals.css for when the white changes hands. */}
           <div className="hidden px-10 lg:block xl:px-12">
             <div
               className={cn(
@@ -309,8 +261,6 @@ export function SiteHeader() {
                 "group-data-[lifted=true]/bar:bg-white group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
               )}
             >
-              {/* Once the shell is white this is white on white, so only its
-                  shadow has to be got out of the way. */}
               <div
                 className={cn(
                   "nav-capsule flex h-14 shrink-0 items-center gap-8 rounded-full bg-white px-7 xl:gap-10",

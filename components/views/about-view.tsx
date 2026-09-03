@@ -30,7 +30,7 @@ export function AboutView() {
         titleAccent={page.titleAccent}
         titleTail={page.titleTail}
         lead={page.lead}
-        imageClassName="scale-110 object-cover object-center opacity-40 blur-[6px]"
+        imageClassName="scale-110 object-cover object-center blur-[5px]"
       >
         <Link href="/contact" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
           {page.ctaAction}
@@ -148,7 +148,7 @@ export function AboutView() {
       </section>
 
       {/* ── The way in ─────────────────────────────────────────────── */}
-      <section
+      {/* <section
         id="contact"
         data-nav-tone="light"
         className="relative isolate w-full"
@@ -204,7 +204,7 @@ export function AboutView() {
             </a>
           </Reveal>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

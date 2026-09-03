@@ -18,7 +18,11 @@ function timecode(seconds: number) {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-const GROWTH_SHARE = 0.86;
+/* Share of the pin the shrink plays out over. The card opens at full size
+   the moment the pin catches   nothing is asked of the visitor before they
+   have even started scrolling   and closes down to `--vsl-start` across
+   this much of the travel, holding there for what is left of the pin. */
+const SHRINK_SHARE = 0.86;
 
 export function Vsl() {
   const { t } = useLanguage();
@@ -47,7 +51,7 @@ export function Vsl() {
       const { top, height } = track.getBoundingClientRect();
       const travel = height - window.innerHeight;
       const share = travel > 0 ? -top / travel : 1;
-      const eased = Math.min(Math.max(share / GROWTH_SHARE, 0), 1);
+      const eased = 1 - Math.min(Math.max(share / SHRINK_SHARE, 0), 1);
       const value = Math.round(eased * 500) / 500;
 
       if (value !== painted) {
@@ -151,15 +155,31 @@ export function Vsl() {
 
   return (
     <section id="methode" ref={sectionRef} className="pointer-events-none relative z-10">
+      <div className="container-eiden">
+        <Reveal direction="none" duration={0.5}>
+          <p className="eyebrow text-teal flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.1s_both]" />
+            {t.vsl.eyebrow}
+          </p>
+        </Reveal>
+
+        <RevealWords as="h2" text={t.vsl.title} delay={0.05} className="text-ink mt-6 max-w-4xl text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]" />
+        {/* <Reveal delay={0.1} direction="none">
+          <p className="eyebrow text-ink/50 mt-8 hidden lg:block">
+            {t.vsl.title}
+          </p>
+        </Reveal> */}
+      </div>
       <div ref={litRef} data-nav-tone="light" className="grain bg-canvas pointer-events-auto relative">
         <span aria-hidden className="vsl-wash" />
         <div ref={trackRef} className="vsl-track relative z-2">
           <div className={cn( "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8", "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14", )}>
             <span aria-hidden className="vsl-bloom" />
-            <div className="flex flex-1 flex-col justify-end pb-12 md:pb-8">
-              <Reveal direction="none" duration={0.5}>
-                <p className="eyebrow text-teal">{t.vsl.eyebrow}</p>
-              </Reveal>
+            <div className="relative z-2 flex flex-1 flex-col justify-end pb-12 md:pb-8">
+              {/* <Reveal direction="none" duration={0.5}>
+                <p className="eyebrow text-teal text-center">{t.vsl.eyebrow}</p>
+              </Reveal> */}
+              {/* <RevealWords as="h2" text={t.vsl.title} delay={0.08} className="font-display vsl-ink mt-4 block max-w-4xl text-center text-[clamp(1.5rem,4.2vw,3.25rem)] leading-[1.04] font-medium tracking-[-0.03em]" /> */}
             </div>
             <div className="vsl-stage w-full">
               <div className="vsl-grow group bg-beige overflow-hidden">
@@ -277,9 +297,7 @@ export function Vsl() {
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col justify-start pt-14 md:pt-6">
-              <RevealWords as="h2" text={t.vsl.title} delay={0.08} className="font-display vsl-ink block max-w-4xl text-center text-[clamp(1.5rem,4.2vw,3.25rem)] leading-[1.04] font-medium tracking-[-0.03em]" />
-            </div>
+            <div className="flex-1" />
           </div>
         </div>
       </div>

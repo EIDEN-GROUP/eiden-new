@@ -12,7 +12,7 @@ export function Services() {
   const { t } = useLanguage();
 
   return (
-    <section id="services" className="bg-canvas pt-20 sm:pt-28">
+    <section id="services" className="bg-canvas">
       <div className="container-eiden">
         <Reveal direction="none" duration={0.5}>
           <p className="eyebrow text-teal flex items-center gap-3">

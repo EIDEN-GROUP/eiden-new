@@ -38,7 +38,7 @@ export const fr = {
 
   nav: {
     home: "Accueil",
-    about: "Architecture",
+    about: "à propos",
     clients: "Clients",
     solutions: "Nos solutions",
     contact: "Contact",

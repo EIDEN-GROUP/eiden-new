@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, type CSSProperties } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
+import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
 import { SwipeDeck } from "@/components/ui/swipe-deck";
+import { ideaTexture } from "@/lib/data/site";
 import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
@@ -91,7 +93,9 @@ export function Idea() {
   return (
     <section id="idee" className="bg-cream relative">
       <div ref={trackRef} data-nav-tone="light" className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0">
-        <span aria-hidden className="idea-wash" />
+        <div aria-hidden className="idea-wash">
+          <FixedBackdrop src={ideaTexture} imageClassName="scale-110 blur-md" />
+        </div>
 
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
@@ -131,9 +135,8 @@ export function Idea() {
                     card.lane,
                   )}
                 >
-                  {/* <span aria-hidden className="idea-plate" /> */}
 
-                  <div className="idea-face bg-teal text-forest relative flex flex-1 flex-col p-8 shadow-[0_40px_100px_-50px_rgba(0,0,0,0.55)] sm:p-10 lg:p-12">
+                  <div className="idea-face idea-glass text-canvas relative z-1 flex flex-1 flex-col p-8 backdrop-blur-2xl backdrop-saturate-150 sm:p-10 lg:p-12">
                     <div>
                       <p className="eyebrow text-canvas/85">{card.label}</p>
                       <p className="text-canvas mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
@@ -141,13 +144,13 @@ export function Idea() {
                       </p>
                     </div>
 
-                    <ol className="border-canvas/10 mt-10 border-t">
+                    <ol className="border-canvas/15 mt-10 border-t">
                       {card.points.map((point, index) => (
                         <li
                           key={point}
                           className={cn(
                             "grid grid-cols-[2.25rem_1fr] gap-4 py-4 sm:py-5",
-                            index > 0 && "border-canvas/10 border-t",
+                            index > 0 && "border-canvas/15 border-t",
                           )}
                         >
                           <span aria-hidden className="eyebrow text-cream pt-0.5">
