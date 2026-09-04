@@ -240,7 +240,7 @@ export const aboutTexture = "/work/contact-bg.png";
 
 export const proofTexture = "/work/contact-section-bg.png";
 
-export const ideaTexture = "/media/idea-bg.jpeg";
+export const ideaTexture = "/media/idea-bg.png";
 
 export const movementMedia = [
   "/media/heritage-1.jpeg",
