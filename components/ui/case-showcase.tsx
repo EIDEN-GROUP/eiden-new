@@ -367,7 +367,7 @@ export function CaseShowcase({
           <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
 
           <div className="container-eiden py-16">
-            <p className="eyebrow text-teal text-center">{outro.eyebrow}</p>
+            <p className="eyebrow text-canvas text-center">{outro.eyebrow}</p>
 
             <div className="mx-auto mt-9 grid max-w-4xl gap-9 sm:mt-12 sm:gap-12 md:grid-cols-2">
               {outro.blocks.map((block, index) => (
@@ -389,7 +389,7 @@ export function CaseShowcase({
 
                   <ButtonLink
                     href={block.href}
-                    variant={index === 0 ? "light" : "outline"}
+                    variant="light"
                     size="lg"
                     className="mt-7"
                     tabIndex={active >= cases.length + 1 ? undefined : -1}
@@ -419,7 +419,7 @@ export function CaseShowcase({
         </div>
 
         {/* Where you are in the set. */}
-        <ol
+        {/* <ol
           aria-hidden
           className={cn(
             "pointer-events-none absolute top-1/2 right-4 z-40 hidden -translate-y-1/2 flex-col gap-2 transition-opacity duration-500 sm:right-6 lg:flex",
@@ -445,7 +445,7 @@ export function CaseShowcase({
               <span className="numeral">{String(index + 1).padStart(2, "0")}</span>
             </li>
           ))}
-        </ol>
+        </ol> */}
       </div>
     </div>
   );
