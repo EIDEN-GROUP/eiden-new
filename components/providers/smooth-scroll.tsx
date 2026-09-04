@@ -68,16 +68,19 @@ export function SmoothScroll() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (prefersReduced.matches) return;
 
-    /* Longer than a browser's own scroll, and shorter per gesture than one.
-       The case studies are read rather than skimmed   a notch of the wheel
-       should move the page by less than a screen and land softly, so a room
-       arrives instead of snapping into place. */
+    /* Smooth, but under the hand rather than ahead of it.
+
+       This ran at 1.45s with a 0.85 wheel: every notch moved less than the
+       browser would have, and then took a second and a half to settle. The
+       easing is an expo-out, so almost all of the distance is covered early  
+       what a long duration buys is tail, not glide. Just under a second keeps
+       the landing soft and gives the wheel back to the visitor. */
     const lenis = new Lenis({
-      duration: 1.45,
+      duration: 0.9,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.85,
-      touchMultiplier: 1.35,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
 
     instance = lenis;

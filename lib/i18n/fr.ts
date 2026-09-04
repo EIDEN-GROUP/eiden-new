@@ -59,6 +59,10 @@ export const fr = {
   },
 
   hero: {
+    eyebrow: "Business architecture",
+    rail: ["Strategy", "Systems", "Growth"],
+    railClaim: "Where chaos becomes architecture.",
+    scrollCue: "Scroller pour découvrir",
     titleLead: "La structure digitale qui fait",
     titleAccent: "grandir",
     titleTail: "votre entreprise.",

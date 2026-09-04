@@ -121,7 +121,7 @@ export function ContactView() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="text-ink mt-7 max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)]">
+            <h1 className="text-ink mt-7 max-w-4xl text-[clamp(2.25rem,min(6vw,10.5vh),4.5rem)]">
               {page.title}
             </h1>
           </Reveal>
@@ -290,7 +290,7 @@ export function ContactView() {
                 rel="noreferrer noopener"
                 className={cn(
                   "group border-ink/15 focus-visible:outline-teal flex flex-col items-center",
-                  "rounded-[1.75rem] border px-8 py-12 text-center transition-colors duration-500 ease-[var(--ease-brand)]",
+                  "glass-light rounded-[1.75rem] border px-8 py-12 text-center transition-colors duration-500 ease-[var(--ease-brand)]",
                   "hover:bg-beige hover:border-ink/30",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-10 sm:py-14",
                 )}
@@ -314,31 +314,31 @@ export function ContactView() {
               </a>
 
               <ul className="divide-ink/10 border-ink/10 mt-10 flex flex-wrap justify-between divide-y border-t">
-              {details.map((detail) => (
-                <li key={detail.label} className="flex items-start gap-4 py-5">
-                  <detail.icon
-                    className="text-teal mt-1 size-4 shrink-0"
-                    strokeWidth={1.8}
-                    aria-hidden
-                  />
-                  <div className="min-w-0">
-                    <p className="eyebrow text-ink/35">{detail.label}</p>
-                    {detail.href ? (
-                      <a
-                        href={detail.href}
-                        className="text-ink hover:text-teal mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
-                      >
-                        {detail.value}
-                      </a>
-                    ) : (
-                      <p className="text-ink/75 mt-2 text-[0.9375rem] leading-relaxed">
-                        {detail.value}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
+                {details.map((detail) => (
+                  <li key={detail.label} className="flex items-start gap-4 py-5">
+                    <detail.icon
+                      className="text-teal mt-1 size-4 shrink-0"
+                      strokeWidth={1.8}
+                      aria-hidden
+                    />
+                    <div className="min-w-0">
+                      <p className="eyebrow text-ink/35">{detail.label}</p>
+                      {detail.href ? (
+                        <a
+                          href={detail.href}
+                          className="text-ink hover:text-teal mt-2 block text-[0.9375rem] break-words transition-colors duration-300"
+                        >
+                          {detail.value}
+                        </a>
+                      ) : (
+                        <p className="text-ink/75 mt-2 text-[0.9375rem] leading-relaxed">
+                          {detail.value}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
         </div>

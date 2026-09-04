@@ -123,7 +123,7 @@ export function FilmHero({
       ref={sectionRef}
       data-nav-tone="light"
       className={cn(
-        "hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden bg-cream sm:min-h-[74svh]",
+        "hero-depart bg-cream relative isolate flex min-h-[68svh] flex-col overflow-hidden sm:min-h-[74svh]",
         className,
       )}
     >
@@ -155,7 +155,7 @@ export function FilmHero({
           {eyebrow}
         </p>
 
-        <h1 className="text-balance-tight text-ink mt-6 max-w-full text-[clamp(2.25rem,6.4vw,4.5rem)] leading-[1.02] font-medium">
+        <h1 className="text-balance-tight text-ink mt-6 max-w-full text-[clamp(2.25rem,min(6.4vw,11vh),4.5rem)] leading-[1.02] font-medium">
           {words.map((word, index) => {
             const rise = heroStage(HERO_WORD_LEAD + index * HERO_WORD_STEP);
             const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
@@ -186,7 +186,7 @@ export function FilmHero({
               >
                 <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
                   <span
-                    className="text-[#8a6412] inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
+                    className="inline-block text-[#8a6412] motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
                     style={rise}
                   >
                     {word.text}
@@ -194,7 +194,7 @@ export function FilmHero({
                 </span>
                 <span
                   aria-hidden
-                  className="bg-[#8a6412]/50 absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
+                  className="absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left bg-[#8a6412]/50 motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
                 />
               </span>
             );

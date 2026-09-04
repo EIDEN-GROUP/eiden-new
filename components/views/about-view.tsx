@@ -32,7 +32,10 @@ export function AboutView() {
         lead={page.lead}
         imageClassName="scale-110 object-cover object-center blur-[5px]"
       >
-        <Link href="/contact" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+        <Link
+          href="/contact"
+          className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+        >
           {page.ctaAction}
           <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
         </Link>

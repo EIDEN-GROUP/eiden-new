@@ -10,7 +10,12 @@ import { LogoMarquee } from "@/components/ui/marquee";
 import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getProjectCase } from "@/lib/data/projects/index";
-import { clientLogos, portfolioProjectUrl, projects, type ProjectCategory, } from "@/lib/data/site";
+import {
+  clientLogos,
+  portfolioProjectUrl,
+  projects,
+  type ProjectCategory,
+} from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 type Filter = ProjectCategory | "all";
@@ -73,7 +78,7 @@ export function ClientsView() {
               </Reveal>
 
               <Reveal delay={0.06}>
-                <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,5.4vw,4.25rem)]">
+                <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,min(5.4vw,10vh),4.25rem)]">
                   {page.workTitle}
                 </h1>
               </Reveal>
@@ -103,10 +108,18 @@ export function ClientsView() {
             </div>
 
             <Reveal delay={0.1} direction="left">
-              <div aria-hidden className={cn( "relative h-[22rem] overflow-hidden sm:h-[28rem] lg:h-[40rem] , [mask-image:linear-gradient(to_bottom,black_85%,transparent)]", )}>
+              <div
+                aria-hidden
+                className={cn(
+                  ", relative h-[22rem] overflow-hidden [mask-image:linear-gradient(to_bottom,black_85%,transparent)] sm:h-[28rem] lg:h-[40rem]",
+                )}
+              >
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                   {COLUMNS.map((column, index) => (
-                    <div key={index} className={cn("min-w-0", index === 2 && "hidden lg:block")} >
+                    <div
+                      key={index}
+                      className={cn("min-w-0", index === 2 && "hidden lg:block")}
+                    >
                       <div
                         className="drift-y"
                         style={
@@ -120,7 +133,7 @@ export function ClientsView() {
                           <div key={`${project.slug}-${i}`} className="pb-3">
                             <div
                               className={cn(
-                                "ring-forest/10 relative overflow-hidden rounded-2xl ring-1",
+                                "glass-dark glass-top ring-forest/10 relative overflow-hidden rounded-2xl ring-1",
                                 i % column.items.length === 0
                                   ? "aspect-4/5"
                                   : "aspect-4/3",
@@ -131,7 +144,7 @@ export function ClientsView() {
                                 alt=""
                                 fill
                                 sizes="(max-width: 1024px) 70vw, 30vw"
-                                className="object-cover size-full"
+                                className="size-full object-cover"
                               />
                             </div>
                           </div>
@@ -152,7 +165,7 @@ export function ClientsView() {
         <div className="container-eiden pt-16 pb-24 sm:pt-20 sm:pb-32">
           <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
             <div className="lg:sticky lg:top-32">
-              <div className="border-forest/12 bg-forest/[0.03] rounded-[1.75rem] border p-4">
+              <div className="glass-light border-forest/12 bg-forest/[0.03] rounded-[1.75rem] border p-4">
                 <ul className="flex flex-wrap gap-2.5">
                   {FILTERS.map((filter) => {
                     const on = filter === active;
@@ -187,7 +200,12 @@ export function ClientsView() {
                 </ul>
               </div>
 
-              <ButtonLink href="/contact" variant="primary" size="lg" className="mt-4 w-full" >
+              <ButtonLink
+                href="/contact"
+                variant="primary"
+                size="lg"
+                className="mt-4 w-full"
+              >
                 {t.contact.cta}
               </ButtonLink>
             </div>
@@ -237,9 +255,12 @@ export function ClientsView() {
             </h2>
           </Reveal>
 
-          <RevealGroup className="mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="glass-light mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
             {page.sectors.map((sector) => (
-              <article key={sector.title} className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500" >
+              <article
+                key={sector.title}
+                className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500"
+              >
                 <h3 className="font-display text-forest text-lg font-bold tracking-[-0.02em]">
                   {sector.title}
                 </h3>
@@ -311,7 +332,12 @@ function ProjectCard({
         wide && "sm:col-span-2",
       )}
     >
-      <div className={cn( "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )} >
+      <div
+        className={cn(
+          "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]",
+          wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3",
+        )}
+      >
         <Image
           src={image}
           alt={imageAlt}
@@ -321,15 +347,18 @@ function ProjectCard({
               ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 62vw"
               : "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 50vw"
           }
-          className="object-cover size-full transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
+          className="size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
         />
 
-        <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"/>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"
+        />
 
         <p className="eyebrow text-canvas/80 absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/80 px-5 py-2">
-          <span className="text-gold tabular-nums">
+          <span className="numeral text-gold">
             {String(index + 1).padStart(2, "0")}
-          </span>         
+          </span>
           <span aria-hidden className="bg-canvas/30 h-3 w-px" />
           {category}
         </p>

@@ -33,11 +33,7 @@ export function AboutMethods({
   return (
     <section className="grain bg-beige py-24 sm:py-32">
       <div className="container-eiden relative z-2">
-        <SectionHeading
-          eyebrow={eyebrow}
-          title={title}
-          className="max-w-2xl"
-        />
+        <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
 
         <ol
           ref={stepsRef}
@@ -51,7 +47,7 @@ export function AboutMethods({
               className="step-in relative"
             >
               <div className="flex items-center gap-4">
-                <span className="font-display text-teal text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
+                <span className="numeral text-teal text-[clamp(2rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.05em]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 

@@ -59,7 +59,7 @@ export function Process() {
                 <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
                   {say(step.title)}
                 </h3>
-                <span className="eyebrow text-ink/30 tabular-nums">
+                <span className="eyebrow numeral text-ink/30">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>

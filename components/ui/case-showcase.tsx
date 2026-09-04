@@ -49,18 +49,8 @@ const GROUNDS = [
 ] as const;
 
 const INTRO_GROUND = "#f4ebd0";
-/* Both are read against the span the last case takes to lift away.
-   `LEAD` lets that lift get under way on its own before anything moves
-   underneath it; `SHARE` is what the cards travel over, and it ends
-   just short of the lift, so the suite is already carrying its pair by
-   the time the case is off the screen. The panel after that is the rest
-   the pair comes to before the track releases. */
 const SUITE_LEAD = 0.2;
 const SUITE_SHARE = 0.7;
-/* How much real scroll one panel costs. `--seq`, the lift-away and the
-   suite's own reveal are all fractions of a panel, so this is the one
-   knob for the whole track's length   drop it and every stage still
-   plays in the same order, just over less of the wheel. */
 const PANEL_VH = 60;
 type Tone = (typeof GROUNDS)[number]["tone"];
 const INK: Record<
@@ -105,10 +95,6 @@ export function CaseShowcase({
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  /* One panel per case, plus the intro it opens on and the outro it
-     closes on   nothing held past that, so the track releases as soon
-     as the suite has settled rather than making the wheel pay for a
-     beat no one asked for. */
   const panels = cases.length + 2;
 
   useEffect(() => {
@@ -117,15 +103,28 @@ export function CaseShowcase({
 
     let raf = 0;
     let painted = Number.NaN;
-    /* The last case's own index, not derived from `panels`: the lift
-       away starts exactly when that curtain is due, whether or not
-       there's any track left after it to hold the reveal on. */
     const suiteFrom = cases.length;
+    let seen = -1;
+    let docTop = 0;
+    let height = 0;
+
+    const measure = () => {
+      const box = track.getBoundingClientRect();
+      docTop = box.top + window.scrollY;
+      height = box.height;
+      seen = -1;
+    };
 
     const paint = () => {
-      const { top, height } = track.getBoundingClientRect();
+      const y = window.scrollY;
+      if (y === seen) {
+        raf = requestAnimationFrame(paint);
+        return;
+      }
+      seen = y;
+
       const travel = height - window.innerHeight;
-      const share = travel > 0 ? -top / travel : 0;
+      const share = travel > 0 ? (y - docTop) / travel : 0;
       const seq = Math.min(Math.max(share, 0), 1) * (panels - 1);
       const value = Math.round(seq * 1000) / 1000;
 
@@ -160,8 +159,16 @@ export function CaseShowcase({
     );
 
     observer.observe(track);
+    measure();
+
+    const resize = new ResizeObserver(measure);
+    resize.observe(document.body);
+    window.addEventListener("resize", measure);
+
     return () => {
       observer.disconnect();
+      resize.disconnect();
+      window.removeEventListener("resize", measure);
       if (raf) cancelAnimationFrame(raf);
     };
   }, [panels, cases.length]);
@@ -175,24 +182,36 @@ export function CaseShowcase({
     : INK.light;
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: `${panels * PANEL_VH}svh` }}>
+    <div
+      ref={trackRef}
+      className="relative"
+      style={{ height: `${panels * PANEL_VH}svh` }}
+    >
       <div className="text-canvas sticky top-0 h-svh overflow-hidden">
-        <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }}>
+        <section
+          className="absolute inset-0 isolate z-0 flex items-center justify-center"
+          style={{ backgroundColor: INTRO_GROUND }}
+        >
           <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
           <div className="container-eiden flex flex-col items-center py-16 text-center">
             <Reveal direction="none" duration={0.5}>
-              <p className="eyebrow text-teal mb-3">{intro.eyebrow}</p>
+              <p className="eyebrow text-canvas mb-3">{intro.eyebrow}</p>
             </Reveal>
 
-            <RevealWords as="h2" text={intro.title} delay={0.06} className="font-display text-canvas mt-3 block max-w-4xl text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase" />
+            <RevealWords
+              as="h2"
+              text={intro.title}
+              delay={0.06}
+              className="font-display text-canvas mt-3 block max-w-4xl text-[clamp(1.875rem,5vw,3.75rem)] leading-[1.06] font-medium tracking-[-0.01em] uppercase"
+            />
             <Reveal delay={0.45}>
-              <p className="text-canvas/65 mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
+              <p className="text-canvas mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
                 {intro.text}
               </p>
             </Reveal>
 
             <Reveal delay={0.58} className="mt-11 sm:mt-12">
-              <p className="eyebrow text-canvas/50 flex items-center justify-center gap-3">
+              <p className="eyebrow text-canvas flex items-center justify-center gap-3">
                 {intro.cue}
                 <ArrowDown className="size-4" strokeWidth={1.4} aria-hidden />
               </p>
@@ -221,31 +240,74 @@ export function CaseShowcase({
                 index === cases.length - 1 && "curtain-exit",
               )}
             >
-              <span aria-hidden className={cn( "pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b to-transparent", "from-black/15", )} />
-              <span aria-hidden className={cn( "pointer-events-none absolute inset-x-0 top-0 z-10 h-px", "bg-black/10", )} />
+              <span
+                aria-hidden
+                className={cn(
+                  "pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b to-transparent",
+                  "from-black/15",
+                )}
+              />
+              <span
+                aria-hidden
+                className={cn(
+                  "pointer-events-none absolute inset-x-0 top-0 z-10 h-px",
+                  "bg-black/10",
+                )}
+              />
 
               {/* The number the case stands on. */}
-              <span aria-hidden className={cn( "font-display pointer-events-none absolute right-2 bottom-[-4vw] text-[26vw] leading-none font-extrabold tracking-[-0.06em] select-none", ink.ghost, )} >
+              <span
+                aria-hidden
+                className={cn(
+                  "numeral pointer-events-none absolute right-2 bottom-[-4vw] text-[26vw] leading-none font-extrabold tracking-[-0.06em] select-none",
+                  ink.ghost,
+                )}
+              >
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="container-eiden relative my-auto grid w-full items-center gap-5 py-28 sm:gap-8 sm:py-32 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-40">
                 <div className="min-w-0">
-                  <p className={cn( "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]", ink.accent, )} >
+                  <p
+                    className={cn(
+                      "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]",
+                      ink.accent,
+                    )}
+                  >
                     <span>{entry.client}</span>
                     <span className={ink.muted}>· {entry.tags.join(" · ")}</span>
                   </p>
 
-                  <h3 className={cn( "font-display mt-4 text-[clamp(1.625rem,4vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6", ink.title, )} >
+                  <h3
+                    className={cn(
+                      "font-display mt-4 text-[clamp(1.625rem,4vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6",
+                      ink.title,
+                    )}
+                  >
                     {entry.title}
                   </h3>
 
-                  <p className={cn( "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3", ink.body, )} >
+                  <p
+                    className={cn(
+                      "mt-4 line-clamp-4 max-w-md text-[0.9375rem] leading-relaxed sm:mt-6 sm:line-clamp-none sm:text-base [@media(max-height:640px)]:line-clamp-3",
+                      ink.body,
+                    )}
+                  >
                     {entry.text}
                   </p>
 
                   {entry.quote && entry.author ? (
-                    <figure className={cn( "mt-5 max-w-md border-l pl-5 sm:mt-8", ink.rule, )}>
-                      <blockquote className={cn( "text-[0.9375rem] leading-relaxed", ink.quote, )}>
+                    <figure
+                      className={cn(
+                        "mt-5 max-w-md border-l pl-5 sm:mt-8",
+                        ink.rule,
+                      )}
+                    >
+                      <blockquote
+                        className={cn(
+                          "text-[0.9375rem] leading-relaxed",
+                          ink.quote,
+                        )}
+                      >
                         “{entry.quote}”
                       </blockquote>
                       <figcaption className={cn("eyebrow mt-3", ink.muted)}>
@@ -254,7 +316,14 @@ export function CaseShowcase({
                     </figure>
                   ) : null}
 
-                  <Link href={entry.href} tabIndex={index + 1 === active ? undefined : -1} className={cn( "group font-label mt-5 inline-flex items-center gap-4 text-[0.82rem] font-bold tracking-[0.22em] uppercase sm:mt-9", ink.title, )} >
+                  <Link
+                    href={entry.href}
+                    tabIndex={index + 1 === active ? undefined : -1}
+                    className={cn(
+                      "group font-label mt-5 inline-flex items-center gap-4 text-[0.82rem] font-bold tracking-[0.22em] uppercase sm:mt-9",
+                      ink.title,
+                    )}
+                  >
                     {cta}
                     <span
                       className={cn(
@@ -343,7 +412,7 @@ export function CaseShowcase({
               onCase ? "opacity-100" : "opacity-0",
             )}
           >
-            <span className={activeInk.accent}>{caseNumber}</span>
+            <span className={cn("numeral", activeInk.accent)}>{caseNumber}</span>
             {" / "}
             {label}
           </p>
@@ -373,7 +442,7 @@ export function CaseShowcase({
                     : "w-0 bg-transparent",
                 )}
               />
-              {String(index + 1).padStart(2, "0")}
+              <span className="numeral">{String(index + 1).padStart(2, "0")}</span>
             </li>
           ))}
         </ol>

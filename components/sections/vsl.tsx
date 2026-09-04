@@ -47,10 +47,31 @@ export function Vsl() {
     let raf = 0;
     let painted = Number.NaN;
 
+    let seen = -1;
+    /* Measured where the geometry changes rather than read every frame:
+       `getBoundingClientRect` forces a synchronous layout, and several
+       sections asking for one on the same frame is what made the wheel
+       feel heavy. A scroll position and a subtraction touch no layout. */
+    let docTop = 0;
+    let height = 0;
+
+    const measure = () => {
+      const box = track.getBoundingClientRect();
+      docTop = box.top + window.scrollY;
+      height = box.height;
+      seen = -1;
+    };
+
     const paint = () => {
-      const { top, height } = track.getBoundingClientRect();
+      const y = window.scrollY;
+      if (y === seen) {
+        raf = requestAnimationFrame(paint);
+        return;
+      }
+      seen = y;
+
       const travel = height - window.innerHeight;
-      const share = travel > 0 ? -top / travel : 1;
+      const share = travel > 0 ? (y - docTop) / travel : 1;
       const eased = 1 - Math.min(Math.max(share / SHRINK_SHARE, 0), 1);
       const value = Math.round(eased * 500) / 500;
 
@@ -80,6 +101,11 @@ export function Vsl() {
     );
 
     observer.observe(track);
+    measure();
+
+    const resize = new ResizeObserver(measure);
+    resize.observe(document.body);
+    window.addEventListener("resize", measure);
     return () => {
       observer.disconnect();
       if (raf) cancelAnimationFrame(raf);
@@ -285,7 +311,7 @@ export function Vsl() {
 
                 <span
                   style={withGrow}
-                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block"
+                  className="numeral text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] sm:block"
                 >
                   <span ref={elapsedRef}>0:00</span>
                   <span className="text-canvas/40">

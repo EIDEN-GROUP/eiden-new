@@ -54,6 +54,10 @@ export const en: Dictionary = {
   },
 
   hero: {
+    eyebrow: "Business architecture",
+    rail: ["Strategy", "Systems", "Growth"],
+    railClaim: "Where chaos becomes architecture.",
+    scrollCue: "Scroll to explore",
     titleLead: "The digital structure that",
     titleAccent: "grows",
     titleTail: "your business.",

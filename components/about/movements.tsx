@@ -71,8 +71,14 @@ export function AboutMovements({
 
   return (
     <section className="grain bg-canvas">
-      <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
-        <div aria-hidden className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
+      <div
+        ref={trackRef}
+        className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]"
+      >
+        <div
+          aria-hidden
+          className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh"
+        >
           {movements.map((movement, index) => (
             <div
               key={movement.n}
@@ -127,7 +133,7 @@ export function AboutMovements({
                       : "translate-y-3 opacity-0",
                   )}
                 >
-                  <p className="font-label text-teal text-[0.8125rem] font-bold tracking-[0.28em]">
+                  <p className="numeral text-teal text-[0.8125rem] font-bold tracking-[0.28em]">
                     {String(index + 1).padStart(2, "0")}
                     <span className="text-ink/40">
                       {` / ${String(total).padStart(2, "0")}`}
@@ -149,11 +155,7 @@ export function AboutMovements({
             COLUMN,
           )}
         >
-          <SectionHeading
-            eyebrow={eyebrow}
-            title={title}
-            className="max-w-2xl"
-          />
+          <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
         </div>
 
         {/* ── One movement per screen ───────────────────────────────── */}

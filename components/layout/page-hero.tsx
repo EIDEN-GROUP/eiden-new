@@ -41,7 +41,7 @@ export function PageHero({
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="text-ink mt-7 max-w-4xl text-[clamp(2.25rem,6vw,4.5rem)]">
+            <h1 className="text-ink mt-7 max-w-4xl text-[clamp(2.25rem,min(6vw,10.5vh),4.5rem)]">
               {title}
             </h1>
           </Reveal>

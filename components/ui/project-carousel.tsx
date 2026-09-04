@@ -69,7 +69,7 @@ export function ProjectCarousel({
       className={cn("w-full max-w-[26rem]", className)}
     >
       <div className="text-canvas/70 mb-3 flex items-center justify-end gap-2">
-        <p className="font-label text-[0.875rem] tracking-[0.18em] tabular-nums">
+        <p className="numeral text-[0.875rem] tracking-[0.18em]">
           <span className="text-canvas">{String(index + 1).padStart(2, "0")}</span>
           <span className="mx-1 opacity-40">/</span>
           {String(count).padStart(2, "0")}
@@ -181,7 +181,7 @@ export function ProjectCarousel({
         </div>
       </div>
       <p aria-live="polite" className="sr-only">
-        {current.client}   {index + 1} / {count}
+        {current.client} {index + 1} / {count}
       </p>
     </section>
   );

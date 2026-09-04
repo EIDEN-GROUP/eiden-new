@@ -60,6 +60,12 @@ function useGround(open: boolean) {
     let lifted = false;
     let tone: Tone | null = null;
     let raf = 0;
+    /* `toneAt` walks a hit test and then the computed style of everything
+       under the bar   by far the dearest thing on a scroll frame, and the
+       answer only turns at a section boundary. Probing every 24px of travel
+       reads the same and costs a fraction. */
+    let probed = Number.NaN;
+    const PROBE_STEP = 24;
 
     const draw = () => {
       raf = 0;
@@ -68,11 +74,20 @@ function useGround(open: boolean) {
         lifted = nowLifted;
         bar.dataset.lifted = String(nowLifted);
       }
-      const nowTone: Tone =
-        open || lifted
-          ? "light"
-          : toneAt(24, bar.getBoundingClientRect().height / 2, frame);
+      if (open || lifted) {
+        probed = Number.NaN;
+        if (tone !== "light") {
+          tone = "light";
+          bar.dataset.tone = "light";
+        }
+        return;
+      }
 
+      const y = window.scrollY;
+      if (Number.isFinite(probed) && Math.abs(y - probed) < PROBE_STEP) return;
+      probed = y;
+
+      const nowTone = toneAt(24, bar.getBoundingClientRect().height / 2, frame);
       if (nowTone !== tone) {
         tone = nowTone;
         bar.dataset.tone = nowTone;
@@ -258,12 +273,24 @@ export function SiteHeader() {
               className={cn(
                 "nav-shell glass-light text-ink pointer-events-auto mx-auto mt-3 flex h-18 w-full max-w-[100vw] items-center justify-between gap-6 rounded-full pr-2",
                 "group-data-[lifted=true]/bar:h-14 group-data-[lifted=true]/bar:max-w-[44rem]",
-                "group-data-[lifted=true]/bar:bg-white group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
+                /* Canvas at 80%, not white at 100%: the bar is meant to read as
+                   a pane over the page, and pure white also sits cold against a
+                   palette built on a warm off-white. The blur is what makes the
+                   translucency read as glass rather than as a weak fill. */
+                "group-data-[lifted=true]/bar:bg-canvas/80 group-data-[lifted=true]/bar:backdrop-blur-xl group-data-[lifted=true]/bar:backdrop-saturate-150",
+                "group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
               )}
             >
               <div
                 className={cn(
-                  "nav-capsule glass-light flex h-14 shrink-0 items-center gap-8 rounded-full bg-white px-7 xl:gap-10",
+                  "nav-capsule glass-light flex h-14 shrink-0 items-center gap-8 rounded-full px-7 xl:gap-10",
+                  "bg-canvas/80 backdrop-blur-xl backdrop-saturate-150",
+                  /* Once the shell has taken the white over, the capsule steps
+                     out of the way entirely. Two translucent panes stacked
+                     would darken where they overlap, and an opaque one masks
+                     the shell’s own sheen   which is the step that showed up
+                     between the routes and contact. */
+                  "group-data-[lifted=true]/bar:bg-transparent group-data-[lifted=true]/bar:backdrop-filter-none",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                 )}
               >
@@ -313,12 +340,24 @@ export function SiteHeader() {
               <Link
                 href="/contact"
                 className={cn(
-                  "nav-capsule glass-dark bg-teal text-canvas hover:bg-teal-dk flex h-10 shrink-0 items-center gap-2 rounded-full pr-4 pl-5 text-[0.9375rem] font-semibold whitespace-nowrap",
+                  "nav-capsule group/cta glass-dark bg-teal text-canvas hover:bg-teal-dk flex h-12 shrink-0 items-center gap-2.5 rounded-full pr-5 pl-7 text-[1rem] font-semibold whitespace-nowrap",
+                  /* The shell closes to h-14 once the page has moved, so the
+                     button gives four pixels back rather than filling it. */
+                  "group-data-[lifted=true]/bar:h-11",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
+                  /* Lifts into its own light. The shadow is tinted with the
+                     teal rather than black, so it reads as the button glowing
+                     rather than as a heavier drop. */
+                  "hover:-translate-y-0.5 hover:shadow-[0_18px_38px_-14px_rgba(14,122,115,0.55)]",
+                  "motion-reduce:translate-none",
                 )}
               >
                 {t.nav.contact}
-                <ArrowUpRight aria-hidden strokeWidth={2} className="size-4" />
+                <ArrowUpRight
+                  aria-hidden
+                  strokeWidth={2}
+                  className="size-[1.05rem] transition-transform duration-300 ease-[var(--ease-brand)] group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none"
+                />
               </Link>
             </div>
           </div>

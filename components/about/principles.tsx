@@ -48,7 +48,7 @@ export function AboutPrinciples({
                       "--gt": `${TILT[index % TILT.length]}deg`,
                     } as CSSProperties
                   }
-                  className="deal-card bg-cream relative flex flex-col rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
+                  className="deal-card glass-light bg-cream relative flex flex-col rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
                 >
                   <p className="font-label text-gold-dk text-[0.9375rem] font-bold tracking-[0.24em]">
                     {principle.n}

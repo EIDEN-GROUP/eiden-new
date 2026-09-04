@@ -98,7 +98,7 @@ export function SolutionsIntro() {
               >
                 <span
                   aria-hidden
-                  className="font-label text-teal/40 group-hover:text-teal text-[0.8rem] font-bold tracking-[0.2em] tabular-nums transition-colors duration-500"
+                  className="numeral text-teal/40 group-hover:text-teal text-[0.8rem] font-bold tracking-[0.2em] transition-colors duration-500"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>

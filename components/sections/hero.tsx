@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { LogoMarquee } from "@/components/ui/marquee";
@@ -29,13 +29,24 @@ export function Hero() {
     let raf = 0;
     let painted = Number.NaN;
     let height = section.offsetHeight;
+    let seen = -1;
+    let docTop = 0;
 
     const measure = () => {
       height = section.offsetHeight;
+      docTop = section.getBoundingClientRect().top + window.scrollY;
+      seen = -1;
     };
 
     const paint = () => {
-      const travelled = -section.getBoundingClientRect().top;
+      const y = window.scrollY;
+      if (y === seen) {
+        raf = requestAnimationFrame(paint);
+        return;
+      }
+      seen = y;
+
+      const travelled = y - docTop;
       const share = height ? travelled / (height * DEPART_OVER) : 0;
       const value = Math.round(Math.min(Math.max(share, 0), 1) * 500) / 500;
 
@@ -63,10 +74,15 @@ export function Hero() {
     );
 
     observer.observe(section);
+    measure();
+
+    const resize = new ResizeObserver(measure);
+    resize.observe(document.body);
     window.addEventListener("resize", measure);
 
     return () => {
       observer.disconnect();
+      resize.disconnect();
       window.removeEventListener("resize", measure);
       if (raf) cancelAnimationFrame(raf);
     };
@@ -99,7 +115,6 @@ export function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]"
       >
-        {/* <HeroVideo src="/media/eiden-hero.mp4" poster="/media/eiden-hero-poster.jpg" className="object-[50%_62%]" /> */}
         <Image
           src="/media/hero.png"
           alt=""
@@ -113,9 +128,41 @@ export function Hero() {
         aria-hidden
         className="absolute inset-x-0 bottom-0 -z-10 h-[62%] bg-[linear-gradient(to_top,rgba(244,235,208,0.94)_0%,rgba(244,235,208,0.78)_22%,rgba(244,235,208,0.42)_52%,rgba(244,235,208,0)_100%)]"
       />
-      <div className="relative flex flex-1 flex-col justify-around px-5 sm:px-10 lg:px-20">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-10 hidden w-[11rem] flex-col justify-center gap-[16vh] xl:flex 2xl:right-16 2xl:w-[13rem]"
+      >
+        <div
+          className={cn(enter, "border-ink/15 border-l pl-5")}
+          style={stage(0.95)}
+        >
+          {t.hero.rail.map((word) => (
+            <p key={word} className="eyebrow text-ink/40 leading-[2]">
+              {word}
+            </p>
+          ))}
+        </div>
+
+        <div className={cn(enter)} style={stage(1.05)}>
+          <p className="eyebrow text-ink/40 leading-[2]">{t.hero.railClaim}</p>
+          <span aria-hidden className="bg-gold/70 mt-4 block h-px w-9" />
+        </div>
+      </div>
+
+      <div className="relative flex flex-1 flex-col justify-between px-5 pb-2 sm:px-10 lg:px-20">
         <div>
-          <h1 className="text-balance-tight text-ink mb-10 max-w-7xl pt-24 text-[50px] leading-[1.02] font-medium sm:text-[100px]">
+          <div
+            className={cn(
+              enter,
+              "flex items-center gap-4 pt-[clamp(4.75rem,9vh,6rem)]",
+            )}
+            style={stage(0.08)}
+          >
+            <span aria-hidden className="bg-gold h-px w-8 sm:w-10" />
+            <p className="eyebrow text-ink/55">{t.hero.eyebrow}</p>
+          </div>
+
+          <h1 className="text-balance-tight text-ink mt-[clamp(0.75rem,2vh,2.25rem)] mb-[clamp(1.125rem,3.2vh,2.5rem)] text-[clamp(2.35rem,min(4.05vw,9.5vh),5rem)] leading-[1.06] font-medium xl:max-w-[calc(100%-16rem)]">
             {words.map((word, index) => {
               const rise = stage(WORD_LEAD + index * WORD_STEP);
               const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
@@ -161,29 +208,29 @@ export function Hero() {
             })}
           </h1>
           <div className={cn(enter, "min-w-0")} style={stage(0.58)}>
-            <p className="text-ink max-w-3xl text-[14px] leading-relaxed sm:text-[18px]">
+            <p className="text-ink max-w-3xl text-[clamp(0.9375rem,0.55rem+0.85vw,1.125rem)] leading-relaxed">
               {t.hero.description}
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <div className="mt-[clamp(1.25rem,3.4vh,2.5rem)] flex flex-wrap items-center gap-x-7 gap-y-3">
               <Link
                 href="/contact"
-                className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
+                className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
               >
                 {t.common.bookCall}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
               <Link
                 href="/nos-solutions"
-                className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300"
+                className="group text-ink border-ink hover:border-ink inline-flex h-9 items-center gap-6 border-b text-[0.9375rem] transition-colors duration-300"
               >
                 {t.common.seeSolutions}
-                <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
+                <ArrowRight className={arrow} strokeWidth={2} aria-hidden />
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 items-center gap-2 pt-3 pb-5 sm:pt-5 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-end gap-6 pt-3 pb-5 sm:pt-5 lg:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <div
               className={cn(enter, "flex items-center gap-3 md:justify-start")}
@@ -203,17 +250,32 @@ export function Hero() {
             <div
               className={cn(
                 enter,
-                "border-ink/12 mt-3 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:gap-10 sm:pt-7",
+                "border-ink/12 mt-3 flex flex-col gap-4 border-t pt-[clamp(1rem,2.6vh,1.75rem)] sm:flex-row sm:items-center sm:gap-10",
               )}
               style={stage(0.78)}
             >
-              <p className="eyebrow text-ink shrink-0">{t.hero.clientsLabel}</p>
+              <p className="eyebrow text-ink/60 shrink-0">{t.hero.clientsLabel}</p>
               <LogoMarquee
                 logos={clientLogos}
                 tone="dark"
                 speed={46}
                 className="min-w-0 flex-1"
               />
+            </div>
+
+            <div
+              className={cn(
+                enter,
+                "text-ink/45 mt-[clamp(1rem,3vh,2.25rem)] hidden items-center gap-4 lg:flex",
+              )}
+              style={stage(0.88)}
+            >
+              <ArrowDown
+                aria-hidden
+                strokeWidth={1.4}
+                className="size-8 shrink-0 motion-safe:[animation:eiden-cue_2.6s_var(--ease-brand)_infinite]"
+              />
+              <p className="eyebrow">{t.hero.scrollCue}</p>
             </div>
           </div>
           <div className="md:justify-self-end">
@@ -222,11 +284,11 @@ export function Hero() {
                 href="/projects/lunja-village"
                 className={cn(
                   enter,
-                  "group glass-light border-ink/10 bg-canvas hover:border-ink/25 mt-5 flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
+                  "group glass-light border-ink/10 bg-canvas hover:border-ink/25 mt-[clamp(0.5rem,2vh,1.25rem)] flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
                 )}
                 style={stage(0.76)}
               >
-                <span className="relative size-30 h-40! shrink-0 overflow-hidden rounded-xl">
+                <span className="relative h-[clamp(5.5rem,20vh,10rem)]! w-[clamp(4.5rem,9vw,7.5rem)] shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={featured.image}
                     alt=""
@@ -244,7 +306,7 @@ export function Hero() {
                     {t.hero.featured.text}
                   </span>
                   <span className="text-ink/50 mt-2 block text-[0.82rem]">
-                    <span className="text-ink/80 font-medium">
+                    <span className="numeral text-ink/80 font-medium">
                       {featured.metric}
                     </span>{" "}
                     {t.hero.featured.metricLabel}

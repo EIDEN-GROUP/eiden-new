@@ -591,6 +591,20 @@
   }
 }
 
+/* The scroll cue: a slow fall and return, so it reads as an invitation
+   rather than as something blinking for attention. */
+@keyframes eiden-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(0.4rem);
+    opacity: 1;
+  }
+}
+
 @keyframes eiden-mark-head {
   from {
     left: 0%;
@@ -616,6 +630,25 @@
   to {
     transform: translate3d(101%, 0, 0);
   }
+}
+
+/* Figures, set in the display face.
+
+   The labels around them are Cormorant, whose figures are old-style   they
+   sit below the cap height and vary in size, so `06` reads as an ornament
+   beside its own label rather than as a number. Outfit is lined and even.
+   Tabular widths keep a column of them from shuffling as the digits change,
+   which matters for the counters and the timecode. Nothing else about the
+   label changes: size, weight and tracking stay with whatever carries it.
+
+   Deliberately unlayered   `eyebrow` is an @utility, and a plain class
+   outside the layer wins the family back without `!important`. */
+.numeral {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings:
+    "lnum" 1,
+    "tnum" 1;
 }
 
 /* ============================================================
@@ -795,6 +828,33 @@
   }
 }
 
+/* The routes capsule is the surface at rest, so it carries the glass. Once
+   the shell has taken the white over, that capsule is sitting inside a single
+   white pill   and its own rim then draws a seam across it, right where the
+   routes end and contact begins. So the two hand the glass over on the same
+   beat as the shadow: shell takes it, capsule gives it up.
+
+   Contact is the exception and keeps its own. It stays a colour of its own in
+   both states, so its rim is an edge between two surfaces rather than a line
+   drawn across one. */
+.nav-capsule.glass-light::before,
+.nav-capsule.glass-light::after {
+  transition: opacity 0.3s var(--ease-brand);
+}
+
+[data-lifted="true"] .nav-capsule.glass-light::before,
+[data-lifted="true"] .nav-capsule.glass-light::after {
+  opacity: 0;
+  transition-delay: 0.42s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-capsule.glass-light::before,
+  .nav-capsule.glass-light::after {
+    transition: none;
+  }
+}
+
 .idea-wash {
   position: absolute;
   inset: 0;
@@ -891,7 +951,12 @@
     color-mix(in oklab, var(--color-ink) 72%, transparent) 62%,
     color-mix(in oklab, var(--color-ink) 75%, transparent) 100%
   );
-  backdrop-filter: blur(28px) saturate(155%);
+  /* 18px, not 28. A backdrop blur is re-sampled whenever what sits behind
+     it moves, and behind these the wash parallaxes for the whole of a 300vh
+     pin   so this is the dearest thing on the page, and its cost runs with
+     the radius. Ten pixels off is invisible on a surface this dark, and is
+     felt in the wheel. */
+  backdrop-filter: blur(18px) saturate(150%);
   box-shadow:
     0 1px 2px 0 rgba(6, 18, 14, 0.3),
     0 20px 40px -26px rgba(6, 18, 14, 0.45),
@@ -1026,7 +1091,8 @@
     max-width 0.7s var(--ease-brand),
     height 0.7s var(--ease-brand),
     background-color 0.26s var(--ease-brand),
-    box-shadow 0.26s var(--ease-brand);
+    box-shadow 0.26s var(--ease-brand),
+    backdrop-filter 0.4s var(--ease-brand);
 }
 
 /* Both capsules   the white one and contact   lose their shadow to the
@@ -1035,7 +1101,11 @@
 .nav-capsule {
   transition:
     background-color 0.5s var(--ease-brand),
-    box-shadow 0.26s var(--ease-brand);
+    box-shadow 0.26s var(--ease-brand),
+    height 0.7s var(--ease-brand),
+    translate 0.35s var(--ease-brand),
+    transform 0.35s var(--ease-brand),
+    backdrop-filter 0.4s var(--ease-brand);
 }
 
 [data-lifted="true"] .nav-shell {
@@ -1043,13 +1113,18 @@
     max-width 0.7s var(--ease-brand),
     height 0.7s var(--ease-brand),
     background-color 0.3s var(--ease-brand) 0.42s,
-    box-shadow 0.3s var(--ease-brand) 0.42s;
+    box-shadow 0.3s var(--ease-brand) 0.42s,
+    backdrop-filter 0.4s var(--ease-brand) 0.42s;
 }
 
 [data-lifted="true"] .nav-capsule {
   transition:
     background-color 0.5s var(--ease-brand),
-    box-shadow 0.3s var(--ease-brand) 0.42s;
+    box-shadow 0.3s var(--ease-brand) 0.42s,
+    height 0.7s var(--ease-brand),
+    translate 0.35s var(--ease-brand),
+    transform 0.35s var(--ease-brand),
+    backdrop-filter 0.4s var(--ease-brand);
 }
 
 /* ============================================================

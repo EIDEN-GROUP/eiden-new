@@ -39,16 +39,19 @@ export function Idea() {
     }
 
     let frame = 0;
+    /* `offsetHeight` is a second layout flush for a number that only
+       changes on resize, so it is measured there instead of per frame. */
+    let span = track.offsetHeight - window.innerHeight;
+    let docTop = track.getBoundingClientRect().top + window.scrollY;
 
     const update = () => {
       frame = 0;
-      const box = track.getBoundingClientRect();
-      const span = track.offsetHeight - window.innerHeight;
+      const top = docTop - window.scrollY;
       const p = animate
         ? span > 0
-          ? clamp01(-box.top / span)
+          ? clamp01(-top / span)
           : 0
-        : clamp01((window.innerHeight - box.top) / (window.innerHeight * 0.9));
+        : clamp01((window.innerHeight - top) / (window.innerHeight * 0.9));
 
       const dim = animate ? ramp(p, 0.34, 0.6) : ramp(p, 0.05, 0.45);
       track.style.setProperty("--dim", `${dim}`);
@@ -73,13 +76,26 @@ export function Idea() {
       if (!frame) frame = requestAnimationFrame(update);
     };
 
+    const onResize = () => {
+      span = track.offsetHeight - window.innerHeight;
+      docTop = track.getBoundingClientRect().top + window.scrollY;
+      onScroll();
+    };
+
+    /* Watching the body, not the track: what moves this section is the
+       page growing above it   an image landing in the hero shifts where the
+       track starts without changing its own size at all. */
+    const observer = new ResizeObserver(onResize);
+    observer.observe(document.body);
+
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
+      observer.disconnect();
       if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [animate, reduced]);
 
@@ -158,7 +174,10 @@ export function Idea() {
                             index === 2 && "lg:border-t-0",
                           )}
                         >
-                          <span aria-hidden className="eyebrow text-cream pt-0.5">
+                          <span
+                            aria-hidden
+                            className="eyebrow numeral text-cream pt-0.5"
+                          >
                             {String(index + 1).padStart(2, "0")}
                           </span>
                           <span className="text-canvas/80 text-[0.9375rem] leading-snug">
