@@ -128,7 +128,7 @@ export function Hero() {
         aria-hidden
         className="absolute inset-x-0 bottom-0 -z-10 h-[62%] bg-[linear-gradient(to_top,rgba(244,235,208,0.94)_0%,rgba(244,235,208,0.78)_22%,rgba(244,235,208,0.42)_52%,rgba(244,235,208,0)_100%)]"
       />
-      <div
+      {/* <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 right-10 hidden w-[11rem] flex-col justify-center gap-[16vh] xl:flex 2xl:right-16 2xl:w-[13rem]"
       >
@@ -147,7 +147,7 @@ export function Hero() {
           <p className="eyebrow text-ink/40 leading-[2]">{t.hero.railClaim}</p>
           <span aria-hidden className="bg-gold/70 mt-4 block h-px w-9" />
         </div>
-      </div>
+      </div> */}
 
       <div className="relative flex flex-1 flex-col justify-between px-5 pb-2 sm:px-10 lg:px-20">
         <div>
