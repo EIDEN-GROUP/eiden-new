@@ -154,26 +154,47 @@ export function Vsl() {
   const withGrow = { opacity: "var(--grow, 1)" } as CSSProperties;
 
   return (
-    <section id="methode" ref={sectionRef} className="pointer-events-none pt-20 relative z-10">
+    <section
+      id="methode"
+      ref={sectionRef}
+      className="pointer-events-none relative z-10 pt-20"
+    >
       <div className="container-eiden">
         <Reveal direction="none" duration={0.5}>
           <p className="eyebrow text-teal flex items-center gap-3">
-            <span aria-hidden className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.1s_both]" />
+            <span
+              aria-hidden
+              className="h-px w-8 origin-left bg-current opacity-50 motion-safe:[animation:eiden-underline_0.8s_var(--ease-brand)_0.1s_both]"
+            />
             {t.vsl.eyebrow}
           </p>
         </Reveal>
 
-        <RevealWords as="h2" text={t.vsl.title} delay={0.05} className="text-ink mt-6 max-w-4xl text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]" />
+        <RevealWords
+          as="h2"
+          text={t.vsl.title}
+          delay={0.05}
+          className="text-ink mt-6 max-w-4xl text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]"
+        />
         {/* <Reveal delay={0.1} direction="none">
           <p className="eyebrow text-ink/50 mt-8 hidden lg:block">
             {t.vsl.title}
           </p>
         </Reveal> */}
       </div>
-      <div ref={litRef} data-nav-tone="light" className="grain bg-canvas pointer-events-auto relative">
+      <div
+        ref={litRef}
+        data-nav-tone="light"
+        className="grain bg-canvas pointer-events-auto relative"
+      >
         <span aria-hidden className="vsl-wash" />
         <div ref={trackRef} className="vsl-track relative z-2">
-          <div className={cn( "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8", "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14", )}>
+          <div
+            className={cn(
+              "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8",
+              "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14",
+            )}
+          >
             <span aria-hidden className="vsl-bloom" />
             <div className="relative z-2 flex flex-1 flex-col justify-end pb-12 md:pb-8">
               {/* <Reveal direction="none" duration={0.5}>
@@ -235,7 +256,7 @@ export function Vsl() {
 
                     <span
                       className={cn(
-                        "bg-canvas/95 text-forest relative flex size-full items-center justify-center rounded-full backdrop-blur-sm",
+                        "glass-light bg-canvas/95 text-forest relative flex size-full items-center justify-center rounded-full backdrop-blur-sm",
                         "shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]",
                         "transition-transform duration-400 ease-[var(--ease-brand)]",
                         "group-hover:scale-[1.06] active:scale-95 motion-reduce:transition-none",
@@ -262,7 +283,10 @@ export function Vsl() {
                   </span>
                 </button>
 
-                <span style={withGrow} className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block">
+                <span
+                  style={withGrow}
+                  className="font-label text-canvas/70 absolute bottom-0 left-0 hidden p-5 text-[0.8rem] tracking-[0.18em] tabular-nums sm:block"
+                >
                   <span ref={elapsedRef}>0:00</span>
                   <span className="text-canvas/40">
                     {" / "}
@@ -270,12 +294,15 @@ export function Vsl() {
                   </span>
                 </span>
 
-                <div style={withGrow} className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2.5 p-4 sm:p-5">
+                <div
+                  style={withGrow}
+                  className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2.5 p-4 sm:p-5"
+                >
                   <button
                     type="button"
                     onClick={toggleMute}
                     aria-label={muted ? t.vsl.unmute : t.vsl.mute}
-                    className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                    className="glass-dark border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
                   >
                     {muted ? (
                       <VolumeX className="size-3.5" strokeWidth={1.7} aria-hidden />
@@ -285,14 +312,25 @@ export function Vsl() {
                     {t.vsl.sound}
                   </button>
 
-                  <button type="button" onClick={goFullscreen} className="border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300">
+                  <button
+                    type="button"
+                    onClick={goFullscreen}
+                    className="glass-dark border-canvas/20 bg-ink/60 text-canvas hover:bg-canvas hover:text-ink font-label flex items-center gap-2 rounded-full border px-4 py-2 text-[0.75rem] font-bold tracking-[0.18em] uppercase backdrop-blur-xl transition-colors duration-300"
+                  >
                     <Maximize className="size-3.5" strokeWidth={1.7} aria-hidden />
                     {t.vsl.fullscreen}
                   </button>
                 </div>
 
-                <span aria-hidden className="bg-canvas/15 absolute inset-x-0 bottom-0 h-px">
-                  <span ref={barRef} className="bg-gold absolute inset-0 origin-left" style={{ transform: "scaleX(0)" } as CSSProperties} />
+                <span
+                  aria-hidden
+                  className="bg-canvas/15 absolute inset-x-0 bottom-0 h-px"
+                >
+                  <span
+                    ref={barRef}
+                    className="bg-gold absolute inset-0 origin-left"
+                    style={{ transform: "scaleX(0)" } as CSSProperties}
+                  />
                 </span>
               </div>
             </div>

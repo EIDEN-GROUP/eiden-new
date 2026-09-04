@@ -35,7 +35,7 @@ export function FloatingActions() {
   const scrolled = useScrolledPast(560);
 
   const skin =
-    "border-forest/8 bg-canvas/85 text-forest/70 hover:text-forest shadow-[0_10px_40px_-16px_rgba(18,38,32,0.35)] backdrop-blur-xl";
+    "glass-light border-forest/8 bg-canvas/85 text-forest/70 hover:text-forest shadow-[0_10px_40px_-16px_rgba(18,38,32,0.35)] backdrop-blur-xl";
   const swap =
     "transition-[opacity,transform] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none";
 
@@ -69,7 +69,7 @@ export function FloatingActions() {
         tabIndex={footerRevealed ? -1 : undefined}
         aria-hidden={footerRevealed || undefined}
         className={cn(
-          "bg-teal hover:bg-teal-lt text-canvas flex size-11 items-center justify-center rounded-full shadow-[0_10px_40px_-16px_rgba(18,38,32,0.55)]",
+          "glass-dark bg-teal hover:bg-teal-lt text-canvas flex size-11 items-center justify-center rounded-full shadow-[0_10px_40px_-16px_rgba(18,38,32,0.55)]",
           swap,
           footerRevealed
             ? "translate-y-2 opacity-0"

@@ -618,6 +618,183 @@
   }
 }
 
+/* ============================================================
+   Glass skin   a treatment, not a surface
+
+   The pane in `#idee` is glass all the way through: it sets its
+   own smoke, its own blur, its own shadow stack. Everything else
+   on the page already has a surface the design chose, so these
+   classes add only the three things that make a surface read as
+   glass   a lit rim, light caught inside it, and the depth of a
+   real thickness   and touch nothing else.
+
+   Two rules keep them safe to drop on an existing element:
+   nothing here sets `background`, and the inset highlights live
+   on the pseudo rather than on the element, so whatever
+   `box-shadow` the element already carries is left alone.
+
+   `glass-light` for pale surfaces, `glass-dark` for ink and
+   saturated colour. Add `glass-top` when the content is a
+   photograph, so the rim lies over it instead of under.
+   ============================================================ */
+
+.glass-light,
+.glass-dark {
+  position: relative;
+  isolation: isolate;
+}
+
+.glass-light::before,
+.glass-light::after,
+.glass-dark::before,
+.glass-dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-top::before,
+.glass-top::after {
+  z-index: 2;
+}
+
+/* The rim is a 1px ring cut out of a gradient, so the light along
+   it is uneven the way light on an edge actually is. */
+.glass-light::after,
+.glass-dark::after {
+  padding: 1px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ── Ink and colour ─────────────────────────────────────────── */
+
+.glass-dark::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.035) 8%,
+      transparent 26%
+    ),
+    radial-gradient(
+      120% 76% at 4% -14%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 58%
+    ),
+    linear-gradient(0deg, rgba(4, 14, 11, 0.22) 0%, transparent 30%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+    inset 0 26px 50px -42px rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark::after {
+  background:
+    radial-gradient(
+      70% 128% at 8% -12%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      56% 108% at 99% 4%,
+      rgba(255, 255, 255, 0.28) 0%,
+      transparent 56%
+    ),
+    radial-gradient(
+      86% 66% at 60% 112%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.26) 0%,
+      rgba(255, 255, 255, 0.07) 24%,
+      rgba(255, 255, 255, 0.03) 60%,
+      rgba(255, 255, 255, 0.14) 100%
+    );
+}
+
+/* ── Pale surfaces ──────────────────────────────────────────── */
+
+.glass-light::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0.22) 9%,
+      transparent 28%
+    ),
+    radial-gradient(
+      120% 76% at 4% -14%,
+      rgba(255, 255, 255, 0.38) 0%,
+      transparent 58%
+    ),
+    linear-gradient(0deg, rgba(18, 38, 32, 0.05) 0%, transparent 26%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 0 rgba(18, 38, 32, 0.07),
+    inset 0 22px 44px -40px rgba(255, 255, 255, 0.75);
+}
+
+.glass-light::after {
+  background:
+    radial-gradient(
+      70% 128% at 8% -12%,
+      rgba(255, 255, 255, 0.95) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      56% 108% at 99% 4%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 56%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.4) 22%,
+      rgba(18, 38, 32, 0.05) 62%,
+      rgba(18, 38, 32, 0.1) 100%
+    );
+}
+
+/* The bar and the shell are transparent until the page has moved,
+   so their glass arrives with the white rather than hanging over
+   the first screen on its own. The delay matches the shell's. */
+.nav-shell::before,
+.nav-shell::after,
+.nav-bar::before,
+.nav-bar::after {
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-brand);
+}
+
+[data-lifted="true"] .nav-shell::before,
+[data-lifted="true"] .nav-shell::after,
+[data-lifted="true"] .nav-bar::before,
+[data-lifted="true"] .nav-bar::after {
+  opacity: 1;
+  transition-delay: 0.42s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-shell::before,
+  .nav-shell::after,
+  .nav-bar::before,
+  .nav-bar::after {
+    transition: none;
+  }
+}
+
 .idea-wash {
   position: absolute;
   inset: 0;

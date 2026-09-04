@@ -12,10 +12,10 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-teal text-canvas hover:bg-teal-lt shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]",
-  gold: "bg-gold text-forest hover:bg-gold-dk",
-  dark: "bg-forest text-canvas hover:bg-teal",
-  light: "bg-canvas text-forest hover:bg-beige",
+    "glass-dark bg-teal text-canvas hover:bg-teal-lt shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]",
+  gold: "glass-light bg-gold text-forest hover:bg-gold-dk",
+  dark: "glass-dark bg-forest text-canvas hover:bg-teal",
+  light: "glass-light bg-canvas text-forest hover:bg-beige",
   outline:
     "border border-current/25 bg-transparent text-current hover:border-current/60 hover:bg-current/5",
   ghost: "bg-transparent text-current hover:bg-current/8",

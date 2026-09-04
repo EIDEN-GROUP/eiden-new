@@ -190,7 +190,7 @@ export function SiteHeader() {
         >
           <div
             className={cn(
-              "flex h-16 items-center justify-between gap-4 px-5 sm:h-18 sm:px-10 lg:hidden",
+              "nav-bar glass-light flex h-16 items-center justify-between gap-4 px-5 sm:h-18 sm:px-10 lg:hidden",
               "border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
               /* Transparent on the first screen, its own white after it. */
               "group-data-[lifted=true]/bar:bg-canvas/88 group-data-[lifted=true]/bar:border-ink/8 group-data-[lifted=true]/bar:pointer-events-auto group-data-[lifted=true]/bar:backdrop-blur-xl",
@@ -221,7 +221,7 @@ export function SiteHeader() {
                 "pointer-events-auto flex h-10 shrink-0 items-center gap-3.5 rounded-full border pr-4 pl-5 sm:h-11 sm:gap-4 sm:pr-5 sm:pl-6",
                 "transition-[background-color,border-color,color] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                 open
-                  ? "bg-ink border-ink text-canvas"
+                  ? "glass-dark bg-ink border-ink text-canvas"
                   : "border-current/35 hover:border-current",
               )}
             >
@@ -256,14 +256,14 @@ export function SiteHeader() {
           <div className="hidden px-10 lg:block xl:px-12">
             <div
               className={cn(
-                "nav-shell text-ink pointer-events-auto mx-auto mt-3 flex h-18 w-full max-w-[100vw] items-center justify-between gap-6 rounded-full pr-2",
+                "nav-shell glass-light text-ink pointer-events-auto mx-auto mt-3 flex h-18 w-full max-w-[100vw] items-center justify-between gap-6 rounded-full pr-2",
                 "group-data-[lifted=true]/bar:h-14 group-data-[lifted=true]/bar:max-w-[44rem]",
                 "group-data-[lifted=true]/bar:bg-white group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
               )}
             >
               <div
                 className={cn(
-                  "nav-capsule flex h-14 shrink-0 items-center gap-8 rounded-full bg-white px-7 xl:gap-10",
+                  "nav-capsule glass-light flex h-14 shrink-0 items-center gap-8 rounded-full bg-white px-7 xl:gap-10",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                 )}
               >
@@ -313,7 +313,7 @@ export function SiteHeader() {
               <Link
                 href="/contact"
                 className={cn(
-                  "nav-capsule bg-teal text-canvas hover:bg-teal-dk flex h-10 shrink-0 items-center gap-2 rounded-full pr-4 pl-5 text-[0.9375rem] font-semibold whitespace-nowrap",
+                  "nav-capsule glass-dark bg-teal text-canvas hover:bg-teal-dk flex h-10 shrink-0 items-center gap-2 rounded-full pr-4 pl-5 text-[0.9375rem] font-semibold whitespace-nowrap",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                 )}
               >

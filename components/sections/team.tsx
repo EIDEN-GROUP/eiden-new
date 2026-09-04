@@ -26,7 +26,11 @@ function Member({
   accent: string;
 }) {
   return (
-    <Link href="/a-propos#equipe" aria-label={`${name} | ${role}`} className="group focus-visible:outline-teal relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2" >
+    <Link
+      href="/a-propos#equipe"
+      aria-label={`${name} | ${role}`}
+      className="group glass-dark glass-top focus-visible:outline-teal relative block aspect-4/5 overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2"
+    >
       <div
         aria-hidden
         className={cn(
@@ -99,7 +103,11 @@ export function Team() {
         </div>
 
         <Reveal delay={0.12} duration={0.9} className="mt-16">
-          <Link href="/a-propos#equipe" aria-label={`${founder.name}   ${founder.role}`} className="group border-ink/10 focus-visible:outline-teal grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]" >
+          <Link
+            href="/a-propos#equipe"
+            aria-label={`${founder.name}   ${founder.role}`}
+            className="group glass-light glass-top border-ink/10 focus-visible:outline-teal grid overflow-hidden rounded-3xl border focus-visible:outline-2 focus-visible:outline-offset-2 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]"
+          >
             <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-[26rem]">
               <Image
                 src="/work/CEO.png"
