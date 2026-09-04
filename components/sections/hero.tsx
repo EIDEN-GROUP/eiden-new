@@ -136,12 +136,12 @@ export function Hero() {
                 {t.hero.description}
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
-                <Link href="/nos-solutions" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
-                  {t.common.seeSolutions}
+                <Link href="/contact" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+                  {t.common.bookCall}
                   <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
                 </Link>
-                <Link href="/contact" className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
-                  {t.common.bookCall}
+                <Link href="/nos-solutions" className="group text-ink hover:text-ink inline-flex h-9 items-center gap-2 text-[0.9375rem] transition-colors duration-300">
+                  {t.common.seeSolutions}
                   <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
                 </Link>
               </div>

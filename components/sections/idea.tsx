@@ -65,10 +65,8 @@ export function Idea() {
 
       stage.style.setProperty("--head-x", `${ramp(p, 0, 0.42)}`);
       stage.style.setProperty("--head-o", `${1 - ramp(p, 0.3, 0.46)}`);
-      stage.style.setProperty("--first-in", `${ramp(p, 0.16, 0.4)}`);
-      stage.style.setProperty("--first-x", `${1 - ramp(p, 0.5, 0.78)}`);
-      stage.style.setProperty("--second-in", `${ramp(p, 0.52, 0.78)}`);
-      stage.style.setProperty("--second-x", `${1 - ramp(p, 0.5, 0.82)}`);
+      stage.style.setProperty("--first-in", `${ramp(p, 0.16, 0.42)}`);
+      stage.style.setProperty("--second-in", `${ramp(p, 0.5, 0.78)}`);
     };
 
     const onScroll = () => {
@@ -92,7 +90,11 @@ export function Idea() {
 
   return (
     <section id="idee" className="bg-cream relative">
-      <div ref={trackRef} data-nav-tone="light" className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0">
+      <div
+        ref={trackRef}
+        data-nav-tone="light"
+        className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0"
+      >
         <div aria-hidden className="idea-wash">
           <FixedBackdrop src={ideaTexture} imageClassName="scale-110 blur-md" />
         </div>
@@ -120,7 +122,7 @@ export function Idea() {
               </span>
             </h2>
 
-            <SwipeDeck className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
+            <SwipeDeck className="mx-auto grid max-w-7xl auto-rows-fr gap-5">
               {cards.map((card) => (
                 <article
                   key={card.label}
@@ -135,8 +137,7 @@ export function Idea() {
                     card.lane,
                   )}
                 >
-
-                  <div className="idea-face idea-glass text-canvas relative z-1 flex flex-1 flex-col p-8 backdrop-blur-2xl backdrop-saturate-150 sm:p-10 lg:p-12">
+                  <div className="idea-face idea-glass text-canvas relative z-1 flex flex-1 flex-col p-8 sm:p-10 lg:px-12 lg:py-7">
                     <div>
                       <p className="eyebrow text-canvas/85">{card.label}</p>
                       <p className="text-canvas mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
@@ -144,13 +145,17 @@ export function Idea() {
                       </p>
                     </div>
 
-                    <ol className="border-canvas/15 mt-10 border-t">
+                    <ol className="border-canvas/15 mt-6 grid border-t sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3 lg:gap-x-8">
                       {card.points.map((point, index) => (
                         <li
                           key={point}
                           className={cn(
-                            "grid grid-cols-[2.25rem_1fr] gap-4 py-4 sm:py-5",
-                            index > 0 && "border-canvas/15 border-t",
+                            "border-canvas/15 grid grid-cols-[2.25rem_1fr] gap-4 py-4 lg:grid-cols-[1.75rem_1fr] lg:gap-3",
+                            index > 0 && "border-t",
+                            // The first item of each column sits against the
+                            // list’s own rule, so it carries none of its own.
+                            index === 1 && "sm:border-t-0",
+                            index === 2 && "lg:border-t-0",
                           )}
                         >
                           <span aria-hidden className="eyebrow text-cream pt-0.5">

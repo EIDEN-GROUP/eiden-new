@@ -154,7 +154,7 @@ export function Vsl() {
   const withGrow = { opacity: "var(--grow, 1)" } as CSSProperties;
 
   return (
-    <section id="methode" ref={sectionRef} className="pointer-events-none relative z-10">
+    <section id="methode" ref={sectionRef} className="pointer-events-none pt-20 relative z-10">
       <div className="container-eiden">
         <Reveal direction="none" duration={0.5}>
           <p className="eyebrow text-teal flex items-center gap-3">
