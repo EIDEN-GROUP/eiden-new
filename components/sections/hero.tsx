@@ -42,7 +42,7 @@ export function Hero() {
     >
       <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
         <Image
-          src="/media/hero-bg.png"
+          src="/media/hero bg.png"
           alt=""
           fill
           priority

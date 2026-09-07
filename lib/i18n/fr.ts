@@ -63,11 +63,11 @@ export const fr = {
     rail: ["Strategy", "Systems", "Growth"],
     railClaim: "Where chaos becomes architecture.",
     scrollCue: "Scroller pour découvrir",
-    titleLead: "La structure digitale qui fait",
-    titleAccent: "grandir",
-    titleTail: "votre entreprise.",
+    titleLead: "La structure qui fait",
+    titleAccent: "avancer",
+    titleTail: "votre business.",
     description:
-      "Web-apps, marque, marketing & ads : la plupart des entreprises ajoutent ces éléments un par un, chacun de son côté. Nous faisons l’inverse. Nous construisons d’abord une base solide, puis nous ajoutons chaque pièce dessus pour que tout fonctionne ensemble.",
+      "Stratégie, création, digital, technologie, contenu et marketing : nous réunissons toutes les expertises pour transformer vos besoins en solutions concrètes. Une seule équipe pour imaginer, construire et faire avancer vos projets.",
     stats: [
       { value: "25+", label: "Entreprises accompagnées" },
       { value: "92%", label: "Clients en accompagnement continu" },
