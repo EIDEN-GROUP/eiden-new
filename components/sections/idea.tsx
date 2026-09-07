@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CircleSlash2, Pause, Play, Sparkles, Sprout } from "lucide-react";
+import { Ban, CircleSlash2, Pause, Play, Pyramid, Sparkles, Sprout } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
@@ -18,13 +18,13 @@ const lanes = [
   {
     lane: "idea-card-first",
     enter: "--first-in",
-    Glyph: Pause,
+    Glyph: Ban,
     image: "/work/card-1.jpeg",
   },
   {
     lane: "idea-card-second",
     enter: "--second-in",
-    Glyph: Play,
+    Glyph: Pyramid,
     image: "/work/card-2.jpeg",
   },
 ];
@@ -166,7 +166,7 @@ export function Idea() {
                     <span aria-hidden className="idea-shot-veil" />
 
                     <div className="relative z-1">
-                      <p className="idea-chip">
+                      <p className="idea-chip flex items-center">
                         <Glyph
                           className="size-4 shrink-0"
                           strokeWidth={3}
@@ -175,7 +175,7 @@ export function Idea() {
                         {card.label}
                       </p>
 
-                      <h4 className="idea-shot-title text-canvas mt-4 text-[clamp(1.1rem,2.2vw,1.5rem)] leading-[1.16] font-semibold tracking-[-0.03em] text-balance">
+                      <h4 className="idea-shot-title text-canvas capitalize mt-4 text-[clamp(1.1rem,2.2vw,1.5rem)] leading-[1.16] font-semibold tracking-[-0.03em] text-balance">
                         {card.body}
                       </h4>
                     </div>
