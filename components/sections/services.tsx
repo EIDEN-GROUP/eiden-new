@@ -62,9 +62,9 @@ export function Services() {
                     alt=""
                     fill
                     sizes="100vw"
-                    className="object-cover object-center"
+                    className="idea-shot-img object-cover"
                   />
-                  <span className="bg-ink/50 absolute inset-0" />
+                  <span aria-hidden className="idea-shot-veil" />
                 </span>
               ) : null}
 

@@ -250,9 +250,9 @@ export const movementMedia = [
 ] as const;
 
 export const serviceMedia: Record<string, string> = {
-  web: "/services/web-2.jpg",
-  visibilite: "/services/op-1.jpg",
-  media: "/services/audit-2.jpg",
-  contenu: "/services/illustration.jpg",
-  photoVid: "/services/photoVid.jpeg",
+  web: "/services/photo-5.jpg",
+  visibilite: "/services/photo-1.jpeg",
+  media: "/services/photo-2.png",
+  contenu: "/services/photo-4.png",
+  photoVid: "/services/photo-1.png",
 };
