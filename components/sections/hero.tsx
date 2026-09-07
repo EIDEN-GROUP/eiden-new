@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Star } from "lucide-react";
-import { useEffect, useRef, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { LogoMarquee } from "@/components/ui/marquee";
 import { useLanguage } from "@/components/providers/language-provider";
-import { caseStudies, clientLogos } from "@/lib/data/site";
+import { caseStudies, clientLogos, siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 const enter = "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
@@ -15,79 +15,9 @@ const stage = (seconds: number) =>
   ({ animationDelay: `${seconds}s` }) as CSSProperties;
 const WORD_LEAD = 0.18;
 const WORD_STEP = 0.075;
-const DEPART_OVER = 0.55;
 
 export function Hero() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let raf = 0;
-    let painted = Number.NaN;
-    let height = section.offsetHeight;
-    let seen = -1;
-    let docTop = 0;
-
-    const measure = () => {
-      height = section.offsetHeight;
-      docTop = section.getBoundingClientRect().top + window.scrollY;
-      seen = -1;
-    };
-
-    const paint = () => {
-      const y = window.scrollY;
-      if (y === seen) {
-        raf = requestAnimationFrame(paint);
-        return;
-      }
-      seen = y;
-
-      const travelled = y - docTop;
-      const share = height ? travelled / (height * DEPART_OVER) : 0;
-      const value = Math.round(Math.min(Math.max(share, 0), 1) * 500) / 500;
-
-      if (value !== painted) {
-        painted = value;
-        section.style.setProperty("--depart", `${value}`);
-      }
-      raf = requestAnimationFrame(paint);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!raf) raf = requestAnimationFrame(paint);
-          return;
-        }
-        if (raf) {
-          cancelAnimationFrame(raf);
-          raf = 0;
-        }
-        painted = 1;
-        section.style.setProperty("--depart", "1");
-      },
-      { threshold: 0 },
-    );
-
-    observer.observe(section);
-    measure();
-
-    const resize = new ResizeObserver(measure);
-    resize.observe(document.body);
-    window.addEventListener("resize", measure);
-
-    return () => {
-      observer.disconnect();
-      resize.disconnect();
-      window.removeEventListener("resize", measure);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   const words = [
     ...t.hero.titleLead
       .split(" ")
@@ -107,14 +37,10 @@ export function Hero() {
 
   return (
     <section
-      ref={sectionRef}
       data-nav-tone="light"
-      className="hero-depart relative isolate flex min-h-svh flex-col overflow-hidden lg:p-10"
+      className="relative isolate flex min-h-svh flex-col overflow-hidden lg:p-10"
     >
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]"
-      >
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
         <Image
           src="/media/hero.png"
           alt=""
@@ -213,7 +139,7 @@ export function Hero() {
             </p>
             <div className="mt-[clamp(1.25rem,3.4vh,2.5rem)] flex flex-wrap items-center gap-x-7 gap-y-3">
               <Link
-                href="/contact"
+                href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`}
                 className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
               >
                 {t.common.bookCall}
@@ -231,7 +157,7 @@ export function Hero() {
         </div>
 
         <div className="grid grid-cols-1 items-end gap-6 pt-3 pb-5 sm:pt-5 lg:grid-cols-[minmax(0,1fr)_auto]">
-          <div>
+          <div className="order-2 lg:order-1">
             <div
               className={cn(enter, "flex items-center gap-3 md:justify-start")}
               style={stage(0.68)}
@@ -263,7 +189,7 @@ export function Hero() {
               />
             </div>
 
-            <div
+            {/* <div
               className={cn(
                 enter,
                 "text-ink/45 mt-[clamp(1rem,3vh,2.25rem)] hidden items-center gap-4 lg:flex",
@@ -276,9 +202,9 @@ export function Hero() {
                 className="size-8 shrink-0 motion-safe:[animation:eiden-cue_2.6s_var(--ease-brand)_infinite]"
               />
               <p className="eyebrow">{t.hero.scrollCue}</p>
-            </div>
+            </div> */}
           </div>
-          <div className="md:justify-self-end">
+          <div className="md:justify-self-end order-1 lg:order-2">
             {featured ? (
               <Link
                 href="/projects/lunja-village"
@@ -288,7 +214,7 @@ export function Hero() {
                 )}
                 style={stage(0.76)}
               >
-                <span className="relative h-[clamp(5.5rem,20vh,10rem)]! w-[clamp(4.5rem,9vw,7.5rem)] shrink-0 overflow-hidden rounded-xl">
+                <span className="relative h-[clamp(5.5rem,20vh,10rem)]! w-[clamp(7rem,9vw,7.5rem)] shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={featured.image}
                     alt=""

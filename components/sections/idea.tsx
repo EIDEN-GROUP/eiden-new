@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import { CircleSlash2, Sparkles } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
@@ -13,8 +15,18 @@ const ramp = (value: number, from: number, to: number) =>
   clamp01((value - from) / (to - from));
 
 const lanes = [
-  { lane: "idea-card-first", enter: "--first-in", lean: "-1" },
-  { lane: "idea-card-second", enter: "--second-in", lean: "1" },
+  {
+    lane: "idea-card-first",
+    enter: "--first-in",
+    Glyph: CircleSlash2,
+    image: "/work/card-1.jpeg",
+  },
+  {
+    lane: "idea-card-second",
+    enter: "--second-in",
+    Glyph: Sparkles,
+    image: "/work/card-2.jpeg",
+  },
 ];
 
 export function Idea() {
@@ -39,8 +51,6 @@ export function Idea() {
     }
 
     let frame = 0;
-    /* `offsetHeight` is a second layout flush for a number that only
-       changes on resize, so it is measured there instead of per frame. */
     let span = track.offsetHeight - window.innerHeight;
     let docTop = track.getBoundingClientRect().top + window.scrollY;
 
@@ -61,6 +71,7 @@ export function Idea() {
       }
 
       if (!animate) {
+        stage.style.setProperty("--deck-in", `${ramp(p, 0.02, 0.26)}`);
         stage.style.setProperty("--first-in", `${ramp(p, 0.1, 0.4)}`);
         stage.style.setProperty("--second-in", `${ramp(p, 0.28, 0.58)}`);
         return;
@@ -68,6 +79,7 @@ export function Idea() {
 
       stage.style.setProperty("--head-x", `${ramp(p, 0, 0.42)}`);
       stage.style.setProperty("--head-o", `${1 - ramp(p, 0.3, 0.46)}`);
+      stage.style.setProperty("--deck-in", `${ramp(p, 0.1, 0.32)}`);
       stage.style.setProperty("--first-in", `${ramp(p, 0.16, 0.42)}`);
       stage.style.setProperty("--second-in", `${ramp(p, 0.5, 0.78)}`);
     };
@@ -81,10 +93,6 @@ export function Idea() {
       docTop = track.getBoundingClientRect().top + window.scrollY;
       onScroll();
     };
-
-    /* Watching the body, not the track: what moves this section is the
-       page growing above it   an image landing in the hero shifts where the
-       track starts without changing its own size at all. */
     const observer = new ResizeObserver(onResize);
     observer.observe(document.body);
 
@@ -106,14 +114,11 @@ export function Idea() {
 
   return (
     <section id="idee" className="bg-cream relative">
-      <div
-        ref={trackRef}
-        data-nav-tone="light"
-        className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0"
-      >
+      <div ref={trackRef} data-nav-tone="light" className="relative pt-24 pb-24 lg:h-[300vh] lg:py-0">
         <div aria-hidden className="idea-wash">
           <FixedBackdrop src={ideaTexture} imageClassName="scale-110 blur-md" />
         </div>
+        <span aria-hidden className="idea-seam" />
 
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
@@ -138,58 +143,63 @@ export function Idea() {
               </span>
             </h2>
 
-            <SwipeDeck className="mx-auto grid max-w-7xl auto-rows-fr gap-5">
-              {cards.map((card) => (
-                <article
-                  key={card.label}
-                  style={
-                    {
-                      "--card-in": `var(${card.enter}, 1)`,
-                      "--lean": card.lean,
-                    } as CSSProperties
-                  }
-                  className={cn(
-                    "idea-card relative flex flex-col rounded-[1.75rem]",
-                    card.lane,
-                  )}
-                >
-                  <div className="idea-face idea-glass text-canvas relative z-1 flex flex-1 flex-col p-8 sm:p-10 lg:px-12 lg:py-7">
-                    <div>
-                      <p className="eyebrow text-canvas/85">{card.label}</p>
-                      <p className="text-canvas mt-6 max-w-full text-[clamp(0.875rem,2.6vw,2rem)] leading-[1.14] font-medium tracking-[-0.02em]">
-                        {card.body}
+            <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-10 lg:max-w-none lg:grid-cols-[minmax(14rem,0.72fr)_minmax(0,1.62fr)] lg:gap-12 xl:gap-16">
+              <h3 className="hidden lg:block idea-deck-head font-display idea-lit text-[clamp(1.5rem,3.6vw,2.6rem)] leading-[1.06] font-extrabold tracking-[-0.04em] text-balance">
+                {t.idea.deckTitle}
+              </h3>
+
+              <SwipeDeck className="grid auto-rows-fr gap-4 sm:gap-5 lg:grid-cols-2">
+                {cards.map(({ Glyph, ...card }) => (
+                  <article
+                    key={card.label}
+                    style={
+                      { "--card-in": `var(${card.enter}, 1)` } as CSSProperties
+                    }
+                    className={cn(
+                      "idea-card idea-shot relative flex flex-col justify-between",
+                      "min-h-[24rem] overflow-hidden rounded-[1.5rem] p-5",
+                      "sm:min-h-[26rem] sm:p-6 lg:h-[clamp(23rem,62svh,33rem)] xl:p-7",
+                      card.lane,
+                    )}
+                  >
+                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 32vw, (min-width: 640px) 60vw, 88vw" className="idea-shot-img object-cover" />
+                    <span aria-hidden className="idea-shot-veil" />
+
+                    <div className="relative z-1">
+                      <p className="idea-chip">
+                        {card.label}
                       </p>
+
+                      <h4 className="idea-shot-title text-canvas mt-4 text-[clamp(1.1rem,2.2vw,1.5rem)] leading-[1.16] font-semibold tracking-[-0.03em] text-balance">
+                        {card.body}
+                      </h4>
                     </div>
 
-                    <ol className="border-canvas/15 mt-6 grid border-t sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3 lg:gap-x-8">
+                    <ol className="border-canvas/15 relative z-1 mt-6 grid border-t">
                       {card.points.map((point, index) => (
                         <li
                           key={point}
                           className={cn(
-                            "border-canvas/15 grid grid-cols-[2.25rem_1fr] gap-4 py-4 lg:grid-cols-[1.75rem_1fr] lg:gap-3",
+                            "border-canvas/15 grid grid-cols-[1.5rem_1fr] gap-3 py-2",
                             index > 0 && "border-t",
-                            // The first item of each column sits against the
-                            // list’s own rule, so it carries none of its own.
-                            index === 1 && "sm:border-t-0",
-                            index === 2 && "lg:border-t-0",
                           )}
                         >
                           <span
                             aria-hidden
-                            className="eyebrow numeral text-cream pt-0.5"
+                            className="numeral text-cream/55 pt-[0.15em] text-[0.6875rem] font-bold tracking-[0.08em]"
                           >
                             {String(index + 1).padStart(2, "0")}
                           </span>
-                          <span className="text-canvas/80 text-[0.9375rem] leading-snug">
+                          <span className="text-canvas/80 text-[0.8125rem] leading-[1.4]">
                             {point}
                           </span>
                         </li>
                       ))}
                     </ol>
-                  </div>
-                </article>
-              ))}
-            </SwipeDeck>
+                  </article>
+                ))}
+              </SwipeDeck>
+            </div>
           </div>
         </div>
       </div>

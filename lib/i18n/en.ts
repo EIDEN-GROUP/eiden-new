@@ -104,6 +104,7 @@ export const en: Dictionary = {
     ],
     shiftLead: "What changes",
     shiftTail: "when you work with us.",
+    deckTitle: "What you leave behind, what you gain.",
     cards: [
       {
         label: "What stops",

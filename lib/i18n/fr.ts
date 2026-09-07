@@ -109,6 +109,7 @@ export const fr = {
     ],
     shiftLead: "Ce qui change",
     shiftTail: "quand vous travaillez avec nous.",
+    deckTitle: "Ce que vous quittez, ce que vous gagnez.",
     cards: [
       {
         label: "Ce qui s'arrête",

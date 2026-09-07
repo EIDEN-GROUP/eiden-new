@@ -9,7 +9,6 @@ import { useFooterRevealed } from "@/lib/footer-reveal";
 import { useScrolledPast } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
-/** The WhatsApp mark, filled   the silhouette is what carries it at 18px. */
 function WhatsAppGlyph(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -18,17 +17,6 @@ function WhatsAppGlyph(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/**
- * The bottom-right corner: the way back to the top, and WhatsApp beneath it.
- *
- * The two share the corner rather than a side of the screen each   one
- * standing action a visitor already expects to find there, the other beside
- * it rather than off on its own edge. Back-to-top only shows itself once
- * there's somewhere to go back to; WhatsApp is there from the start. Both
- * step aside as the footer curtain comes up   the footer carries its own way
- * back to the top, and a light pill over the dark panel reads as a stray
- * sticker.
- */
 export function FloatingActions() {
   const { t } = useLanguage();
   const footerRevealed = useFooterRevealed();
