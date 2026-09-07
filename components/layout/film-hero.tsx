@@ -4,25 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
-export const heroEnter =
-  "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
-export const heroStage = (seconds: number) =>
-  ({ animationDelay: `${seconds}s` }) as CSSProperties;
+export const heroEnter = "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]";
+export const heroStage = (seconds: number) => ({ animationDelay: `${seconds}s` }) as CSSProperties;
 export const HERO_WORD_LEAD = 0.18;
 export const HERO_WORD_STEP = 0.075;
 
 const DEPART_OVER = 0.55;
 
-/**
- * The still stepping back as the page leaves it.
- *
- * `--depart` runs 0 → 1 across the first `DEPART_OVER` of the hero's own
- * height, and `.hero-depart` turns it into a scale and a growing corner
- * radius, so the frame recedes like a card being lifted rather than sliding
- * off. Exported because a case study opens on the same gesture: two heroes
- * that look alike but drift apart in their timing would be worse than one
- * hero used twice.
- */
 export function useHeroDepart<T extends HTMLElement>() {
   const sectionRef = useRef<T>(null);
 
@@ -86,8 +74,8 @@ export function FilmHero({
   titleAccent,
   titleTail,
   lead,
-  image = "/media/eiden-hero-poster.jpg",
-  imageClassName = "object-cover object-center",
+  image = "/work/card-1.jpeg",
+  imageClassName = "idea-shot-img object-cover",
   className,
   children,
 }: {
@@ -97,10 +85,7 @@ export function FilmHero({
   titleTail: string;
   lead: string;
   image?: string;
-  /** How the still is framed and treated. A page carrying its own backdrop
-      passes its own here rather than being re-cropped to this one. */
   imageClassName?: string;
-  /** How tall the still stands. A case study takes the whole screen. */
   className?: string;
   children?: React.ReactNode;
 }) {
@@ -127,10 +112,7 @@ export function FilmHero({
         className,
       )}
     >
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]"
-      >
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
         <Image
           src={image}
           alt=""
@@ -139,18 +121,11 @@ export function FilmHero({
           sizes="100vw"
           className={imageClassName}
         />
+        <span aria-hidden className="hero-shot-veil" />
       </div>
 
-      <span
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(244,235,208,1)_16%,rgba(244,235,208,0.94)_24%,rgba(244,235,208,0.86)_100%)]"
-      />
-
       <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-10 sm:pt-36 sm:pb-14">
-        <p
-          className={cn(heroEnter, "eyebrow text-teal flex items-center gap-3")}
-          style={heroStage(0.06)}
-        >
+        <p className={cn(heroEnter, "eyebrow text-canvas flex items-center gap-3")} style={heroStage(0.06)}>
           <span aria-hidden className="h-px w-8 bg-current opacity-50" />
           {eyebrow}
         </p>
@@ -169,10 +144,7 @@ export function FilmHero({
                     spacing,
                   )}
                 >
-                  <span
-                    className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
-                    style={rise}
-                  >
+                  <span className="inline-block motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
                     {word.text}
                   </span>
                 </span>
@@ -180,34 +152,19 @@ export function FilmHero({
             }
 
             return (
-              <span
-                key={`${word.text}-${index}`}
-                className={cn("relative inline-block", spacing)}
-              >
+              <span key={`${word.text}-${index}`} className={cn("relative inline-block", spacing)} >
                 <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-                  <span
-                    className="inline-block text-[#8a6412] motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]"
-                    style={rise}
-                  >
+                  <span className="inline-block text-gold-dk motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
                     {word.text}
                   </span>
                 </span>
-                <span
-                  aria-hidden
-                  className="absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left bg-[#8a6412]/50 motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]"
-                />
+                <span aria-hidden className="absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left bg-gold-dk motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]" />
               </span>
             );
           })}
         </h1>
 
-        <p
-          className={cn(
-            heroEnter,
-            "text-ink/70 mt-6 max-w-full text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]",
-          )}
-          style={heroStage(0.58)}
-        >
+        <p className={cn( heroEnter, "text-ink/70 mt-6 max-w-full text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]", )} style={heroStage(0.58)}>
           {lead}
         </p>
 

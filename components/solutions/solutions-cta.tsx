@@ -48,16 +48,16 @@ export function SolutionsCTA() {
   const copy = solutionsCopy.closing;
 
   return (
-    <section data-nav-tone="light" className="grain bg-beige text-ink">
+    <section data-nav-tone="light" className="grain bg-ink text-canvas">
       <div className="container-eiden flex min-h-[80svh] flex-col justify-center py-24 sm:py-32">
         <RevealWords
           as="h2"
           text={say(copy.title)}
-          className="text-ink block max-w-5xl text-[clamp(2.25rem,6.5vw,5.5rem)] uppercase"
+          className="text-canvas block max-w-5xl text-[clamp(2.25rem,6.5vw,5.5rem)] uppercase"
         />
 
         <Reveal delay={0.3}>
-          <p className="editorial text-ink/55 mt-8 max-w-xl text-[clamp(1.25rem,2.4vw,1.75rem)]">
+          <p className="editorial text-canvas/55 mt-8 max-w-xl text-[clamp(1.25rem,2.4vw,1.75rem)]">
             {say(copy.text)}
           </p>
         </Reveal>
@@ -65,7 +65,7 @@ export function SolutionsCTA() {
         <Reveal delay={0.38}>
           <Link
             href="/contact"
-            className="group border-ink/20 text-ink hover:border-teal hover:text-teal mt-14 inline-flex items-center gap-5 border-b pb-4 transition-colors duration-500 ease-[var(--ease-brand)]"
+            className="group border-canvas/20 text-canvas hover:border-teal hover:text-teal mt-14 inline-flex items-center gap-5 border-b pb-4 transition-colors duration-500 ease-[var(--ease-brand)]"
           >
             <span className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] leading-none font-extrabold tracking-[-0.03em] uppercase">
               {say(copy.cta)}
