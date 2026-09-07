@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, type CSSProperties } from "react";
 import { useTravel } from "@/components/home2/motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SwipeDeck } from "@/components/ui/swipe-deck";
+import { proofTexture } from "@/lib/data/site";
 
 type Principle = { n: string; title: string; text: string; quote: string };
 
@@ -26,7 +28,7 @@ export function AboutPrinciples({
   const rows = Math.ceil(total / 2);
 
   return (
-    <section className="bg-canvas py-24 sm:py-32">
+    <section className="bg-beige/50 py-24 sm:py-32">
       <div className="container-eiden">
         <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
 
@@ -48,18 +50,29 @@ export function AboutPrinciples({
                       "--gt": `${TILT[index % TILT.length]}deg`,
                     } as CSSProperties
                   }
-                  className="deal-card glass-light bg-cream relative flex flex-col rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
+                  className="deal-card glass-dark glass-top bg-ink relative flex flex-col overflow-hidden rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
                 >
-                  <p className="font-label text-gold-dk text-[0.9375rem] font-bold tracking-[0.24em]">
+                  {/* The same silk the proof section runs on, blurred the same
+                      way   the cards read as cut out of that ground. */}
+                  <Image
+                    src={proofTexture}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 46vw, 92vw"
+                    className="principle-shot-img object-cover"
+                  />
+                  <span aria-hidden className="principle-shot-veil" />
+
+                  <p className="font-label text-canvas relative z-1 text-[0.9375rem] font-bold tracking-[0.24em]">
                     {principle.n}
                   </p>
-                  <h3 className="font-display text-forest mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
+                  <h3 className="font-display text-ink relative z-1 mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
                     {principle.title}
                   </h3>
-                  <p className="text-forest/65 mt-3 text-[0.9375rem] leading-relaxed">
+                  <p className="text-ink/72 relative z-1 mt-3 text-[0.9375rem] leading-relaxed">
                     {principle.text}
                   </p>
-                  <p className="editorial text-teal mt-auto pt-6 text-[0.9375rem] leading-snug">
+                  <p className="editorial text-teal relative z-1 mt-auto pt-6 text-[0.9375rem] leading-snug">
                     “{principle.quote}”
                   </p>
                 </article>

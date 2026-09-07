@@ -71,14 +71,8 @@ export function AboutMovements({
 
   return (
     <section className="grain bg-canvas">
-      <div
-        ref={trackRef}
-        className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]"
-      >
-        <div
-          aria-hidden
-          className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh"
-        >
+      <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
+        <div aria-hidden className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
           {movements.map((movement, index) => (
             <div
               key={movement.n}
@@ -89,14 +83,7 @@ export function AboutMovements({
                   : "scale-[1.07] opacity-0",
               )}
             >
-              <Image
-                src={media[index % media.length]}
-                alt=""
-                fill
-                sizes="(min-width: 64rem) 44vw, 100vw"
-                priority={index === 0}
-                className="object-cover object-center"
-              />
+              <Image src={media[index % media.length]} alt="" fill sizes="(min-width: 64rem) 44vw, 100vw" priority={index === 0} className="object-cover object-center" />
             </div>
           ))}
 
@@ -109,8 +96,8 @@ export function AboutMovements({
                 className={cn(
                   "h-8 w-px transition-[background-color,transform] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
                   active !== null && index === current
-                    ? "bg-teal scale-y-100"
-                    : "bg-ink/25 scale-y-75",
+                    ? "bg-beige scale-y-100"
+                    : "bg-canvas/25 scale-y-75",
                 )}
               />
             ))}
@@ -133,13 +120,13 @@ export function AboutMovements({
                       : "translate-y-3 opacity-0",
                   )}
                 >
-                  <p className="numeral text-teal text-[0.8125rem] font-bold tracking-[0.28em]">
+                  <p className="numeral text-beige text-[0.8125rem] font-bold tracking-[0.28em]">
                     {String(index + 1).padStart(2, "0")}
                     <span className="text-ink/40">
                       {` / ${String(total).padStart(2, "0")}`}
                     </span>
                   </p>
-                  <p className="font-display text-ink mt-3 text-[clamp(1.25rem,2.1vw,1.875rem)] leading-[1.06] font-extrabold tracking-[-0.03em]">
+                  <p className="font-display text-canvas/70 mt-3 text-[clamp(1.25rem,2.1vw,1.875rem)] leading-[1.06] font-extrabold tracking-[-0.03em]">
                     {movement.title}
                   </p>
                 </div>
@@ -149,12 +136,7 @@ export function AboutMovements({
         </div>
 
         {/* ── The heading, at the head of the reading column ────────── */}
-        <div
-          className={cn(
-            "order-1 pt-24 pb-12 sm:pt-28 lg:order-none lg:col-start-2 lg:row-start-1 lg:pt-32 lg:pb-16",
-            COLUMN,
-          )}
-        >
+        <div className={cn( "order-1 pt-24 pb-12 sm:pt-28 lg:order-none lg:col-start-2 lg:row-start-1 lg:pt-32 lg:pb-16", COLUMN, )}>
           <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
         </div>
 

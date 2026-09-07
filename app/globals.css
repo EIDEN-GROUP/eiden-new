@@ -2051,3 +2051,35 @@
     display: none;
   }
 }
+
+/* ── Principle cards ────────────────────────────────────────────
+   The proof section's ground, cut into a card: the same silk,
+   blurred the same way, held down under ink so the writing keeps
+   its contrast wherever the gold falls. */
+
+.principle-shot-img {
+  z-index: 0;
+  /* Wide enough that the blur never fades out inside the card. */
+  transform: scale(1.6);
+  filter: blur(10px) saturate(118%);
+}
+
+.principle-shot-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-beige) 62%, transparent) 0%,
+      color-mix(in oklab, var(--color-beige) 50%, transparent) 42%,
+      color-mix(in oklab, var(--color-beige) 72%, transparent) 100%
+    ),
+    radial-gradient(
+      88% 62% at 50% 108%,
+      color-mix(in oklab, var(--color-beige) 55%, transparent) 0%,
+      transparent 70%
+    );
+}
