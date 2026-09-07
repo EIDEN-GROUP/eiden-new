@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CircleSlash2, Sparkles } from "lucide-react";
+import { CircleSlash2, Pause, Play, Sparkles, Sprout } from "lucide-react";
 import { useEffect, useRef, type CSSProperties } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
@@ -18,13 +18,13 @@ const lanes = [
   {
     lane: "idea-card-first",
     enter: "--first-in",
-    Glyph: CircleSlash2,
+    Glyph: Pause,
     image: "/work/card-1.jpeg",
   },
   {
     lane: "idea-card-second",
     enter: "--second-in",
-    Glyph: Sparkles,
+    Glyph: Play,
     image: "/work/card-2.jpeg",
   },
 ];
@@ -167,6 +167,11 @@ export function Idea() {
 
                     <div className="relative z-1">
                       <p className="idea-chip">
+                        <Glyph
+                          className="size-4 shrink-0"
+                          strokeWidth={3}
+                          aria-hidden
+                        />
                         {card.label}
                       </p>
 

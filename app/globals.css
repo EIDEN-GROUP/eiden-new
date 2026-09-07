@@ -1288,6 +1288,24 @@
   }
 }
 
+/* Phones read it as an ordinary section: the pin is given back its height,
+   the stage holds the whole 16/9 card and the card drops the scale. Same
+   resting state the reduced-motion pass asks for   the component skips its
+   scroll work below this width, so `--grow` stays at 1 throughout. */
+@media (width < 48rem) {
+  .vsl-track {
+    height: auto;
+  }
+
+  .vsl-stage {
+    height: calc(var(--vsl-w) * 9 / 16);
+  }
+
+  .vsl-grow {
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* ------------------------------------------------------------
    The light going out behind the film
 

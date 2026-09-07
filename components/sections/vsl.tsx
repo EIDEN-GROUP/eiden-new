@@ -10,6 +10,7 @@ import {
 import { Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
+import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
 function timecode(seconds: number) {
@@ -38,11 +39,22 @@ export function Vsl() {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
 
+  /* The pin is a desktop reading. On a phone the card has no room to travel
+     and the shrink only takes the picture away from a small screen, so below
+     the stage's own breakpoint the section is left in normal flow   `--grow`
+     is cleared back to its default of 1, which is the open card, the lit
+     ground and the controls at full opacity. */
+  const pinned = useMediaQuery("(min-width: 48rem)");
+
   useEffect(() => {
     const track = trackRef.current;
     const section = sectionRef.current;
     if (!track || !section) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!pinned) {
+      section.style.removeProperty("--grow");
+      return;
+    }
 
     let raf = 0;
     let painted = Number.NaN;
@@ -108,9 +120,11 @@ export function Vsl() {
     window.addEventListener("resize", measure);
     return () => {
       observer.disconnect();
+      resize.disconnect();
+      window.removeEventListener("resize", measure);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [pinned]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -218,6 +232,7 @@ export function Vsl() {
           <div
             className={cn(
               "sticky top-0 isolate flex h-svh flex-col items-center px-5 sm:px-8",
+              "max-md:static max-md:h-auto max-md:py-14",
               "motion-reduce:static motion-reduce:h-auto motion-reduce:py-14",
             )}
           >
