@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Serif_Display, Inter, Outfit, } from "next/font/google";
+import { DM_Serif_Display, Inter, Outfit, } from "next/font/google";
 import "./globals.css";
 
 import { LanguageProvider } from "@/components/providers/language-provider";
@@ -25,13 +25,6 @@ const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -89,7 +82,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}>
+    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} h-full antialiased`}>
       <head>
         <noscript>
           <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>

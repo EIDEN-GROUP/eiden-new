@@ -22,7 +22,7 @@
   /* Typography   five voices, five roles */
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-editorial: var(--font-dm-serif), ui-serif, Georgia, serif;
-  --font-label: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-label: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Motion */
@@ -123,11 +123,17 @@
   --page-measure: 100%;
 }
 
-/* Label / eyebrow   Cormorant Garamond, uppercase, wide tracking */
+/* Label / eyebrow   Outfit, uppercase, wide tracking.
+
+   The label voice was Cormorant Garamond, a reading serif: at 12px, uppercase
+   and tracked out to 0.15em it went soft, and its old-style figures sat below
+   the cap height. Outfit is a grotesque built for exactly this size   even
+   stroke, open counters, lined figures   so the eyebrow reads as a label
+   rather than as decoration. */
 @utility eyebrow {
   font-family: var(--font-label);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   line-height: 1.2;
@@ -634,12 +640,11 @@
 
 /* Figures, set in the display face.
 
-   The labels around them are Cormorant, whose figures are old-style   they
-   sit below the cap height and vary in size, so `06` reads as an ornament
-   beside its own label rather than as a number. Outfit is lined and even.
-   Tabular widths keep a column of them from shuffling as the digits change,
-   which matters for the counters and the timecode. Nothing else about the
-   label changes: size, weight and tracking stay with whatever carries it.
+   The labels carry Outfit themselves now, so the family below is belt and
+   braces. What this class still buys is width: tabular figures keep a column
+   of them from shuffling as the digits change, which matters for the counters
+   and the timecode. Nothing else about the label changes: size, weight and
+   tracking stay with whatever carries it.
 
    Deliberately unlayered   `eyebrow` is an @utility, and a plain class
    outside the layer wins the family back without `!important`. */

@@ -123,22 +123,10 @@ export function Idea() {
         <div className="relative z-10 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:overflow-hidden">
           <div ref={stageRef} className="container-eiden relative w-full">
             <h2 className="relative z-10 mb-12 flex flex-wrap justify-center gap-x-[0.3em] text-center lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-1/2 lg:mb-0 lg:-translate-y-1/2 lg:flex-nowrap lg:whitespace-nowrap">
-              <span
-                style={{
-                  transform: "translateX(calc(var(--head-x, 0) * -58vw))",
-                  opacity: "var(--head-o, 1)",
-                }}
-                className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em]"
-              >
+              <span style={{ transform: "translateX(calc(var(--head-x, 0) * -58vw))", opacity: "var(--head-o, 1)", }} className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em]">
                 {t.idea.shiftLead}
               </span>
-              <span
-                style={{
-                  transform: "translateX(calc(var(--head-x, 0) * 58vw))",
-                  opacity: "var(--head-o, 1)",
-                }}
-                className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em] opacity-35"
-              >
+              <span style={{ transform: "translateX(calc(var(--head-x, 0) * 58vw))", opacity: "var(--head-o, 1)", }} className="font-display idea-lit text-[clamp(1.75rem,5.4vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.04em] opacity-35">
                 {t.idea.shiftTail}
               </span>
             </h2>
@@ -167,32 +155,19 @@ export function Idea() {
 
                     <div className="relative z-1">
                       <p className="idea-chip flex items-center">
-                        <Glyph
-                          className="size-4 shrink-0"
-                          strokeWidth={3}
-                          aria-hidden
-                        />
+                        <Glyph className="size-4 shrink-0" strokeWidth={3} aria-hidden />
                         {card.label}
                       </p>
 
-                      <h4 className="idea-shot-title text-canvas capitalize mt-4 text-[clamp(1.1rem,2.2vw,1.5rem)] leading-[1.16] font-semibold tracking-[-0.03em] text-balance">
+                      <h4 className="idea-shot-title text-canvas capitalize mt-4 text-[26px] lg:text-[36px] leading-[1.16] font-semibold tracking-[-0.03em] text-balance">
                         {card.body}
                       </h4>
                     </div>
 
                     <ol className="border-canvas/15 relative z-1 mt-6 grid border-t">
                       {card.points.map((point, index) => (
-                        <li
-                          key={point}
-                          className={cn(
-                            "border-canvas/15 grid grid-cols-[1.5rem_1fr] gap-3 py-2",
-                            index > 0 && "border-t",
-                          )}
-                        >
-                          <span
-                            aria-hidden
-                            className="numeral text-cream/55 pt-[0.15em] text-[0.6875rem] font-bold tracking-[0.08em]"
-                          >
+                        <li key={point} className={cn( "border-canvas/15 grid grid-cols-[1.5rem_1fr] gap-3 py-2", index > 0 && "border-t", )} >
+                          <span aria-hidden className="numeral text-cream/55 pt-[0.15em] text-[0.6875rem] font-bold tracking-[0.08em]">
                             {String(index + 1).padStart(2, "0")}
                           </span>
                           <span className="text-canvas/80 text-[0.8125rem] leading-[1.4]">
