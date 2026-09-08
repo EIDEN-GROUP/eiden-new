@@ -43,8 +43,6 @@ export function AboutPrinciples({
                   key={principle.n}
                   style={
                     {
-                      /* Where this card sits relative to the middle of the grid,
-                       measured in its own width and height. */
                       "--gx": `${(0.5 - column) * 100}%`,
                       "--gy": `${((rows - 1) / 2 - row) * 100}%`,
                       "--gt": `${TILT[index % TILT.length]}deg`,
@@ -52,27 +50,18 @@ export function AboutPrinciples({
                   }
                   className="deal-card glass-dark glass-top bg-ink relative flex flex-col overflow-hidden rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
                 >
-                  {/* The same silk the proof section runs on, blurred the same
-                      way   the cards read as cut out of that ground. */}
-                  <Image
-                    src={proofTexture}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 46vw, 92vw"
-                    className="principle-shot-img object-cover"
-                  />
+                  <Image src={proofTexture} alt="" fill sizes="(min-width: 1024px) 46vw, 92vw" className="principle-shot-img object-cover" />
                   <span aria-hidden className="principle-shot-veil" />
-
                   <p className="font-label text-canvas relative z-1 text-[0.9375rem] font-bold tracking-[0.24em]">
                     {principle.n}
                   </p>
-                  <h3 className="font-display text-ink relative z-1 mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
+                  <h3 className="font-display text-canvas relative z-1 mt-4 text-xl font-bold tracking-[-0.02em] sm:text-2xl">
                     {principle.title}
                   </h3>
-                  <p className="text-ink/72 relative z-1 mt-3 text-[0.9375rem] leading-relaxed">
+                  <p className="text-canvas/90 relative z-1 mt-3 text-[0.9375rem] leading-relaxed">
                     {principle.text}
                   </p>
-                  <p className="editorial text-teal relative z-1 mt-auto pt-6 text-[0.9375rem] leading-snug">
+                  <p className="editorial text-beige relative z-1 mt-auto pt-6 text-[0.9375rem] leading-snug">
                     “{principle.quote}”
                   </p>
                 </article>

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { Wordmark } from "@/components/ui/wordmark";
 import { useLanguage } from "@/components/providers/language-provider";
+import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { useHydrated, useMediaQuery } from "@/lib/hooks";
 import { setIntroDone } from "@/lib/intro-store";
 import { cn } from "@/lib/utils";
@@ -55,7 +56,7 @@ export function PageLoader() {
   useEffect(() => {
     if (!visible) return;
 
-    document.body.style.overflow = "hidden";
+    setScrollLock(true);
 
     const toSweep = window.setTimeout(() => setSweeping(true), FILL_MS + HOLD_MS);
     const toGone = window.setTimeout(
@@ -69,7 +70,7 @@ export function PageLoader() {
     return () => {
       window.clearTimeout(toSweep);
       window.clearTimeout(toGone);
-      document.body.style.overflow = "";
+      setScrollLock(false);
     };
   }, [visible]);
 

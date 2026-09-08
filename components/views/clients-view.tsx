@@ -10,12 +10,7 @@ import { LogoMarquee } from "@/components/ui/marquee";
 import { Reveal, RevealGroup } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getProjectCase } from "@/lib/data/projects/index";
-import {
-  clientLogos,
-  portfolioProjectUrl,
-  projects,
-  type ProjectCategory,
-} from "@/lib/data/site";
+import { clientLogos, portfolioProjectUrl, projects, siteConfig, type ProjectCategory, } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 type Filter = ProjectCategory | "all";
@@ -91,7 +86,7 @@ export function ClientsView() {
 
               <Reveal delay={0.18}>
                 <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                  <ButtonLink href="/contact" variant="primary" size="lg">
+                  <ButtonLink href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} variant="primary" size="lg">
                     {t.common.bookCall}
                   </ButtonLink>
 
@@ -165,7 +160,7 @@ export function ClientsView() {
         <div className="container-eiden pt-16 pb-24 sm:pt-20 sm:pb-32">
           <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
             <div className="lg:sticky lg:top-32">
-              <div className="glass-light border-forest/12 bg-forest/[0.03] rounded-[1.75rem] border p-4">
+              <div className="bg-beige/50 rounded-[1.75rem] p-4">
                 <ul className="flex flex-wrap gap-2.5">
                   {FILTERS.map((filter) => {
                     const on = filter === active;
@@ -181,7 +176,7 @@ export function ClientsView() {
                             "focus-visible:outline-2 focus-visible:outline-offset-2",
                             on
                               ? "bg-forest text-canvas"
-                              : "bg-forest/[0.05] text-forest/70 hover:bg-forest/10 hover:text-forest",
+                              : "bg-cream/70 text-forest/70 hover:bg-cream/10 hover:text-forest",
                           )}
                         >
                           {page.filters[filter]}
@@ -201,7 +196,7 @@ export function ClientsView() {
               </div>
 
               <ButtonLink
-                href="/contact"
+                href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`}
                 variant="primary"
                 size="lg"
                 className="mt-4 w-full"
@@ -313,48 +308,16 @@ function ProjectCard({
     );
   };
 
-  /* A written case opens over this page rather than replacing it, so it goes
-     through the router carrying the transition type the curtain listens for.
-     A project we only host a screenshot of still leaves the site, and leaving
-     the site is an ordinary link. */
   const Tag = external ? "a" : Link;
   const opening = external
     ? { target: "_blank" as const, rel: "noreferrer noopener" }
     : { transitionTypes: ["case-open"] };
 
   return (
-    <Tag
-      href={href}
-      {...opening}
-      onPointerMove={track}
-      className={cn(
-        "group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:outline-offset-4",
-        wide && "sm:col-span-2",
-      )}
-    >
-      <div
-        className={cn(
-          "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]",
-          wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3",
-        )}
-      >
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          sizes={
-            wide
-              ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 62vw"
-              : "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 50vw"
-          }
-          className="size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
-        />
-
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent"
-        />
-
+    <Tag href={href} {...opening} onPointerMove={track} className={cn( "group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:outline-offset-4", wide && "sm:col-span-2", )}>
+      <div className={cn( "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )}>
+        <Image src={image} alt={imageAlt} fill sizes={ wide ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 62vw" : "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 50vw" } className="size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none" />
+        <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent" />
         <p className="eyebrow text-canvas/80 absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/80 px-5 py-2">
           <span className="numeral text-gold">
             {String(index + 1).padStart(2, "0")}

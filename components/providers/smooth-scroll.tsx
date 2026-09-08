@@ -20,6 +20,9 @@ export function scrollToTop() {
   window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
 }
 
+/** How many overlays are currently holding the page still. */
+let locks = 0;
+
 /**
  * Hold the page still while an overlay owns the screen.
  *
@@ -28,21 +31,36 @@ export function scrollToTop() {
  * position itself and would go on running underneath a lightbox that only
  * clipped the page. The width the scrollbar gives back is paid to the body as
  * padding, so nothing behind the overlay moves while it is open.
+ *
+ * Counted rather than boolean, because three things cover this screen   the
+ * intro, the menu and the lightbox   and they overlap: the menu opens over the
+ * intro, a lightbox opens on a page the menu navigated to. Each of them used to
+ * write `body.style.overflow` on its own, so whichever released first handed
+ * scrolling back while another overlay was still up, and whichever released
+ * last could leave `hidden` standing over a page with nothing on it. That last
+ * case is a page that cannot be scrolled again until the tab is reloaded.
+ *
+ * So the body is clipped on the way up from zero and released on the way back
+ * down to it, and the depth in between is nobody's business. Releases below
+ * zero are ignored rather than trusted: an unbalanced caller should not be able
+ * to unlock an overlay that is still open.
  */
 export function setScrollLock(locked: boolean) {
   const { body } = document;
 
-  if (!locked) {
-    body.style.overflow = "";
-    body.style.paddingRight = "";
-    instance?.start();
+  if (locked) {
+    if (++locks > 1) return;
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    body.style.overflow = "hidden";
+    if (gap > 0) body.style.paddingRight = `${gap}px`;
+    instance?.stop();
     return;
   }
 
-  const gap = window.innerWidth - document.documentElement.clientWidth;
-  body.style.overflow = "hidden";
-  if (gap > 0) body.style.paddingRight = `${gap}px`;
-  instance?.stop();
+  if (locks === 0 || --locks > 0) return;
+  body.style.overflow = "";
+  body.style.paddingRight = "";
+  instance?.start();
 }
 
 /**
@@ -53,10 +71,14 @@ export function setScrollLock(locked: boolean) {
  * bare `window.scrollTo` is overwritten on its next frame. Both are called   the
  * instance for the case where it is running, the window for the case where it
  * is not.
+ *
+ * The window call names its behaviour rather than inheriting it. `html` carries
+ * `scroll-behavior: smooth`, so a bare `scrollTo` is an animation, and landing
+ * on a case study ran that animation against the snap above it.
  */
 export function jumpToTop() {
   instance?.scrollTo(0, { immediate: true });
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 /**
@@ -84,6 +106,9 @@ export function SmoothScroll() {
     });
 
     instance = lenis;
+    /* An overlay may already be open   a remount in development, or a lightbox
+       that outlived the previous instance. Start where the page actually is. */
+    if (locks > 0) lenis.stop();
 
     let frame = 0;
     const raf = (time: number) => {

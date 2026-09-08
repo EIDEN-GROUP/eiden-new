@@ -85,13 +85,18 @@ export function CaseLightbox({
     };
 
     window.addEventListener("keydown", onKey);
-    setScrollLock(true);
-
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      setScrollLock(false);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose, step]);
+
+  /* The page is held for as long as the lightbox is open, not for as long as
+     one picture is. The keyboard effect above re-runs on every step, and taking
+     the lock with it released the page between two pictures   long enough for
+     the scroll behind to move under a reader who was only pressing an arrow. */
+  useEffect(() => {
+    if (!open) return;
+    setScrollLock(true);
+    return () => setScrollLock(false);
+  }, [open]);
 
   /* Opening moves the focus in, closing puts it back where it was. Stepping
      between pictures leaves it alone. */

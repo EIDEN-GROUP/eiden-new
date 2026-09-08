@@ -956,7 +956,7 @@
 
 .idea-shot-img {
   transform: scale(1.18);
-  filter: blur(9px) saturate(112%);
+  filter: blur(2px);
   transition:
     transform 0.8s var(--ease-brand),
     filter 0.8s var(--ease-brand);
@@ -965,7 +965,7 @@
 @media (hover: hover) and (pointer: fine) {
   .idea-shot:hover .idea-shot-img {
     transform: scale(1.24);
-    filter: blur(5px) saturate(120%);
+    filter: blur(5px);
   }
 }
 
@@ -1043,8 +1043,7 @@
     opacity: 1;
   }
 
-  .idea-shot-img,
-  .idea-shot:hover .idea-shot-img {
+  .idea-shot-img, .idea-shot:hover .idea-shot-img {
     transform: scale(1.18);
     transition: none;
   }
@@ -1072,21 +1071,6 @@
     );
 }
 
-/* ============================================================
-   Site bar   two capsules that arrive as one
-
-   At rest the white is only around the mark and the routes;
-   contact keeps to itself at the far edge of the window. Once
-   the page has moved, the shell narrows and takes the white
-   over, closing around contact so the three read as a single
-   pill. Widths and heights travel for the whole of it, but the
-   white is handed between the two surfaces late and quickly:
-   a shell that faded in from the start would flash a bar the
-   width of the window across the hero on its way in. Going the
-   other way there is nothing to hide, so the handover is
-   immediate and the capsule is white again before the shell
-   has finished opening out.
-   ============================================================ */
 .nav-shell {
   transition:
     max-width 0.7s var(--ease-brand),
@@ -1096,9 +1080,6 @@
     backdrop-filter 0.4s var(--ease-brand);
 }
 
-/* Both capsules   the white one and contact   lose their shadow to the
-   shell on the same beat. Contact keeps a colour transition of its own for
-   the hover, which is why the shorthand carries both. */
 .nav-capsule {
   transition:
     background-color 0.5s var(--ease-brand),
@@ -1432,34 +1413,10 @@
   );
 }
 
-/* ------------------------------------------------------------
-   The suite   the closing pair, settling into place on the same
-   wash the run of work opened on
-
-   The last curtain rises on the intro's own ground, and the panel
-   after it is scroll of its own. `--suite` runs 0 → 1 across that
-   span, so the pair comes up under the visitor's own hand and goes
-   back down the same way the moment they scroll up   never fired at
-   a threshold, never played once.
-
-   `--dir` is which side a block is held on, minus one or one: each
-   settles in from the corner its own column sits toward and fades in
-   as it arrives, rather than swinging the full width of the screen
-   the way a clipped card could   there is no mask here to keep the
-   travel hidden, so the distance stays small and the opacity carries
-   the rest of the arrival.
-
-   `--suite` falls back to 1: with no script the pair is simply
-   there, level and in place, which is the honest thing to show.
-   ------------------------------------------------------------ */
 .suite-block {
   opacity: var(--suite, 1);
   translate: calc((1 - var(--suite, 1)) * var(--dir) * 2rem)
     calc((1 - var(--suite, 1)) * 1.5rem);
-  /* The scroll drives these straight, so a wheel notch would otherwise
-     land as a step. A short ease sitting behind the value carries the
-     block across the gap between one notch and the next; it is short
-     enough to stay under the hand rather than read as lag. */
   transition:
     translate 420ms var(--ease-brand),
     opacity 420ms var(--ease-brand);
@@ -1473,30 +1430,7 @@
   }
 }
 
-/* ============================================================
-   About   a block that plays with the scroll, in both directions
 
-   `--p` is the block's travel through the viewport, written frame
-   by frame by `useTravel`; `--i` and `--n` place an element in the
-   sequence. Because `--p` is measured from the block's position on
-   every scroll rather than latched once at a threshold, all of this
-   runs backwards when the visitor scrolls back up   which is the
-   whole point of driving it this way instead of with a reveal.
-
-   Two rules the ramp has to follow:
-
-   · It is written out in full inside every `calc()` rather than
-     parked in one custom property. Substituting a `clamp()` through
-     a custom property resolves to zero in Chrome, which would
-     strand every card in the pile.
-   · `--p` falls back to 1, not 0. Before the script runs there is
-     no travel to read, and the finished layout is the honest thing
-     to show   never a heap of cards stacked in the middle.
-   ============================================================ */
-
-/* Cards gathered into a deck, then dealt out to their places. The
-   offsets are shares of a card's own size, so the pile lands on the
-   middle of the grid without anything having to be measured. */
 .deal-card {
   z-index: calc(var(--n) - var(--i));
   translate: calc(
@@ -2078,13 +2012,13 @@
   background:
     linear-gradient(
       180deg,
-      color-mix(in oklab, var(--color-beige) 62%, transparent) 0%,
-      color-mix(in oklab, var(--color-beige) 50%, transparent) 42%,
-      color-mix(in oklab, var(--color-beige) 72%, transparent) 100%
+      color-mix(in oklab, var(--color-teal) 62%, transparent) 0%,
+      color-mix(in oklab, var(--color-teal) 50%, transparent) 42%,
+      color-mix(in oklab, var(--color-teal) 72%, transparent) 100%
     ),
     radial-gradient(
       88% 62% at 50% 108%,
-      color-mix(in oklab, var(--color-beige) 55%, transparent) 0%,
+      color-mix(in oklab, var(--color-teal) 55%, transparent) 0%,
       transparent 70%
     );
 }

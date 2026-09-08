@@ -179,8 +179,6 @@ export const systems: SystemRecord[] = [
 export const solutionsCopy = {
   hero: {
     eyebrow: { fr: "Nos systèmes", en: "Our systems" },
-    /* Split for the film hero, which raises the title a word at a time and
-       rules the accented one in gold. Same three parts the about page uses. */
     titleLead: { fr: "Des", en: "" },
     titleAccent: { fr: "systèmes", en: "Systems" },
     titleTail: {
@@ -242,7 +240,6 @@ export const solutionsCopy = {
     explore: { fr: "Découvrir", en: "Explore" },
     builtFor: { fr: "Conçu pour", en: "Built for" },
     inside: { fr: "Dans le système", en: "Inside the system" },
-    /* Shown in place of a capability list when a product is not public. */
     privateNote: {
       fr: "Accès sur demande.",
       en: "Access on request.",

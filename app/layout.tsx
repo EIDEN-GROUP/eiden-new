@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Inter, Outfit, } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 import { LanguageProvider } from "@/components/providers/language-provider";
@@ -82,13 +83,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} h-full antialiased`}>
+    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} antialiased`}>
       <head>
         <noscript>
           <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="bg-canvas flex min-h-full flex-col">
+      <body className="bg-canvas flex min-h-screen flex-col">
         <LanguageProvider>
           <MotionProvider>
             <SmoothScroll />

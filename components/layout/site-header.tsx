@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/ui/wordmark";
 import { socialAccounts } from "@/components/ui/social-links";
 import { useLanguage } from "@/components/providers/language-provider";
+import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { menuMedia, navRoutes, siteConfig } from "@/lib/data/site";
 import { useFooterRevealed } from "@/lib/footer-reveal";
 import { cn } from "@/lib/utils";
@@ -149,11 +150,14 @@ export function SiteHeader() {
     return () => window.removeEventListener("resize", placeOrigin);
   }, [open, placeOrigin]);
 
+  /* The menu covers the screen, so the page behind it holds still   through the
+     shared lock, which also stops Lenis. Clipping the body on its own left the
+     smooth scroll running underneath, and clearing `overflow` on the way out
+     released whatever else was holding the page. */
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!open) return;
+    setScrollLock(true);
+    return () => setScrollLock(false);
   }, [open]);
 
   useEffect(() => {

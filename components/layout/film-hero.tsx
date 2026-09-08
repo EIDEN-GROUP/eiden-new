@@ -74,7 +74,7 @@ export function FilmHero({
   titleAccent,
   titleTail,
   lead,
-  image = "/work/card-1.jpeg",
+  image = "/media/architecture-1.jpg",
   imageClassName = "idea-shot-img object-cover",
   className,
   children,

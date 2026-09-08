@@ -238,7 +238,7 @@ export const contactTexture = "/work/contact-bg.png";
 
 export const aboutTexture = "/work/contact-bg.png";
 
-export const proofTexture = "/work/contact-section-bg.png";
+export const proofTexture = "/work/project-5.jpg";
 
 export const ideaTexture = "/media/idea-bg.png";
 

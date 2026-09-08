@@ -26,17 +26,6 @@ export function FixedBackdrop({
     let raf = 0;
     let painted = Number.NaN;
     let seen = -1;
-    /* This one reads its rect every frame, and has to.
-
-       The others cache where they sit in the document, because a section in
-       normal flow does not move. A backdrop can be handed to a panel inside a
-       `sticky` wrapper   the case showcase does exactly that   and a sticky
-       element’s document offset climbs with the scroll while it stays pinned
-       to the frame. Cached, the parallax drifts the picture off the top of
-       the panel and leaves the writing on bare ground.
-
-       The scroll guard above is what keeps this cheap: on a still page the
-       rect is never asked for at all. */
     const paint = () => {
       const y = window.scrollY;
       if (y === seen) {
