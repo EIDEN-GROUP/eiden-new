@@ -152,20 +152,13 @@ export function Hero() {
 
         <div className="grid grid-cols-1 items-end gap-6 pt-3 pb-5 sm:pt-5 lg:grid-cols-[minmax(0,1fr)_auto]">
           <div className="order-2 lg:order-1">
-            <div
-              className={cn(enter, "flex items-center gap-3 md:justify-start")}
-              style={stage(0.68)}
-            >
+            <div className={cn(enter, "flex items-center gap-3 md:justify-start")} style={stage(0.68)}>
               <span className="flex items-center gap-1" aria-hidden>
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <Star
-                    key={index}
-                    className="fill-gold text-gold size-2.5"
-                    strokeWidth={0}
-                  />
+                  <Star key={index} className="fill-gold text-gold size-2.5" strokeWidth={0} />
                 ))}
               </span>
-              <p className="text-ink text-[0.875rem]">{t.hero.trust}</p>
+              <p className="text-ink text-[12px] lg:text-[14px]">{t.hero.trust}</p>
             </div>
             <div
               className={cn(
@@ -222,10 +215,10 @@ export function Hero() {
                   <span className="eyebrow text-teal block font-bold">
                     {t.hero.featured.badge}
                   </span>
-                  <span className="text-ink mt-2 block text-[0.875rem] leading-snug">
+                  <span className="text-ink mt-2 block text-[12px] lg:text-[14px] leading-snug">
                     {t.hero.featured.text}
                   </span>
-                  <span className="text-ink/50 mt-2 block text-[0.82rem]">
+                  <span className="text-ink/50 mt-2 block text-[12px] lg:text-[13px]">
                     <span className="numeral text-ink/80 font-medium">
                       {featured.metric}
                     </span>{" "}
