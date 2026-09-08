@@ -1,5 +1,9 @@
 import type { ComponentType, SVGProps } from "react";
-import { InstagramGlyph, LinkedInGlyph } from "@/components/ui/social-glyphs";
+import {
+  FacebookGlyph,
+  InstagramGlyph,
+  LinkedInGlyph,
+} from "@/components/ui/social-glyphs";
 import { siteConfig } from "@/lib/data/site";
 
 type Glyph = ComponentType<SVGProps<SVGSVGElement>>;
@@ -19,5 +23,10 @@ export const socialAccounts: {
     label: "Instagram",
     href: siteConfig.socials.instagram,
     Icon: InstagramGlyph,
+  },
+  {
+    label: "Facebook",
+    href: siteConfig.socials.facebook,
+    Icon: FacebookGlyph,
   },
 ];

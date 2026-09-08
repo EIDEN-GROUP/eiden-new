@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Serif_Display, Inter, Outfit, } from "next/font/google";
+import { DM_Serif_Display, Inter, Outfit } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -83,8 +83,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} antialiased`}>
+    <html
+      lang="fr"
+      data-scroll-behavior="smooth"
+      className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} antialiased`}
+    >
       <head>
+        {/* The cursor art is fetched the moment it is first needed, which
+            would show one frame of the system arrow. Preloading both cuts
+            keeps that frame from ever landing. */}
+        <link rel="preload" as="image" href="/cursors/arrow.svg" />
+        <link rel="preload" as="image" href="/cursors/arrow-light.svg" />
         <noscript>
           <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>
         </noscript>
@@ -94,7 +103,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MotionProvider>
             <SmoothScroll />
             <PageLoader />
-            <a href="#main" className="bg-forest text-canvas sr-only rounded-full px-5 py-3 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[110]">
+            <a
+              href="#main"
+              className="bg-forest text-canvas sr-only rounded-full px-5 py-3 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[110]"
+            >
               Aller au contenu principal
             </a>
             <SiteHeader />

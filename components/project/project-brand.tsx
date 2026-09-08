@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useLocalized } from "@/components/project/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import type { ProjectStory } from "@/lib/data/projects";
+import { cursorOn } from "@/lib/utils";
 
 /**
  * The identity, shown as a system and then in place.
@@ -54,6 +55,7 @@ export function ProjectBrand({
       <Reveal delay={0.18} className="mt-14 sm:mt-20">
         <div
           style={{ backgroundColor: ground }}
+          data-cursor={cursorOn(ground)}
           className="text-canvas overflow-hidden"
         >
           <div className="container-eiden py-12 sm:py-16">
@@ -72,6 +74,7 @@ export function ProjectBrand({
                     <div key={swatch.hex} className="min-w-0 flex-1">
                       <div
                         style={{ backgroundColor: swatch.hex }}
+                        data-cursor={cursorOn(swatch.hex)}
                         className="ring-canvas/10 aspect-3/4 w-full rounded-sm ring-1 ring-inset"
                       />
                       <p className="text-canvas mt-3 truncate text-[0.8125rem]">

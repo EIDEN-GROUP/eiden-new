@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
-import { cn } from "@/lib/utils";
+import { cn, cursorOn } from "@/lib/utils";
 
 export type ShowcaseCase = {
   slug: string;
@@ -191,6 +191,7 @@ export function CaseShowcase({
         <section
           className="absolute inset-0 isolate z-0 flex items-center justify-center"
           style={{ backgroundColor: INTRO_GROUND }}
+          data-cursor={cursorOn(INTRO_GROUND)}
         >
           <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
           <div className="container-eiden flex flex-col items-center py-16 text-center">
@@ -227,6 +228,7 @@ export function CaseShowcase({
             <article
               key={entry.slug}
               aria-hidden={index + 1 !== active}
+              data-cursor={cursorOn(ground.bg)}
               style={
                 {
                   "--i": index + 1,
@@ -355,6 +357,7 @@ export function CaseShowcase({
 
         <article
           aria-hidden={active < cases.length + 1}
+          data-cursor={cursorOn(INTRO_GROUND)}
           style={
             {
               "--i": cases.length,

@@ -198,12 +198,11 @@
   }
 }
 
-/* Google only draws its tiles in daylight, and the contact page is ink, so
-   the frame is turned back into a night map here. Greyscale first   without
-   it the inversion returns a road as orange   then the contrast pulled back
-   so the place names stay readable rather than glaring. */
-@utility map-night {
-  filter: grayscale(1) invert(0.92) contrast(0.92) brightness(1.04);
+/* The contact page reads on canvas now, so the frame is left in daylight and
+   only calmed: most of the colour pulled out, the rest kept warm enough that
+   the parks and the water still say which is which beside the beige panels. */
+@utility map-muted {
+  filter: grayscale(0.55) saturate(0.95) contrast(0.97) brightness(1.02);
 }
 
 /* One drifting column. Duration and direction are handed in as custom
@@ -1043,14 +1042,15 @@
     opacity: 1;
   }
 
-  .idea-shot-img, .idea-shot:hover .idea-shot-img {
+  .idea-shot-img,
+  .idea-shot:hover .idea-shot-img {
     transform: scale(1.18);
     transition: none;
   }
 }
 
 .hero-shot-veil {
-   position: absolute;
+  position: absolute;
   inset: 0;
   z-index: 0;
   border-radius: inherit;
@@ -1430,7 +1430,6 @@
   }
 }
 
-
 .deal-card {
   z-index: calc(var(--n) - var(--i));
   translate: calc(
@@ -1770,10 +1769,6 @@
   }
 }
 
-/* The frame's own height: a viewport to be held for, plus one handover
-   per beat. The handover is shorter on a phone   five screenfuls of
-   hold on a small device stops reading as an effect and starts reading
-   as a page that has stopped responding. */
 .palette-frame {
   height: calc(100svh + var(--beats, 0) * var(--palette-beat-travel, 85svh));
 }
@@ -1784,18 +1779,6 @@
   }
 }
 
-/* ------------------------------------------------------------
-   The ring, held against the left edge
-
-   Half of it is off-screen on purpose: what is on screen is the
-   right-hand arc, which is where the live colour is turned to.
-   A whole wheel floating in the column would read as a diagram;
-   a wheel running off the frame reads as an object the page is
-   showing part of.
-
-   `--disk` is the full diameter, so exactly half of it is the
-   visible width   which is also what the writing has to clear.
-   ------------------------------------------------------------ */
 .palette-frame {
   --disk: min(46rem, 82svh);
   --disk-gap: 3.5rem;
@@ -1811,9 +1794,6 @@
   pointer-events: none;
 }
 
-/* Half the disk is on screen, so half the disk is what the writing starts
-   after   plus the gap. Without this the arc is drawn straight over the type,
-   which is exactly what it looks like. */
 .palette-copy {
   padding-left: calc(var(--disk) / 2 + var(--disk-gap));
 }
@@ -1849,26 +1829,7 @@
   }
 }
 
-/* ============================================================
-   The curtain   a case study opening over the page it came from
-
-   Four movements, and they only ever run in pairs. Going in, the
-   case rises from the foot of the screen while the index it came
-   from sinks back and dims: the index is still there, underneath,
-   which is the whole claim the gesture makes. Coming back, the
-   case falls away and the index rises out of the same depth.
-
-   Named per project rather than per route   see the project page  
-   so that two cases in a row are two rooms rather than one room
-   morphing, and `case-next` runs the same rise as `case-open`.
-
-   The classes are put on the snapshots by React's `<ViewTransition>`;
-   the `z-index` is on the group because that is the only place the
-   two halves of a transition can be ordered against each other.
-   ============================================================ */
 ::view-transition {
-  /* The overlay would otherwise swallow a click aimed at the page
-     underneath it for the length of the animation. */
   pointer-events: none;
 }
 
@@ -1916,8 +1877,6 @@
   }
 }
 
-/* The page being left does not leave. It steps back into the dark
-   and waits, so the case reads as something laid over it. */
 @keyframes eiden-case-under {
   from {
     transform: scale(1);
@@ -1940,9 +1899,6 @@
   }
 }
 
-/* The curtain simulates a whole screen moving, which is the most
-   common trigger for motion sensitivity. Without it the pages
-   simply swap, which is the browser's own behaviour. */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(*),
   ::view-transition-new(*),
@@ -1952,11 +1908,6 @@
   }
 }
 
-/* Browsers with no view transitions at all get the gesture as a
-   veil instead: ink over the page, sliding off the bottom of the
-   screen. It is a separate fixed layer rather than a transform on
-   the article, because a transformed ancestor would take the
-   case's own fixed bar down with it. */
 @keyframes eiden-case-veil {
   from {
     transform: translateY(0);
@@ -1966,10 +1917,6 @@
   }
 }
 
-/* The veil itself. Present in the markup on every case page and
-   taken back out once it has run; `@supports` is what keeps it off
-   the browsers that have the real thing, since the feature query
-   and the API ship together. */
 .case-veil {
   position: fixed;
   inset: 0;
@@ -1990,11 +1937,6 @@
     display: none;
   }
 }
-
-/* ── Principle cards ────────────────────────────────────────────
-   The proof section's ground, cut into a card: the same silk,
-   blurred the same way, held down under ink so the writing keeps
-   its contrast wherever the gold falls. */
 
 .principle-shot-img {
   z-index: 0;
@@ -2021,4 +1963,184 @@
       color-mix(in oklab, var(--color-teal) 55%, transparent) 0%,
       transparent 70%
     );
+}
+
+/* ── Cursor ─────────────────────────────────────────────────────
+   One shape carries the whole site: the flat arrow, no outline, and
+   no second form for the things you can press   a link answers with
+   its own hover, not with a change of pointer.
+
+   It is cut twice and the ground picks the cut: cream on anything
+   dark, forest on anything pale, hover fills included, so the arrow
+   never lands ink on ink. CSS cannot read the pixel under the
+   pointer, so the grounds are named   the background utilities that
+   paint them, plus the few classes that paint their own. Anything
+   new and dark either joins the list or carries
+   `data-cursor="light"`. (`data-nav-tone` looks like the same list
+   and is not: sections override it to dress the header, so
+   `bg-ink` sections declaring `light` are common.)
+
+   Deliberately unlayered: unlayered rules outrank every Tailwind
+   `cursor-*` utility, and outrank the browser's own hand on links
+   and buttons, which is what lets the one arrow hold everywhere. */
+
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --cursor-arrow: url("/cursors/arrow.svg") 5 1, default;
+  }
+
+  html,
+  body {
+    cursor: var(--cursor-arrow);
+  }
+
+  /* `cursor` inherits already resolved, so a ground has to restate the
+     property   re-pointing the variable alone would never reach the
+     text sitting on it. Pale grounds restate it too, so a cream chip
+     inside an ink card hands the dark cut back. */
+  .bg-ink,
+  .bg-forest,
+  .bg-forest-md,
+  .bg-teal,
+  .bg-teal-dk,
+  .bg-teal-lt,
+  .bg-mint,
+  .bg-black,
+  [class~="bg-ink/60"],
+  [class~="bg-ink/70"],
+  [class~="bg-ink/95"],
+  [class~="bg-black/80"],
+  .idea-shot {
+    --cursor-arrow: url("/cursors/arrow-light.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  .bg-canvas,
+  .bg-cream,
+  .bg-beige,
+  .bg-beige-dk,
+  .bg-gold,
+  .bg-gold-dk,
+  .bg-white,
+  [class~="bg-canvas/70"],
+  [class~="bg-canvas/80"],
+  [class~="bg-canvas/85"],
+  [class~="bg-canvas/90"],
+  [class~="bg-canvas/95"],
+  [class~="bg-cream/70"],
+  [class~="bg-beige/50"],
+  [class~="bg-beige/70"],
+  [class~="bg-gold/50"],
+  [class~="bg-gold/70"],
+  .idea-chip,
+  .idea-chip-mark {
+    --cursor-arrow: url("/cursors/arrow.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  /* The hand-set override, after both lists so it wins either way. */
+  [data-cursor="light"] {
+    --cursor-arrow: url("/cursors/arrow-light.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  [data-cursor="dark"] {
+    --cursor-arrow: url("/cursors/arrow.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  /* A fill that only exists on hover is exactly the fill under the
+     pointer while it exists, so the swap follows it. */
+  [class*="hover:bg-ink"]:hover,
+  [class*="hover:bg-forest"]:hover,
+  [class*="hover:bg-teal"]:hover,
+  .group:hover [class*="group-hover:bg-ink"],
+  .group:hover [class*="group-hover:bg-teal"] {
+    --cursor-arrow: url("/cursors/arrow-light.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  [class*="hover:bg-canvas"]:hover,
+  [class*="hover:bg-cream"]:hover,
+  [class*="hover:bg-beige"]:hover,
+  [class*="hover:bg-gold"]:hover,
+  .group:hover [class*="group-hover:bg-canvas"] {
+    --cursor-arrow: url("/cursors/arrow.svg") 5 1, default;
+    cursor: var(--cursor-arrow);
+  }
+
+  /* Everything the browser would otherwise raise a hand over. `:is()`
+     lifts the list to the weight of the ground rules above, so it
+     lands after them and the arrow holds on an ink pill. */
+  :is(
+    a[href],
+    button,
+    summary,
+    select,
+    label[for],
+    [role="button"],
+    [role="link"],
+    [role="tab"],
+    [role="menuitem"],
+    [role="option"],
+    [role="switch"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="file"],
+    input[type="color"],
+    input[type="range"],
+    .cursor-pointer,
+    .cursor-default
+  ) {
+    cursor: var(--cursor-arrow);
+  }
+
+  /* Typing surfaces keep their caret. */
+  input:not(
+    [type="button"],
+    [type="submit"],
+    [type="reset"],
+    [type="checkbox"],
+    [type="radio"],
+    [type="file"],
+    [type="color"],
+    [type="range"]
+  ),
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+
+  :disabled,
+  [aria-disabled="true"],
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
+
+  /* The utilities that mean something other than "here is the arrow",
+     put back last so the rules above cannot swallow them. */
+  .cursor-text {
+    cursor: text;
+  }
+  .cursor-zoom-in {
+    cursor: zoom-in;
+  }
+  .cursor-zoom-out {
+    cursor: zoom-out;
+  }
+  .cursor-grab {
+    cursor: grab;
+  }
+  .cursor-grabbing {
+    cursor: grabbing;
+  }
+  .cursor-wait {
+    cursor: wait;
+  }
+  .cursor-none {
+    cursor: none;
+  }
 }

@@ -18,7 +18,7 @@ import { CaseWall } from "@/components/project/case/wall";
 import { CasePaletteStory } from "@/components/project/case/palette-story";
 import { TONES } from "@/components/project/case/tone";
 import type { PaletteStory } from "@/lib/data/projects/types";
-import { cn } from "@/lib/utils";
+import { cn, cursorOn } from "@/lib/utils";
 
 type Say = { fr: string; en: string };
 
@@ -802,6 +802,7 @@ export default function MabroukPage() {
             <div
               className="group/id relative min-h-[15rem] overflow-hidden sm:min-h-[18rem] lg:col-span-5 lg:row-span-2"
               style={{ backgroundColor: BRAND.ground }}
+              data-cursor={cursorOn(BRAND.ground)}
             >
               <Image
                 src="/work/mabrouk/mabrouk-logo.jpeg"

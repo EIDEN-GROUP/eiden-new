@@ -5,7 +5,7 @@ import { useLocalized } from "@/components/project/shared";
 import { useMediaQuery } from "@/lib/hooks";
 import type { ToneSkin } from "./tone";
 import type { PaletteStory } from "@/lib/data/projects/types";
-import { cn } from "@/lib/utils";
+import { cn, cursorOn } from "@/lib/utils";
 
 const POINTER = 0;
 
@@ -152,7 +152,7 @@ export function CasePaletteStory({
               const swatch = colors[state.colorIndex] ?? colors[0];
               return (
                 <li key={say(state.title)} className={cn("flex gap-6 border-t py-6", skin.rule)} >
-                  <span aria-hidden style={{ backgroundColor: swatch.hex }} className={cn("mt-1 size-10 shrink-0 rounded-full ring-1", skin.ring)} />
+                  <span aria-hidden style={{ backgroundColor: swatch.hex }} data-cursor={cursorOn(swatch.hex)} className={cn("mt-1 size-10 shrink-0 rounded-full ring-1", skin.ring)} />
                   <div className="min-w-0">
                     <p className={cn("eyebrow tabular-nums", skin.caption)}>
                       {String(index + 1).padStart(2, "0")} · {swatch.name}
@@ -175,7 +175,10 @@ export function CasePaletteStory({
 
   /* ── Held, and turned ──────────────────────────────────────────── */
   return (
-    <section data-nav-tone={onDark ? "dark" : "light"}>
+    <section
+      data-nav-tone={onDark ? "dark" : "light"}
+      data-cursor={onDark ? "light" : "dark"}
+    >
       <div
         ref={frameRef}
         style={

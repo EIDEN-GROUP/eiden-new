@@ -11,7 +11,7 @@ export const siteConfig = {
   socials: {
     linkedin: "https://www.linkedin.com/company/eiden-group/",
     instagram: "https://www.instagram.com/eiden.group/",
-    behance: "https://www.behance.net/",
+    facebook: "https://www.facebook.com/eiden.group/",
   },
 } as const;
 
@@ -32,13 +32,22 @@ export const projectGallery = [
   { src: "/work/lunja-village/lunja-hero.png", client: "Lunja Village" },
   { src: "/work/bopassage/bopassage-web-desktop.png", client: "Bôpassage" },
   { src: "/work/medical-bay/medical-bay-brand.png", client: "Medical Bay" },
-  { src: "/work/dmc-morocco/dmc-brand-posters.png", client: "DMC Hospitality Morocco" },
+  {
+    src: "/work/dmc-morocco/dmc-brand-posters.png",
+    client: "DMC Hospitality Morocco",
+  },
   { src: "/work/educazen-kids/educazenkids-cover.png", client: "EducazenKids" },
   { src: "/work/lunja-village/lunja-brand-board.png", client: "Lunja Village" },
   { src: "/work/bopassage/bopassage-brand-identity.png", client: "Bôpassage" },
   { src: "/work/medical-bay/medical-bay-web-desktop.png", client: "Medical Bay" },
-  { src: "/work/dmc-morocco/dmc-web-desktop.png", client: "DMC Hospitality Morocco" },
-  { src: "/work/educazen-kids/educazenkids-brand-identity.png", client: "EducazenKids" },
+  {
+    src: "/work/dmc-morocco/dmc-web-desktop.png",
+    client: "DMC Hospitality Morocco",
+  },
+  {
+    src: "/work/educazen-kids/educazenkids-brand-identity.png",
+    client: "EducazenKids",
+  },
   { src: "/work/lunja-village/lunja-brand-tote.png", client: "Lunja Village" },
   { src: "/work/dmc-morocco/dmc-cover.png", client: "DMC Hospitality Morocco" },
 ] as const;
@@ -69,7 +78,8 @@ export const caseStudies: CaseStudyRecord[] = [
     slug: "lunja-village",
     client: "Lunja Village",
     image: "/work/lunja-village/lunja-social-1.png",
-    imageAlt: "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
+    imageAlt:
+      "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
     website: "https://www.lunjavillage.com",
     metric: "+38%",
   },
@@ -106,12 +116,7 @@ export const caseStudies: CaseStudyRecord[] = [
 ];
 
 export type ProjectCategory =
-  | "web"
-  | "hospitality"
-  | "restaurants"
-  | "lounge"
-  | "education"
-  | "health";
+  "web" | "hospitality" | "restaurants" | "lounge" | "education" | "health";
 
 export type ProjectRecord = {
   slug: string;
@@ -136,7 +141,7 @@ export const projects = [
     image: "/work/dmc-morocco/dmc-brand-logo.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
-   {
+  {
     slug: "lunja-village",
     name: "Lunja Village",
     category: "hospitality",
@@ -157,7 +162,7 @@ export const projects = [
     image: "/work/medical-bay/medical-bay-brand.png",
     imageAlt: "Identité du centre médical Medical Bay",
   },
-   {
+  {
     slug: "droguerie-souss",
     name: "Souss Droguerie",
     category: "web",
@@ -199,7 +204,7 @@ export const projects = [
     image: "/work/rihab-residence/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
   },
-  
+
   // {
   //   slug: "lunja-village-vibes",
   //   name: "Lunja Village Vibes",
@@ -214,8 +219,6 @@ export const projects = [
   //   image: "/work/one-retail/one reail card.png",
   //   imageAlt: "Site web One Retail",
   // },
-  
- 
 ] as const satisfies readonly ProjectRecord[];
 
 export type ProjectSlug = (typeof projects)[number]["slug"];

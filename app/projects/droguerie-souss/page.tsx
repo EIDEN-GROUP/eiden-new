@@ -30,7 +30,7 @@ import {
   useHeroDepart,
 } from "@/components/layout/film-hero";
 import { Reveal, RevealGroup, RevealWords, SlideIn } from "@/components/ui/reveal";
-import { cn } from "@/lib/utils";
+import { cn, cursorOn } from "@/lib/utils";
 
 type Say = { fr: string; en: string };
 
@@ -576,6 +576,7 @@ export default function DroguerieSoussPage() {
             <div
               className="group/id relative min-h-[15rem] overflow-hidden sm:min-h-[18rem] lg:col-span-5 lg:row-span-2"
               style={{ backgroundColor: BRAND.ground }}
+              data-cursor={cursorOn(BRAND.ground)}
             >
               <Image
                 src={BRAND.wordmark}
@@ -612,6 +613,7 @@ export default function DroguerieSoussPage() {
                   <li
                     key={colour.hex}
                     style={{ backgroundColor: colour.hex }}
+                    data-cursor={cursorOn(colour.hex)}
                     className={cn(
                       "flex min-h-[4.5rem] flex-1 flex-col justify-end p-4",
                       "transition-[flex-grow] duration-500 ease-[var(--ease-brand)] sm:hover:grow-[2.5]",
