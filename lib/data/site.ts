@@ -228,7 +228,7 @@ export const menuMedia: Record<NavRoute["key"], string> = {
   home: "/work/hero.png",
   about: "/media/eiden-hero-poster.jpg",
   clients: "/media/clients-bg.png",
-  solutions: "/services/web-2.jpg",
+  solutions: "/media/architecture-1.jpg",
   contact: "/work/contact-bg.png",
 };
 
