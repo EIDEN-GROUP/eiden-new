@@ -74,9 +74,9 @@ export function Services() {
                 </span>
 
                 <div className="lg:w-[15rem] lg:shrink-0 xl:w-[30rem]">
-                  <p className="eyebrow text-canvas mb-2 lg:hidden">
+                  {/* <p className="eyebrow text-canvas mb-2 lg:hidden">
                     {item.kicker}
-                  </p>
+                  </p> */}
                   <p className="text-canvas/90 lg:text-ink/70 lg:group-hover:text-canvas flex flex-wrap items-center gap-1 text-[0.9375rem] leading-relaxed transition-colors duration-500 ease-[var(--ease-brand)] lg:text-[0.875rem]">
                     {item.deliverables.map((deliverable, index) => (
                       <span key={deliverable} className="flex items-center gap-2">
