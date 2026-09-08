@@ -134,21 +134,15 @@ export function Hero() {
             })}
           </h1>
           <div className={cn(enter, "min-w-0")} style={stage(0.58)}>
-            <p className="text-ink max-w-3xl text-[clamp(0.9375rem,0.55rem+0.85vw,1.125rem)] leading-relaxed">
+            <p className="text-ink max-w-3xl text-[14px] lg:text-[16px] leading-relaxed">
               {t.hero.description}
             </p>
             <div className="mt-[clamp(1.25rem,3.4vh,2.5rem)] flex flex-wrap items-center gap-x-7 gap-y-3">
-              <Link
-                href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`}
-                className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300"
-              >
+              <Link href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-9 lg:h-12 items-center gap-2 rounded-full px-4 lg:px-6 text-[14px] lg:text-[15px] transition-colors duration-300">
                 {t.common.bookCall}
                 <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
               </Link>
-              <Link
-                href="/nos-solutions"
-                className="group text-ink border-ink hover:border-ink inline-flex h-9 items-center gap-6 border-b text-[0.9375rem] transition-colors duration-300"
-              >
+              <Link href="/nos-solutions" className="group text-ink border-ink hover:border-ink inline-flex h-9 lg:h-10 items-center gap-6 border-b text-[14px] lg:text-[15px] transition-colors duration-300">
                 {t.common.seeSolutions}
                 <ArrowRight className={arrow} strokeWidth={2} aria-hidden />
               </Link>
