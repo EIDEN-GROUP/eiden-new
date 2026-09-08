@@ -28,7 +28,7 @@ export function Services() {
           as="h2"
           text={t.services.title}
           delay={0.05}
-          className="text-ink mt-6 max-w-4xl text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.02]"
+          className="text-ink mt-6 max-w-4xl text-[38px] lg:text-[56px] leading-[1.02]"
         />
         <Reveal delay={0.1} direction="none">
           <p className="eyebrow text-ink/50 mt-8 hidden lg:block">
