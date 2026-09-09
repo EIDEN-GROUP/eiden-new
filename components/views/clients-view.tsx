@@ -161,7 +161,7 @@ export function ClientsView() {
         <div className="container-eiden pt-16 pb-24 sm:pt-20 sm:pb-32">
           <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
             <div className="lg:sticky lg:top-32">
-              <div className="bg-beige/50 rounded-[1.75rem] p-4">
+              <div className=" rounded-[1.75rem] p-4">
                 <ul className="flex flex-wrap gap-2.5">
                   {FILTERS.map((filter) => {
                     const on = filter === active;
@@ -172,7 +172,7 @@ export function ClientsView() {
                           onClick={() => setActive(filter)}
                           aria-pressed={on}
                           className={cn(
-                            "font-label focus-visible:outline-teal inline-flex items-center gap-2 rounded-full px-5 py-3",
+                            "focus-visible:outline-teal inline-flex items-center gap-2 rounded-full px-5 py-3",
                             "text-[0.875rem] font-bold tracking-[0.05em] transition-colors duration-300 ease-[var(--ease-brand)]",
                             "focus-visible:outline-2 focus-visible:outline-offset-2",
                             on

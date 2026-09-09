@@ -72,7 +72,17 @@ export function AboutMovements({
   return (
     <section className="grain bg-canvas">
       <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
-        <div aria-hidden className="bg-beige sticky top-0 isolate order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
+        {/* `z-1`, so the reading column passes underneath.
+            Stacked, the picture is held at the top of the window and the
+            movements scroll up into it   and each of them opens with a rule
+            that was being drawn over the picture instead of under it. The
+            panel is `sticky` and so paints with the positioned elements,
+            but at `z-index: auto` it lost to the articles below it in the
+            markup: `Reveal` puts a transform on each one, which promotes it
+            to the same layer, and later in the DOM wins a tie. One step up
+            settles it. No effect at `lg`, where the two are separate
+            columns of a grid and never overlap. */}
+        <div aria-hidden className="bg-beige sticky top-0 isolate z-1 order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
           {movements.map((movement, index) => (
             <div
               key={movement.n}

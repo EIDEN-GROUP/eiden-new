@@ -6,23 +6,8 @@ import { useSay } from "@/components/solutions/shared";
 import { Reveal, RevealGroup, RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy } from "@/lib/data/solutions";
 
-/**
- * The constat reads back muted and turns to ink one line at a time as the
- * block rises   the same ramp the home headline uses, pitched off gold so the
- * unlit state still holds its own on cream.
- */
-const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
+const READ = litRamp("var(--color-ink)", "var(--color-forest/65)");
 
-/**
- * The starting point, told the way the about page states its position:
- * the heading pinned on the left, the reading column running past it.
- *
- * Three beats down that column   what we see, what we do instead, what it
- * leaves you with   each on its own motion. The constat lights as it is
- * scrolled through, the turn rises word by word from behind its baseline, and
- * the outcome lands as three ruled lines. No boxes: the page is measured in
- * air, and every rule here is a hairline.
- */
 export function SolutionsIntro() {
   const say = useSay();
   const copy = solutionsCopy.intro;
@@ -30,16 +15,6 @@ export function SolutionsIntro() {
   const constatRef = useRef<HTMLUListElement>(null);
 
   useTravel(constatRef, { from: 0.85, to: 0.32 });
-
-  /* The gather and split the about page's position section runs, on top of
-     everything already here rather than in place of it: this writes
-     `--split` while the constat keeps its own `--p` for the colour ramp and
-     `ScrollWords` keeps a third for the heading, so the three travels do not
-     read each other's numbers.
-
-     `from` sits under the hero's own height   the section opens at `74svh`,
-     so a wider window would leave the pair already half apart at the top of
-     the page. */
   useTravel(sectionRef, { from: 0.72, to: 0.22, property: "--split" });
 
   return (
@@ -63,8 +38,6 @@ export function SolutionsIntro() {
 
         {/* ── The reading column ────────────────────────────────────── */}
         <div className="split-part split-body">
-          {/* What we see. `--n` on the run, `--i` on each line: the ramp does
-              the rest, without a re-render per frame. */}
           <ul
             ref={constatRef}
             style={
@@ -117,8 +90,6 @@ export function SolutionsIntro() {
                 <span className="font-display text-forest text-[clamp(1.0625rem,1.9vw,1.5rem)] font-bold tracking-[-0.025em] transition-transform duration-500 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none">
                   {say(line)}
                 </span>
-                {/* Drawn over the row's own rule, so the line reads as being
-                    struck through in teal rather than gaining a second edge. */}
                 <span
                   aria-hidden
                   className="bg-teal absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:scale-x-100 motion-reduce:transition-none"

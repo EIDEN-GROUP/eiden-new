@@ -1988,23 +1988,10 @@
 
 .principle-shot-img {
   z-index: 0;
-  /* Wide enough that the blur never fades out inside the card   the wider
-     the blur, the further in its own soft edge reaches, so this grows with
-     the radius below rather than being a fixed margin. */
-  transform: scale(1.9);
-  /* The hero's blur, at the hero's radius: the picture is a colour field
-     rather than a photograph, which is what lets four very different
-     images sit in one deck without any of them reading as a subject. */
-  filter: blur(40px);
+  transform: scale(1);
+  filter: blur(20px);
 }
 
-/* Ink, where this used to be teal.
-   The deck carries four very different pictures now, and two of them are
-   pale   a cream chrome and a pastel   so a teal scrim left the canvas
-   copy on them at about 2.8:1, which is not a readable line. Ink at these
-   weights holds every one of the four above 4.5:1 on its lightest patch
-   while still letting the colour through; the teal stays as the wash at
-   the foot, where no copy sits but the brand still wants to be felt. */
 .principle-shot-veil {
   position: absolute;
   inset: 0;
@@ -2025,24 +2012,6 @@
     );
 }
 
-/* ── Cursor ─────────────────────────────────────────────────────
-   One shape carries the whole site: the flat arrow, no outline, and
-   no second form for the things you can press   a link answers with
-   its own hover, not with a change of pointer.
-
-   It is cut twice and the ground picks the cut: cream on anything
-   dark, forest on anything pale, hover fills included, so the arrow
-   never lands ink on ink. CSS cannot read the pixel under the
-   pointer, so the grounds are named   the background utilities that
-   paint them, plus the few classes that paint their own. Anything
-   new and dark either joins the list or carries
-   `data-cursor="light"`. (`data-nav-tone` looks like the same list
-   and is not: sections override it to dress the header, so
-   `bg-ink` sections declaring `light` are common.)
-
-   Deliberately unlayered: unlayered rules outrank every Tailwind
-   `cursor-*` utility, and outrank the browser's own hand on links
-   and buttons, which is what lets the one arrow hold everywhere. */
 
 @media (hover: hover) and (pointer: fine) {
   :root {
@@ -2054,10 +2023,6 @@
     cursor: var(--cursor-arrow);
   }
 
-  /* `cursor` inherits already resolved, so a ground has to restate the
-     property   re-pointing the variable alone would never reach the
-     text sitting on it. Pale grounds restate it too, so a cream chip
-     inside an ink card hands the dark cut back. */
   .bg-ink,
   .bg-forest,
   .bg-forest-md,

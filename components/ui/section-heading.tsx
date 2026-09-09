@@ -8,16 +8,9 @@ type SectionHeadingProps = {
   lead?: ReactNode;
   align?: "left" | "center";
   className?: string;
-  /** Extra content rendered under the lead (buttons, meta…). */
   children?: ReactNode;
 };
 
-/**
- * Eyebrow + title + lead, in the brand's five-voice type hierarchy.
- *
- * There is no tone to pick any more: every ground on the site is canvas or the
- * warm one, so the heading is always written for daylight.
- */
 export function SectionHeading({
   eyebrow,
   title,

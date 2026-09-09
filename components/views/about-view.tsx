@@ -65,13 +65,6 @@ export function AboutView() {
           src={ideaTexture}
           imageClassName="scale-110 object-cover object-center blur-md"
         />
-        {/* The wash the beige used to be. Without it the teal eyebrows and
-            the method quotes fall to about 2.8:1 on the picture's greyer
-            passes   the ink headings are never in doubt, but the teal is.
-            At this weight the ground reads the same as the `beige/50` it
-            replaces (4.7:1) and the pearl still comes through.
-            `-z-10` and after the backdrop: same layer, later in the DOM, so
-            it sits over the picture and under the sections. */}
         <span aria-hidden className="bg-canvas/55 absolute inset-0 -z-10" />
 
         {/* ── Principles ─────────────────────────────────────────────── */}

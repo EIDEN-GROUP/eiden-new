@@ -28,7 +28,7 @@ export function ContactBanner() {
         </Reveal>
 
         <Reveal delay={0.58} className="mt-11 flex flex-col items-center gap-5 sm:mt-12">
-          <Link href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} className="group text-canvas px-8 py-2 font-display border border-canvas/50 rounded-full hover:border-gold hover:text-gold relative inline-block pb-2 text-[15px] font-semibold tracking-[0.24em] uppercase sm:text-[0.875rem]">
+          <Link href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} className="group text-ink px-8 py-2 font-display bg-canvas rounded-full hover:bg-teal  hover:text-canvas relative inline-block pb-2 text-[15px] font-semibold tracking-[0.2em] uppercase sm:text-[0.875rem]">
             {t.contact.cta}
           </Link>
 

@@ -10,26 +10,10 @@ import {
 } from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * Scroll choreography for the home2 layout.
- *
- * Every moving part here is driven the same way: one rAF-throttled listener
- * writes a 0→1 number into a CSS custom property, and the markup underneath
- * reads it. React never re-renders mid-scroll, and everything degrades to its
- * finished state when the visitor asks for less motion.
- */
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 
-/**
- * A step's colour, ramped from `dim` to `lit` by the block's progress and the
- * step's own index. `var(--p, 0)` so the run is legible from the first paint,
- * before any scroll listener has had a chance to write anything.
- *
- * The caller reads `--n` (how many steps) off the run and `--i` (which one)
- * off each step, so the same ramp lights a headline word by word or a list
- * line by line.
- */
+
 export function litRamp(lit: string, dim: string) {
   return (
     `color-mix(in oklab, ${lit} ` +
@@ -38,19 +22,7 @@ export function litRamp(lit: string, dim: string) {
   );
 }
 
-/** The headline ramp: muted beige up to ink. */
-const LIT = litRamp("var(--color-ink)", "var(--color-beige-dk)");
-
-/**
- * Write the element's travel through the viewport into `--p`.
- *
- * `from` and `to` are viewport fractions measured from the top: progress
- * starts when the element's top edge crosses `from` and completes at `to`.
- *
- * `property` names what it is written into, for a block that already has a
- * `--p` of its own doing something else and wants a second travel alongside
- * it rather than on top of it.
- */
+const LIT = litRamp("var(--color-ink)", "var(--color-canvas)");
 export function useTravel(
   ref: RefObject<HTMLElement | null>,
   {
@@ -133,12 +105,6 @@ export function ScrollWords({
             style={
               {
                 "--i": `${index}`,
-                /*
-                 * The ramp is written out in place rather than parked in its
-                 * own custom property: substituting a `clamp()` into a
-                 * surrounding `calc()` resolves to 0% in Chrome, so the whole
-                 * line would sit at its muted colour forever.
-                 */
                 color: LIT,
                 transition: "color 0.25s linear",
               } as CSSProperties
@@ -153,12 +119,6 @@ export function ScrollWords({
   );
 }
 
-/**
- * Lift-and-fade on entry, staged by index.
- *
- * The finished state is the default and the offset is applied only under
- * `motion-safe`, so nothing can be stranded off-screen without animation.
- */
 export function Rise({
   children,
   delay = 0,
@@ -170,13 +130,7 @@ export function Rise({
   className?: string;
 }) {
   return (
-    <div
-      style={{ animationDelay: `${delay}s` } as CSSProperties}
-      className={cn(
-        "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]",
-        className,
-      )}
-    >
+    <div style={{ animationDelay: `${delay}s` } as CSSProperties} className={cn( "motion-safe:[animation:eiden-fade-in_0.9s_var(--ease-brand)_both]", className, )}>
       {children}
     </div>
   );

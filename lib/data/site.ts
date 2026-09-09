@@ -283,10 +283,10 @@ export const movementMedia = [
 
 /** One per principle, in the order the rules are written. */
 export const principleMedia = [
-  "/media/bg-2.jpeg",
-  "/media/bg-3.jpeg",
-  "/media/bg-4.jpeg",
-  "/media/bg-1.jpeg",
+  "/work/card-1.jpeg",
+  "/work/card-2.jpeg",
+  "/work/card-2.jpeg",
+  "/work/card-1.jpeg",
 ] as const;
 
 export const serviceMedia: Record<string, string> = {

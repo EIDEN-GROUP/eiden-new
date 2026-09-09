@@ -74,7 +74,7 @@ export function FilmHero({
   titleAccent,
   titleTail,
   lead,
-  image = "/media/card-2.jpeg",
+  image = "/work/project-5.jpg",
   imageClassName = "object-cover",
   className,
   children,
