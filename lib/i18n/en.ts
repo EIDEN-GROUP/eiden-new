@@ -35,9 +35,9 @@ export const en: Dictionary = {
 
   nav: {
     home: "Home",
-    about: "Architecture",
+    about: "About Us",
     clients: "Clients",
-    solutions: "Solutions",
+    solutions: "Our Solutions",
     contact: "Contact",
   },
 
@@ -301,20 +301,20 @@ export const en: Dictionary = {
       {
         slug: "lunja-village",
         title:
-          "A complete coastal identity and a social presence that fills the seasons.",
-        text: "For Lunja Village we built the entire brand: logo, visual world, collateral, social content and site. The resort went from a name few knew to a destination travellers search for by name.",
-        tags: ["Branding", "Social media", "Website"],
+        "Changing perception. Renewing appeal.",
+        text: "Lunja Village needed more than a new communication strategy. We rethought its image, reputation, digital strategy, and acquisition approach to rebuild a destination that gets noticed, considered, and chosen.",
+        tags: ["STRATEGY", "IDENTITY", "DIGITAL", "ACQUISITION"],
         quote: "",
         author: "",
       },
       {
-        slug: "bopassage",
-        title:
-          "An Agadir café-restaurant finally visible online, from first click to booked table.",
-        text: "Bôpassage had the room and the regulars, but no site and no social rhythm. We launched the site, structured the editorial line and ran Google Ads campaigns aimed at bookings.",
-        tags: ["Website", "Content", "Google Ads"],
-        quote: "",
-        author: "",
+      slug: "bopassage",
+      title:
+      "Communication designed to attract and convert.",
+      text: "Bô Passage already had the experience and offering to attract customers. We rethought its communication strategy, refined its image, and developed its content to capture attention more effectively and turn visibility into visits, bookings, and new customers.",
+      tags: ["MARCOM STRATEGY", "BRANDING", "DIGITAL", "ACQUISITION"],
+      quote: "",
+      author: "",
       },
       {
         slug: "medical-bay",
@@ -326,13 +326,12 @@ export const en: Dictionary = {
         author: "",
       },
       {
-        slug: "dmc-morocco",
-        title:
-          "Thirty years of hotel expertise turned into a brand, from blank page to first contract.",
-        text: "Naming, identity, website and LinkedIn strategy for DMC Hospitality Morocco. Expertise that had existed for years, but had never had a face.",
-        tags: ["Naming", "Identity", "LinkedIn"],
-        quote: "",
-        author: "",
+      slug: "dmc-morocco",
+      title: "Giving a face to thirty years of expertise.",
+      text: "DMC Hospitality Morocco had the expertise and experience. We built everything needed to make it visible: naming, identity, website, and content creation, with an image designed to establish the brand and support its growth.",
+      tags: ["NAMING", "BRANDING", "WEB", "CONTENT"],
+      quote: "",
+      author: "",
       },
       {
         slug: "educazen-kids",

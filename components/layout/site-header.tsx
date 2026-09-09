@@ -149,11 +149,6 @@ export function SiteHeader() {
     window.addEventListener("resize", placeOrigin);
     return () => window.removeEventListener("resize", placeOrigin);
   }, [open, placeOrigin]);
-
-  /* The menu covers the screen, so the page behind it holds still   through the
-     shared lock, which also stops Lenis. Clipping the body on its own left the
-     smooth scroll running underneath, and clearing `overflow` on the way out
-     released whatever else was holding the page. */
   useEffect(() => {
     if (!open) return;
     setScrollLock(true);
@@ -277,10 +272,6 @@ export function SiteHeader() {
               className={cn(
                 "nav-shell glass-light text-ink pointer-events-auto mx-auto mt-3 flex h-18 w-full max-w-[100vw] items-center justify-between gap-6 rounded-full pr-2",
                 "group-data-[lifted=true]/bar:h-14 group-data-[lifted=true]/bar:max-w-[44rem]",
-                /* Canvas at 80%, not white at 100%: the bar is meant to read as
-                   a pane over the page, and pure white also sits cold against a
-                   palette built on a warm off-white. The blur is what makes the
-                   translucency read as glass rather than as a weak fill. */
                 "group-data-[lifted=true]/bar:bg-canvas/80 group-data-[lifted=true]/bar:backdrop-blur-xl group-data-[lifted=true]/bar:backdrop-saturate-150",
                 "group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
               )}
@@ -289,11 +280,6 @@ export function SiteHeader() {
                 className={cn(
                   "nav-capsule glass-light flex h-14 shrink-0 items-center gap-8 rounded-full px-7 xl:gap-10",
                   "bg-canvas/80 backdrop-blur-xl backdrop-saturate-150",
-                  /* Once the shell has taken the white over, the capsule steps
-                     out of the way entirely. Two translucent panes stacked
-                     would darken where they overlap, and an opaque one masks
-                     the shell’s own sheen   which is the step that showed up
-                     between the routes and contact. */
                   "group-data-[lifted=true]/bar:bg-transparent group-data-[lifted=true]/bar:backdrop-filter-none",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                 )}
@@ -345,13 +331,8 @@ export function SiteHeader() {
                 href="/contact"
                 className={cn(
                   "nav-capsule group/cta glass-dark bg-teal text-canvas hover:bg-teal-dk flex h-12 shrink-0 items-center gap-2.5 rounded-full pr-5 pl-7 text-[1rem] font-semibold whitespace-nowrap",
-                  /* The shell closes to h-14 once the page has moved, so the
-                     button gives four pixels back rather than filling it. */
                   "group-data-[lifted=true]/bar:h-11",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
-                  /* Lifts into its own light. The shadow is tinted with the
-                     teal rather than black, so it reads as the button glowing
-                     rather than as a heavier drop. */
                   "hover:-translate-y-0.5 hover:shadow-[0_18px_38px_-14px_rgba(14,122,115,0.55)]",
                   "motion-reduce:translate-none",
                 )}

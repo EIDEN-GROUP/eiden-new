@@ -79,17 +79,16 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "lunja-village",
     client: "Lunja Village",
-    image: "/work/lunja-village/lunja-social-1.png",
-    imageAlt:
-      "Univers de marque Lunja Village : identité, réseaux sociaux et supports imprimés",
+    image: "/work/lunja-village/lunja-cover.png",
+    imageAlt: "Vue aérienne du village Lunja Village au coucher du soleil",
     website: "https://www.lunjavillage.com",
     metric: "+38%",
   },
   {
     slug: "dmc-morocco",
     client: "DMC Hospitality Morocco",
-    image: "/work/dmc-morocco/dmc-portfolio-image.png",
-    imageAlt: "Affiches de marque DMC Hospitality Morocco",
+    image: "/work/dmc-morocco/dmc-cover.png",
+    imageAlt: "Bureaux DMC Hospitality Morocco avec la marque sur la paroi vitrée",
     website: "https://dmchm.com",
     metric: "0 → 1",
   },
@@ -103,8 +102,8 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "bopassage",
     client: "Bôpassage",
-    image: "/work/bopassage/bopassage.png",
-    imageAlt: "Site web Bôpassage présenté sur tablette dans le restaurant",
+    image: "/work/bopassage/bopassage-cover.jpg",
+    imageAlt: "Terrasse du restaurant Bôpassage à Agadir",
     website: "https://bopassage.com",
     metric: "x3",
   },
@@ -153,7 +152,7 @@ export const projects = [
     slug: "lunja-village",
     name: "Lunja Village",
     category: "hospitality",
-    image: "/work/lunja-village/image lunja village portfoliio.png",
+    image: "/work/lunja-village/lunja-cover.png",
     imageAlt: "Univers de marque du village côtier Lunja Village",
   },
   {
@@ -184,11 +183,11 @@ export const projects = [
     image: "/work/mabrouk/imgg1 (1).png",
     imageAlt: "L’accueil du Mabrouk Hôtel",
   },
-   {
+  {
     slug: "dmc-morocco",
     name: "DMC Hospitality Morocco",
     category: "hospitality",
-    image: "/work/dmc-morocco/dmc-brand-logo.png",
+    image: "/work/dmc-morocco/dmc-cover.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
   {
@@ -219,11 +218,11 @@ export const projects = [
     image: "/clients/madaef.png",
     imageAlt: "Identité MADAEF",
   },
-    {
+  {
     slug: "bopassage",
     name: "Bôpassage",
     category: "restaurants",
-    image: "/work/bopassage/bopassage.png",
+    image: "/work/bopassage/bopassage-cover.jpg",
     imageAlt: "Identité et site web du restaurant Bôpassage",
   },
   {
@@ -271,6 +270,8 @@ export const contactTexture = "/work/contact-bg.png";
 export const aboutTexture = "/work/contact-bg.png";
 
 export const proofTexture = "/work/project-5.jpg";
+
+export const solutionCover = "/services/photo-5.jpg";
 
 export const ideaTexture = "/media/idea-bg.png";
 

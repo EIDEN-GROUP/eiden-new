@@ -308,18 +308,18 @@ export const fr = {
       {
         slug: "lunja-village",
         title:
-          "Une identité côtière complète et une présence sociale qui remplit les saisons.",
-        text: "Pour Lunja Village, nous avons construit toute la marque : logo, univers visuel, supports, contenus sociaux et site. Le complexe est passé d'un nom peu connu à une destination que les voyageurs cherchent par son nom.",
-        tags: ["Branding", "Réseaux sociaux", "Site web"],
+          "Changer la perception. Relancer l’attractivité.",
+        text: "Lunja Village avait besoin de plus qu’une nouvelle communication. Nous avons repensé son image, sa réputation, sa stratégie digitale et son acquisition pour reconstruire une destination que l’on remarque, que l’on considère et que l’on choisit.",
+        tags: ["STRATÉGIE", "IDENTITÉ", "DIGITAL", "ACQUISITION"],
         quote: "",
         author: "",
       },
       {
         slug: "bopassage",
         title:
-          "Un café-restaurant d'Agadir enfin visible en ligne, du premier clic à la table réservée.",
-        text: "Bôpassage avait la salle et les clients fidèles, mais aucun site ni rythme social. Nous avons lancé le site, structuré la ligne éditoriale et mis en place les campagnes Google Ads orientées réservation.",
-        tags: ["Site web", "Contenu", "Google Ads"],
+          "Une communication pensée pour attirer et convertir.",
+        text: "Bô Passage avait déjà l’expérience et l’offre pour séduire. Nous avons repensé sa stratégie de communication, optimisé son image et développé son contenu pour mieux capter l’attention et transformer cette visibilité en visites, réservations et nouveaux clients.",
+        tags: ["STRATÉGIE MARCOM", "BRANDING", "DIGITAL", "ACQUISITION"],
         quote: "",
         author: "",
       },
@@ -334,10 +334,9 @@ export const fr = {
       },
       {
         slug: "dmc-morocco",
-        title:
-          "Trente ans d'expertise hôtelière transformés en marque, de la page blanche au premier contrat.",
-        text: "Naming, identité, site et stratégie LinkedIn pour DMC Hospitality Morocco. Une expertise qui existait depuis longtemps, mais qui n'avait jamais eu de visage.",
-        tags: ["Naming", "Identité", "LinkedIn"],
+        title: "Donner un visage à trente ans d’expertise.",
+        text: "DMC Hospitality Morocco avait l’expertise et l’expérience. Nous avons construit tout ce qu’il fallait pour les rendre visibles : naming, identité, site web et création de contenu, avec une image pensée pour installer la marque et accompagner son développement.",
+        tags: ["Naming", "BRANDING", "WEB", "CONTENU"],
         quote: "",
         author: "",
       },

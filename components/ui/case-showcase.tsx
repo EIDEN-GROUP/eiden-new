@@ -272,6 +272,13 @@ export function CaseShowcase({
                   <p
                     className={cn(
                       "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]",
+                      /* Le libellé client + tags doit occuper le même nombre de
+                         lignes sur toutes les cases, sinon le bloc saute d'une
+                         case à l'autre. En deux colonnes il tient sur une seule
+                         ligne, la plus longue comprise ; sur mobile la colonne
+                         est trop étroite pour ça, on vise deux lignes partout. */
+                      "max-sm:min-h-[calc(2.4em+0.25rem)] max-sm:text-[clamp(0.5rem,2.7vw,0.6875rem)] max-sm:tracking-[0.06em]",
+                      "lg:flex-nowrap lg:text-[clamp(0.6rem,0.95vw,0.875rem)] lg:tracking-[0.08em]",
                       ink.accent,
                     )}
                   >
@@ -281,7 +288,7 @@ export function CaseShowcase({
 
                   <h3
                     className={cn(
-                      "font-display mt-4 text-[clamp(1.625rem,4vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6",
+                      "font-display mt-4 text-[clamp(1.625rem,3vw,2.75rem)] leading-[1.08] font-medium tracking-[-0.03em] sm:mt-6",
                       ink.title,
                     )}
                   >

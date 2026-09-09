@@ -1,11 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { type CSSProperties, useEffect, useRef } from "react";
 import { BandLabel, useSay } from "@/components/solutions/shared";
 import { SystemFeature } from "@/components/solutions/system-feature";
+import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
 import { RevealWords } from "@/components/ui/reveal";
+import { proofTexture, solutionCover } from "@/lib/data/site";
 import { solutionsCopy, systems } from "@/lib/data/solutions";
 
+/* Les quatre rideaux descendent la rampe de marque, du plus sombre au plus
+   clair. SystemFeature écrit son texte en `canvas` et ses accents en `teal` :
+   on redéfinit ces variables sur le panneau, ce qui retourne toutes ses
+   classes d'un coup sans toucher au composant. Sur le dernier fond, trop
+   clair pour du blanc, `canvas` passe à l'encre   et `ink` prend l'inverse
+   pour que la flèche survolée reste lisible. */
+const PANEL_TONES = [
+  { ground: "#122620", canvas: "#fefdfb", ink: "#122620", accent: "#fefdfb" },
+  { ground: "#0c5752", canvas: "#fefdfb", ink: "#122620", accent: "#fefdfb" },
+  { ground: "#e3d3a8", canvas: "#122620", ink: "#122620", accent: "#0e7a73" },
+  { ground: "#f4ebd0", canvas: "#122620", ink: "#122620", accent: "#122620" },
+];
 
 export function SystemsOverview() {
   const say = useSay();
@@ -37,6 +51,10 @@ export function SystemsOverview() {
           data-nav-tone="dark"
           className="grain bg-forest text-canvas sticky top-0 z-0 flex min-h-svh flex-col"
         >
+          {/* Même traitement que l'intro des preuves : la texture défile avec
+              la page derrière le titre, la couleur reste dessous. */}
+          <FixedBackdrop src={solutionCover} imageClassName="scale-110 blur-2xl" />
+
           <div className="container-eiden pt-20 sm:pt-28">
             <BandLabel number="01" tone="forest">
               {say(copy.eyebrow)}
@@ -48,13 +66,16 @@ export function SystemsOverview() {
           </div>
         </div>
         <div>
-          {systems.map((system, index) => (
-            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-ink sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
-              <div className="container-eiden w-full py-16 lg:py-12">
-                <SystemFeature system={system} />
+          {systems.map((system, index) => {
+            const tone = PANEL_TONES[index % PANEL_TONES.length];
+            return (
+              <div key={system.slug} data-system-panel style={{ zIndex: index + 1, backgroundColor: tone.ground, "--color-canvas": tone.canvas, "--color-ink": tone.ink, "--color-teal": tone.accent } as CSSProperties} className="sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+                <div className="container-eiden w-full py-16 lg:py-12">
+                  <SystemFeature system={system} />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
