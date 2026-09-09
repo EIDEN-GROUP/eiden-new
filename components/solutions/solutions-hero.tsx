@@ -16,7 +16,7 @@ export function SolutionsHero() {
       titleAccent={say(copy.titleAccent)}
       titleTail={say(copy.titleTail)}
       lead={say(copy.lead)}
-      image="/media/bg-1.jpeg"
+      image="/media/bg-6.png"
       imageClassName="scale-110 object-cover object-center blur-[6px]"
     >
       <a href="#systemes" className="group glass-dark bg-canvas text-ink hover:bg-teal hover:text-canvas inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
