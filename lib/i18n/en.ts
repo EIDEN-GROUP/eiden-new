@@ -205,13 +205,15 @@ export const en: Dictionary = {
       },
       {
         slug: "photoVid",
-        title: "Photography, Video & Content Creation",
+        title: "Content Creation",
         kicker: "What the brand actually gives people to look at",
         text: "We create the visuals and content that give your communication impact. Photography, video, social formats, and advertising content are produced to capture attention, tell your story, and inspire people to take the next step.",
         deliverables: [
           "Photography",
           "Video Production",
           "Reels",
+          "Photography",
+          "Videos",
           "Social Content",
           "Motion Design",
           "Post-production",

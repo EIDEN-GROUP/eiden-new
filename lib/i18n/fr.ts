@@ -211,13 +211,15 @@ export const fr = {
       },
       {
         slug: "photoVid",
-        title: "Photo, vidéo et création de contenu",
+        title: "Création de contenu",
         kicker: "Ce que la marque donne à voir",
         text: "Nous créons les images et les contenus qui donnent de la force à votre communication. Photos, vidéos, formats sociaux et contenus publicitaires sont produits pour attirer l’attention, raconter ce que vous faites et donner envie d’aller plus loin.",
         deliverables: [
           "Shooting photo",
           "Production vidéo",
           "Reels",
+          "Photos",
+          "Vidéos",
           "Social Content",
           "Motion Design",
           "Post-production",
