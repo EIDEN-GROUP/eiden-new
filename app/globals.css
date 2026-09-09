@@ -1461,7 +1461,54 @@
   opacity: calc(0.15 + 0.85 * clamp(0, calc(var(--p, 1) * var(--n) - var(--i)), 1));
 }
 
-/* The run from one step to the next, drawn once its own step has arrived  
+/* The two halves of a statement, gathered at the middle of the column
+   and pulled apart to their own places as the block travels.
+
+   The same deal `.deal-card` runs, without the sequencing: there are two
+   parts and they move together, so the ramp is the travel straight
+   rather than the travel cut into steps. It is written on every scroll
+   and never latched, which is the point of it here   the pair opens on
+   the way down and closes again on the way back up, however many times
+   the section is passed, instead of playing once and staying open.
+
+   It rides `--split` rather than `--p` because a section can already be
+   spending `--p` on something else   the solutions intro lights its
+   constat line by line with one and its heading word by word with
+   another   and the two travels have no business sharing a name.
+
+   `--split` falls back to 1, so with no script the halves are already
+   in their places and nothing is left stranded at the centre. */
+.split-part {
+  translate: calc(var(--dx, 0px) * (1 - var(--split, 1)))
+    calc(var(--dy, 0px) * (1 - var(--split, 1)));
+  opacity: calc(0.3 + 0.7 * var(--split, 1));
+}
+
+/* Stacked, the pair closes on the vertical   the two halves sit one over
+   the other, so each travels toward the seam between them. */
+.split-lead {
+  --dy: 3rem;
+}
+
+.split-body {
+  --dy: -3rem;
+}
+
+/* Side by side, it closes on the horizontal instead, each half moving in
+   toward the gutter it is dealt away from. */
+@media (width >= 64rem) {
+  .split-lead {
+    --dx: clamp(2rem, 9vw, 7rem);
+    --dy: 0px;
+  }
+
+  .split-body {
+    --dx: calc(clamp(2rem, 9vw, 7rem) * -1);
+    --dy: 0px;
+  }
+}
+
+/* The run from one step to the next, drawn once its own step has arrived
    hence the half-step of lag before the ramp starts to open it. */
 .step-arrow {
   transform-origin: left center;
@@ -1554,6 +1601,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .deal-card,
+  .split-part,
   .step-in,
   .step-arrow,
   .step-run {
@@ -1940,11 +1988,23 @@
 
 .principle-shot-img {
   z-index: 0;
-  /* Wide enough that the blur never fades out inside the card. */
-  transform: scale(1.6);
-  filter: blur(10px) saturate(118%);
+  /* Wide enough that the blur never fades out inside the card   the wider
+     the blur, the further in its own soft edge reaches, so this grows with
+     the radius below rather than being a fixed margin. */
+  transform: scale(1.9);
+  /* The hero's blur, at the hero's radius: the picture is a colour field
+     rather than a photograph, which is what lets four very different
+     images sit in one deck without any of them reading as a subject. */
+  filter: blur(40px);
 }
 
+/* Ink, where this used to be teal.
+   The deck carries four very different pictures now, and two of them are
+   pale   a cream chrome and a pastel   so a teal scrim left the canvas
+   copy on them at about 2.8:1, which is not a readable line. Ink at these
+   weights holds every one of the four above 4.5:1 on its lightest patch
+   while still letting the colour through; the teal stays as the wash at
+   the foot, where no copy sits but the brand still wants to be felt. */
 .principle-shot-veil {
   position: absolute;
   inset: 0;
@@ -1954,13 +2014,13 @@
   background:
     linear-gradient(
       180deg,
-      color-mix(in oklab, var(--color-teal) 62%, transparent) 0%,
-      color-mix(in oklab, var(--color-teal) 50%, transparent) 42%,
-      color-mix(in oklab, var(--color-teal) 72%, transparent) 100%
+      color-mix(in oklab, var(--color-ink) 68%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink) 60%, transparent) 42%,
+      color-mix(in oklab, var(--color-ink) 78%, transparent) 100%
     ),
     radial-gradient(
       88% 62% at 50% 108%,
-      color-mix(in oklab, var(--color-teal) 55%, transparent) 0%,
+      color-mix(in oklab, var(--color-teal) 40%, transparent) 0%,
       transparent 70%
     );
 }

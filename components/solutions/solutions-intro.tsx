@@ -26,15 +26,27 @@ const READ = litRamp("var(--color-ink)", "var(--color-gold-dk)");
 export function SolutionsIntro() {
   const say = useSay();
   const copy = solutionsCopy.intro;
+  const sectionRef = useRef<HTMLElement>(null);
   const constatRef = useRef<HTMLUListElement>(null);
 
   useTravel(constatRef, { from: 0.85, to: 0.32 });
 
+  /* The gather and split the about page's position section runs, on top of
+     everything already here rather than in place of it: this writes
+     `--split` while the constat keeps its own `--p` for the colour ramp and
+     `ScrollWords` keeps a third for the heading, so the three travels do not
+     read each other's numbers.
+
+     `from` sits under the hero's own height   the section opens at `74svh`,
+     so a wider window would leave the pair already half apart at the top of
+     the page. */
+  useTravel(sectionRef, { from: 0.72, to: 0.22, property: "--split" });
+
   return (
-    <section className="bg-cream py-24 sm:py-32">
+    <section ref={sectionRef} className="bg-cream py-24 sm:py-32">
       <div className="container-eiden grid items-end gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
         {/* ── The position, held while the column moves ─────────────── */}
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="split-part split-lead lg:sticky lg:top-28 lg:self-start">
           <Reveal direction="none" duration={0.5}>
             <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
@@ -50,7 +62,7 @@ export function SolutionsIntro() {
         </div>
 
         {/* ── The reading column ────────────────────────────────────── */}
-        <div>
+        <div className="split-part split-body">
           {/* What we see. `--n` on the run, `--i` on each line: the ramp does
               the rest, without a re-render per frame. */}
           <ul

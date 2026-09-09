@@ -10,6 +10,9 @@ import { lithosMateriaux } from "./lithos-materiaux";
 import { rihabResidence } from "./rihab-residence";
 import { chilloutLounge } from "./chillout-lounge";
 import { droguerieSouss } from "./droguerie-souss";
+import { anisal } from "./anisal";
+import { madaef } from "./madaef";
+import { centreAccompagnement } from "./centre-accompagnement";
 
 export type {
   Architecture,
@@ -45,6 +48,11 @@ export const projectCases: ProjectCase[] = [
   orsen,
   lithosMateriaux,
   droguerieSouss,
+  /* Newest three, and the only ones whose copy has not been through the
+     client   see the warning at the head of each file. */
+  anisal,
+  madaef,
+  centreAccompagnement,
 ];
 
 export function getProjectCase(slug: string) {

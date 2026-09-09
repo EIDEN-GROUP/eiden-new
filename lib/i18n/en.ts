@@ -700,7 +700,7 @@ export const en: Dictionary = {
       ctaTitle: "Your first move.",
       ctaText:
         "Two hours. One conversation. We map every visible fracture in your business, and you leave with the Hydra Map.",
-      ctaAction: "Book a Hydra Analysis",
+      ctaAction: "Book a call",
     },
     clients: {
       eyebrow: "Clients",
@@ -722,6 +722,7 @@ export const en: Dictionary = {
         lounge: "Lounge",
         education: "Education",
         health: "Healthcare",
+        cooperative: "Cooperatives",
       },
       empty: "Nothing in this category yet.",
       projectLines: {
@@ -746,6 +747,11 @@ export const en: Dictionary = {
         "droguerie-souss": "Build with the best materials.",
         mabrouk:
           "A house you recognise by its light: brass, wood and velvet, held as a brand.",
+        anisal:
+          "A cooperative's work, carried under one name instead of a hundred.",
+        madaef: "Destinations held to one standard, from the brand down.",
+        "centre-accompagnement":
+          "Support that is followed through, from the first call to the last session.",
       },
       sectors: [
         {

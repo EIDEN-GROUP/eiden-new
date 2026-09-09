@@ -87,7 +87,7 @@ export function AboutMovements({
             </div>
           ))}
 
-          <span className="from-ink via-ink/45 pointer-events-none absolute inset-x-0 bottom-0 z-1 h-3/5 bg-gradient-to-t to-transparent" />
+          <span className="from-black via-black/45 pointer-events-none absolute inset-x-0 bottom-0 z-1 h-3/5 bg-gradient-to-t to-transparent" />
 
           <div className="absolute top-1/2 right-6 z-2 hidden -translate-y-1/2 flex-col gap-2 lg:flex xl:right-8">
             {movements.map((movement, index) => (
@@ -122,7 +122,7 @@ export function AboutMovements({
                 >
                   <p className="numeral text-beige text-[0.8125rem] font-bold tracking-[0.28em]">
                     {String(index + 1).padStart(2, "0")}
-                    <span className="text-ink/40">
+                    <span className="text-canvas/40">
                       {` / ${String(total).padStart(2, "0")}`}
                     </span>
                   </p>

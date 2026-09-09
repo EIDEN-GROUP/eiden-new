@@ -33,7 +33,10 @@ export function CustomSolution() {
             <span className="font-label text-[0.875rem] font-bold tracking-[0.16em] uppercase">
               {say(copy.cta)}
             </span>
-            <span className="border-ink/20 group-hover:bg-ink group-hover:text-ink flex size-11 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
+            {/* `text-canvas`, not `text-ink`: the circle fills with ink on
+                hover, so an ink arrow inside it disappeared. Every other
+                circle action on the site turns the glyph over with it. */}
+            <span className="border-ink/20 group-hover:bg-ink group-hover:text-canvas flex size-11 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
               <ArrowRight className="size-4" strokeWidth={1.8} aria-hidden />
             </span>
           </Link>

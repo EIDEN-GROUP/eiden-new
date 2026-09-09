@@ -31,7 +31,9 @@ export function AboutMethods({
   const total = methods.length;
 
   return (
-    <section className="grain bg-beige/50 py-24 sm:py-32">
+    /* Grain, but no ground: the backdrop behind this section is the one it
+       shares with the principles above it. */
+    <section className="grain py-24 sm:py-32">
       <div className="container-eiden relative z-2">
         <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
 
@@ -61,7 +63,7 @@ export function AboutMethods({
               <h3 className="font-display text-ink mt-5 text-[clamp(1.125rem,2vw,1.5rem)] font-bold tracking-[-0.02em]">
                 {method.name}
               </h3>
-              <p className="text-ink/60 mt-3 text-[0.9375rem] leading-relaxed">
+              <p className="text-ink/90 mt-3 text-[0.9375rem] leading-relaxed">
                 {method.text}
               </p>
               <p className="editorial text-teal mt-4 text-[0.9375rem] leading-snug">

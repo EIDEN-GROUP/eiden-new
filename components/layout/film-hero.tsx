@@ -74,8 +74,8 @@ export function FilmHero({
   titleAccent,
   titleTail,
   lead,
-  image = "/media/architecture-1.jpg",
-  imageClassName = "idea-shot-img object-cover",
+  image = "/media/card-2.jpeg",
+  imageClassName = "object-cover",
   className,
   children,
 }: {
@@ -108,11 +108,11 @@ export function FilmHero({
       ref={sectionRef}
       data-nav-tone="light"
       className={cn(
-        "hero-depart bg-cream relative isolate flex min-h-[68svh] flex-col overflow-hidden sm:min-h-[74svh]",
+        "hero-depart relative isolate flex min-h-[68svh] flex-col overflow-hidden sm:min-h-[74svh]",
         className,
       )}
     >
-      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden motion-safe:[animation:eiden-film-settle_2.4s_var(--ease-brand)_both]">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-lvh will-change-transform motion-reduce:h-full motion-reduce:will-change-auto">
         <Image
           src={image}
           alt=""
@@ -121,7 +121,6 @@ export function FilmHero({
           sizes="100vw"
           className={imageClassName}
         />
-        <span aria-hidden className="hero-shot-veil" />
       </div>
 
       <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-10 sm:pt-36 sm:pb-14">
@@ -129,8 +128,7 @@ export function FilmHero({
           <span aria-hidden className="h-px w-8 bg-current opacity-50" />
           {eyebrow}
         </p>
-
-        <h1 className="text-balance-tight text-ink mt-6 max-w-full text-[clamp(2.25rem,min(6.4vw,11vh),4.5rem)] leading-[1.02] font-medium">
+        <h1 className="text-balance-tight text-canvas mt-6 max-w-full text-[clamp(2.25rem,min(6.4vw,11vh),4.5rem)] leading-[1.02] font-medium">
           {words.map((word, index) => {
             const rise = heroStage(HERO_WORD_LEAD + index * HERO_WORD_STEP);
             const spacing = index < words.length - 1 ? "mr-[0.25em]" : "";
@@ -154,17 +152,17 @@ export function FilmHero({
             return (
               <span key={`${word.text}-${index}`} className={cn("relative inline-block", spacing)} >
                 <span className="inline-block overflow-hidden pb-[0.14em] align-bottom">
-                  <span className="inline-block text-gold-dk motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
+                  <span className="inline-block text-gold motion-safe:[animation:eiden-word-rise_0.95s_var(--ease-brand)_both]" style={rise} >
                     {word.text}
                   </span>
                 </span>
-                <span aria-hidden className="absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left bg-gold-dk motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]" />
+                <span aria-hidden className="absolute bottom-[0.05em] left-0 h-[3px] w-full origin-left bg-gold motion-safe:[animation:eiden-underline_0.9s_var(--ease-brand)_1.15s_both]" />
               </span>
             );
           })}
         </h1>
 
-        <p className={cn( heroEnter, "text-ink/70 mt-6 max-w-full text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]", )} style={heroStage(0.58)}>
+        <p className={cn( heroEnter, "text-canvas/75 mt-6 max-w-full text-[0.9375rem] leading-relaxed sm:text-[1.0625rem]", )} style={heroStage(0.58)}>
           {lead}
         </p>
 

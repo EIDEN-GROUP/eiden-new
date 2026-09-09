@@ -15,10 +15,13 @@ export function AboutPrinciples({
   eyebrow,
   title,
   principles,
+  media,
 }: {
   eyebrow: string;
   title: string;
   principles: Principle[];
+  /** One picture per rule. Short runs fall back to the shared texture. */
+  media?: readonly string[];
 }) {
   const deckRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +31,9 @@ export function AboutPrinciples({
   const rows = Math.ceil(total / 2);
 
   return (
-    <section className="bg-beige/50 py-24 sm:py-32">
+    /* No ground of its own: the about page holds one backdrop across this
+       section and the method that follows it. */
+    <section className="py-24 sm:py-32">
       <div className="container-eiden">
         <SectionHeading eyebrow={eyebrow} title={title} className="max-w-2xl" />
 
@@ -50,7 +55,7 @@ export function AboutPrinciples({
                   }
                   className="deal-card glass-dark glass-top bg-ink relative flex flex-col overflow-hidden rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
                 >
-                  <Image src={proofTexture} alt="" fill sizes="(min-width: 1024px) 46vw, 92vw" className="principle-shot-img object-cover" />
+                  <Image src={media?.[index] ?? proofTexture} alt="" fill sizes="(min-width: 1024px) 46vw, 92vw" className="principle-shot-img object-cover" />
                   <span aria-hidden className="principle-shot-veil" />
                   <p className="font-label text-canvas relative z-1 text-[0.9375rem] font-bold tracking-[0.24em]">
                     {principle.n}

@@ -46,6 +46,10 @@ const LIT = litRamp("var(--color-ink)", "var(--color-beige-dk)");
  *
  * `from` and `to` are viewport fractions measured from the top: progress
  * starts when the element's top edge crosses `from` and completes at `to`.
+ *
+ * `property` names what it is written into, for a block that already has a
+ * `--p` of its own doing something else and wants a second travel alongside
+ * it rather than on top of it.
  */
 export function useTravel(
   ref: RefObject<HTMLElement | null>,
@@ -53,14 +57,20 @@ export function useTravel(
     from = 0.92,
     to = 0.4,
     cover = false,
-  }: { from?: number; to?: number; cover?: boolean } = {},
+    property = "--p",
+  }: {
+    from?: number;
+    to?: number;
+    cover?: boolean;
+    property?: string;
+  } = {},
 ) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      node.style.setProperty("--p", "1");
+      node.style.setProperty(property, "1");
       return;
     }
 
@@ -72,7 +82,10 @@ export function useTravel(
       const top = node.getBoundingClientRect().top;
       const window_ = (from - to) * height;
       const span = cover ? Math.max(window_, node.offsetHeight) : window_;
-      node.style.setProperty("--p", `${clamp01((from * height - top) / span)}`);
+      node.style.setProperty(
+        property,
+        `${clamp01((from * height - top) / span)}`,
+      );
     };
 
     const onScroll = () => {
@@ -87,7 +100,7 @@ export function useTravel(
       window.removeEventListener("resize", onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, [ref, from, to, cover]);
+  }, [ref, from, to, cover, property]);
 }
 
 export function ScrollWords({

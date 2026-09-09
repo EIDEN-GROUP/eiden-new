@@ -56,6 +56,8 @@ export const clientLogos = [
   { name: "Bôpassage", src: "/clients/bopassage.png" },
   { name: "DMC Hospitality Morocco", src: "/clients/dmc.png" },
   { name: "Lunja Village", src: "/clients/lunja-village.png" },
+  { name: "MADAEF", src: "/clients/madaef.png" },
+  { name: "Anisal", src: "/clients/anisal.png" },
   { name: "EducazenKids", src: "/clients/educazenkids.png" },
   { name: "Medical Bay", src: "/clients/medical-bay.png" },
   // { name: "EIDEN Academy", src: "/clients/eiden-academy.png" },
@@ -116,7 +118,13 @@ export const caseStudies: CaseStudyRecord[] = [
 ];
 
 export type ProjectCategory =
-  "web" | "hospitality" | "restaurants" | "lounge" | "education" | "health";
+  | "web"
+  | "hospitality"
+  | "restaurants"
+  | "lounge"
+  | "education"
+  | "health"
+  | "cooperative";
 
 export type ProjectRecord = {
   slug: string;
@@ -128,25 +136,11 @@ export type ProjectRecord = {
 
 export const projects = [
   {
-    slug: "bopassage",
-    name: "Bôpassage",
-    category: "restaurants",
-    image: "/work/bopassage/bopassage.png",
-    imageAlt: "Identité et site web du restaurant Bôpassage",
-  },
-  {
-    slug: "dmc-morocco",
-    name: "DMC Hospitality Morocco",
-    category: "hospitality",
-    image: "/work/dmc-morocco/dmc-brand-logo.png",
-    imageAlt: "Marque et supports DMC Hospitality Morocco",
-  },
-  {
-    slug: "lunja-village",
-    name: "Lunja Village",
-    category: "hospitality",
-    image: "/work/lunja-village/image lunja village portfoliio.png",
-    imageAlt: "Univers de marque du village côtier Lunja Village",
+    slug: "chillout-lounge",
+    name: "CHILLOUT Lounge",
+    category: "lounge",
+    image: "/work/chillout-lounge/chilout card.png",
+    imageAlt: "Site web du CHILLOUT Lounge",
   },
   {
     slug: "educazen-kids",
@@ -154,6 +148,13 @@ export const projects = [
     category: "education",
     image: "/work/educazen-kids/educazen-hero.png",
     imageAlt: "Plateforme et identité EducazenKids",
+  },
+  {
+    slug: "lunja-village",
+    name: "Lunja Village",
+    category: "hospitality",
+    image: "/work/lunja-village/image lunja village portfoliio.png",
+    imageAlt: "Univers de marque du village côtier Lunja Village",
   },
   {
     slug: "medical-bay",
@@ -183,12 +184,12 @@ export const projects = [
     image: "/work/mabrouk/imgg1 (1).png",
     imageAlt: "L’accueil du Mabrouk Hôtel",
   },
-  {
-    slug: "chillout-lounge",
-    name: "CHILLOUT Lounge",
-    category: "lounge",
-    image: "/work/chillout-lounge/chilout card.png",
-    imageAlt: "Site web du CHILLOUT Lounge",
+   {
+    slug: "dmc-morocco",
+    name: "DMC Hospitality Morocco",
+    category: "hospitality",
+    image: "/work/dmc-morocco/dmc-brand-logo.png",
+    imageAlt: "Marque et supports DMC Hospitality Morocco",
   },
   {
     slug: "lithos-materiaux",
@@ -203,6 +204,34 @@ export const projects = [
     category: "web",
     image: "/work/rihab-residence/web-rihab-desktop.jpg",
     imageAlt: "Site web de la Résidence Rihab",
+  },
+  {
+    slug: "anisal",
+    name: "Anisal",
+    category: "cooperative",
+    image: "/clients/anisal.png",
+    imageAlt: "Identité de la coopérative Anisal",
+  },
+  {
+    slug: "madaef",
+    name: "MADAEF",
+    category: "hospitality",
+    image: "/clients/madaef.png",
+    imageAlt: "Identité MADAEF",
+  },
+    {
+    slug: "bopassage",
+    name: "Bôpassage",
+    category: "restaurants",
+    image: "/work/bopassage/bopassage.png",
+    imageAlt: "Identité et site web du restaurant Bôpassage",
+  },
+  {
+    slug: "centre-accompagnement",
+    name: "Centre d'accompagnement",
+    category: "education",
+    image: "/media/eiden-hero-poster.jpg",
+    imageAlt: "Le centre d'accompagnement",
   },
 
   // {
@@ -246,10 +275,18 @@ export const proofTexture = "/work/project-5.jpg";
 export const ideaTexture = "/media/idea-bg.png";
 
 export const movementMedia = [
-  "/media/heritage-1.jpeg",
-  "/media/schema.jpeg",
-  "/media/insight.jpg",
-  "/media/architecture.jpg",
+  "/media/heritage.png",
+  "/media/schema.png",
+  "/media/intuition.png",
+  "/media/architecture.jpeg",
+] as const;
+
+/** One per principle, in the order the rules are written. */
+export const principleMedia = [
+  "/media/bg-2.jpeg",
+  "/media/bg-3.jpeg",
+  "/media/bg-4.jpeg",
+  "/media/bg-1.jpeg",
 ] as const;
 
 export const serviceMedia: Record<string, string> = {

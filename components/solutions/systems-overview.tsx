@@ -6,36 +6,7 @@ import { SystemFeature } from "@/components/solutions/system-feature";
 import { RevealWords } from "@/components/ui/reveal";
 import { solutionsCopy, systems } from "@/lib/data/solutions";
 
-/**
- * The four systems, held one at a time while the next travels over it.
- *
- * From `lg` a panel is exactly a window tall, so it is pinned at the top of
- * the frame and read whole while it waits there. Below that a panel stands
- * well over a window tall   the product carries a description, a mockup and
- * the list of what is inside it   and pinning its top would bury everything
- * past the first screenful.
- *
- * So the pin is set at the panel's own overhang instead: `top` is however far
- * the panel is taller than the window, as a negative number. The panel scrolls
- * through the window on its own, all of it, and only catches once its last
- * line has arrived; from there it holds while the next one climbs over it,
- * exactly as at width. Nothing is dropped to make it fit, and a panel that is
- * only a window tall lands back on `top: 0` of its own accord.
- *
- * The overhang is measured against `lvh`, not `svh`. A phone hides its address
- * bar on the way down, which is the whole of the time the pin is engaged, so
- * `lvh` is the height the panel is actually being held against; measuring
- * against the short viewport instead leaves a band of the next panel showing
- * under the one being held, and the band changes size as the bar comes and
- * goes.
- *
- * Until the measurement lands the fallback has to put the pin somewhere the
- * scroll cannot reach   otherwise a panel catches at an offset taken from a
- * height that is not its own and holds with its opening lines already above
- * the frame. A number no panel can be as tall as does that; nothing is ever
- * held over content that has not been read, which is the right way to be wrong
- * here, and it is also the no-script state.
- */
+
 export function SystemsOverview() {
   const say = useSay();
   const copy = solutionsCopy.systems;
@@ -51,10 +22,6 @@ export function SystemsOverview() {
       for (const entry of entries) {
         const node = entry.target as HTMLElement;
         const { height } = node.getBoundingClientRect();
-
-        /* How far this panel hangs below one window, which is what its own
-           sticky offset is measured against. Writing it back on the panel
-           cannot change the panel's size, so this settles in one pass. */
         node.style.setProperty("--panel-h", `${Math.round(height)}px`);
       }
     });
@@ -64,27 +31,25 @@ export function SystemsOverview() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="systemes" data-nav-tone="light" className="grain bg-beige text-ink scroll-mt-24">
+    <section ref={sectionRef} id="systemes" data-nav-tone="light" className="grain bg-ink text-canvas scroll-mt-24">
       <div className="relative z-2">
-        {/* The title takes the frame on its own first, centred, and is
-            then left there: it holds the lowest layer of the section, so
-            every panel that follows draws over it as it climbs. Nothing is
-            pinned above the panels any more, which gives each of them a
-            whole window to be read in. */}
-        <div className="bg-beige sticky top-0 z-0 flex min-h-svh flex-col">
+        <div
+          data-nav-tone="dark"
+          className="grain bg-forest text-canvas sticky top-0 z-0 flex min-h-svh flex-col"
+        >
           <div className="container-eiden pt-20 sm:pt-28">
-            <BandLabel number="01" tone="dark">
+            <BandLabel number="01" tone="forest">
               {say(copy.eyebrow)}
             </BandLabel>
           </div>
 
           <div className="container-eiden flex flex-1 items-center justify-center py-16">
-            <RevealWords as="h2" text={say(copy.title)} delay={0.06} className="text-ink mx-auto block max-w-4xl text-center text-[clamp(1.75rem,5vw,3.75rem)] uppercase" />
+            <RevealWords as="h2" text={say(copy.title)} delay={0.06} className="text-canvas mx-auto block max-w-4xl text-center text-[clamp(1.75rem,5vw,3.75rem)] uppercase" />
           </div>
         </div>
         <div>
           {systems.map((system, index) => (
-            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-beige sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+            <div key={system.slug} data-system-panel style={{ zIndex: index + 1 }} className="bg-ink sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
               <div className="container-eiden w-full py-16 lg:py-12">
                 <SystemFeature system={system} />
               </div>

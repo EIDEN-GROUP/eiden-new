@@ -7,13 +7,20 @@ import { ButtonLink } from "@/components/ui/button";
 import { Reveal, RevealWords } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useLanguage } from "@/components/providers/language-provider";
-import { aboutTexture, movementMedia, siteConfig } from "@/lib/data/site";
+import {
+  aboutTexture,
+  ideaTexture,
+  movementMedia,
+  principleMedia,
+  siteConfig,
+} from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 import { FixedBackdrop } from "../ui/fixed-backdrop";
 import Link from "next/link";
 import { AboutMovements } from "../about/movements";
 import { AboutPrinciples } from "../about/principles";
 import { AboutMethods } from "../about/methods";
+import { AboutPosition } from "../about/position";
 
 export function AboutView() {
   const { t } = useLanguage();
@@ -30,30 +37,20 @@ export function AboutView() {
         titleAccent={page.titleAccent}
         titleTail={page.titleTail}
         lead={page.lead}
-        imageClassName="scale-110 object-cover object-center blur-[5px]"
+        imageClassName="scale-110 blur-2xl object-cover object-center"
       >
-        <Link href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} className="group glass-dark bg-ink text-canvas hover:bg-teal inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+        <Link href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} className="group glass-dark bg-beige text-ink hover:bg-teal hover:text-cream inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
           {page.ctaAction}
           <ArrowRight className={arrow} strokeWidth={1.8} aria-hidden />
         </Link>
       </FilmHero>
 
       {/* ── Where we stand ─────────────────────────────────────────── */}
-      <section className="bg-canvas py-24 sm:py-32">
-        <div className="container-eiden grid items-end gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
-          <SectionHeading
-            eyebrow={page.positionEyebrow}
-            title={page.positionTitle}
-            className="lg:sticky lg:top-28 lg:self-start"
-          />
-
-          <Reveal delay={0.06}>
-            <p className="editorial text-forest text-[clamp(1rem,2.4vw,1.5rem)] leading-snug">
-              {page.positionBody}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <AboutPosition
+        eyebrow={page.positionEyebrow}
+        title={page.positionTitle}
+        body={page.positionBody}
+      />
 
       {/* ── The origin, in four movements ──────────────────────────── */}
       <AboutMovements
@@ -63,21 +60,37 @@ export function AboutView() {
         media={movementMedia}
       />
 
-      {/* ── Principles ─────────────────────────────────────────────── */}
-      <AboutPrinciples
-        eyebrow={page.principlesEyebrow}
-        title={page.principlesTitle}
-        principles={page.principles}
-      />
+      <div className="relative isolate">
+        <FixedBackdrop
+          src={ideaTexture}
+          imageClassName="scale-110 object-cover object-center blur-md"
+        />
+        {/* The wash the beige used to be. Without it the teal eyebrows and
+            the method quotes fall to about 2.8:1 on the picture's greyer
+            passes   the ink headings are never in doubt, but the teal is.
+            At this weight the ground reads the same as the `beige/50` it
+            replaces (4.7:1) and the pearl still comes through.
+            `-z-10` and after the backdrop: same layer, later in the DOM, so
+            it sits over the picture and under the sections. */}
+        <span aria-hidden className="bg-canvas/55 absolute inset-0 -z-10" />
 
-      {/* ── Methods, then the count ────────────────────────────────── */}
-      <AboutMethods
-        eyebrow={page.methodsEyebrow}
-        title={page.methodsTitle}
-        methods={page.methods}
-        numbersEyebrow={page.numbersEyebrow}
-        numbers={page.numbers}
-      />
+        {/* ── Principles ─────────────────────────────────────────────── */}
+        <AboutPrinciples
+          eyebrow={page.principlesEyebrow}
+          title={page.principlesTitle}
+          principles={page.principles}
+          media={principleMedia}
+        />
+
+        {/* ── Methods, then the count ────────────────────────────────── */}
+        <AboutMethods
+          eyebrow={page.methodsEyebrow}
+          title={page.methodsTitle}
+          methods={page.methods}
+          numbersEyebrow={page.numbersEyebrow}
+          numbers={page.numbers}
+        />
+      </div>
 
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <section id="faq" className="bg-cream py-24 sm:py-32">

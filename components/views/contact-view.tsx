@@ -9,7 +9,9 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-type Errors = Partial<Record<"name" | "email" | "message" | "detail", string>>;
+type Errors = Partial<
+  Record<"name" | "email" | "company" | "phone" | "detail", string>
+>;
 
 const fieldClass =
   "w-full border-b border-ink/25 bg-transparent px-0 py-3 text-[0.9375rem] text-ink caret-teal " +
@@ -45,7 +47,8 @@ export function ContactView() {
     if (!email) nextErrors.email = form.required;
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
       nextErrors.email = form.invalidEmail;
-    if (!message) nextErrors.message = form.required;
+    if (!company) nextErrors.company = form.required;
+    if (!phone) nextErrors.phone = form.required;
     if (needsDetail && !detail) nextErrors.detail = form.required;
 
     setErrors(nextErrors);
@@ -53,14 +56,16 @@ export function ContactView() {
 
     const body = [
       `${form.name}: ${name}`,
-      company ? `${form.company}: ${company}` : null,
+      `${form.company}: ${company}`,
       `${form.email}: ${email}`,
-      phone ? `${form.phone}: ${phone}` : null,
+      `${form.phone}: ${phone}`,
       `${form.subject}: ${subject}${detail ? `   ${detail}` : ""}`,
-      "",
-      message,
+      // The message is optional now, so the blank line that separates it from
+      // the details above it only belongs there when there is a message.
+      message ? "" : null,
+      message || null,
     ]
-      .filter(Boolean)
+      .filter((line) => line !== null)
       .join("\n");
 
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
@@ -155,13 +160,25 @@ export function ContactView() {
                     />
                   </Field>
 
-                  <Field id="company" label={`${form.company} (${form.optional})`}>
+                  <Field
+                    id="company"
+                    label={form.company}
+                    error={errors.company}
+                    required
+                  >
                     <input
                       id="company"
                       name="company"
                       type="text"
                       autoComplete="organization"
-                      className={fieldClass}
+                      className={cn(
+                        fieldClass,
+                        errors.company && "border-red-400",
+                      )}
+                      aria-invalid={Boolean(errors.company)}
+                      aria-describedby={
+                        errors.company ? "company-error" : undefined
+                      }
                     />
                   </Field>
 
@@ -182,13 +199,20 @@ export function ContactView() {
                     />
                   </Field>
 
-                  <Field id="phone" label={`${form.phone} (${form.optional})`}>
+                  <Field
+                    id="phone"
+                    label={form.phone}
+                    error={errors.phone}
+                    required
+                  >
                     <input
                       id="phone"
                       name="phone"
                       type="tel"
                       autoComplete="tel"
-                      className={fieldClass}
+                      className={cn(fieldClass, errors.phone && "border-red-400")}
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? "phone-error" : undefined}
                     />
                   </Field>
                 </div>
@@ -230,24 +254,13 @@ export function ContactView() {
                   </div>
                 ) : null}
 
-                <Field
-                  id="message"
-                  label={form.message}
-                  error={errors.message}
-                  required
-                >
+                <Field id="message" label={`${form.message} (${form.optional})`}>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
                     placeholder={form.messagePlaceholder}
-                    className={cn(
-                      fieldClass,
-                      "resize-y",
-                      errors.message && "border-red-400",
-                    )}
-                    aria-invalid={Boolean(errors.message)}
-                    aria-describedby={errors.message ? "message-error" : undefined}
+                    className={cn(fieldClass, "resize-y")}
                   />
                 </Field>
 

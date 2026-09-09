@@ -154,6 +154,63 @@ export function RevealWords({
 }
 
 /**
+ * A run of prose read one sentence at a time.
+ *
+ * The same rise as `RevealWords`, one step coarser: the text is cut on its own
+ * sentence ends, each sentence takes a line and a mask of its own, and they
+ * arrive one after another rather than the paragraph landing whole.
+ *
+ * The copy is not touched to do this   the sentences are found in the string
+ * the page already carries, so a translation stays a translation and nothing
+ * has to be re-typed as a list.
+ */
+export function RevealLines({
+  text,
+  className,
+  lineClassName,
+  as: Tag = "p",
+  /** Seconds before the first line moves. */
+  delay = 0,
+  /** Seconds between lines. */
+  step = 0.18,
+  amount = 0.2,
+}: {
+  text: string;
+  className?: string;
+  lineClassName?: string;
+  as?: ElementType;
+  delay?: number;
+  step?: number;
+  amount?: number;
+}) {
+  const ref = useRevealOnce("data-reveal-words", amount);
+  /* Everything up to and including a sentence end, so the punctuation stays
+     with the sentence it closes; a run with no full stop at all comes back as
+     one line, which is the right answer for it. */
+  const lines = text.match(/[^.!?]+[.!?]*/g)?.map((line) => line.trim()) ?? [];
+  const sentences = lines.filter(Boolean);
+
+  return (
+    <Tag ref={ref} data-reveal-words="out" className={cn(className)}>
+      {(sentences.length > 0 ? sentences : [text]).map((line, index) => (
+        <span
+          key={`${line}-${index}`}
+          /* The padding keeps accents and descenders clear of the mask edge. */
+          className={cn("block overflow-hidden pb-[0.14em]", lineClassName)}
+        >
+          <span
+            className="word-rise block"
+            style={{ "--word-delay": `${delay + index * step}s` } as CSSProperties}
+          >
+            {line}
+          </span>
+        </span>
+      ))}
+    </Tag>
+  );
+}
+
+/**
  * Which way the page is going, kept once for every block that asks rather than
  * once per block: the listener is passive and does nothing but compare two
  * numbers, and a page carrying a dozen sliding blocks should not carry a dozen

@@ -16,10 +16,10 @@ export function SolutionsHero() {
       titleAccent={say(copy.titleAccent)}
       titleTail={say(copy.titleTail)}
       lead={say(copy.lead)}
-      image="/work/project-2.jpg"
-      imageClassName="scale-110 object-cover object-center opacity-40 blur-[6px]"
+      image="/media/bg-1.jpeg"
+      imageClassName="scale-110 object-cover object-center blur-[6px]"
     >
-      <a href="#systemes" className="group bg-ink text-canvas hover:bg-teal inline-flex h-9 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
+      <a href="#systemes" className="group glass-dark bg-canvas text-ink hover:bg-teal hover:text-canvas inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] transition-colors duration-300">
         {say(copy.cta)}
         <ArrowDown
           className="size-4 shrink-0 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-y-1 motion-reduce:transition-none"

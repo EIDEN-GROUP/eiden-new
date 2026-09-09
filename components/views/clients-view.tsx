@@ -23,6 +23,7 @@ const FILTERS: Filter[] = [
   "lounge",
   "education",
   "health",
+  "cooperative",
 ];
 
 const COLUMNS = [0, 1, 2].map((column) => ({
@@ -252,10 +253,7 @@ export function ClientsView() {
 
           <RevealGroup className="glass-light mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
             {page.sectors.map((sector) => (
-              <article
-                key={sector.title}
-                className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500"
-              >
+              <article key={sector.title} className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500">
                 <h3 className="font-display text-forest text-lg font-bold tracking-[-0.02em]">
                   {sector.title}
                 </h3>

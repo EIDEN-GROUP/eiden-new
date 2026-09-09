@@ -43,7 +43,7 @@ export function Services() {
           return (
             <Link
               key={item.slug}
-              href="/nos-solutions"
+              href={`/services/${item.slug}`}
               className={cn(
                 "group border-ink/10 relative isolate block border-t",
                 index === t.services.items.length - 1 && "border-b",

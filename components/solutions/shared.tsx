@@ -36,6 +36,11 @@ export function Band({
   );
 }
 
+/**
+ * `light` and `dark` are both grounds the label is read in ink on   canvas
+ * and beige. `forest` is the one that is not: the label turns over to canvas
+ * and its rule with it.
+ */
 export function BandLabel({
   number,
   children,
@@ -43,27 +48,35 @@ export function BandLabel({
 }: {
   number: string;
   children: ReactNode;
-  tone?: "light" | "dark";
+  tone?: "light" | "dark" | "forest";
 }) {
+  const onForest = tone === "forest";
+
   return (
     <Reveal direction="none" duration={0.5}>
       <div
         className={cn(
           "flex items-baseline gap-4 border-t pt-5",
-          tone === "dark" ? "border-ink/20" : "border-ink/15",
+          onForest
+            ? "border-canvas/20"
+            : tone === "dark"
+              ? "border-ink/20"
+              : "border-ink/15",
         )}
       >
         <span
           className={cn(
             "eyebrow tabular-nums",
-            tone === "dark" ? "text-ink/40" : "text-ink/35",
+            onForest
+              ? "text-canvas/45"
+              : tone === "dark"
+                ? "text-ink/40"
+                : "text-ink/35",
           )}
         >
           {number}
         </span>
-        <span
-          className={cn("eyebrow", "text-ink")}
-        >
+        <span className={cn("eyebrow", onForest ? "text-canvas" : "text-ink")}>
           {children}
         </span>
       </div>

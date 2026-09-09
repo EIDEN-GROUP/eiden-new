@@ -709,7 +709,7 @@ export const fr = {
       ctaTitle: "Votre premier mouvement.",
       ctaText:
         "Deux heures. Une conversation. Nous cartographions chaque fracture visible de votre activité, et vous repartez avec la Hydra Map.",
-      ctaAction: "Réserver une Hydra Analysis",
+      ctaAction: "Réserver un appel",
     },
     clients: {
       eyebrow: "Clients",
@@ -731,6 +731,7 @@ export const fr = {
         lounge: "Lounge",
         education: "Éducation",
         health: "Santé",
+        cooperative: "Coopératives",
       },
       empty: "Aucun projet dans cette catégorie pour l'instant.",
       projectLines: {
@@ -755,6 +756,12 @@ export const fr = {
         "droguerie-souss": "Bâtissez avec les meilleurs matériaux.",
         mabrouk:
           "Une maison qui se reconnaît à sa lumière : laiton, bois et velours, tenus en marque.",
+        anisal:
+          "Le travail d'une coopérative, porté sous un seul nom plutôt que sous cent.",
+        madaef:
+          "Des destinations tenues au même standard, depuis la marque jusqu'au terrain.",
+        "centre-accompagnement":
+          "Un accompagnement qui va au bout, du premier appel à la dernière séance.",
       },
       sectors: [
         {
