@@ -107,16 +107,11 @@ export function CaseLightbox({
     return () => before?.focus?.();
   }, [open]);
 
-  /* Nothing is rendered until a picture is opened, and a picture can only be
-     opened by a click   so by the time there is anything to portal, there is a
-     document to portal it into, and the server and the client still agree on
-     the first render. */
   if (index === null || typeof document === "undefined") return null;
 
   const item = items[index];
 
-  const control =
-    "pointer-events-auto flex items-center justify-center rounded-full border border-canvas/25 bg-ink/70 text-canvas shadow-[0_8px_30px_-12px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors duration-300 ease-[var(--ease-brand)] hover:bg-canvas hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-canvas motion-reduce:transition-none";
+  const control = "pointer-events-auto flex items-center justify-center rounded-full border border-canvas/25 bg-ink/70 text-canvas shadow-[0_8px_30px_-12px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors duration-300 ease-[var(--ease-brand)] hover:bg-canvas hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-canvas motion-reduce:transition-none";
 
   return createPortal(
     <div
@@ -124,7 +119,7 @@ export function CaseLightbox({
       role="dialog"
       aria-modal="true"
       aria-label={say({ fr: "Galerie", en: "Gallery" })}
-      className="bg-ink/95 fixed inset-0 z-[120] overscroll-contain backdrop-blur-sm motion-safe:[animation:eiden-fade_0.25s_ease-out_both]"
+      className="fixed inset-0 z-[120] overscroll-contain backdrop-blur-sm motion-safe:[animation:eiden-fade_0.25s_ease-out_both]"
       onTouchStart={(event) => {
         const touch = event.changedTouches[0];
         swipe.current = { x: touch.clientX, y: touch.clientY, moved: false };
@@ -138,7 +133,6 @@ export function CaseLightbox({
         step(dx < 0 ? 1 : -1);
       }}
     >
-      {/* The ground itself closes. It is the gesture everyone tries first. */}
       <button
         type="button"
         tabIndex={-1}
@@ -153,7 +147,6 @@ export function CaseLightbox({
         className="absolute inset-0 cursor-zoom-out"
       />
 
-      {/* The picture, inside margins that leave the chrome its room. */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 pt-20 pb-24 sm:px-24 sm:pt-24 lg:px-32">
         <figure className="relative h-full w-full">
           <Image

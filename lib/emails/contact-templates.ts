@@ -117,9 +117,9 @@ function subjectPill(subject: string): string {
 
 const copy = {
   fr: {
-    adminEyebrow: "Nouvelle demande — site web",
+    adminEyebrow: "Nouvelle demande site web",
     adminTitle: "Nouvelle demande de contact",
-    visitorEyebrow: "Eiden Group — confirmation",
+    visitorEyebrow: "Eiden Group confirmation",
     visitorTitle: "Merci, message bien reçu",
     labels: {
       name: "Nom complet",
@@ -131,9 +131,9 @@ const copy = {
     },
   },
   en: {
-    adminEyebrow: "New request — website",
+    adminEyebrow: "New request website",
     adminTitle: "New contact request",
-    visitorEyebrow: "EIDEN GROUP — confirmation",
+    visitorEyebrow: "EIDEN GROUP confirmation",
     visitorTitle: "Thank you, message received",
     labels: {
       name: "Full name",
@@ -150,7 +150,7 @@ export function buildAdminEmail(data: ContactPayload): BuiltEmail {
   const t = copy[data.locale] ?? copy.fr;
   const needLine =
     data.subjectDetail && data.subjectDetail !== data.subject
-      ? `${data.subject} — ${data.subjectDetail}`
+      ? `${data.subject} ${data.subjectDetail}`
       : data.subject;
 
   const rows =
@@ -173,7 +173,7 @@ export function buildAdminEmail(data: ContactPayload): BuiltEmail {
       : "Envoyé depuis le formulaire de contact eiden-group.com. Ne pas transférer.";
 
   return {
-    subject: `[Contact] ${needLine} — ${data.name}`,
+    subject: `[Contact] ${needLine} ${data.name}`,
     html: shell({
       lang: data.locale,
       eyebrow: t.adminEyebrow,
@@ -184,17 +184,17 @@ export function buildAdminEmail(data: ContactPayload): BuiltEmail {
     }),
     text: [
       t.adminTitle,
-      "—".repeat(32),
+      ".repeat(32),
       intro,
       "",
       `${t.labels.name}: ${data.name}`,
       `${t.labels.company}: ${data.company}`,
       `${t.labels.email}: ${data.email}`,
       `${t.labels.phone}: ${data.phone}`,
-      `${t.labels.detail}: ${data.subjectDetail || "—"}`,
+      `${t.labels.detail}: ${data.subjectDetail || "}`,
       "",
       `${t.labels.message}:`,
-      data.message || "—",
+      data.message || ",
       "",
       footerNote,
     ].join("\n"),
@@ -224,8 +224,8 @@ export function buildVisitorEmail(data: ContactPayload): BuiltEmail {
 
   return {
     subject: fr
-      ? `Merci ${data.name} — votre message est bien reçu | EIDEN GROUP`
-      : `Thank you ${data.name} — message received | EIDEN GROUP`,
+      ? `Merci ${data.name} votre message est bien reçu | EIDEN GROUP`
+      : `Thank you ${data.name} message received | EIDEN GROUP`,
     html: shell({
       lang: data.locale,
       eyebrow: t.visitorEyebrow,
@@ -234,7 +234,7 @@ export function buildVisitorEmail(data: ContactPayload): BuiltEmail {
       bodyRows: rows,
       footerNote,
     }),
-    text: [t.visitorTitle, "—".repeat(32), intro, "", recap + ":", `${t.labels.name}: ${data.name}`, `${t.labels.company}: ${data.company}`, `${t.labels.phone}: ${data.phone}`, data.message ? `${t.labels.message}:\n${data.message}` : "", footerNote]
+    text: [t.visitorTitle, ".repeat(32), intro, "", recap + ":", `${t.labels.name}: ${data.name}`, `${t.labels.company}: ${data.company}`, `${t.labels.phone}: ${data.phone}`, data.message ? `${t.labels.message}:\n${data.message}` : "", footerNote]
       .filter((l) => l !== "")
       .join("\n"),
   };

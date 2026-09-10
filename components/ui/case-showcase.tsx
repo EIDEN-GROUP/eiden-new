@@ -349,14 +349,15 @@ export function CaseShowcase({
                   </Link>
                 </div>
                 <div className="relative order-first h-[18svh] w-full overflow-hidden rounded-sm sm:h-[24svh] lg:order-none lg:aspect-16/10 lg:h-auto">
-                  <Image
-                    src={entry.image}
-                    alt={entry.imageAlt}
-                    fill
-                    sizes="(max-width: 1024px) 80vw, 40vw"
-                    className="object-cover"
-                  />
-                </div>
+  <Image
+    src={entry.image}
+    alt={entry.imageAlt}
+    fill
+    sizes="(max-width: 1024px) 80vw, 75vw"
+    quality={95}
+    className="object-cover"
+  />
+</div>
               </div>
             </article>
           );

@@ -170,7 +170,7 @@ export function SiteHeader() {
   }, []);
 
   const stowed = footerRevealed && !open;
-  const homeLabel = `${siteConfig.name} — ${t.nav.home}`;
+  const homeLabel = `${siteConfig.name} ${t.nav.home}`;
 
   const reach = [
     { label: siteConfig.email, href: `mailto:${siteConfig.email}` },

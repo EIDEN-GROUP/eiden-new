@@ -534,7 +534,7 @@ export const fr = {
       submit: "Envoyer la demande",
       sending: "Envoi en cours…",
       success:
-        "Merci. Votre message a bien été envoyé — nous répondons sous 48 heures.",
+        "Merci. Votre message a bien été envoyé nous répondons sous 48 heures.",
       error: "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
       required: "Champ obligatoire",
       invalidEmail: "Adresse e-mail invalide",
@@ -733,6 +733,12 @@ export const fr = {
         cooperative: "Coopératives",
       },
       empty: "Aucun projet dans cette catégorie pour l'instant.",
+      v2: {
+        filterCta: "Filtrer",
+        filterTitle: "Je cherche…",
+        filterClose: "Fermer les filtres",
+        featuredLabel: "Dernier projet livré",
+      },
       projectLines: {
         bopassage:
           "Le lieu où l'on revient toujours, avec la couche digitale qui va avec.",

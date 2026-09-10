@@ -525,7 +525,7 @@ export const en: Dictionary = {
         "Tell us about your business, your goal and your timeline.",
       submit: "Send request",
       sending: "Sending…",
-      success: "Thank you. Your message has been sent — we reply within 48 hours.",
+      success: "Thank you. Your message has been sent we reply within 48 hours.",
       error: "Something went wrong. Try again or email us directly.",
       required: "Required field",
       invalidEmail: "Invalid email address",
@@ -723,6 +723,12 @@ export const en: Dictionary = {
         cooperative: "Cooperatives",
       },
       empty: "Nothing in this category yet.",
+      v2: {
+        filterCta: "Filter",
+        filterTitle: "I'm curious about…",
+        filterClose: "Close the filters",
+        featuredLabel: "Latest project delivered",
+      },
       projectLines: {
         bopassage:
           "The place you always come back to   now with the digital layer to match.",
