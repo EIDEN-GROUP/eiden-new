@@ -184,17 +184,17 @@ export function buildAdminEmail(data: ContactPayload): BuiltEmail {
     }),
     text: [
       t.adminTitle,
-      ".repeat(32),
+      "\u2014".repeat(32),
       intro,
       "",
       `${t.labels.name}: ${data.name}`,
       `${t.labels.company}: ${data.company}`,
       `${t.labels.email}: ${data.email}`,
       `${t.labels.phone}: ${data.phone}`,
-      `${t.labels.detail}: ${data.subjectDetail || "}`,
+      `${t.labels.detail}: ${data.subjectDetail || "\u2014"}`,
       "",
       `${t.labels.message}:`,
-      data.message || ",
+      data.message || "\u2014",
       "",
       footerNote,
     ].join("\n"),
@@ -234,7 +234,7 @@ export function buildVisitorEmail(data: ContactPayload): BuiltEmail {
       bodyRows: rows,
       footerNote,
     }),
-    text: [t.visitorTitle, ".repeat(32), intro, "", recap + ":", `${t.labels.name}: ${data.name}`, `${t.labels.company}: ${data.company}`, `${t.labels.phone}: ${data.phone}`, data.message ? `${t.labels.message}:\n${data.message}` : "", footerNote]
+    text: [t.visitorTitle, "\u2014".repeat(32), intro, "", recap + ":", `${t.labels.name}: ${data.name}`, `${t.labels.company}: ${data.company}`, `${t.labels.phone}: ${data.phone}`, data.message ? `${t.labels.message}:\n${data.message}` : "", footerNote]
       .filter((l) => l !== "")
       .join("\n"),
   };

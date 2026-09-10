@@ -6,8 +6,6 @@ export const metadata: Metadata = {
   title: "Clients v2",
   description:
     "Hôtellerie, Cafés & restaurants, santé, éducation, commerce : les entreprises marocaines pour lesquelles EIDEN GROUP construit marques, sites et campagnes.",
-  /* A second cut of a page that already exists, kept for comparison. Two URLs
-     carrying the same work is exactly what a crawler should not be shown. */
   robots: { index: false, follow: false },
   alternates: { canonical: "/clients" },
 };

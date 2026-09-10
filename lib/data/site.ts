@@ -152,7 +152,7 @@ export const projects = [
     slug: "lunja-village",
     name: "Lunja Village",
     category: "hospitality",
-    image: "/work/lunja-village/lunja-cover.png",
+    image: "/work/lunja-village/Drone 1.png",
     imageAlt: "Univers de marque du village côtier Lunja Village",
   },
   {

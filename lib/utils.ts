@@ -6,16 +6,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/**
- * Which cut of the arrow cursor a hand-set ground needs: `"light"` for the
- * cream arrow, `"dark"` for the forest one.
- *
- * The cursor is swapped in CSS off the background utilities, which cannot see
- * a colour that arrives as an inline style   a brand ground, a palette
- * swatch   so those elements declare their own cut with
- * `data-cursor={cursorOn(hex)}`. Same weighting the header uses to dress
- * itself against the ground it is over.
- */
 export function cursorOn(background: string): "light" | "dark" {
   const parts = background.startsWith("#")
     ? [1, 3, 5].map((i) =>

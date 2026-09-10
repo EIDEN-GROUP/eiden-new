@@ -17,6 +17,7 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { ButtonLink } from "@/components/ui/button";
 import { getProjectCase } from "@/lib/data/projects/index";
 import { useFooterRevealed } from "@/lib/footer-reveal";
+import { useHydrated } from "@/lib/hooks";
 import {
   portfolioProjectUrl,
   projects,
@@ -39,20 +40,22 @@ const FILTERS: Filter[] = [
   "cooperative",
 ];
 
-const SHAPES = [
-  "aspect-4/5",
-  "aspect-4/3",
-  "aspect-3/4",
-  "aspect-16/11",
-  "aspect-square",
-];
-
-/* The three we lead with. They are given a frame taller than anything the
-   cycle deals out, so they carry the wall whichever way the grid falls   and
-   because the columns take alternating indices, they land two on one side and
-   one on the other rather than stacking up in a single column. */
-const HEADLINE = new Set<string>(["lunja-village", "dmc-morocco", "bopassage"]);
 const HEADLINE_SHAPE = "aspect-2/3";
+const MEDIUM_SHAPE = "aspect-4/3";
+const HEADLINE = new Set<string>(["lunja-village", "dmc-morocco", "bopassage"]);
+const WALL: Project[] = (() => {
+  const list = [...projects];
+  const lunja = list.findIndex((project) => project.slug === "lunja-village");
+  const chillout = list.findIndex((project) => project.slug === "chillout-lounge");
+  if (lunja >= 0 && chillout >= 0) {
+    [list[lunja], list[chillout]] = [list[chillout], list[lunja]];
+  }
+  return list;
+})();
+
+const COVERS: Record<string, string> = {
+  bopassage: "/work/bopassage/bopassage-cover.jpg",
+};
 
 const THUMBS = FILTERS.reduce(
   (thumbs, filter) => {
@@ -76,12 +79,10 @@ export function ClientsV2View() {
   const [active, setActive] = useState<Filter>("all");
 
   const counts = useMemo(() => {
-    const tally = { all: projects.length } as Record<Filter, number>;
+    const tally = { all: WALL.length } as Record<Filter, number>;
     for (const filter of FILTERS) {
       if (filter === "all") continue;
-      tally[filter] = projects.filter(
-        (project) => project.category === filter,
-      ).length;
+      tally[filter] = WALL.filter((project) => project.category === filter).length;
     }
     return tally;
   }, []);
@@ -89,8 +90,8 @@ export function ClientsV2View() {
   const shown = useMemo(
     () =>
       active === "all"
-        ? [...projects]
-        : projects.filter((project) => project.category === active),
+        ? WALL
+        : WALL.filter((project) => project.category === active),
     [active],
   );
 
@@ -132,10 +133,9 @@ export function ClientsV2View() {
                       key={project.slug}
                       project={project}
                       index={index}
+                      image={COVERS[project.slug] ?? project.image}
                       shape={
-                        HEADLINE.has(project.slug)
-                          ? HEADLINE_SHAPE
-                          : SHAPES[index % SHAPES.length]
+                        HEADLINE.has(project.slug) ? HEADLINE_SHAPE : MEDIUM_SHAPE
                       }
                       category={page.filters[project.category]}
                       line={page.projectLines[project.slug]}
@@ -232,7 +232,8 @@ function Rail({
               src={FEATURED.image}
               alt=""
               fill
-              sizes="48px"
+              sizes="(max-width: 1024px) 80vw, 75vw"
+              quality={95}
               className="object-cover"
             />
           </span>
@@ -266,6 +267,7 @@ function Rail({
 
 function Tile({
   project,
+  image,
   index,
   shape,
   category,
@@ -273,6 +275,8 @@ function Tile({
   label,
 }: {
   project: Project;
+  /** The picture to hang, which is not always the one on the record. */
+  image: string;
   index: number;
   shape: string;
   category: string;
@@ -304,12 +308,19 @@ function Tile({
         "motion-safe:[animation:eiden-tile-in_0.7s_var(--ease-brand)_both]",
       )}
     >
-      <div className={cn("bg-ink/5 relative w-full overflow-hidden", shape)}>
+      <div
+        className={cn(
+          "bg-ink/5 relative w-full overflow-hidden rounded-4xl",
+          shape,
+        )}
+      >
         <Image
-          src={project.image}
+          src={image}
           alt={project.imageAlt}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 38vw"
+          sizes="(max-width: 1024px) 80vw, 75vw"
+                    quality={95}
+          priority={index === 0}
           className="size-full object-cover transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none"
         />
 
@@ -462,6 +473,14 @@ function FilterSheet({
   const dialog = useRef<HTMLDivElement>(null);
   const closer = useRef<HTMLButtonElement>(null);
 
+  /* The sheet is built on the client and only there   it is portalled onto the
+     body, which the server has no equivalent of. Held back until after the
+     hydrating render rather than merely until `document` exists: the browser
+     has a document on that first pass too, so testing for one would put a
+     dialog in the client tree that the server never sent, and React would call
+     the whole page a mismatch. */
+  const hydrated = useHydrated();
+
   /* Escape closes, Tab stays inside. Same handling the case-study lightbox
      uses   the ring is read off the DOM each time rather than held anywhere. */
   useEffect(() => {
@@ -504,7 +523,7 @@ function FilterSheet({
     closer.current?.focus();
   }, [open]);
 
-  if (typeof document === "undefined") return null;
+  if (!hydrated) return null;
 
   return createPortal(
     <div
