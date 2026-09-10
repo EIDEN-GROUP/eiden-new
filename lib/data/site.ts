@@ -79,7 +79,7 @@ export const caseStudies: CaseStudyRecord[] = [
   {
     slug: "lunja-village",
     client: "Lunja Village",
-    image: "/work/lunja-village/1.png",
+    image: "/work/lunja-village/1.jpg",
     imageAlt: "Vue aérienne du village Lunja Village au coucher du soleil",
     website: "https://www.lunjavillage.com",
     metric: "+38%",
