@@ -13,7 +13,7 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
   const hasCapabilities = system.capabilities.length > 0;
 
   return (
-    <article className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)_minmax(0,1fr)] lg:gap-12 xl:gap-14">
+    <article className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)_minmax(0,1fr)] lg:gap-6 xl:gap-8">
       {/* ── What it is ─────────────────────────────────────────────── */}
       <div className="min-w-0 lg:self-start">
         <Reveal direction="none" duration={0.5}>
@@ -43,20 +43,21 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
           </p>
         </Reveal>
 
-        <Reveal delay={0.18}>
-          <div className="mt-8 lg:mt-6">
-            <p className="eyebrow text-ink/30">{say(copy.builtFor)}</p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {system.audience.map((item) => (
-                <li
-                  key={say(item)}
-                  className="border-ink/20 text-ink/70 rounded-full border px-4 py-1.5 text-[0.875rem]"
-                >
-                  {say(item)}
-                </li>
-              ))}
-            </ul>
-          </div>
+         {/* The way in sits under the account of what is behind it. */}
+        <Reveal delay={0.22}>
+          <a
+            href={system.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="group text-ink hover:text-teal mt-8 inline-flex items-center gap-4 transition-colors duration-300"
+          >
+            <span className="font-label text-[0.875rem] font-bold tracking-[0.16em] uppercase">
+              {say(copy.explore)} {system.name}
+            </span>
+            <span className="border-ink/25 group-hover:bg-ink group-hover:text-canvas flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
+              <ArrowUpRight className="size-4" strokeWidth={1.8} aria-hidden />
+            </span>
+          </a>
         </Reveal>
       </div>
 
@@ -92,6 +93,18 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
 
       {/* ── What is inside, and the way in ─────────────────────────── */}
       <div className="min-w-0 lg:self-start">
+        <Reveal delay={0.18}>
+          <div className="mb-8 lg:mb-6">
+            <p className="eyebrow text-ink/30">{say(copy.builtFor)}</p>
+            <ul className="mt-4 flex flex-wrap gap-1">
+              {system.audience.map((item) => (
+                <li key={say(item)} className="border-ink/20 text-ink/70 rounded-full border px-3 py-1 text-[12.5px]">
+                  {say(item)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
         {hasCapabilities ? (
           <div>
             <Reveal direction="none" duration={0.5}>
@@ -128,23 +141,6 @@ export function SystemFeature({ system }: { system: SystemRecord }) {
             <p className="eyebrow text-ink/25 mt-10">{say(copy.privateNote)}</p>
           </Reveal>
         )}
-
-        {/* The way in sits under the account of what is behind it. */}
-        <Reveal delay={0.22}>
-          <a
-            href={system.url}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="group text-ink hover:text-teal mt-8 inline-flex items-center gap-4 transition-colors duration-300"
-          >
-            <span className="font-label text-[0.875rem] font-bold tracking-[0.16em] uppercase">
-              {say(copy.explore)} {system.name}
-            </span>
-            <span className="border-ink/25 group-hover:bg-ink group-hover:text-ink flex size-10 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)]">
-              <ArrowUpRight className="size-4" strokeWidth={1.8} aria-hidden />
-            </span>
-          </a>
-        </Reveal>
       </div>
     </article>
   );

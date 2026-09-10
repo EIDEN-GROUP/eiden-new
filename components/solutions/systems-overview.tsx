@@ -62,7 +62,7 @@ export function SystemsOverview() {
           {systems.map((system, index) => {
             const texture = systemPanelTextures[index % systemPanelTextures.length];
             return (
-              <div key={system.slug} data-system-panel className="relative isolate sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+              <div key={system.slug} data-system-panel data-cursor="dark" className="relative isolate sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
                 <FixedBackdrop src={texture} imageClassName="scale-110 object-cover object-center blur-xl" />
                 <span aria-hidden className="bg-canvas/75 absolute inset-0 -z-10" />
                 {/* <Image src={texture} alt="" fill sizes="100vw" className="-z-10 object-cover blur-2xl" /> */}
