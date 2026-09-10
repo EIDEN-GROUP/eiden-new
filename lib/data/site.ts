@@ -273,6 +273,10 @@ export const proofTexture = "/work/project-5.jpg";
 
 export const solutionCover = "/services/photo-5.jpg";
 
+export const solutionTexture = "/media/contact-solution.png";
+
+export const solutionbg = "/media/bg-solution.jpeg";
+
 export const ideaTexture = "/media/idea-bg.png";
 
 export const movementMedia = [

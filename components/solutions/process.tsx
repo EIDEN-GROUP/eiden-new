@@ -16,29 +16,25 @@ export function Process() {
 
       <RevealGroup as="ul" className="mt-14 flex flex-col">
         {copy.steps.map((step, index) => (
-          <li key={say(step.title)} className="group border-ink/15 relative isolate border-t last:border-b lg:grid lg:items-center">
+          <li key={say(step.title)} className="group border-ink/15 relative isolate border-t last:border-b lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
             <span aria-hidden className="bg-teal absolute inset-y-0 -right-4 -left-4 -z-10 origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:-right-6 lg:-left-6 lg:group-hover:scale-x-100" />
 
-            <div className="transition-[opacity,transform] duration-300 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:group-hover:-translate-y-2 lg:group-hover:opacity-0">
-              <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
-                <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase">
-                  {say(step.title)}
-                </h3>
-                <span className="eyebrow numeral text-ink/30">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
+            <div className="flex items-center justify-between gap-6 py-5 lg:col-start-1 lg:py-6">
+              <h3 className="font-display text-ink text-[clamp(1.625rem,4vw,3.25rem)] leading-none font-extrabold tracking-[-0.04em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] lg:group-hover:text-canvas">
+                {say(step.title)}
+              </h3>
+              <span className="eyebrow numeral text-ink/30 lg:hidden">
+                {String(index + 1).padStart(2, "0")}
+              </span>
             </div>
 
-            <div className="transition-[opacity,transform] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none lg:col-start-1 lg:row-start-1 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-hover:delay-100">
-              <div className="pb-5 lg:py-6">
-                <p className="eyebrow lg:text-canvas/45 hidden lg:block">
-                  {say(step.title)}
-                </p>
-                <p className="text-ink/65 lg:text-canvas max-w-3xl text-[0.9375rem] leading-relaxed lg:mt-2 lg:text-[clamp(1rem,1.5vw,1.25rem)]">
-                  {say(step.text)}
-                </p>
-              </div>
+            <div className="pb-5 lg:col-start-2 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:py-6">
+              <p className="text-ink/65 lg:text-canvas max-w-3xl text-[0.9375rem] leading-relaxed transition-[opacity,transform] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none lg:translate-y-2 lg:text-[clamp(1rem,1.5vw,1.25rem)] lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-hover:delay-100">
+                {say(step.text)}
+              </p>
+              <span className="eyebrow numeral text-ink/30 hidden transition-colors duration-500 ease-[var(--ease-brand)] lg:block lg:group-hover:text-canvas/50">
+                {String(index + 1).padStart(2, "0")}
+              </span>
             </div>
           </li>
         ))}
@@ -77,7 +73,7 @@ export function LocalGlobal() {
   return (
     <Band>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-24">
-        <RevealWords as="h2" text={say(copy.title)} className="text-ink block text-[clamp(1.75rem,4vw,3rem)] uppercase" />=
+        <RevealWords as="h2" text={say(copy.title)} className="text-ink block text-[clamp(1.75rem,4vw,3rem)] uppercase" />
         <div>
           <Reveal>
             <p className="text-ink/65 max-w-xl text-[clamp(1rem,1.6vw,1.25rem)] leading-relaxed">

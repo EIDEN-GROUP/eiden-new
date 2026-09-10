@@ -6,6 +6,8 @@ import { SolutionsHero } from "@/components/solutions/solutions-hero";
 import { SolutionsIntro } from "@/components/solutions/solutions-intro";
 import { CustomSolution, SolutionsCTA } from "@/components/solutions/solutions-cta";
 import { SystemsOverview } from "@/components/solutions/systems-overview";
+import { solutionbg, solutionTexture } from "@/lib/data/site";
+import { FixedBackdrop } from "../ui/fixed-backdrop";
 
 export function SolutionsView() {
   return (
@@ -14,11 +16,23 @@ export function SolutionsView() {
       <SolutionsIntro />
       <SystemsOverview />
       {/* <BeforeAfter /> */}
-      <Process />
-      <Capabilities />
+      <div className="relative isolate">
+        <FixedBackdrop src={solutionbg} imageClassName="scale-110 object-cover object-center blur-md" />
+        <span aria-hidden className="bg-canvas/95 absolute inset-0 -z-10" />
+        <Process />
+        <Capabilities />
+      </div>
       {/* <LocalGlobal /> */}
       {/* <CustomSolution /> */}
-      <SolutionsCTA />
+      
+      <div className="relative isolate">
+        <FixedBackdrop
+          src={solutionTexture}
+          imageClassName="scale-110 object-cover object-center blur-md"
+        />
+        <span aria-hidden className="bg-ink/55 absolute inset-0 -z-10" />
+        <SolutionsCTA />
+      </div>
     </div>
   );
 }
