@@ -1,25 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { type CSSProperties, useEffect, useRef } from "react";
 import { BandLabel, useSay } from "@/components/solutions/shared";
 import { SystemFeature } from "@/components/solutions/system-feature";
 import { FixedBackdrop } from "@/components/ui/fixed-backdrop";
 import { RevealWords } from "@/components/ui/reveal";
-import { proofTexture, solutionCover } from "@/lib/data/site";
+import { solutionCover, systemPanelTextures } from "@/lib/data/site";
 import { solutionsCopy, systems } from "@/lib/data/solutions";
 
-/* Les quatre rideaux descendent la rampe de marque, du plus sombre au plus
-   clair. SystemFeature écrit son texte en `canvas` et ses accents en `teal` :
-   on redéfinit ces variables sur le panneau, ce qui retourne toutes ses
-   classes d'un coup sans toucher au composant. Sur le dernier fond, trop
-   clair pour du blanc, `canvas` passe à l'encre   et `ink` prend l'inverse
-   pour que la flèche survolée reste lisible. */
-const PANEL_TONES = [
-  { ground: "#122620", canvas: "#fefdfb", ink: "#122620", accent: "#fefdfb" },
-  { ground: "#0c5752", canvas: "#fefdfb", ink: "#122620", accent: "#fefdfb" },
-  { ground: "#e3d3a8", canvas: "#122620", ink: "#122620", accent: "#0e7a73" },
-  { ground: "#f4ebd0", canvas: "#122620", ink: "#122620", accent: "#122620" },
-];
+const PANEL_TONE = {
+  ground: "#f4efe7",
+  canvas: "#122620",
+  ink: "#fefdfb",
+  accent: "#0e7a73",
+};
 
 export function SystemsOverview() {
   const say = useSay();
@@ -51,8 +46,6 @@ export function SystemsOverview() {
           data-nav-tone="dark"
           className="grain bg-forest text-canvas sticky top-0 z-0 flex min-h-svh flex-col"
         >
-          {/* Même traitement que l'intro des preuves : la texture défile avec
-              la page derrière le titre, la couleur reste dessous. */}
           <FixedBackdrop src={solutionCover} imageClassName="scale-110 blur-2xl" />
 
           <div className="container-eiden pt-20 sm:pt-28">
@@ -67,9 +60,13 @@ export function SystemsOverview() {
         </div>
         <div>
           {systems.map((system, index) => {
-            const tone = PANEL_TONES[index % PANEL_TONES.length];
+            const texture = systemPanelTextures[index % systemPanelTextures.length];
             return (
-              <div key={system.slug} data-system-panel style={{ zIndex: index + 1, backgroundColor: tone.ground, "--color-canvas": tone.canvas, "--color-ink": tone.ink, "--color-teal": tone.accent } as CSSProperties} className="sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+              <div key={system.slug} data-system-panel className="relative isolate sticky top-[calc(100lvh-var(--panel-h,999vh))] min-h-svh lg:top-0 lg:flex lg:h-svh lg:min-h-0 lg:flex-col lg:justify-center lg:overflow-hidden">
+                <FixedBackdrop src={texture} imageClassName="scale-110 object-cover object-center blur-xl" />
+                <span aria-hidden className="bg-canvas/75 absolute inset-0 -z-10" />
+                {/* <Image src={texture} alt="" fill sizes="100vw" className="-z-10 object-cover blur-2xl" /> */}
+
                 <div className="container-eiden w-full py-16 lg:py-12">
                   <SystemFeature system={system} />
                 </div>

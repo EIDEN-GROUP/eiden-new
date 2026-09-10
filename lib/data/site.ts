@@ -275,9 +275,14 @@ export const solutionCover = "/services/photo-5.jpg";
 
 export const solutionTexture = "/media/contact-solution.png";
 
-export const solutionbg = "/media/bg-solution.jpeg";
+// export const solutionbg = "/media/bg-solution.jpeg";
 
 export const ideaTexture = "/media/idea-bg.png";
+
+/** Les deux rideaux de « Nos systèmes », alternés d'un panneau à l'autre. */
+export const systemPanelTextures = [
+  "/media/idea-bg.png",
+] as const;
 
 export const movementMedia = [
   "/media/heritage.png",

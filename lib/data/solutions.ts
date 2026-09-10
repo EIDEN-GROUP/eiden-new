@@ -18,13 +18,6 @@ export type SystemRecord = {
   capabilities: { group?: Localized; items: Localized[] }[];
   /** A raw capture, shown in browser chrome. Used only without a `mockup`. */
   screenshot?: string;
-  /**
-   * An art-directed composition of the product, shown whole.
-   *
-   * Imported rather than pathed so its dimensions travel with it: the frame
-   * reserves the right box before the file lands, and swapping in art of a
-   * different shape needs no second edit.
-   */
   mockup?: StaticImageData;
 };
 
@@ -81,10 +74,6 @@ export const systems: SystemRecord[] = [
       { fr: "Organismes de formation", en: "Educational organisations" },
       { fr: "Équipes pédagogiques", en: "Academic teams" },
     ],
-    /* The product sits behind a login, so this list is read off the capture
-       beside it rather than the live app: its own section labels (Scolarité,
-       Finances), page titles and dashboard tiles. Keep the two in step   if
-       the mockup is replaced, these are the names that have to match it. */
     capabilities: [
       {
         items: [
