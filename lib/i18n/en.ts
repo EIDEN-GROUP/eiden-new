@@ -525,8 +525,7 @@ export const en: Dictionary = {
         "Tell us about your business, your goal and your timeline.",
       submit: "Send request",
       sending: "Sending…",
-      success:
-        "Thank you. Your request is ready   your mail app will open to send it.",
+      success: "Thank you. Your message has been sent — we reply within 48 hours.",
       error: "Something went wrong. Try again or email us directly.",
       required: "Required field",
       invalidEmail: "Invalid email address",

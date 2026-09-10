@@ -534,7 +534,7 @@ export const fr = {
       submit: "Envoyer la demande",
       sending: "Envoi en cours…",
       success:
-        "Merci. Votre demande est prête   votre messagerie va s'ouvrir pour l'envoyer.",
+        "Merci. Votre message a bien été envoyé — nous répondons sous 48 heures.",
       error: "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
       required: "Champ obligatoire",
       invalidEmail: "Adresse e-mail invalide",

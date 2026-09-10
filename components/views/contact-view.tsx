@@ -27,13 +27,17 @@ export function ContactView() {
 
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [sending, setSending] = useState(false);
   const [subjectIndex, setSubjectIndex] = useState(0);
 
   const needsDetail = subjectIndex === form.subjects.length - 1;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    if (sending) return;
+    const currentForm = event.currentTarget;
+    const data = new FormData(currentForm);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const company = String(data.get("company") ?? "").trim();
@@ -54,24 +58,35 @@ export function ContactView() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    const body = [
-      `${form.name}: ${name}`,
-      `${form.company}: ${company}`,
-      `${form.email}: ${email}`,
-      `${form.phone}: ${phone}`,
-      `${form.subject}: ${subject}${detail ? `   ${detail}` : ""}`,
-      // The message is optional now, so the blank line that separates it from
-      // the details above it only belongs there when there is a message.
-      message ? "" : null,
-      message || null,
-    ]
-      .filter((line) => line !== null)
-      .join("\n");
-
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      `${detail || subject}   ${name}`,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setSending(true);
+    setFailed(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name,
+          company,
+          email,
+          phone,
+          subject,
+          subjectDetail: detail,
+          message,
+          locale,
+        }),
+      });
+      const json = (await res.json().catch(() => null)) as {
+        ok?: boolean;
+      } | null;
+      if (!res.ok || !json?.ok) throw new Error("send_failed");
+      currentForm.reset();
+      setSubjectIndex(0);
+      setSent(true);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const details = [
@@ -264,12 +279,32 @@ export function ContactView() {
                   />
                 </Field>
 
+                {/* Honeypot: hidden from humans, catches bots. */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
+
                 <div className="flex flex-wrap items-center gap-5 pt-2">
-                  <Button type="submit" variant="primary" size="lg" dot>
-                    {form.submit}
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    dot
+                    disabled={sending}
+                  >
+                    {sending ? form.sending : form.submit}
                   </Button>
-                  <p aria-live="polite" className="text-teal text-[0.9375rem]">
-                    {sent ? form.success : null}
+                  <p aria-live="polite" className="text-[0.9375rem]">
+                    {sent ? (
+                      <span className="text-teal">{form.success}</span>
+                    ) : failed ? (
+                      <span className="text-red-500">{form.error}</span>
+                    ) : null}
                   </p>
                 </div>
               </form>
