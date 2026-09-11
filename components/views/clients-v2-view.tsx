@@ -53,6 +53,13 @@ const WALL: Project[] = (() => {
   return list;
 })();
 
+/* The cases that have been rebuilt for this wall. The v2 wall opens the v2
+   case; everything else still opens the one case there is, and /clients keeps
+   opening the originals. */
+const V2_CASES: Record<string, string> = {
+  "lunja-village": "/lunja-village-v2",
+};
+
 const COVERS: Record<string, string> = {
   bopassage: "/work/bopassage/bopassage-cover.jpg",
 };
@@ -284,9 +291,9 @@ function Tile({
   label: string;
 }) {
   const cased = Boolean(getProjectCase(project.slug));
-  const href = cased
-    ? `/projects/${project.slug}`
-    : portfolioProjectUrl(project.slug);
+  const href =
+    V2_CASES[project.slug] ??
+    (cased ? `/projects/${project.slug}` : portfolioProjectUrl(project.slug));
 
   const Tag = cased ? Link : "a";
   const opening = cased
@@ -439,20 +446,6 @@ function FilterDock({
   );
 }
 
-/**
- * The sheet, which is built once and then only ever faded.
- *
- * It would be more natural to mount it on the click and throw it away on the
- * close, and that is what made opening it stutter: the click paid for eight
- * thumbnails, a layout of the whole sheet and the start of an animation on the
- * same frame. Left standing at `opacity: 0`, none of that is on the critical
- * path   opening is one class swapping for another on a layer the compositor
- * already holds, which is also what gives the close a fade instead of a cut,
- * with no timer holding the markup back to do it.
- *
- * `inert` is what keeps a sheet nobody has opened out of the page: no tab
- * stop, no pointer, nothing in the accessibility tree.
- */
 function FilterSheet({
   open,
   active,

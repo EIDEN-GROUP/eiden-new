@@ -20,6 +20,19 @@ export function scrollToTop() {
   window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
 }
 
+/** Bring an element to the top of the frame, clear of the fixed header. */
+export function scrollToElement(target: HTMLElement, offset = -96) {
+  if (instance) {
+    instance.scrollTo(target, { offset });
+    return;
+  }
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({
+    top: target.getBoundingClientRect().top + window.scrollY + offset,
+    behavior: reduced ? "auto" : "smooth",
+  });
+}
+
 /** How many overlays are currently holding the page still. */
 let locks = 0;
 
