@@ -7,6 +7,9 @@ import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { CountUp } from "@/components/ui/count-up";
 import { Reveal } from "@/components/ui/reveal";
+import { CasePaletteStory } from "@/components/project/case/palette-story";
+import { TONES } from "@/components/project/case/tone";
+import type { PaletteStory } from "@/lib/data/projects/types";
 import { cn, cursorOn } from "@/lib/utils";
 
 type Say = { fr: string; en: string };
@@ -394,6 +397,17 @@ const BRAND_TITLE: Say = {
 
 const PALETTE_TITLE: Say = { fr: "Retro Beach.", en: "Retro Beach." };
 
+const PALETTE: PaletteStory = {
+  title: { fr: "Le langage visuel", en: "The visual language" },
+  lead: BRAND.lead,
+  colors: BRAND.colors.map(({ name, hex, role }) => ({ name, hex, role })),
+  states: BRAND.colors.map((color, index) => ({
+    title: color.note.title,
+    text: color.note.text,
+    colorIndex: index,
+  })),
+};
+
 const SIGNALS: Say[] = [
   { fr: "Une date en tête.", en: "A date in mind." },
   { fr: "Un billet en attente.", en: "A flight on hold." },
@@ -635,49 +649,13 @@ export function LunjaVillageV2View() {
               index={4}
               say={say}
               title={say(PALETTE_TITLE)}
-              text={say(BRAND.lead)}
               meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
             />
 
-            <div className="grid gap-1.5">
-              {BRAND.colors.map((color, index) => {
-                const tone =
-                  cursorOn(color.hex) === "light" ? "text-canvas" : "text-ink";
-
-                return (
-                  <Reveal key={color.hex} amount={0.2} delay={index * 0.04}>
-                    <div
-                      className={cn(
-                        "grid gap-6 rounded-4xl p-7 sm:grid-cols-2 sm:gap-10 sm:p-9",
-                        tone,
-                      )}
-                      style={{ backgroundColor: color.hex }}
-                      data-cursor={cursorOn(color.hex)}
-                    >
-                      <div>
-                        <p className="font-label text-[0.78rem] font-bold tracking-[0.18em] uppercase">
-                          {String(index + 1).padStart(2, "0")} · {say(color.role)}
-                        </p>
-                        <p className="font-display mt-4 text-[clamp(2rem,3.4vw,3rem)] leading-none font-extrabold tracking-[-0.04em]">
-                          {color.name}
-                        </p>
-                        <p className="numeral mt-3 text-[1rem] font-semibold tracking-[0.08em]">
-                          {color.hex}
-                        </p>
-                      </div>
-
-                      <div className="self-end">
-                        <p className="font-display text-[1.375rem] leading-snug font-bold tracking-[-0.02em]">
-                          {say(color.note.title)}
-                        </p>
-                        <p className="mt-2 text-[1.0625rem] leading-relaxed">
-                          {say(color.note.text)}
-                        </p>
-                      </div>
-                    </div>
-                  </Reveal>
-                );
-              })}
+            {/* overflow-clip, not hidden: the story's stage is sticky, and a
+                hidden overflow would pin it to this box instead of the page. */}
+            <div className="overflow-clip rounded-4xl lg:[&_.palette-frame]:[--disk:min(36rem,72svh)]">
+              <CasePaletteStory story={PALETTE} skin={TONES.canvas} />
             </div>
           </Chapter>
 
