@@ -23,8 +23,9 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { getProjectCase } from "@/lib/data/projects/index";
 import { useFooterRevealed } from "@/lib/footer-reveal";
 import { useHydrated } from "@/lib/hooks";
-import { clientLogos, portfolioProjectUrl, projects, siteConfig, type ProjectCategory, } from "@/lib/data/site";
+import { clientLogos, ideaTexture, portfolioProjectUrl, projects, siteConfig, type ProjectCategory, } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
+import { FixedBackdrop } from "../ui/fixed-backdrop";
 
 type Filter = ProjectCategory | "all";
 
@@ -106,219 +107,98 @@ export function ClientsV3View() {
   return (
     <div data-nav-tone="light" className="bg-canvas text-forest">
       {/* ── The claim, with the work already showing beside it ────────── */}
-      <section className="grain">
-        {/* <div className="container-eiden">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
-            <div className="pt-20 pb-0 sm:pt-28 sm:pb-20">
-              <Reveal direction="none" duration={0.5}>
-                <p className="eyebrow text-teal flex items-center gap-3">
-                  <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-                  {page.eyebrow}
-                </p>
-              </Reveal>
+      <div aria-hidden className="idea-wash">
+        <FixedBackdrop src={ideaTexture} imageClassName="scale-110 blur-md" />
+      </div>
+      <span aria-hidden className="idea-seam" />
+      <section className="grain relative z-30">
+          {/* <div className="container-eiden border-forest/12 border-y py-3">
+            <LogoMarquee logos={clientLogos} tone="dark" speed={44} />
+          </div> */}
+          <div className="m-5 pt-5 pb-24 sm:pt-15 sm:pb-32">
+            <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
+              <div className="lg:sticky lg:top-0">
+                <div className=" rounded-[1.75rem] p-4">
+                  <div className="pt-10 pb-0 sm:pt-15 sm:pb-20">
+                  <Reveal direction="none" duration={0.5}>
+                    <p className="eyebrow text-teal flex items-center gap-3">
+                      <span aria-hidden className="h-px w-8 bg-current opacity-50" />
+                      {page.eyebrow}
+                    </p>
+                  </Reveal>
 
-              <Reveal delay={0.06}>
-                <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,min(5.4vw,10vh),4.25rem)]">
-                  {page.workTitle}
-                </h1>
-              </Reveal>
+                <Reveal delay={0.06}>
+                    <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,min(5.4vw,10vh),4.25rem)]">
+                      {page.workTitle}
+                    </h1>
+                  </Reveal>
 
-              <Reveal delay={0.12}>
-                <p className="text-forest/65 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
-                  {page.workLead}
-                </p>
-              </Reveal>
+                  <Reveal delay={0.12}>
+                    <p className="text-forest/65 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
+                      {page.workLead}
+                    </p>
+                  </Reveal>
 
-              <Reveal delay={0.18}>
-                <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                  <ButtonLink href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} variant="primary" size="lg">
-                    {t.common.bookCall}
-                  </ButtonLink>
+                  <Reveal delay={0.18}>
+                    <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
+                      <ButtonLink href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} variant="primary" size="lg">
+                        {t.common.bookCall}
+                      </ButtonLink>
 
-                  <div className="border-forest/15 flex items-baseline gap-3 border-l pl-8">
-                    <span className="font-display text-forest text-[1.75rem] leading-none font-extrabold tracking-[-0.04em]">
-                      {projects.length}
-                    </span>
-                    <span className="text-forest/60 text-[0.9375rem]">
-                      {page.statLabel}
-                    </span>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-
-            <Reveal delay={0.1} direction="left">
-              <div
-                aria-hidden
-                className={cn(
-                  ", relative h-[22rem] overflow-hidden [mask-image:linear-gradient(to_bottom,black_85%,transparent)] sm:h-[28rem] lg:h-[40rem]",
-                )}
-              >
-                <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-                  {COLUMNS.map((column, index) => (
-                    <div
-                      key={index}
-                      className={cn("min-w-0", index === 2 && "hidden lg:block")}
-                    >
-                      <div
-                        className="drift-y"
-                        style={
-                          {
-                            "--drift-duration": `${column.seconds}s`,
-                            "--drift-direction": index === 1 ? "reverse" : "normal",
-                          } as CSSProperties
-                        }
-                      >
-                        {[...column.items, ...column.items].map((project, i) => (
-                          <div key={`${project.slug}-${i}`} className="pb-3">
-                            <div
-                              className={cn(
-                                "glass-dark glass-top ring-forest/10 relative overflow-hidden rounded-2xl ring-1",
-                                i % column.items.length === 0
-                                  ? "aspect-4/5"
-                                  : "aspect-4/3",
-                              )}
-                            >
-                              <Image
-                                src={project.image}
-                                alt=""
-                                fill
-                                sizes="(max-width: 1024px) 70vw, 30vw"
-                                className="size-full object-cover"
-                              />
-                            </div>
-                          </div>
-                        ))}
+                      <div className="border-forest/15 flex items-baseline gap-3 border-l pl-8">
+                        <span className="font-display text-forest text-[1.75rem] leading-none font-extrabold tracking-[-0.04em]">
+                          {projects.length}
+                        </span>
+                        <span className="text-forest/60 text-[0.9375rem]">
+                          {page.statLabel}
+                        </span>
                       </div>
                     </div>
-                  ))}
+                  </Reveal>
+
+                  <Reveal delay={0.24}>
+                    <FilterControl
+                      active={active}
+                      counts={counts}
+                      labels={page.filters}
+                      copy={page.v2}
+                      onPick={pick}
+                    />
+                  </Reveal>
+                </div>
                 </div>
               </div>
-            </Reveal>
-          </div>
-        </div> */}
 
-        {/* <div className="container-eiden border-forest/12 border-y py-3">
-          <LogoMarquee logos={clientLogos} tone="dark" speed={44} />
-        </div> */}
-
-        <div className="m-5 pt-5 pb-24 sm:pt-15 sm:pb-32">
-          <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-10 xl:gap-12">
-            <div className="lg:sticky lg:top-0">
-              <div className=" rounded-[1.75rem] p-4">
-                <div className="pt-10 pb-0 sm:pt-15 sm:pb-20">
-                <Reveal direction="none" duration={0.5}>
-                  <p className="eyebrow text-teal flex items-center gap-3">
-                    <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-                    {page.eyebrow}
-                  </p>
-                </Reveal>
-
-              <Reveal delay={0.06}>
-                  <h1 className="text-forest mt-7 max-w-2xl text-[clamp(2.25rem,min(5.4vw,10vh),4.25rem)]">
-                    {page.workTitle}
-                  </h1>
-                </Reveal>
-
-                <Reveal delay={0.12}>
-                  <p className="text-forest/65 mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
-                    {page.workLead}
-                  </p>
-                </Reveal>
-
-                <Reveal delay={0.18}>
-                  <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                    <ButtonLink href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} variant="primary" size="lg">
-                      {t.common.bookCall}
-                    </ButtonLink>
-
-                    <div className="border-forest/15 flex items-baseline gap-3 border-l pl-8">
-                      <span className="font-display text-forest text-[1.75rem] leading-none font-extrabold tracking-[-0.04em]">
-                        {projects.length}
-                      </span>
-                      <span className="text-forest/60 text-[0.9375rem]">
-                        {page.statLabel}
-                      </span>
-                    </div>
-                  </div>
-                </Reveal>
-
-                <Reveal delay={0.24}>
-                  <FilterControl
-                    active={active}
-                    counts={counts}
-                    labels={page.filters}
-                    copy={page.v2}
-                    onPick={pick}
-                  />
-                </Reveal>
-              </div>
+              <div ref={grid} className="min-w-0">
+              {shown.length === 0 ? (
+                <p className="text-forest/55 text-[0.9375rem]">{page.empty}</p>
+              ) : (
+                <RevealGroup key={active} className="grid gap-4 sm:grid-cols-2">
+                  {shown.map((project, index) => (
+                    <ProjectCard
+                      key={project.slug}
+                      href={
+                        getProjectCase(project.slug)
+                          ? `/projects/${project.slug}`
+                          : portfolioProjectUrl(project.slug)
+                      }
+                      external={!getProjectCase(project.slug)}
+                      name={project.name}
+                      category={page.filters[project.category]}
+                      line={page.projectLines[project.slug]}
+                      image={project.image}
+                      imageAlt={project.imageAlt}
+                      index={index}
+                      label={page.viewProject}
+                      wide={isWide(index)}
+                    />
+                  ))}
+                </RevealGroup>
+              )}
               </div>
             </div>
-
-            <div ref={grid} className="min-w-0">
-            {shown.length === 0 ? (
-              <p className="text-forest/55 text-[0.9375rem]">{page.empty}</p>
-            ) : (
-              <RevealGroup key={active} className="grid gap-4 sm:grid-cols-2">
-                {shown.map((project, index) => (
-                  <ProjectCard
-                    key={project.slug}
-                    href={
-                      getProjectCase(project.slug)
-                        ? `/projects/${project.slug}`
-                        : portfolioProjectUrl(project.slug)
-                    }
-                    external={!getProjectCase(project.slug)}
-                    name={project.name}
-                    category={page.filters[project.category]}
-                    line={page.projectLines[project.slug]}
-                    image={project.image}
-                    imageAlt={project.imageAlt}
-                    index={index}
-                    label={page.viewProject}
-                    wide={isWide(index)}
-                  />
-                ))}
-              </RevealGroup>
-            )}
-            </div>
           </div>
-        </div>
       </section>
-
-      {/* ── The ground the work stands on ────────────────────────────── */}
-      {/* <section className="border-forest/12 border-t">
-        <div className="container-eiden py-24 sm:py-32">
-          <Reveal direction="none" duration={0.5}>
-            <p className="eyebrow text-teal flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-              {page.eyebrow}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <h2 className="text-forest mt-7 max-w-2xl text-[clamp(1.75rem,3.6vw,2.75rem)]">
-              {page.sectorsTitle}
-            </h2>
-          </Reveal>
-
-          <RevealGroup className="glass-light mt-14 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-3">
-            {page.sectors.map((sector) => (
-              <article key={sector.title} className="bg-forest/[0.04] hover:bg-forest/[0.07] p-8 transition-colors duration-500">
-                <h3 className="font-display text-forest text-lg font-bold tracking-[-0.02em]">
-                  {sector.title}
-                </h3>
-                <p className="text-forest/65 mt-3 text-[0.9375rem] leading-relaxed">
-                  {sector.text}
-                </p>
-              </article>
-            ))}
-          </RevealGroup>
-        </div>
-      </section> */}
-
-      {/* <ContactBanner /> */}
     </div>
   );
 }
