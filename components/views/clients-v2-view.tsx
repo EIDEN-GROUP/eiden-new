@@ -55,6 +55,8 @@ const WALL: Project[] = (() => {
 
 const V2_CASES: Record<string, string> = {
   "lunja-village": "/lunja-village-v2",
+  bopassage: "/bopassage-v2",
+  "dmc-morocco": "/dmc-morocco-v2",
 };
 
 const COVERS: Record<string, string> = {
@@ -323,7 +325,7 @@ function Tile({
           alt={project.imageAlt}
           fill
           sizes="(max-width: 1024px) 80vw, 75vw"
-                    quality={95}
+          quality={95}
           priority={index === 0}
           className="size-full object-cover transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none"
         />

@@ -1,16 +1,23 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUpRight, ChevronLeft } from "lucide-react";
-import { useLanguage } from "@/components/providers/language-provider";
-import { CountUp } from "@/components/ui/count-up";
-import { Reveal } from "@/components/ui/reveal";
-import { CasePaletteStory } from "@/components/project/case/palette-story";
-import { TONES } from "@/components/project/case/tone";
+import {
+  BrandBoard,
+  CaseV2,
+  Caption,
+  Chapter,
+  Gallery,
+  Grid,
+  Hero,
+  ImpactPanel,
+  Pair,
+  PaletteStage,
+  Plate,
+  RealityFracture,
+  SignalsPanel,
+  useSay,
+  type NextProject,
+} from "@/components/case-v2/kit";
 import type { PaletteStory } from "@/lib/data/projects/types";
-import { cn, cursorOn } from "@/lib/utils";
 
 type Say = { fr: string; en: string };
 
@@ -424,765 +431,166 @@ const CHAPTERS = [
   { id: "achat-media", label: { fr: "Achat média", en: "Media buying" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
-] as const;
+];
 
-type ChapterId = (typeof CHAPTERS)[number]["id"];
-
-const CHAPTER_IDS = CHAPTERS.map((chapter) => chapter.id);
-
-const FRAME = "bg-beige relative overflow-hidden rounded-4xl";
-
-const HALF = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 38vw";
-const FULL = "(max-width: 1024px) 100vw, 76vw";
-
-/** The last chapter whose top has passed a line just above the middle. */
-function useChapter(ids: readonly ChapterId[]) {
-  const [active, setActive] = useState<ChapterId>(ids[0]);
-
-  useEffect(() => {
-    const nodes = ids
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => node !== null);
-    if (nodes.length === 0) return;
-
-    let frame = 0;
-
-    const measure = () => {
-      frame = 0;
-      const line = window.innerHeight * 0.42;
-      let current = nodes[0];
-      for (const node of nodes) {
-        if (node.getBoundingClientRect().top > line) break;
-        current = node;
-      }
-      setActive(current.id as ChapterId);
-    };
-
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(measure);
-    };
-
-    schedule();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-    };
-  }, [ids]);
-
-  return active;
-}
+const NEXT_V2: NextProject[] = NEXT.map((project) => ({
+  href: `/projects/${project.slug}`,
+  client: project.client,
+  category: project.category,
+  image: project.image,
+}));
 
 export function LunjaVillageV2View() {
-  const { locale } = useLanguage();
-  const say = (value: Say) => value[locale];
-  const active = useChapter(CHAPTER_IDS);
+  const say = useSay();
 
   return (
-    <div data-nav-tone="light" className="bg-canvas text-ink">
-      <div className="lg:grid lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
-        <Rail active={active} say={say} />
-
-        <div className="min-w-0 p-1.5">
-          <Tabs active={active} say={say} />
-
-          <Chapter id="le-defi">
-            <Reveal amount={0.1}>
-              <figure className={cn(FRAME, "aspect-4/5 sm:aspect-16/9")}>
-                <Image
-                  src={HERO.image}
-                  alt={say(HERO.alt)}
-                  fill
-                  priority
-                  quality={90}
-                  sizes={FULL}
-                  className="object-cover"
-                />
-              </figure>
-            </Reveal>
-
-            <Caption
-              index={0}
-              say={say}
-              title={say(STATEMENT)}
-              text={say(HERO.intro)}
-            />
-
-            <Pair>
-              <ListPanel
-                label={say({ fr: "La réalité", en: "The reality" })}
-                items={REALITY.map(say)}
-                tone="reality"
-              />
-              <ListPanel
-                label={say({ fr: "La fracture", en: "The fracture" })}
-                items={FRACTURE.map(say)}
-                tone="fracture"
-              />
-            </Pair>
-          </Chapter>
-
-          <Chapter id="architecture">
-            <Caption
-              index={1}
-              say={say}
-              title={say(DECISION)}
-              text={say(CHAIN_TEXT)}
-            />
-
-            <Pair>
-              <Plate
-                image="/work/lunja-village/lunja-social-4.png"
-                alt={say(HERO.alt)}
-                shape="aspect-square"
-              />
-              <Plate
-                image="/work/lunja-village/lunja-brand-tote.png"
-                alt={say({
-                  fr: "Tote bag Lunja Village",
-                  en: "Lunja Village tote bag",
-                })}
-                shape="aspect-square"
-                delay={0.08}
-              />
-            </Pair>
-          </Chapter>
-
-          <Chapter id="positionnement">
-            <Caption
-              index={2}
-              say={say}
-              label={say({
-                fr: "Rebranding · Positionnement",
-                en: "Rebranding · Positioning",
-              })}
-              title={say(POSITIONING.title)}
-              text={say(POSITIONING.text)}
-            />
-
-            <div className="grid gap-1.5 sm:grid-cols-2">
-              {POSITIONING.plates.map((plate, index) => (
-                <Plate
-                  key={plate.image}
-                  image={plate.image}
-                  alt={say(plate.alt)}
-                  caption={say(plate.caption)}
-                  shape="aspect-square"
-                  delay={(index % 2) * 0.08}
-                />
-              ))}
-            </div>
-          </Chapter>
-
-          <Chapter id="marque">
-            <Caption
-              index={3}
-              say={say}
-              title={say(BRAND_TITLE)}
-              text={say(BRAND.essence)}
-              meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
-            />
-
-            <Pair>
-              <Reveal amount={0.1}>
-                <figure
-                  className={cn(FRAME, "aspect-square")}
-                  style={{ backgroundColor: BRAND.ground }}
-                  data-cursor={cursorOn(BRAND.ground)}
-                >
-                  <Image
-                    src={BRAND.wordmark}
-                    alt={say(BRAND.wordmarkAlt)}
-                    fill
-                    quality={90}
-                    sizes={HALF}
-                    className="object-contain"
-                  />
-                  <figcaption className="font-label text-ink absolute top-6 left-7 text-[0.78rem] font-bold tracking-[0.18em] uppercase">
-                    {say({ fr: "Identité", en: "Identity" })}
-                  </figcaption>
-                </figure>
-              </Reveal>
-
-              <Reveal amount={0.1} delay={0.08} className="h-full">
-                <div className="bg-beige flex h-full flex-col rounded-4xl p-7 sm:p-9">
-                  <p className="font-label text-teal text-[0.78rem] font-bold tracking-[0.18em] uppercase">
-                    {say({ fr: "Typographie", en: "Typography" })}
-                  </p>
-
-                  {/* The three faces share the height of the wordmark beside
-                      them, so the panel is filled rather than bottom-heavy. */}
-                  <ul className="mt-5 flex flex-1 flex-col">
-                    {BRAND.type.map((face) => (
-                      <li
-                        key={face.name}
-                        className="border-beige-dk flex flex-1 items-center gap-6 border-t py-4"
-                      >
-                        <span
-                          aria-hidden
-                          className="text-teal w-[1.6em] shrink-0 text-[clamp(2.75rem,4.6vw,4.25rem)] leading-none"
-                          style={{ fontFamily: face.stack }}
-                        >
-                          Aa
-                        </span>
-                        <span className="min-w-0">
-                          <span className="font-display text-ink block text-[1.25rem] leading-tight font-bold sm:text-[1.375rem]">
-                            {face.name}
-                          </span>
-                          <span className="text-ink mt-1.5 block text-[1rem] leading-snug">
-                            {say(face.role)}
-                          </span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            </Pair>
-          </Chapter>
-
-          <Chapter id="palette">
-            <Caption
-              index={4}
-              say={say}
-              title={say(PALETTE_TITLE)}
-              meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
-            />
-
-            {/* overflow-clip, not hidden: the story's stage is sticky, and a
-                hidden overflow would pin it to this box instead of the page. */}
-            <div className="overflow-clip rounded-4xl lg:[&_.palette-frame]:[--disk:min(36rem,72svh)]">
-              <CasePaletteStory story={PALETTE} skin={TONES.canvas} />
-            </div>
-          </Chapter>
-
-          <Chapter id="marketing">
-            <Caption
-              index={5}
-              say={say}
-              title={say(MARKETING.title)}
-              text={say(MARKETING.text)}
-            />
-
-            <Pair>
-              {MARKETING.posts.map((post, index) => (
-                <Plate
-                  key={post}
-                  image={post}
-                  alt={say({
-                    fr: "Publication sociale Lunja",
-                    en: "Lunja social post",
-                  })}
-                  caption={
-                    index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
-                  }
-                  shape="aspect-4/5"
-                  delay={index * 0.08}
-                />
-              ))}
-            </Pair>
-          </Chapter>
-
-          <Chapter id="achat-media">
-            <Caption
-              index={6}
-              say={say}
-              label={say({
-                fr: "Revenu · Achat média",
-                en: "Revenue · Media buying",
-              })}
-              title={say(MEDIA.title)}
-              text={say(MEDIA.text)}
-            />
-
-            <Pair>
-              <Plate
-                image={MEDIA.post}
-                alt={say({
-                  fr: "Publication sociale Lunja",
-                  en: "Lunja social post",
-                })}
-                shape="aspect-4/5"
-              />
-
-              {/* The three signals the budget was pointed at, lifted from the
-                  chapter's own text. */}
-              <Reveal amount={0.1} delay={0.08} className="h-full">
-                <div className="bg-teal text-canvas flex h-full flex-col justify-center rounded-4xl p-8 sm:p-10">
-                  <ol className="flex flex-col">
-                    {SIGNALS.map((signal, index) => (
-                      <li
-                        key={signal.fr}
-                        className="border-teal-dk grid grid-cols-[3rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0"
-                      >
-                        <span className="font-label text-gold text-[0.85rem] font-bold tracking-[0.16em] tabular-nums">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-display text-[clamp(1.625rem,2.8vw,2.5rem)] leading-[1.05] font-extrabold tracking-[-0.035em]">
-                          {say(signal)}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </Reveal>
-            </Pair>
-          </Chapter>
-
-          <Chapter id="impact">
-            <Caption
-              index={7}
-              say={say}
-              title={say(IMPACT.title)}
-              text={say(IMPACT.text)}
-            />
-
-            <Reveal amount={0.15}>
-              <div className="bg-beige relative isolate grid gap-8 overflow-hidden rounded-4xl px-7 py-12 sm:grid-cols-2 sm:items-end sm:px-12 sm:py-16">
-                <div aria-hidden className="absolute inset-0 -z-10">
-                  <Image
-                    src={HERO.image}
-                    alt=""
-                    fill
-                    quality={70}
-                    sizes={FULL}
-                    className="object-cover opacity-20"
-                  />
-                  <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--color-beige)_75%)]" />
-                </div>
-
-                <p className="font-display text-teal text-[clamp(4.5rem,12vw,9.5rem)] leading-[0.82] font-extrabold tracking-[-0.06em]">
-                  <CountUp value={IMPACT.metric} />
-                </p>
-                <p className="font-display text-ink text-[clamp(1.375rem,2.4vw,2rem)] leading-[1.15] font-bold tracking-[-0.025em]">
-                  {say(IMPACT.metricLine)}
-                </p>
-              </div>
-            </Reveal>
-          </Chapter>
-
-          <Chapter id="le-travail">
-            <Caption
-              index={8}
-              say={say}
-              title={say({
-                fr: "La preuve, après l'argument.",
-                en: "The proof, after the argument.",
-              })}
-              meta={`${WORK.length} ${say({ fr: "images", en: "pictures" })}`}
-            />
-
-            <Gallery items={WORK} say={say} />
-          </Chapter>
-        </div>
-      </div>
-
-      <NextProjects say={say} />
-    </div>
-  );
-}
-
-function Rail({ active, say }: { active: ChapterId; say: (value: Say) => string }) {
-  return (
-    <aside className="border-beige-dk no-scrollbar relative z-20 border-b lg:sticky lg:top-0 lg:h-dvh lg:self-start lg:overflow-y-auto lg:border-r lg:border-b-0">
-      <div className="flex h-full flex-col px-5 pt-24 pb-10 sm:px-10 sm:pt-32 lg:px-7 lg:pt-28 lg:pb-6 xl:px-9">
-        <Link
-          href="/clients-v2"
-          className="group font-label text-ink hover:text-teal inline-flex w-fit items-center gap-1.5 text-[0.75rem] font-bold tracking-[0.18em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
-        >
-          <ChevronLeft
-            aria-hidden
-            strokeWidth={2.2}
-            className="size-4 transition-transform duration-500 ease-[var(--ease-brand)] group-hover:-translate-x-0.5 motion-reduce:transition-none"
-          />
-          {say({ fr: "Tous les projets", en: "All projects" })}
-        </Link>
-
-        <p className="eyebrow text-teal mt-7 flex items-center gap-3">
-          <span aria-hidden className="h-px w-8 bg-current" />
-          {say({ fr: "Étude de cas", en: "Case study" })}
-        </p>
-
-        <h1 className="text-ink mt-5 text-[clamp(2.25rem,5vw,3rem)] lg:text-[clamp(2rem,2.6vw,2.75rem)]">
-          {CLIENT}
-        </h1>
-
-        <p className="text-ink/70 mt-3 max-w-md text-[14px] leading-snug">
-          {say(HERO.statement)}
-        </p>
-
-        <p className="font-label text-gold-dk mt-5 text-[0.75rem] leading-relaxed font-bold tracking-[0.16em] uppercase">
-          <span className="block">
-            {say(CATEGORY)} · {YEAR}
-          </span>
-          <span className="block">{say(LOCATION)}</span>
-        </p>
-
-        <nav
-          aria-label={say({ fr: "Chapitres", en: "Chapters" })}
-          className="mt-9 hidden lg:block"
-        >
-          <ol className="flex flex-col gap-1.5">
-            {CHAPTERS.map((chapter) => {
-              const on = chapter.id === active;
-
-              return (
-                <li key={chapter.id}>
-                  <a
-                    href={`#${chapter.id}`}
-                    aria-current={on ? "location" : undefined}
-                    className={cn(
-                      "group relative flex items-center py-0.5 text-[1.0625rem] leading-snug transition-[color,opacity] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                      on
-                        ? "text-teal font-semibold"
-                        : "text-ink opacity-40 hover:opacity-100",
-                    )}
-                  >
-                    <span
-                      aria-hidden
-                      className={cn(
-                        "bg-teal absolute -left-3.5 size-1.5 rounded-full transition-[opacity,scale] duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                        on ? "scale-100 opacity-100" : "scale-50 opacity-0",
-                      )}
-                    />
-                    {say(chapter.label)}
-                  </a>
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
-
-        <a
-          href={SITE}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="group border-ink text-ink hover:bg-ink hover:text-canvas font-label mt-8 inline-flex w-fit items-center gap-2.5 rounded-full border px-5 py-3 text-[0.75rem] font-bold tracking-[0.16em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:mt-auto"
-        >
-          {say({ fr: "Voir le site", en: "View the site" })}
-          <ArrowUpRight
-            aria-hidden
-            strokeWidth={2}
-            className="size-4 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
-          />
-        </a>
-      </div>
-    </aside>
-  );
-}
-
-/** The chapter index on a phone: tabs held under the header. */
-function Tabs({ active, say }: { active: ChapterId; say: (value: Say) => string }) {
-  const track = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const box = track.current;
-    const tab = box?.querySelector<HTMLElement>(`[data-chapter="${active}"]`);
-    if (!box || !tab) return;
-    box.scrollTo({
-      left: tab.offsetLeft - box.clientWidth / 2 + tab.clientWidth / 2,
-      behavior: "smooth",
-    });
-  }, [active]);
-
-  return (
-    <nav
-      aria-label={say({ fr: "Chapitres", en: "Chapters" })}
-      className="bg-canvas border-beige-dk sticky top-16 z-30 -mx-1.5 mb-1.5 border-b sm:top-18 lg:hidden"
+    <CaseV2
+      chapters={CHAPTERS}
+      client={CLIENT}
+      statement={HERO.statement}
+      category={CATEGORY}
+      location={LOCATION}
+      year={YEAR}
+      site={SITE}
+      next={NEXT_V2}
     >
-      <div
-        ref={track}
-        className="no-scrollbar flex gap-1.5 overflow-x-auto px-3 py-2.5"
-      >
-        {CHAPTERS.map((chapter) => {
-          const on = chapter.id === active;
+      <Chapter id="le-defi">
+        <Hero image={HERO.image} alt={say(HERO.alt)} />
+        <Caption index={0} title={say(STATEMENT)} text={say(HERO.intro)} />
+        <RealityFracture reality={REALITY} fracture={FRACTURE} />
+      </Chapter>
 
-          return (
-            <a
-              key={chapter.id}
-              href={`#${chapter.id}`}
-              data-chapter={chapter.id}
-              data-scroll-offset="-132"
-              aria-current={on ? "location" : undefined}
-              className={cn(
-                "shrink-0 rounded-full px-4 py-2 text-[0.875rem] font-semibold whitespace-nowrap transition-colors duration-300 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                on ? "bg-teal text-canvas" : "bg-beige text-ink",
-              )}
-            >
-              {say(chapter.label)}
-            </a>
-          );
-        })}
-      </div>
-    </nav>
-  );
-}
-
-function Chapter({ id, children }: { id: ChapterId; children: ReactNode }) {
-  return (
-    <section id={id} className="grid gap-1.5 pb-1.5">
-      {children}
-    </section>
-  );
-}
-
-/**
- * The row that opens a chapter: number and name across the top, the claim on
- * the left, the argument on the right. With no argument the claim takes both.
- */
-function Caption({
-  index,
-  say,
-  label,
-  title,
-  text,
-  meta,
-}: {
-  index: number;
-  say: (value: Say) => string;
-  label?: string;
-  title: string;
-  text?: string;
-  meta?: string;
-}) {
-  return (
-    <Reveal amount={0.2}>
-      <header className="border-beige-dk mx-2 grid gap-x-12 gap-y-4 border-t pt-6 pb-8 sm:mx-4 sm:pt-7 sm:pb-10 lg:grid-cols-2">
-        <p className="font-label flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[0.78rem] font-bold tracking-[0.18em] uppercase lg:col-span-2">
-          <span className="text-gold-dk tabular-nums">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <span className="text-teal">{label ?? say(CHAPTERS[index].label)}</span>
-          {meta ? <span className="text-gold-dk">· {meta}</span> : null}
-        </p>
-
-        <h2
-          className={cn(
-            "font-display text-ink text-[clamp(1.875rem,3.3vw,3rem)] leading-[1.04] font-extrabold tracking-[-0.04em]",
-            !text && "lg:col-span-2",
-          )}
-        >
-          {title}
-        </h2>
-
-        {text ? (
-          <p className="text-ink text-[1.0625rem] leading-[1.7] sm:text-[1.125rem]">
-            {text}
-          </p>
-        ) : null}
-      </header>
-    </Reveal>
-  );
-}
-
-function Pair({ children }: { children: ReactNode }) {
-  return <div className="grid gap-1.5 sm:grid-cols-2">{children}</div>;
-}
-
-function Plate({
-  image,
-  alt,
-  shape,
-  caption,
-  sizes = HALF,
-  delay = 0,
-}: {
-  image: string;
-  alt: string;
-  shape: string;
-  caption?: string;
-  sizes?: string;
-  delay?: number;
-}) {
-  return (
-    <Reveal amount={0.1} delay={delay}>
-      <figure className={cn(FRAME, "group", shape)}>
-        <Image
-          src={image}
-          alt={alt}
-          fill
-          quality={90}
-          sizes={sizes}
-          className="object-cover transition-transform duration-[1400ms] ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:transition-none"
-        />
-        {caption ? (
-          <figcaption className="font-label text-canvas absolute bottom-5 left-6 text-[0.78rem] font-bold tracking-[0.18em] uppercase [text-shadow:0_1px_12px_rgba(0,0,0,0.8)]">
-            {caption}
-          </figcaption>
-        ) : null}
-      </figure>
-    </Reveal>
-  );
-}
-
-function ListPanel({
-  label,
-  items,
-  tone,
-}: {
-  label: string;
-  items: string[];
-  tone: "reality" | "fracture";
-}) {
-  const fracture = tone === "fracture";
-
-  return (
-    <Reveal amount={0.15} delay={fracture ? 0.08 : 0} className="h-full">
-      <div
-        className={cn(
-          "flex h-full flex-col rounded-4xl p-7 sm:p-9",
-          fracture ? "bg-forest text-canvas" : "bg-beige text-ink",
-        )}
-      >
-        <p
-          className={cn(
-            "font-label text-[0.78rem] font-bold tracking-[0.18em] uppercase",
-            fracture ? "text-gold" : "text-teal",
-          )}
-        >
-          {label}
-        </p>
-
-        <ol className="mt-6 flex flex-1 flex-col justify-between">
-          {items.map((item, index) => (
-            <li
-              key={item}
-              className={cn(
-                "grid grid-cols-[2.5rem_1fr] items-baseline border-t py-4 first:border-t-0 first:pt-0 last:pb-0 sm:py-5",
-                fracture ? "border-forest-md" : "border-beige-dk",
-              )}
-            >
-              <span
-                aria-hidden
-                className={cn(
-                  "font-label text-[0.8rem] font-bold tracking-[0.16em] tabular-nums",
-                  fracture ? "text-gold" : "text-teal",
-                )}
-              >
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="font-display text-[1.1875rem] leading-snug font-bold tracking-[-0.02em] sm:text-[1.375rem]">
-                {item}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </Reveal>
-  );
-}
-
-function Gallery({
-  items,
-  say,
-}: {
-  items: { image: string; alt: Say }[];
-  say: (value: Say) => string;
-}) {
-  const first = items[0];
-  const last = items[items.length - 1];
-  const middle = items.slice(1, -1);
-
-  return (
-    <div className="grid gap-1.5">
-      <Plate
-        image={first.image}
-        alt={say(first.alt)}
-        shape="aspect-4/3 sm:aspect-16/9"
-        sizes={FULL}
-      />
-
-      <div className="grid gap-1.5 sm:grid-cols-2">
-        {middle.map((item, index) => (
+      <Chapter id="architecture">
+        <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
+        <Pair>
           <Plate
-            key={item.image}
-            image={item.image}
-            alt={say(item.alt)}
-            shape="aspect-4/3"
-            delay={(index % 2) * 0.06}
+            image="/work/lunja-village/lunja-social-4.png"
+            alt={say(HERO.alt)}
+            shape="aspect-square"
           />
-        ))}
-      </div>
+          <Plate
+            image="/work/lunja-village/lunja-brand-tote.png"
+            alt={say({
+              fr: "Tote bag Lunja Village",
+              en: "Lunja Village tote bag",
+            })}
+            shape="aspect-square"
+            delay={0.08}
+          />
+        </Pair>
+      </Chapter>
 
-      <Plate
-        image={last.image}
-        alt={say(last.alt)}
-        shape="aspect-4/3 sm:aspect-16/9"
-        sizes={FULL}
-      />
-    </div>
-  );
-}
+      <Chapter id="positionnement">
+        <Caption
+          index={2}
+          label={say({
+            fr: "Rebranding · Positionnement",
+            en: "Rebranding · Positioning",
+          })}
+          title={say(POSITIONING.title)}
+          text={say(POSITIONING.text)}
+        />
+        <Grid>
+          {POSITIONING.plates.map((plate, index) => (
+            <Plate
+              key={plate.image}
+              image={plate.image}
+              alt={say(plate.alt)}
+              caption={say(plate.caption)}
+              shape="aspect-square"
+              delay={(index % 2) * 0.08}
+            />
+          ))}
+        </Grid>
+      </Chapter>
 
-function NextProjects({ say }: { say: (value: Say) => string }) {
-  return (
-    <section
-      aria-label={say({ fr: "Projets suivants", en: "Next projects" })}
-      className="border-beige-dk border-t"
-    >
-      <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-3 px-5 pt-12 pb-6 sm:px-10 sm:pt-16 lg:px-7 xl:px-9">
-        <h2 className="font-display text-ink text-[clamp(1.875rem,3.3vw,3rem)] leading-none font-extrabold tracking-[-0.04em]">
-          {say({ fr: "Transformations suivantes", en: "Next transformations" })}
-        </h2>
+      <Chapter id="marque">
+        <Caption
+          index={3}
+          title={say(BRAND_TITLE)}
+          text={say(BRAND.essence)}
+          meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
+        />
+        <BrandBoard
+          ground={BRAND.ground}
+          wordmark={BRAND.wordmark}
+          wordmarkAlt={say(BRAND.wordmarkAlt)}
+          contain
+          faces={BRAND.type}
+        />
+      </Chapter>
 
-        <Link
-          href="/clients-v2"
-          className="font-label text-ink hover:text-teal inline-flex items-center gap-2 text-[0.78rem] font-bold tracking-[0.18em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
-        >
-          {say({ fr: "Tous les projets", en: "All projects" })}
-          <ArrowUpRight className="size-4" strokeWidth={2} aria-hidden />
-        </Link>
-      </div>
+      <Chapter id="palette">
+        <Caption
+          index={4}
+          title={say(PALETTE_TITLE)}
+          meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
+        />
+        <PaletteStage story={PALETTE} />
+      </Chapter>
 
-      <div className="grid gap-1.5 p-1.5 sm:grid-cols-2">
-        {NEXT.map((project, index) => (
-          <Reveal key={project.slug} amount={0.15} delay={index * 0.08}>
-            <Link
-              href={`/projects/${project.slug}`}
-              transitionTypes={["case-open"]}
-              aria-label={`${project.client}, ${say(project.category)}`}
-              className="group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:-outline-offset-4"
-            >
-              <div className={cn(FRAME, "aspect-4/3 lg:aspect-16/11")}>
-                <Image
-                  src={project.image}
-                  alt=""
-                  aria-hidden
-                  fill
-                  quality={90}
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/35 to-transparent"
-                />
+      <Chapter id="marketing">
+        <Caption
+          index={5}
+          title={say(MARKETING.title)}
+          text={say(MARKETING.text)}
+        />
+        <Pair>
+          {MARKETING.posts.map((post, index) => (
+            <Plate
+              key={post}
+              image={post}
+              alt={say({
+                fr: "Publication sociale Lunja",
+                en: "Lunja social post",
+              })}
+              caption={
+                index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
+              }
+              shape="aspect-4/5"
+              delay={index * 0.08}
+            />
+          ))}
+        </Pair>
+      </Chapter>
 
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-5 p-6 sm:p-8">
-                  <div className="min-w-0">
-                    <p className="font-label text-gold text-[0.78rem] font-bold tracking-[0.18em] uppercase">
-                      {say(project.category)}
-                    </p>
-                    <h3 className="font-display text-canvas mt-2.5 text-[clamp(2rem,3.6vw,3rem)] leading-[0.95] font-extrabold tracking-[-0.05em] text-balance transition-transform duration-700 ease-[var(--ease-brand)] group-hover:translate-x-1 motion-reduce:transition-none">
-                      {project.client}
-                    </h3>
-                  </div>
+      <Chapter id="achat-media">
+        <Caption
+          index={6}
+          label={say({ fr: "Revenu · Achat média", en: "Revenue · Media buying" })}
+          title={say(MEDIA.title)}
+          text={say(MEDIA.text)}
+        />
+        <Pair>
+          <Plate
+            image={MEDIA.post}
+            alt={say({ fr: "Publication sociale Lunja", en: "Lunja social post" })}
+            shape="aspect-4/5"
+          />
+          <SignalsPanel items={SIGNALS.map(say)} />
+        </Pair>
+      </Chapter>
 
-                  <span
-                    aria-hidden
-                    className="border-canvas text-canvas group-hover:bg-canvas group-hover:text-ink flex size-12 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
-                  >
-                    <ArrowUpRight className="size-5" strokeWidth={1.8} />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </Reveal>
-        ))}
-      </div>
-    </section>
+      <Chapter id="impact">
+        <Caption index={7} title={say(IMPACT.title)} text={say(IMPACT.text)} />
+        <ImpactPanel
+          image={HERO.image}
+          metric={IMPACT.metric}
+          line={say(IMPACT.metricLine)}
+        />
+      </Chapter>
+
+      <Chapter id="le-travail">
+        <Caption
+          index={8}
+          title={say({
+            fr: "La preuve, après l'argument.",
+            en: "The proof, after the argument.",
+          })}
+          meta={`${WORK.length} ${say({ fr: "images", en: "pictures" })}`}
+        />
+        <Gallery items={WORK} />
+      </Chapter>
+    </CaseV2>
   );
 }

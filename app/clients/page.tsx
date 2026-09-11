@@ -1,6 +1,6 @@
 import { ViewTransition } from "react";
 import type { Metadata } from "next";
-import { ClientsView } from "@/components/views/clients-view";
+import { ClientsV2View } from "@/components/views/clients-v2-view";
 
 export const metadata: Metadata = {
   title: "Clients",
@@ -16,7 +16,7 @@ export default function ClientsPage() {
       exit={{ "case-open": "case-under", default: "none" }}
       default="none"
     >
-      <ClientsView />
+      <ClientsV2View />
     </ViewTransition>
   );
 }
