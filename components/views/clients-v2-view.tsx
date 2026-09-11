@@ -53,9 +53,6 @@ const WALL: Project[] = (() => {
   return list;
 })();
 
-/* The cases that have been rebuilt for this wall. The v2 wall opens the v2
-   case; everything else still opens the one case there is, and /clients keeps
-   opening the originals. */
 const V2_CASES: Record<string, string> = {
   "lunja-village": "/lunja-village-v2",
 };
