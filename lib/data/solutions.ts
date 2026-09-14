@@ -3,7 +3,7 @@ import type { Localized } from "@/lib/data/localized";
 
 import gestioMockup from "@/public/solutions/gestion-mockup.png";
 import kavoMockup from "@/public/solutions/kavo-mockup.png";
-import scholnexaMockup from "@/public/solutions/schoolnexa-mockup.png";
+import EssorMockup from "@/public/solutions/schoolnexa-mockup.png";
 import stayDeskMockup from "@/public/solutions/staydesk-mockup.png";
 
 export type SystemRecord = {
@@ -23,9 +23,9 @@ export type SystemRecord = {
 
 export const systems: SystemRecord[] = [
   {
-    slug: "gestio",
+    slug: "skema",
     number: "01",
-    name: "Gestio",
+    name: "Skema",
     category: { fr: "Centres spécialisés", en: "Specialised centres" },
     tagline: {
       fr: "Le système d'exploitation des centres spécialisés.",
@@ -56,9 +56,9 @@ export const systems: SystemRecord[] = [
     mockup: gestioMockup,
   },
   {
-    slug: "scholnexa",
+    slug: "Essor",
     number: "02",
-    name: "Scholnexa",
+    name: "Essor",
     category: { fr: "Écoles", en: "Schools" },
     tagline: {
       fr: "Une façon plus claire de gérer une école.",
@@ -68,7 +68,7 @@ export const systems: SystemRecord[] = [
       fr: "Une plateforme de gestion scolaire, pensée pour les organismes de formation et les équipes pédagogiques.",
       en: "A school management platform, built for training organisations and academic teams.",
     },
-    url: "https://scholnexa.vercel.app/dashboard",
+    url: "https://Essor.vercel.app/dashboard",
     audience: [
       { fr: "Écoles", en: "Schools" },
       { fr: "Organismes de formation", en: "Educational organisations" },
@@ -86,7 +86,7 @@ export const systems: SystemRecord[] = [
         ],
       },
     ],
-    mockup: scholnexaMockup,
+    mockup: EssorMockup,
   },
   {
     slug: "kavo",
