@@ -114,7 +114,7 @@ export function CaseV2({
   client: string;
   statement: Say;
   category: Say;
-  location: Say;
+  location?: Say;
   year: string;
   site?: string;
   next: NextProject[];
@@ -160,7 +160,7 @@ export function CaseV2({
                 <span className="block">
                   {say(category)} · {year}
                 </span>
-                <span className="block">{say(location)}</span>
+                {location ? <span className="block">{say(location)}</span> : null}
               </p>
 
               <nav
@@ -500,6 +500,53 @@ export function RealityFracture({
   );
 }
 
+/** The wordmark on its own ground. */
+export function IdentityPlate({
+  ground,
+  image,
+  alt,
+  contain,
+  shape = "aspect-square",
+  sizes = HALF,
+}: {
+  ground: string;
+  image: string;
+  alt: string;
+  contain: boolean;
+  shape?: string;
+  sizes?: string;
+}) {
+  const { say } = useCase();
+  const onGround = cursorOn(ground) === "light" ? "text-canvas" : "text-ink";
+
+  return (
+    <Reveal amount={0.1}>
+      <figure
+        className={cn(FRAME, shape)}
+        style={{ backgroundColor: ground }}
+        data-cursor={cursorOn(ground)}
+      >
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          quality={90}
+          sizes={sizes}
+          className={contain ? "object-contain" : "object-cover"}
+        />
+        <figcaption
+          className={cn(
+            "font-label absolute top-6 left-7 text-[0.78rem] font-bold tracking-[0.18em] uppercase",
+            onGround,
+          )}
+        >
+          {say({ fr: "Identité", en: "Identity" })}
+        </figcaption>
+      </figure>
+    </Reveal>
+  );
+}
+
 /** The wordmark on its own ground, beside the typefaces it is set with. */
 export function BrandBoard({
   ground,
@@ -515,34 +562,15 @@ export function BrandBoard({
   faces: Face[];
 }) {
   const { say } = useCase();
-  const onGround = cursorOn(ground) === "light" ? "text-canvas" : "text-ink";
 
   return (
     <Pair>
-      <Reveal amount={0.1}>
-        <figure
-          className={cn(FRAME, "aspect-square")}
-          style={{ backgroundColor: ground }}
-          data-cursor={cursorOn(ground)}
-        >
-          <Image
-            src={wordmark}
-            alt={wordmarkAlt}
-            fill
-            quality={90}
-            sizes={HALF}
-            className={contain ? "object-contain" : "object-cover"}
-          />
-          <figcaption
-            className={cn(
-              "font-label absolute top-6 left-7 text-[0.78rem] font-bold tracking-[0.18em] uppercase",
-              onGround,
-            )}
-          >
-            {say({ fr: "Identité", en: "Identity" })}
-          </figcaption>
-        </figure>
-      </Reveal>
+      <IdentityPlate
+        ground={ground}
+        image={wordmark}
+        alt={wordmarkAlt}
+        contain={contain}
+      />
 
       <Reveal amount={0.1} delay={0.08} className="h-full">
         <div className="bg-beige flex h-full flex-col rounded-4xl p-7 sm:p-9">
@@ -580,6 +608,66 @@ export function BrandBoard({
   );
 }
 
+export type Swatch = { hex: string; role: Say };
+
+/** The wordmark beside the colours read off it, for a case with no type book. */
+export function ColourBoard({
+  ground,
+  wordmark,
+  wordmarkAlt,
+  contain,
+  colors,
+}: {
+  ground: string;
+  wordmark: string;
+  wordmarkAlt: string;
+  contain: boolean;
+  colors: Swatch[];
+}) {
+  const { say } = useCase();
+
+  return (
+    <Pair>
+      <IdentityPlate
+        ground={ground}
+        image={wordmark}
+        alt={wordmarkAlt}
+        contain={contain}
+      />
+
+      <Reveal amount={0.1} delay={0.08} className="h-full">
+        <div className="bg-beige flex h-full flex-col rounded-4xl p-7 sm:p-9">
+          <p className="font-label text-teal text-[0.78rem] font-bold tracking-[0.18em] uppercase">
+            {say({ fr: "Système colorimétrique", en: "Colour system" })}
+          </p>
+
+          <ul className="mt-5 flex flex-1 flex-col gap-1.5">
+            {colors.map((colour) => (
+              <li
+                key={colour.hex}
+                style={{ backgroundColor: colour.hex }}
+                data-cursor={cursorOn(colour.hex)}
+                className={cn(
+                  "ring-beige-dk flex min-h-[4.5rem] flex-1 items-end justify-between gap-4 rounded-2xl px-5 py-4 ring-1 ring-inset",
+                  "transition-[flex-grow] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none sm:hover:grow-[2.5]",
+                  cursorOn(colour.hex) === "light" ? "text-canvas" : "text-ink",
+                )}
+              >
+                <span className="font-display text-[1.25rem] leading-tight font-bold sm:text-[1.375rem]">
+                  {say(colour.role)}
+                </span>
+                <span className="font-label text-[0.78rem] font-bold tracking-[0.16em] uppercase tabular-nums">
+                  {colour.hex}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+    </Pair>
+  );
+}
+
 /** The v1 palette story, held in the column. */
 export function PaletteStage({ story }: { story: PaletteStory }) {
   return (
@@ -606,6 +694,106 @@ export function SignalsPanel({ items }: { items: string[] }) {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="font-display text-[clamp(1.5rem,2.6vw,2.375rem)] leading-[1.06] font-extrabold tracking-[-0.035em]">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Reveal>
+  );
+}
+
+const LINES = {
+  teal: {
+    panel: "bg-teal text-canvas",
+    rule: "border-teal-dk",
+    index: "text-gold",
+  },
+  forest: {
+    panel: "bg-forest text-canvas",
+    rule: "border-forest-md",
+    index: "text-gold",
+  },
+  beige: {
+    panel: "bg-beige text-ink",
+    rule: "border-beige-dk",
+    index: "text-teal",
+  },
+} as const;
+
+const ABREAST: Record<number, string> = {
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-2 xl:grid-cols-4",
+};
+
+/** Short lines lifted from a chapter's own text, set abreast across the column. */
+export function LinesRow({
+  items,
+  tone = "teal",
+}: {
+  items: string[];
+  tone?: keyof typeof LINES;
+}) {
+  const skin = LINES[tone];
+
+  return (
+    <Reveal amount={0.15}>
+      <ol
+        className={cn(
+          "grid gap-x-10 gap-y-8 rounded-4xl px-7 py-9 sm:px-10 sm:py-12",
+          ABREAST[items.length],
+          skin.panel,
+        )}
+      >
+        {items.map((item, index) => (
+          <li key={item} className={cn("border-t pt-5", skin.rule)}>
+            <span
+              className={cn(
+                "font-label block text-[0.85rem] font-bold tracking-[0.16em] tabular-nums",
+                skin.index,
+              )}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="font-display mt-4 block text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.06] font-extrabold tracking-[-0.035em]">
+              {item}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </Reveal>
+  );
+}
+
+/** The impact where no figure has been published: what changed, line by line. */
+export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
+  return (
+    <Reveal amount={0.15}>
+      <div className="bg-beige relative isolate overflow-hidden rounded-4xl px-7 py-12 sm:px-12 sm:py-16">
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <Image
+            src={image}
+            alt=""
+            fill
+            quality={70}
+            sizes={FULL}
+            className="object-cover opacity-20"
+          />
+          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--color-beige)_75%)]" />
+        </div>
+
+        <ol className="flex flex-col">
+          {items.map((item, index) => (
+            <li
+              key={item}
+              className="border-beige-dk grid grid-cols-[4rem_1fr] items-baseline border-t py-7 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[7rem_1fr]"
+            >
+              <span className="font-display text-teal text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="font-display text-ink text-[clamp(1.5rem,2.8vw,2.5rem)] leading-[1.08] font-extrabold tracking-[-0.035em]">
                 {item}
               </span>
             </li>

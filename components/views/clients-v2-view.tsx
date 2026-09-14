@@ -57,6 +57,17 @@ const V2_CASES: Record<string, string> = {
   "lunja-village": "/lunja-village",
   bopassage: "/bopassage",
   "dmc-morocco": "/dmc-morocco",
+  "educazen-kids": "/educazen-kids",
+  "medical-bay": "/medical-bay",
+  orsen: "/orsen",
+  "droguerie-souss": "/droguerie-souss",
+  "lithos-materiaux": "/lithos-materiaux",
+  "rihab-residence": "/rihab-residence",
+  anisal: "/anisal",
+  madaef: "/madaef",
+  "chillout-lounge": "/chillout-lounge",
+  mabrouk: "/mabrouk",
+  "centre-accompagnement": "/ca-challenge-academy",
 };
 
 const COVERS: Record<string, string> = {

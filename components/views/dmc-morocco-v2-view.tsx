@@ -392,7 +392,7 @@ export function DmcMoroccoV2View() {
               key={plate.image}
               image={plate.image}
               alt={say(plate.alt)}
-              caption={say(plate.caption)}
+              // caption={say(plate.caption)}
               shape="aspect-4/3"
               delay={(index % 2) * 0.08}
             />
@@ -463,9 +463,9 @@ export function DmcMoroccoV2View() {
               key={post}
               image={post}
               alt={say({ fr: "Publication sociale DMC", en: "DMC social post" })}
-              caption={
-                index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
-              }
+              // caption={
+              //   index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
+              // }
               shape="aspect-4/5"
               delay={(index % 2) * 0.08}
             />

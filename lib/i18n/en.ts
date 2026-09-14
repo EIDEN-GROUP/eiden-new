@@ -765,7 +765,7 @@ export const en: Dictionary = {
         "one-retail": "At the heart of modern Moroccan retail.",
         "droguerie-souss": "Build with the best materials.",
         mabrouk:
-          "A house you recognise by its light: brass, wood and velvet, held as a brand.",
+          "A house you recognise by its light: brass, wood and velvet, photographed and told.",
         anisal:
           "A cooperative's work, carried under one name instead of a hundred.",
         madaef: "Destinations held to one standard, from the brand down.",

@@ -775,7 +775,7 @@ export const fr = {
         "one-retail": "Au cœur du commerce marocain moderne.",
         "droguerie-souss": "Bâtissez avec les meilleurs matériaux.",
         mabrouk:
-          "Une maison qui se reconnaît à sa lumière : laiton, bois et velours, tenus en marque.",
+          "Une maison qui se reconnaît à sa lumière : laiton, bois et velours, photographiés et racontés.",
         anisal:
           "Le travail d'une coopérative, porté sous un seul nom plutôt que sous cent.",
         madaef:

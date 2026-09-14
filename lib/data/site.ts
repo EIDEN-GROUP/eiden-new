@@ -227,10 +227,10 @@ export const projects = [
   },
   {
     slug: "centre-accompagnement",
-    name: "Centre d'accompagnement",
+    name: "CA Challenge Academy",
     category: "education",
     image: "/media/eiden-hero-poster.jpg",
-    imageAlt: "Le centre d'accompagnement",
+    imageAlt: "CA Challenge Academy",
   },
 
   // {

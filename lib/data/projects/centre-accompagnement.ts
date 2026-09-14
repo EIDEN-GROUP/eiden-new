@@ -16,7 +16,7 @@ import type { ProjectCase } from "./types";
  */
 export const centreAccompagnement: ProjectCase = {
   slug: "centre-accompagnement",
-  client: "Centre d'accompagnement",
+  client: "CA Challenge Academy",
   year: "2025",
   category: { fr: "Éducation", en: "Education" },
   location: { fr: "Agadir, Maroc", en: "Agadir, Morocco" },

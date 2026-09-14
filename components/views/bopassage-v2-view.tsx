@@ -411,7 +411,7 @@ export function BopassageV2View() {
               key={plate.image}
               image={plate.image}
               alt={say(plate.alt)}
-              caption={say(plate.caption)}
+              // caption={say(plate.caption)}
               shape="aspect-4/3"
               delay={(index % 2) * 0.08}
             />
@@ -482,7 +482,7 @@ export function BopassageV2View() {
               fr: "Publication sociale Bôpassage",
               en: "Bôpassage social post",
             })}
-            caption={say({ fr: "Social", en: "Social" })}
+            // caption={say({ fr: "Social", en: "Social" })}
             shape="aspect-4/5"
           />
           <Plate
@@ -491,7 +491,7 @@ export function BopassageV2View() {
               fr: "Profil Instagram Bôpassage",
               en: "Bôpassage Instagram profile",
             })}
-            caption={say({ fr: "Profil", en: "Profile" })}
+            // caption={say({ fr: "Profil", en: "Profile" })}
             shape="aspect-4/5"
             delay={0.08}
           />
@@ -512,7 +512,7 @@ export function BopassageV2View() {
               fr: "Affichage extérieur Bôpassage",
               en: "Bôpassage out-of-home poster",
             })}
-            caption={say({ fr: "Affichage", en: "Out of home" })}
+            // caption={say({ fr: "Affichage", en: "Out of home" })}
             shape="aspect-4/5"
           />
           <SignalsPanel items={PAID.signals.map(say)} />

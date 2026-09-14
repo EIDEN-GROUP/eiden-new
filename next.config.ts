@@ -22,11 +22,33 @@ const nextConfig: NextConfig = {
   },
   redirects() {
     const cases = ["lunja-village", "bopassage", "dmc-morocco"];
+    const promoted = [
+      "educazen-kids",
+      "medical-bay",
+      "orsen",
+      "droguerie-souss",
+      "lithos-materiaux",
+      "rihab-residence",
+      "anisal",
+      "madaef",
+      "chillout-lounge",
+      "mabrouk",
+    ];
     return [
       ...cases.flatMap((slug) => [
         { source: `/projects/${slug}`, destination: `/${slug}`, permanent: true },
         { source: `/${slug}-v2`, destination: `/${slug}`, permanent: true },
       ]),
+      ...promoted.map((slug) => ({
+        source: `/projects/${slug}`,
+        destination: `/${slug}`,
+        permanent: true,
+      })),
+      {
+        source: "/projects/centre-accompagnement",
+        destination: "/ca-challenge-academy",
+        permanent: true,
+      },
       { source: "/clients-v2", destination: "/clients", permanent: true },
       { source: "/clients-v3", destination: "/clients", permanent: true },
     ];

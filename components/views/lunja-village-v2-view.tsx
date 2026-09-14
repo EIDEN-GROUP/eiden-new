@@ -91,9 +91,6 @@ const POSITIONING = {
     fr: "Le village disait « resort » à des surfeurs, des nomades et des collectifs créatifs ; le repositionnement n'a rien inventé, il a écrit ce que les gens racontaient déjà en repartant   Surf & Nomad Cottages. Le logotype, les cinq caractères du système et les objets sur lesquels ils vivent disent la même chose : une côte, du sel, du bois, et rien qui ressemble à une réception d'hôtel.",
     en: "The village was saying “resort” to surfers, nomads and creative collectives; the reposition invented nothing, it wrote down what people were already saying on the way out   Surf & Nomad Cottages. The wordmark, the five faces of the system and the objects they live on say the same thing: a coastline, salt, wood, and nothing that looks like a hotel reception.",
   },
-  /* The original case names two boards that are no longer in the folder   the
-     brand board and the system mockup. The identity board and the social
-     mockup stand in for them, under the same captions. */
   plates: [
     {
       image: "/work/lunja-village/Img brand board site lunja.png",
@@ -506,7 +503,7 @@ export function LunjaVillageV2View() {
               key={plate.image}
               image={plate.image}
               alt={say(plate.alt)}
-              caption={say(plate.caption)}
+              // caption={say(plate.caption)}
               shape="aspect-square"
               delay={(index % 2) * 0.08}
             />
@@ -554,9 +551,9 @@ export function LunjaVillageV2View() {
                 fr: "Publication sociale Lunja",
                 en: "Lunja social post",
               })}
-              caption={
-                index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
-              }
+              // caption={
+              //   index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
+              // }
               shape="aspect-4/5"
               delay={index * 0.08}
             />

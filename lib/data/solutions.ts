@@ -142,7 +142,7 @@ export const systems: SystemRecord[] = [
       fr: "Toute la propriété dans un seul système : réservations, réception, profils clients, facturation, ménage et tarifs. Rien à installer.",
       en: "A whole property in one system: reservations, front desk, guest profiles, billing, housekeeping and rates. Nothing to install.",
     },
-    url: "https://operaflow.eiden-group.com/",
+    url: "https://staydesk.eiden-group.com/",
     audience: [
       { fr: "Hôtels indépendants", en: "Independent hotels" },
       { fr: "Maisons d'hôtes", en: "Guest houses" },
