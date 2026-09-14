@@ -68,7 +68,7 @@ export const systems: SystemRecord[] = [
       fr: "Une plateforme de gestion scolaire, pensée pour les organismes de formation et les équipes pédagogiques.",
       en: "A school management platform, built for training organisations and academic teams.",
     },
-    url: "https://Essor.vercel.app/dashboard",
+    url: "https://essor.eiden-group.com/",
     audience: [
       { fr: "Écoles", en: "Schools" },
       { fr: "Organismes de formation", en: "Educational organisations" },
