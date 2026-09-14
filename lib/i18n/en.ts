@@ -567,21 +567,32 @@ export const en: Dictionary = {
           n: "I",
           title: "The inheritance",
           text: "Our founder spent over a decade working in Moroccan and international businesses as an operator, a sales and marketing strategist, and eventually, the person companies turned to when growth stalled and no one knew why.",
+          stat: { value: "13+", label: "years of experience" },
         },
         {
           n: "II",
           title: "The pattern",
           text: "The same scene, every time. Strong founders. Good products. Capable teams. And underneath: revenue leaking through gaps nobody had mapped, operations running on WhatsApp voice notes.",
+          stat: {
+            value: "5",
+            label: "areas of expertise",
+            tags: ["Strategy", "Creative", "Digital", "Technology", "Marketing"],
+          },
         },
         {
           n: "III",
           title: "The insight",
           text: "What was missing was not one more opinion. It was architecture. And no firm in the region was treating that work as a discipline of its own.",
+          stat: {
+            label: "Fortune 500 experience",
+            text: "Methods learned alongside major international groups.",
+          },
         },
         {
           n: "IV",
           title: "The architecture",
           text: "EIDEN came out of that: the rigour of engineers and the sensibility of designers, brought to a business the way they are brought to a building.",
+          stat: { value: "4", label: "continents served" },
         },
       ],
 

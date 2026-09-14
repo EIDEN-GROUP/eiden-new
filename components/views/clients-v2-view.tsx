@@ -54,9 +54,9 @@ const WALL: Project[] = (() => {
 })();
 
 const V2_CASES: Record<string, string> = {
-  "lunja-village": "/lunja-village-v2",
-  bopassage: "/bopassage-v2",
-  "dmc-morocco": "/dmc-morocco-v2",
+  "lunja-village": "/lunja-village",
+  bopassage: "/bopassage",
+  "dmc-morocco": "/dmc-morocco",
 };
 
 const COVERS: Record<string, string> = {
@@ -189,9 +189,11 @@ function Rail({
   featuredCategory: string;
   cta: string;
 }) {
-  const featuredHref = getProjectCase(FEATURED.slug)
-    ? `/projects/${FEATURED.slug}`
-    : portfolioProjectUrl(FEATURED.slug);
+  const featuredHref =
+    V2_CASES[FEATURED.slug] ??
+    (getProjectCase(FEATURED.slug)
+      ? `/projects/${FEATURED.slug}`
+      : portfolioProjectUrl(FEATURED.slug));
 
   return (
     <aside className="border-ink/10 no-scrollbar relative z-20 border-b lg:sticky lg:top-0 lg:h-dvh lg:self-start lg:overflow-y-auto lg:border-r lg:border-b-0">

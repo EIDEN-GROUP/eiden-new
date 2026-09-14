@@ -359,8 +359,8 @@ export function Hero({ image, alt }: { image: string; alt: string }) {
           alt={alt}
           fill
           priority
-          quality={90}
-          sizes={FULL}
+          sizes="(max-width: 1024px) 85vw, 80vw"
+          quality={95}
           className="object-cover"
         />
       </figure>

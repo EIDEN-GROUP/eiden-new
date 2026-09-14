@@ -74,7 +74,7 @@ export function FilmHero({
   titleAccent,
   titleTail,
   lead,
-  image = "/work/project-5.jpg",
+  image = "/media/about.png",
   imageClassName = "object-cover",
   className,
   children,
@@ -123,7 +123,7 @@ export function FilmHero({
         />
       </div>
 
-      <div className="container-eiden relative flex flex-1 flex-col justify-end pt-28 pb-10 sm:pt-36 sm:pb-14">
+      <div className="container-eiden relative flex flex-1 flex-col justify-center pt-28 pb-10 sm:pt-36 sm:pb-14">
         <p className={cn(heroEnter, "eyebrow text-canvas flex items-center gap-3")} style={heroStage(0.06)}>
           <span aria-hidden className="h-px w-8 bg-current opacity-50" />
           {eyebrow}

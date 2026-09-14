@@ -559,98 +559,113 @@ export const fr = {
   pages: {
     about: {
       eyebrow: "À propos",
-      titleLead: "Un cabinet bâti sur une",
-      titleAccent: "catégorie",
-      titleTail: "qui n'existait pas encore.",
-      lead: "Le premier cabinet d'architecture d'entreprise de la région MENA. Le siège est à Agadir ; le travail se fait sur quatre continents.",
+      titleLead: "Parce que les meilleurs projets",
+      titleAccent: "se construisent",
+      titleTail: " rarement avec une seule expertise.",
+      lead: "Nous réunissons les bonnes compétences autour de votre projet pour passer de la réflexion à la création, puis de la création au concret.",
 
       positionEyebrow: "Notre position",
-      positionTitle: "Nous ne donnons pas d'avis. Nous posons la structure.",
+      positionTitle: "Chaque projet mérite une vraie réflexion.",
       positionBody:
-        "L'architecture d'entreprise, c'est la structure invisible qui décide si une activité passe à l'échelle ou s'étouffe. Nous la traitons comme un architecte traite un bâtiment : étudiée, structurée, délibérée avec la rigueur d'un ingénieur et l'œil d'un designer.",
+        "Chaque projet commence par comprendre votre business, vos objectifs et ce dont vous avez réellement besoin. Ensuite, nous réunissons les bonnes expertises pour construire la solution : stratégie, création, digital, technologie et marketing. L'idée est simple : chaque décision doit servir le même objectif et chaque projet doit pouvoir évoluer avec votre business.",
 
       storyEyebrow: "L'origine",
       storyTitle: "Quatre mouvements.",
       movements: [
         {
           n: "I",
-          title: "L'héritage",
-          text: "Notre fondateur a passé plus de dix ans au sein d’entreprises marocaines et internationales : d’abord comme opérateur, puis comme stratège commercial et marketing, et enfin comme celui que les entreprises appelaient lorsque la croissance ralentissait sans que personne ne sache vraiment pourquoi.",
+          title: "L’EXPÉRIENCE",
+          text: "Tout a commencé sur le terrain.",
+          body: "Avant EIDEN, notre expérience s’est construite au cœur des entreprises, au contact des équipes, des clients, des problèmes réels et des décisions qui font avancer ou ralentir un business. Plus de dix ans à passer de l’opérationnel à la stratégie commerciale et marketing nous ont appris à regarder une entreprise dans son ensemble. À comprendre ce qui fonctionne, ce qui bloque et surtout ce qui manque pour passer à l’étape suivante.",
+          stat: { value: "13+", label: "années d’expérience" },
         },
         {
           n: "II",
-          title: "Le schéma",
-          text: "Toujours la même scène. Des fondateurs solides. De bons produits. Des équipes compétentes. Et dessous : des fuites de revenus que personne n'a cartographiées, des opérations qui tournent sur des notes vocales WhatsApp.",
+          title: "LE CONSTAT",
+          text: "Les entreprises ont besoin de plus que d’une expertise.",
+          body: "Au fil des projets, le même constat revenait : une entreprise peut avoir un bon produit, une belle identité, un bon site ou de bonnes campagnes, mais les résultats restent limités quand chaque élément avance de son côté.La stratégie doit parler à la création. Le digital doit servir le business. La technologie doit répondre à un vrai besoin. Le marketing doit prolonger tout ce qui a été construit avant lui. C’est cette vision d’ensemble qui permet aux bonnes idées de devenir de vraies solutions.",
+          stat: {
+            value: "5",
+            label: "expertises réunies",
+            tags: ["Stratégie", "Création", "Digital", "Technologie", "Marketing"],
+          },
         },
         {
           n: "III",
-          title: "L'intuition",
-          text: "Ce qui manquait n'était pas un avis de plus. C'était l'architecture. Et personne, dans la région, ne traitait ce travail comme un métier à part entière.",
+          title: "L’IDÉE",
+          text: "Réunir les bonnes compétences au même endroit.",
+          body: "EIDEN est née de cette conviction : une entreprise doit pouvoir trouver au même endroit les compétences dont elle a besoin pour réfléchir, créer et construire. Nous avons donc réuni des profils et des expertises complémentaires autour d’une même façon de travailler : commencer par comprendre le business, identifier le vrai besoin, puis construire la solution avec les bonnes compétences. C’est ce qui nous permet d’intervenir sur un projet de marque, un site, une campagne, une application ou une transformation plus large, tout en gardant la même vision.",
+          stat: {
+            label: "Expérience Fortune 500",
+            text: "Des méthodes apprises auprès de grands groupes internationaux.",
+          },
         },
         {
           n: "IV",
-          title: "L'architecture",
-          text: "EIDEN est née de là : la rigueur des ingénieurs et la sensibilité des designers, appliquées à une entreprise comme on les applique à un bâtiment.",
+          title: "EIDEN",
+          text: "Construire avec nos clients, et grandir avec eux.",
+          body: "Un projet ne s’arrête pas au moment où le site est en ligne, où la campagne est lancée ou où l’identité est livrée. Les entreprises évoluent. Les besoins changent. De nouvelles opportunités apparaissent. Notre rôle est donc de construire des solutions qui peuvent évoluer avec elles, et de rester l’équipe vers laquelle elles peuvent revenir lorsqu’un nouveau besoin apparaît. Aujourd’hui, EIDEN réunit stratégie, création, digital, technologie et marketing autour d’une même ambition : donner aux entreprises les bonnes compétences pour avancer, au bon moment.",
+          stat: { value: "4", label: "continents servis" },
         },
       ],
 
       principlesEyebrow: "Nos principes",
-      principlesTitle: "Quatre règles, tenues sur chaque dossier.",
+      principlesTitle: "Quatre règles, tenues sur chaque projet.",
       principles: [
         {
           n: "01",
-          title: "L'architecture avant l'avis",
-          text: "Nous écoutons le système entier avant de proposer quoi que ce soit.",
+          title: "Comprendre avant de créer",
+          text: "Nous commençons par votre business, vos objectifs et vos vrais besoins. Avant de proposer une solution, nous cherchons à comprendre ce qui doit réellement changer.",
           quote:
-            "On cartographie avant de bouger. Le réseau des fractures d'abord, les interventions ensuite.",
+            "Pas de solution toute faite. Chaque projet commence par comprendre.",
         },
         {
           n: "02",
-          title: "La structure avec le style",
-          text: "La rigueur opérationnelle et le soin de la forme ne sont pas deux métiers séparés.",
+          title: "Tout doit servir le même objectif",
+          text: "Stratégie, image, site, contenu, technologie ou acquisition ne doivent pas avancer séparément. Chaque élément doit renforcer les autres et servir le même objectif.",
           quote:
-            "Des opérations qui ne ressemblent à rien sont des opérations qu'on ignore.",
+            "Une bonne idée devient plus forte quand tout fonctionne ensemble.",
         },
         {
           n: "03",
-          title: "L'exécution, pas le conseil",
-          text: "Nous restons jusqu'à la mise en service. Nous facturons une transformation, pas des livrables.",
+          title: "Construire, pas seulement conseiller",
+          text: "Nous ne nous arrêtons pas aux recommandations. Nous concevons, produisons, développons et lançons les solutions avec vous.",
           quote:
-            "Des systèmes livrés. Des équipes formées. Des résultats mesurables.",
+            "De l’idée au concret, nous allons jusqu’au bout.",
         },
         {
           n: "04",
-          title: "Ancrés au Maroc, à l'aise partout",
-          text: "Le siège est marocain, la portée est internationale   Afrique, Europe, Amérique du Nord.",
+          title: "Créer pour aujourd’hui, penser pour demain",
+          text: "Votre business va évoluer. Vos besoins aussi. Nous construisons donc des solutions capables de grandir, de s’adapter et d'accompagner la suite.",
           quote:
-            "Agadir. Casablanca. Paris. Montréal. Floride. Dubaï. Un studio, plusieurs fuseaux.",
+            "Ce que nous construisons aujourd’hui doit pouvoir évoluer demain",
         },
       ],
 
       methodsEyebrow: "Nos méthodes",
-      methodsTitle: "Quatre cadres, développés en interne.",
+      methodsTitle: "Vous savez où vous voulez aller. Nous vous aidons à construire le chemin.",
       methods: [
         {
-          name: "Hydra Analysis™",
-          text: "Le diagnostic. Une lecture à 360° de l'entreprise   marque, présence digitale, opérations, expérience client   chaque pilier noté séparément, avant la moindre recommandation.",
+          name: "LE CADRAGE",
+          text: "Avant de commencer, nous posons le contexte. Où en est votre entreprise ? Quel est le problème ? Quelles sont les priorités ? Cette première étape permet de partir sur des bases claires et d'éviter de travailler dans la mauvaise direction.",
           quote:
-            "Coupez une tête. Deux repoussent. Chaque fracture tient aux autres.",
+            "Bien cadrer aujourd’hui, c’est mieux construire demain.",
         },
         {
-          name: "Architecture of Scale",
-          text: "La séquence. Quatre piliers, toujours dans cet ordre : Infrastructure → Process → Capital humain → Moteur de revenus. Le marketing se branche sur le quatrième, jamais sur le premier.",
+          name: "LA CONCEPTION",
+          text: "Une fois le besoin défini, nous construisons la réponse. Nous cherchons la bonne idée, définissons la direction et réunissons les expertises nécessaires pour donner au projet une vraie cohérence.",
           quote:
-            "On ne décore pas une façade avant de savoir ce que le bâtiment doit porter.",
+            "Une bonne idée, c’est une idée qui sait où elle va.",
         },
         {
-          name: "Fountain Build™",
-          text: "La mise en œuvre. Elle se fait aux côtés de vos équipes, service par service, jusqu'à ce que l'entreprise fasse tourner le système seule.",
-          quote: "On remplit un étage. On le laisse déborder. Puis le suivant.",
+          name: "LA PRODUCTION",
+          text: "C'est le moment où la stratégie devient concrète. Nos équipes créent, développent, produisent et mettent en place les différents éléments du projet, avec un même niveau d'exigence du début à la fin.",
+          quote: "Les idées comptent. Ce qu’on en fait compte encore plus.",
         },
         {
-          name: "B-Arch Labs™",
-          text: "Le laboratoire interne. Formats publicitaires, tunnels et systèmes créatifs sont testés ici avant de toucher un compte client.",
-          quote: "Votre budget ne sert pas à découvrir ce qui ne marche pas.",
+          name: "LE SUIVI",
+          text: "Un projet vivant évolue avec son marché et ses utilisateurs. Après le lancement, nous regardons ce qui fonctionne, ce qui peut être amélioré et les nouvelles opportunités à saisir.",
+          quote: "Lancer n’est pas la fin. C’est le début de la suite.",
         },
       ],
 

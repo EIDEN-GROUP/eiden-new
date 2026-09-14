@@ -1,5 +1,6 @@
 "use client";
 
+import { Anton } from "next/font/google";
 import {
   BrandBoard,
   CaseV2,
@@ -21,6 +22,8 @@ import type { PaletteStory } from "@/lib/data/projects/types";
 
 type Say = { fr: string; en: string };
 
+const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap" });
+
 const CLIENT = "Lunja Village";
 const YEAR = "2024";
 const CATEGORY: Say = { fr: "Hôtellerie", en: "Hospitality" };
@@ -39,7 +42,7 @@ const HERO = {
     fr: "Un village côtier dont la marque disait encore « resort » alors que ceux qui arrivaient étaient surfeurs, nomades et collectifs créatifs. Nous l'avons reconstruite pour le client qui vient vraiment.",
     en: "A coastal village whose brand still said “resort” while the people turning up were surfers, nomads and creative groups. We rebuilt it for the guest actually arriving.",
   },
-  image: "/work/lunja-village/image lunja village portfoliio.png",
+  image: "/work/lunja-village/image lunja hero 1.png",
   alt: {
     fr: "La piscine de Lunja Village au coucher du soleil",
     en: "The Lunja Village pool at sunset",
@@ -135,33 +138,9 @@ const BRAND = {
   },
   colors: [
     {
-      name: "Keppel",
-      hex: "#2BBAA5",
+      name: "JOE Yellow",
+      hex: "#F4DE12",
       role: { fr: "Primaire", en: "Primary" },
-      note: {
-        title: { fr: "L'eau, d'abord", en: "The water, first" },
-        text: {
-          fr: "Le keppel vient de l'Atlantique à cinq minutes.",
-          en: "Keppel came from the Atlantic five minutes away.",
-        },
-      },
-    },
-    {
-      name: "Céladon",
-      hex: "#93D3AE",
-      role: { fr: "Secondaire", en: "Secondary" },
-      note: {
-        title: { fr: "De la place pour respirer", en: "Space to breathe" },
-        text: {
-          fr: "Le céladon adoucit le keppel sans le diluer.",
-          en: "Celadon softens keppel without diluting it.",
-        },
-      },
-    },
-    {
-      name: "Jo&Joe Yellow",
-      hex: "#FFD100",
-      role: { fr: "Accent partenaire", en: "Partnership accent" },
       note: {
         title: { fr: "Le jaune du partenaire", en: "The partner's yellow" },
         text: {
@@ -171,20 +150,56 @@ const BRAND = {
       },
     },
     {
-      name: "Corail",
-      hex: "#F96635",
-      role: { fr: "Action", en: "Action" },
+      name: "Ink Black",
+      hex: "#131110",
+      role: { fr: "Titres et affiches", en: "Headlines and posters" },
       note: {
-        title: { fr: "Ce qui arrête l'œil", en: "What stops the eye" },
+        title: { fr: "Jamais gris", en: "Never grey" },
         text: {
-          fr: "Le corail est le seul ton qui interrompt.",
-          en: "Coral is the only tone that interrupts.",
+          fr: "Le noir porte chaque titre et sert de second fond d'affiche, sans jamais s'adoucir en gris.",
+          en: "Ink carries every headline and the alternate poster ground, never softened to grey.",
         },
       },
     },
     {
-      name: "Crème Douce",
-      hex: "#FDF5D3",
+      name: "Sunset Red",
+      hex: "#C6371F",
+      role: { fr: "Urgence", en: "Urgency" },
+      note: {
+        title: { fr: "Ce soir, pas demain", en: "Tonight, not tomorrow" },
+        text: {
+          fr: "Le rouge est réservé à ce qui presse : un compte à rebours, une soirée, un complet.",
+          en: "Red is kept for what cannot wait: a countdown, a night out, a sold-out flag.",
+        },
+      },
+    },
+    {
+      name: "Ocean Teal",
+      hex: "#3D86A3",
+      role: { fr: "Photographie", en: "Photography" },
+      note: {
+        title: { fr: "L'eau, d'abord", en: "The water, first" },
+        text: {
+          fr: "Le teal n'est pas une couleur graphique : c'est le ton de la vague, vers lequel on étalonne les bleus.",
+          en: "Teal is not a graphic colour: it is the tone of the wave, the one the blues are graded toward.",
+        },
+      },
+    },
+    {
+      name: "Warm Wood",
+      hex: "#875B39",
+      role: { fr: "Tons chauds", en: "Warm tones" },
+      note: {
+        title: { fr: "Du bois, pas du gris", en: "Wood, not grey" },
+        text: {
+          fr: "Le bois revient dans les intérieurs, la peau et le bar ; les ombres tirent vers lui plutôt que vers le gris froid.",
+          en: "Wood returns in the interiors, the skin and the bar; shadows lean toward it rather than cool grey.",
+        },
+      },
+    },
+    {
+      name: "Sand Paper",
+      hex: "#F7F0E1",
       role: { fr: "Fond", en: "Background" },
       note: {
         title: {
@@ -192,27 +207,22 @@ const BRAND = {
           en: "A village, not a brochure",
         },
         text: {
-          fr: "La crème douce laisse le reste exister.",
-          en: "Crème douce lets the rest exist.",
+          fr: "Le sable remplace le blanc pur : plus chaud, il laisse le reste exister.",
+          en: "Sand replaces pure white: warmer, it lets the rest exist.",
         },
       },
     },
   ],
   type: [
     {
-      name: "Abril Fatface",
-      stack: "'Abril Fatface', Georgia, serif",
-      role: { fr: "Titres", en: "Titles" },
+      name: "Anton",
+      stack: anton.style.fontFamily,
+      role: { fr: "Titres et affiches", en: "Display and posters" },
     },
     {
-      name: "DM Sans",
-      stack: "'DM Sans', ui-sans-serif, system-ui, sans-serif",
-      role: { fr: "Corps et interface", en: "Body and interface" },
-    },
-    {
-      name: "Lora",
-      stack: "'Lora', Georgia, serif",
-      role: { fr: "Accroches", en: "Pull lines" },
+      name: "Inter",
+      stack: "var(--font-inter), ui-sans-serif, system-ui, sans-serif",
+      role: { fr: "Corps et légendes", en: "Body and captions" },
     },
   ],
 };

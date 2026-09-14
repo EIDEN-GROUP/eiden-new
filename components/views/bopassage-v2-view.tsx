@@ -337,7 +337,7 @@ const WORK: { image: string; alt: Say }[] = [
 
 const NEXT: NextProject[] = [
   {
-    href: "/dmc-morocco-v2",
+    href: "/dmc-morocco",
     client: "DMC Hospitality Morocco",
     category: { fr: "Hôtellerie", en: "Hospitality" },
     image: "/work/dmc-morocco/dmc-hero.png",

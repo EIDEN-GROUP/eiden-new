@@ -20,6 +20,17 @@ const nextConfig: NextConfig = {
     // for good. WebP encodes the same picture in a fraction of a second.
     formats: ["image/webp"],
   },
+  redirects() {
+    const cases = ["lunja-village", "bopassage", "dmc-morocco"];
+    return [
+      ...cases.flatMap((slug) => [
+        { source: `/projects/${slug}`, destination: `/${slug}`, permanent: true },
+        { source: `/${slug}-v2`, destination: `/${slug}`, permanent: true },
+      ]),
+      { source: "/clients-v2", destination: "/clients", permanent: true },
+      { source: "/clients-v3", destination: "/clients", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

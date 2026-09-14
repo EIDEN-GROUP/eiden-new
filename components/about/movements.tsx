@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { CountUp } from "@/components/ui/count-up";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
-type Movement = { n: string; title: string; text: string };
+type Stat = { value?: string; label: string; text?: string; tags?: string[] };
+type Movement = { n: string; title: string; text: string; body: string; stat: Stat };
 
 type MovementsProps = {
   eyebrow: string;
@@ -72,16 +74,6 @@ export function AboutMovements({
   return (
     <section className="grain bg-canvas">
       <div ref={trackRef} className="relative z-2 flex flex-col lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
-        {/* `z-1`, so the reading column passes underneath.
-            Stacked, the picture is held at the top of the window and the
-            movements scroll up into it   and each of them opens with a rule
-            that was being drawn over the picture instead of under it. The
-            panel is `sticky` and so paints with the positioned elements,
-            but at `z-index: auto` it lost to the articles below it in the
-            markup: `Reveal` puts a transform on each one, which promotes it
-            to the same layer, and later in the DOM wins a tie. One step up
-            settles it. No effect at `lg`, where the two are separate
-            columns of a grid and never overlap. */}
         <div aria-hidden className="bg-beige sticky top-0 isolate z-1 order-2 h-[42svh] shrink-0 overflow-hidden lg:order-none lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-svh">
           {movements.map((movement, index) => (
             <div
@@ -175,9 +167,48 @@ export function AboutMovements({
                 <h3 className="font-display text-ink mt-4 text-[clamp(1.75rem,3.2vw,3.25rem)] leading-[1.02] font-extrabold tracking-[-0.03em]">
                   {movement.title}
                 </h3>
-                <p className="text-ink/60 mt-6 max-w-xl text-[0.9375rem] leading-relaxed sm:text-base">
+                <p className="text-ink/60 font-medium mt-6 max-w-xl text-[15px] leading-relaxed sm:text-base">
                   {movement.text}
                 </p>
+                <p className="text-ink/70 mt-6 max-w-xl text-[16px] leading-relaxed sm:text-base">
+                  {movement.body}
+                </p>
+
+                <div className="border-beige-dk mt-10 max-w-xl border-t pt-8">
+                  <p className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                    {movement.stat.value ? (
+                      <span className="font-display text-teal text-[clamp(3rem,5vw,4.5rem)] leading-none font-extrabold tracking-[-0.05em]">
+                        <CountUp value={movement.stat.value} />
+                      </span>
+                    ) : null}
+                    <span
+                      className={cn(
+                        "font-display",
+                        movement.stat.value
+                          ? "text-ink text-[clamp(1.25rem,1.8vw,1.625rem)] font-bold tracking-[-0.02em]"
+                          : "text-teal text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.05] font-extrabold tracking-[-0.03em] uppercase",
+                      )}
+                    >
+                      {movement.stat.label}
+                    </span>
+                  </p>
+
+                  {movement.stat.text ? (
+                    <p className="text-ink mt-3 text-[1.125rem] leading-relaxed">
+                      {movement.stat.text}
+                    </p>
+                  ) : null}
+
+                  {movement.stat.tags ? (
+                    <ul className="mt-6 flex flex-wrap gap-2.5">
+                      {movement.stat.tags.map((tag) => (
+                        <li key={tag} className="border-teal text-teal rounded-full border px-4 py-1.5 text-[0.9375rem] font-semibold">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
               </Reveal>
             </article>
           ))}

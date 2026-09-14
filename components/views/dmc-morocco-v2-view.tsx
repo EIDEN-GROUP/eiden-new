@@ -325,10 +325,10 @@ const NEXT: NextProject[] = [
     image: "/work/educazen-kids/educazen-hero.png",
   },
   {
-    href: "/lunja-village-v2",
+    href: "/lunja-village",
     client: "Lunja Village",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/lunja-village/image lunja village portfoliio.png",
+    image: "/work/lunja-village/image lunja hero 1.png",
   },
 ];
 

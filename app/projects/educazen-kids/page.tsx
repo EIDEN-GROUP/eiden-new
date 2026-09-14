@@ -313,7 +313,7 @@ const NEXT = [
     slug: "lunja-village",
     client: "Lunja Village",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/lunja-village/image lunja village portfoliio.png",
+    image: "/work/lunja-village/image lunja hero 1.png",
   },
   {
     slug: "mabrouk",

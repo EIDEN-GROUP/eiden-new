@@ -22,7 +22,7 @@ export const lunjaVillage: ProjectCase = {
       fr: "Un village côtier dont la marque disait encore « resort » alors que ceux qui arrivaient étaient surfeurs, nomades et collectifs créatifs. Nous l'avons reconstruite pour le client qui vient vraiment.",
       en: "A coastal village whose brand still said “resort” while the people turning up were surfers, nomads and creative groups. We rebuilt it for the guest actually arriving.",
     },
-    image: "/work/lunja-village/image lunja village portfoliio.png",
+    image: "/work/lunja-village/image lunja hero 1.png",
     alt: {
       fr: "La piscine de Lunja Village au coucher du soleil",
       en: "The Lunja Village pool at sunset",

@@ -194,7 +194,7 @@ export function Hero() {
           <div className="md:justify-self-end order-1 lg:order-2">
             {featured ? (
               <Link
-                href="/projects/lunja-village"
+                href="/lunja-village"
                 className={cn(
                   enter,
                   "group glass-light border-ink/10 bg-canvas hover:border-ink/25 mt-[clamp(0.5rem,2vh,1.25rem)] flex max-w-md items-center gap-4 rounded-2xl border p-3 backdrop-blur-md transition-colors duration-500 ease-[var(--ease-brand)]",
