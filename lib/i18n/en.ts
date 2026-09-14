@@ -565,14 +565,16 @@ export const en: Dictionary = {
       movements: [
         {
           n: "I",
-          title: "The inheritance",
-          text: "Our founder spent over a decade working in Moroccan and international businesses as an operator, a sales and marketing strategist, and eventually, the person companies turned to when growth stalled and no one knew why.",
+          title: "THE EXPERIENCE",
+          text: "It all started in the field.",
+          body: "Before EIDEN, our experience was built inside businesses, alongside teams, customers, real problems and the decisions that move a business forward or hold it back. More than ten years spent moving from operations to sales and marketing strategy taught us to look at a company as a whole. To understand what works, what gets in the way and, above all, what is missing to reach the next stage.",
           stat: { value: "13+", label: "years of experience" },
         },
         {
           n: "II",
-          title: "The pattern",
-          text: "The same scene, every time. Strong founders. Good products. Capable teams. And underneath: revenue leaking through gaps nobody had mapped, operations running on WhatsApp voice notes.",
+          title: "THE FINDING",
+          text: "Businesses need more than a single expertise.",
+          body: "Project after project, the same finding kept coming back: a company can have a good product, a strong identity, a good website or good campaigns, yet results stay limited when each piece moves on its own. Strategy has to talk to creative. Digital has to serve the business. Technology has to answer a real need. Marketing has to extend everything built before it. It is this overall vision that turns good ideas into real solutions.",
           stat: {
             value: "5",
             label: "areas of expertise",
@@ -581,8 +583,9 @@ export const en: Dictionary = {
         },
         {
           n: "III",
-          title: "The insight",
-          text: "What was missing was not one more opinion. It was architecture. And no firm in the region was treating that work as a discipline of its own.",
+          title: "THE IDEA",
+          text: "Bringing the right skills together in one place.",
+          body: "EIDEN was born from that conviction: a business should be able to find, in one place, the skills it needs to think, create and build. So we brought together complementary profiles and expertise around a single way of working: start by understanding the business, identify the real need, then build the solution with the right skills. That is what lets us work on a brand project, a website, a campaign, an app or a wider transformation, while keeping the same vision.",
           stat: {
             label: "Fortune 500 experience",
             text: "Methods learned alongside major international groups.",
@@ -590,8 +593,9 @@ export const en: Dictionary = {
         },
         {
           n: "IV",
-          title: "The architecture",
-          text: "EIDEN came out of that: the rigour of engineers and the sensibility of designers, brought to a business the way they are brought to a building.",
+          title: "EIDEN",
+          text: "Building with our clients, and growing with them.",
+          body: "A project does not end when the site goes live, the campaign launches or the identity is delivered. Businesses evolve. Needs change. New opportunities appear. Our role is to build solutions that can evolve with them, and to remain the team they can come back to when a new need arises. Today, EIDEN brings strategy, creative, digital, technology and marketing together around one ambition: giving businesses the right skills to move forward, at the right time.",
           stat: { value: "4", label: "continents served" },
         },
       ],

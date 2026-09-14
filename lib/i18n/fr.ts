@@ -583,7 +583,7 @@ export const fr = {
           n: "II",
           title: "LE CONSTAT",
           text: "Les entreprises ont besoin de plus que d’une expertise.",
-          body: "Au fil des projets, le même constat revenait : une entreprise peut avoir un bon produit, une belle identité, un bon site ou de bonnes campagnes, mais les résultats restent limités quand chaque élément avance de son côté.La stratégie doit parler à la création. Le digital doit servir le business. La technologie doit répondre à un vrai besoin. Le marketing doit prolonger tout ce qui a été construit avant lui. C’est cette vision d’ensemble qui permet aux bonnes idées de devenir de vraies solutions.",
+          body: "Au fil des projets, le même constat revenait : une entreprise peut avoir un bon produit, une belle identité, un bon site ou de bonnes campagnes, mais les résultats restent limités quand chaque élément avance de son côté. La stratégie doit parler à la création. Le digital doit servir le business. La technologie doit répondre à un vrai besoin. Le marketing doit prolonger tout ce qui a été construit avant lui. C’est cette vision d’ensemble qui permet aux bonnes idées de devenir de vraies solutions.",
           stat: {
             value: "5",
             label: "expertises réunies",
