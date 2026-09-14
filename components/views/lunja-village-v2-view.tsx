@@ -235,7 +235,7 @@ const MARKETING = {
   },
   posts: [
     "/work/lunja-village/image social lunja site.png",
-    "/work/lunja-village/lunja-social-2.png",
+    "/work/lunja-village/iPhone lunja insta img_Plan de travail .png",
   ],
 };
 

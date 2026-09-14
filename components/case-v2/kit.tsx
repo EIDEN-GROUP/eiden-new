@@ -373,7 +373,7 @@ export function Plate({
   alt,
   shape,
   caption,
-  sizes = HALF,
+  sizes = FULL,
   delay = 0,
   contain = false,
 }: {
@@ -393,7 +393,7 @@ export function Plate({
           src={image}
           alt={alt}
           fill
-          quality={90}
+          quality={95}
           sizes={sizes}
           className={cn(
             "transition-transform duration-[1400ms] ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:transition-none",
