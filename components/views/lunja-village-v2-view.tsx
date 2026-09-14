@@ -96,7 +96,7 @@ const POSITIONING = {
      mockup stand in for them, under the same captions. */
   plates: [
     {
-      image: "/work/lunja-village/1.jpg",
+      image: "/work/lunja-village/Img brand board site lunja.png",
       caption: { fr: "Planche de marque", en: "Brand board" },
       alt: { fr: "Planche de marque Lunja", en: "Lunja brand board" },
     },
@@ -237,7 +237,7 @@ const MARKETING = {
     en: "Nothing that needs a production crew: what the village already has to hand   a morning, a session, a long table. The rhythm was set against what the house can actually make in a busy week.",
   },
   posts: [
-    "/work/lunja-village/lunja-social-1.png",
+    "/work/lunja-village/image social lunja site.png",
     "/work/lunja-village/lunja-social-2.png",
   ],
 };

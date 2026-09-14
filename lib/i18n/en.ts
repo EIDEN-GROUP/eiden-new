@@ -209,7 +209,7 @@ export const en: Dictionary = {
         kicker: "What the brand actually gives people to look at",
         text: "We create the visuals and content that give your communication impact. Photography, video, social formats, and advertising content are produced to capture attention, tell your story, and inspire people to take the next step.",
         deliverables: [
-          "Photography",
+          "Photo Shoots",
           "Video Production",
           "Reels",
           "Photography",
@@ -549,113 +549,113 @@ export const en: Dictionary = {
 
   pages: {
     about: {
-      eyebrow: "About",
-      titleLead: "A firm built on a",
-      titleAccent: "category",
-      titleTail: "that did not exist yet.",
-      lead: "The MENA region's first business architecture firm. Headquartered in Agadir; at work across four continents.",
+      eyebrow: "Strategy, creativity, digital and technology, all in one place.",
+      titleLead: "Because the strongest projects",
+      titleAccent: "rarely",
+      titleTail: "come from a single expertise.",
+      lead: "We bring the right skills together around your project, moving from thinking to creating, and from creating to making things happen.",
 
-      positionEyebrow: "Where we stand",
-      positionTitle: "We do not hand out advice. We lay the structure.",
+      positionEyebrow: "OUR APPROACH",
+      positionTitle: "Every project deserves real thinking.",
       positionBody:
-        "Business architecture is the invisible structure that decides whether a company scales or suffocates. We treat it the way an architect treats a building: studied, structured, deliberate   with an engineer's rigour and a designer's eye.",
+        "Every project starts with understanding your business, your goals and what you actually need. From there, we bring together the right expertise to build the solution: strategy, creativity, digital, technology and marketing. The idea is simple: every decision should serve the same goal, and every project should be able to evolve with your business.",
 
-      storyEyebrow: "The origin",
-      storyTitle: "Four movements.",
+      storyEyebrow: "THE STORY",
+      storyTitle: "Four moments that shaped EIDEN.",
       movements: [
         {
           n: "I",
           title: "THE EXPERIENCE",
-          text: "It all started in the field.",
-          body: "Before EIDEN, our experience was built inside businesses, alongside teams, customers, real problems and the decisions that move a business forward or hold it back. More than ten years spent moving from operations to sales and marketing strategy taught us to look at a company as a whole. To understand what works, what gets in the way and, above all, what is missing to reach the next stage.",
+          text: "It all started in the real world.",
+          body: "Before EIDEN, our experience was built inside businesses, alongside teams, customers, real challenges and the decisions that can move a business forward or hold it back. More than thirteen years across operations, commercial strategy and marketing taught us to look beyond individual tasks and understand the bigger picture. To see what works, what gets in the way and, most importantly, what is needed to move to the next stage.",
           stat: { value: "13+", label: "years of experience" },
         },
         {
           n: "II",
-          title: "THE FINDING",
-          text: "Businesses need more than a single expertise.",
-          body: "Project after project, the same finding kept coming back: a company can have a good product, a strong identity, a good website or good campaigns, yet results stay limited when each piece moves on its own. Strategy has to talk to creative. Digital has to serve the business. Technology has to answer a real need. Marketing has to extend everything built before it. It is this overall vision that turns good ideas into real solutions.",
+          title: "THE REALIZATION",
+          text: "Businesses need more than one expertise.",
+          body: "Over time, we kept seeing the same thing: a business can have a great product, a strong identity, a good website or effective campaigns, yet still struggle when each part works on its own. Strategy needs to connect with creativity. Digital needs to serve the business. Technology needs to solve a real problem. Marketing needs to build on everything that came before it. That bigger picture is what turns good ideas into solutions that actually work.",
           stat: {
             value: "5",
-            label: "areas of expertise",
+            label: "EXPERTISES BROUGHT TOGETHER",
             tags: ["Strategy", "Creative", "Digital", "Technology", "Marketing"],
           },
         },
         {
           n: "III",
           title: "THE IDEA",
-          text: "Bringing the right skills together in one place.",
-          body: "EIDEN was born from that conviction: a business should be able to find, in one place, the skills it needs to think, create and build. So we brought together complementary profiles and expertise around a single way of working: start by understanding the business, identify the real need, then build the solution with the right skills. That is what lets us work on a brand project, a website, a campaign, an app or a wider transformation, while keeping the same vision.",
+          text: "Bring the right people together, in one place.",
+          body: "EIDEN was born from a simple belief: businesses should be able to find the expertise they need to think, create and build, without having to piece everything together themselves. So we brought together complementary skills around one way of working: understand the business, identify the real challenge, then bring the right people in to build the right solution. That allows us to work across brand projects, websites, campaigns, applications and larger transformations, while keeping one clear vision from start to finish.",
           stat: {
-            label: "Fortune 500 experience",
-            text: "Methods learned alongside major international groups.",
+            label: "FORTUNE 500 EXPERIENCE",
+            text: "Experience and methods shaped by working with global organizations.",
           },
         },
         {
           n: "IV",
           title: "EIDEN",
-          text: "Building with our clients, and growing with them.",
-          body: "A project does not end when the site goes live, the campaign launches or the identity is delivered. Businesses evolve. Needs change. New opportunities appear. Our role is to build solutions that can evolve with them, and to remain the team they can come back to when a new need arises. Today, EIDEN brings strategy, creative, digital, technology and marketing together around one ambition: giving businesses the right skills to move forward, at the right time.",
+          text: "Build with our clients. Grow with them.",
+          body: "A project does not end when a website goes live, a campaign launches or a brand is delivered. Businesses evolve. Needs change. New opportunities appear. Our role is to build solutions that can evolve with them, and to remain the team they can turn to when the next challenge comes. Today, EIDEN brings strategy, creativity, digital, technology and marketing together around one ambition: giving businesses the right expertise, at the right time, to move forward.",
           stat: { value: "4", label: "continents served" },
         },
       ],
 
-      principlesEyebrow: "Our principles",
-      principlesTitle: "Four rules, held on every engagement.",
+      principlesEyebrow: "OUR PRINCIPLES",
+      principlesTitle: "Four principles we bring to every project.",
       principles: [
         {
           n: "01",
-          title: "Architecture before advice",
-          text: "We listen to the whole system before we suggest anything at all.",
+          title: "Understand before we build",
+          text: "Every project starts with understanding your business, your goals and what really needs to change. We take the time to get to the real challenge before deciding what to create.",
           quote:
-            "We map before we move. The fracture network first, the interventions second.",
+            "No ready-made answers. Start with the right question.",
         },
         {
           n: "02",
-          title: "Structure with style",
-          text: "Operational rigour and care for form are not two separate trades.",
+          title: "Make everything work together",
+          text: "Strategy, brand, digital, technology, content and acquisition should never operate in isolation. Each part should have a role, strengthen the others and move the business towards the same goal.",
           quote:
-            "Operations that look like nothing are operations that get ignored.",
+            "The strongest ideas are the ones that connect.",
         },
         {
           n: "03",
-          title: "Execution, not consulting",
-          text: "We stay through to go-live. We price a transformation, not a stack of deliverables.",
-          quote: "Shipped systems. Trained teams. Measurable outcomes.",
+          title: "Turn thinking into action",
+          text: "We believe ideas only matter when they become real. We do not stop at recommendations. We bring the strategy to life through design, technology, content, marketing and execution.",
+          quote: "Good thinking is only the beginning.",
         },
         {
           n: "04",
-          title: "Rooted in Morocco, fluent anywhere",
-          text: "The base is Moroccan, the reach is international   Africa, Europe, North America.",
+          title: "Build for today. Think beyond.",
+          text: "Your business will evolve, and so should what we build for it. We create solutions that can grow, adapt and keep supporting your business as new needs and opportunities emerge.",
           quote:
-            "Agadir. Casablanca. Paris. Montréal. Florida. Dubai. One studio, many timezones.",
+            "Built for today. Ready for what’s next.",
         },
       ],
 
       methodsEyebrow: "Our methods",
-      methodsTitle: "Four frameworks, built in-house.",
+      methodsTitle: "You know where you want to go. We help you build the way there.",
       methods: [
         {
-          name: "Hydra Analysis™",
-          text: "The diagnosis. A 360° read of the business   brand, digital presence, operations, customer experience   every pillar scored on its own, before a single recommendation.",
+          name: "THE FRAMEWORK",
+          text: "Before we begin, we establish the context. Where is your business today? What is the challenge? What are the priorities? This first step gives the project a clear foundation and helps us avoid solving the wrong problem.",
           quote:
-            "Cut one head. Two more appear. Every fracture holds to the others.",
+            "Start with the right direction. Build with confidence.",
         },
         {
-          name: "Architecture of Scale",
-          text: "The sequence. Four pillars, always in this order: Infrastructure → Process → Human Capital → Revenue Engine. Marketing plugs into the fourth, never the first.",
+          name: "THE CONCEPT",
+          text: "Once the need is clear, we shape the response. We find the right idea, define the direction and bring together the expertise needed to give the project a strong and coherent foundation.",
           quote:
-            "You don't dress a façade before you know what the building has to carry.",
+            "A good idea knows where it is going.",
         },
         {
-          name: "Fountain Build™",
-          text: "The build. It happens alongside your own team, department by department, until the business can run the system on its own.",
-          quote: "Fill one tier. Let it overflow. Then the next.",
+          name: "THE BUILD",
+          text: "This is where strategy becomes real. Our teams design, develop, produce and bring the different parts of the project to life, with the same level of attention and ambition from start to finish.",
+          quote: "Ideas matter. What you do with them matters more.",
         },
         {
-          name: "B-Arch Labs™",
-          text: "The internal lab. Ad formats, funnels and creative systems are tested here before they touch a client account.",
-          quote: "Your budget is not there to find out what doesn't work.",
+          name: "THE FOLLOW-THROUGH",
+          text: "A live project continues to evolve with its market and its users. After launch, we look at what is working, what can be improved and where new opportunities can be found.",
+          quote: "Launch is not the finish line. It is where the next chapter begins.",
         },
       ],
 
