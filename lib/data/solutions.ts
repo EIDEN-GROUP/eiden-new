@@ -35,7 +35,7 @@ export const systems: SystemRecord[] = [
       fr: "Les dossiers, les paiements et les rendez-vous d'un centre, réunis sur un seul tableau de bord au lieu d'un classeur Excel et d'un groupe WhatsApp.",
       en: "A centre's records, payments and appointments on one dashboard instead of a spreadsheet and a WhatsApp group.",
     },
-    url: "https://demo.eiden-group.com/",
+    url: "https://skema.eiden-group.com/",
     audience: [
       { fr: "Centres spécialisés", en: "Specialised centres" },
       { fr: "Éducation", en: "Education" },

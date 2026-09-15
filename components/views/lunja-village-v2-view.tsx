@@ -471,12 +471,12 @@ export function LunjaVillageV2View() {
         <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
         <Pair>
           <Plate
-            image="/work/lunja-village/lunja-social-4.png"
+            image="/work/lunja-village/positioning.png"
             alt={say(HERO.alt)}
             shape="aspect-square"
           />
           <Plate
-            image="/work/lunja-village/lunja-brand-tote.png"
+            image="/work/lunja-village/image Positioning lunja.png"
             alt={say({
               fr: "Tote bag Lunja Village",
               en: "Lunja Village tote bag",
