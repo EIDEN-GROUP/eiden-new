@@ -103,12 +103,12 @@ const POSITIONING = {
       alt: { fr: "Logo Lunja Village", en: "Lunja Village logo" },
     },
     {
-      image: "/work/lunja-village/lunja-brand-tote.png",
+      image: "/work/lunja-village/mockup website lunja_Plan de travail 1.png",
       caption: { fr: "Application", en: "Application" },
       alt: { fr: "Tote bag Lunja Village", en: "Lunja Village tote bag" },
     },
     {
-      image: "/work/lunja-village/lunja image site.png",
+      image: "/work/lunja-village/IMAGE REBRANDING lunja_Plan de travail 1.png",
       caption: { fr: "Système", en: "System" },
       alt: {
         fr: "L'identité Lunja en situation",
