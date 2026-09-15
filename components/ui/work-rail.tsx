@@ -41,7 +41,7 @@ function Row({
           className="group/card shrink-0"
         >
           <Link
-            href="/clients"
+            href="/portfolio"
             tabIndex={index >= items.length ? -1 : undefined}
             className="bg-cream relative block h-[9rem] w-[13rem] overflow-hidden rounded-2xl sm:h-[11rem] sm:w-[17rem]"
           >

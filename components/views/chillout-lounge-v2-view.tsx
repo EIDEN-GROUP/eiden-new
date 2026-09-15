@@ -24,6 +24,7 @@ const YEAR = "2026";
 const CATEGORY: Say = { fr: "Lounge", en: "Lounge" };
 const LOCATION: Say = { fr: "Lunja Village, Agadir", en: "Lunja Village, Agadir" };
 const SITE = "https://chill-vibes-studio.vercel.app";
+const SOCIALS = { instagram: "https://www.instagram.com/chillout_taghazout/" };
 
 const HERO = {
   statement: { fr: "Imprimer l'heure dorée.", en: "Print the golden hour." },
@@ -244,6 +245,7 @@ export function ChilloutLoungeV2View() {
       location={LOCATION}
       year={YEAR}
       site={SITE}
+      socials={SOCIALS}
       next={NEXT}
     >
       <Chapter id="le-defi">

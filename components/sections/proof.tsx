@@ -19,7 +19,7 @@ export function Proof() {
         tags: entry.tags,
         image: record.image,
         imageAlt: record.imageAlt,
-        href: `/clients#${entry.slug}`,
+        href: `/portfolio#${entry.slug}`,
         quote: entry.quote,
         author: entry.author,
       };
@@ -44,7 +44,7 @@ export function Proof() {
               title: t.proof.outro.projectsTitle,
               text: t.proof.outro.projectsText,
               cta: t.proof.ctaPortfolio,
-              href: "/clients",
+              href: "/portfolio",
             },
             {
               title: t.proof.outro.solutionsTitle,

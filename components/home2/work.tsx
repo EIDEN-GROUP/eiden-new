@@ -82,7 +82,7 @@ export function Home2Work() {
                 </button>
 
                 <ButtonLink
-                  href="/clients"
+                  href="/portfolio"
                   variant="ghost"
                   size="md"
                   className="text-forest/70 hover:text-ink ml-2"

@@ -18,6 +18,7 @@ import { CasePaletteStory } from "@/components/project/case/palette-story";
 import { TONES } from "@/components/project/case/tone";
 import { CountUp } from "@/components/ui/count-up";
 import { Reveal } from "@/components/ui/reveal";
+import { FacebookGlyph, InstagramGlyph } from "@/components/ui/social-glyphs";
 import type { PaletteStory } from "@/lib/data/projects/types";
 import { cn, cursorOn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ export type NextProject = {
   image: string;
 };
 export type Face = { name: string; stack: string; role: Say };
+export type Socials = { instagram?: string; facebook?: string };
 
 const FRAME = "bg-beige relative overflow-hidden rounded-4xl";
 export const HALF = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 38vw";
@@ -107,6 +109,7 @@ export function CaseV2({
   location,
   year,
   site,
+  socials,
   next,
   children,
 }: {
@@ -117,10 +120,15 @@ export function CaseV2({
   location?: Say;
   year: string;
   site?: string;
+  socials?: Socials;
   next: NextProject[];
   children: ReactNode;
 }) {
   const say = useSay();
+  const accounts = [
+    { label: "Instagram", href: socials?.instagram, Icon: InstagramGlyph },
+    { label: "Facebook", href: socials?.facebook, Icon: FacebookGlyph },
+  ].filter((account) => account.href);
   const ids = useMemo(() => chapters.map((chapter) => chapter.id), [chapters]);
   const active = useChapter(ids);
   const context = useMemo(() => ({ chapters, say }), [chapters, say]);
@@ -132,7 +140,7 @@ export function CaseV2({
           <aside className="border-beige-dk no-scrollbar relative z-20 border-b lg:sticky lg:top-0 lg:h-dvh lg:self-start lg:overflow-y-auto lg:border-r lg:border-b-0">
             <div className="flex h-full flex-col px-5 pt-24 pb-10 sm:px-10 sm:pt-32 lg:px-7 lg:pt-28 lg:pb-6 xl:px-9">
               <Link
-                href="/clients"
+                href="/portfolio"
                 className="group font-label text-ink hover:text-teal inline-flex w-fit items-center gap-1.5 text-[0.75rem] font-bold tracking-[0.18em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
               >
                 <ChevronLeft
@@ -198,20 +206,37 @@ export function CaseV2({
                 </ol>
               </nav>
 
-              {site ? (
-                <a
-                  href={site}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="group border-ink text-ink hover:bg-ink hover:text-canvas font-label mt-8 inline-flex w-fit items-center gap-2.5 rounded-full border px-5 py-3 text-[0.75rem] font-bold tracking-[0.16em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none lg:mt-auto"
-                >
-                  {say({ fr: "Voir le site", en: "View the site" })}
-                  <ArrowUpRight
-                    aria-hidden
-                    strokeWidth={2}
-                    className="size-4 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
-                  />
-                </a>
+              {site || accounts.length > 0 ? (
+                <div className="mt-8 flex flex-wrap items-center gap-2.5 lg:mt-auto">
+                  {site ? (
+                    <a
+                      href={site}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group border-ink text-ink hover:bg-ink hover:text-canvas font-label inline-flex w-fit items-center gap-2.5 rounded-full border px-5 py-3 text-[0.75rem] font-bold tracking-[0.16em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
+                    >
+                      {say({ fr: "Voir le site", en: "View the site" })}
+                      <ArrowUpRight
+                        aria-hidden
+                        strokeWidth={2}
+                        className="size-4 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+                      />
+                    </a>
+                  ) : null}
+                  {accounts.map((account) => (
+                    <a
+                      key={account.label}
+                      href={account.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={`${client} · ${account.label}`}
+                      title={account.label}
+                      className="border-ink text-ink hover:bg-ink hover:text-canvas flex size-11 items-center justify-center rounded-full border transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
+                    >
+                      <account.Icon className="size-[1.15rem]" />
+                    </a>
+                  ))}
+                </div>
               ) : null}
             </div>
           </aside>
@@ -906,7 +931,7 @@ function NextProjects({ items }: { items: NextProject[] }) {
         </h2>
 
         <Link
-          href="/clients"
+          href="/portfolio"
           className="font-label text-ink hover:text-teal inline-flex items-center gap-2 text-[0.78rem] font-bold tracking-[0.18em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
         >
           {say({ fr: "Tous les projets", en: "All projects" })}

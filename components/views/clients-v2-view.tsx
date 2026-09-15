@@ -86,9 +86,6 @@ const THUMBS = FILTERS.reduce(
   {} as Record<Filter, string>,
 );
 
-const FEATURED =
-  projects.find((project) => getProjectCase(project.slug)) ?? projects[0];
-
 export function ClientsV2View() {
   const { t } = useLanguage();
   const page = t.pages.clients;
@@ -122,13 +119,10 @@ export function ClientsV2View() {
     <div data-nav-tone="light" className="bg-canvas text-ink">
       <div className="lg:grid lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
         <Rail
-          copy={copy}
           eyebrow={page.eyebrow}
           title={page.workTitle}
           lead={page.workLead}
           statLabel={page.statLabel}
-          featuredLine={page.projectLines[FEATURED.slug]}
-          featuredCategory={page.filters[FEATURED.category]}
           cta={t.common.bookCall}
         />
 
@@ -182,30 +176,18 @@ export function ClientsV2View() {
    ──────────────────────────────────────────────────────────────────────── */
 
 function Rail({
-  copy,
   eyebrow,
   title,
   lead,
   statLabel,
-  featuredLine,
-  featuredCategory,
   cta,
 }: {
-  copy: { featuredLabel: string };
   eyebrow: string;
   title: string;
   lead: string;
   statLabel: string;
-  featuredLine: string;
-  featuredCategory: string;
   cta: string;
 }) {
-  const featuredHref =
-    V2_CASES[FEATURED.slug] ??
-    (getProjectCase(FEATURED.slug)
-      ? `/projects/${FEATURED.slug}`
-      : portfolioProjectUrl(FEATURED.slug));
-
   return (
     <aside className="border-ink/10 no-scrollbar relative z-20 border-b lg:sticky lg:top-0 lg:h-dvh lg:self-start lg:overflow-y-auto lg:border-r lg:border-b-0">
       <div className="flex h-full flex-col px-5 pt-24 pb-10 sm:px-10 sm:pt-32 lg:px-7 lg:pt-30 lg:pb-6 xl:px-9">
@@ -238,43 +220,6 @@ function Rail({
             <span className="text-ink/50 text-[0.875rem]">{statLabel}</span>
           </div>
         </div>
-
-        <Link
-          href={featuredHref}
-          {...(getProjectCase(FEATURED.slug)
-            ? { transitionTypes: ["case-open"] }
-            : {})}
-          className="group border-ink/10 hover:border-ink/25 bg-ink/[0.03] hover:bg-ink/[0.06] mt-auto hidden items-center gap-3.5 rounded-2xl border p-3 transition-colors duration-500 ease-[var(--ease-brand)] lg:flex"
-        >
-          <span className="bg-ink/5 relative size-12 shrink-0 overflow-hidden rounded-xl">
-            <Image
-              src={FEATURED.image}
-              alt=""
-              fill
-              sizes="(max-width: 1024px) 80vw, 75vw"
-              quality={95}
-              className="object-cover"
-            />
-          </span>
-
-          <span className="min-w-0 flex-1">
-            <span className="text-ink block truncate text-[0.875rem] font-semibold">
-              {FEATURED.name}
-            </span>
-            <span className="text-ink/45 block truncate text-[0.8125rem]">
-              {featuredLine}
-            </span>
-            <span className="font-label text-ink/35 mt-1.5 block text-[0.62rem] font-bold tracking-[0.18em] uppercase">
-              {featuredCategory} · {copy.featuredLabel}
-            </span>
-          </span>
-
-          <ArrowUpRight
-            aria-hidden
-            strokeWidth={1.8}
-            className="text-ink/40 group-hover:text-teal size-4 shrink-0 self-start transition-[color,transform] duration-300 ease-[var(--ease-brand)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
-          />
-        </Link>
       </div>
     </aside>
   );
@@ -294,7 +239,6 @@ function Tile({
   label,
 }: {
   project: Project;
-  /** The picture to hang, which is not always the one on the record. */
   image: string;
   index: number;
   shape: string;
@@ -376,9 +320,6 @@ function Tile({
   );
 }
 
-/* ────────────────────────────────────────────────────────────────────────────
-   The filter   a dock, and the sheet it opens
-   ──────────────────────────────────────────────────────────────────────── */
 
 type Copy = {
   filterCta: string;
@@ -477,17 +418,8 @@ function FilterSheet({
 }) {
   const dialog = useRef<HTMLDivElement>(null);
   const closer = useRef<HTMLButtonElement>(null);
-
-  /* The sheet is built on the client and only there   it is portalled onto the
-     body, which the server has no equivalent of. Held back until after the
-     hydrating render rather than merely until `document` exists: the browser
-     has a document on that first pass too, so testing for one would put a
-     dialog in the client tree that the server never sent, and React would call
-     the whole page a mismatch. */
   const hydrated = useHydrated();
 
-  /* Escape closes, Tab stays inside. Same handling the case-study lightbox
-     uses   the ring is read off the DOM each time rather than held anywhere. */
   useEffect(() => {
     if (!open) return;
 
@@ -543,11 +475,6 @@ function FilterSheet({
         open ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >
-      {/* The ground behind: near-black, blurred hard, and blurred harder still
-          on a phone, where the wall is closer to the eye. The radius is the
-          dearest thing in the sheet, so it is kept only as wide as it has to
-          be to read as glass under 80% black. It is also the first thing
-          anyone clicks to leave. */}
       <button
         type="button"
         tabIndex={-1}

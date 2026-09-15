@@ -145,7 +145,7 @@ export function ProjectCarousel({
 
                 <div className="flex items-center gap-3">
                   <Link
-                    href="/clients"
+                    href="/portfolio"
                     className="group bg-canvas text-forest hover:bg-gold inline-flex h-9 items-center gap-2 rounded-full px-4 text-[0.875rem] font-medium transition-colors duration-300"
                   >
                     {t.common.seeCase}

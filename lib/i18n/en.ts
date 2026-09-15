@@ -742,7 +742,6 @@ export const en: Dictionary = {
         filterCta: "Filter",
         filterTitle: "I'm curious about…",
         filterClose: "Close the filters",
-        featuredLabel: "Latest project delivered",
       },
       projectLines: {
         bopassage:

@@ -26,6 +26,10 @@ const YEAR = "2024";
 const CATEGORY: Say = { fr: "Éducation", en: "Education" };
 const LOCATION: Say = { fr: "Agadir, Maroc", en: "Agadir, Morocco" };
 const SITE = "https://educazenkids.com";
+const SOCIALS = {
+  instagram: "https://www.instagram.com/educazenkids/",
+  facebook: "https://www.facebook.com/p/Educazen-Kids-61563794544686/",
+};
 
 const HERO = {
   statement: {
@@ -388,6 +392,7 @@ export function EducazenKidsV2View() {
       location={LOCATION}
       year={YEAR}
       site={SITE}
+      socials={SOCIALS}
       next={NEXT}
     >
       <Chapter id="le-defi">

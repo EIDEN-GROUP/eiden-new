@@ -20,6 +20,7 @@ import {
 const CLIENT = "Mabrouk Hôtel";
 const YEAR = "2026";
 const CATEGORY: Say = { fr: "Hôtellerie", en: "Hospitality" };
+const SOCIALS = { instagram: "https://www.instagram.com/hotel_mabrouk/" };
 
 const HERO = {
   statement: {
@@ -260,6 +261,7 @@ export function MabroukV2View() {
       statement={HERO.statement}
       category={CATEGORY}
       year={YEAR}
+      socials={SOCIALS}
       next={NEXT}
     >
       <Chapter id="le-defi">

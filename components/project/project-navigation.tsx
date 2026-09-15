@@ -29,7 +29,7 @@ export function ProjectNavigation({ suggestions }: { suggestions: ProjectPage[] 
         <div className="container-eiden py-20 sm:py-28">
           <Reveal>
             <Link
-              href="/clients"
+              href="/portfolio"
               className="group text-ink hover:text-teal inline-flex items-center gap-5 transition-colors duration-300"
             >
               <span className="font-display text-[clamp(1.75rem,4vw,3rem)] leading-none font-extrabold tracking-[-0.03em] uppercase">

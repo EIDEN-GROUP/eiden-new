@@ -32,6 +32,10 @@ const LOCATION: Say = {
   en: "Imi Ouaddar, Taghazout",
 };
 const SITE = "https://www.lunjavillage.com";
+const SOCIALS = {
+  instagram: "https://www.instagram.com/lunjavillage.officiel/",
+  facebook: "https://www.facebook.com/lunjavillage.Agadir.Morocco/",
+};
 
 const HERO = {
   statement: {
@@ -269,38 +273,10 @@ const IMPACT = {
 
 const WORK: { image: string; alt: Say }[] = [
   {
-    image: "/work/lunja-village/Drone 3.png",
-    alt: {
-      fr: "Vue drone du village au-dessus de la baie de Taghazout",
-      en: "Drone view of the village above the Taghazout bay",
-    },
-  },
-  {
     image: "/work/lunja-village/Drone 2.png",
     alt: {
       fr: "Vue drone à la verticale sur les toits du village",
       en: "Overhead drone view of the village rooftops",
-    },
-  },
-  {
-    image: "/work/lunja-village/Copie de 36.png",
-    alt: {
-      fr: "Façade d'un bungalow et son motif ajouré",
-      en: "Bungalow facade and its perforated pattern",
-    },
-  },
-  {
-    image: "/work/lunja-village/Copie de immgg28.png",
-    alt: {
-      fr: "Bungalow blanc adossé aux collines",
-      en: "White bungalow set against the hills",
-    },
-  },
-  {
-    image: "/work/lunja-village/Room 9.png",
-    alt: {
-      fr: "Terrasse couverte d'un bungalow ouverte sur la piscine",
-      en: "Covered bungalow terrace opening onto the pool",
     },
   },
   {
@@ -360,20 +336,6 @@ const WORK: { image: string; alt: Say }[] = [
   {
     image: "/work/lunja-village/img1 (6).png",
     alt: { fr: "Le bar du village", en: "The village bar" },
-  },
-  {
-    image: "/work/lunja-village/img8.png",
-    alt: {
-      fr: "Le food truck JJ Snack aux couleurs de la marque",
-      en: "The JJ Snack food truck in the brand's colours",
-    },
-  },
-  {
-    image: "/work/lunja-village/Copie de immgg52.png",
-    alt: {
-      fr: "La plage de Taghazout au coucher du soleil",
-      en: "Taghazout beach at sunset",
-    },
   },
   {
     image: "/work/lunja-village/Drone 5.png",
@@ -459,6 +421,7 @@ export function LunjaVillageV2View() {
       location={LOCATION}
       year={YEAR}
       site={SITE}
+      socials={SOCIALS}
       next={NEXT_V2}
     >
       <Chapter id="le-defi">

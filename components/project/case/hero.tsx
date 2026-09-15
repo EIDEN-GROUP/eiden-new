@@ -43,7 +43,7 @@ export function CaseHero({ project }: { project: ProjectCase }) {
 
       <div className="container-eiden relative flex flex-1 flex-col pt-28 pb-10 sm:pt-20 sm:pb-10">
         <Link
-          href="/clients"
+          href="/portfolio"
           transitionTypes={["case-close"]}
           className={cn(
             ENTER,

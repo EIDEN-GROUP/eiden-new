@@ -49,8 +49,9 @@ const nextConfig: NextConfig = {
         destination: "/ca-challenge-academy",
         permanent: true,
       },
-      { source: "/clients-v2", destination: "/clients", permanent: true },
-      { source: "/clients-v3", destination: "/clients", permanent: true },
+      { source: "/clients", destination: "/portfolio", permanent: true },
+      { source: "/clients-v2", destination: "/portfolio", permanent: true },
+      { source: "/clients-v3", destination: "/portfolio", permanent: true },
     ];
   },
 };

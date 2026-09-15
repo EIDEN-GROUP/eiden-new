@@ -26,6 +26,10 @@ const YEAR = "2026";
 const CATEGORY: Say = { fr: "Santé", en: "Healthcare" };
 const LOCATION: Say = { fr: "Agadir, Maroc", en: "Agadir, Morocco" };
 const SITE = "https://medicalbay.vercel.app/";
+const SOCIALS = {
+  instagram: "https://www.instagram.com/medicalbay.maroc/",
+  facebook: "https://www.facebook.com/p/Medical-Bay-100085861093531/",
+};
 
 const HERO = {
   statement: {
@@ -370,6 +374,7 @@ export function MedicalBayV2View() {
       location={LOCATION}
       year={YEAR}
       site={SITE}
+      socials={SOCIALS}
       next={NEXT}
     >
       <Chapter id="le-defi">

@@ -23,7 +23,7 @@ export type NavRoute = {
 export const navRoutes: NavRoute[] = [
   { href: "/", key: "home" },
   { href: "/a-propos", key: "about" },
-  { href: "/clients", key: "clients" },
+  { href: "/portfolio", key: "clients" },
   { href: "/nos-solutions", key: "solutions" },
   { href: "/contact", key: "contact" },
 ];

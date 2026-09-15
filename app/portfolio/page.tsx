@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Hôtellerie, Cafés & restaurants, santé, éducation, commerce : les entreprises marocaines pour lesquelles EIDEN GROUP construit marques, sites et campagnes.",
 };
 
-export default function ClientsPage() {
+export default function PortfolioPage() {
   return (
     <ViewTransition
       name="clients-page"

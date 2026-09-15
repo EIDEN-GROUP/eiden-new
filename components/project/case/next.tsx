@@ -51,7 +51,7 @@ export function CaseNext({ next }: { next: ProjectCase[] }) {
 
           <Reveal delay={0.1} amount={0.3}>
             <Link
-              href="/clients"
+              href="/portfolio"
               transitionTypes={["case-close"]}
               className="text-ink/45 hover:text-ink font-label inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.2em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] sm:text-[0.78rem]"
             >

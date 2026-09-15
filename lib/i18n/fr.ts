@@ -39,7 +39,7 @@ export const fr = {
   nav: {
     home: "Accueil",
     about: "à propos",
-    clients: "Clients",
+    clients: "Portoflio",
     solutions: "Nos solutions",
     contact: "Contact",
   },
@@ -752,7 +752,6 @@ export const fr = {
         filterCta: "Filtrer",
         filterTitle: "Je cherche…",
         filterClose: "Fermer les filtres",
-        featuredLabel: "Dernier projet livré",
       },
       projectLines: {
         bopassage:

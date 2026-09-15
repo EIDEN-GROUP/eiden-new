@@ -25,6 +25,10 @@ const YEAR = "2024";
 const CATEGORY: Say = { fr: "Cafés & restaurants", en: "Cafés & Restaurants" };
 const LOCATION: Say = { fr: "Agadir, Maroc", en: "Agadir, Morocco" };
 const SITE = "https://bopassage.com";
+const SOCIALS = {
+  instagram: "https://www.instagram.com/bo.passage/",
+  facebook: "https://www.facebook.com/bopassage/",
+};
 
 const HERO = {
   statement: {
@@ -103,7 +107,7 @@ const BRANDING = {
   },
   plates: [
     {
-      image: "/work/bopassage/bopassage-brand-logo-green.png",
+      image: "/work/bopassage/bopassage-brand-board.png",
       caption: { fr: "Logo", en: "Logo" },
       alt: {
         fr: "Logotype principal et secondaire de Bôpassage",
@@ -119,7 +123,7 @@ const BRANDING = {
       },
     },
     {
-      image: "/work/bopassage/bopassage-brand-signage.png",
+      image: "/work/bopassage/bopassage-brand-logo-green.png",
       caption: { fr: "Enseigne", en: "Signage" },
       alt: {
         fr: "Signalétique extérieure de Bôpassage",
@@ -299,40 +303,28 @@ const IMPACT = {
 
 const WORK: { image: string; alt: Say }[] = [
   {
-    image: "/work/bopassage/bopassage-brand-board.png",
+    image: "/work/bopassage/IMG_9620 copie.jpg",
     alt: { fr: "Planche de marque Bôpassage", en: "Bôpassage brand board" },
   },
   {
-    image: "/work/bopassage/bopassage-brand-logo-green.png",
+    image: "/work/bopassage/obsession.png",
     alt: {
       fr: "Logo Bôpassage en or sur forêt",
       en: "Bôpassage logo in gold on forest",
     },
   },
   {
-    image: "/work/bopassage/bopassage-brand-palette.png",
+    image: "/work/bopassage/matcha post fin.png",
     alt: { fr: "Palette Bôpassage", en: "Bôpassage palette" },
   },
   {
     image: "/work/bopassage/bopassage-social-savory-morning.png",
     alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
   },
-  {
-    image: "/work/bopassage/bopassage-social-balance.png",
-    alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-  },
-  {
-    image: "/work/bopassage/bopassage-social-slows-down.png",
-    alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
-  },
-  {
-    image: "/work/bopassage/bopassage-brand-logo-mark.png",
-    alt: { fr: "Le monogramme Bôpassage", en: "The Bôpassage monogram" },
-  },
-  {
-    image: "/work/bopassage/bopassage-web.png",
-    alt: { fr: "Le site Bôpassage", en: "The Bôpassage site" },
-  },
+  // {
+  //   image: "/work/bopassage/bopassage-social-balance.png",
+  //   alt: { fr: "Publication sociale Bôpassage", en: "Bôpassage social post" },
+  // },
 ];
 
 const NEXT: NextProject[] = [
@@ -375,6 +367,7 @@ export function BopassageV2View() {
       location={LOCATION}
       year={YEAR}
       site={SITE}
+      socials={SOCIALS}
       next={NEXT}
     >
       <Chapter id="le-defi">
@@ -477,7 +470,7 @@ export function BopassageV2View() {
         />
         <Pair>
           <Plate
-            image="/work/bopassage/bopassage-social-matcha.png"
+            image="/work/bopassage/sm bo passage.png"
             alt={say({
               fr: "Publication sociale Bôpassage",
               en: "Bôpassage social post",
