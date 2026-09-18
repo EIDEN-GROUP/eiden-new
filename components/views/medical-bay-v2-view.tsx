@@ -14,7 +14,6 @@ import {
   PaletteStage,
   Plate,
   RealityFracture,
-  SignalsPanel,
   useSay,
   type NextProject,
   type Say,
@@ -75,32 +74,6 @@ const FRACTURE: Say[] = [
   },
   { fr: "Pas de CRM, aucun tunnel.", en: "No CRM, no funnel." },
 ];
-
-const DECISION: Say = {
-  fr: "Concevoir l'espace et le logiciel comme un seul travail.",
-  en: "Design the space and the software as one piece of work.",
-};
-
-const CHAIN_TEXT: Say = {
-  fr: "Le premier livrable n'était pas une maquette : c'était le chemin qu'un patient parcourt, de la recherche au suivi. La marque et l'espace physique ont été dessinés ensemble pour ce chemin-là. Le site en est la porte d'entrée, le tableau de bord la salle des machines. Et chaque traitement a sa campagne, sa page et sa preuve, parce qu'un implant et une facette ne se cherchent pas au même moment.",
-  en: "The first deliverable was not a mockup: it was the path a patient walks, from search to follow-up. The brand and the physical space were drawn together for that path. The site is its front door, the dashboard its engine room. And each treatment has its own campaign, page and proof, because an implant and a veneer are not searched for at the same moment.",
-};
-
-const JOURNEY = {
-  title: {
-    fr: "Le parcours patient dessiné avant le moindre pixel.",
-    en: "The patient journey drawn before a single pixel.",
-  },
-  text: {
-    fr: "Le premier livrable n'était pas une maquette : c'était le chemin qu'un patient parcourt, de la recherche au suivi, et la liste de ce que l'équipe doit tenir à chaque étape. Tout le reste   la marque, le site, l'écran de l'accueil   a été dessiné pour ce chemin-là.",
-    en: "The first deliverable was not a mockup: it was the path a patient walks, from search to follow-up, and the list of what the team has to hold at every step. Everything after it   the brand, the site, the screen at the front desk   was drawn for that path.",
-  },
-  signals: [
-    { fr: "La marque.", en: "The brand." },
-    { fr: "Le site.", en: "The site." },
-    { fr: "L'écran de l'accueil.", en: "The screen at the front desk." },
-  ] as Say[],
-};
 
 const BRANDING = {
   title: {
@@ -333,10 +306,10 @@ const WORK: { image: string; alt: Say }[] = [
 
 const NEXT: NextProject[] = [
   {
-    href: "/rihab-residence",
-    client: "Résidence Rihab",
-    category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/rihab-residence/HERO PAGE RIHAB.png",
+    href: "/educazen-kids",
+    client: "EducazenKids",
+    category: { fr: "Éducation", en: "Education" },
+    image: "/work/educazen-kids/educazen-hero.png",
   },
   {
     href: "/chillout-lounge",
@@ -348,11 +321,6 @@ const NEXT: NextProject[] = [
 
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
-  { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
-  {
-    id: "architecture-activite",
-    label: { fr: "Architecture d'activité", en: "Business architecture" },
-  },
   { id: "branding", label: { fr: "Branding", en: "Branding" } },
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
@@ -383,43 +351,8 @@ export function MedicalBayV2View() {
         <RealityFracture reality={REALITY} fracture={FRACTURE} />
       </Chapter>
 
-      <Chapter id="architecture">
-        <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
-        <Pair>
-          <Plate
-            image="/work/medical-bay/medical-bay-brand-reception-mockup.png"
-            alt={say({
-              fr: "L'accueil Medical Bay",
-              en: "The Medical Bay reception",
-            })}
-            shape="aspect-square"
-          />
-          <Plate
-            image="/work/medical-bay/medical-bay-brand-logo-3.png"
-            alt={say({ fr: "Logo Medical Bay", en: "Medical Bay logo" })}
-            shape="aspect-square"
-            delay={0.08}
-          />
-        </Pair>
-      </Chapter>
-
-      <Chapter id="architecture-activite">
-        <Caption index={2} title={say(JOURNEY.title)} text={say(JOURNEY.text)} />
-        <Pair>
-          <Plate
-            image="/work/medical-bay/medical-bay-office.png"
-            alt={say({
-              fr: "Un cabinet de Medical Bay",
-              en: "A Medical Bay treatment room",
-            })}
-            shape="aspect-4/5"
-          />
-          <SignalsPanel items={JOURNEY.signals.map(say)} />
-        </Pair>
-      </Chapter>
-
       <Chapter id="branding">
-        <Caption index={3} title={say(BRANDING.title)} text={say(BRANDING.text)} />
+        <Caption index={1} title={say(BRANDING.title)} text={say(BRANDING.text)} />
         <Grid>
           {BRANDING.plates.map((plate, index) => (
             <Plate
@@ -435,7 +368,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="marque">
         <Caption
-          index={4}
+          index={2}
           title={say(BRAND.essence)}
           meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
         />
@@ -450,7 +383,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="palette">
         <Caption
-          index={5}
+          index={3}
           title={say({
             fr: "Teal, Teal Profond, Mist, Encre.",
             en: "Teal, Teal Profond, Mist, Encre.",
@@ -462,7 +395,7 @@ export function MedicalBayV2View() {
       </Chapter>
 
       <Chapter id="site-web">
-        <Caption index={6} title={say(PLATFORM.title)} text={say(PLATFORM.text)} />
+        <Caption index={4} title={say(PLATFORM.title)} text={say(PLATFORM.text)} />
         <Pair>
           <Plate
             image="/work/medical-bay/medical-bay-web-desktop.png"
@@ -497,7 +430,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="marketing">
         <Caption
-          index={7}
+          index={5}
           title={say(MARKETING.title)}
           text={say(MARKETING.text)}
         />
@@ -515,7 +448,7 @@ export function MedicalBayV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={8} title={say(IMPACT.title)} />
+        <Caption index={6} title={say(IMPACT.title)} />
         <ImpactPanel
           image={HERO.image}
           metric={IMPACT.metric}
@@ -525,7 +458,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="le-travail">
         <Caption
-          index={9}
+          index={7}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

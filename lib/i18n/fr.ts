@@ -735,7 +735,7 @@ export const fr = {
       statLabel: "projets livrés",
       workTitle: "Ce dont nous sommes le plus fiers",
       workLead:
-        "Marque, site, contenu, campagnes douze chantiers menés de bout en bout, chacun détaillé sur notre portfolio.",
+        "Marque, site, contenu, campagnes plus de vingt chantiers menés de bout en bout, chacun détaillé sur notre portfolio.",
       viewProject: "Voir le projet",
       filters: {
         all: "Tous les projets",
@@ -764,10 +764,6 @@ export const fr = {
           "Surf, nomades, communauté : une marque de village côtier rebâtie pour ceux qui arrivent vraiment.",
         "medical-bay":
           "Un centre médical, pensé de l'expérience patient jusqu'à la logique de revenus.",
-        orsen: "La matière avant le décor.",
-        "lithos-materiaux": "La matière, racontée avec soin.",
-        "rihab-residence":
-          "Une adresse marocaine tranquille, à cinq minutes de l'Atlantique.",
         "lunja-village-vibes": "Ta parenthèse ensoleillée à Imi Ouaddar.",
         "chillout-lounge":
           "Musique live, cocktails et couchers de soleil face à l'Atlantique.",

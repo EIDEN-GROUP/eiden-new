@@ -147,16 +147,16 @@ const WORK: { image: string; alt: Say }[] = [
 
 const NEXT: NextProject[] = [
   {
-    href: "/orsen",
-    client: "ORSEN",
-    category: { fr: "Matériaux", en: "Materials" },
-    image: "/work/orsen/orsen hero.png",
+    href: "/lunja-village",
+    client: "Lunja Village",
+    category: { fr: "Hôtellerie", en: "Hospitality" },
+    image: "/work/lunja-village/hero section lunja.png",
   },
   {
-    href: "/lithos-materiaux",
-    client: "LITHOS",
-    category: { fr: "Matériaux", en: "Materials" },
-    image: "/work/lithos-materiaux/luthos hero.png",
+    href: "/bopassage",
+    client: "Bôpassage",
+    category: { fr: "Cafés & restaurants", en: "Cafés & Restaurants" },
+    image: "/work/bopassage/bopassage-hero.png",
   },
 ];
 

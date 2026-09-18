@@ -25,10 +25,7 @@ const nextConfig: NextConfig = {
     const promoted = [
       "educazen-kids",
       "medical-bay",
-      "orsen",
       "droguerie-souss",
-      "lithos-materiaux",
-      "rihab-residence",
       "anisal",
       "madaef",
       "chillout-lounge",

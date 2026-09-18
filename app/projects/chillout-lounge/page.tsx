@@ -215,16 +215,16 @@ const BRAND = {
 
 const NEXT = [
   {
-    slug: "orsen",
-    client: "ORSEN",
-    category: { fr: "Matériaux", en: "Materials" },
-    image: "/work/orsen/orsen hero.png",
+    slug: "lunja-village",
+    client: "Lunja Village",
+    category: { fr: "Hôtellerie", en: "Hospitality" },
+    image: "/work/lunja-village/hero section lunja.png",
   },
   {
-    slug: "lithos-materiaux",
-    client: "LITHOS",
-    category: { fr: "Matériaux", en: "Materials" },
-    image: "/work/lithos-materiaux/luthos hero.png",
+    slug: "bopassage",
+    client: "Bôpassage",
+    category: { fr: "Cafés & restaurants", en: "Cafés & Restaurants" },
+    image: "/work/bopassage/bopassage-hero.png",
   },
 ];
 

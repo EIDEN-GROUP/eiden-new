@@ -309,10 +309,10 @@ const NEXT = [
     image: "/work/medical-bay/medical-bay-lobby.png",
   },
   {
-    slug: "rihab-residence",
-    client: "Résidence Rihab",
+    slug: "dmc-morocco",
+    client: "DMC Hospitality Morocco",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/rihab-residence/HERO PAGE RIHAB.png",
+    image: "/work/dmc-morocco/dmc-hero.png",
   },
 ];
 

@@ -14,6 +14,7 @@ import {
   Plate,
   RealityFracture,
   SignalsPanel,
+  Slides,
   useSay,
   type NextProject,
   type Say,
@@ -282,6 +283,20 @@ const PAID = {
       en: "Retuned every month against covers.",
     },
   ] as Say[],
+  slides: [
+    {
+      image: "/work/bopassage/bopassage-application.png",
+      alt: { fr: "Affichage extérieur Bôpassage", en: "Bôpassage out-of-home poster" },
+    },
+    {
+      image: "/work/bopassage/bopassage-ooh-column.png",
+      alt: { fr: "Colonne d'affichage Bôpassage", en: "Bôpassage advertising column" },
+    },
+    {
+      image: "/work/bopassage/bopassage-social-waffle.png",
+      alt: { fr: "Publication Bôpassage : la gaufre", en: "Bôpassage post: the waffle" },
+    },
+  ],
 };
 
 const IMPACT = {
@@ -489,7 +504,7 @@ export function BopassageV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="media-payant">
+      <Chapter id="media-payant" fit>
         <Caption
           index={7}
           label={say({ fr: "Revenu · Média payant", en: "Revenue · Paid media" })}
@@ -497,14 +512,11 @@ export function BopassageV2View() {
           text={say(PAID.text)}
         />
         <Pair>
-          <Plate
-            image="/work/bopassage/bopassage-application.png"
-            alt={say({
-              fr: "Affichage extérieur Bôpassage",
-              en: "Bôpassage out-of-home poster",
-            })}
-            // caption={say({ fr: "Affichage", en: "Out of home" })}
-            shape="aspect-4/5"
+          <Slides
+            items={PAID.slides.map((slide) => ({
+              image: slide.image,
+              alt: say(slide.alt),
+            }))}
           />
           <SignalsPanel items={PAID.signals.map(say)} />
         </Pair>

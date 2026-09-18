@@ -15,6 +15,7 @@ import {
   Plate,
   RealityFracture,
   SignalsPanel,
+  Slides,
   useSay,
   type NextProject,
   type Say,
@@ -290,6 +291,11 @@ const PAID = {
       en: "Switched off the moment the places are taken.",
     },
   ] as Say[],
+  slides: [
+    "/work/educazen-kids/educazenkids-scroll-2.png",
+    "/work/educazen-kids/educazenkids-scroll-1.png",
+    "/work/educazen-kids/educazenkids-scroll-3.png",
+  ],
 };
 
 const IMPACT = {
@@ -501,7 +507,7 @@ export function EducazenKidsV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="media-payant">
+      <Chapter id="media-payant" fit>
         <Caption
           index={7}
           label={say({ fr: "Média payant", en: "Paid media" })}
@@ -509,10 +515,11 @@ export function EducazenKidsV2View() {
           text={say(PAID.text)}
         />
         <Pair>
-          <Plate
-            image="/work/educazen-kids/educazenkids-scroll-2.png"
-            alt={say({ fr: "Le site EducazenKids", en: "The EducazenKids site" })}
-            shape="aspect-4/5"
+          <Slides
+            items={PAID.slides.map((image) => ({
+              image,
+              alt: say({ fr: "Le site EducazenKids", en: "The EducazenKids site" }),
+            }))}
           />
           <SignalsPanel items={PAID.signals.map(say)} />
         </Pair>

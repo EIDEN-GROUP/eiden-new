@@ -311,10 +311,10 @@ const PALETTE: PaletteStory = {
 
 const NEXT = [
   {
-    slug: "rihab-residence",
-    client: "Résidence Rihab",
-    category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/rihab-residence/HERO PAGE RIHAB.png",
+    slug: "educazen-kids",
+    client: "EducazenKids",
+    category: { fr: "Éducation", en: "Education" },
+    image: "/work/educazen-kids/educazen-hero.png",
   },
   {
     slug: "chillout-lounge",

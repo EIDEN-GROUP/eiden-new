@@ -1,6 +1,6 @@
 "use client";
 
-import { CaseV2, Caption, Chapter, Gallery, Grid, Hero, OutcomePanel, Pair, Plate, RealityFracture, SignalsPanel, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
+import { CaseV2, Caption, Chapter, Gallery, Grid, Hero, OutcomePanel, Pair, Plate, RealityFracture, SignalsPanel, Slides, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
 
 const CLIENT = "Mabrouk Hôtel";
 const YEAR = "2026";
@@ -91,6 +91,23 @@ const MARKETING = {
       en: "Direct booking rather than the platforms.",
     },
   ] as Say[],
+  slides: [
+    {
+      image: "/work/mabrouk/imgg1 (48).png",
+      alt: { fr: "Le salon du Mabrouk Hôtel", en: "The Mabrouk Hôtel lounge" },
+    },
+    {
+      image: "/work/mabrouk/imgg1 (12).png",
+      alt: { fr: "Une chambre du Mabrouk Hôtel", en: "A Mabrouk Hôtel bedroom" },
+    },
+    {
+      image: "/work/mabrouk/imgg1 (19).png",
+      alt: {
+        fr: "Les lanternes de laiton du Mabrouk Hôtel",
+        en: "The brass lanterns of the Mabrouk Hôtel",
+      },
+    },
+  ],
 };
 
 const CONTENT = {
@@ -176,10 +193,10 @@ const NEXT: NextProject[] = [
     image: "/work/medical-bay/medical-bay-lobby.png",
   },
   {
-    href: "/rihab-residence",
-    client: "Résidence Rihab",
+    href: "/dmc-morocco",
+    client: "DMC Hospitality Morocco",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/rihab-residence/HERO PAGE RIHAB.png",
+    image: "/work/dmc-morocco/dmc-hero.png",
   },
 ];
 
@@ -227,20 +244,18 @@ export function MabroukV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="marketing">
+      <Chapter id="marketing" fit>
         <Caption
           index={2}
           title={say(MARKETING.title)}
           text={say(MARKETING.text)}
         />
         <Pair>
-          <Plate
-            image="/work/mabrouk/imgg1 (48).png"
-            alt={say({
-              fr: "Le salon du Mabrouk Hôtel",
-              en: "The Mabrouk Hôtel lounge",
-            })}
-            shape="aspect-4/5"
+          <Slides
+            items={MARKETING.slides.map((slide) => ({
+              image: slide.image,
+              alt: say(slide.alt),
+            }))}
           />
           <SignalsPanel items={MARKETING.signals.map(say)} />
         </Pair>

@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { useLanguage } from "@/components/providers/language-provider";
 import { ButtonLink } from "@/components/ui/button";
+import { CountUp } from "@/components/ui/count-up";
 import { HeroVideo } from "@/components/ui/hero-video";
 import { getProjectCase } from "@/lib/data/projects/index";
 import { useFooterRevealed } from "@/lib/footer-reveal";
@@ -29,15 +30,9 @@ const FILTERS: Filter[] = [
 ];
 
 const SHOW_FILTERS = false;
+const DELIVERED = "+20";
 const ZOOM ="transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none";
-const HIDDEN = new Set<string>([
-  "anisal",
-  "madaef",
-  "centre-accompagnement",
-  "lithos-materiaux",
-  "orsen",
-  "rihab-residence",
-]);
+const HIDDEN = new Set<string>(["anisal", "madaef", "centre-accompagnement"]);
 const LISTED = projects.filter((project) => !HIDDEN.has(project.slug));
 // Three cards per screen: the big one is first on screens 1, 3, 5… and last on 2, 4…
 const ORDER = [
@@ -63,10 +58,7 @@ const V2_CASES: Record<string, string> = {
   "dmc-morocco": "/dmc-morocco",
   "educazen-kids": "/educazen-kids",
   "medical-bay": "/medical-bay",
-  orsen: "/orsen",
   "droguerie-souss": "/droguerie-souss",
-  "lithos-materiaux": "/lithos-materiaux",
-  "rihab-residence": "/rihab-residence",
   anisal: "/anisal",
   madaef: "/madaef",
   "chillout-lounge": "/chillout-lounge",
@@ -236,7 +228,7 @@ function Rail({
 
           <div className="border-ink/15 flex items-baseline gap-3 border-l pl-6">
             <span className="font-display text-ink text-[1.5rem] leading-none font-extrabold tracking-[-0.04em]">
-              {WALL.length}
+              <CountUp value={DELIVERED} />
             </span>
             <span className="text-ink/50 text-[0.875rem]">{statLabel}</span>
           </div>

@@ -7,12 +7,14 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
   type ReactNode,
 } from "react";
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/components/providers/language-provider";
 import { CasePaletteStory } from "@/components/project/case/palette-story";
 import { TONES } from "@/components/project/case/tone";
@@ -44,6 +46,9 @@ type CaseContextValue = {
 };
 
 const CaseContext = createContext<CaseContextValue | null>(null);
+
+/** Inside a `fit` chapter: the whole chapter is held to one screen. */
+const Fit = createContext(false);
 
 function useCase() {
   const value = useContext(CaseContext);
@@ -301,11 +306,29 @@ function Tabs({ active }: { active: string }) {
 
 /* ─── Chapters ─────────────────────────────────────────────────────── */
 
-export function Chapter({ id, children }: { id: string; children: ReactNode }) {
+export function Chapter({
+  id,
+  fit = false,
+  children,
+}: {
+  id: string;
+  /** Hold the chapter to one screen, under the header and the tabs. */
+  fit?: boolean;
+  children: ReactNode;
+}) {
   return (
-    <section id={id} className="grid gap-1.5 pb-1.5">
-      {children}
-    </section>
+    <Fit.Provider value={fit}>
+      <section
+        id={id}
+        className={cn(
+          "grid gap-1.5 pb-1.5",
+          fit &&
+            "h-[calc(100svh-8.25rem)] grid-rows-[auto_minmax(0,1fr)] sm:h-[calc(100svh-8.75rem)] lg:h-[calc(100svh-0.375rem)]",
+        )}
+      >
+        {children}
+      </section>
+    </Fit.Provider>
   );
 }
 
@@ -328,12 +351,19 @@ export function Caption({
   meta?: string;
 }) {
   const { chapters, say } = useCase();
+  const fit = useContext(Fit);
   const name =
     label ?? (index !== undefined ? say(chapters[index].label) : undefined);
 
   return (
     <Reveal amount={0.2}>
-      <header className="border-beige-dk mx-2 grid gap-x-12 gap-y-4 border-t pt-6 pb-8 sm:mx-4 sm:pt-7 sm:pb-10 lg:grid-cols-2">
+      <header
+        className={cn(
+          "border-beige-dk mx-2 grid gap-x-12 gap-y-4 border-t pt-6 pb-8 sm:mx-4 sm:pt-7 sm:pb-10 lg:grid-cols-2",
+          fit &&
+            "gap-y-[clamp(0.5rem,1.8svh,1rem)] pt-[clamp(0.75rem,2.6svh,1.75rem)] pb-[clamp(0.75rem,3.4svh,2.5rem)] sm:pt-[clamp(0.75rem,2.6svh,1.75rem)] sm:pb-[clamp(0.75rem,3.4svh,2.5rem)]",
+        )}
+      >
         <p className="font-label flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[0.78rem] font-bold tracking-[0.18em] uppercase lg:col-span-2">
           {index !== undefined ? (
             <span className="text-gold-dk tabular-nums">
@@ -347,6 +377,7 @@ export function Caption({
         <h2
           className={cn(
             "font-display text-ink text-[clamp(1.875rem,3.3vw,3rem)] leading-[1.04] font-extrabold tracking-[-0.04em]",
+            fit && "text-[clamp(1.375rem,min(5.8vw,4.8svh),3rem)] lg:text-[clamp(1.5rem,min(3.3vw,5.2svh),3rem)]",
             !text && "lg:col-span-2",
           )}
         >
@@ -354,7 +385,13 @@ export function Caption({
         </h2>
 
         {text ? (
-          <p className="text-ink text-[1.0625rem] leading-[1.7] sm:text-[1.125rem]">
+          <p
+            className={cn(
+              "text-ink text-[1.0625rem] leading-[1.7] sm:text-[1.125rem]",
+              fit &&
+                "text-[clamp(0.8125rem,min(3.8vw,1.9svh),1.125rem)] sm:text-[clamp(0.8125rem,1.9svh,1.125rem)] lg:text-[clamp(0.8125rem,min(1.9svh,1.4vw),1.125rem)]",
+            )}
+          >
             {text}
           </p>
         ) : null}
@@ -363,9 +400,20 @@ export function Caption({
   );
 }
 
-/** Two abreast from a small tablet up. */
+/** Two abreast from a small tablet up; in a `fit` chapter, always, sharing what is left of the screen. */
 export function Pair({ children }: { children: ReactNode }) {
-  return <div className="grid gap-1.5 sm:grid-cols-2">{children}</div>;
+  const fit = useContext(Fit);
+
+  return (
+    <div
+      className={cn(
+        "grid gap-1.5 sm:grid-cols-2",
+        fit && "h-full min-h-0 grid-cols-2 grid-rows-1",
+      )}
+    >
+      {children}
+    </div>
+  );
 }
 
 /** A 2 × 2 block of plates. */
@@ -434,6 +482,139 @@ export function Plate({
           >
             {caption}
           </figcaption>
+        ) : null}
+      </figure>
+    </Reveal>
+  );
+}
+
+/** Plates that take turns in one frame: they move on by themselves, and can be swiped. */
+export function Slides({
+  items,
+  shape = "aspect-4/5",
+  sizes = HALF,
+  interval = 4000,
+}: {
+  items: { image: string; alt: string }[];
+  shape?: string;
+  sizes?: string;
+  interval?: number;
+}) {
+  const { say } = useCase();
+  const fit = useContext(Fit);
+  const reduced = useReducedMotion();
+  const [turn, setTurn] = useState({ index: 0, previous: 0, forward: true });
+  const [held, setHeld] = useState(false);
+  const [hidden, setHidden] = useState(
+    () => typeof document !== "undefined" && document.hidden,
+  );
+  const start = useRef<number | null>(null);
+  const slides = useRef<(HTMLDivElement | null)[]>([]);
+  const count = items.length;
+
+  // The arriving slide pushes the leaving one: same property as `translate-x-full`, same timing, before paint.
+  useLayoutEffect(() => {
+    const { index, previous, forward } = turn;
+    if (index === previous || reduced) return;
+    const timing = { duration: 1000, easing: "cubic-bezier(0.65, 0, 0.35, 1)" };
+    slides.current[index]?.animate(
+      [{ translate: forward ? "100% 0" : "-100% 0" }, { translate: "0 0" }],
+      timing,
+    );
+    slides.current[previous]?.animate(
+      [{ translate: "0 0" }, { translate: forward ? "-100% 0" : "100% 0" }],
+      timing,
+    );
+  }, [turn, reduced]);
+
+  const go = useCallback(
+    (step: number) =>
+      setTurn(({ index }) => ({
+        index: (index + step + count) % count,
+        previous: index,
+        forward: step > 0,
+      })),
+    [count],
+  );
+
+  useEffect(() => {
+    if (reduced || held || hidden || count < 2) return;
+    const id = window.setInterval(() => go(1), interval);
+    return () => window.clearInterval(id);
+  }, [reduced, held, hidden, count, interval, go]);
+
+  useEffect(() => {
+    const onVisibility = () => setHidden(document.hidden);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  return (
+    <Reveal amount={0.1} className="h-full">
+      <figure
+        aria-roledescription={say({ fr: "carrousel", en: "carousel" })}
+        className={cn(FRAME, "touch-pan-y select-none", fit ? "size-full" : shape)}
+        onPointerEnter={() => setHeld(true)}
+        onPointerLeave={() => {
+          setHeld(false);
+          start.current = null;
+        }}
+        onFocus={() => setHeld(true)}
+        onBlur={() => setHeld(false)}
+        onPointerDown={(event) => {
+          start.current = event.clientX;
+        }}
+        onPointerUp={(event) => {
+          if (start.current === null) return;
+          const moved = event.clientX - start.current;
+          start.current = null;
+          if (Math.abs(moved) > 40) go(moved < 0 ? 1 : -1);
+        }}
+      >
+        {items.map((item, index) => (
+          <div
+            key={item.image}
+            ref={(node) => {
+              slides.current[index] = node;
+            }}
+            aria-hidden={index !== turn.index}
+            className={cn(
+              "absolute inset-0",
+              index !== turn.index && "translate-x-full",
+            )}
+          >
+            <Image
+              src={item.image}
+              alt={item.alt}
+              fill
+              quality={95}
+              sizes={sizes}
+              loading="eager"
+              draggable={false}
+              className="object-cover"
+            />
+          </div>
+        ))}
+
+        {count > 1 ? (
+          <div className="absolute inset-x-0 bottom-5 flex justify-center gap-2">
+            {items.map((item, index) => (
+              <button
+                key={item.image}
+                type="button"
+                onClick={() => go(index - turn.index)}
+                aria-label={say({
+                  fr: `Image ${index + 1} sur ${count}`,
+                  en: `Picture ${index + 1} of ${count}`,
+                })}
+                aria-current={index === turn.index}
+                className={cn(
+                  "h-2 rounded-full transition-[width,background-color] duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                  index === turn.index ? "bg-gold w-6" : "bg-canvas w-2",
+                )}
+              />
+            ))}
+          </div>
         ) : null}
       </figure>
     </Reveal>
@@ -704,19 +885,84 @@ export function PaletteStage({ story }: { story: PaletteStory }) {
 
 /** Three short lines on teal, lifted from the chapter's own text. */
 export function SignalsPanel({ items }: { items: string[] }) {
+  const fit = useContext(Fit);
+  const box = useRef<HTMLDivElement>(null);
+  const list = useRef<HTMLOListElement>(null);
+  const lines = items.join("\n");
+
+  // In a `fit` chapter the lines step down a pixel at a time until they fit the panel.
+  useLayoutEffect(() => {
+    const panel = box.current;
+    const ol = list.current;
+    if (!fit || !panel || !ol) return;
+
+    const section = panel.closest("section");
+
+    const settle = () => {
+      section?.style.removeProperty("height");
+      section?.style.removeProperty("min-height");
+      section?.style.removeProperty("grid-template-rows");
+      ol.style.removeProperty("--signal");
+      const line = ol.querySelector<HTMLElement>("li > span:last-child");
+      if (!line) return;
+      const style = getComputedStyle(panel);
+      const room =
+        panel.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      let size = Math.floor(parseFloat(getComputedStyle(line).fontSize));
+      while (ol.offsetHeight > room && size > 12) {
+        size -= 1;
+        ol.style.setProperty("--signal", `${size}px`);
+      }
+
+      // Not even the smallest size fits: the chapter grows past the screen rather than cut its lines.
+      if (ol.offsetHeight > room && section) {
+        ol.style.removeProperty("--signal");
+        section.style.minHeight = `${section.offsetHeight}px`;
+        section.style.height = "auto";
+        section.style.gridTemplateRows = "auto auto";
+      }
+    };
+
+    settle();
+    void document.fonts.ready.then(settle);
+    window.addEventListener("resize", settle);
+    return () => window.removeEventListener("resize", settle);
+  }, [fit, lines]);
+
   return (
-    <Reveal amount={0.1} delay={0.08} className="h-full">
-      <div className="bg-teal text-canvas flex h-full flex-col justify-center rounded-xl p-8 sm:p-10">
-        <ol className="flex flex-col">
+    <Reveal amount={0.1} delay={0.08} className={cn("h-full", fit && "@container")}>
+      <div
+        ref={box}
+        className={cn(
+          "bg-teal text-canvas flex h-full flex-col justify-center rounded-xl p-8 sm:p-10",
+          fit && "p-[clamp(0.875rem,6cqi,2.5rem)] sm:p-[clamp(0.875rem,6cqi,2.5rem)]",
+        )}
+      >
+        <ol ref={list} className="flex flex-col">
           {items.map((item, index) => (
             <li
               key={item}
-              className="border-teal-dk grid grid-cols-[3rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0"
+              className={cn(
+                "border-teal-dk grid grid-cols-[3rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0",
+                fit &&
+                  "grid-cols-[clamp(1.75rem,12cqi,3rem)_1fr] py-[clamp(0.375rem,min(4cqi,2.8svh),1.5rem)]",
+              )}
             >
-              <span className="font-label text-gold text-[0.85rem] font-bold tracking-[0.16em] tabular-nums">
+              <span
+                className={cn(
+                  "font-label text-gold text-[0.85rem] font-bold tracking-[0.16em] tabular-nums",
+                  fit && "text-[clamp(0.6875rem,3cqi,0.85rem)]",
+                )}
+              >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="font-display text-[clamp(1.5rem,2.6vw,2.375rem)] leading-[1.06] font-extrabold tracking-[-0.035em]">
+              <span
+                className={cn(
+                  "font-display text-[clamp(1.5rem,2.6vw,2.375rem)] leading-[1.06] font-extrabold tracking-[-0.035em]",
+                  fit &&
+                    "text-[length:var(--signal,clamp(0.9375rem,min(8.5cqi,4.4svh),2.375rem))]",
+                )}
+              >
                 {item}
               </span>
             </li>
@@ -727,31 +973,20 @@ export function SignalsPanel({ items }: { items: string[] }) {
   );
 }
 
+/** Each row's own tone, then the one it alternates with. */
 const LINES = {
-  teal: {
-    panel: "bg-teal text-canvas",
-    rule: "border-teal-dk",
-    index: "text-gold",
-  },
-  forest: {
-    panel: "bg-forest text-canvas",
-    rule: "border-forest-md",
-    index: "text-gold",
-  },
-  beige: {
-    panel: "bg-beige text-ink",
-    rule: "border-beige-dk",
-    index: "text-teal",
-  },
+  teal: ["bg-teal text-canvas", "bg-forest text-canvas"],
+  forest: ["bg-forest text-canvas", "bg-teal text-canvas"],
+  beige: ["bg-beige text-ink", "bg-forest text-canvas"],
 } as const;
 
 const ABREAST: Record<number, string> = {
-  2: "sm:grid-cols-2",
+  2: "grid-cols-2",
   3: "sm:grid-cols-3",
-  4: "sm:grid-cols-2 xl:grid-cols-4",
+  4: "grid-cols-2 xl:grid-cols-4",
 };
 
-/** Short lines lifted from a chapter's own text, set abreast across the column. */
+/** Short lines lifted from a chapter's own text, a tile each, the tones taking turns. */
 export function LinesRow({
   items,
   tone = "teal",
@@ -759,71 +994,68 @@ export function LinesRow({
   items: string[];
   tone?: keyof typeof LINES;
 }) {
-  const skin = LINES[tone];
-
   return (
-    <Reveal amount={0.15}>
-      <ol
-        className={cn(
-          "grid gap-x-10 gap-y-8 rounded-xl px-7 py-9 sm:px-10 sm:py-12",
-          ABREAST[items.length],
-          skin.panel,
-        )}
-      >
-        {items.map((item, index) => (
-          <li key={item} className={cn("border-t pt-5", skin.rule)}>
-            <span
+    <ol className={cn("grid gap-1.5", ABREAST[items.length])}>
+      {items.map((item, index) => {
+        const skin = LINES[tone][index % 2];
+
+        return (
+          <Reveal key={item} as="li" amount={0.15} delay={index * 0.06}>
+            <div
               className={cn(
-                "font-label block text-[0.85rem] font-bold tracking-[0.16em] tabular-nums",
-                skin.index,
+                "flex h-full min-h-[11rem] flex-col justify-between gap-8 rounded-xl p-6 sm:min-h-[14rem] sm:p-8",
+                skin,
               )}
             >
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="font-display mt-4 block text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.06] font-extrabold tracking-[-0.035em]">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ol>
-    </Reveal>
+              <span
+                className={cn(
+                  "font-display text-[clamp(2.75rem,5vw,4.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums",
+                  skin.includes("bg-beige") ? "text-teal" : "text-gold",
+                )}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="font-display text-[clamp(1.375rem,2.2vw,2rem)] leading-[1.06] font-extrabold tracking-[-0.035em]">
+                {item}
+              </span>
+            </div>
+          </Reveal>
+        );
+      })}
+    </ol>
   );
 }
 
-/** The impact where no figure has been published: what changed, line by line. */
+/** The impact where no figure has been published: what changed, on forest, beside the place itself. */
 export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
   return (
-    <Reveal amount={0.15}>
-      <div className="bg-beige relative isolate overflow-hidden rounded-xl px-7 py-12 sm:px-12 sm:py-16">
-        <div aria-hidden className="absolute inset-0 -z-10">
-          <Image
-            src={image}
-            alt=""
-            fill
-            quality={70}
-            sizes={FULL}
-            className="object-cover opacity-20"
-          />
-          <span className="absolute inset-0 bg-[radial-gradient(120%_100%_at_15%_0%,transparent,var(--color-beige)_75%)]" />
+    <div className="grid gap-1.5 lg:grid-cols-[7fr_5fr]">
+      <Reveal amount={0.15} className="h-full">
+        <div className="bg-forest text-canvas flex h-full flex-col justify-center rounded-xl px-7 py-10 sm:px-12 sm:py-14">
+          <ol className="flex flex-col">
+            {items.map((item, index) => (
+              <li
+                key={item}
+                className="border-forest-md grid grid-cols-[4rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:py-7"
+              >
+                <span className="font-display text-gold text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="font-display text-[clamp(1.5rem,2.6vw,2.375rem)] leading-[1.08] font-extrabold tracking-[-0.035em]">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
+      </Reveal>
 
-        <ol className="flex flex-col">
-          {items.map((item, index) => (
-            <li
-              key={item}
-              className="border-beige-dk grid grid-cols-[4rem_1fr] items-baseline border-t py-7 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[7rem_1fr]"
-            >
-              <span className="font-display text-teal text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="font-display text-ink text-[clamp(1.5rem,2.8vw,2.5rem)] leading-[1.08] font-extrabold tracking-[-0.035em]">
-                {item}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </Reveal>
+      <Reveal amount={0.15} delay={0.08} className="h-full">
+        <figure className={cn(FRAME, "aspect-4/3 h-full lg:aspect-auto")}>
+          <Image src={image} alt="" fill quality={90} sizes={HALF} className="object-cover" />
+        </figure>
+      </Reveal>
+    </div>
   );
 }
 

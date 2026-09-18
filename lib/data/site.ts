@@ -170,13 +170,6 @@ export const projects = [
     imageAlt: "Site web Souss Droguerie",
   },
   {
-    slug: "orsen",
-    name: "ORSEN",
-    category: "web",
-    image: "/work/orsen/orsen hero.png",
-    imageAlt: "Site web ORSEN",
-  },
-  {
     slug: "mabrouk",
     name: "Mabrouk Hôtel",
     category: "hospitality",
@@ -189,20 +182,6 @@ export const projects = [
     category: "hospitality",
     image: "/work/dmc-morocco/dmc-cover.png",
     imageAlt: "Marque et supports DMC Hospitality Morocco",
-  },
-  {
-    slug: "lithos-materiaux",
-    name: "LITHOS",
-    category: "web",
-    image: "/work/lithos-materiaux/lotus card.png",
-    imageAlt: "Site web LITHOS Matériaux",
-  },
-  {
-    slug: "rihab-residence",
-    name: "Résidence Rihab",
-    category: "web",
-    image: "/work/rihab-residence/web-rihab-desktop.jpg",
-    imageAlt: "Site web de la Résidence Rihab",
   },
   {
     slug: "anisal",

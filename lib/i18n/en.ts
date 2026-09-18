@@ -725,7 +725,7 @@ export const en: Dictionary = {
       statLabel: "projects delivered",
       workTitle: "What we are proudest of",
       workLead:
-        "Brand, site, content, campaigns   twelve projects carried end to end, each one written up in full on our portfolio.",
+        "Brand, site, content, campaigns   more than twenty projects carried end to end, each one written up in full on our portfolio.",
       viewProject: "See the project",
       filters: {
         all: "All work",
@@ -754,10 +754,6 @@ export const en: Dictionary = {
           "Surf, nomads, community   a coastal village brand rebuilt for who is actually arriving.",
         "medical-bay":
           "A medical centre, architected from patient experience to revenue logic.",
-        orsen: "Substance before decoration.",
-        "lithos-materiaux": "Material, told with care.",
-        "rihab-residence":
-          "A quiet Moroccan address, five minutes from the Atlantic.",
         "lunja-village-vibes": "Your sunlit break in Imi Ouaddar.",
         "chillout-lounge":
           "Live music, cocktails and sunset sessions facing the Atlantic.",

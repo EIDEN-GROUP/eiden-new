@@ -5,9 +5,6 @@ import { educazenKids } from "./educazen-kids";
 import { lunjaVillage } from "./lunja-village";
 import { mabrouk } from "./mabrouk";
 import { medicalBay } from "./medical-bay";
-import { orsen } from "./orsen";
-import { lithosMateriaux } from "./lithos-materiaux";
-import { rihabResidence } from "./rihab-residence";
 import { chilloutLounge } from "./chillout-lounge";
 import { droguerieSouss } from "./droguerie-souss";
 import { anisal } from "./anisal";
@@ -35,10 +32,7 @@ export const projectCases: ProjectCase[] = [
   lunjaVillage,
   mabrouk,
   medicalBay,
-  rihabResidence,
   chilloutLounge,
-  orsen,
-  lithosMateriaux,
   droguerieSouss,
   anisal,
   madaef,
