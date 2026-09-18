@@ -75,10 +75,10 @@ const VIDEOS: Record<string, { src: string; poster: string }> = {
     src: "/work/lunja-village/lunja-web-1080p.mp4",
     poster: "/work/lunja-village/lunja-poster.jpg",
   },
-   "bopassage": {
-    src: "/work/bopassage/bo_passage_web_1080.mp4",
-    poster: "/work/bopassage/bopassage-cover.jpg",
-  },
+  //  "bopassage": {
+  //   src: "/work/bopassage/bo_passage_web_1080.mp4",
+  //   poster: "/work/bopassage/bopassage-cover.jpg",
+  // },
   "chillout-lounge": {
     src: "/work/chillout-lounge/chilloutt-web-1080p.mp4",
     poster: "/work/chillout-lounge/chillout-poster.jpg",
