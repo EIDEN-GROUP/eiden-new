@@ -227,7 +227,7 @@ const PLATFORM = {
   },
   plates: [
     {
-      image: "/work/educazen-kids/educazenkids-web-desktop.png",
+      image: "/work/educazen-kids/desktop.jpeg",
       caption: { fr: "Desktop", en: "Desktop" },
       alt: {
         fr: "Le site EducazenKids sur écran",
@@ -236,7 +236,7 @@ const PLATFORM = {
       contain: false,
     },
     {
-      image: "/work/educazen-kids/educazenkids-web-mobile.png",
+      image: "/work/educazen-kids/mobile.jpeg",
       caption: { fr: "Mobile", en: "Mobile" },
       alt: {
         fr: "Le site EducazenKids sur téléphone",
@@ -470,7 +470,6 @@ export function EducazenKidsV2View() {
               alt={say(plate.alt)}
               caption={say(plate.caption)}
               shape="aspect-4/3"
-              contain={plate.contain}
               delay={(index % 2) * 0.08}
             />
           ))}

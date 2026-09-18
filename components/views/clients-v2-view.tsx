@@ -43,14 +43,14 @@ const LISTED = projects.filter((project) => !HIDDEN.has(project.slug));
 const ORDER = [
   "lunja-village",
   "educazen-kids",
-  "medical-bay",
+  "bopassage",
 
   "dmc-morocco",
-  "droguerie-souss",
+  "mabrouk",
   "chillout-lounge",
 
-  "bopassage",
-  "mabrouk",
+  "medical-bay",
+  "droguerie-souss",
 ];
 const WALL: Project[] = [
   ...ORDER.flatMap((slug) => LISTED.filter((project) => project.slug === slug)),
@@ -82,6 +82,10 @@ const VIDEOS: Record<string, { src: string; poster: string }> = {
   "lunja-village": {
     src: "/work/lunja-village/lunja-web-1080p.mp4",
     poster: "/work/lunja-village/lunja-poster.jpg",
+  },
+   "bopassage": {
+    src: "/work/bopassage/bo_passage_web_1080.mp4",
+    poster: "/work/bopassage/bopassage-cover.jpg",
   },
   "chillout-lounge": {
     src: "/work/chillout-lounge/chilloutt-web-1080p.mp4",
