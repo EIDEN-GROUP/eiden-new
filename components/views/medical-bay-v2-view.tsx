@@ -25,7 +25,7 @@ const CLIENT = "Medical Bay";
 const YEAR = "2026";
 const CATEGORY: Say = { fr: "Santé", en: "Healthcare" };
 const LOCATION: Say = { fr: "Agadir, Maroc", en: "Agadir, Morocco" };
-const SITE = "https://medicalbay.vercel.app/";
+const SITE = "https://medicalbay-agadir.vercel.app/";
 const SOCIALS = {
   instagram: "https://www.instagram.com/medicalbay.maroc/",
   facebook: "https://www.facebook.com/p/Medical-Bay-100085861093531/",
@@ -359,7 +359,7 @@ const CHAPTERS = [
   { id: "site-web", label: { fr: "Site web · CRM", en: "Website · CRM" } },
   { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function MedicalBayV2View() {
@@ -474,19 +474,17 @@ export function MedicalBayV2View() {
             shape="aspect-4/3"
           />
           <Plate
-            image="/work/medical-bay/medical-bay-web-mobile.png"
+            image="/work/medical-bay/medical-bay-web-mobile.jpeg"
             alt={say({
               fr: "Le site Medical Bay sur téléphone",
               en: "The Medical Bay site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
             shape="aspect-4/3"
-            contain
-            delay={0.08}
           />
         </Pair>
         <Plate
-          image="/work/medical-bay/medical-bay-dashboard.png"
+          image="/work/medical-bay/crm-medicalbay.jpeg"
           alt={say({
             fr: "Le tableau de bord Medical Bay",
             en: "The Medical Bay dashboard",

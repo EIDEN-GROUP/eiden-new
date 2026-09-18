@@ -1181,7 +1181,7 @@ export default function EducazenKidsPage() {
           <Reveal direction="none" duration={0.5} amount={0.3}>
             <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-              {say({ fr: "Le travail", en: "The work" })}
+              {say({ fr: "Gallerie", en: "Gallery" })}
             </p>
           </Reveal>
 

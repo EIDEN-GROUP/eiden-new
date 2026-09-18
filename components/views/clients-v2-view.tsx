@@ -3,27 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, SlidersHorizontal, X } from "lucide-react";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties,} from "react";
 import { createPortal } from "react-dom";
 import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { useLanguage } from "@/components/providers/language-provider";
 import { ButtonLink } from "@/components/ui/button";
+import { HeroVideo } from "@/components/ui/hero-video";
 import { getProjectCase } from "@/lib/data/projects/index";
 import { useFooterRevealed } from "@/lib/footer-reveal";
 import { useHydrated } from "@/lib/hooks";
-import {
-  portfolioProjectUrl,
-  projects,
-  siteConfig,
-  type ProjectCategory,
-} from "@/lib/data/site";
+import { portfolioProjectUrl, projects, siteConfig, type ProjectCategory, } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 type Project = (typeof projects)[number];
@@ -37,21 +26,36 @@ const FILTERS: Filter[] = [
   "lounge",
   "education",
   "health",
-  "cooperative",
 ];
 
-const HEADLINE_SHAPE = "aspect-2/3";
-const MEDIUM_SHAPE = "aspect-4/3";
-const HEADLINE = new Set<string>(["lunja-village", "dmc-morocco", "bopassage"]);
-const WALL: Project[] = (() => {
-  const list = [...projects];
-  const lunja = list.findIndex((project) => project.slug === "lunja-village");
-  const chillout = list.findIndex((project) => project.slug === "chillout-lounge");
-  if (lunja >= 0 && chillout >= 0) {
-    [list[lunja], list[chillout]] = [list[chillout], list[lunja]];
-  }
-  return list;
-})();
+const SHOW_FILTERS = false;
+const ZOOM ="transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none";
+const HIDDEN = new Set<string>([
+  "anisal",
+  "madaef",
+  "centre-accompagnement",
+  "lithos-materiaux",
+  "orsen",
+  "rihab-residence",
+]);
+const LISTED = projects.filter((project) => !HIDDEN.has(project.slug));
+// Three cards per screen: the big one is first on screens 1, 3, 5… and last on 2, 4…
+const ORDER = [
+  "lunja-village",
+  "educazen-kids",
+  "medical-bay",
+
+  "dmc-morocco",
+  "droguerie-souss",
+  "chillout-lounge",
+
+  "bopassage",
+  "mabrouk",
+];
+const WALL: Project[] = [
+  ...ORDER.flatMap((slug) => LISTED.filter((project) => project.slug === slug)),
+  ...LISTED.filter((project) => !ORDER.includes(project.slug)),
+];
 
 const V2_CASES: Record<string, string> = {
   "lunja-village": "/lunja-village",
@@ -74,13 +78,24 @@ const COVERS: Record<string, string> = {
   bopassage: "/work/bopassage/bopassage-cover.jpg",
 };
 
+const VIDEOS: Record<string, { src: string; poster: string }> = {
+  "lunja-village": {
+    src: "/work/lunja-village/lunja-web-1080p.mp4",
+    poster: "/work/lunja-village/lunja-poster.jpg",
+  },
+  "chillout-lounge": {
+    src: "/work/chillout-lounge/chilloutt-web-1080p.mp4",
+    poster: "/work/chillout-lounge/chillout-poster.jpg",
+  },
+};
+
 const THUMBS = FILTERS.reduce(
   (thumbs, filter) => {
     const found =
       filter === "all"
-        ? projects[0]
-        : projects.find((project) => project.category === filter);
-    thumbs[filter] = (found ?? projects[0]).image;
+        ? LISTED[0]
+        : LISTED.find((project) => project.category === filter);
+    thumbs[filter] = (found ?? LISTED[0]).image;
     return thumbs;
   },
   {} as Record<Filter, string>,
@@ -109,10 +124,13 @@ export function ClientsV2View() {
     [active],
   );
 
-  const columns = useMemo(() => {
-    const dealt: { project: Project; index: number }[][] = [[], []];
-    shown.forEach((project, index) => dealt[index % 2].push({ project, index }));
-    return dealt;
+  const screens = useMemo(() => {
+    const grouped: { project: Project; index: number }[][] = [];
+    shown.forEach((project, index) => {
+      if (index % 3 === 0) grouped.push([]);
+      grouped[grouped.length - 1].push({ project, index });
+    });
+    return grouped;
   }, [shown]);
 
   return (
@@ -130,24 +148,25 @@ export function ClientsV2View() {
           {shown.length === 0 ? (
             <p className="text-ink/55 px-4 py-24 text-[0.9375rem]">{page.empty}</p>
           ) : (
-            <div
-              key={active}
-              className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:items-start"
-            >
-              {columns.map((column, side) => (
+            <div key={active} className="grid gap-1.5">
+              {screens.map((screen, row) => (
                 <div
-                  key={side}
-                  className="contents sm:grid sm:content-start sm:gap-1.5"
+                  key={row}
+                  className={cn(
+                    "grid grid-cols-1 gap-1.5 sm:grid-cols-2",
+                    screen.length === 2
+                      ? "sm:h-[calc((100svh-1.125rem)/2)] sm:grid-rows-1"
+                      : "sm:h-[calc(100svh-0.75rem)] sm:grid-rows-2",
+                  )}
                 >
-                  {column.map(({ project, index }) => (
+                  {screen.map(({ project, index }, slot) => (
                     <Tile
                       key={project.slug}
                       project={project}
                       index={index}
                       image={COVERS[project.slug] ?? project.image}
-                      shape={
-                        HEADLINE.has(project.slug) ? HEADLINE_SHAPE : MEDIUM_SHAPE
-                      }
+                      video={VIDEOS[project.slug]}
+                      className={place(screen.length, row, slot)}
                       category={page.filters[project.category]}
                       line={page.projectLines[project.slug]}
                       label={page.viewProject}
@@ -160,13 +179,15 @@ export function ClientsV2View() {
         </div>
       </div>
 
-      <FilterDock
-        active={active}
-        counts={counts}
-        labels={page.filters}
-        copy={copy}
-        onPick={setActive}
-      />
+      {SHOW_FILTERS ? (
+        <FilterDock
+          active={active}
+          counts={counts}
+          labels={page.filters}
+          copy={copy}
+          onPick={setActive}
+        />
+      ) : null}
     </div>
   );
 }
@@ -205,17 +226,13 @@ function Rail({
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 lg:mt-8">
-          <ButtonLink
-            href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`}
-            variant="dark"
-            size="md"
-          >
+          <ButtonLink href={`https://wa.me/${siteConfig.phoneMa.replace(/\D/g, "")}`} variant="dark" size="md">
             {cta}
           </ButtonLink>
 
           <div className="border-ink/15 flex items-baseline gap-3 border-l pl-6">
             <span className="font-display text-ink text-[1.5rem] leading-none font-extrabold tracking-[-0.04em]">
-              {projects.length}
+              {WALL.length}
             </span>
             <span className="text-ink/50 text-[0.875rem]">{statLabel}</span>
           </div>
@@ -229,19 +246,37 @@ function Rail({
    One brick of the wall
    ──────────────────────────────────────────────────────────────────────── */
 
+// On a phone the big card fills the screen and the others go two to a screen.
+const WHOLE_SCREEN = "h-[calc(100svh-0.75rem)]";
+const HALF_SCREEN = "h-[calc((100svh-1.125rem)/2)]";
+
+function place(size: number, row: number, slot: number) {
+  if (size === 1) return cn(WHOLE_SCREEN, "sm:col-span-2 sm:row-span-2");
+  if (size === 2) return HALF_SCREEN;
+  const left = row % 2 === 0;
+  if (slot !== (left ? 0 : size - 1)) return HALF_SCREEN;
+  return cn(
+    WHOLE_SCREEN,
+    "sm:row-start-1 sm:row-span-2",
+    left ? "sm:col-start-1" : "sm:col-start-2",
+  );
+}
+
 function Tile({
   project,
   image,
+  video,
   index,
-  shape,
+  className,
   category,
   line,
   label,
 }: {
   project: Project;
   image: string;
+  video?: { src: string; poster: string };
   index: number;
-  shape: string;
+  className?: string;
   category: string;
   line: string;
   label: string;
@@ -262,35 +297,35 @@ function Tile({
       {...opening}
       style={
         {
-          order: index,
           animationDelay: `${Math.min(index * 45, 450)}ms`,
         } as CSSProperties
       }
       className={cn(
-        "group focus-visible:outline-gold relative block focus-visible:outline-2 focus-visible:-outline-offset-2",
+        "group focus-visible:outline-gold relative block focus-visible:outline-2 focus-visible:-outline-offset-2 sm:h-auto",
         "motion-safe:[animation:eiden-tile-in_0.7s_var(--ease-brand)_both]",
+        className,
       )}
     >
-      <div
-        className={cn(
-          "bg-ink/5 relative w-full overflow-hidden rounded-4xl",
-          shape,
+      <div className="bg-ink/5 relative size-full overflow-hidden rounded-xl">
+        {video ? (
+          <HeroVideo
+            src={video.src}
+            poster={video.poster}
+            className={cn("absolute inset-0", ZOOM)}
+          />
+        ) : (
+          <Image
+            src={image}
+            alt={project.imageAlt}
+            fill
+            sizes="(max-width: 1024px) 80vw, 75vw"
+            quality={95}
+            priority={index === 0}
+            className={cn("size-full object-cover", ZOOM)}
+          />
         )}
-      >
-        <Image
-          src={image}
-          alt={project.imageAlt}
-          fill
-          sizes="(max-width: 1024px) 80vw, 75vw"
-          quality={95}
-          priority={index === 0}
-          className="size-full object-cover transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none"
-        />
 
-        <span
-          aria-hidden
-          className="from-ink/95 via-ink/25 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-500 ease-[var(--ease-brand)] group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none [@media(hover:none)]:opacity-100"
-        />
+        <span aria-hidden className="from-ink/95 via-ink/25 pointer-events-none absolute inset-0 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-500 ease-[var(--ease-brand)] group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none [@media(hover:none)]:opacity-100" />
 
         <span className="numeral text-canvas absolute top-3 left-3.5 text-[0.7rem] font-bold tracking-[0.14em] mix-blend-difference">
           {String(index + 1).padStart(2, "0")}
@@ -308,11 +343,7 @@ function Tile({
           </p>
         </div>
 
-        <span
-          aria-hidden
-          className="bg-canvas text-ink absolute right-4 bottom-4 flex size-9 scale-75 items-center justify-center rounded-full opacity-0 transition-[opacity,scale] duration-400 ease-[var(--ease-brand)] group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none"
-          title={label}
-        >
+        <span aria-hidden className="bg-canvas text-ink absolute right-4 bottom-4 flex size-9 scale-75 items-center justify-center rounded-full opacity-0 transition-[opacity,scale] duration-400 ease-[var(--ease-brand)] group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none" title={label}>
           <ArrowUpRight className="size-4" strokeWidth={2} />
         </span>
       </div>
@@ -350,8 +381,6 @@ function FilterDock({
 
   return (
     <>
-      {/* Left of the WhatsApp column rather than under it: both are pinned to
-          the same corner, and the dock is the one that belongs to this page. */}
       <div className="pointer-events-none fixed right-[4.75rem] bottom-5 z-50 sm:right-[5.5rem] sm:bottom-8">
         <button
           ref={opener}

@@ -6,13 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { jumpToTop } from "@/components/providers/smooth-scroll";
 import { useLanguage } from "@/components/providers/language-provider";
-import {
-  HERO_WORD_LEAD,
-  HERO_WORD_STEP,
-  heroEnter as ENTER,
-  heroStage as stage,
-  useHeroDepart,
-} from "@/components/layout/film-hero";
+import { HERO_WORD_LEAD, HERO_WORD_STEP, heroEnter as ENTER, heroStage as stage, useHeroDepart, } from "@/components/layout/film-hero";
 import { Reveal, RevealGroup, RevealWords, SlideIn } from "@/components/ui/reveal";
 import { CaseWall } from "@/components/project/case/wall";
 import { CasePaletteStory } from "@/components/project/case/palette-story";
@@ -38,7 +32,7 @@ const HERO = {
     fr: "Un hôtel dont tout le caractère est dans la matière   le laiton, le bois, le velours   et dont rien de tout cela n'arrivait jusqu'au client avant sa réservation. Nous avons reconstruit la marque autour de ce que la maison est déjà.",
     en: "A hotel whose whole character is in its materials   brass, wood, velvet   and none of which reached a guest before they booked. We rebuilt the brand around what the house already is.",
   },
-  image: "/work/mabrouk/imgg1 (18).png",
+  image: "/work/mabrouk/hero-mabrouk.png",
   alt: {
     fr: "L'escalier du Mabrouk Hôtel sous ses lanternes de laiton",
     en: "The Mabrouk Hôtel staircase under its brass lanterns",
@@ -89,6 +83,7 @@ const IMPACT_TITLE: Say = {
   fr: "Un hôtel qui ressemble enfin à ce qu'il fait ressentir.",
   en: "A hotel that finally looks like what it feels like.",
 };
+
 const IMPACT_TEXT: Say = {
   fr: "Une marque tirée du bâtiment plutôt que de sa catégorie, une photographie qui montre la maison à son heure, et un positionnement qui laisse la liste d'équipements aux comparateurs.",
   en: "A brand taken from the building rather than from its category, photography that shows the house at its own hour, and a position that leaves the amenity list to the comparison sites.",
@@ -295,22 +290,10 @@ const BRAND = {
   ],
 };
 
-/**
- * The palette, told rather than listed.
- *
- * The brand card above shows the colours; this is the run that says what
- * each one is for   the disk turns, the ground changes under the reader,
- * and one beat holds per note. Nothing is written twice: the colours are
- * the card’s own and the beats are the notes already set beside them, so
- * the two can never fall out of step.
- */
 const PALETTE: PaletteStory = {
   title: { fr: "Le langage visuel", en: "The visual language" },
   lead: BRAND.lead,
   colors: BRAND.colors.map(({ name, hex, role }) => ({ name, hex, role })),
-  /* Which colour each beat turns the room. Written out rather than counted
-     off the beats: there are more beats than colours, because the last one
-     comes back to a colour already used instead of introducing another. */
   states: BRAND.notes.map((note, index) => ({
     title: note.title,
     text: note.text,
@@ -1104,7 +1087,7 @@ export default function MabroukPage() {
           <Reveal direction="none" duration={0.5} amount={0.3}>
             <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-              {say({ fr: "Le travail", en: "The work" })}
+              {say({ fr: "gallerie", en: "Gallery" })}
             </p>
           </Reveal>
 

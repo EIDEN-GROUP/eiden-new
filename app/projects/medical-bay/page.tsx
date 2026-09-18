@@ -912,9 +912,9 @@ export default function MedicalBayPage() {
 
               <Reveal delay={0.22} amount={0.3}>
                 <ul className="mt-8 flex flex-wrap gap-2.5">
-                  <li key={"https://medicalbay.vercel.app/"}>
+                  <li key={"https://medicalbay-agadir.vercel.app/"}>
                     <a
-                      href={"https://medicalbay.vercel.app/"}
+                      href={"https://medicalbay-agadir.vercel.app/"}
                       target="_blank"
                       rel="noreferrer noopener"
                       className="font-label border-ink/20 text-ink hover:bg-ink hover:text-canvas inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[0.72rem] font-bold tracking-[0.16em] uppercase transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none sm:px-6 sm:py-3 sm:text-[0.78rem]"
@@ -1199,7 +1199,7 @@ export default function MedicalBayPage() {
           <Reveal direction="none" duration={0.5} amount={0.3}>
             <p className="eyebrow text-teal flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-current opacity-50" />
-              {say({ fr: "Le travail", en: "The work" })}
+              {say({ fr: "Gallerie", en: "Gallery" })}
             </p>
           </Reveal>
 

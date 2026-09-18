@@ -22,8 +22,6 @@ import { FacebookGlyph, InstagramGlyph } from "@/components/ui/social-glyphs";
 import type { PaletteStory } from "@/lib/data/projects/types";
 import { cn, cursorOn } from "@/lib/utils";
 
-/* The layout shared by the v2 case pages. Each page keeps its own words and
-   pictures and composes its chapters from these pieces. */
 
 export type Say = { fr: string; en: string };
 export type ChapterDef = { id: string; label: Say };
@@ -36,7 +34,7 @@ export type NextProject = {
 export type Face = { name: string; stack: string; role: Say };
 export type Socials = { instagram?: string; facebook?: string };
 
-const FRAME = "bg-beige relative overflow-hidden rounded-4xl";
+const FRAME = "bg-beige relative overflow-hidden rounded-xl";
 export const HALF = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 38vw";
 export const FULL = "(max-width: 1024px) 100vw, 76vw";
 
@@ -457,7 +455,7 @@ export function ListPanel({
     <Reveal amount={0.15} delay={fracture ? 0.08 : 0} className="h-full">
       <div
         className={cn(
-          "flex h-full flex-col rounded-4xl p-7 sm:p-9",
+          "flex h-full flex-col rounded-xl p-7 sm:p-9",
           fracture ? "bg-forest text-canvas" : "bg-beige text-ink",
         )}
       >
@@ -598,7 +596,7 @@ export function BrandBoard({
       />
 
       <Reveal amount={0.1} delay={0.08} className="h-full">
-        <div className="bg-beige flex h-full flex-col rounded-4xl p-7 sm:p-9">
+        <div className="bg-beige flex h-full flex-col rounded-xl p-7 sm:p-9">
           <p className="font-label text-teal text-[0.78rem] font-bold tracking-[0.18em] uppercase">
             {say({ fr: "Typographie", en: "Typography" })}
           </p>
@@ -661,7 +659,7 @@ export function ColourBoard({
       />
 
       <Reveal amount={0.1} delay={0.08} className="h-full">
-        <div className="bg-beige flex h-full flex-col rounded-4xl p-7 sm:p-9">
+        <div className="bg-beige flex h-full flex-col rounded-xl p-7 sm:p-9">
           <p className="font-label text-teal text-[0.78rem] font-bold tracking-[0.18em] uppercase">
             {say({ fr: "Système colorimétrique", en: "Colour system" })}
           </p>
@@ -698,7 +696,7 @@ export function PaletteStage({ story }: { story: PaletteStory }) {
   return (
     /* overflow-clip, not hidden: the stage is sticky, and a hidden overflow
        would pin it to this box instead of the page. */
-    <div className="overflow-clip rounded-4xl lg:[&_.palette-frame]:[--disk:min(36rem,72svh)]">
+    <div className="overflow-clip rounded-xl lg:[&_.palette-frame]:[--disk:min(36rem,72svh)]">
       <CasePaletteStory story={story} skin={TONES.canvas} />
     </div>
   );
@@ -708,7 +706,7 @@ export function PaletteStage({ story }: { story: PaletteStory }) {
 export function SignalsPanel({ items }: { items: string[] }) {
   return (
     <Reveal amount={0.1} delay={0.08} className="h-full">
-      <div className="bg-teal text-canvas flex h-full flex-col justify-center rounded-4xl p-8 sm:p-10">
+      <div className="bg-teal text-canvas flex h-full flex-col justify-center rounded-xl p-8 sm:p-10">
         <ol className="flex flex-col">
           {items.map((item, index) => (
             <li
@@ -767,7 +765,7 @@ export function LinesRow({
     <Reveal amount={0.15}>
       <ol
         className={cn(
-          "grid gap-x-10 gap-y-8 rounded-4xl px-7 py-9 sm:px-10 sm:py-12",
+          "grid gap-x-10 gap-y-8 rounded-xl px-7 py-9 sm:px-10 sm:py-12",
           ABREAST[items.length],
           skin.panel,
         )}
@@ -796,7 +794,7 @@ export function LinesRow({
 export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
   return (
     <Reveal amount={0.15}>
-      <div className="bg-beige relative isolate overflow-hidden rounded-4xl px-7 py-12 sm:px-12 sm:py-16">
+      <div className="bg-beige relative isolate overflow-hidden rounded-xl px-7 py-12 sm:px-12 sm:py-16">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
             src={image}
@@ -842,7 +840,7 @@ export function ImpactPanel({
 }) {
   return (
     <Reveal amount={0.15}>
-      <div className="bg-beige relative isolate grid gap-8 overflow-hidden rounded-4xl px-7 py-12 sm:grid-cols-2 sm:items-end sm:px-12 sm:py-16">
+      <div className="bg-beige relative isolate grid gap-8 overflow-hidden rounded-xl px-7 py-12 sm:grid-cols-2 sm:items-end sm:px-12 sm:py-16">
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image
             src={image}

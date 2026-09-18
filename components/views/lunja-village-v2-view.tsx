@@ -46,7 +46,7 @@ const HERO = {
     fr: "Un village côtier dont la marque disait encore « resort » alors que ceux qui arrivaient étaient surfeurs, nomades et collectifs créatifs. Nous l'avons reconstruite pour le client qui vient vraiment.",
     en: "A coastal village whose brand still said “resort” while the people turning up were surfers, nomads and creative groups. We rebuilt it for the guest actually arriving.",
   },
-  image: "/work/lunja-village/image lunja hero 1.png",
+  image: "/work/lunja-village/hero section lunja.png",
   alt: {
     fr: "La piscine de Lunja Village au coucher du soleil",
     en: "The Lunja Village pool at sunset",
@@ -174,30 +174,30 @@ const BRAND = {
         },
       },
     },
-    {
-      name: "Ocean Teal",
-      hex: "#3D86A3",
-      role: { fr: "Photographie", en: "Photography" },
-      note: {
-        title: { fr: "L'eau, d'abord", en: "The water, first" },
-        text: {
-          fr: "Le teal n'est pas une couleur graphique : c'est le ton de la vague, vers lequel on étalonne les bleus.",
-          en: "Teal is not a graphic colour: it is the tone of the wave, the one the blues are graded toward.",
-        },
-      },
-    },
-    {
-      name: "Warm Wood",
-      hex: "#875B39",
-      role: { fr: "Tons chauds", en: "Warm tones" },
-      note: {
-        title: { fr: "Du bois, pas du gris", en: "Wood, not grey" },
-        text: {
-          fr: "Le bois revient dans les intérieurs, la peau et le bar ; les ombres tirent vers lui plutôt que vers le gris froid.",
-          en: "Wood returns in the interiors, the skin and the bar; shadows lean toward it rather than cool grey.",
-        },
-      },
-    },
+    // {
+    //   name: "Ocean Teal",
+    //   hex: "#3D86A3",
+    //   role: { fr: "Photographie", en: "Photography" },
+    //   note: {
+    //     title: { fr: "L'eau, d'abord", en: "The water, first" },
+    //     text: {
+    //       fr: "Le teal n'est pas une couleur graphique : c'est le ton de la vague, vers lequel on étalonne les bleus.",
+    //       en: "Teal is not a graphic colour: it is the tone of the wave, the one the blues are graded toward.",
+    //     },
+    //   },
+    // },
+    // {
+    //   name: "Warm Wood",
+    //   hex: "#875B39",
+    //   role: { fr: "Tons chauds", en: "Warm tones" },
+    //   note: {
+    //     title: { fr: "Du bois, pas du gris", en: "Wood, not grey" },
+    //     text: {
+    //       fr: "Le bois revient dans les intérieurs, la peau et le bar ; les ombres tirent vers lui plutôt que vers le gris froid.",
+    //       en: "Wood returns in the interiors, the skin and the bar; shadows lean toward it rather than cool grey.",
+    //     },
+    //   },
+    // },
     {
       name: "Sand Paper",
       hex: "#F7F0E1",
@@ -319,14 +319,6 @@ const WORK: { image: string; alt: Say }[] = [
     alt: { fr: "Réception du village", en: "Village reception" },
   },
   {
-    image: "/work/lunja-village/Copie de immgg38.png",
-    alt: { fr: "Salon d'accueil", en: "Lounge at reception" },
-  },
-  {
-    image: "/work/lunja-village/Copie de immgg39.png",
-    alt: { fr: "Salle du restaurant", en: "Restaurant room" },
-  },
-  {
     image: "/work/lunja-village/Copie de immgg42.png",
     alt: {
       fr: "Salon ouvert sur la côte",
@@ -393,13 +385,13 @@ const SIGNALS: Say[] = [
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
   { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
-  { id: "positionnement", label: { fr: "Positionnement", en: "Positioning" } },
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
+  { id: "positionnement", label: { fr: "Positionnement", en: "Positioning" } },
   { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   { id: "achat-media", label: { fr: "Achat média", en: "Media buying" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 const NEXT_V2: NextProject[] = NEXT.map((project) => ({
@@ -450,9 +442,34 @@ export function LunjaVillageV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="positionnement">
+      <Chapter id="marque">
         <Caption
           index={2}
+          title={say(BRAND_TITLE)}
+          text={say(BRAND.essence)}
+          meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
+        />
+        <BrandBoard
+          ground={BRAND.ground}
+          wordmark={BRAND.wordmark}
+          wordmarkAlt={say(BRAND.wordmarkAlt)}
+          contain
+          faces={BRAND.type}
+        />
+      </Chapter>
+
+      <Chapter id="palette">
+        <Caption
+          index={3}
+          title={say(PALETTE_TITLE)}
+          meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
+        />
+        <PaletteStage story={PALETTE} />
+      </Chapter>
+
+      <Chapter id="positionnement">
+        <Caption
+          index={4}
           label={say({
             fr: "Rebranding · Positionnement",
             en: "Rebranding · Positioning",
@@ -472,31 +489,6 @@ export function LunjaVillageV2View() {
             />
           ))}
         </Grid>
-      </Chapter>
-
-      <Chapter id="marque">
-        <Caption
-          index={3}
-          title={say(BRAND_TITLE)}
-          text={say(BRAND.essence)}
-          meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
-        />
-        <BrandBoard
-          ground={BRAND.ground}
-          wordmark={BRAND.wordmark}
-          wordmarkAlt={say(BRAND.wordmarkAlt)}
-          contain
-          faces={BRAND.type}
-        />
-      </Chapter>
-
-      <Chapter id="palette">
-        <Caption
-          index={4}
-          title={say(PALETTE_TITLE)}
-          meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
-        />
-        <PaletteStage story={PALETTE} />
       </Chapter>
 
       <Chapter id="marketing">

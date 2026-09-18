@@ -219,7 +219,7 @@ export const medicalBay: ProjectCase = {
       },
       links: [
         {
-          href: "https://medicalbay.vercel.app/",
+          href: "https://medicalbay-agadir.vercel.app/",
           label: { fr: "Voir le site", en: "View the site" },
           kind: "site",
         },

@@ -3,60 +3,27 @@ import type { ProjectSlug } from "@/lib/data/site";
 
 export type { Localized };
 
-/**
- * A picture, and what it is an example of.
- *
- * The label is the only writing a visual gets. It names the kind of work
- * `Website`, `Campaign`, `B2B Portal`   rather than describing the picture,
- * because a reader scanning a wall of work is asking what they are looking at,
- * not what is in the frame.
- */
 export type Shot = {
   image: string;
   alt: Localized;
   label: Localized;
-  /**
-   * How the picture meets its frame. `cover` by default, which is right for a
-   * photograph   the crop costs nothing. A phone screenshot is the exception:
-   * it is much taller than any frame on the page, so covering it throws away
-   * the top and bottom of the screen being shown. Those ask for `contain`.
-   */
   fit?: "cover" | "contain";
 };
 
-/**
- * A picture in the gallery.
- *
- * No label, unlike a `Shot`: a gallery is looked at rather than read, and
- * captioning nine images turns it back into a list.
- */
 export type GalleryImage = { image: string; alt: Localized };
 
-/** One colour of a brand palette, as the brand book itself names it. */
 export type PaletteColor = {
-  /** The brand's own name for it   "Forêt", "Keppel", "Magenta". */
   name: string;
   hex: string;
-  /** What it does in the system, not what it looks like. */
   role: Localized;
 };
 
-/** One beat of the palette story, and the colour it turns the room. */
 export type PaletteState = {
   title: Localized;
   text: Localized;
-  /** Index into `colors`. Beats may return to a colour already used. */
   colorIndex: number;
 };
 
-/**
- * The palette, told rather than listed.
- *
- * Read as a held run the visitor scrolls through: the disk turns, the ground
- * changes colour under them, and each beat says what that colour is for. It
- * belongs to the branding chapter and is written inside it   a palette is one
- * of the things branding produced, not a subject of its own.
- */
 export type PaletteStory = {
   title: Localized;
   lead: Localized;
@@ -64,42 +31,14 @@ export type PaletteStory = {
   states: PaletteState[];
 };
 
-/**
- * Somewhere the work is live.
- *
- * `kind` only decides which mark is drawn beside the label; the label is what
- * is read. Never write a link that has not been checked   an account that has
- * been renamed is worse than no link at all.
- */
 export type ChapterLink = {
   href: string;
   label: Localized;
   kind?: "site" | "instagram" | "facebook" | "linkedin" | "tiktok";
 };
 
-/**
- * The ground a room stands on.
- *
- * Three, and only three. A case study is a set of rooms the reader walks
- * through, and a room changes by changing its walls   canvas for the work that
- * has to be looked at in daylight, ink for the work that was made for a
- * screen, forest for the turns. A fourth ground would stop reading as a change
- * and start reading as decoration.
- */
 export type ChapterTone = "canvas" | "ink" | "forest";
 
-/**
- * The diagnosis: what was already true, and what was out of joint.
- *
- * This is the section that makes a case unmistakably EIDEN, and it is the one
- * place the reader is allowed to see the business before the design. It is
- * written as two columns because a fracture is only legible next to the thing
- * it broke away from   a list of problems on its own reads as a pitch, and a
- * list of strengths on its own reads as a compliment.
- *
- * `statement` closes it in one line. Two short clauses, the second turning on
- * the first: "Le lieu savait qui il était. La marque, non."
- */
 export type Fracture = {
   /** What the business already had. Three or four, short. */
   reality: Localized[];
@@ -109,16 +48,6 @@ export type Fracture = {
   statement: Localized;
 };
 
-/**
- * The decision, and the system it set in motion.
- *
- * The difference between EIDEN and an agency is written here: one business
- * problem answered by connected disciplines rather than by a list of
- * deliverables. `chain` is that system in order   positioning → brand →
- * content → media → commercial   and `text` says how each link holds the next
- * one up. Never more than five links: a chain nobody can hold in their head is
- * an org chart, not an architecture.
- */
 export type Architecture = {
   /** What EIDEN understood and decided, in one sentence. */
   decision: Localized;
@@ -128,33 +57,13 @@ export type Architecture = {
   text: Localized;
 };
 
-/**
- * One figure, and everything that makes it mean something.
- *
- * A number alone is not evidence   "+38%" with no unit and no period is a
- * decoration. Every field except the figure is allowed to be `null`, and a
- * `null` is rendered as nothing rather than as a guess: on this portfolio a
- * missing timeframe is written by the client or it is not written at all.
- */
 export type ImpactRow = {
-  /** The figure, as the client publishes it. */
   metric: string;
-  /** What it counts. `null` until the client has said. */
   measures: Localized | null;
-  /** Over what period. `null` until the client has said. */
   period: Localized | null;
-  /** Why it matters commercially. `null` until the client has said. */
   meaning: Localized | null;
 };
 
-/**
- * What changed.
- *
- * The close of the case, on its own screen. `metric` is only ever a number the
- * client has put its own name to, and `rows` is where that number is given its
- * unit, its period and its commercial meaning   the three things that turn a
- * figure into an argument.
- */
 export type Impact = {
   title: Localized;
   text: Localized;

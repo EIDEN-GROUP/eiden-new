@@ -1,21 +1,6 @@
 "use client";
 
-import {
-  CaseV2,
-  Caption,
-  Chapter,
-  Gallery,
-  Grid,
-  Hero,
-  OutcomePanel,
-  Pair,
-  Plate,
-  RealityFracture,
-  SignalsPanel,
-  useSay,
-  type NextProject,
-  type Say,
-} from "@/components/case-v2/kit";
+import { CaseV2, Caption, Chapter, Gallery, Grid, Hero, OutcomePanel, Pair, Plate, RealityFracture, SignalsPanel, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
 
 const CLIENT = "Mabrouk Hôtel";
 const YEAR = "2026";
@@ -31,7 +16,7 @@ const HERO = {
     fr: "Un hôtel dont tout le caractère est dans la matière   le laiton, le bois, le velours   et dont rien de tout cela n'arrivait jusqu'au client avant sa réservation. Nous l'avons fait voir par le marketing, la photographie et le contenu.",
     en: "A hotel whose whole character is in its materials   brass, wood, velvet   and none of which reached a guest before they booked. We made it visible through marketing, photography and content.",
   },
-  image: "/work/mabrouk/imgg1 (18).png",
+  image: "/work/mabrouk/hero-mabrouk.png",
   alt: {
     fr: "L'escalier du Mabrouk Hôtel sous ses lanternes de laiton",
     en: "The Mabrouk Hôtel staircase under its brass lanterns",
@@ -108,46 +93,6 @@ const MARKETING = {
   ] as Say[],
 };
 
-const PHOTOGRAPHY = {
-  title: {
-    fr: "Photographier la maison comme on l'habite, pas comme on l'inventorie.",
-    en: "Photograph the house the way it is lived in, not the way it is inventoried.",
-  },
-  text: {
-    fr: "Une chambre d'hôtel photographiée de face, au flash, ressemble à toutes les autres. Chaque prise a donc été faite à l'heure où la maison est la plus elle-même, et cadrée sur ce qu'un client remarque vraiment : une matière, une lumière, un coin.",
-    en: "A hotel bedroom shot square on, with flash, looks like every other one. So each frame was made at the hour the house is most itself, and framed on what a guest actually notices: a material, a light, a corner.",
-  },
-  plates: [
-    {
-      image: "/work/mabrouk/imgg1 (1).png",
-      alt: { fr: "L'accueil du Mabrouk Hôtel", en: "The Mabrouk Hôtel reception" },
-    },
-    {
-      image: "/work/mabrouk/imgg1 (19).png",
-      alt: {
-        fr: "Les lanternes de laiton du Mabrouk Hôtel",
-        en: "The Mabrouk Hôtel brass lanterns",
-      },
-    },
-    {
-      image: "/work/mabrouk/imgg1 (20).png",
-      alt: {
-        fr: "Le salon du Mabrouk Hôtel derrière son claustra",
-        en: "The Mabrouk Hôtel lounge behind its fretwork screen",
-      },
-    },
-    {
-      image: "/work/mabrouk/imgg1 (12).png",
-      alt: { fr: "Une chambre du Mabrouk Hôtel", en: "A Mabrouk Hôtel bedroom" },
-    },
-  ],
-  signals: [
-    { fr: "Une matière.", en: "A material." },
-    { fr: "Une lumière.", en: "A light." },
-    { fr: "Un coin.", en: "A corner." },
-  ] as Say[],
-};
-
 const CONTENT = {
   title: {
     fr: "Des images qui continuent de vivre entre deux séjours.",
@@ -159,7 +104,7 @@ const CONTENT = {
   },
   plates: [
     {
-      image: "/work/mabrouk/imgg1 (38).png",
+      image: "/work/mabrouk/image sm mabrouk.png",
       alt: { fr: "Une chambre du Mabrouk Hôtel", en: "A Mabrouk Hôtel bedroom" },
     },
     {
@@ -177,7 +122,7 @@ const CONTENT = {
       },
     },
     {
-      image: "/work/mabrouk/imgg1 (58).png",
+      image: "/work/mabrouk/sm image mabrouk.png",
       alt: {
         fr: "Le salon de velours du Mabrouk Hôtel",
         en: "The velvet lounge of the Mabrouk Hôtel",
@@ -242,13 +187,12 @@ const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
   { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
   { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
-  { id: "photographie", label: { fr: "Photographie", en: "Photography" } },
   {
     id: "contenu",
     label: { fr: "Contenu · Réseaux sociaux", en: "Content · Social media" },
   },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function MabroukV2View() {
@@ -275,7 +219,7 @@ export function MabroukV2View() {
         <Pair>
           <Plate image={HERO.image} alt={say(HERO.alt)} shape="aspect-square" />
           <Plate
-            image="/work/mabrouk/imgg1 (2).png"
+            image="/work/mabrouk/IMAGE web positioning.png"
             alt={say({ fr: "Le Mabrouk Hôtel", en: "The Mabrouk Hôtel" })}
             shape="aspect-square"
             delay={0.08}
@@ -302,38 +246,8 @@ export function MabroukV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="photographie">
-        <Caption
-          index={3}
-          title={say(PHOTOGRAPHY.title)}
-          text={say(PHOTOGRAPHY.text)}
-        />
-        <Grid>
-          {PHOTOGRAPHY.plates.map((plate, index) => (
-            <Plate
-              key={plate.image}
-              image={plate.image}
-              alt={say(plate.alt)}
-              shape="aspect-4/5"
-              delay={(index % 2) * 0.08}
-            />
-          ))}
-        </Grid>
-        <Pair>
-          <Plate
-            image="/work/mabrouk/imgg1 (53).png"
-            alt={say({
-              fr: "Les lanternes de laiton du Mabrouk Hôtel",
-              en: "The Mabrouk Hôtel brass lanterns",
-            })}
-            shape="aspect-4/5"
-          />
-          <SignalsPanel items={PHOTOGRAPHY.signals.map(say)} />
-        </Pair>
-      </Chapter>
-
       <Chapter id="contenu">
-        <Caption index={4} title={say(CONTENT.title)} text={say(CONTENT.text)} />
+        <Caption index={3} title={say(CONTENT.title)} text={say(CONTENT.text)} />
         <Grid>
           {CONTENT.plates.map((plate, index) => (
             <Plate
@@ -348,13 +262,13 @@ export function MabroukV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={5} title={say(IMPACT.title)} />
+        <Caption index={4} title={say(IMPACT.title)} />
         <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
       </Chapter>
 
       <Chapter id="le-travail">
         <Caption
-          index={6}
+          index={5}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

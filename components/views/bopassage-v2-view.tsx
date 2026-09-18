@@ -352,7 +352,7 @@ const CHAPTERS = [
   { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   { id: "media-payant", label: { fr: "Média payant", en: "Paid media" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function BopassageV2View() {
@@ -440,7 +440,7 @@ export function BopassageV2View() {
         <Caption index={5} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         <Pair>
           <Plate
-            image="/work/bopassage/bopassage-web-desktop.png"
+            image="/work/bopassage/bopassage-web-desktop.jpeg"
             alt={say({
               fr: "Page d'accueil du site Bôpassage",
               en: "The Bôpassage homepage",
@@ -449,15 +449,13 @@ export function BopassageV2View() {
             shape="aspect-4/3"
           />
           <Plate
-            image="/work/bopassage/bopassage-web-mobile.png"
+            image="/work/bopassage/bopassage-web-mobile.jpeg"
             alt={say({
               fr: "Le site Bôpassage sur téléphone",
               en: "The Bôpassage site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
             shape="aspect-4/3"
-            contain
-            delay={0.08}
           />
         </Pair>
       </Chapter>

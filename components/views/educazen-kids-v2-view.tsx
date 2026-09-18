@@ -377,7 +377,7 @@ const CHAPTERS = [
   { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   { id: "media-payant", label: { fr: "Média payant", en: "Paid media" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function EducazenKidsV2View() {

@@ -4,10 +4,8 @@ import {
   CaseV2,
   Caption,
   Chapter,
-  ColourBoard,
   FULL,
   Gallery,
-  Grid,
   Hero,
   OutcomePanel,
   Pair,
@@ -79,63 +77,6 @@ const DECISION: Say = {
 const CHAIN_TEXT: Say = {
   fr: "La direction artistique a choisi dix-neuf heures et s'y tient partout : le logotype et la lumière viennent de ce que le lieu est déjà à cette heure-là. Le site ne traite qu'une question   qui joue ce soir   et l'équipe met la soirée à jour elle-même, depuis la salle. Et le mouvement est écrit en CSS plutôt qu'apporté par une librairie, pour que le site reste léger sur un réseau de bord de mer.",
   en: "Art direction picked seven in the evening and holds to it everywhere: the wordmark and the light come from what the place already is at that hour. The site handles one question   who is playing tonight   and the team updates the evening itself, from the floor. And the motion is written in CSS rather than brought in by a library, so the site stays light on a seafront network.",
-};
-
-const ART_DIRECTION = {
-  title: {
-    fr: "La personnalité du lieu, rendue visible.",
-    en: "The venue's own personality, made visible.",
-  },
-  text: {
-    fr: "Rien n'a été inventé : le logotype et la lumière viennent de ce que le lieu est déjà à dix-neuf heures. La direction artistique a consisté à choisir cette heure-là et à s'y tenir partout.",
-    en: "Nothing was invented: the wordmark and the light come from what the place already is at seven in the evening. The art direction was choosing that hour and holding to it everywhere.",
-  },
-  plates: [
-    {
-      image: "/work/chillout-lounge/chilout card.png",
-      alt: {
-        fr: "Le logotype CHILLOUT sur une soirée du lieu",
-        en: "The CHILLOUT wordmark over a night at the venue",
-      },
-    },
-    {
-      image: "/work/chillout-lounge/DSC08999.jpg",
-      alt: {
-        fr: "Cocktails au bar du CHILLOUT",
-        en: "Cocktails at the CHILLOUT bar",
-      },
-    },
-    {
-      image: "/work/chillout-lounge/DSC09029.jpg",
-      alt: {
-        fr: "Le barman du CHILLOUT au travail",
-        en: "The CHILLOUT bartender at work",
-      },
-    },
-    {
-      image: "/work/chillout-lounge/DSC09034.jpg",
-      alt: {
-        fr: "Une soirée au CHILLOUT Lounge",
-        en: "A night at CHILLOUT Lounge",
-      },
-    },
-  ],
-};
-
-const BRAND = {
-  ground: "#4C3E0A",
-  wordmark: "/work/chillout-lounge/chilout card.png",
-  wordmarkAlt: { fr: "Marque CHILLOUT Lounge", en: "CHILLOUT Lounge brand mark" },
-  essence: {
-    fr: "Rien n'a été inventé : le logotype et la lumière viennent de ce que le lieu est déjà à dix-neuf heures.",
-    en: "Nothing was invented: the wordmark and the light come from what the place already is at seven in the evening.",
-  },
-  colors: [
-    { hex: "#403A08", role: { fr: "Dominante", en: "Dominant" } },
-    { hex: "#A6945E", role: { fr: "Accent", en: "Accent" } },
-    { hex: "#75652E", role: { fr: "Contraste", en: "Contrast" } },
-    { hex: "#FFFFFF", role: { fr: "Neutre", en: "Neutral" } },
-  ],
 };
 
 const WEBSITE = {
@@ -222,15 +163,10 @@ const NEXT: NextProject[] = [
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
   { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
-  {
-    id: "direction-artistique",
-    label: { fr: "Direction artistique", en: "Art direction" },
-  },
-  { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
   { id: "motion", label: { fr: "Motion", en: "Motion" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function ChilloutLoungeV2View() {
@@ -267,46 +203,9 @@ export function ChilloutLoungeV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="direction-artistique">
-        <Caption
-          index={2}
-          title={say(ART_DIRECTION.title)}
-          text={say(ART_DIRECTION.text)}
-        />
-        <Grid>
-          {ART_DIRECTION.plates.map((plate, index) => (
-            <Plate
-              key={plate.image}
-              image={plate.image}
-              alt={say(plate.alt)}
-              shape="aspect-square"
-              delay={(index % 2) * 0.08}
-            />
-          ))}
-        </Grid>
-      </Chapter>
-
-      <Chapter id="marque">
-        <Caption
-          index={3}
-          title={say(BRAND.essence)}
-          meta={say({
-            fr: "Couleurs relevées sur la marque",
-            en: "Colours read off the mark",
-          })}
-        />
-        <ColourBoard
-          ground={BRAND.ground}
-          wordmark={BRAND.wordmark}
-          wordmarkAlt={say(BRAND.wordmarkAlt)}
-          contain
-          colors={BRAND.colors}
-        />
-      </Chapter>
-
       <Chapter id="site-web">
-        <Caption index={4} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
-        <Plate
+        <Caption index={2} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
+        {/* <Plate
           image="/work/chillout-lounge/web-chillout-desktop.jpg"
           alt={say({
             fr: "Le site CHILLOUT sur écran",
@@ -315,8 +214,18 @@ export function ChilloutLoungeV2View() {
           caption={say({ fr: "Desktop", en: "Desktop" })}
           shape="aspect-4/3 sm:aspect-16/10"
           sizes={FULL}
-        />
+        /> */}
         <Pair>
+          <Plate
+            image="/work/chillout-lounge/web-chillout-cover.jpg"
+            alt={say({
+              fr: "Le site CHILLOUT sur écran",
+              en: "The CHILLOUT site on desktop",
+            })}
+            caption={say({ fr: "Desktop", en: "Desktop" })}
+            shape="aspect-4/5"
+            delay={0.08}
+          />
           <Plate
             image="/work/chillout-lounge/web-chillout-mobile.jpg"
             alt={say({
@@ -327,21 +236,11 @@ export function ChilloutLoungeV2View() {
             shape="aspect-4/5"
             contain
           />
-          <Plate
-            image="/work/chillout-lounge/web-chillout-cover.jpg"
-            alt={say({
-              fr: "L'accueil du site CHILLOUT",
-              en: "The CHILLOUT site homepage",
-            })}
-            caption={say({ fr: "Accueil", en: "Home" })}
-            shape="aspect-4/5"
-            delay={0.08}
-          />
         </Pair>
       </Chapter>
 
       <Chapter id="motion">
-        <Caption index={5} title={say(MOTION.title)} text={say(MOTION.text)} />
+        <Caption index={3} title={say(MOTION.title)} text={say(MOTION.text)} />
         <Pair>
           <Plate
             image="/work/chillout-lounge/DSC09024.jpg"
@@ -353,13 +252,13 @@ export function ChilloutLoungeV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={6} title={say(IMPACT.title)} />
+        <Caption index={4} title={say(IMPACT.title)} />
         <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
       </Chapter>
 
       <Chapter id="le-travail">
         <Caption
-          index={7}
+          index={5}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

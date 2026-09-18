@@ -344,7 +344,7 @@ const CHAPTERS = [
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
   { id: "contenu", label: { fr: "Contenu", en: "Content" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Le travail", en: "The work" } },
+  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function DmcMoroccoV2View() {
