@@ -5,7 +5,6 @@ import {
   CaseV2,
   Caption,
   Chapter,
-  FULL,
   Gallery,
   Grid,
   Hero,
@@ -41,7 +40,7 @@ const HERO = {
     fr: "Un centre qui change la vie d'enfants tous les jours, avec une présence digitale qui n'en montrait rien. Nous avons rafraîchi la marque et mis les inscriptions sur rails.",
     en: "A centre changing children's lives daily, with a digital presence that showed none of it. We refreshed the brand and put enrolment on rails.",
   },
-  image: "/work/educazen-kids/educazen-hero.png",
+  image: "/work/educazen-kids/hero.jpeg",
   alt: {
     fr: "Le centre EducazenKids à Agadir",
     en: "The EducazenKids centre in Agadir",
@@ -92,35 +91,31 @@ const CHAIN_TEXT: Say = {
 
 const REFRESH = {
   title: {
-    fr: "Une identité qui ressemble enfin à ce qui se passe à l'intérieur.",
-    en: "An identity that finally looks like what happens inside.",
+    fr: "Un site qui répond au parent avant de parler du centre.",
+    en: "A site that answers the parent before it talks about the centre.",
   },
   text: {
-    fr: "Le seul projet du portfolio où la refonte peut se montrer en comparaison : l'ancienne marque à côté de la nouvelle. Le cœur-puzzle vient du centre lui-même   quatre pièces différentes, et c'est ce qui le rend entier. Il vit seul en avatar, en favicon et en filigrane à trois pour cent, toujours sans le slogan, et jamais sur un fond sombre.",
-    en: "The one project in this portfolio where the refresh can be shown as a comparison: the old mark beside the new one. The puzzle heart came out of the centre itself   four different pieces, which is what makes it whole. It stands alone as an avatar, a favicon and a three per cent watermark, always without the strapline, and never on a dark ground.",
+    fr: "L'ancien site ne montrait rien de ce qui se passe à l'intérieur. Le nouveau porte la marque refondue et répond d'abord aux deux questions d'un parent : est-ce qu'on accueille un enfant comme le sien, et est-ce qu'il reste une place. Les profils HPI, TDAH, DYS et typique sont nommés dès le premier écran, les inscriptions de la rentrée sont annoncées avant le titre, et un seul bouton mène à l'inscription, sur écran comme sur téléphone.",
+    en: "The old site showed nothing of what happens inside. The new one wears the refreshed brand and answers a parent's two questions first: does the centre take a child like theirs, and is there still a place. Gifted, ADHD, DYS and typical profiles are named on the first screen, open enrolment for the new school year sits above the headline, and one button leads to enrolment, on desktop as on a phone.",
   },
   plates: [
-    {
-      image: "/work/educazen-kids/educazenkids-before.png",
+     {
+      image: "/work/educazen-kids/desktop.jpeg",
+      caption: { fr: "Desktop", en: "Desktop" },
       alt: {
-        fr: "L'identité EducazenKids avant la refonte",
-        en: "The EducazenKids identity before the refresh",
+        fr: "Le site EducazenKids sur écran",
+        en: "The EducazenKids site on desktop",
       },
+      contain: false,
     },
     {
-      image: "/work/educazen-kids/educazenkids-after.png",
+      image: "/work/educazen-kids/mobile.jpeg",
+      caption: { fr: "Mobile", en: "Mobile" },
       alt: {
-        fr: "L'identité EducazenKids après la refonte",
-        en: "The EducazenKids identity after the refresh",
+        fr: "Le site EducazenKids sur téléphone",
+        en: "The EducazenKids site on a phone",
       },
-    },
-    {
-      image: "/work/educazen-kids/educazenkids-logo.png",
-      alt: { fr: "Logo EducazenKids", en: "EducazenKids logo" },
-    },
-    {
-      image: "/work/educazen-kids/educazenkids-brand-identity.png",
-      alt: { fr: "Identité EducazenKids", en: "EducazenKids identity" },
+      contain: true,
     },
   ],
 };
@@ -219,59 +214,30 @@ const PALETTE: PaletteStory = {
 
 const PLATFORM = {
   title: {
-    fr: "Une seule route, du premier clic à la place confirmée.",
-    en: "One route, from the first click to the confirmed place.",
+    fr: "Ce que le papier perdait, l'écran le garde.",
+    en: "What paper used to lose, the screen now keeps.",
   },
   text: {
-    fr: "Devant, un site qui répond aux deux questions d'un parent avant de parler du centre : est-ce qu'on prend un profil comme le sien, et combien de temps il faut attendre. Derrière, le tableau de bord où arrivent les demandes, où se comptent les places, et où les relances ne dépendent plus de la mémoire de quelqu'un.",
-    en: "In front, a site that answers a parent's two questions before it talks about the centre: is a profile like theirs taken, and how long is the wait. Behind it, the dashboard where enquiries land, places are counted, and follow-ups no longer depend on someone remembering.",
+    fr: "Les places étaient suivies sur papier. Désormais, les commandes et les demandes de rendez-vous passées sur le site arrivent au tableau de bord, avec leur évolution mois après mois. Le CRM prend le relais : les familles, les camps et les paiements, ce qui a été réglé ce mois-ci, ce qui reste dû et le taux de collecte. Les relances ne dépendent plus de la mémoire de quelqu'un.",
+    en: "Places used to be tracked on paper. Now the orders and appointment requests made on the site land on the dashboard, with their trend month by month. The CRM takes over from there: families, camps and payments, what was paid this month, what is still owed and the collection rate. Follow-ups no longer depend on someone remembering.",
   },
   plates: [
     {
-      image: "/work/educazen-kids/desktop.jpeg",
-      caption: { fr: "Desktop", en: "Desktop" },
-      alt: {
-        fr: "Le site EducazenKids sur écran",
-        en: "The EducazenKids site on desktop",
-      },
-      contain: false,
-    },
-    {
-      image: "/work/educazen-kids/mobile.jpeg",
-      caption: { fr: "Mobile", en: "Mobile" },
-      alt: {
-        fr: "Le site EducazenKids sur téléphone",
-        en: "The EducazenKids site on a phone",
-      },
-      contain: true,
-    },
-    {
-      image: "/work/educazen-kids/educazenkids-crm.png",
+      image: "/work/educazen-kids/crm.jpeg",
       caption: { fr: "CRM", en: "CRM" },
       alt: { fr: "Le CRM EducazenKids", en: "The EducazenKids CRM" },
       contain: false,
     },
     {
-      image: "/work/educazen-kids/educazenkids-dashboard.png",
+      image: "/work/educazen-kids/db.jpeg",
       caption: { fr: "Tableau de bord", en: "Dashboard" },
       alt: {
-        fr: "Tableau de bord des inscriptions",
-        en: "The enrolment dashboard",
+        fr: "Le tableau de bord EducazenKids",
+        en: "The EducazenKids dashboard",
       },
       contain: false,
     },
   ],
-};
-
-const MARKETING = {
-  title: {
-    fr: "Une présence que les parents croisent vraiment.",
-    en: "A presence parents actually come across.",
-  },
-  text: {
-    fr: "Les familles concernées ne se trouvent pas par volume : elles se parlent entre elles, dans des groupes, autour d'une école. La présence a donc été construite pour être reconnue une deuxième fois plutôt que vue une première.",
-    en: "The families this matters to are not found by volume: they talk to each other, in groups, around a school. So the presence was built to be recognised a second time rather than seen a first.",
-  },
 };
 
 const PAID = {
@@ -360,7 +326,7 @@ const NEXT: NextProject[] = [
     href: "/lunja-village",
     client: "Lunja Village",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/lunja-village/image lunja hero 1.png",
+    image: "/work/lunja-village/hero section lunja.png",
   },
   {
     href: "/mabrouk",
@@ -373,14 +339,16 @@ const NEXT: NextProject[] = [
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
   { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
-  {
-    id: "refonte-de-marque",
-    label: { fr: "Refonte de marque", en: "Brand refresh" },
-  },
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
-  { id: "site-web", label: { fr: "Site web · CRM", en: "Website · CRM" } },
-  { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
+  {
+    id: "refonte-de-marque",
+    label: { fr: "Refonte du site", en: "Website refresh" },
+  },
+  {
+    id: "site-web",
+    label: { fr: "CRM & tableau de bord", en: "CRM & dashboard" },
+  },
   { id: "media-payant", label: { fr: "Média payant", en: "Paid media" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
@@ -410,9 +378,17 @@ export function EducazenKidsV2View() {
       <Chapter id="architecture">
         <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
         <Pair>
-          <Plate image={HERO.image} alt={say(HERO.alt)} shape="aspect-square" />
           <Plate
-            image="/work/educazen-kids/educazenkids-brand-book.png"
+            image="/work/educazen-kids/architecture-2.jpeg"
+            alt={say({
+              fr: "Livre de marque EducazenKids",
+              en: "EducazenKids brand book",
+            })}
+            shape="aspect-square"
+            delay={0.08}
+          />
+          <Plate
+            image="/work/educazen-kids/architecture-1.jpeg"
             alt={say({
               fr: "Livre de marque EducazenKids",
               en: "EducazenKids brand book",
@@ -423,24 +399,9 @@ export function EducazenKidsV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="refonte-de-marque">
-        <Caption index={2} title={say(REFRESH.title)} text={say(REFRESH.text)} />
-        <Grid>
-          {REFRESH.plates.map((plate, index) => (
-            <Plate
-              key={plate.image}
-              image={plate.image}
-              alt={say(plate.alt)}
-              shape="aspect-4/3"
-              delay={(index % 2) * 0.08}
-            />
-          ))}
-        </Grid>
-      </Chapter>
-
       <Chapter id="marque">
         <Caption
-          index={3}
+          index={2}
           title={say(BRAND.essence)}
           meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
         />
@@ -455,7 +416,7 @@ export function EducazenKidsV2View() {
 
       <Chapter id="palette">
         <Caption
-          index={4}
+          index={3}
           title={say({
             fr: "Magenta, Violet, Teal, Or.",
             en: "Magenta, Violet, Teal, Or.",
@@ -464,6 +425,22 @@ export function EducazenKidsV2View() {
           meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
         />
         <PaletteStage story={PALETTE} />
+      </Chapter>
+
+      <Chapter id="refonte-de-marque">
+        <Caption index={4} title={say(REFRESH.title)} text={say(REFRESH.text)} />
+        <Grid>
+          {REFRESH.plates.map((plate, index) => (
+            <Plate
+              key={plate.image}
+              image={plate.image}
+              alt={say(plate.alt)}
+              caption={say(plate.caption)}
+              shape="aspect-4/3"
+              delay={(index % 2) * 0.08}
+            />
+          ))}
+        </Grid>
       </Chapter>
 
       <Chapter id="site-web">
@@ -482,34 +459,9 @@ export function EducazenKidsV2View() {
         </Grid>
       </Chapter>
 
-      <Chapter id="marketing">
-        <Caption
-          index={6}
-          title={say(MARKETING.title)}
-          text={say(MARKETING.text)}
-        />
-        <Pair>
-          <Plate
-            image="/work/educazen-kids/educazenkids-website-banner.png"
-            alt={say({ fr: "Bannière EducazenKids", en: "EducazenKids banner" })}
-            shape="aspect-4/5"
-            sizes={FULL}
-          />
-          <Plate
-            image="/work/educazen-kids/educazenkids-application.png"
-            alt={say({
-              fr: "L'identité EducazenKids en situation",
-              en: "The EducazenKids identity in place",
-            })}
-            shape="aspect-4/5"
-            sizes={FULL}
-          />
-        </Pair>
-      </Chapter>
-
       <Chapter id="media-payant" fit>
         <Caption
-          index={7}
+          index={6}
           label={say({ fr: "Média payant", en: "Paid media" })}
           title={say(PAID.title)}
           text={say(PAID.text)}
@@ -526,7 +478,7 @@ export function EducazenKidsV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={8} title={say(IMPACT.title)} text={say(IMPACT.text)} />
+        <Caption index={7} title={say(IMPACT.title)} text={say(IMPACT.text)} />
         <ImpactPanel
           image={HERO.image}
           metric={IMPACT.metric}
@@ -536,7 +488,7 @@ export function EducazenKidsV2View() {
 
       <Chapter id="le-travail">
         <Caption
-          index={9}
+          index={8}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

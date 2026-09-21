@@ -1,24 +1,6 @@
 "use client";
 
-import {
-  BrandBoard,
-  CaseV2,
-  Caption,
-  Chapter,
-  Gallery,
-  Grid,
-  Hero,
-  ImpactPanel,
-  Pair,
-  PaletteStage,
-  Plate,
-  RealityFracture,
-  SignalsPanel,
-  Slides,
-  useSay,
-  type NextProject,
-  type Say,
-} from "@/components/case-v2/kit";
+import { BrandBoard, CaseV2, Caption, Chapter, Gallery, Grid, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, SignalsPanel, Slides, useSay, type NextProject, type Say,} from "@/components/case-v2/kit";
 import type { PaletteStory } from "@/lib/data/projects/types";
 
 const CLIENT = "Bôpassage";
@@ -36,15 +18,13 @@ const HERO = {
     fr: "Le lieu où l'on revient toujours.",
     en: "The place you always come back to.",
   },
-  image: "/work/bopassage/bopassage-hero.png",
+  image: "/work/bopassage/hero-top.jpeg",
   alt: {
     fr: "La salle de Bôpassage à Agadir",
     en: "The Bôpassage dining room in Agadir",
   },
 };
 
-/* The v1 intro, cut at its full stop: the first sentence is the claim, the
-   second the answer. */
 const CHALLENGE = {
   title: {
     fr: "Un café-restaurant de Founty qui avait tout, sauf de quoi se faire trouver.",
@@ -87,16 +67,6 @@ const FRACTURE: Say[] = [
   },
 ];
 
-const DECISION: Say = {
-  fr: "Prendre ce que la salle fait ressentir, et construire vers l'extérieur à partir de là.",
-  en: "Take what the room feels like, and build outward from it.",
-};
-
-const CHAIN_TEXT: Say = {
-  fr: "La marque a fixé la chaleur et la lumière de la salle en système. Le site répond aux deux seules questions qu'on pose à un restaurant : où, et quand. Le contenu a donné à l'équipe un rythme qu'elle peut tenir seule. Le payant est allé chercher l'intention plutôt que l'audience. Et l'ensemble est réglé chaque mois sur une seule mesure : les couverts servis.",
-  en: "The brand fixed the room's warmth and light into a system. The site answers the only two questions anyone asks a restaurant: where, and when. Content gave the team a rhythm it can hold on its own. Paid media went after intent rather than audience. And all of it is retuned every month against one measure: covers served.",
-};
-
 const BRANDING = {
   title: {
     fr: "Forêt & Or, une identité tirée de la salle elle-même.",
@@ -108,19 +78,11 @@ const BRANDING = {
   },
   plates: [
     {
-      image: "/work/bopassage/bopassage-brand-board.png",
+      image: "/work/bopassage/branding.jpeg",
       caption: { fr: "Logo", en: "Logo" },
       alt: {
         fr: "Logotype principal et secondaire de Bôpassage",
         en: "Bôpassage primary and secondary wordmark",
-      },
-    },
-    {
-      image: "/work/bopassage/bopassage-brand-cup.png",
-      caption: { fr: "Application", en: "Application" },
-      alt: {
-        fr: "Tasse aux couleurs de Bôpassage",
-        en: "Cup in the Bôpassage colours",
       },
     },
     {
@@ -129,6 +91,14 @@ const BRANDING = {
       alt: {
         fr: "Signalétique extérieure de Bôpassage",
         en: "Bôpassage exterior signage",
+      },
+    },
+    {
+      image: "/work/bopassage/bopassage-brand-cup.png",
+      caption: { fr: "Application", en: "Application" },
+      alt: {
+        fr: "Tasse aux couleurs de Bôpassage",
+        en: "Cup in the Bôpassage colours",
       },
     },
     {
@@ -359,7 +329,6 @@ const NEXT: NextProject[] = [
 
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
-  { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
   { id: "branding", label: { fr: "Branding", en: "Branding" } },
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
@@ -395,24 +364,8 @@ export function BopassageV2View() {
         <RealityFracture reality={REALITY} fracture={FRACTURE} />
       </Chapter>
 
-      <Chapter id="architecture">
-        <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
-        <Pair>
-          <Plate image={HERO.image} alt={say(HERO.alt)} shape="aspect-square" />
-          <Plate
-            image="/work/bopassage/bopassage-brand-board.png"
-            alt={say({
-              fr: "Planche de marque Bôpassage",
-              en: "Bôpassage brand board",
-            })}
-            shape="aspect-square"
-            delay={0.08}
-          />
-        </Pair>
-      </Chapter>
-
       <Chapter id="branding">
-        <Caption index={2} title={say(BRANDING.title)} text={say(BRANDING.text)} />
+        <Caption index={1} title={say(BRANDING.title)} text={say(BRANDING.text)} />
         <Grid>
           {BRANDING.plates.map((plate, index) => (
             <Plate
@@ -420,7 +373,7 @@ export function BopassageV2View() {
               image={plate.image}
               alt={say(plate.alt)}
               // caption={say(plate.caption)}
-              shape="aspect-4/3"
+              shape="aspect-5/4"
               delay={(index % 2) * 0.08}
             />
           ))}
@@ -429,7 +382,7 @@ export function BopassageV2View() {
 
       <Chapter id="marque">
         <Caption
-          index={3}
+          index={2}
           title={say(BRAND.essence)}
           meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
         />
@@ -444,7 +397,7 @@ export function BopassageV2View() {
 
       <Chapter id="palette">
         <Caption
-          index={4}
+          index={3}
           title={say({ fr: "Forêt & Or.", en: "Forêt & Or." })}
           meta={`${BRAND.colors.length} ${say({ fr: "couleurs", en: "colours" })}`}
         />
@@ -452,7 +405,7 @@ export function BopassageV2View() {
       </Chapter>
 
       <Chapter id="site-web">
-        <Caption index={5} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
+        <Caption index={4} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         <Pair>
           <Plate
             image="/work/bopassage/bopassage-web-desktop.jpeg"
@@ -477,7 +430,7 @@ export function BopassageV2View() {
 
       <Chapter id="marketing">
         <Caption
-          index={6}
+          index={5}
           title={say(MARKETING.title)}
           text={say(MARKETING.text)}
         />
@@ -506,7 +459,7 @@ export function BopassageV2View() {
 
       <Chapter id="media-payant" fit>
         <Caption
-          index={7}
+          index={6}
           label={say({ fr: "Revenu · Média payant", en: "Revenue · Paid media" })}
           title={say(PAID.title)}
           text={say(PAID.text)}
@@ -523,7 +476,7 @@ export function BopassageV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={8} title={say(IMPACT.title)} text={say(IMPACT.text)} />
+        <Caption index={7} title={say(IMPACT.title)} text={say(IMPACT.text)} />
         <ImpactPanel
           image={HERO.image}
           metric={IMPACT.metric}
@@ -534,7 +487,7 @@ export function BopassageV2View() {
 
       <Chapter id="le-travail">
         <Caption
-          index={9}
+          index={8}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

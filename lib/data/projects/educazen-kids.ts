@@ -82,7 +82,7 @@ export const educazenKids: ProjectCase = {
   chapters: [
     {
       key: "brand-refresh",
-      labels: [{ fr: "Refonte de marque", en: "Brand Refresh" }],
+      labels: [{ fr: "Refonte du site", en: "Website refresh" }],
       tone: "forest",
       title: {
         fr: "Une identité qui ressemble enfin à ce qui se passe à l'intérieur.",

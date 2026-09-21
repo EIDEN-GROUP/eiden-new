@@ -8,7 +8,6 @@ import {
   Gallery,
   Grid,
   Hero,
-  ImpactPanel,
   Pair,
   PaletteStage,
   Plate,
@@ -30,7 +29,7 @@ const HERO = {
     fr: "Trente ans d'expertise, enfin dotés d'un nom.",
     en: "Thirty years of expertise, finally given a name.",
   },
-  image: "/work/dmc-morocco/dmc-hero.png",
+  image: "/work/dmc-morocco/hero.jpeg",
   alt: {
     fr: "Univers de marque DMC Hospitality Morocco",
     en: "The DMC Hospitality Morocco brand world",
@@ -79,16 +78,6 @@ const FRACTURE: Say[] = [
   },
 ];
 
-const DECISION: Say = {
-  fr: "Construire le nom et le visage que l'expertise avait déjà mérités.",
-  en: "Build the name and the face the expertise had already earned.",
-};
-
-const CHAIN_TEXT: Say = {
-  fr: "Le positionnement a réduit trente ans de métier à ce qu'un concurrent ne peut pas recopier sans mentir. La marque   nom, monogramme, règles   lui a donné un visage. Le site a été écrit pour des propriétaires plutôt que pour des voyageurs. Et la voix LinkedIn tient cette position devant un public de pairs, jusqu'à ce que ce soit le propriétaire qui écrive le premier.",
-  en: "Positioning reduced thirty years of trade to what a competitor could not copy without lying. The brand   name, monogram, rules   gave it a face. The site was written for owners rather than for guests. And the LinkedIn voice holds that position in front of a room of peers, until it is the owner who writes first.",
-};
-
 const CREATION = {
   title: {
     fr: "Le nom, l'identité et les règles qui vont avec, à partir de rien.",
@@ -124,7 +113,7 @@ const CREATION = {
       },
     },
     {
-      image: "/work/dmc-morocco/dmc-brand-uniform.png",
+      image: "/work/dmc-morocco/branding.jpeg",
       caption: { fr: "Application", en: "Application" },
       alt: {
         fr: "Tenue aux couleurs de DMC",
@@ -136,7 +125,7 @@ const CREATION = {
 
 const BRAND = {
   ground: "#141c19",
-  wordmark: "/work/dmc-morocco/dmc-brand-logo.png",
+  wordmark: "/work/dmc-morocco/dmc-brand-logo-mark.png",
   wordmarkAlt: {
     fr: "Marque DMC Hospitality Morocco",
     en: "DMC Hospitality Morocco brand mark",
@@ -145,7 +134,6 @@ const BRAND = {
     fr: "Une marque adressée à des opérateurs : elle doit être crue avant d'être aimée.",
     en: "A brand addressed to operators: it has to be believed before it is liked.",
   },
-  /* The v1 essence, cut where its dash used to be. */
   essence: {
     title: {
       fr: "Monogramme, système typographique et livre de règles.",
@@ -258,28 +246,11 @@ const CONTENT = {
     en: "The audience is a few hundred people and they all know each other. So the posting is written the way you talk to a peer: one subject from the trade, one position held, and no promise the business is not already keeping.",
   },
   posts: [
-    "/work/dmc-morocco/dmc-social-excellence.png",
-    "/work/dmc-morocco/dmc-social-c.png",
+    "/work/dmc-morocco/content-1.jpeg",
     "/work/dmc-morocco/dmc-social-d.png",
     "/work/dmc-morocco/dmc-social-m.png",
+    "/work/dmc-morocco/dmc-social-c.png",
   ],
-};
-
-const IMPACT = {
-  title: {
-    fr: "Le premier propriétaire qui écrit le premier.",
-    en: "The first owner who writes first.",
-  },
-  text: {
-    fr: "Une marque qui se présente elle-même, un site adressé à ceux qui achètent la gestion, et une voix que le marché reconnaît.",
-    en: "A brand that introduces itself, a site addressed to the people who buy management, and a voice the market recognises.",
-  },
-  metric: "0 → 1",
-  label: { fr: "Contacts entrants", en: "Inbound enquiries" },
-  line: {
-    fr: "D'aucun contact entrant à une présence qui en amène.",
-    en: "From no inbound at all to a presence that brings it.",
-  },
 };
 
 const WORK: { image: string; alt: Say }[] = [
@@ -296,7 +267,7 @@ const WORK: { image: string; alt: Say }[] = [
     alt: { fr: "Affiches DMC", en: "DMC posters" },
   },
   {
-    image: "/work/dmc-morocco/dmc-hero-2.png",
+    image: "/work/dmc-morocco/hero.jpeg",
     alt: { fr: "Univers de marque DMC", en: "The DMC brand world" },
   },
   {
@@ -305,14 +276,6 @@ const WORK: { image: string; alt: Say }[] = [
   },
   {
     image: "/work/dmc-morocco/dmc-cover.png",
-    alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc-alt.png",
-    alt: { fr: "Affiches de marque DMC", en: "DMC brand posters" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc.png",
     alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
   },
 ];
@@ -328,13 +291,12 @@ const NEXT: NextProject[] = [
     href: "/lunja-village",
     client: "Lunja Village",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/lunja-village/image lunja hero 1.png",
+    image: "/work/lunja-village/hero section lunja.png",
   },
 ];
 
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
-  { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
   {
     id: "creation-de-marque",
     label: { fr: "Création de marque", en: "Brand creation" },
@@ -343,7 +305,6 @@ const CHAPTERS = [
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
   { id: "contenu", label: { fr: "Contenu", en: "Content" } },
-  { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
@@ -371,21 +332,8 @@ export function DmcMoroccoV2View() {
         <RealityFracture reality={REALITY} fracture={FRACTURE} />
       </Chapter>
 
-      <Chapter id="architecture">
-        <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
-        <Pair>
-          <Plate image={HERO.image} alt={say(HERO.alt)} shape="aspect-square" />
-          <Plate
-            image="/work/dmc-morocco/dmc-brand-card.png"
-            alt={say({ fr: "Carte de visite DMC", en: "DMC business card" })}
-            shape="aspect-square"
-            delay={0.08}
-          />
-        </Pair>
-      </Chapter>
-
       <Chapter id="creation-de-marque">
-        <Caption index={2} title={say(CREATION.title)} text={say(CREATION.text)} />
+        <Caption index={1} title={say(CREATION.title)} text={say(CREATION.text)} />
         <Grid>
           {CREATION.plates.map((plate, index) => (
             <Plate
@@ -402,7 +350,7 @@ export function DmcMoroccoV2View() {
 
       <Chapter id="marque">
         <Caption
-          index={3}
+          index={2}
           title={say(BRAND.essence.title)}
           text={say(BRAND.essence.text)}
           meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
@@ -418,7 +366,7 @@ export function DmcMoroccoV2View() {
 
       <Chapter id="palette">
         <Caption
-          index={4}
+          index={3}
           title={say({
             fr: "Forêt, Or, Sable Doré, Encre.",
             en: "Forêt, Or, Sable Doré, Encre.",
@@ -430,10 +378,10 @@ export function DmcMoroccoV2View() {
       </Chapter>
 
       <Chapter id="site-web">
-        <Caption index={5} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
+        <Caption index={4} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         <Pair>
           <Plate
-            image="/work/dmc-morocco/dmc-web-desktop.png"
+            image="/work/dmc-morocco/desktop.jpeg"
             alt={say({
               fr: "Le site DMC sur écran",
               en: "The DMC site on desktop",
@@ -442,21 +390,20 @@ export function DmcMoroccoV2View() {
             shape="aspect-4/3"
           />
           <Plate
-            image="/work/dmc-morocco/dmc-web-mobile.png"
+            image="/work/dmc-morocco/mobile.jpeg"
             alt={say({
               fr: "Le site DMC sur téléphone",
               en: "The DMC site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
             shape="aspect-4/3"
-            contain
             delay={0.08}
           />
         </Pair>
       </Chapter>
 
       <Chapter id="contenu">
-        <Caption index={6} title={say(CONTENT.title)} text={say(CONTENT.text)} />
+        <Caption index={5} title={say(CONTENT.title)} text={say(CONTENT.text)} />
         <Grid>
           {CONTENT.posts.map((post, index) => (
             <Plate
@@ -466,26 +413,16 @@ export function DmcMoroccoV2View() {
               // caption={
               //   index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
               // }
-              shape="aspect-4/5"
+              shape="aspect-4/3"
               delay={(index % 2) * 0.08}
             />
           ))}
         </Grid>
       </Chapter>
 
-      <Chapter id="impact">
-        <Caption index={7} title={say(IMPACT.title)} text={say(IMPACT.text)} />
-        <ImpactPanel
-          image={HERO.image}
-          metric={IMPACT.metric}
-          label={say(IMPACT.label)}
-          line={say(IMPACT.line)}
-        />
-      </Chapter>
-
       <Chapter id="le-travail">
         <Caption
-          index={8}
+          index={6}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

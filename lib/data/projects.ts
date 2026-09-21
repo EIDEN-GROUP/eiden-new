@@ -825,7 +825,7 @@ export const projectPages: ProjectPage[] = [
     year: "2024",
     sector: { fr: "Hôtellerie", en: "Hospitality" },
     services: [
-      { fr: "Refonte de marque", en: "Rebrand" },
+      { fr: "Refonte du site", en: "Rebrand" },
       { fr: "Contenu", en: "Content" },
       { fr: "Media", en: "Media" },
     ],

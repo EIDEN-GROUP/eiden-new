@@ -11,7 +11,6 @@ import {
   Pair,
   Plate,
   RealityFracture,
-  SignalsPanel,
   useSay,
   type NextProject,
   type Say,
@@ -30,7 +29,7 @@ const HERO = {
     fr: "Musique live, cocktails et couchers de soleil face à l'Atlantique   avec un seul travail à faire en ligne : remplir ce soir.",
     en: "Live music, cocktails and sunset sessions facing the Atlantic   with one job to do online: fill tonight.",
   },
-  image: "/work/chillout-lounge/chilout hero.png",
+  image: "/work/chillout-lounge/hero.jpeg",
   alt: {
     fr: "Le CHILLOUT Lounge au coucher du soleil",
     en: "CHILLOUT Lounge at sunset",
@@ -69,16 +68,6 @@ const FRACTURE: Say[] = [
   },
 ];
 
-const DECISION: Say = {
-  fr: "Faire porter au site la personnalité du lieu, avant qu'on y arrive.",
-  en: "Make the site carry the personality of the place, before you get there.",
-};
-
-const CHAIN_TEXT: Say = {
-  fr: "La direction artistique a choisi dix-neuf heures et s'y tient partout : le logotype et la lumière viennent de ce que le lieu est déjà à cette heure-là. Le site ne traite qu'une question   qui joue ce soir   et l'équipe met la soirée à jour elle-même, depuis la salle. Et le mouvement est écrit en CSS plutôt qu'apporté par une librairie, pour que le site reste léger sur un réseau de bord de mer.",
-  en: "Art direction picked seven in the evening and holds to it everywhere: the wordmark and the light come from what the place already is at that hour. The site handles one question   who is playing tonight   and the team updates the evening itself, from the floor. And the motion is written in CSS rather than brought in by a library, so the site stays light on a seafront network.",
-};
-
 const WEBSITE = {
   title: {
     fr: "Un site léger, construit autour du programme de ce soir.",
@@ -88,28 +77,6 @@ const WEBSITE = {
     fr: "Un bar n'a qu'une question à traiter en ligne : qui joue ce soir, et à quelle heure. Tout le reste du site est en dessous, et l'équipe met la soirée à jour elle-même depuis un téléphone, en salle.",
     en: "A bar has one question to handle online: who is playing tonight, and at what time. Everything else on the site sits below that, and the team updates the evening themselves from a phone, on the floor.",
   },
-};
-
-const MOTION = {
-  title: {
-    fr: "Du mouvement discret, sans dépendance supplémentaire.",
-    en: "Light motion, with no extra dependency.",
-  },
-  text: {
-    fr: "Le mouvement est écrit en CSS plutôt qu'apporté par une librairie : le site reste léger sur un réseau de bord de mer, et rien ne casse le jour où la librairie change de version. C'est de la retenue, pas une limite.",
-    en: "The motion is written in CSS rather than brought in by a library: the site stays light on a seafront connection, and nothing breaks the day the library changes version. That is restraint, not a limitation.",
-  },
-  signals: [
-    {
-      fr: "Un site léger sur un réseau de bord de mer.",
-      en: "A site that stays light on a seafront connection.",
-    },
-    {
-      fr: "Rien ne casse le jour où la librairie change de version.",
-      en: "Nothing breaks the day the library changes version.",
-    },
-    { fr: "De la retenue, pas une limite.", en: "Restraint, not a limitation." },
-  ] as Say[],
 };
 
 const IMPACT = {
@@ -162,9 +129,7 @@ const NEXT: NextProject[] = [
 
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
-  { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
-  { id: "motion", label: { fr: "Motion", en: "Motion" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
@@ -190,21 +155,8 @@ export function ChilloutLoungeV2View() {
         <RealityFracture reality={REALITY} fracture={FRACTURE} />
       </Chapter>
 
-      <Chapter id="architecture">
-        <Caption index={1} title={say(DECISION)} text={say(CHAIN_TEXT)} />
-        <Pair>
-          <Plate image={HERO.image} alt={say(HERO.alt)} shape="aspect-square" />
-          <Plate
-            image="/work/chillout-lounge/DSC09000.jpg"
-            alt={say({ fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" })}
-            shape="aspect-square"
-            delay={0.08}
-          />
-        </Pair>
-      </Chapter>
-
       <Chapter id="site-web">
-        <Caption index={2} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
+        <Caption index={1} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         {/* <Plate
           image="/work/chillout-lounge/web-chillout-desktop.jpg"
           alt={say({
@@ -217,48 +169,35 @@ export function ChilloutLoungeV2View() {
         /> */}
         <Pair>
           <Plate
-            image="/work/chillout-lounge/web-chillout-cover.jpg"
+            image="/work/chillout-lounge/desktop.jpeg"
             alt={say({
               fr: "Le site CHILLOUT sur écran",
               en: "The CHILLOUT site on desktop",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/5"
+            shape="aspect-4/3"
             delay={0.08}
           />
           <Plate
-            image="/work/chillout-lounge/web-chillout-mobile.jpg"
+            image="/work/chillout-lounge/mobile.jpeg"
             alt={say({
               fr: "Le site CHILLOUT sur téléphone",
               en: "The CHILLOUT site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/5"
-            contain
+            shape="aspect-4/3"
           />
-        </Pair>
-      </Chapter>
-
-      <Chapter id="motion">
-        <Caption index={3} title={say(MOTION.title)} text={say(MOTION.text)} />
-        <Pair>
-          <Plate
-            image="/work/chillout-lounge/DSC09024.jpg"
-            alt={say({ fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" })}
-            shape="aspect-4/5"
-          />
-          <SignalsPanel items={MOTION.signals.map(say)} />
         </Pair>
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={4} title={say(IMPACT.title)} />
+        <Caption index={2} title={say(IMPACT.title)} />
         <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
       </Chapter>
 
       <Chapter id="le-travail">
         <Caption
-          index={5}
+          index={3}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

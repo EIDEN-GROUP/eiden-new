@@ -205,7 +205,7 @@ export function DroguerieSoussV2View() {
         <Caption index={1} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         <Pair>
           <Plate
-            image="/work/droguerie-souss/desktop.jpeg"
+            image="/work/droguerie-souss/desktop-sd.jpeg"
             alt={say({
               fr: "Le site Souss Droguerie sur écran",
               en: "The Souss Droguerie site on desktop",
@@ -214,7 +214,7 @@ export function DroguerieSoussV2View() {
             shape="aspect-4/3"
           />
           <Plate
-            image="/work/droguerie-souss/mobile.jpeg"
+            image="/work/droguerie-souss/mobile-sd.jpeg"
             alt={say({
               fr: "Le site Souss Droguerie sur téléphone",
               en: "The Souss Droguerie site on a phone",

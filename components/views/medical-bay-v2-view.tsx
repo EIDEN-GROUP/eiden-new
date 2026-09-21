@@ -1,6 +1,6 @@
 "use client";
 
-import { BrandBoard, CaseV2, Caption, Chapter, FULL, Gallery, Grid, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
+import { BrandBoard, CaseV2, Caption, Chapter, FULL, Gallery, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
 import type { PaletteStory } from "@/lib/data/projects/types";
 
 const CLIENT = "Medical Bay";
@@ -22,7 +22,7 @@ const HERO = {
     fr: "Un centre médical qui existait sur le papier   une vision claire, et rien dessous. Nous avons construit l'activité, la marque et le système ensemble.",
     en: "A medical centre that existed on paper   a clear vision, and nothing underneath it. We built the business, the brand and the system together.",
   },
-  image: "/work/medical-bay/medical-bay-lobby.png",
+  image: "/work/medical-bay/hero.jpeg",
   alt: {
     fr: "Le hall de la clinique Medical Bay",
     en: "The Medical Bay clinic lobby",
@@ -57,41 +57,6 @@ const FRACTURE: Say[] = [
   },
   { fr: "Pas de CRM, aucun tunnel.", en: "No CRM, no funnel." },
 ];
-
-const BRANDING = {
-  title: {
-    fr: "Le calme, avant le rendez-vous.",
-    en: "Calm, before the appointment.",
-  },
-  text: {
-    fr: "Medical Bay n'est pas une clinique : c'est le pont entre un patient et le bon spécialiste, et la marque devait porter cette confiance-là avant d'expliquer quoi que ce soit. Montserrat pour l'autorité, Cormorant en italique pour la part humaine, et un teal choisi contre le bleu clinique   une identité qui rassure en français, en anglais et en arabe.",
-    en: "Medical Bay is not a clinic: it is the bridge between a patient and the right specialist, and the brand had to carry that trust before it explained anything. Montserrat for the authority, Cormorant italic for the human half, and a teal chosen against clinical blue   an identity that reassures in French, in English and in Arabic.",
-  },
-  plates: [
-    {
-      image: "/work/medical-bay/medical-bay-brand-logo-1.jpg",
-      alt: {
-        fr: "L'identité Medical Bay en application",
-        en: "The Medical Bay identity applied",
-      },
-    },
-    {
-      image: "/work/medical-bay/brand-2.jpeg",
-      alt: { fr: "L'identité Medical Bay", en: "The Medical Bay identity" },
-    },
-    {
-      image: "/work/medical-bay/medical-bay-reception.png",
-      alt: { fr: "L'accueil de Medical Bay", en: "The Medical Bay reception" },
-    },
-    {
-      image: "/work/medical-bay/brand-1.jpeg",
-      alt: {
-        fr: "L'identité Medical Bay en situation",
-        en: "The Medical Bay identity in place",
-      },
-    },
-  ],
-};
 
 const BRAND = {
   ground: "#4BBDBD",
@@ -185,14 +150,25 @@ const PALETTE: PaletteStory = {
   })),
 };
 
-const PLATFORM = {
+const WEBSITE = {
   title: {
-    fr: "La porte d'entrée du parcours, et l'écran qui le fait tourner.",
-    en: "The front door of the journey, and the screen that runs it.",
+    fr: "La porte d'entrée du parcours, pas une vitrine.",
+    en: "The front door of the journey, not a shop window.",
   },
   text: {
-    fr: "Devant, un site qui ne présente pas la clinique mais fait entrer dans le parcours : prendre rendez-vous, comprendre un traitement, savoir ce qui vient après. Derrière, le tableau de bord depuis lequel l'accueil suit rendez-vous, rappels et suivis. Les deux moitiés du même chemin, dessinées ensemble.",
-    en: "In front, a site that does not introduce the clinic but opens the journey: booking, understanding a treatment, knowing what comes next. Behind it, the dashboard the front desk follows appointments, reminders and follow-ups from. Two halves of one path, drawn together.",
+    fr: "Le site ne présente pas la clinique : il fait entrer dans le parcours. Dès le premier écran, le patient sait ce qu'il y gagne : jusqu'à 70 % moins cher qu'en Europe, un séjour palace inclus, et un devis gratuit sous 24 heures. Dentisterie, tourisme médical et packs ont chacun leur page, en français comme en anglais, pour le patient d'Agadir comme pour celui qui prend l'avion.",
+    en: "The site does not introduce the clinic: it opens the journey. From the first screen, a patient knows what they stand to gain: up to 70% less than in Europe, a palace stay included, and a free quote within 24 hours. Dentistry, medical tourism and packs each have their own page, in French and in English, for the patient from Agadir as much as the one who flies in.",
+  },
+};
+
+const CRM = {
+  title: {
+    fr: "L'écran qui fait tourner la clinique.",
+    en: "The screen that runs the clinic.",
+  },
+  text: {
+    fr: "Derrière le site, le tableau de bord depuis lequel l'accueil suit rendez-vous, rappels et suivis. La semaine en cours, l'activité récente et le chiffre d'affaires en dirhams se lisent sur un seul écran, sans tableur à côté. C'est l'autre moitié du même chemin : ce que le site promet, le CRM le tient.",
+    en: "Behind the site, the dashboard the front desk follows appointments, reminders and follow-ups from. The week ahead, recent activity and revenue in dirhams read on a single screen, with no spreadsheet on the side. It is the other half of the same path: what the site promises, the CRM delivers.",
   },
 };
 
@@ -241,7 +217,7 @@ const WORK: { image: string; alt: Say }[] = [
     alt: { fr: "Medical Bay", en: "Medical Bay" },
   },
   {
-    image: "/work/medical-bay/medical-bay-lobby.png",
+    image: "/work/medical-bay/hero.jpeg",
     alt: { fr: "Le hall de Medical Bay", en: "The Medical Bay lobby" },
   },
 ];
@@ -263,10 +239,10 @@ const NEXT: NextProject[] = [
 
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
-  { id: "branding", label: { fr: "Branding", en: "Branding" } },
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
-  { id: "site-web", label: { fr: "Site web · CRM", en: "Website · CRM" } },
+  { id: "site-web", label: { fr: "Site web", en: "Website" } },
+  { id: "crm", label: { fr: "CRM & tableau de bord", en: "CRM & dashboard" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
@@ -292,24 +268,9 @@ export function MedicalBayV2View() {
         <RealityFracture reality={REALITY} fracture={FRACTURE} />
       </Chapter>
 
-      <Chapter id="branding">
-        <Caption index={1} title={say(BRANDING.title)} text={say(BRANDING.text)} />
-        <Grid>
-          {BRANDING.plates.map((plate, index) => (
-            <Plate
-              key={plate.image}
-              image={plate.image}
-              alt={say(plate.alt)}
-              shape="aspect-4/3"
-              delay={(index % 2) * 0.08}
-            />
-          ))}
-        </Grid>
-      </Chapter>
-
       <Chapter id="marque">
         <Caption
-          index={2}
+          index={1}
           title={say(BRAND.essence)}
           meta={`${BRAND.type.length} ${say({ fr: "polices", en: "typefaces" })}`}
         />
@@ -324,7 +285,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="palette">
         <Caption
-          index={3}
+          index={2}
           title={say({
             fr: "Teal, Teal Profond, Mist, Encre.",
             en: "Teal, Teal Profond, Mist, Encre.",
@@ -336,10 +297,10 @@ export function MedicalBayV2View() {
       </Chapter>
 
       <Chapter id="site-web">
-        <Caption index={4} title={say(PLATFORM.title)} text={say(PLATFORM.text)} />
+        <Caption index={3} title={say(WEBSITE.title)} text={say(WEBSITE.text)} />
         <Pair>
           <Plate
-            image="/work/medical-bay/medical-bay-web-desktop.png"
+            image="/work/medical-bay/desktop.jpeg"
             alt={say({
               fr: "Le site Medical Bay sur écran",
               en: "The Medical Bay site on desktop",
@@ -357,6 +318,10 @@ export function MedicalBayV2View() {
             shape="aspect-4/3"
           />
         </Pair>
+      </Chapter>
+
+      <Chapter id="crm">
+        <Caption index={4} title={say(CRM.title)} text={say(CRM.text)} />
         <Plate
           image="/work/medical-bay/crm-medicalbay.jpeg"
           alt={say({

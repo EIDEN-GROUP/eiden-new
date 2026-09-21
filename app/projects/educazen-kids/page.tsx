@@ -285,22 +285,10 @@ const BRAND = {
   ],
 };
 
-/**
- * The palette, told rather than listed.
- *
- * The brand card above shows the colours; this is the run that says what
- * each one is for   the disk turns, the ground changes under the reader,
- * and one beat holds per note. Nothing is written twice: the colours are
- * the card’s own and the beats are the notes already set beside them, so
- * the two can never fall out of step.
- */
 const PALETTE: PaletteStory = {
   title: { fr: "Le langage visuel", en: "The visual language" },
   lead: BRAND.lead,
   colors: BRAND.colors.map(({ name, hex, role }) => ({ name, hex, role })),
-  /* Which colour each beat turns the room. Written out rather than counted
-     off the beats: there are more beats than colours, because the last one
-     comes back to a colour already used instead of introducing another. */
   states: BRAND.notes.map((note, index) => ({
     title: note.title,
     text: note.text,
@@ -590,7 +578,7 @@ export default function EducazenKidsPage() {
         </div>
       </section>
 
-      {/* ══ 01 · REFONTE DE MARQUE ══════════════════════════ */}
+      {/* ══ 01 · Refonte du site ══════════════════════════ */}
       <section
         id={"chapter-brand-refresh"}
         data-nav-tone="light"
@@ -607,7 +595,7 @@ export default function EducazenKidsPage() {
                   <span className="eyebrow text-teal mr-1 tabular-nums">01</span>
                   <span className="flex items-baseline gap-3">
                     <span className="eyebrow text-ink">
-                      {say({ fr: "Refonte de marque", en: "Brand Refresh" })}
+                      {say({ fr: "Refonte du site", en: "Website refresh" })}
                     </span>
                   </span>
                 </div>

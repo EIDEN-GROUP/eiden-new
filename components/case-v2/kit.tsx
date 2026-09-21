@@ -751,7 +751,6 @@ export function IdentityPlate({
   );
 }
 
-/** The wordmark on its own ground, beside the typefaces it is set with. */
 export function BrandBoard({
   ground,
   wordmark,
@@ -784,10 +783,7 @@ export function BrandBoard({
 
           <ul className="mt-5 flex flex-1 flex-col">
             {faces.map((face) => (
-              <li
-                key={face.name}
-                className="border-beige-dk flex flex-1 items-center gap-6 border-t py-4"
-              >
+              <li key={face.name} className="border-beige-dk flex flex-1 items-center gap-6 border-t py-4" >
                 <span
                   aria-hidden
                   className="text-teal w-[1.6em] shrink-0 text-[clamp(2.75rem,4.6vw,4.25rem)] leading-none"
@@ -814,7 +810,6 @@ export function BrandBoard({
 
 export type Swatch = { hex: string; role: Say };
 
-/** The wordmark beside the colours read off it, for a case with no type book. */
 export function ColourBoard({
   ground,
   wordmark,
