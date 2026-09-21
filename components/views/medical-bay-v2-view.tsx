@@ -1,23 +1,6 @@
 "use client";
 
-import {
-  BrandBoard,
-  CaseV2,
-  Caption,
-  Chapter,
-  FULL,
-  Gallery,
-  Grid,
-  Hero,
-  ImpactPanel,
-  Pair,
-  PaletteStage,
-  Plate,
-  RealityFracture,
-  useSay,
-  type NextProject,
-  type Say,
-} from "@/components/case-v2/kit";
+import { BrandBoard, CaseV2, Caption, Chapter, FULL, Gallery, Grid, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
 import type { PaletteStory } from "@/lib/data/projects/types";
 
 const CLIENT = "Medical Bay";
@@ -93,7 +76,7 @@ const BRANDING = {
       },
     },
     {
-      image: "/work/medical-bay/medical-bay-brand.png",
+      image: "/work/medical-bay/brand-2.jpeg",
       alt: { fr: "L'identité Medical Bay", en: "The Medical Bay identity" },
     },
     {
@@ -101,7 +84,7 @@ const BRANDING = {
       alt: { fr: "L'accueil de Medical Bay", en: "The Medical Bay reception" },
     },
     {
-      image: "/work/medical-bay/medical-bay-application.png",
+      image: "/work/medical-bay/brand-1.jpeg",
       alt: {
         fr: "L'identité Medical Bay en situation",
         en: "The Medical Bay identity in place",
@@ -213,47 +196,6 @@ const PLATFORM = {
   },
 };
 
-const MARKETING = {
-  title: {
-    fr: "Des campagnes par traitement, pas par saison.",
-    en: "Campaigns per treatment, not per season.",
-  },
-  text: {
-    fr: "Un implant, une facette et une couronne ne se décident pas de la même façon et ne se cherchent pas au même moment. Chaque traitement a donc sa campagne, sa page et sa preuve   y compris pour les patients qui viennent de l'étranger.",
-    en: "An implant, a veneer and a crown are not decided the same way and are not searched for at the same moment. So each treatment has its own campaign, its own page and its own proof   including for the patients who fly in.",
-  },
-  posts: [
-    {
-      image: "/work/medical-bay/medical-bay-campaign-implant.png",
-      alt: {
-        fr: "Campagne Medical Bay   implants",
-        en: "Medical Bay campaign   implants",
-      },
-    },
-    {
-      image: "/work/medical-bay/medical-bay-campaign-veneer.png",
-      alt: {
-        fr: "Campagne Medical Bay   facettes",
-        en: "Medical Bay campaign   veneers",
-      },
-    },
-    {
-      image: "/work/medical-bay/medical-bay-campaign-zirconia.png",
-      alt: {
-        fr: "Campagne Medical Bay   zircone",
-        en: "Medical Bay campaign   zirconia",
-      },
-    },
-    {
-      image: "/work/medical-bay/medical-bay-tourism-medical.png",
-      alt: {
-        fr: "Campagne tourisme médical Medical Bay",
-        en: "Medical Bay medical tourism campaign",
-      },
-    },
-  ],
-};
-
 const IMPACT = {
   title: {
     fr: "Une clinique qui tourne sur un système, plus sur des tableurs.",
@@ -325,7 +267,6 @@ const CHAPTERS = [
   { id: "marque", label: { fr: "La planche de marque", en: "The brand board" } },
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
   { id: "site-web", label: { fr: "Site web · CRM", en: "Website · CRM" } },
-  { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
   { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
@@ -428,27 +369,8 @@ export function MedicalBayV2View() {
         />
       </Chapter>
 
-      <Chapter id="marketing">
-        <Caption
-          index={5}
-          title={say(MARKETING.title)}
-          text={say(MARKETING.text)}
-        />
-        <Grid>
-          {MARKETING.posts.map((post, index) => (
-            <Plate
-              key={post.image}
-              image={post.image}
-              alt={say(post.alt)}
-              shape="aspect-4/5"
-              delay={(index % 2) * 0.08}
-            />
-          ))}
-        </Grid>
-      </Chapter>
-
       <Chapter id="impact">
-        <Caption index={6} title={say(IMPACT.title)} />
+        <Caption index={5} title={say(IMPACT.title)} />
         <ImpactPanel
           image={HERO.image}
           metric={IMPACT.metric}
@@ -458,7 +380,7 @@ export function MedicalBayV2View() {
 
       <Chapter id="le-travail">
         <Caption
-          index={7}
+          index={6}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",
