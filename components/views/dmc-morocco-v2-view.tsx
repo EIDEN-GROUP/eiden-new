@@ -89,15 +89,7 @@ const CREATION = {
   },
   plates: [
     {
-      image: "/work/dmc-morocco/dmc-brand-logo.png",
-      caption: { fr: "Monogramme", en: "Monogram" },
-      alt: {
-        fr: "Monogramme DMC Hospitality Morocco",
-        en: "DMC Hospitality Morocco monogram",
-      },
-    },
-    {
-      image: "/work/dmc-morocco/dmc-brand-logo-mark.png",
+      image: "/work/dmc-morocco/logo.jpeg",
       caption: { fr: "Logo", en: "Logo" },
       alt: {
         fr: "Logo DMC Hospitality Morocco",
@@ -105,7 +97,15 @@ const CREATION = {
       },
     },
     {
-      image: "/work/dmc-morocco/dmc-guidelines.png",
+      image: "/work/dmc-morocco/brand.jpeg",
+      caption: { fr: "Monogramme", en: "Monogram" },
+      alt: {
+        fr: "Monogramme DMC Hospitality Morocco",
+        en: "DMC Hospitality Morocco monogram",
+      },
+    },
+    {
+      image: "/work/dmc-morocco/branding-2.jpeg",
       caption: { fr: "Charte", en: "Guidelines" },
       alt: {
         fr: "Charte graphique DMC Hospitality Morocco",
@@ -125,7 +125,7 @@ const CREATION = {
 
 const BRAND = {
   ground: "#141c19",
-  wordmark: "/work/dmc-morocco/dmc-brand-logo-mark.png",
+  wordmark: "/work/dmc-morocco/logo.jpeg",
   wordmarkAlt: {
     fr: "Marque DMC Hospitality Morocco",
     en: "DMC Hospitality Morocco brand mark",
@@ -341,7 +341,7 @@ export function DmcMoroccoV2View() {
               image={plate.image}
               alt={say(plate.alt)}
               // caption={say(plate.caption)}
-              shape="aspect-4/3"
+              shape="aspect-4/4"
               delay={(index % 2) * 0.08}
             />
           ))}
@@ -387,7 +387,7 @@ export function DmcMoroccoV2View() {
               en: "The DMC site on desktop",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
           <Plate
             image="/work/dmc-morocco/mobile.jpeg"
@@ -396,7 +396,7 @@ export function DmcMoroccoV2View() {
               en: "The DMC site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
             delay={0.08}
           />
         </Pair>
@@ -413,7 +413,7 @@ export function DmcMoroccoV2View() {
               // caption={
               //   index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
               // }
-              shape="aspect-4/3"
+              shape="aspect-4/4"
               delay={(index % 2) * 0.08}
             />
           ))}

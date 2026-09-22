@@ -78,19 +78,19 @@ const BRANDING = {
   },
   plates: [
     {
-      image: "/work/bopassage/branding.jpeg",
-      caption: { fr: "Logo", en: "Logo" },
-      alt: {
-        fr: "Logotype principal et secondaire de Bôpassage",
-        en: "Bôpassage primary and secondary wordmark",
-      },
-    },
-    {
       image: "/work/bopassage/bopassage-brand-logo-green.png",
       caption: { fr: "Enseigne", en: "Signage" },
       alt: {
         fr: "Signalétique extérieure de Bôpassage",
         en: "Bôpassage exterior signage",
+      },
+    },
+    {
+      image: "/work/bopassage/branding.jpeg",
+      caption: { fr: "Logo", en: "Logo" },
+      alt: {
+        fr: "Logotype principal et secondaire de Bôpassage",
+        en: "Bôpassage primary and secondary wordmark",
       },
     },
     {
@@ -102,7 +102,7 @@ const BRANDING = {
       },
     },
     {
-      image: "/work/bopassage/bopassage-brand-identity.png",
+      image: "/work/bopassage/brand-1.jpeg",
       caption: { fr: "Système", en: "System" },
       alt: {
         fr: "Système d'identité Bôpassage",
@@ -414,7 +414,7 @@ export function BopassageV2View() {
               en: "The Bôpassage homepage",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
           <Plate
             image="/work/bopassage/bopassage-web-mobile.jpeg"
@@ -423,7 +423,7 @@ export function BopassageV2View() {
               en: "The Bôpassage site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
         </Pair>
       </Chapter>
@@ -442,16 +442,16 @@ export function BopassageV2View() {
               en: "Bôpassage social post",
             })}
             // caption={say({ fr: "Social", en: "Social" })}
-            shape="aspect-4/5"
+            shape="aspect-4/4"
           />
           <Plate
-            image="/work/bopassage/bopassage-social-instagram.png"
+            image="/work/bopassage/bopassage-social-instagram.jpeg"
             alt={say({
               fr: "Profil Instagram Bôpassage",
               en: "Bôpassage Instagram profile",
             })}
             // caption={say({ fr: "Profil", en: "Profile" })}
-            shape="aspect-4/5"
+            shape="aspect-4/4"
             delay={0.08}
           />
         </Pair>

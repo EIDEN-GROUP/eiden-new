@@ -256,7 +256,7 @@ export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin 
               aria-label={say(alt)}
               className={cn(
                 "group/tile focus-visible:outline-gold relative block shrink-0 cursor-zoom-in snap-start overflow-hidden rounded-xl ring-1 sm:rounded-2xl",
-                "aspect-4/3 w-[86vw] sm:w-[56vw] lg:w-[40vw]",
+                "aspect-4/4 w-[86vw] sm:w-[56vw] lg:w-[40vw]",
                 "focus-visible:outline-2 focus-visible:-outline-offset-2",
                 skin.frame,
                 skin.ring,

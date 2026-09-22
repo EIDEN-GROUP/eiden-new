@@ -19,6 +19,19 @@
   --color-gold-dk: #b8860b;
   --color-mint: #14a79b;
 
+  /* Souss Droguerie catalogue */
+  --color-sd-navy: #202560;
+  --color-sd-brand: #2f378d;
+  --color-sd-red: #b8001f;
+  --color-sd-sky: #8e93c3;
+  --color-sd-mint: #dddfec;
+  --color-sd-ink: #30313d;
+  --color-sd-ink-soft: #757783;
+  --color-sd-paper: #ffffff;
+  --color-sd-cream: #f3f3f8;
+  --color-sd-line: #e0e1ee;
+  --color-sd-ground: #f2f2f0;
+
   /* Typography   five voices, five roles */
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-editorial: var(--font-dm-serif), ui-serif, Georgia, serif;

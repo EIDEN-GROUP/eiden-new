@@ -212,7 +212,7 @@ export function MadaefV2View() {
           image="/clients/madaef.png"
           alt={say({ fr: "Logo MADAEF", en: "MADAEF logo" })}
           contain
-          shape="aspect-4/3 sm:aspect-16/9"
+          shape="aspect-4/4 sm:aspect-16/9"
           sizes={FULL}
         />
       </Chapter>

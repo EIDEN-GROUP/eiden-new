@@ -98,27 +98,27 @@ const POSITIONING = {
   },
   plates: [
     {
-      image: "/work/lunja-village/Img brand board site lunja.png",
-      caption: { fr: "Planche de marque", en: "Brand board" },
-      alt: { fr: "Planche de marque Lunja", en: "Lunja brand board" },
-    },
-    {
       image: "/work/lunja-village/logo-lunja-village.jpg",
       caption: { fr: "Logo", en: "Logo" },
       alt: { fr: "Logo Lunja Village", en: "Lunja Village logo" },
     },
     {
-      image: "/work/lunja-village/mockup website lunja_Plan de travail 1.png",
-      caption: { fr: "Application", en: "Application" },
-      alt: { fr: "Tote bag Lunja Village", en: "Lunja Village tote bag" },
+      image: "/work/lunja-village/branding-2.jpeg",
+      caption: { fr: "Planche de marque", en: "Brand board" },
+      alt: { fr: "Planche de marque Lunja", en: "Lunja brand board" },
     },
     {
-      image: "/work/lunja-village/IMAGE REBRANDING lunja_Plan de travail 1.png",
+      image: "/work/lunja-village/branding-3.jpg",
       caption: { fr: "Système", en: "System" },
       alt: {
         fr: "L'identité Lunja en situation",
         en: "The Lunja identity in place",
       },
+    },
+    {
+      image: "/work/lunja-village/branding.jpeg",
+      caption: { fr: "Application", en: "Application" },
+      alt: { fr: "Tote bag Lunja Village", en: "Lunja Village tote bag" },
     },
   ],
 };
@@ -511,10 +511,7 @@ export function LunjaVillageV2View() {
                 fr: "Publication sociale Lunja",
                 en: "Lunja social post",
               })}
-              // caption={
-              //   index === 0 ? say({ fr: "Social", en: "Social" }) : undefined
-              // }
-              shape="aspect-4/5"
+              shape="aspect-4/4"
               delay={index * 0.08}
             />
           ))}

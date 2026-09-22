@@ -40,7 +40,7 @@ export function ProjectIdea({ idea }: { idea: ProjectPage["idea"] }) {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-14 sm:mt-20">
-          <div className="relative aspect-4/3 w-full overflow-hidden rounded-sm sm:aspect-16/9">
+          <div className="relative aspect-4/4 w-full overflow-hidden rounded-sm sm:aspect-16/9">
             <Image
               src={idea.image}
               alt={say(idea.alt)}

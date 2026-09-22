@@ -118,7 +118,7 @@ export function ProjectVisualStory({
               style={{ "--i": `${i}` } as CSSProperties}
             >
               <figure className="story-card">
-                <div className="bg-ink/5 relative aspect-4/3 w-full overflow-hidden rounded-xl">
+                <div className="bg-ink/5 relative aspect-4/4 w-full overflow-hidden rounded-xl">
                   <Image
                     src={slide.image}
                     alt={say(slide.alt)}

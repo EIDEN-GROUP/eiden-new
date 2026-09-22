@@ -312,7 +312,6 @@ export function Chapter({
   children,
 }: {
   id: string;
-  /** Hold the chapter to one screen, under the header and the tabs. */
   fit?: boolean;
   children: ReactNode;
 }) {
@@ -332,10 +331,6 @@ export function Chapter({
   );
 }
 
-/**
- * The row that opens a chapter: number and name across the top, the claim on
- * the left, the argument on the right. With no argument the claim takes both.
- */
 export function Caption({
   index,
   label,
@@ -484,6 +479,15 @@ export function Plate({
           </figcaption>
         ) : null}
       </figure>
+    </Reveal>
+  );
+}
+
+/** A plate that holds something live instead of a picture. */
+export function Stage({ shape, children }: { shape: string; children: ReactNode }) {
+  return (
+    <Reveal amount={0.1}>
+      <div className={cn(FRAME, shape)}>{children}</div>
     </Reveal>
   );
 }
@@ -1024,7 +1028,7 @@ export function LinesRow({
 /** The impact where no figure has been published: what changed, on forest, beside the place itself. */
 export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
   return (
-    <div className="grid gap-1.5 lg:grid-cols-[7fr_5fr]">
+    <div className="grid gap-1.5 lg:grid-cols-[1fr_1fr]">
       <Reveal amount={0.15} className="h-full">
         <div className="bg-forest text-canvas flex h-full flex-col justify-center rounded-xl px-7 py-10 sm:px-12 sm:py-14">
           <ol className="flex flex-col">
@@ -1033,10 +1037,10 @@ export function OutcomePanel({ image, items }: { image: string; items: string[] 
                 key={item}
                 className="border-forest-md grid grid-cols-[4rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:py-7"
               >
-                <span className="font-display text-gold text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
+                <span className="font-display text-gold text-[22px] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="font-display text-[clamp(1.5rem,2.6vw,2.375rem)] leading-[1.08] font-extrabold tracking-[-0.035em]">
+                <span className="font-display text-[24px] leading-[1.08] font-extrabold tracking-[-0.035em]">
                   {item}
                 </span>
               </li>
@@ -1046,7 +1050,7 @@ export function OutcomePanel({ image, items }: { image: string; items: string[] 
       </Reveal>
 
       <Reveal amount={0.15} delay={0.08} className="h-full">
-        <figure className={cn(FRAME, "aspect-4/3 h-full lg:aspect-auto")}>
+        <figure className={cn(FRAME, "aspect-4/4 h-full lg:aspect-auto")}>
           <Image src={image} alt="" fill quality={90} sizes={HALF} className="object-cover" />
         </figure>
       </Reveal>
@@ -1116,7 +1120,7 @@ export function Gallery({ items }: { items: { image: string; alt: Say }[] }) {
       <Plate
         image={first.image}
         alt={say(first.alt)}
-        shape="aspect-4/3 sm:aspect-16/9"
+        shape="aspect-4/4 sm:aspect-16/9"
         sizes={FULL}
       />
 
@@ -1126,7 +1130,7 @@ export function Gallery({ items }: { items: { image: string; alt: Say }[] }) {
             key={item.image}
             image={item.image}
             alt={say(item.alt)}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
             delay={(index % 2) * 0.06}
           />
         ))}
@@ -1135,7 +1139,7 @@ export function Gallery({ items }: { items: { image: string; alt: Say }[] }) {
       <Plate
         image={last.image}
         alt={say(last.alt)}
-        shape="aspect-4/3 sm:aspect-16/9"
+        shape="aspect-4/4 sm:aspect-16/9"
         sizes={FULL}
       />
     </div>
@@ -1173,7 +1177,7 @@ function NextProjects({ items }: { items: NextProject[] }) {
               aria-label={`${project.client}, ${say(project.category)}`}
               className="group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:-outline-offset-4"
             >
-              <div className={cn(FRAME, "aspect-4/3 lg:aspect-16/11")}>
+              <div className={cn(FRAME, "aspect-4/4 lg:aspect-16/11")}>
                 <Image
                   src={project.image}
                   alt=""

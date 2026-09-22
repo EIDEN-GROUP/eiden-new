@@ -40,7 +40,7 @@ const HERO = {
     fr: "Un centre qui change la vie d'enfants tous les jours, avec une présence digitale qui n'en montrait rien. Nous avons rafraîchi la marque et mis les inscriptions sur rails.",
     en: "A centre changing children's lives daily, with a digital presence that showed none of it. We refreshed the brand and put enrolment on rails.",
   },
-  image: "/work/educazen-kids/hero.jpeg",
+  image: "/work/educazen-kids/hero-educa.jpeg",
   alt: {
     fr: "Le centre EducazenKids à Agadir",
     en: "The EducazenKids centre in Agadir",
@@ -436,7 +436,7 @@ export function EducazenKidsV2View() {
               image={plate.image}
               alt={say(plate.alt)}
               caption={say(plate.caption)}
-              shape="aspect-4/3"
+              shape="aspect-4/4"
               delay={(index % 2) * 0.08}
             />
           ))}
@@ -452,7 +452,7 @@ export function EducazenKidsV2View() {
               image={plate.image}
               alt={say(plate.alt)}
               caption={say(plate.caption)}
-              shape="aspect-4/3"
+              shape="aspect-4/4"
               delay={(index % 2) * 0.08}
             />
           ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   CaseV2,
   Caption,
@@ -11,10 +12,17 @@ import {
   Plate,
   RealityFracture,
   SignalsPanel,
+  Stage,
   useSay,
   type NextProject,
   type Say,
 } from "@/components/case-v2/kit";
+
+// react-pageflip works on the DOM when it mounts: never rendered on the server.
+const Catalogue = dynamic(() => import("@/components/case-v2/catalogue/flipbook"), {
+  ssr: false,
+  loading: () => <div className="bg-sd-ground size-full" />,
+});
 
 const CLIENT = "Souss Droguerie";
 const YEAR = "2026";
@@ -211,7 +219,7 @@ export function DroguerieSoussV2View() {
               en: "The Souss Droguerie site on desktop",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
           <Plate
             image="/work/droguerie-souss/mobile-sd.jpeg"
@@ -220,7 +228,7 @@ export function DroguerieSoussV2View() {
               en: "The Souss Droguerie site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
         </Pair>
       </Chapter>
@@ -237,15 +245,9 @@ export function DroguerieSoussV2View() {
           text={say(CATALOGUE.text)}
         />
         <Pair>
-          <Plate
-            image="/work/droguerie-souss/web-droguerie-souss-cover.jpg"
-            alt={say({
-              fr: "Le catalogue Souss Droguerie",
-              en: "The Souss Droguerie catalogue",
-            })}
-            caption={say({ fr: "Catalogue", en: "Catalogue" })}
-            shape="aspect-4/5"
-          />
+          <Stage shape="aspect-4/5">
+            <Catalogue />
+          </Stage>
           <SignalsPanel items={CATALOGUE.signals.map(say)} />
         </Pair>
       </Chapter>

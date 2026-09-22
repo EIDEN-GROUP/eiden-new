@@ -106,7 +106,7 @@ const WORK: { image: string; alt: Say }[] = [
   "DSC09016.jpg",
   "DSC09020.jpg",
   "DSC09024.jpg",
-  "chilout hero.png",
+  "DSC08999.jpg",
 ].map((file) => ({
   image: `/work/chillout-lounge/${file}`,
   alt: { fr: "Le CHILLOUT Lounge", en: "CHILLOUT Lounge" },
@@ -164,7 +164,7 @@ export function ChilloutLoungeV2View() {
             en: "The CHILLOUT site on desktop",
           })}
           caption={say({ fr: "Desktop", en: "Desktop" })}
-          shape="aspect-4/3 sm:aspect-16/10"
+          shape="aspect-4/4 sm:aspect-16/10"
           sizes={FULL}
         /> */}
         <Pair>
@@ -175,7 +175,7 @@ export function ChilloutLoungeV2View() {
               en: "The CHILLOUT site on desktop",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
             delay={0.08}
           />
           <Plate
@@ -185,7 +185,7 @@ export function ChilloutLoungeV2View() {
               en: "The CHILLOUT site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
         </Pair>
       </Chapter>

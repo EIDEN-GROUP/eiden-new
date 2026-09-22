@@ -58,7 +58,7 @@ export function ProjectNavigation({ suggestions }: { suggestions: ProjectPage[] 
             href={`/projects/${project.slug}`}
             className="group focus-visible:outline-teal block focus-visible:outline-2 focus-visible:outline-offset-4"
           >
-            <div className="bg-cream relative aspect-4/3 w-full overflow-hidden">
+            <div className="bg-cream relative aspect-4/4 w-full overflow-hidden">
               <Image
                 src={project.hero.image}
                 alt={say(project.hero.alt)}

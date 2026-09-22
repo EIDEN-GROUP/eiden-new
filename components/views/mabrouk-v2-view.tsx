@@ -1,6 +1,6 @@
 "use client";
 
-import { CaseV2, Caption, Chapter, Gallery, Grid, Hero, OutcomePanel, Pair, Plate, RealityFracture, SignalsPanel, Slides, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
+import { CaseV2, Caption, Chapter, Gallery, Grid, Hero, OutcomePanel, Pair, Plate, RealityFracture, useSay, type NextProject, type Say, } from "@/components/case-v2/kit";
 
 const CLIENT = "Mabrouk Hôtel";
 const YEAR = "2026";
@@ -16,7 +16,7 @@ const HERO = {
     fr: "Un hôtel dont tout le caractère est dans la matière   le laiton, le bois, le velours   et dont rien de tout cela n'arrivait jusqu'au client avant sa réservation. Nous l'avons fait voir par le marketing, la photographie et le contenu.",
     en: "A hotel whose whole character is in its materials   brass, wood, velvet   and none of which reached a guest before they booked. We made it visible through marketing, photography and content.",
   },
-  image: "/work/mabrouk/hero-mabrouk.png",
+  image: "/work/mabrouk/hero-bg.jpeg",
   alt: {
     fr: "L'escalier du Mabrouk Hôtel sous ses lanternes de laiton",
     en: "The Mabrouk Hôtel staircase under its brass lanterns",
@@ -66,48 +66,6 @@ const DECISION: Say = {
 const CHAIN_TEXT: Say = {
   fr: "Le marketing a laissé la liste d'équipements aux comparateurs, et réglé l'offre comme la dépense séparément sur la haute saison et sur le reste de l'année, dirigées vers la réservation directe plutôt que vers les plateformes. La photographie montre la maison à l'heure où elle est le plus elle-même. Et le contenu fait vivre ces images sur les réseaux sociaux, pour que le client voie la maison avant de la réserver.",
   en: "Marketing left the amenity list to the comparison sites, and tuned the offer and the spend separately against high season and against the rest of the year, pointed at direct booking rather than at the platforms. The photography shows the house at the hour it is most itself. And the content keeps those pictures alive on social media, so guests see the house before they book it.",
-};
-
-const MARKETING = {
-  title: {
-    fr: "Vendre les nuits que personne ne vient chercher.",
-    en: "Selling the nights nobody comes looking for.",
-  },
-  text: {
-    fr: "Un hôtel n'a pas un problème de remplissage : il en a deux, et ils ne se ressemblent pas. La haute saison se vend seule et se défend sur le prix ; le reste de l'année se gagne en donnant une raison de venir. L'offre et la dépense ont été réglées séparément sur ces deux-là, et le budget dirigé vers la réservation directe plutôt que vers les plateformes.",
-    en: "A hotel does not have one occupancy problem: it has two, and they look nothing alike. High season sells itself and is defended on price; the rest of the year is won by giving someone a reason to come. The offer and the spend were tuned separately against each, and the budget pointed at direct booking rather than at the platforms.",
-  },
-  signals: [
-    {
-      fr: "La haute saison se défend sur le prix.",
-      en: "High season is defended on price.",
-    },
-    {
-      fr: "Le reste de l'année se gagne en donnant une raison de venir.",
-      en: "The rest of the year is won by giving a reason to come.",
-    },
-    {
-      fr: "La réservation directe plutôt que les plateformes.",
-      en: "Direct booking rather than the platforms.",
-    },
-  ] as Say[],
-  slides: [
-    {
-      image: "/work/mabrouk/imgg1 (48).png",
-      alt: { fr: "Le salon du Mabrouk Hôtel", en: "The Mabrouk Hôtel lounge" },
-    },
-    {
-      image: "/work/mabrouk/imgg1 (12).png",
-      alt: { fr: "Une chambre du Mabrouk Hôtel", en: "A Mabrouk Hôtel bedroom" },
-    },
-    {
-      image: "/work/mabrouk/imgg1 (19).png",
-      alt: {
-        fr: "Les lanternes de laiton du Mabrouk Hôtel",
-        en: "The brass lanterns of the Mabrouk Hôtel",
-      },
-    },
-  ],
 };
 
 const CONTENT = {
@@ -171,8 +129,6 @@ const IMPACT = {
 
 const WORK: { image: string; alt: Say }[] = [
   "imgg1 (2).png",
-  "imgg1 (13).png",
-  "imgg1 (14).png",
   "imgg1 (15).png",
   "imgg1 (22).png",
   "imgg1 (23).png",
@@ -203,7 +159,6 @@ const NEXT: NextProject[] = [
 const CHAPTERS = [
   { id: "le-defi", label: { fr: "Le défi", en: "The challenge" } },
   { id: "architecture", label: { fr: "L'architecture", en: "The architecture" } },
-  { id: "marketing", label: { fr: "Marketing", en: "Marketing" } },
   {
     id: "contenu",
     label: { fr: "Contenu · Réseaux sociaux", en: "Content · Social media" },
@@ -244,25 +199,8 @@ export function MabroukV2View() {
         </Pair>
       </Chapter>
 
-      <Chapter id="marketing" fit>
-        <Caption
-          index={2}
-          title={say(MARKETING.title)}
-          text={say(MARKETING.text)}
-        />
-        <Pair>
-          <Slides
-            items={MARKETING.slides.map((slide) => ({
-              image: slide.image,
-              alt: say(slide.alt),
-            }))}
-          />
-          <SignalsPanel items={MARKETING.signals.map(say)} />
-        </Pair>
-      </Chapter>
-
       <Chapter id="contenu">
-        <Caption index={3} title={say(CONTENT.title)} text={say(CONTENT.text)} />
+        <Caption index={2} title={say(CONTENT.title)} text={say(CONTENT.text)} />
         <Grid>
           {CONTENT.plates.map((plate, index) => (
             <Plate
@@ -277,13 +215,13 @@ export function MabroukV2View() {
       </Chapter>
 
       <Chapter id="impact">
-        <Caption index={4} title={say(IMPACT.title)} />
+        <Caption index={3} title={say(IMPACT.title)} />
         <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
       </Chapter>
 
       <Chapter id="le-travail">
         <Caption
-          index={5}
+          index={4}
           title={say({
             fr: "La preuve, après l'argument.",
             en: "The proof, after the argument.",

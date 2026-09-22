@@ -132,7 +132,7 @@ export function ClientsView() {
                                 "glass-dark glass-top ring-forest/10 relative overflow-hidden rounded-2xl ring-1",
                                 i % column.items.length === 0
                                   ? "aspect-4/5"
-                                  : "aspect-4/3",
+                                  : "aspect-4/4",
                               )}
                             >
                               <Image
@@ -313,7 +313,7 @@ function ProjectCard({
 
   return (
     <Tag href={href} {...opening} onPointerMove={track} className={cn( "group focus-visible:outline-teal relative block focus-visible:outline-2 focus-visible:outline-offset-4", wide && "sm:col-span-2", )}>
-      <div className={cn( "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/3 sm:aspect-16/9" : "aspect-4/3", )}>
+      <div className={cn( "bg-forest/[0.04] relative overflow-hidden rounded-[1.25rem]", wide ? "aspect-4/4 sm:aspect-16/9" : "aspect-4/4", )}>
         <Image src={image} alt={imageAlt} fill sizes={ wide ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 62vw" : "(max-width: 640px) 92vw, (max-width: 1024px) 60vw, 50vw" } className="size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-brand)] group-hover:scale-[1.04] motion-reduce:transition-none" />
         <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/100 to-transparent" />
         <p className="eyebrow text-canvas/80 absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/80 px-5 py-2">

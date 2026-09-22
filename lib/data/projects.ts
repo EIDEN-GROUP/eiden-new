@@ -576,7 +576,7 @@ export const projectPages: ProjectPage[] = [
         kind: "pair",
         items: [
           {
-            image: "/work/dmc-morocco/dmc-brand-logo-mark.png",
+            image: "/work/dmc-morocco/logo.jpeg",
             alt: { fr: "Symbole DMC", en: "DMC brand mark" },
             caption: { fr: "Le symbole", en: "The mark" },
           },

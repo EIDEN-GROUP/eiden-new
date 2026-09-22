@@ -37,7 +37,7 @@ function Block({ block }: { block: WorkBlock }) {
     return (
       <Reveal>
         <figure>
-          <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
+          <div className="relative aspect-4/4 w-full overflow-hidden sm:aspect-16/9">
             <Image
               src={block.image}
               alt={say(block.alt)}
@@ -62,7 +62,7 @@ function Block({ block }: { block: WorkBlock }) {
         >
           <div
             className={cn(
-              "relative aspect-4/3 w-full overflow-hidden",
+              "relative aspect-4/4 w-full overflow-hidden",
               block.side === "left" && "lg:order-last",
             )}
           >
@@ -111,7 +111,7 @@ function Plate({ item, count }: { item: WorkImage; count: number }) {
       <div
         className={cn(
           "relative w-full overflow-hidden",
-          count === 3 ? "aspect-4/5" : "aspect-4/3",
+          count === 3 ? "aspect-4/5" : "aspect-4/4",
         )}
       >
         <Image

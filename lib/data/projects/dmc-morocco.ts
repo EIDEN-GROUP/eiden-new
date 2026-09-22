@@ -98,7 +98,7 @@ export const dmcMorocco: ProjectCase = {
           label: { fr: "Monogramme", en: "Monogram" },
         },
         {
-          image: "/work/dmc-morocco/dmc-brand-logo-mark.png",
+          image: "/work/dmc-morocco/logo.jpeg",
           alt: {
             fr: "Logo DMC Hospitality Morocco",
             en: "DMC Hospitality Morocco logo",

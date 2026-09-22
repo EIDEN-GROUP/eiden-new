@@ -277,7 +277,7 @@ function Shots({
               "relative overflow-hidden rounded-[1.1rem] sm:rounded-[1.4rem]",
               skin.frame,
               wide && "aspect-16/10 sm:col-span-2",
-              !wide && "aspect-4/3",
+              !wide && "aspect-4/4",
             )}
           >
             <Image

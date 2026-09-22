@@ -108,7 +108,7 @@ export function Home2Vision() {
                 {strip.map((entry) => (
                   <li
                     key={entry.src}
-                    className="relative aspect-4/3 overflow-hidden rounded-xl"
+                    className="relative aspect-4/4 overflow-hidden rounded-xl"
                   >
                     <Image
                       src={entry.src}

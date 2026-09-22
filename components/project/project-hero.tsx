@@ -52,7 +52,7 @@ export function ProjectHero({ project }: { project: ProjectPage }) {
       </div>
 
       <Reveal delay={0.24} className="mt-10 sm:mt-14">
-        <div className="relative aspect-4/3 w-full overflow-hidden sm:aspect-16/9">
+        <div className="relative aspect-4/4 w-full overflow-hidden sm:aspect-16/9">
           <Image
             src={project.hero.image}
             alt={say(project.hero.alt)}

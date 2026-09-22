@@ -186,23 +186,12 @@ const IMPACT = {
 
 const WORK: { image: string; alt: Say }[] = [
   {
-    image: "/work/medical-bay/medical-bay-brand-reception-mockup.png",
+    image: "/work/medical-bay/medical-local.png",
     alt: { fr: "L'accueil Medical Bay", en: "The Medical Bay reception" },
   },
   {
     image: "/work/medical-bay/medical-bay-brand-logo-3.png",
     alt: { fr: "Logo Medical Bay", en: "Medical Bay logo" },
-  },
-  {
-    image: "/work/medical-bay/medical-bay-application.png",
-    alt: {
-      fr: "L'identité Medical Bay en situation",
-      en: "The Medical Bay identity in place",
-    },
-  },
-  {
-    image: "/work/medical-bay/medical-bay-office.png",
-    alt: { fr: "Un cabinet de Medical Bay", en: "A Medical Bay treatment room" },
   },
   {
     image: "/work/medical-bay/medical-bay-dental-campaign.png",
@@ -217,8 +206,11 @@ const WORK: { image: string; alt: Say }[] = [
     alt: { fr: "Medical Bay", en: "Medical Bay" },
   },
   {
-    image: "/work/medical-bay/hero.jpeg",
-    alt: { fr: "Le hall de Medical Bay", en: "The Medical Bay lobby" },
+    image: "/work/medical-bay/medical-bay-application.png",
+    alt: {
+      fr: "L'identité Medical Bay en situation",
+      en: "The Medical Bay identity in place",
+    },
   },
 ];
 
@@ -306,7 +298,7 @@ export function MedicalBayV2View() {
               en: "The Medical Bay site on desktop",
             })}
             caption={say({ fr: "Desktop", en: "Desktop" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
           <Plate
             image="/work/medical-bay/medical-bay-web-mobile.jpeg"
@@ -315,7 +307,7 @@ export function MedicalBayV2View() {
               en: "The Medical Bay site on a phone",
             })}
             caption={say({ fr: "Mobile", en: "Mobile" })}
-            shape="aspect-4/3"
+            shape="aspect-4/4"
           />
         </Pair>
       </Chapter>
@@ -329,7 +321,7 @@ export function MedicalBayV2View() {
             en: "The Medical Bay dashboard",
           })}
           caption={say({ fr: "Tableau de bord", en: "Dashboard" })}
-          shape="aspect-4/3 sm:aspect-16/9"
+          shape="aspect-4/4 sm:aspect-16/9"
           sizes={FULL}
         />
       </Chapter>
