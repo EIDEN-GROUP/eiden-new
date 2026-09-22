@@ -75,9 +75,21 @@ const VIDEOS: Record<string, { src: string; poster: string }> = {
     src: "/work/lunja-village/lunja-web-1080p.mp4",
     poster: "/work/lunja-village/lunja-poster.jpg",
   },
-  bopassage: {
+  "educazen-kids": {
+    src: "/work/educazen-kids/educazenkids.mp4",
+    poster: "/work/educazen-kids/educazen-hero.png",
+  },
+  "bopassage": {
     src: "/work/bopassage/bo_passage_siteweb.mp4",
     poster: "/work/bopassage/bopassage-cover.jpg",
+  },
+  "dmc-morocco": {
+    src: "/work/dmc-morocco/dmc-web-1080p.mp4",
+    poster: "/work/dmc-morocco/dmc-poster.jpg",
+  },
+  mabrouk: {
+    src: "/work/mabrouk/mabrouk-web-1080p.mp4",
+    poster: "/work/mabrouk/mabrouk-poster.jpg",
   },
   "chillout-lounge": {
     src: "/work/chillout-lounge/chilloutt-web-1080p.mp4",
