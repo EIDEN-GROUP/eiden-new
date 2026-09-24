@@ -5,7 +5,6 @@ import {
   CaseV2,
   Caption,
   Chapter,
-  Gallery,
   Grid,
   Hero,
   ImpactPanel,
@@ -40,7 +39,7 @@ const HERO = {
     fr: "Un centre qui change la vie d'enfants tous les jours, avec une présence digitale qui n'en montrait rien. Nous avons rafraîchi la marque et mis les inscriptions sur rails.",
     en: "A centre changing children's lives daily, with a digital presence that showed none of it. We refreshed the brand and put enrolment on rails.",
   },
-  image: "/work/educazen-kids/hero-educa.jpeg",
+  image: "/work/educazen-kids/hero.jpeg",
   alt: {
     fr: "Le centre EducazenKids à Agadir",
     en: "The EducazenKids centre in Agadir",
@@ -280,47 +279,6 @@ const IMPACT = {
   },
 };
 
-const WORK: { image: string; alt: Say }[] = [
-  {
-    image: "/work/educazen-kids/educazenkids-brand-book.png",
-    alt: { fr: "Livre de marque EducazenKids", en: "EducazenKids brand book" },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-scroll-1.png",
-    alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-scroll-2.png",
-    alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-scroll-3.png",
-    alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-cover.png",
-    alt: { fr: "EducazenKids", en: "EducazenKids" },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-brand-logo-site.png",
-    alt: {
-      fr: "Le logo EducazenKids appliqué",
-      en: "The EducazenKids logo applied",
-    },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-application.png",
-    alt: {
-      fr: "L'identité EducazenKids en situation",
-      en: "The EducazenKids identity in place",
-    },
-  },
-  {
-    image: "/work/educazen-kids/educazenkids-web.png",
-    alt: { fr: "Le site EducazenKids", en: "The EducazenKids site" },
-  },
-];
-
 const NEXT: NextProject[] = [
   {
     href: "/lunja-village",
@@ -351,7 +309,6 @@ const CHAPTERS = [
   },
   { id: "media-payant", label: { fr: "Média payant", en: "Paid media" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function EducazenKidsV2View() {
@@ -484,18 +441,6 @@ export function EducazenKidsV2View() {
           metric={IMPACT.metric}
           line={say(IMPACT.line)}
         />
-      </Chapter>
-
-      <Chapter id="le-travail">
-        <Caption
-          index={8}
-          title={say({
-            fr: "La preuve, après l'argument.",
-            en: "The proof, after the argument.",
-          })}
-          meta={`${WORK.length} ${say({ fr: "images", en: "pictures" })}`}
-        />
-        <Gallery items={WORK} />
       </Chapter>
     </CaseV2>
   );

@@ -236,7 +236,6 @@ const CHAPTERS = [
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
   { id: "crm", label: { fr: "CRM & tableau de bord", en: "CRM & dashboard" } },
   { id: "impact", label: { fr: "L'impact", en: "The impact" } },
-  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function MedicalBayV2View() {
@@ -333,18 +332,6 @@ export function MedicalBayV2View() {
           metric={IMPACT.metric}
           line={say(IMPACT.text)}
         />
-      </Chapter>
-
-      <Chapter id="le-travail">
-        <Caption
-          index={6}
-          title={say({
-            fr: "La preuve, après l'argument.",
-            en: "The proof, after the argument.",
-          })}
-          meta={`${WORK.length} ${say({ fr: "images", en: "pictures" })}`}
-        />
-        <Gallery items={WORK} />
       </Chapter>
     </CaseV2>
   );

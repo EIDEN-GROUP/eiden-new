@@ -5,7 +5,6 @@ import {
   CaseV2,
   Caption,
   Chapter,
-  Gallery,
   Grid,
   Hero,
   Pair,
@@ -89,7 +88,7 @@ const CREATION = {
   },
   plates: [
     {
-      image: "/work/dmc-morocco/logo.jpeg",
+      image: "/work/dmc-morocco/brand-1.jpeg",
       caption: { fr: "Logo", en: "Logo" },
       alt: {
         fr: "Logo DMC Hospitality Morocco",
@@ -97,7 +96,7 @@ const CREATION = {
       },
     },
     {
-      image: "/work/dmc-morocco/brand.jpeg",
+      image: "/work/dmc-morocco/brand-2.jpeg",
       caption: { fr: "Monogramme", en: "Monogram" },
       alt: {
         fr: "Monogramme DMC Hospitality Morocco",
@@ -105,7 +104,7 @@ const CREATION = {
       },
     },
     {
-      image: "/work/dmc-morocco/branding-2.jpeg",
+      image: "/work/dmc-morocco/brand-3.jpeg",
       caption: { fr: "Charte", en: "Guidelines" },
       alt: {
         fr: "Charte graphique DMC Hospitality Morocco",
@@ -247,38 +246,9 @@ const CONTENT = {
   },
   posts: [
     "/work/dmc-morocco/content-1.jpeg",
-    "/work/dmc-morocco/dmc-social-d.png",
-    "/work/dmc-morocco/dmc-social-m.png",
-    "/work/dmc-morocco/dmc-social-c.png",
+    "/work/dmc-morocco/content.jpeg",
   ],
 };
-
-const WORK: { image: string; alt: Say }[] = [
-  {
-    image: "/work/dmc-morocco/dmc-brand-card.png",
-    alt: { fr: "Carte de visite DMC", en: "DMC business card" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc-guidelines-hero.png",
-    alt: { fr: "Charte graphique DMC", en: "DMC brand guidelines" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc-brand-posters.png",
-    alt: { fr: "Affiches DMC", en: "DMC posters" },
-  },
-  {
-    image: "/work/dmc-morocco/hero.jpeg",
-    alt: { fr: "Univers de marque DMC", en: "The DMC brand world" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc-portfolio-image.png",
-    alt: { fr: "Supports DMC", en: "DMC collateral" },
-  },
-  {
-    image: "/work/dmc-morocco/dmc-cover.png",
-    alt: { fr: "DMC Hospitality Morocco", en: "DMC Hospitality Morocco" },
-  },
-];
 
 const NEXT: NextProject[] = [
   {
@@ -305,7 +275,6 @@ const CHAPTERS = [
   { id: "palette", label: { fr: "Le langage visuel", en: "The visual language" } },
   { id: "site-web", label: { fr: "Site web", en: "Website" } },
   { id: "contenu", label: { fr: "Contenu", en: "Content" } },
-  { id: "le-travail", label: { fr: "Galerie", en: "Gallery" } },
 ];
 
 export function DmcMoroccoV2View() {
@@ -418,18 +387,6 @@ export function DmcMoroccoV2View() {
             />
           ))}
         </Grid>
-      </Chapter>
-
-      <Chapter id="le-travail">
-        <Caption
-          index={6}
-          title={say({
-            fr: "La preuve, après l'argument.",
-            en: "The proof, after the argument.",
-          })}
-          meta={`${WORK.length} ${say({ fr: "images", en: "pictures" })}`}
-        />
-        <Gallery items={WORK} />
       </Chapter>
     </CaseV2>
   );
