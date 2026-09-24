@@ -182,17 +182,9 @@ export function CaseShowcase({
     : INK.light;
 
   return (
-    <div
-      ref={trackRef}
-      className="relative"
-      style={{ height: `${panels * PANEL_VH}svh` }}
-    >
+    <div ref={trackRef} className="relative" style={{ height: `${panels * PANEL_VH}svh` }}>
       <div className="text-canvas sticky top-0 h-svh overflow-hidden">
-        <section
-          className="absolute inset-0 isolate z-0 flex items-center justify-center"
-          style={{ backgroundColor: INTRO_GROUND }}
-          data-cursor={cursorOn(INTRO_GROUND)}
-        >
+        <section className="absolute inset-0 isolate z-0 flex items-center justify-center" style={{ backgroundColor: INTRO_GROUND }} data-cursor={cursorOn(INTRO_GROUND)} >
           <FixedBackdrop src={intro.texture} imageClassName="scale-110 blur-2xl" />
           <div className="container-eiden flex flex-col items-center py-16 text-center">
             <Reveal direction="none" duration={0.5}>
@@ -272,11 +264,6 @@ export function CaseShowcase({
                   <p
                     className={cn(
                       "eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 tracking-[0.14em] sm:tracking-[0.2em]",
-                      /* Le libellé client + tags doit occuper le même nombre de
-                         lignes sur toutes les cases, sinon le bloc saute d'une
-                         case à l'autre. En deux colonnes il tient sur une seule
-                         ligne, la plus longue comprise ; sur mobile la colonne
-                         est trop étroite pour ça, on vise deux lignes partout. */
                       "max-sm:min-h-[calc(2.4em+0.25rem)] max-sm:text-[clamp(0.5rem,2.7vw,0.6875rem)] max-sm:tracking-[0.06em]",
                       "lg:flex-nowrap lg:text-[clamp(0.6rem,0.95vw,0.875rem)] lg:tracking-[0.08em]",
                       ink.accent,

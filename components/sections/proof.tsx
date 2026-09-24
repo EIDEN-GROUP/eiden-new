@@ -19,7 +19,7 @@ export function Proof() {
         tags: entry.tags,
         image: record.image,
         imageAlt: record.imageAlt,
-        href: `/portfolio#${entry.slug}`,
+        href: `/${entry.slug}`,
         quote: entry.quote,
         author: entry.author,
       };
