@@ -354,7 +354,7 @@ const NEXT = [
     slug: "medical-bay",
     client: "Medical Bay",
     category: { fr: "Santé", en: "Healthcare" },
-    image: "/work/medical-bay/medical-bay-lobby.png",
+    image: "/work/medical-bay/hero.jpeg",
   },
 ];
 

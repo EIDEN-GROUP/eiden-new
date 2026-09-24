@@ -219,13 +219,13 @@ const NEXT: NextProject[] = [
     href: "/educazen-kids",
     client: "EducazenKids",
     category: { fr: "Éducation", en: "Education" },
-    image: "/work/educazen-kids/educazen-hero.png",
+    image: "/work/educazen-kids/hero.jpeg",
   },
   {
     href: "/chillout-lounge",
     client: "CHILLOUT Lounge",
     category: { fr: "Lounge", en: "Lounge" },
-    image: "/work/chillout-lounge/chilout hero.png",
+    image: "/work/chillout-lounge/hero.jpeg",
   },
 ];
 

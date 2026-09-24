@@ -146,13 +146,13 @@ const NEXT: NextProject[] = [
     href: "/medical-bay",
     client: "Medical Bay",
     category: { fr: "Santé", en: "Healthcare" },
-    image: "/work/medical-bay/medical-bay-lobby.png",
+    image: "/work/medical-bay/hero.jpeg",
   },
   {
     href: "/dmc-morocco",
     client: "DMC Hospitality Morocco",
     category: { fr: "Hôtellerie", en: "Hospitality" },
-    image: "/work/dmc-morocco/dmc-hero.png",
+    image: "/work/dmc-morocco/hero.jpeg",
   },
 ];
 
