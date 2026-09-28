@@ -419,7 +419,7 @@ export function Grid({ children }: { children: ReactNode }) {
 export function Hero({ image, alt }: { image: string; alt: string }) {
   return (
     <Reveal amount={0.1}>
-      <figure className={cn(FRAME, "aspect-4/5")}>
+      <figure className={cn(FRAME, "aspect-4/5 sm:aspect-16/9")}>
         <Image
           src={image}
           alt={alt}
