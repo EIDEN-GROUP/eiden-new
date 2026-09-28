@@ -1,4 +1,5 @@
 import { siteConfig } from "@/lib/data/site";
+import { ICON, LOGO, type InlineImage } from "@/lib/emails/brand-images";
 
 export type ContactLocale = "fr" | "en";
 
@@ -17,6 +18,8 @@ export type BuiltEmail = {
   subject: string;
   html: string;
   text: string;
+  /** The images the html points at with `cid:`; pass them to `sendMail`. */
+  attachments: InlineImage[];
 };
 
 /* Brand tokens mirrored from app/globals.css (emails need inline styles). */
@@ -41,9 +44,9 @@ const SANS =
 const DISPLAY =
   "'Outfit', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
-/* The site's own marks, as PNG: most mail clients will not draw SVG. */
-const ICON = `${siteConfig.url}/brand/eiden-icon.png`;
-const LOGO = `${siteConfig.url}/brand/eiden-logo-light.png`;
+/* The site's own marks travel with the email, so they show wherever the site is hosted. */
+const ICON_SRC = `cid:${ICON.cid}`;
+const LOGO_SRC = `cid:${LOGO.cid}`;
 
 const TABLE = `role="presentation" cellpadding="0" cellspacing="0" border="0"`;
 
@@ -92,8 +95,8 @@ function shell(opts: {
 <tr><td style="background-color:${C.forest};padding:0;">
 <table ${TABLE} width="100%"><tr><td align="center" class="e-pad" style="padding:40px 40px 36px 40px;">
 <table ${TABLE} align="center"><tr>
-<td valign="middle" style="padding:0 12px 0 0;"><img src="${ICON}" width="40" height="40" alt="" style="display:block;border:0;width:40px;height:40px;" /></td>
-<td valign="middle"><img src="${LOGO}" width="103" height="40" alt="${escapeHtml(siteConfig.name)}" style="display:block;border:0;width:103px;height:40px;" /></td>
+<td valign="middle" style="padding:0 12px 0 0;"><img src="${ICON_SRC}" width="40" height="40" alt="" style="display:block;border:0;width:40px;height:40px;" /></td>
+<td valign="middle"><img src="${LOGO_SRC}" width="103" height="40" alt="${escapeHtml(siteConfig.name)}" style="display:block;border:0;width:103px;height:40px;" /></td>
 </tr></table>
 <p style="margin:32px 0 0 0;font-family:${DISPLAY};font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:${C.gold};">${escapeHtml(eyebrow)}</p>
 <h1 class="e-title" style="margin:12px 0 0 0;font-family:${DISPLAY};font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-0.02em;color:${C.canvas};">${escapeHtml(title)}</h1>
@@ -121,7 +124,7 @@ function shell(opts: {
 </td></tr>
 
 <tr><td align="center" class="e-pad" style="background-color:${C.forest};padding:32px 40px;">
-<img src="${ICON}" width="44" height="44" alt="" style="display:block;margin:0 auto;border:0;width:44px;height:44px;" />
+<img src="${ICON_SRC}" width="44" height="44" alt="" style="display:block;margin:0 auto;border:0;width:44px;height:44px;" />
 <p style="margin:16px 0 0 0;font-size:12px;line-height:1.7;color:${C.canvasDim};">${escapeHtml(siteConfig.phoneMa)} &middot; ${escapeHtml(siteConfig.address)}</p>
 <div style="margin:20px auto 0 auto;width:48px;height:1px;background-color:${C.gold};font-size:0;line-height:1px;">&nbsp;</div>
 <p style="margin:16px 0 0 0;font-family:${DISPLAY};font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:${C.gold};">L&agrave; o&ugrave; le chaos devient architecture</p>
@@ -231,6 +234,7 @@ export function buildAdminEmail(data: ContactPayload): BuiltEmail {
 
   return {
     subject: `[Contact] ${needLine} ${data.name}`,
+    attachments: [ICON, LOGO],
     html: shell({
       lang: data.locale,
       eyebrow: t.adminEyebrow,
@@ -285,6 +289,7 @@ export function buildVisitorEmail(data: ContactPayload): BuiltEmail {
     subject: fr
       ? `Merci ${data.name} votre message est bien reçu | EIDEN GROUP`
       : `Thank you ${data.name} message received | EIDEN GROUP`,
+    attachments: [ICON, LOGO],
     html: shell({
       lang: data.locale,
       eyebrow: t.visitorEyebrow,

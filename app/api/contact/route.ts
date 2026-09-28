@@ -5,7 +5,6 @@ import {
   type ContactPayload,
 } from "@/lib/emails/contact-templates";
 import { emailConfig, getTransporter } from "@/lib/emails/transporter";
-import { siteConfig } from "@/lib/data/site";
 import { clientIp, isRateLimited } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -94,6 +93,7 @@ export async function POST(request: Request) {
       subject: adminMail.subject,
       text: adminMail.text,
       html: adminMail.html,
+      attachments: adminMail.attachments,
     });
 
     try {
@@ -104,6 +104,7 @@ export async function POST(request: Request) {
         subject: visitorMail.subject,
         text: visitorMail.text,
         html: visitorMail.html,
+        attachments: visitorMail.attachments,
       });
     } catch (visitorError) {
       // The lead is already delivered to the inbox; don't fail the request.
@@ -142,8 +143,13 @@ export async function GET(request: Request) {
   };
 
   const built = kind === "visitor" ? buildVisitorEmail(sample) : buildAdminEmail(sample);
-  // The marks are hosted on the live site; locally, serve them from here.
-  return new NextResponse(built.html.replaceAll(siteConfig.url, url.origin), {
+  // A browser cannot follow `cid:`; show the attached images in place instead.
+  const html = built.attachments.reduce(
+    (page, image) =>
+      page.replaceAll(`cid:${image.cid}`, `data:${image.contentType};base64,${image.content}`),
+    built.html,
+  );
+  return new NextResponse(html, {
     headers: { "content-type": "text/html; charset=utf-8" },
   });
 }
