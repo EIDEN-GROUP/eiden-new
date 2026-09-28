@@ -6,9 +6,10 @@ import { useLanguage } from "@/components/providers/language-provider";
 import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { useHydrated, useMediaQuery } from "@/lib/hooks";
 import { setIntroDone } from "@/lib/intro-store";
+import { INTRO_SEEN_KEY } from "@/lib/intro-seen";
 import { cn } from "@/lib/utils";
 
-const SESSION_KEY = "eiden.introSeen";
+const SESSION_KEY = INTRO_SEEN_KEY;
 
 /** Milliseconds: the mark fills, holds, then the curtains clear the frame. */
 const FILL_MS = 950;
@@ -42,10 +43,11 @@ export function PageLoader() {
   const hydrated = useHydrated();
   const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
 
+  // Server-rendered so it covers the first paint; the layout's head script hides it for repeat visits.
   const introSeen = useSyncExternalStore(
     noopSubscribe,
     useCallback(() => window.sessionStorage.getItem(SESSION_KEY) === "1", []),
-    () => true,
+    () => false,
   );
 
   const [dismissed, setDismissed] = useState(false);
@@ -74,12 +76,7 @@ export function PageLoader() {
     };
   }, [visible]);
 
-  /*
-   * Release the chrome that waits behind the intro. Guarded on hydration
-   * because the server snapshot reports the intro as already seen   without
-   * that, the very first commit would call this a beat before the loader
-   * has even had a chance to appear.
-   */
+  // Release the chrome that waits behind the intro, once the client knows it is gone.
   useEffect(() => {
     if (!hydrated || visible) return;
     setIntroDone();
@@ -96,7 +93,7 @@ export function PageLoader() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[100] overflow-hidden"
+      className="page-loader pointer-events-none fixed inset-0 z-[100] overflow-hidden"
       role="status"
       aria-live="polite"
       aria-label={t.common.loading}

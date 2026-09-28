@@ -419,7 +419,7 @@ export function Grid({ children }: { children: ReactNode }) {
 export function Hero({ image, alt }: { image: string; alt: string }) {
   return (
     <Reveal amount={0.1}>
-      <figure className={cn(FRAME, "aspect-4/5 sm:aspect-16/9")}>
+      <figure className={cn(FRAME, "aspect-4/5")}>
         <Image
           src={image}
           alt={alt}
@@ -437,24 +437,37 @@ export function Hero({ image, alt }: { image: string; alt: string }) {
 export function Plate({
   image,
   alt,
-  shape,
+  shape = "aspect-4/5",
   caption,
   sizes = FULL,
   delay = 0,
   contain = false,
+  ground,
 }: {
   image: string;
   alt: string;
-  shape: string;
+  /** Ignored in a `fit` chapter, where the plate fills its cell. */
+  shape?: string;
   caption?: string;
   sizes?: string;
   delay?: number;
   /** Show the whole picture on the beige ground instead of filling the frame. */
   contain?: boolean;
+  /** The picture's own flat background: shown whole on its bottom edge, the frame filled with this colour, so it can stretch to its row. */
+  ground?: string;
 }) {
+  const fit = useContext(Fit);
+
   return (
-    <Reveal amount={0.1} delay={delay}>
-      <figure className={cn(FRAME, "group", shape)}>
+    <Reveal amount={0.1} delay={delay} className={cn((fit || ground) && "h-full")}>
+      <figure
+        className={cn(
+          FRAME,
+          "group",
+          fit ? "size-full" : [shape, ground && "size-full"],
+        )}
+        style={ground ? { backgroundColor: ground } : undefined}
+      >
         <Image
           src={image}
           alt={alt}
@@ -463,7 +476,11 @@ export function Plate({
           sizes={sizes}
           className={cn(
             "transition-transform duration-[1400ms] ease-[var(--ease-brand)] group-hover:scale-[1.03] motion-reduce:transition-none",
-            contain ? "object-contain p-6 sm:p-8" : "object-cover",
+            contain
+              ? "object-contain p-6 sm:p-8"
+              : ground
+                ? "object-contain object-bottom"
+                : "object-cover",
           )}
         />
         {caption ? (
@@ -882,14 +899,11 @@ export function PaletteStage({ story }: { story: PaletteStory }) {
   );
 }
 
-/** Three short lines on teal, lifted from the chapter's own text. */
-export function SignalsPanel({ items }: { items: string[] }) {
-  const fit = useContext(Fit);
+/** In a `fit` chapter a panel's lines step down a pixel at a time until they fit it. */
+function useFitLines(fit: boolean, lines: string) {
   const box = useRef<HTMLDivElement>(null);
   const list = useRef<HTMLOListElement>(null);
-  const lines = items.join("\n");
 
-  // In a `fit` chapter the lines step down a pixel at a time until they fit the panel.
   useLayoutEffect(() => {
     const panel = box.current;
     const ol = list.current;
@@ -927,6 +941,14 @@ export function SignalsPanel({ items }: { items: string[] }) {
     window.addEventListener("resize", settle);
     return () => window.removeEventListener("resize", settle);
   }, [fit, lines]);
+
+  return { box, list };
+}
+
+/** Three short lines on teal, lifted from the chapter's own text. */
+export function SignalsPanel({ items }: { items: string[] }) {
+  const fit = useContext(Fit);
+  const { box, list } = useFitLines(fit, items.join("\n"));
 
   return (
     <Reveal amount={0.1} delay={0.08} className={cn("h-full", fit && "@container")}>
@@ -1025,29 +1047,61 @@ export function LinesRow({
   );
 }
 
+/** What changed, on forest. In a `fit` chapter it fills its cell of a `Pair`. */
+export function OutcomeList({ items }: { items: string[] }) {
+  const fit = useContext(Fit);
+  const { box, list } = useFitLines(fit, items.join("\n"));
+
+  return (
+    <Reveal amount={0.15} className={cn("h-full", fit && "@container")}>
+      <div
+        ref={box}
+        className={cn(
+          "bg-forest text-canvas flex h-full flex-col justify-center rounded-xl px-7 py-10 sm:px-12 sm:py-14",
+          fit &&
+            "px-[clamp(0.875rem,7cqi,3rem)] py-[clamp(0.875rem,7cqi,3.5rem)] sm:px-[clamp(0.875rem,7cqi,3rem)] sm:py-[clamp(0.875rem,7cqi,3.5rem)]",
+        )}
+      >
+        <ol ref={list} className="flex flex-col">
+          {items.map((item, index) => (
+            <li
+              key={item}
+              className={cn(
+                "border-forest-md grid grid-cols-[4rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:py-7",
+                fit &&
+                  "grid-cols-[clamp(1.75rem,14cqi,6rem)_1fr] py-[clamp(0.375rem,min(4cqi,2.8svh),1.75rem)] sm:grid-cols-[clamp(1.75rem,14cqi,6rem)_1fr] sm:py-[clamp(0.375rem,min(4cqi,2.8svh),1.75rem)]",
+              )}
+            >
+              <span
+                className={cn(
+                  "font-display text-gold text-[22px] leading-none font-extrabold tracking-[-0.05em] tabular-nums",
+                  fit && "text-[clamp(0.875rem,4.5cqi,22px)]",
+                )}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span
+                className={cn(
+                  "font-display text-[24px] leading-[1.08] font-extrabold tracking-[-0.035em]",
+                  fit &&
+                    "text-[length:var(--signal,clamp(0.9375rem,min(8.5cqi,4.4svh),24px))]",
+                )}
+              >
+                {item}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Reveal>
+  );
+}
+
 /** The impact where no figure has been published: what changed, on forest, beside the place itself. */
 export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
   return (
     <div className="grid gap-1.5 lg:grid-cols-[1fr_1fr]">
-      <Reveal amount={0.15} className="h-full">
-        <div className="bg-forest text-canvas flex h-full flex-col justify-center rounded-xl px-7 py-10 sm:px-12 sm:py-14">
-          <ol className="flex flex-col">
-            {items.map((item, index) => (
-              <li
-                key={item}
-                className="border-forest-md grid grid-cols-[4rem_1fr] items-baseline border-t py-6 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[6rem_1fr] sm:py-7"
-              >
-                <span className="font-display text-gold text-[22px] leading-none font-extrabold tracking-[-0.05em] tabular-nums">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="font-display text-[24px] leading-[1.08] font-extrabold tracking-[-0.035em]">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Reveal>
+      <OutcomeList items={items} />
 
       <Reveal amount={0.15} delay={0.08} className="h-full">
         <figure className={cn(FRAME, "aspect-4/4 h-full lg:aspect-auto")}>

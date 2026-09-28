@@ -6,8 +6,9 @@ import {
   Chapter,
   FULL,
   Gallery,
+  HALF,
   Hero,
-  OutcomePanel,
+  OutcomeList,
   Pair,
   Plate,
   RealityFracture,
@@ -94,6 +95,14 @@ const IMPACT = {
       en: "A light site with no heavy imagery to load.",
     },
   ] as Say[],
+  receipt: {
+    image: "/work/chillout-lounge/chillout-meta-ads.webp",
+    ground: "#1E2B3B",
+    alt: {
+      fr: "Bilan Meta Ads du CHILLOUT Lounge : 30,9 K personnes touchées pour 30,71 $",
+      en: "CHILLOUT Lounge Meta Ads results: 30.9K people reached for $30.71",
+    },
+  },
 };
 
 const WORK: { image: string; alt: Say }[] = [
@@ -192,7 +201,17 @@ export function ChilloutLoungeV2View() {
 
       <Chapter id="impact">
         <Caption index={2} title={say(IMPACT.title)} />
-        <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
+        <Pair>
+          <OutcomeList items={IMPACT.outcomes.map(say)} />
+          <Plate
+            image={IMPACT.receipt.image}
+            alt={say(IMPACT.receipt.alt)}
+            ground={IMPACT.receipt.ground}
+            shape="aspect-[1778/2000]"
+            sizes={HALF}
+            delay={0.08}
+          />
+        </Pair>
       </Chapter>
 
       <Chapter id="le-travail">

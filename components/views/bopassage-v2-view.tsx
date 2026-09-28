@@ -1,6 +1,6 @@
 "use client";
 
-import { BrandBoard, CaseV2, Caption, Chapter, Gallery, Grid, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, SignalsPanel, Slides, useSay, type NextProject, type Say,} from "@/components/case-v2/kit";
+import { BrandBoard, CaseV2, Caption, Chapter, Gallery, Grid, HALF, Hero, ImpactPanel, Pair, PaletteStage, Plate, RealityFracture, SignalsPanel, useSay, type NextProject, type Say,} from "@/components/case-v2/kit";
 import type { PaletteStory } from "@/lib/data/projects/types";
 
 const CLIENT = "Bôpassage";
@@ -253,20 +253,14 @@ const PAID = {
       en: "Retuned every month against covers.",
     },
   ] as Say[],
-  slides: [
-    {
-      image: "/work/bopassage/bopassage-application.png",
-      alt: { fr: "Affichage extérieur Bôpassage", en: "Bôpassage out-of-home poster" },
+  receipt: {
+    image: "/work/bopassage/bopassage-meta-ads.webp",
+    ground: "#0E5B43",
+    alt: {
+      fr: "Bilan Meta Ads de Bôpassage : 3 266 visites de profil pour 105,67 $",
+      en: "Bôpassage Meta Ads results: 3,266 profile visits for $105.67",
     },
-    {
-      image: "/work/bopassage/bopassage-ooh-column.png",
-      alt: { fr: "Colonne d'affichage Bôpassage", en: "Bôpassage advertising column" },
-    },
-    {
-      image: "/work/bopassage/bopassage-social-waffle.png",
-      alt: { fr: "Publication Bôpassage : la gaufre", en: "Bôpassage post: the waffle" },
-    },
-  ],
+  },
 };
 
 const IMPACT = {
@@ -465,11 +459,11 @@ export function BopassageV2View() {
           text={say(PAID.text)}
         />
         <Pair>
-          <Slides
-            items={PAID.slides.map((slide) => ({
-              image: slide.image,
-              alt: say(slide.alt),
-            }))}
+          <Plate
+            image={PAID.receipt.image}
+            alt={say(PAID.receipt.alt)}
+            ground={PAID.receipt.ground}
+            sizes={HALF}
           />
           <SignalsPanel items={PAID.signals.map(say)} />
         </Pair>

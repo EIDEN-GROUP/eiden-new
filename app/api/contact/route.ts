@@ -5,6 +5,7 @@ import {
   type ContactPayload,
 } from "@/lib/emails/contact-templates";
 import { emailConfig, getTransporter } from "@/lib/emails/transporter";
+import { siteConfig } from "@/lib/data/site";
 import { clientIp, isRateLimited } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -141,7 +142,8 @@ export async function GET(request: Request) {
   };
 
   const built = kind === "visitor" ? buildVisitorEmail(sample) : buildAdminEmail(sample);
-  return new NextResponse(built.html, {
+  // The marks are hosted on the live site; locally, serve them from here.
+  return new NextResponse(built.html.replaceAll(siteConfig.url, url.origin), {
     headers: { "content-type": "text/html; charset=utf-8" },
   });
 }

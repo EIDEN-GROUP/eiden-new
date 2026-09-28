@@ -6,6 +6,7 @@ import {
   Caption,
   Chapter,
   Grid,
+  HALF,
   Hero,
   ImpactPanel,
   Pair,
@@ -13,7 +14,6 @@ import {
   Plate,
   RealityFracture,
   SignalsPanel,
-  Slides,
   useSay,
   type NextProject,
   type Say,
@@ -256,11 +256,14 @@ const PAID = {
       en: "Switched off the moment the places are taken.",
     },
   ] as Say[],
-  slides: [
-    "/work/educazen-kids/educazenkids-scroll-2.png",
-    "/work/educazen-kids/educazenkids-scroll-1.png",
-    "/work/educazen-kids/educazenkids-scroll-3.png",
-  ],
+  receipt: {
+    image: "/work/educazen-kids/educazenkids-meta-ads.webp",
+    ground: "#C2185B",
+    alt: {
+      fr: "Bilan Meta Ads d'EducazenKids : 951 conversations ouvertes par des parents pour 443,50 €",
+      en: "EducazenKids Meta Ads results: 951 conversations opened by parents for €443.50",
+    },
+  },
 };
 
 const IMPACT = {
@@ -424,11 +427,11 @@ export function EducazenKidsV2View() {
           text={say(PAID.text)}
         />
         <Pair>
-          <Slides
-            items={PAID.slides.map((image) => ({
-              image,
-              alt: say({ fr: "Le site EducazenKids", en: "The EducazenKids site" }),
-            }))}
+          <Plate
+            image={PAID.receipt.image}
+            alt={say(PAID.receipt.alt)}
+            ground={PAID.receipt.ground}
+            sizes={HALF}
           />
           <SignalsPanel items={PAID.signals.map(say)} />
         </Pair>

@@ -12,7 +12,9 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
 import { SideTags } from "@/components/layout/side-tags";
+import { InlineScript } from "@/components/ui/inline-script";
 import { siteConfig } from "@/lib/data/site";
+import { introSeenScript } from "@/lib/intro-seen";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -86,15 +88,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="fr"
       data-scroll-behavior="smooth"
       className={`${outfit.variable} ${dmSerif.variable} ${inter.variable} antialiased`}
+      suppressHydrationWarning
     >
       <head>
+        <InlineScript html={introSeenScript} />
         {/* The cursor art is fetched the moment it is first needed, which
             would show one frame of the system arrow. Preloading both cuts
             keeps that frame from ever landing. */}
         <link rel="preload" as="image" href="/cursors/arrow.svg" />
         <link rel="preload" as="image" href="/cursors/arrow-light.svg" />
         <noscript>
-          <style>{`[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>
+          <style>{`.page-loader{display:none!important}[data-reveal="out"],[data-reveal-group="out"]>*{opacity:1!important;transform:none!important}[data-reveal-effect="curtain"]::before{transform:translateY(-100%)!important}.footer-rise,.word-rise{transform:none!important}`}</style>
         </noscript>
       </head>
       <body className="bg-canvas flex min-h-screen flex-col">

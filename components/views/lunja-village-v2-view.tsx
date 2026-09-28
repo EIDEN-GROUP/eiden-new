@@ -8,6 +8,7 @@ import {
   Chapter,
   Gallery,
   Grid,
+  HALF,
   Hero,
   ImpactPanel,
   Pair,
@@ -15,7 +16,6 @@ import {
   Plate,
   RealityFracture,
   SignalsPanel,
-  Slides,
   useSay,
   type NextProject,
 } from "@/components/case-v2/kit";
@@ -253,11 +253,14 @@ const MEDIA = {
     fr: "L’offre, le calendrier et la dépense ont été réglés ensemble sur la saison plutôt que sur le mois, et le budget dirigé vers ceux qui préparent déjà le voyage : une date en tête, un billet en attente, une planche à transporter. Les réservations arrivent maintenant en connaissant déjà le lieu.",
     en: "The offer, the calendar and the spend were tuned together against the season rather than the month, and the budget pointed at people already planning the trip: a date in mind, a flight on hold, a board to carry. Bookings now arrive already knowing the place.",
   },
-  posts: [
-    "/work/lunja-village/lunja-social-7.png",
-    "/work/lunja-village/lunja-social-1.png",
-    "/work/lunja-village/lunja-social-2.png",
-  ],
+  receipt: {
+    image: "/work/lunja-village/lunja-meta-ads.webp",
+    ground: "#FFD100",
+    alt: {
+      fr: "Bilan Meta Ads de Lunja Village : 1 689 prospects captés pour 453,84 $",
+      en: "Lunja Village Meta Ads results: 1,689 leads captured for $453.84",
+    },
+  },
 };
 
 const IMPACT = {
@@ -526,11 +529,11 @@ export function LunjaVillageV2View() {
           text={say(MEDIA.text)}
         />
         <Pair>
-          <Slides
-            items={MEDIA.posts.map((image) => ({
-              image,
-              alt: say({ fr: "Publication sociale Lunja", en: "Lunja social post" }),
-            }))}
+          <Plate
+            image={MEDIA.receipt.image}
+            alt={say(MEDIA.receipt.alt)}
+            ground={MEDIA.receipt.ground}
+            sizes={HALF}
           />
           <SignalsPanel items={SIGNALS.map(say)} />
         </Pair>

@@ -61,10 +61,6 @@ function useGround(open: boolean) {
     let lifted = false;
     let tone: Tone | null = null;
     let raf = 0;
-    /* `toneAt` walks a hit test and then the computed style of everything
-       under the bar   by far the dearest thing on a scroll frame, and the
-       answer only turns at a section boundary. Probing every 24px of travel
-       reads the same and costs a fraction. */
     let probed = Number.NaN;
     const PROBE_STEP = 24;
 
@@ -270,67 +266,69 @@ export function SiteHeader() {
           <div className="hidden px-10 lg:block xl:px-12">
             <div
               className={cn(
-                "nav-shell glass-light text-ink pointer-events-auto mx-auto mt-3 flex h-18 w-full max-w-[100vw] items-center justify-between gap-6 rounded-full pr-2",
-                "group-data-[lifted=true]/bar:h-14 group-data-[lifted=true]/bar:max-w-[44rem]",
+                "nav-shell glass-light text-ink pointer-events-auto mx-auto mt-3 grid h-18 w-full max-w-[100vw] grid-cols-[0fr_auto_1fr] items-center rounded-full px-2",
+                /* Links sit after the mark at rest, dead centre once lifted. */
+                "group-data-[lifted=true]/bar:h-14 group-data-[lifted=true]/bar:max-w-[44rem] group-data-[lifted=true]/bar:grid-cols-[1fr_auto_1fr]",
                 "group-data-[lifted=true]/bar:bg-canvas/80 group-data-[lifted=true]/bar:backdrop-blur-xl group-data-[lifted=true]/bar:backdrop-saturate-150",
                 "group-data-[lifted=true]/bar:shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)]",
               )}
             >
-              <div
+              <span
+                aria-hidden
                 className={cn(
-                  "nav-capsule glass-light flex h-14 shrink-0 items-center gap-8 rounded-full px-7 xl:gap-10",
+                  "nav-capsule glass-light col-[1/3] row-start-1 -mr-7 -ml-2 h-14 rounded-full",
                   "bg-canvas/80 backdrop-blur-xl backdrop-saturate-150",
                   "group-data-[lifted=true]/bar:bg-transparent group-data-[lifted=true]/bar:backdrop-filter-none",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                 )}
+              />
+
+              <Link
+                href="/"
+                aria-label={homeLabel}
+                className="hover:text-teal relative col-start-1 row-start-1 mr-8 ml-5 justify-self-start transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none xl:mr-10"
               >
-                <Link
-                  href="/"
-                  aria-label={homeLabel}
-                  className="hover:text-teal shrink-0 transition-colors duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none"
-                >
-                  <Wordmark className="h-7" />
-                </Link>
+                <Wordmark className="h-7" />
+              </Link>
 
-                <nav
-                  aria-label={t.footer.navLabel}
-                  className="flex items-center gap-7 xl:gap-8"
-                >
-                  {inlineRoutes.map((route) => {
-                    const active = pathname === route.href;
+              <nav
+                aria-label={t.footer.navLabel}
+                className="relative col-start-2 row-start-1 flex items-center gap-7 xl:gap-8"
+              >
+                {inlineRoutes.map((route) => {
+                  const active = pathname === route.href;
 
-                    return (
-                      <Link
-                        key={route.href}
-                        href={route.href}
-                        aria-current={active ? "page" : undefined}
+                  return (
+                    <Link
+                      key={route.href}
+                      href={route.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "group/link relative py-1 text-[0.9375rem] font-semibold whitespace-nowrap",
+                        "transition-opacity duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                        active ? "opacity-100" : "opacity-70 hover:opacity-100",
+                      )}
+                    >
+                      {t.nav[route.key]}
+                      <span
+                        aria-hidden
                         className={cn(
-                          "group/link relative py-1 text-[0.9375rem] font-semibold whitespace-nowrap",
-                          "transition-opacity duration-400 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                          active ? "opacity-100" : "opacity-70 hover:opacity-100",
+                          "absolute bottom-0 left-0 h-px w-full origin-left bg-current",
+                          "transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
+                          active
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover/link:scale-x-100",
                         )}
-                      >
-                        {t.nav[route.key]}
-                        <span
-                          aria-hidden
-                          className={cn(
-                            "absolute bottom-0 left-0 h-px w-full origin-left bg-current",
-                            "transition-transform duration-500 ease-[var(--ease-brand)] motion-reduce:transition-none",
-                            active
-                              ? "scale-x-100"
-                              : "scale-x-0 group-hover/link:scale-x-100",
-                          )}
-                        />
-                      </Link>
-                    );
-                  })}
-                </nav>
-              </div>
+                      />
+                    </Link>
+                  );
+                })}
+              </nav>
 
               <Link
                 href="/contact"
                 className={cn(
-                  "nav-capsule group/cta glass-dark bg-teal text-canvas hover:bg-teal-dk flex h-12 shrink-0 items-center gap-2.5 rounded-full pr-5 pl-7 text-[1rem] font-semibold whitespace-nowrap",
+                  "nav-capsule group/cta glass-dark bg-teal text-canvas hover:bg-teal-dk col-start-3 row-start-1 flex h-12 items-center gap-2.5 justify-self-end rounded-full pr-5 pl-7 text-[1rem] font-semibold whitespace-nowrap",
                   "group-data-[lifted=true]/bar:h-11",
                   "shadow-[0_12px_36px_-16px_rgba(18,38,32,0.26)] group-data-[lifted=true]/bar:shadow-none",
                   "hover:-translate-y-0.5 hover:shadow-[0_18px_38px_-14px_rgba(14,122,115,0.55)]",

@@ -651,6 +651,18 @@
   }
 }
 
+/* The loader is in the server HTML so it is the first thing painted. These
+   take it back out before paint for the visits that must not see it. */
+[data-intro="seen"] .page-loader {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader {
+    display: none;
+  }
+}
+
 /* Figures, set in the display face.
 
    The labels carry Outfit themselves now, so the family below is belt and
@@ -1089,6 +1101,7 @@
   transition:
     max-width 0.7s var(--ease-brand),
     height 0.7s var(--ease-brand),
+    grid-template-columns 0.7s var(--ease-brand),
     background-color 0.26s var(--ease-brand),
     box-shadow 0.26s var(--ease-brand),
     backdrop-filter 0.4s var(--ease-brand);
@@ -1108,6 +1121,7 @@
   transition:
     max-width 0.7s var(--ease-brand),
     height 0.7s var(--ease-brand),
+    grid-template-columns 0.7s var(--ease-brand),
     background-color 0.3s var(--ease-brand) 0.42s,
     box-shadow 0.3s var(--ease-brand) 0.42s,
     backdrop-filter 0.4s var(--ease-brand) 0.42s;
