@@ -118,10 +118,6 @@ u + .body .e-bd { background: #000; mix-blend-mode: difference; }
   .e-body { padding-left: 18px !important; padding-right: 18px !important; }
   .e-box { padding: 20px 18px 22px 18px !important; }
   .e-foot { padding: 30px 24px !important; }
-  .e-col { display: block !important; width: 100% !important; padding: 0 !important; text-align: center !important; }
-  .e-col-b { padding-top: 24px !important; }
-  .e-rule { display: none !important; }
-  .e-dash { margin: 0 auto !important; }
 }
 </style>
 </head>
@@ -147,22 +143,13 @@ ${subline ? `<p style="margin:22px 0 0 0;${LABEL}font-size:10.5px;line-height:14
 ${note ? `<p style="margin:18px 0 0 0;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.tealDk};text-align:center;">${escapeHtml(note)}</p>` : ""}
 </td></tr>
 
-<tr><td bgcolor="${C.forest}" class="e-foot" style="background-color:${C.forest};background-image:${SILK_FOOT};padding:28px 40px 24px 68px;">
-<table ${TABLE} width="100%"><tr>
-<td class="e-col" valign="middle" width="228" style="padding:0 20px 0 0;font-family:${SANS};font-size:12.5px;line-height:20px;color:${C.canvas};">
+<tr><td align="center" bgcolor="${C.forest}" class="e-foot" style="background-color:${C.forest};background-image:${SILK_FOOT};padding:28px 40px 26px 40px;font-family:${SANS};font-size:12.5px;line-height:20px;color:${C.canvas};text-align:center;">
 ${lightText(
   `<a href="mailto:${siteConfig.email}" style="color:${C.canvas};text-decoration:none;">${escapeHtml(siteConfig.email)}</a><br />
 <span style="display:block;height:4px;line-height:4px;font-size:0;">&nbsp;</span>
 ${escapeHtml(siteConfig.phoneMa)}<br />${address}`,
   "div",
 )}
-</td>
-<td class="e-rule" width="1" style="width:1px;${solid("#3A5F4F")}font-size:0;line-height:0;">&nbsp;</td>
-<td class="e-col e-col-b" valign="top" style="padding:9px 0 0 60px;">
-<div class="e-dash" style="width:44px;height:2px;${solid(C.gold)}font-size:0;line-height:2px;">&nbsp;</div>
-<p style="margin:18px 0 0 0;${LABEL}font-size:11px;line-height:20px;color:${C.gold};white-space:nowrap;">L&agrave; o&ugrave; le chaos<br />devient architecture.</p>
-</td>
-</tr></table>
 </td></tr>
 
 </table>
