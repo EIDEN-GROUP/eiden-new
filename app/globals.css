@@ -131,19 +131,10 @@
   max-width: var(--page-measure, 80rem);
 }
 
-/* A section that has to reach the edges of the screen while its writing stays
-   on the measure   a drifting wall, a marquee. */
 @utility container-bleed {
   --page-measure: 100%;
 }
 
-/* Label / eyebrow   Outfit, uppercase, wide tracking.
-
-   The label voice was Cormorant Garamond, a reading serif: at 12px, uppercase
-   and tracked out to 0.15em it went soft, and its old-style figures sat below
-   the cap height. Outfit is a grotesque built for exactly this size   even
-   stroke, open counters, lined figures   so the eyebrow reads as a label
-   rather than as decoration. */
 @utility eyebrow {
   font-family: var(--font-label);
   font-size: 12px;
