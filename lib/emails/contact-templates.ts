@@ -67,6 +67,15 @@ function gap(px: number): string {
   return `<div style="height:${px}px;line-height:${px}px;font-size:0;">&nbsp;</div>`;
 }
 
+// Mail apps recolour background-color in dark mode but never a background-image.
+const solid = (color: string) =>
+  `background-color:${color};background-image:linear-gradient(${color},${color});`;
+
+// Gmail app dark mode darkens light text; the screen + difference pair flips it back.
+function lightText(html: string, tag: "span" | "div" = "span"): string {
+  return `<${tag} class="e-bs"><${tag} class="e-bd">${html}</${tag}></${tag}>`;
+}
+
 function shell(opts: {
   lang: ContactLocale;
   preheader: string;
@@ -90,10 +99,17 @@ function shell(opts: {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="color-scheme" content="light" />
-<meta name="supported-color-schemes" content="light" />
+<meta name="color-scheme" content="light only" />
+<meta name="supported-color-schemes" content="light only" />
 <title>${escapeHtml(`${title} ${accent}`.replace(/\n/g, " "))}</title>
 <link href="${FONTS}" rel="stylesheet" />
+<style>
+:root { color-scheme: light only; supported-color-schemes: light only; }
+</style>
+<style>
+u + .body .e-bs { background: #000; mix-blend-mode: screen; }
+u + .body .e-bd { background: #000; mix-blend-mode: difference; }
+</style>
 <style>
 @media only screen and (max-width: 620px) {
   .e-wrap { padding: 0 !important; }
@@ -109,24 +125,24 @@ function shell(opts: {
 }
 </style>
 </head>
-<body style="margin:0;padding:0;background-color:${C.beige};font-family:${SANS};">
+<body class="body" style="margin:0;padding:0;background-color:${C.beige};font-family:${SANS};">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(preheader)}</div>
 <table ${TABLE} width="100%" style="background-color:${C.beige};margin:0;padding:0;">
 <tr><td align="center" class="e-wrap" style="padding:32px 16px;">
 <table ${TABLE} width="600" style="width:100%;max-width:600px;background-color:${C.canvas};">
 
 <tr><td align="center" bgcolor="${C.forest}" class="e-head" style="background-color:${C.forest};background-image:${SILK_HEAD};padding:40px 40px 36px 40px;">
-<div style="width:52px;height:2px;margin:0 auto;background-color:${C.gold};font-size:0;line-height:2px;">&nbsp;</div>
+<div style="width:52px;height:2px;margin:0 auto;${solid(C.gold)}font-size:0;line-height:2px;">&nbsp;</div>
 <p style="margin:26px 0 0 0;${LABEL}font-size:11px;line-height:14px;color:${C.gold};">${escapeHtml(eyebrow)}</p>
-<h1 class="e-title" style="margin:16px 0 0 0;font-family:${DISPLAY};font-size:47px;line-height:48px;font-weight:700;letter-spacing:-0.01em;color:${C.canvas};">${lines(title)} <span style="color:${C.gold};">${escapeHtml(accent)}</span></h1>
-${subline ? `<p style="margin:22px 0 0 0;${LABEL}font-size:10.5px;line-height:14px;color:${C.canvas};">${escapeHtml(subline)}</p>` : ""}
+<h1 class="e-title" style="margin:16px 0 0 0;font-family:${DISPLAY};font-size:47px;line-height:48px;font-weight:700;letter-spacing:-0.01em;color:${C.canvas};">${lightText(lines(title))} <span style="color:${C.gold};">${escapeHtml(accent)}</span></h1>
+${subline ? `<p style="margin:22px 0 0 0;${LABEL}font-size:10.5px;line-height:14px;color:${C.canvas};">${lightText(escapeHtml(subline))}</p>` : ""}
 </td></tr>
 
 <tr><td class="e-body" style="background-color:${C.canvas};padding:32px 34px 0 34px;">${body}</td></tr>
 
 <tr><td align="center" style="background-color:${C.canvas};padding:26px 24px 24px 24px;">
-<table ${TABLE} align="center"><tr><td align="center" bgcolor="${C.forest}" style="background-color:${C.forest};border-radius:999px;">
-<a href="${cta.href}" style="display:inline-block;padding:18px 40px;${LABEL}font-size:11px;letter-spacing:0.28em;line-height:14px;color:${C.canvas};text-decoration:none;">${escapeHtml(cta.label)}&nbsp;&nbsp;&rarr;</a>
+<table ${TABLE} align="center"><tr><td align="center" bgcolor="${C.forest}" style="${solid(C.forest)}border-radius:999px;">
+<a href="${cta.href}" style="display:inline-block;padding:18px 40px;${LABEL}font-size:11px;letter-spacing:0.28em;line-height:14px;color:${C.canvas};text-decoration:none;">${lightText(`${escapeHtml(cta.label)}&nbsp;&nbsp;&rarr;`)}</a>
 </td></tr></table>
 ${note ? `<p style="margin:18px 0 0 0;font-family:${SANS};font-size:12px;line-height:1.6;color:${C.tealDk};text-align:center;">${escapeHtml(note)}</p>` : ""}
 </td></tr>
@@ -134,13 +150,16 @@ ${note ? `<p style="margin:18px 0 0 0;font-family:${SANS};font-size:12px;line-he
 <tr><td bgcolor="${C.forest}" class="e-foot" style="background-color:${C.forest};background-image:${SILK_FOOT};padding:28px 40px 24px 68px;">
 <table ${TABLE} width="100%"><tr>
 <td class="e-col" valign="middle" width="228" style="padding:0 20px 0 0;font-family:${SANS};font-size:12.5px;line-height:20px;color:${C.canvas};">
-<a href="mailto:${siteConfig.email}" style="color:${C.canvas};text-decoration:none;">${escapeHtml(siteConfig.email)}</a><br />
+${lightText(
+  `<a href="mailto:${siteConfig.email}" style="color:${C.canvas};text-decoration:none;">${escapeHtml(siteConfig.email)}</a><br />
 <span style="display:block;height:4px;line-height:4px;font-size:0;">&nbsp;</span>
-${escapeHtml(siteConfig.phoneMa)}<br />${address}
+${escapeHtml(siteConfig.phoneMa)}<br />${address}`,
+  "div",
+)}
 </td>
-<td class="e-rule" width="1" style="width:1px;background-color:#3A5F4F;font-size:0;line-height:0;">&nbsp;</td>
+<td class="e-rule" width="1" style="width:1px;${solid("#3A5F4F")}font-size:0;line-height:0;">&nbsp;</td>
 <td class="e-col e-col-b" valign="top" style="padding:9px 0 0 60px;">
-<div class="e-dash" style="width:44px;height:2px;background-color:${C.gold};font-size:0;line-height:2px;">&nbsp;</div>
+<div class="e-dash" style="width:44px;height:2px;${solid(C.gold)}font-size:0;line-height:2px;">&nbsp;</div>
 <p style="margin:18px 0 0 0;${LABEL}font-size:11px;line-height:20px;color:${C.gold};white-space:nowrap;">L&agrave; o&ugrave; le chaos<br />devient architecture.</p>
 </td>
 </tr></table>
@@ -193,10 +212,10 @@ function detailsBox(title: string, rows: [string, string | undefined][]): string
 
 function steps(items: readonly (readonly [string, string])[]): string {
   const thread = (height?: number) =>
-    `<td width="12" style="width:12px;${height ? `height:${height}px;` : ""}font-size:0;line-height:0;">&nbsp;</td><td width="1" bgcolor="${C.beigeDk}" style="width:1px;background-color:${C.beigeDk};font-size:0;line-height:0;">&nbsp;</td><td width="12" style="width:12px;font-size:0;line-height:0;">&nbsp;</td>`;
+    `<td width="12" style="width:12px;${height ? `height:${height}px;` : ""}font-size:0;line-height:0;">&nbsp;</td><td width="1" bgcolor="${C.beigeDk}" style="width:1px;${solid(C.beigeDk)}font-size:0;line-height:0;">&nbsp;</td><td width="12" style="width:12px;font-size:0;line-height:0;">&nbsp;</td>`;
   const dot = `<table ${TABLE} width="25" style="width:25px;">
 <tr>${thread(8)}</tr>
-<tr><td colspan="3" align="center" style="height:9px;font-size:0;line-height:0;"><div style="width:9px;height:9px;margin:0 auto;border-radius:50%;background-color:${C.goldDk};font-size:0;line-height:0;">&nbsp;</div></td></tr>
+<tr><td colspan="3" align="center" style="height:9px;font-size:0;line-height:0;"><div style="width:9px;height:9px;margin:0 auto;border-radius:50%;${solid(C.goldDk)}font-size:0;line-height:0;">&nbsp;</div></td></tr>
 <tr>${thread(7)}</tr>
 </table>`;
 
