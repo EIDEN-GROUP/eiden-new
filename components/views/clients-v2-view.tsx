@@ -32,7 +32,16 @@ const FILTERS: Filter[] = [
 const SHOW_FILTERS = false;
 const DELIVERED = "+20";
 const ZOOM ="transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover:scale-[1.05] motion-reduce:transition-none";
-const HIDDEN = new Set<string>(["anisal", "madaef", "centre-accompagnement"]);
+/* Hidden from the frontend without deleting anything: medical-bay and
+   droguerie-souss are kept in `projects` and keep their routes on disk.
+   Restore them by removing their slugs from this set. */
+const HIDDEN = new Set<string>([
+  "anisal",
+  "madaef",
+  "centre-accompagnement",
+  "medical-bay",
+  "droguerie-souss",
+]);
 const LISTED = projects.filter((project) => !HIDDEN.has(project.slug));
 // Three cards per screen: the big one is first on screens 1, 3, 5… and last on 2, 4…
 const ORDER = [

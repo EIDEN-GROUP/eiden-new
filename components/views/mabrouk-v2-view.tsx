@@ -143,10 +143,12 @@ const WORK: { image: string; alt: Say }[] = [
 
 const NEXT: NextProject[] = [
   {
-    href: "/medical-bay",
-    client: "Medical Bay",
-    category: { fr: "Santé", en: "Healthcare" },
-    image: "/work/medical-bay/hero.jpeg",
+    // Medical Bay is hidden from the frontend; its entry is kept below.
+    // href: "/medical-bay",
+    href: "/educazen-kids",
+    client: "EducazenKids",
+    category: { fr: "Éducation", en: "Education" },
+    image: "/work/educazen-kids/educazen-hero.png",
   },
   {
     href: "/dmc-morocco",

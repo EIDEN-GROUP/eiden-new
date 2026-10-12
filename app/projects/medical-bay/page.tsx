@@ -20,6 +20,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { jumpToTop } from "@/components/providers/smooth-scroll";
@@ -325,6 +326,9 @@ const NEXT = [
 ];
 
 export default function MedicalBayPage() {
+  // Hidden from the frontend without deleting anything: everything below stays
+  // on disk. Restore the page by removing this line.
+  notFound();
   const { locale } = useLanguage();
   const say = (value: Say) => value[locale];
   const heroRef = useHeroDepart<HTMLElement>();

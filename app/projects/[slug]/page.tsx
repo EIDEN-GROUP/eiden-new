@@ -3,13 +3,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectCaseStudy } from "@/components/project/case/case-study";
 import {
+  HIDDEN_PROJECT_SLUGS,
   getNextCases,
   getProjectCase,
   projectCases,
 } from "@/lib/data/projects/index";
 
 export function generateStaticParams() {
-  return projectCases.map((project) => ({ slug: project.slug }));
+  return projectCases
+    .filter((project) => !HIDDEN_PROJECT_SLUGS.has(project.slug))
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({

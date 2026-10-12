@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { MedicalBayV2View } from "@/components/views/medical-bay-v2-view";
 
 const description =
@@ -15,5 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function MedicalBayPage() {
+  // Hidden from the frontend without deleting anything: the view below stays
+  // on disk. Restore the page by removing this line.
+  notFound();
   return <MedicalBayV2View />;
 }

@@ -39,16 +39,29 @@ export const projectCases: ProjectCase[] = [
   centreAccompagnement,
 ];
 
+/**
+ * Hidden from the frontend without deleting anything: the case modules above
+ * stay imported so nothing is removed. Restore them by emptying this set.
+ */
+export const HIDDEN_PROJECT_SLUGS = new Set<string>([
+  "medical-bay",
+  "droguerie-souss",
+]);
+
 export function getProjectCase(slug: string) {
+  if (HIDDEN_PROJECT_SLUGS.has(slug)) return undefined;
   return projectCases.find((project) => project.slug === slug);
 }
 
 export function getNextCases(slug: string, count = 2) {
-  const index = projectCases.findIndex((project) => project.slug === slug);
+  const visible = projectCases.filter(
+    (project) => !HIDDEN_PROJECT_SLUGS.has(project.slug),
+  );
+  const index = visible.findIndex((project) => project.slug === slug);
   if (index < 0) return [];
 
-  const size = projectCases.length;
+  const size = visible.length;
   return Array.from({ length: Math.min(count, size - 1) }, (_, step) => {
-    return projectCases[(index + step + 1) % size];
+    return visible[(index + step + 1) % size];
   });
 }

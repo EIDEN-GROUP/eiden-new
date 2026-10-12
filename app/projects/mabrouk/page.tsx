@@ -303,10 +303,12 @@ const PALETTE: PaletteStory = {
 
 const NEXT = [
   {
-    slug: "medical-bay",
-    client: "Medical Bay",
-    category: { fr: "Santé", en: "Healthcare" },
-    image: "/work/medical-bay/medical-bay-lobby.png",
+    // Medical Bay is hidden from the frontend; its entry is kept below.
+    // slug: "medical-bay",
+    slug: "educazen-kids",
+    client: "EducazenKids",
+    category: { fr: "Éducation", en: "Education" },
+    image: "/work/educazen-kids/educazen-hero.png",
   },
   {
     slug: "dmc-morocco",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { DroguerieSoussV2View } from "@/components/views/droguerie-souss-v2-view";
 
 const description =
@@ -15,5 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function DroguerieSoussPage() {
+  // Hidden from the frontend without deleting anything: the view below stays
+  // on disk. Restore the page by removing this line.
+  notFound();
   return <DroguerieSoussV2View />;
 }
