@@ -15,6 +15,7 @@ import { SideTags } from "@/components/layout/side-tags";
 import { InlineScript } from "@/components/ui/inline-script";
 import { siteConfig } from "@/lib/data/site";
 import { introSeenScript } from "@/lib/intro-seen";
+import { organizationJsonLd, siteKeywords, siteKeywordsEn } from "@/lib/seo";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -39,36 +40,38 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "EIDEN GROUP | Agence digitale au Maroc",
+    default: "EIDEN GROUP | Architecture & Business au Maroc",
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Agence digitale marocaine basée à Agadir. Stratégie, marque, site web, campagnes et contenu : nous construisons les systèmes digitaux qui font grandir votre entreprise.",
-  keywords: [
-    "agence digitale Maroc",
-    "agence web Agadir",
-    "création site internet Maroc",
-    "branding Maroc",
-    "Google Ads Maroc",
-    "SEO Maroc",
-    "EIDEN GROUP",
-  ],
+    "Agence digitale marocaine basée à Agadir. Stratégie, marque, site web, SEO, campagnes et contenu : nous construisons les systèmes digitaux qui font grandir votre entreprise.",
+  keywords: [...siteKeywords, ...siteKeywordsEn],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_MA",
     alternateLocale: ["en_US"],
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "EIDEN GROUP | Agence digitale au Maroc",
+    title: "EIDEN GROUP | Architecture & Business au Maroc",
     description:
-      "Marque, site web, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
+      "Marque, site web, SEO, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
+    images: [
+      {
+        url: "/work/hero.png",
+        width: 1200,
+        height: 630,
+        alt: "EIDEN GROUP — agence digitale à Agadir, Maroc",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "EIDEN GROUP | Agence digitale au Maroc",
+    title: "EIDEN GROUP | Architecture & Business au Maroc",
     description:
-      "Marque, site web, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
+      "Marque, site web, SEO, campagnes, contenu : nous installons les systèmes digitaux qui vous amènent des clients.",
+    images: ["/work/hero.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -92,6 +95,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <InlineScript html={introSeenScript} />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd()),
+          }}
+        />
         {/* The cursor art is fetched the moment it is first needed, which
             would show one frame of the system arrow. Preloading both cuts
             keeps that frame from ever landing. */}

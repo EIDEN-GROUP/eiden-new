@@ -1,0 +1,17 @@
+{
+  "name": "EIDEN GROUP — Architecture & Business au Maroc",
+  "short_name": "EIDEN GROUP",
+  "description": "Agence digitale à Agadir : stratégie, marque, site web, SEO, campagnes et contenu.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#122620",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

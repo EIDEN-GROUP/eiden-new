@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lunja Village | EIDEN GROUP",
     description,
-    images: [{ url: "/work/lunja-village/image lunja hero 1.png" }],
+    images: [{ url: "/work/lunja-village/hero section lunja.png" }],
   },
 };
 
