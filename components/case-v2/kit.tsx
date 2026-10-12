@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -16,6 +17,7 @@ import {
 import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/components/providers/language-provider";
+import { jumpToTop } from "@/components/providers/smooth-scroll";
 import { CasePaletteStory } from "@/components/project/case/palette-story";
 import { TONES } from "@/components/project/case/tone";
 import { CountUp } from "@/components/ui/count-up";
@@ -128,6 +130,16 @@ export function CaseV2({
   children: ReactNode;
 }) {
   const say = useSay();
+  const pathname = usePathname();
+
+  /* A next-project card lands on a new case: put the reader at its top.
+     Next's own scroll reset is overwritten by Lenis on its next frame, so a
+     bare router reset leaves the new page at the old depth. Keyed on the
+     pathname, so in-page chapter anchors and locale switches don't snap. */
+  useEffect(() => {
+    jumpToTop();
+  }, [pathname]);
+
   const accounts = [
     { label: "Instagram", href: socials?.instagram, Icon: InstagramGlyph },
     { label: "Facebook", href: socials?.facebook, Icon: FacebookGlyph },
