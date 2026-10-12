@@ -25,7 +25,7 @@ export function Home2Strip() {
           <span className="relative size-[clamp(2.5rem,5vw,3.75rem)] shrink-0 overflow-hidden rounded-xl">
             <Image
               src={entry.src}
-              alt=""
+              alt={entry.client}
               fill
               sizes="60px"
               className="object-cover"

@@ -1110,14 +1110,14 @@ export function OutcomeList({ items }: { items: string[] }) {
 }
 
 /** The impact where no figure has been published: what changed, on forest, beside the place itself. */
-export function OutcomePanel({ image, items }: { image: string; items: string[] }) {
+export function OutcomePanel({ image, alt, items }: { image: string; alt: string; items: string[] }) {
   return (
     <div className="grid gap-1.5 lg:grid-cols-[1fr_1fr]">
       <OutcomeList items={items} />
 
       <Reveal amount={0.15} delay={0.08} className="h-full">
         <figure className={cn(FRAME, "aspect-4/4 h-full lg:aspect-auto")}>
-          <Image src={image} alt="" fill quality={90} sizes={HALF} className="object-cover" />
+          <Image src={image} alt={alt} fill quality={90} sizes={HALF} className="object-cover" />
         </figure>
       </Reveal>
     </div>
@@ -1246,7 +1246,7 @@ function NextProjects({ items }: { items: NextProject[] }) {
               <div className={cn(FRAME, "aspect-4/4 lg:aspect-16/11")}>
                 <Image
                   src={project.image}
-                  alt=""
+                  alt={project.client}
                   aria-hidden
                   fill
                   quality={90}

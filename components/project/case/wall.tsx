@@ -264,7 +264,7 @@ export function CaseWall({ wall, skin }: { wall: GalleryImage[]; skin: ToneSkin 
             >
               <Image
                 src={image}
-                alt=""
+                alt={say(alt)}
                 aria-hidden
                 fill
                 sizes="(max-width: 40rem) 86vw, (max-width: 64rem) 56vw, 40vw"

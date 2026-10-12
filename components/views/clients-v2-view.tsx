@@ -328,6 +328,7 @@ function Tile({
           <HeroVideo
             src={video.src}
             poster={video.poster}
+            title={`Vidéo de présentation — ${project.name}`}
             className={cn("absolute inset-0", ZOOM)}
           />
         ) : (

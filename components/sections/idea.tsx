@@ -150,7 +150,7 @@ export function Idea() {
                       card.lane,
                     )}
                   >
-                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 32vw, (min-width: 640px) 60vw, 88vw" className="idea-shot-img object-cover" />
+                    <Image src={card.image} alt={card.label} fill sizes="(min-width: 1024px) 32vw, (min-width: 640px) 60vw, 88vw" className="idea-shot-img object-cover" />
                     <span aria-hidden className="idea-shot-veil" />
 
                     <div className="relative z-1">

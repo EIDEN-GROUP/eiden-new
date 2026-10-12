@@ -137,7 +137,7 @@ export function ClientsView() {
                             >
                               <Image
                                 src={project.image}
-                                alt=""
+                                alt={project.imageAlt}
                                 fill
                                 sizes="(max-width: 1024px) 70vw, 30vw"
                                 className="size-full object-cover"

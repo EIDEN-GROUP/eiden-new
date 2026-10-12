@@ -218,7 +218,7 @@ export function MabroukV2View() {
 
       <Chapter id="impact">
         <Caption index={3} title={say(IMPACT.title)} />
-        <OutcomePanel image={HERO.image} items={IMPACT.outcomes.map(say)} />
+        <OutcomePanel image={HERO.image} alt={say(HERO.alt)} items={IMPACT.outcomes.map(say)} />
       </Chapter>
 
       <Chapter id="le-travail">

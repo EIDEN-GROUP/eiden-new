@@ -90,7 +90,7 @@ export function CaseNext({ next }: { next: ProjectCase[] }) {
             >
               <Image
                 src={project.hero.image}
-                alt=""
+                alt={project.client}
                 aria-hidden
                 fill
                 sizes={next.length > 1 ? "(max-width: 64rem) 100vw, 50vw" : "100vw"}

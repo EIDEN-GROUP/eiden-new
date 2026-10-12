@@ -204,7 +204,7 @@ export function Hero() {
                 <span className="relative h-[clamp(5.5rem,20vh,10rem)]! w-[clamp(7rem,9vw,7.5rem)] shrink-0 overflow-hidden rounded-xl">
                   <Image
                     src={featured.image}
-                    alt=""
+                    alt={featured.client}
                     fill
                     sizes="500px"
                     className="object-cover transition-transform duration-700 ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:transition-none"

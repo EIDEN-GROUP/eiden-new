@@ -249,6 +249,7 @@ export function Vsl() {
                   ref={videoRef}
                   className="size-full object-cover"
                   poster="/work/eiden-hero.png"
+                  title={t.vsl.title}
                   playsInline
                   autoPlay
                   muted={muted}

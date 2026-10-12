@@ -35,6 +35,7 @@ export function Home2Closing() {
               ref={videoRef}
               src="/media/eiden-method.mp4"
               poster={heroTexture}
+              title={t.vsl.title}
               muted
               loop
               playsInline

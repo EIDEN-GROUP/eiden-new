@@ -141,7 +141,8 @@ export function ProjectArc({
                 >
                   <Image
                     src={project.image}
-                    alt=""
+                    alt={project.client}
+                    aria-hidden
                     fill
                     sizes="(max-width: 767px) 45vw, 24vw"
                     className="object-cover transition-transform duration-[1100ms] ease-[var(--ease-brand)] group-hover/card:scale-[1.06] motion-reduce:transition-none"

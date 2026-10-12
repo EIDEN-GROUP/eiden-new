@@ -59,7 +59,7 @@ export function ProjectWebsite({
               <div className="ring-ink/10 relative aspect-9/19 w-full overflow-hidden rounded-2xl shadow-[0_30px_70px_-30px_rgba(0,0,0,0.8)] ring-1">
                 <Image
                   src={website.mobile}
-                  alt=""
+                  alt={say(website.alt)}
                   aria-hidden
                   fill
                   sizes="(max-width: 40rem) 40vw, 12rem"

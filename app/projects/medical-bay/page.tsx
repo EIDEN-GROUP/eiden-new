@@ -1281,7 +1281,7 @@ export default function MedicalBayPage() {
               <div className="bg-ink/[0.05] relative h-[42svh] min-h-[17rem] lg:h-[52svh]">
                 <Image
                   src={project.image}
-                  alt=""
+                  alt={project.client}
                   aria-hidden
                   fill
                   sizes="(max-width: 64rem) 100vw, 50vw"

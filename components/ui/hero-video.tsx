@@ -6,10 +6,12 @@ import { cn } from "@/lib/utils";
 export function HeroVideo({
   src,
   poster,
+  title,
   className,
 }: {
   src: string;
   poster: string;
+  title?: string;
   className?: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,6 +30,7 @@ export function HeroVideo({
       ref={videoRef}
       src={src}
       poster={poster}
+      title={title}
       autoPlay
       loop
       muted
