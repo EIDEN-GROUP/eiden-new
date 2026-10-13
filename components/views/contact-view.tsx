@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SelectField } from "@/components/ui/select";
 import { useLanguage } from "@/components/providers/language-provider";
+import { trackEvent } from "@/lib/analytics";
 import { siteConfig } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
@@ -82,6 +83,7 @@ export function ContactView() {
       currentForm.reset();
       setSubjectIndex(0);
       setSent(true);
+      trackEvent("generate_lead", { method: "contact_form", subject });
     } catch {
       setFailed(true);
     } finally {

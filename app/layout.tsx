@@ -13,6 +13,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
 import { SideTags } from "@/components/layout/side-tags";
 import { InlineScript } from "@/components/ui/inline-script";
+import { AnalyticsProviders } from "@/components/analytics-providers";
 import { siteConfig } from "@/lib/data/site";
 import { introSeenScript } from "@/lib/intro-seen";
 import { organizationJsonLd, siteKeywords, siteKeywordsEn } from "@/lib/seo";
@@ -95,6 +96,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <InlineScript html={introSeenScript} />
+        {/* Consent Mode v2 defaults: everything denied until the banner
+            upgrades the grant. Runs before any measurement library. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted'});`,
+          }}
+        />
         <link rel="manifest" href="/manifest.webmanifest" />
         <script
           type="application/ld+json"
@@ -131,6 +139,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </SiteChrome>
             <FloatingActions />
             <SideTags />
+            <AnalyticsProviders />
           </MotionProvider>
         </LanguageProvider>
       </body>
