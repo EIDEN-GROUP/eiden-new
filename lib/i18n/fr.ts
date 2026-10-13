@@ -9,7 +9,7 @@ export const fr = {
   htmlLang: "fr",
 
   meta: {
-    title: "EIDEN GROUP   Agence digitale au Maroc",
+    title: "EIDEN GROUP | Architecture & Business au Maroc",
     description:
       "Agence digitale marocaine. Stratégie, marque, site web, campagnes et contenu : nous construisons les systèmes digitaux qui font grandir votre entreprise.",
   },
