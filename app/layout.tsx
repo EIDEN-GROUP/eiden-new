@@ -49,6 +49,10 @@ export const metadata: Metadata = {
   keywords: [...siteKeywords, ...siteKeywordsEn],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   alternates: { canonical: "/" },
+  verification: {
+    // Rendered only when set — paste the Search Console HTML-tag value in env.
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   openGraph: {
     type: "website",
     locale: "fr_MA",
