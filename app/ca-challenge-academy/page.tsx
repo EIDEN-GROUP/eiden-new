@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "CA Challenge Academy",
   description,
+  alternates: { canonical: "/ca-challenge-academy" },
   openGraph: {
     title: "CA Challenge Academy | EIDEN GROUP",
     description,

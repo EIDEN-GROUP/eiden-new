@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "Mabrouk Hôtel",
   description,
+  alternates: { canonical: "/mabrouk" },
   openGraph: {
     title: "Mabrouk Hôtel | EIDEN GROUP",
     description,

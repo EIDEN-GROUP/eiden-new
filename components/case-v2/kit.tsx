@@ -18,6 +18,7 @@ import { ArrowUpRight, ChevronLeft } from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/components/providers/language-provider";
 import { jumpToTop } from "@/components/providers/smooth-scroll";
+import { siteConfig } from "@/lib/data/site";
 import { CasePaletteStory } from "@/components/project/case/palette-story";
 import { TONES } from "@/components/project/case/tone";
 import { CountUp } from "@/components/ui/count-up";
@@ -148,8 +149,32 @@ export function CaseV2({
   const active = useChapter(ids);
   const context = useMemo(() => ({ chapters, say }), [chapters, say]);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: siteConfig.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Clients",
+        item: `${siteConfig.url}/portfolio`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: client,
+        item: `${siteConfig.url}${pathname}`,
+      },
+    ],
+  };
+
   return (
     <CaseContext.Provider value={context}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div data-nav-tone="light" className="bg-canvas text-ink">
         <div className="lg:grid lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
           <aside className="border-beige-dk no-scrollbar relative z-20 border-b lg:sticky lg:top-0 lg:h-dvh lg:self-start lg:overflow-y-auto lg:border-r lg:border-b-0">

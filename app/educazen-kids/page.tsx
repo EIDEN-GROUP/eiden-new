@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "EducazenKids",
   description,
+  alternates: { canonical: "/educazen-kids" },
   openGraph: {
     title: "EducazenKids | EIDEN GROUP",
     description,

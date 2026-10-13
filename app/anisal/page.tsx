@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "Anisal",
   description,
+  alternates: { canonical: "/anisal" },
   openGraph: {
     title: "Anisal | EIDEN GROUP",
     description,

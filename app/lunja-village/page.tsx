@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "Lunja Village",
   description,
+  alternates: { canonical: "/lunja-village" },
   openGraph: {
     title: "Lunja Village | EIDEN GROUP",
     description,

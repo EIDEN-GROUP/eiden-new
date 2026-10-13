@@ -22,6 +22,7 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.text,
+    alternates: { canonical: `/services/${slug}` },
     openGraph: {
       title: `${service.title} | EIDEN GROUP`,
       description: service.text,

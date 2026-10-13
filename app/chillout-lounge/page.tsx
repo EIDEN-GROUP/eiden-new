@@ -7,6 +7,7 @@ const description =
 export const metadata: Metadata = {
   title: "CHILLOUT Lounge",
   description,
+  alternates: { canonical: "/chillout-lounge" },
   openGraph: {
     title: "CHILLOUT Lounge | EIDEN GROUP",
     description,
