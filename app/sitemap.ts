@@ -21,6 +21,9 @@ const entries: Entry[] = [
     priority: route.href === "/" ? 1 : 0.9,
   })),
   { path: "/nos-solutions", changeFrequency: "monthly" as const, priority: 0.7 },
+  { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/security", changeFrequency: "yearly" as const, priority: 0.3 },
   ...indexedCaseSlugs.map((slug) => ({
     path: `/${slug}`,
     changeFrequency: "monthly" as const,

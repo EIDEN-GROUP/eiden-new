@@ -199,6 +199,29 @@ export function SiteFooter() {
             <p>
               © {year} {siteConfig.name}. {t.footer.rights}.
             </p>
+            <nav
+              aria-label={locale === "fr" ? "Mentions légales" : "Legal"}
+              className="flex flex-wrap items-center gap-x-5 gap-y-1"
+            >
+              <Link
+                href="/terms"
+                className="hover:text-canvas transition-colors duration-300"
+              >
+                {locale === "fr" ? "CGU" : "Terms"}
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-canvas transition-colors duration-300"
+              >
+                {locale === "fr" ? "Confidentialité" : "Privacy"}
+              </Link>
+              <Link
+                href="/security"
+                className="hover:text-canvas transition-colors duration-300"
+              >
+                {locale === "fr" ? "Sécurité" : "Security"}
+              </Link>
+            </nav>
             <p className="md:text-center">{t.footer.madeIn}</p>
             {/* The floating badge stands down once the panel is up, so the way
                 back to the top and the language switch live here instead. */}

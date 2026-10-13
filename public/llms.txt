@@ -28,4 +28,7 @@
 - À propos : https://eiden-group.com/a-propos
 - Nos solutions (Skema, Essor, Kavo, StayDesk) : https://eiden-group.com/nos-solutions
 - Contact (réponse sous 48h, FR/EN/Darija) : https://eiden-group.com/contact
+- Conditions d'utilisation : https://eiden-group.com/terms
+- Politique de confidentialité : https://eiden-group.com/privacy
+- Sécurité : https://eiden-group.com/security
 - Plan du site : https://eiden-group.com/sitemap.xml
