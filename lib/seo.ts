@@ -46,6 +46,18 @@ export const siteKeywords = [
   "création contenu Maroc",
   "shooting photo produit Agadir",
   "production vidéo Maroc",
+  // Longue traîne : devis, prix, pages, maintenance
+  "prix création site web Maroc",
+  "devis site internet Agadir",
+  "coût refonte site Maroc",
+  "meilleure agence digitale Maroc",
+  "landing page Maroc",
+  "site vitrine Agadir",
+  "maintenance site web Maroc",
+  "hébergement et maintenance site Maroc",
+  "tournage vidéo entreprise Agadir",
+  "photographe produit Agadir",
+  "gestion Instagram entreprise Maroc",
 ] as const;
 
 export const siteKeywordsEn = [

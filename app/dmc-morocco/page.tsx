@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "DMC Hospitality Morocco | EIDEN GROUP",
     description,
-    images: [{ url: "/work/dmc-morocco/dmc-hero.png" }],
+    images: [
+      {
+        url: "/work/dmc-morocco/dmc-hero.png",
+        alt: "DMC Hospitality Morocco — marque par EIDEN GROUP",
+      },
+    ],
   },
 };
 

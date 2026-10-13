@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bôpassage | EIDEN GROUP",
     description,
-    images: [{ url: "/work/bopassage/bopassage-hero.png" }],
+    images: [
+      {
+        url: "/work/bopassage/bopassage-hero.png",
+        alt: "Bôpassage — marque et site web par EIDEN GROUP",
+      },
+    ],
   },
 };
 

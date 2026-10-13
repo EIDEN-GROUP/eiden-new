@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Anisal | EIDEN GROUP",
     description,
-    images: [{ url: "/media/bg-2.jpeg" }],
+    images: [
+      {
+        url: "/media/bg-2.jpeg",
+        alt: "Anisal — identité de coopérative par EIDEN GROUP",
+      },
+    ],
   },
 };
 

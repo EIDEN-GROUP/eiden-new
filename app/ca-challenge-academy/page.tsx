@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CA Challenge Academy | EIDEN GROUP",
     description,
-    images: [{ url: "/media/eiden-hero-poster.jpg" }],
+    images: [
+      {
+        url: "/media/eiden-hero-poster.jpg",
+        alt: "CA Challenge Academy — accompagnement par EIDEN GROUP",
+      },
+    ],
   },
 };
 

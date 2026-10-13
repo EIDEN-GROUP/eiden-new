@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "EducazenKids | EIDEN GROUP",
     description,
-    images: [{ url: "/work/educazen-kids/educazen-hero.png" }],
+    images: [
+      {
+        url: "/work/educazen-kids/educazen-hero.png",
+        alt: "EducazenKids — plateforme et identité par EIDEN GROUP",
+      },
+    ],
   },
 };
 

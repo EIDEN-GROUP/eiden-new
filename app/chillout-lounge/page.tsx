@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CHILLOUT Lounge | EIDEN GROUP",
     description,
-    images: [{ url: "/work/chillout-lounge/chilout hero.png" }],
+    images: [
+      {
+        url: "/work/chillout-lounge/chilout hero.png",
+        alt: "CHILLOUT Lounge — site web par EIDEN GROUP",
+      },
+    ],
   },
 };
 

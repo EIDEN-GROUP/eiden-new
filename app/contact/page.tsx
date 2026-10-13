@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactView } from "@/components/views/contact-view";
+import { ContactFaq } from "@/components/contact-faq";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -28,5 +29,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactView />;
+  return (
+    <>
+      <ContactView />
+      <ContactFaq />
+    </>
+  );
 }

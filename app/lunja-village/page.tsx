@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lunja Village | EIDEN GROUP",
     description,
-    images: [{ url: "/work/lunja-village/hero section lunja.png" }],
+    images: [
+      {
+        url: "/work/lunja-village/hero section lunja.png",
+        alt: "Lunja Village — marque et site web par EIDEN GROUP",
+      },
+    ],
   },
 };
 

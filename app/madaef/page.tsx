@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MADAEF | EIDEN GROUP",
     description,
-    images: [{ url: "/media/bg-3.jpeg" }],
+    images: [
+      {
+        url: "/media/bg-3.jpeg",
+        alt: "MADAEF — identité hôtelière par EIDEN GROUP",
+      },
+    ],
   },
 };
 

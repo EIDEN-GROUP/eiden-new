@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Page introuvable",
+  description:
+    "Cette page EIDEN GROUP n'existe pas ou a été déplacée. Retournez à l'accueil ou au portfolio.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

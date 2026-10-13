@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mabrouk Hôtel | EIDEN GROUP",
     description,
-    images: [{ url: "/work/mabrouk/imgg1 (18).png" }],
+    images: [
+      {
+        url: "/work/mabrouk/imgg1 (18).png",
+        alt: "Mabrouk Hôtel — photographie et contenu par EIDEN GROUP",
+      },
+    ],
   },
 };
 
