@@ -8,6 +8,7 @@ import {
   GTM_ID,
   applyConsent,
   readStoredConsent,
+  validateAnalyticsIds,
   writeStoredConsent,
   type ConsentChoice,
 } from "@/lib/analytics";
@@ -47,6 +48,18 @@ export function AnalyticsProviders() {
   useEffect(() => {
     if (consent) applyConsent(consent);
   }, [consent]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return;
+    for (const warning of validateAnalyticsIds()) {
+      console.warn(`[analytics] ${warning}`);
+    }
+    if (!GA4_ID && !GTM_ID && !CLARITY_ID) {
+      console.info(
+        "[analytics] No measurement IDs set — GA4, GTM and Clarity are all disabled. See .env.example.",
+      );
+    }
+  }, []);
 
   const choose = useCallback((choice: ConsentChoice) => {
     writeStoredConsent(choice);

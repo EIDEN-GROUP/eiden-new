@@ -19,6 +19,30 @@ export const CONSENT_STORAGE_KEY = "eiden-consent-v1";
 
 export type ConsentChoice = "granted" | "denied";
 
+/**
+ * Catches the classic paste mistakes (full snippet or dashboard URL instead
+ * of the bare ID). Returns warnings; dev-only logging lives in the provider.
+ */
+export function validateAnalyticsIds(): string[] {
+  const warnings: string[] = [];
+  if (GA4_ID && !/^G-[A-Z0-9]{4,}$/.test(GA4_ID)) {
+    warnings.push(
+      `NEXT_PUBLIC_GA4_ID looks wrong (${JSON.stringify(GA4_ID)}): expected a bare ID like G-XXXXXXXXXX.`,
+    );
+  }
+  if (GTM_ID && !/^GTM-[A-Z0-9]+$/.test(GTM_ID)) {
+    warnings.push(
+      `NEXT_PUBLIC_GTM_ID looks wrong (${JSON.stringify(GTM_ID)}): expected a bare ID like GTM-XXXXXXX.`,
+    );
+  }
+  if (CLARITY_ID && !/^[a-z0-9]{6,}$/i.test(CLARITY_ID)) {
+    warnings.push(
+      `NEXT_PUBLIC_CLARITY_ID looks wrong (${JSON.stringify(CLARITY_ID)}): expected the bare project ID from clarity.microsoft.com.`,
+    );
+  }
+  return warnings;
+}
+
 declare global {
   interface Window {
     dataLayer?: unknown[];
