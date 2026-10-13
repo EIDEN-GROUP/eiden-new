@@ -14,7 +14,9 @@ export default function HomePage() {
     <>
       <Hero />
       <Idea />
-      <Vsl />
+      {/* Hidden from the frontend without deleting anything — restore by
+          uncommenting. The "In 90 seconds" method film stays on disk. */}
+      {/* <Vsl /> */}
       <Services />
       <Proof />
       <Team />
