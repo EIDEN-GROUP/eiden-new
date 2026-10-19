@@ -11,6 +11,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE_RE = /^[\d\s()+-]{7,20}$/;
+const NAME_RE = /^[a-zA-ZÀ-ÿ\s'-]{2,120}$/;
+const ALLOWED_ORIGINS = [
+  "https://www.eiden-group.com",
+  "https://eiden-group.com",
+  "http://localhost:3000",
+];
 
 function clean(value: unknown, max: number): string {
   return String(value ?? "")
@@ -27,9 +34,27 @@ function cleanMultiline(value: unknown, max: number): string {
     .slice(0, max);
 }
 
+function auditLog(
+  event: string,
+  ip: string,
+  details: Record<string, unknown> = {},
+) {
+  console.log(
+    JSON.stringify({
+      ts: new Date().toISOString(),
+      event,
+      ip,
+      ...details,
+    }),
+  );
+}
+
 export async function POST(request: Request) {
+  const ip = clientIp(request.headers);
+
   // Basic abuse guard before doing any work.
-  if (isRateLimited(`contact:${clientIp(request.headers)}`)) {
+  if (isRateLimited(`contact:${ip}`)) {
+    auditLog("rate_limited", ip);
     return NextResponse.json(
       { ok: false, error: "rate_limited" },
       { status: 429 },
@@ -40,11 +65,42 @@ export async function POST(request: Request) {
   try {
     body = (await request.json()) as Record<string, unknown>;
   } catch {
+    auditLog("bad_request", ip);
     return NextResponse.json({ ok: false, error: "bad_request" }, { status: 400 });
   }
 
   // Honeypot: bots fill it, humans never see it.
   if (body.website && String(body.website).trim() !== "") {
+    auditLog("honeypot_triggered", ip);
+    return NextResponse.json({ ok: true });
+  }
+
+  // Time-trap + JS challenge: bots submit instantly without executing JS.
+  // Silently accept to avoid tipping off bots that they've been detected.
+  const formLoadedAt = Number(body.formLoadedAt);
+  const jsChallenge = String(body.jsChallenge ?? "");
+  const now = Date.now();
+  if (
+    !formLoadedAt ||
+    formLoadedAt > now ||
+    now - formLoadedAt < 2000 ||
+    jsChallenge !== String(formLoadedAt)
+  ) {
+    auditLog("time_trap_or_js_challenge_failed", ip);
+    return NextResponse.json({ ok: true });
+  }
+
+  // CSRF token: must be present and non-empty.
+  const csrfToken = String(body.csrfToken ?? "");
+  if (!csrfToken || csrfToken.length < 10) {
+    auditLog("csrf_failed", ip);
+    return NextResponse.json({ ok: true });
+  }
+
+  // Origin check: reject cross-origin form submissions.
+  const origin = request.headers.get("origin") ?? "";
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    auditLog("origin_rejected", ip, { origin });
     return NextResponse.json({ ok: true });
   }
 
@@ -62,13 +118,24 @@ export async function POST(request: Request) {
 
   const errors: Record<string, string> = {};
   if (!data.name) errors.name = "required";
+  else if (!NAME_RE.test(data.name)) errors.name = "invalid";
   if (!data.company) errors.company = "required";
   if (!data.email) errors.email = "required";
   else if (!EMAIL_RE.test(data.email)) errors.email = "invalid";
   if (!data.phone) errors.phone = "required";
+  else if (!PHONE_RE.test(data.phone)) errors.phone = "invalid";
   if (!data.subject) errors.subject = "required";
 
+  // Message content check: reject if it looks like spam (too many links).
+  const messageStr = data.message ?? "";
+  const linkCount = (messageStr.match(/https?:\/\//g) ?? []).length;
+  if (linkCount > 5) {
+    auditLog("spam_detected", ip, { linkCount });
+    return NextResponse.json({ ok: true });
+  }
+
   if (Object.keys(errors).length > 0) {
+    auditLog("validation_failed", ip, { errors });
     return NextResponse.json({ ok: false, errors }, { status: 400 });
   }
 
@@ -77,6 +144,7 @@ export async function POST(request: Request) {
     transporter = getTransporter();
   } catch {
     console.error("[contact] email transport not configured");
+    auditLog("not_configured", ip);
     return NextResponse.json({ ok: false, error: "not_configured" }, { status: 500 });
   }
 
@@ -111,9 +179,16 @@ export async function POST(request: Request) {
       console.error("[contact] visitor confirmation failed", visitorError);
     }
 
+    auditLog("submission_accepted", ip, {
+      name: data.name,
+      company: data.company,
+      email: data.email,
+      subject: data.subject,
+    });
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[contact] send failed", error);
+    auditLog("send_failed", ip);
     return NextResponse.json({ ok: false, error: "send_failed" }, { status: 500 });
   }
 }
