@@ -31,6 +31,14 @@ export function ContactView() {
   const [failed, setFailed] = useState(false);
   const [sending, setSending] = useState(false);
   const [subjectIndex, setSubjectIndex] = useState(0);
+  const [formLoadedAt] = useState(() => Date.now());
+  const jsChallenge = String(formLoadedAt);
+  const [csrfToken] = useState(() =>
+    typeof window !== "undefined"
+      ? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
+      : "",
+  );
+
 
   const needsDetail = subjectIndex === form.subjects.length - 1;
 
@@ -49,12 +57,17 @@ export function ContactView() {
 
     const nextErrors: Errors = {};
     if (!name) nextErrors.name = form.required;
+    else if (!/^[a-zA-ZÀ-ÿ\s'-]{2,120}$/.test(name))
+      nextErrors.name = form.invalidName;
     if (!email) nextErrors.email = form.required;
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
       nextErrors.email = form.invalidEmail;
     if (!company) nextErrors.company = form.required;
     if (!phone) nextErrors.phone = form.required;
+    else if (!/^[\d\s()+-]{7,20}$/.test(phone))
+      nextErrors.phone = form.invalidPhone;
     if (needsDetail && !detail) nextErrors.detail = form.required;
+
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
@@ -74,6 +87,9 @@ export function ContactView() {
           subjectDetail: detail,
           message,
           locale,
+          formLoadedAt,
+          jsChallenge,
+          csrfToken,
         }),
       });
       const json = (await res.json().catch(() => null)) as {
@@ -281,15 +297,23 @@ export function ContactView() {
                   />
                 </Field>
 
-                {/* Honeypot: hidden from humans, catches bots. */}
+                {/* Honeypot: off-screen, not display:none — harder for bots to detect. */}
                 <input
                   type="text"
                   name="website"
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
-                  className="hidden"
+                  className="absolute left-[-9999px] top-0 w-px h-px overflow-hidden"
                 />
+
+                {/* Time-trap + JS challenge: proves the form was open long enough
+                    and that the client executed JavaScript. */}
+                <input type="hidden" name="formLoadedAt" value={formLoadedAt} />
+                <input type="hidden" name="jsChallenge" value={jsChallenge} />
+                <input type="hidden" name="csrfToken" value={csrfToken} />
+
+
 
                 <div className="flex flex-wrap items-center gap-5 pt-2">
                   <Button

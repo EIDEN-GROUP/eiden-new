@@ -529,6 +529,8 @@ export const en: Dictionary = {
       error: "Something went wrong. Try again or email us directly.",
       required: "Required field",
       invalidEmail: "Invalid email address",
+      invalidName: "Invalid name",
+      invalidPhone: "Invalid phone number",
       optional: "optional",
     },
   },

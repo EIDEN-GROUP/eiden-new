@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import Script from "next/script";
 import {
   CLARITY_ID,
@@ -44,6 +44,15 @@ export function AnalyticsProviders() {
     getServerConsentSnapshot,
   );
 
+  /* Footer "Cookie preferences" button reopens the banner on demand. */
+  const [manageOpen, setManageOpen] = useState(false);
+
+  useEffect(() => {
+    const open = () => setManageOpen(true);
+    window.addEventListener("eiden-consent-manage", open);
+    return () => window.removeEventListener("eiden-consent-manage", open);
+  }, []);
+
   /* Stored grant or fresh choice: push it into Consent Mode. */
   useEffect(() => {
     if (consent) applyConsent(consent);
@@ -66,6 +75,8 @@ export function AnalyticsProviders() {
     applyConsent(choice);
     window.dispatchEvent(new Event("eiden-consent"));
   }, []);
+
+  const closeManage = useCallback(() => setManageOpen(false), []);
 
   return (
     <>
@@ -114,7 +125,9 @@ export function AnalyticsProviders() {
         />
       ) : null}
 
-      {consent === null ? <CookieBanner onChoice={choose} /> : null}
+      {consent === null || manageOpen ? (
+        <CookieBanner onChoice={choose} onClose={manageOpen ? closeManage : undefined} />
+      ) : null}
     </>
   );
 }

@@ -538,6 +538,8 @@ export const fr = {
       error: "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
       required: "Champ obligatoire",
       invalidEmail: "Adresse e-mail invalide",
+      invalidName: "Nom invalide",
+      invalidPhone: "Numéro de téléphone invalide",
       optional: "facultatif",
     },
   },

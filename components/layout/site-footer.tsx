@@ -221,6 +221,13 @@ export function SiteFooter() {
               >
                 {locale === "fr" ? "Sécurité" : "Security"}
               </Link>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("eiden-consent-manage"))}
+                className="hover:text-canvas transition-colors duration-300"
+              >
+                {locale === "fr" ? "Préférences cookies" : "Cookie preferences"}
+              </button>
             </nav>
             <p className="md:text-center">{t.footer.madeIn}</p>
             {/* The floating badge stands down once the panel is up, so the way

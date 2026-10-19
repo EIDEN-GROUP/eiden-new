@@ -25,8 +25,10 @@ const copy = {
  */
 export function CookieBanner({
   onChoice,
+  onClose,
 }: {
   onChoice: (choice: ConsentChoice) => void;
+  onClose?: () => void;
 }) {
   const { locale } = useLanguage();
   const [shown, setShown] = useState(false);
@@ -48,7 +50,19 @@ export function CookieBanner({
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
       )}
     >
-      <div className="glass-dark bg-ink text-canvas rounded-2xl p-5 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.8)]">
+      <div className="glass-dark bg-ink text-canvas relative rounded-2xl p-5 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.8)]">
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={locale === "fr" ? "Fermer" : "Close"}
+            className="text-canvas/40 hover:text-canvas absolute top-3 right-3 transition-colors duration-200"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        )}
         <p className="text-[0.85rem] leading-relaxed text-balance">{t.text}</p>
         <div className="mt-4 flex gap-2.5">
           <button
