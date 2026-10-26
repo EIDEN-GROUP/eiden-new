@@ -372,7 +372,7 @@ export const en: Dictionary = {
   },
 
   offer: {
-    eyebrow: "Our 4 areas of expertise",
+    eyebrow: "Our 3 areas of expertise",
     title: "Complete digital services, from Morocco.",
     text: "What you actually get, with the deliverables and the expected outcomes.",
     items: [
@@ -396,15 +396,6 @@ export const en: Dictionary = {
       },
       {
         n: "03",
-        title: "Performance media & ads",
-        text: "Precise advertising campaigns: Google Ads, social platforms, programmatic.",
-        detail:
-          "Media buying and lead generation. We steer your budgets on ROI, with clear monthly reporting and continuous conversion-rate work.",
-        link: "Accelerate acquisition",
-        href: "/nos-solutions#media",
-      },
-      {
-        n: "04",
         title: "Strategy, content & image",
         text: "From audit to production: video, motion design, photography and editorial line.",
         detail:
@@ -851,18 +842,6 @@ export const en: Dictionary = {
             "Editorial content and internal linking",
             "Google Business profile and local SEO",
             "Rank tracking and monthly reporting",
-          ],
-        },
-        {
-          id: "media",
-          title: "Performance media & ads",
-          text: "Campaigns steered on results, not impressions.",
-          deliverables: [
-            "Acquisition strategy and budgets",
-            "Google, Meta and TikTok campaigns",
-            "Creative assets and messaging",
-            "Tracking, conversions and dashboard",
-            "Continuous cost-per-lead optimisation",
           ],
         },
         {

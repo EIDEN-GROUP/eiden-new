@@ -84,7 +84,6 @@ export const indexedServiceSlugs = [
   "strategie",
   "web",
   "visibilite",
-  "media",
   "photoVid",
 ] as const;
 
