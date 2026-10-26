@@ -196,20 +196,6 @@ export const fr = {
         ],
       },
       {
-        slug: "media",
-        title: "Performance marketing",
-        kicker: "Acheter du trafic n'est pas construire une acquisition",
-        text: "Nous transformons vos investissements marketing en acquisition mesurable. Stratégie média, ciblage, création, campagnes et optimisation travaillent ensemble pour attirer les bonnes audiences et convertir l’attention en résultats.",
-        deliverables: [
-          "Google Ads",
-          "Meta Ads",
-          "Tiktok Ads",
-          "Leads Generation",
-          "Acquisition",
-          "Conversion",
-        ],
-      },
-      {
         slug: "photoVid",
         title: "Création de contenu",
         kicker: "Ce que la marque donne à voir",
@@ -379,7 +365,7 @@ export const fr = {
   },
 
   offer: {
-    eyebrow: "Nos 4 expertises",
+    eyebrow: "Nos 3 expertises",
     title: "Des services digitaux complets, depuis le Maroc.",
     text: "Ce que vous obtenez concrètement, avec les livrables et les résultats attendus.",
     items: [
@@ -403,15 +389,6 @@ export const fr = {
       },
       {
         n: "03",
-        title: "Performance media & ads",
-        text: "Des campagnes publicitaires précises : Google Ads, réseaux sociaux, programmatique.",
-        detail:
-          "Media buying et génération de prospects. Nous pilotons vos budgets au ROI, avec un suivi mensuel clair et un travail continu sur le taux de conversion.",
-        link: "Accélérer votre acquisition",
-        href: "/nos-solutions#media",
-      },
-      {
-        n: "04",
         title: "Stratégie, contenu & image",
         text: "De l'audit à la production : vidéo, motion design, photo et ligne éditoriale.",
         detail:
@@ -862,18 +839,6 @@ export const fr = {
             "Contenu éditorial et maillage interne",
             "Fiche Google Business et référencement local",
             "Suivi de positions et rapport mensuel",
-          ],
-        },
-        {
-          id: "media",
-          title: "Performance media & ads",
-          text: "Des campagnes pilotées au résultat, pas à l'impression.",
-          deliverables: [
-            "Stratégie d'acquisition et budgets",
-            "Campagnes Google, Meta et TikTok",
-            "Création des visuels et des messages",
-            "Tracking, conversions et tableau de bord",
-            "Optimisation continue du coût par prospect",
           ],
         },
         {

@@ -281,7 +281,6 @@ export const principleMedia = [
 export const serviceMedia: Record<string, string> = {
   web: "/services/photo-5.jpg",
   visibilite: "/services/photo-1.jpeg",
-  media: "/services/photo-2.png",
   strategie: "/services/photo-4.png",
   photoVid: "/services/photo-1.png",
 };
