@@ -285,7 +285,7 @@ export const en: Dictionary = {
         name: "Marouane",
         role: "Back-end Dev",
         text: "APIs, databases and server-side architecture.",
-        image: "/Team/marouane.png",
+        image: "/Team/marouane.jpg",
       },
     ],
     note: "Based in Agadir. We work across Morocco, on site or remotely.",

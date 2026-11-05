@@ -277,7 +277,7 @@ export const fr = {
         name: "Marouane",
         role: "Développeur Back-end",
         text: "API, bases de données et architecture serveur.",
-        image: "/Team/marouane.png",
+        image: "/Team/marouane.jpg",
       },
     ],
     note: "Basés à Agadir. Nous intervenons partout au Maroc, en présentiel ou à distance.",
