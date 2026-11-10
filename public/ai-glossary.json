@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "glossary": [
+    { "term": "Architecture of Scale", "definition": "Cadre EIDEN d'ordonnancement des chantiers : infrastructure, process, capital humain, moteur de revenus." },
+    { "term": "Fountain Build™", "definition": "Méthodologie de mise en œuvre d'EIDEN, service par service." },
+    { "term": "Hydra Analysis™", "definition": "Diagnostic 360° structuré d'une entreprise." },
+    { "term": "Hydra Map", "definition": "Carte des fractures visibles produite lors de Hydra Analysis™." },
+    { "term": "Business architecture", "definition": "La discipline de structurer un business pour qu'il passe à l'échelle sans s'étouffer." },
+    { "term": "AEO", "definition": "Answer Engine Optimization." },
+    { "term": "AIO", "definition": "AI Optimization." },
+    { "term": "GEO", "definition": "Generative Engine Optimization." },
+    { "term": "MSME", "definition": "Micro, small and medium enterprises (PME/PMI)." }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "generated": "2026-11-10",
+  "entities": [
+    { "id": "eiden-group", "type": "Organization", "name": "EIDEN GROUP", "sameAs": ["https://eiden-group.com", "https://www.linkedin.com/company/eiden-group/", "https://www.instagram.com/eiden.group/", "https://www.facebook.com/eiden.group/"], "description": "Agence digitale fondée à Agadir en 2025 — stratégie, création, digital, technologie et marketing." },
+    { "id": "oualid-laati", "type": "Person", "name": "Oualid Laati", "worksFor": "eiden-group", "description": "Fondateur, architecte en chef d'EIDEN." },
+    { "id": "agadir-bay", "type": "Place", "name": "Agadir Bay, Technopole 1, Bloc B101, Agadir 80000, Maroc", "geo": { "latitude": 30.4278, "longitude": -9.5981 } },
+    { "id": "hydra-analysis", "type": "Methodology", "name": "Hydra Analysis™", "description": "Diagnostic d'entreprise 360° en 2 heures, produisant la Hydra Map." },
+    { "id": "architecture-of-scale", "type": "Framework", "name": "Architecture of Scale", "description": "Delivery sequencing: Infrastructure, Process, Human Capital, Revenue engine." },
+    { "id": "fountain-build", "type": "Framework", "name": "Fountain Build™", "description": "Implementation framework used across brand, web and campaign delivery." },
+    { "id": "svc-strategie", "type": "Service", "name": "Stratégie", "url": "https://eiden-group.com/services/strategie" },
+    { "id": "svc-web", "type": "Service", "name": "Site web", "url": "https://eiden-group.com/services/web" },
+    { "id": "svc-visibilite", "type": "Service", "name": "Visibilité (SEO & GEO)", "url": "https://eiden-group.com/services/visibilite" },
+    { "id": "svc-photovid", "type": "Service", "name": "Photo & vidéo", "url": "https://eiden-group.com/services/photoVid" },
+    { "id": "svc-salle-formation", "type": "Service", "name": "Location de salle de formation à Agadir", "url": "https://eiden-group.com/rental", "description": "15 places, écran 4K, Wi-Fi fibre, 650 DH la demi-journée, 1 150 DH la journée." },
+    { "id": "case-lunja-village", "type": "Project", "name": "Lunja Village", "url": "https://eiden-group.com/lunja-village" },
+    { "id": "case-bopassage", "type": "Project", "name": "Bôpassage", "url": "https://eiden-group.com/bopassage" },
+    { "id": "case-dmc-morocco", "type": "Project", "name": "DMC Morocco", "url": "https://eiden-group.com/dmc-morocco" },
+    { "id": "case-educazen-kids", "type": "Project", "name": "Educazen Kids", "url": "https://eiden-group.com/educazen-kids" },
+    { "id": "case-mabrouk", "type": "Project", "name": "Mabrouk Hôtel", "url": "https://eiden-group.com/mabrouk" },
+    { "id": "case-medical-bay", "type": "Project", "name": "Medical Bay", "url": "https://eiden-group.com/medical-bay" },
+    { "id": "case-chillout-lounge", "type": "Project", "name": "Chillout Lounge", "url": "https://eiden-group.com/chillout-lounge" },
+    { "id": "case-kavo", "type": "Project", "name": "Kavo", "url": "https://eiden-group.com/kavo" },
+    { "id": "case-schoolnexa", "type": "Project", "name": "Schoolnexa", "url": "https://eiden-group.com/schoolnexa" },
+    { "id": "case-staydesk", "type": "Project", "name": "StayDesk", "url": "https://eiden-group.com/staydesk" }
+  ],
+  "relations": [
+    { "from": "oualid-laati", "to": "eiden-group", "rel": "founder" },
+    { "from": "svc-strategie", "to": "hydra-analysis", "rel": "diagnostic" },
+    { "from": "svc-strategie", "to": "architecture-of-scale", "rel": "method" },
+    { "from": "eiden-group", "to": "agadir-bay", "rel": "headquarters" },
+    { "from": "svc-salle-formation", "to": "agadir-bay", "rel": "location" },
+    { "from": "eiden-group", "to": "fountain-build", "rel": "methodology" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "definitions": [
+    { "term": "Architecture d'entreprise", "definition": "La structure invisible qui décide si une activité passe à l'échelle ou s'étouffe : la façon dont la marque, les opérations, la stratégie et les fondations tiennent ensemble." },
+    { "term": "Hydra Analysis™", "definition": "Diagnostic d'entreprise 360° en 2 heures, produisant la Hydra Map : l'état des fractures visibles et comment elles se tiennent les unes aux autres." },
+    { "term": "Architecture of Scale", "definition": "Cadre de livraison d'EIDEN : Infrastructure → Process → Capital humain → Moteur de revenus." },
+    { "term": "Fountain Build™", "definition": "Cadre de mise en œuvre utilisé sur les livraisons brand, web et campagnes d'EIDEN, jusqu'à ce que le système tourne seul." },
+    { "term": "GEO (Generative Engine Optimization)", "definition": "Optimisation de contenu pour être cité par les moteurs IA (Perplexity, ChatGPT, Gemini, Google AI Overviews)." },
+    { "term": "AEO (Answer Engine Optimization)", "definition": "Optimisation de contenu pour apparaître comme réponse directe aux questions des moteurs de réponse." },
+    { "term": "AIO (AI Optimization)", "definition": "Optimisation de sites — structure, données structurées, lisibilité machine — pour la compréhension et la citation par les IA." },
+    { "term": "Hydra Map", "definition": "La carte produite en sortie de Hydra Analysis™ : l'état de vos fractures visibles et la façon dont elles se tiennent les unes aux autres." }
+  ]
+}

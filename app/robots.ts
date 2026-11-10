@@ -17,12 +17,18 @@ const aiCrawlers = [
   "Applebot-Extended",
   "Cohere-ai",
   "Bytespider",
+  "GoogleOther",
+  "Meta-ExternalAgent",
+  "Meta-ExternalFetcher",
+  "Amazonbot",
+  "DuckAssistant",
+  "Diffbot",
 ];
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
+      { userAgent: "*", allow: "/", disallow: "/api/" },
       ...aiCrawlers.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,

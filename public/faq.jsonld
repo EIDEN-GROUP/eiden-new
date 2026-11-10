@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-11-10",
+  "dateModified": "2026-11-10",
+  "inLanguage": ["fr", "en"],
+  "mainEntity": [
+    { "@type": "Question", "name": "Combien coûte la location d'une salle de formation à Agadir ?", "acceptedAnswer": { "@type": "Answer", "text": "Location de salle à la demi-journée à Agadir : 650 DH les 4 heures. Location de salle à la journée à Agadir : 1 150 DH les 8 heures. La pause café est incluse dans les deux formules." } },
+    { "@type": "Question", "name": "Que comprend la location de la salle ?", "acceptedAnswer": { "@type": "Answer", "text": "Tout l'équipement professionnel : écran 55 pouces 4K (HDMI et USB-C), sonorisation et micro, tableau blanc, Wi-Fi fibre symétrique sur réseau dédié, 15 chaises, table ou disposition en U, climatisation et multiprises à chaque place." } },
+    { "@type": "Question", "name": "Quelle est la capacité de la salle ?", "acceptedAnswer": { "@type": "Answer", "text": "15 places assises, en configuration table de réunion ou disposition en U." } },
+    { "@type": "Question", "name": "Où se trouve la salle et comment venir ?", "acceptedAnswer": { "@type": "Answer", "text": "Agadir Bay, Technopole 1, Bloc B101 Agadir 80000, Maroc. Le technopôle est à 10 minutes de l'aéroport Agadir Al Massira." } },
+    { "@type": "Question", "name": "Peut-on louer la salle pour plusieurs jours ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, via la formule Location sur devis : séries de sessions, locations sur plusieurs jours et réservations récurrentes, avec des tarifs négociés sur la durée et la fréquence." } },
+    { "@type": "Question", "name": "Comment réserver la salle ?", "acceptedAnswer": { "@type": "Answer", "text": "Trois étapes : choisissez votre formule, envoyez votre date, votre horaire et le nombre de participants (formulaire, WhatsApp ou e-mail à contact@eiden-group.com), puis recevez la confirmation sous 24 heures ouvrées." } },
+    { "@type": "Question", "name": "Pour quels usages peut-on louer cette salle ?", "acceptedAnswer": { "@type": "Answer", "text": "Formation professionnelle, ateliers, réunions d'équipe, comités de direction, séminaires, coaching, prospection et lancement d'offre : la salle se prête à toute journée où un groupe a besoin d'écran, de Wi-Fi et de calme." } },
+    { "@type": "Question", "name": "La pause café est-elle incluse ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, la pause café est incluse dans les deux packs. Le Pack Journée Complète ajoute l'accueil personnalisé en plus de la pause café." } },
+    { "@type": "Question", "name": "Qu'est-ce que l'architecture d'entreprise ?", "acceptedAnswer": { "@type": "Answer", "text": "La structure invisible qui décide si une activité passe à l'échelle ou s'étouffe : la façon dont la marque, les opérations, la stratégie et les fondations tiennent ensemble. Nous l'étudions et nous la posons, comme un architecte le ferait d'un bâtiment." } },
+    { "@type": "Question", "name": "En quoi est-ce différent du conseil ?", "acceptedAnswer": { "@type": "Answer", "text": "Un consultant remet un rapport et s'en va. Nous restons jusqu'à la mise en service : systèmes livrés, équipes formées, résultats mesurables. Nous facturons une transformation, pas des livrables." } },
+    { "@type": "Question", "name": "Comment se déroule une mission ?", "acceptedAnswer": { "@type": "Answer", "text": "Elle s'ouvre par la Hydra Analysis™, le diagnostic à 360° qui note chaque pilier avant la moindre recommandation. L'Architecture of Scale fixe ensuite l'ordre du chantier : Infrastructure, Process, Capital humain, Moteur de revenus. Le Fountain Build™ met en œuvre aux côtés de vos équipes, service par service, jusqu'à ce que vous fassiez tourner le système seuls." } },
+    { "@type": "Question", "name": "Qu'est-ce que la Hydra Analysis™ ?", "acceptedAnswer": { "@type": "Answer", "text": "Deux heures, une conversation. Vous repartez avec la Hydra Map : l'état de vos fractures visibles et la façon dont elles se tiennent les unes aux autres." } },
+    { "@type": "Question", "name": "Combien de temps avant de voir des résultats ?", "acceptedAnswer": { "@type": "Answer", "text": "Le scan tient en deux heures et la carte est à vous le jour même. Pour le reste, la durée dépend de l'étendue des fractures — nous l'annonçons après le scan, jamais avant." } },
+    { "@type": "Question", "name": "Travaillez-vous en dehors du Maroc ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le siège est à Agadir, et nous intervenons aussi depuis Casablanca, Paris, Montréal, la Floride et Dubaï. Nous travaillons en français et en anglais, avec l'arabe pour nos clients marocains et du Golfe." } }
+  ]
+}

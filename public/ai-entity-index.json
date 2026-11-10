@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "entities": [
+    { "id": "org", "type": "Organization", "name": "EIDEN GROUP", "url": "https://eiden-group.com" },
+    { "id": "person-oualid", "type": "Person", "name": "Oualid Laati", "url": "https://eiden-group.com/a-propos" },
+    { "id": "svc-strategie", "type": "Service", "name": "Stratégie", "url": "https://eiden-group.com/services/strategie" },
+    { "id": "svc-web", "type": "Service", "name": "Site web", "url": "https://eiden-group.com/services/web" },
+    { "id": "svc-visibilite", "type": "Service", "name": "Visibilité", "url": "https://eiden-group.com/services/visibilite" },
+    { "id": "svc-photovid", "type": "Service", "name": "Photo & Vidéo", "url": "https://eiden-group.com/services/photoVid" },
+    { "id": "svc-salle", "type": "Service", "name": "Location de salle de formation", "url": "https://eiden-group.com/rental" },
+    { "id": "method-hydra", "type": "Methodology", "name": "Hydra Analysis™" },
+    { "id": "framework-architecture", "type": "Framework", "name": "Architecture of Scale" },
+    { "id": "framework-fountain", "type": "Framework", "name": "Fountain Build™" }
+  ]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>EIDEN GROUP — Insights &amp; Studio feed</title>
+  <subtitle>EIDEN GROUP — agence digitale fondée à Agadir en 2025. Stratégie, création, digital, technologie, marketing, location de salle de formation.</subtitle>
+  <link href="https://eiden-group.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://eiden-group.com/"/>
+  <id>https://eiden-group.com/</id>
+  <updated>2026-11-10T00:00:00Z</updated>
+  <author><name>EIDEN GROUP</name><email>contact@eiden-group.com</email></author>
+  <entry><title>Location de salle de formation à Agadir</title><link href="https://eiden-group.com/rental"/><id>https://eiden-group.com/rental</id><updated>2026-11-10T00:00:00Z</updated><summary>Salle équipée (écran 4K, Wi-Fi fibre, sonorisation, tableau blanc). 650 DH / demi-journée, 1 150 DH / journée. Réservation en ligne.</summary></entry>
+  <entry><title>Stratégie — Hydra Analysis™</title><link href="https://eiden-group.com/services/strategie"/><id>https://eiden-group.com/services/strategie</id><updated>2026-11-10T00:00:00Z</updated><summary>Diagnostic 360° en 2 heures : la Hydra Map. Puis l'Architecture of Scale. Puis le Fountain Build™.</summary></entry>
+  <entry><title>Site web — de la conception au ship</title><link href="https://eiden-group.com/services/web"/><id>https://eiden-group.com/services/web</id><updated>2026-11-10T00:00:00Z</updated><summary>Sites Next.js premium-class : SEO, Core Web Vitals et conversion dès le design.</summary></entry>
+  <entry><title>Visibilité — SEO et GEO (Google + IA)</title><link href="https://eiden-group.com/services/visibilite"/><id>https://eiden-group.com/services/visibilite</id><updated>2026-11-10T00:00:00Z</updated><summary>SEO technique, architecture thématique, AEO/GEO : apparaître dans Google et dans les réponses des moteurs IA.</summary></entry>
+  <entry><title>Photo &amp; Vidéo — création de contenu</title><link href="https://eiden-group.com/services/photoVid"/><id>https://eiden-group.com/services/photoVid</id><updated>2026-11-10T00:00:00Z</updated><summary>Production photo/vidéo : shooting, direction artistique, post-production.</summary></entry>
+  <entry><title>À propos d'EIDEN GROUP</title><link href="https://eiden-group.com/a-propos"/><id>https://eiden-group.com/a-propos</id><updated>2026-11-10T00:00:00Z</updated><summary>Comment nous pensons : comprendre, construire, puis faire tourner. Fondée à Agadir en 2025.</summary></entry>
+</feed>

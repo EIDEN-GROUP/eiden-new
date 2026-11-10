@@ -1,0 +1,4 @@
+Contact: mailto:contact@eiden-group.com
+Preferred-Languages: fr, en
+Canonical: https://eiden-group.com/security
+Acknowledgments: https://eiden-group.com/contact

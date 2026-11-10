@@ -101,9 +101,12 @@ export function organizationJsonLd() {
         "@id": `${siteConfig.url}/#business`,
         name: siteConfig.name,
         url: siteConfig.url,
+        description:
+          "EIDEN GROUP est une agence digitale fondée à Agadir en 2025 : stratégie, création, digital, technologie et marketing. Elle loue également une salle de formation équipée à Agadir Bay.",
         email: siteConfig.email,
         telephone: siteConfig.phoneMa,
         foundingDate: siteConfig.founded,
+        foundingLocation: { "@type": "Place", name: "Agadir" },
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",
@@ -126,6 +129,16 @@ export function organizationJsonLd() {
           siteConfig.socials.instagram,
           siteConfig.socials.facebook,
         ],
+        currenciesAccepted: "MAD",
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "sales",
+            email: siteConfig.email,
+            telephone: siteConfig.phoneMa,
+            availableLanguage: ["fr", "en"],
+          },
+        ],
         knowsAbout: [
           "Stratégie digitale",
           "Branding",
@@ -143,6 +156,11 @@ export function organizationJsonLd() {
         name: siteConfig.name,
         inLanguage: ["fr", "en"],
         publisher: { "@id": `${siteConfig.url}/#business` },
+        sameAs: [
+          siteConfig.socials.linkedin,
+          siteConfig.socials.instagram,
+          siteConfig.socials.facebook,
+        ],
       },
     ],
   };

@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
 import { AboutView } from "@/components/views/about-view";
+import { siteConfig } from "@/lib/data/site";
+import { dictionaries } from "@/lib/i18n";
+
+/* FR is the shipping language of the route (client-side toggle), so the
+   static metadata and this structured data are authored in French. Mirrors
+   the visible FAQ on the page — zero visible change. */
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: dictionaries.fr.pages.about.faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
 
 export const metadata: Metadata = {
   title: "À propos",
@@ -27,5 +42,13 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutView />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <AboutView />
+    </>
+  );
 }

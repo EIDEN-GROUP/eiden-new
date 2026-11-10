@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "site": "https://eiden-group.com",
+  "contact": { "email": "contact@eiden-group.com", "phone": "+212 777 777 428", "address": "Technopole 1, Bloc B101, Agadir Bay, Agadir 80000, Maroc" },
+  "socials": { "linkedin": "https://www.linkedin.com/company/eiden-group/", "instagram": "https://www.instagram.com/eiden.group/", "facebook": "https://www.facebook.com/eiden.group/" },
+  "timezone": "Africa/Casablanca",
+  "languages": ["fr", "en"],
+  "rental": { "address": "Technopole 1, Bloc B101, Agadir Bay", "capacity": 15, "halfDay": "650 DH", "fullDay": "1 150 DH", "equipment": ["55-inch 4K screen (HDMI, USB-C)", "Sound system + microphone", "Whiteboard", "Wi-Fi fibre symétrique (réseau dédié)", "Climatisation", "Multiprises à chaque place"], "openingHoursSlots": "08:00–22:00 À 30 minutes" },
+  "proof": { "projects": "25+", "continuance": "92%", "responseTime": "48h", "experience": "13+ years" },
+  "crawlersAllowed": ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "Applebot-Extended", "Bytespider", "Cohere-ai", "Amazonbot", "DuckAssistant", "Meta-ExternalAgent", "Meta-ExternalFetcher", "GoogleOther", "Diffbot"]
+}

@@ -20,6 +20,30 @@ const nextConfig: NextConfig = {
     // for good. WebP encodes the same picture in a fraction of a second.
     formats: ["image/webp"],
   },
+  headers() {
+    return [
+      {
+        /* /rental is the commercial rental page — let engines use the full
+           page in snippets and large image previews. */
+        source: "/rental",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+          },
+          {
+            key: "Link",
+            value: [
+              '<https://eiden-group.com/rental>; rel="canonical"',
+              '<https://eiden-group.com/rental>; rel="alternate"; hreflang="fr"',
+              '<https://eiden-group.com/rental>; rel="alternate"; hreflang="en"',
+              '<https://eiden-group.com/rental>; rel="alternate"; hreflang="x-default"',
+            ].join(", "),
+          },
+        ],
+      },
+    ];
+  },
   redirects() {
     const cases = ["lunja-village", "bopassage", "dmc-morocco"];
     const promoted = [

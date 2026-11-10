@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "contexts": [
+    { "queryContext": "Agence digitale", "intent": "commercial", "answerType": "list + service description", "bestPage": "/" },
+    { "queryContext": "Salle de formation Agadir", "intent": "commercial", "answerType": "price + availability + booking steps", "bestPage": "/rental" },
+    { "queryContext": "Hydra Analysis", "intent": "informational", "answerType": "definition + mechanism + output", "bestPage": "/services/strategie" },
+    { "queryContext": "Création de site web au Maroc", "intent": "commercial", "answerType": "service description + proof", "bestPage": "/services/web" },
+    { "queryContext": "SEO Maroc", "intent": "commercial", "answerType": "service description + method", "bestPage": "/services/visibilite" },
+    { "queryContext": "Architecture d'entreprise", "intent": "informational", "answerType": "definition + methodology attribution", "bestPage": "/a-propos" },
+    { "queryContext": "Contact / devis EIDEN", "intent": "transactional", "answerType": "contact details + booking link", "bestPage": "/contact" }
+  ]
+}

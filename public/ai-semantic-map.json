@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "clusters": {
+    "business-architecture": ["hydra", "architecture-of-scale", "fountain-build", "structures", "operations", "processus", "human-capital", "revenue-engine"],
+    "digital": ["strategy", "positioning", "website", "seo", "geo", "content", "campaigns"],
+    "local-agadir": ["agadir", "technopole", "agadir-bay", "maroc", "souss-massa"],
+    "trust": ["quiet-confidence", "method", "proof", "hydra-analysis", "cases"],
+    "ai-optimization": ["aeo", "aio", "geo", "structured-data", "faq", "llms"]
+  }
+}

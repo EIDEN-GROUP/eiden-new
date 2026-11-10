@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "relations": [
+    { "sub": "person-oualid", "rel": "founder", "obj": "org" },
+    { "sub": "org", "rel": "owns", "obj": "svc-strategie" },
+    { "sub": "org", "rel": "owns", "obj": "svc-web" },
+    { "sub": "org", "rel": "owns", "obj": "svc-visibilite" },
+    { "sub": "org", "rel": "owns", "obj": "svc-photovid" },
+    { "sub": "org", "rel": "owns", "obj": "svc-salle" },
+    { "sub": "svc-strategie", "rel": "uses", "obj": "method-hydra" },
+    { "sub": "svc-strategie", "rel": "uses", "obj": "framework-architecture" },
+    { "sub": "svc-web", "rel": "uses", "obj": "framework-fountain" },
+    { "sub": "svc-visibilite", "rel": "uses", "obj": "framework-architecture" },
+    { "sub": "org", "rel": "hasLocation", "obj": "agadir-bay" },
+    { "sub": "svc-salle", "rel": "hasLocation", "obj": "agadir-bay" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "node": "content-topic",
+  "topics": {
+    "strategy": { "pages": ["/services/strategie"], "keywords": ["Hydra Analysis", "Architecture of Scale", "diagnostic 360", "positionnement", "business architecture"] },
+    "web": { "pages": ["/services/web"], "keywords": ["Next.js", "React", "TypeScript", "Core Web Vitals", "création site internet Maroc"] },
+    "visibility": { "pages": ["/services/visibilite"], "keywords": ["SEO", "GEO", "AEO", "AIO", "référencement Google", "moteurs IA"] },
+    "photovideo": { "pages": ["/services/photoVid"], "keywords": ["photographie", "vidéo", "branding visuel", "production"] },
+    "rental": { "pages": ["/rental"], "keywords": ["salle de formation Agadir", "salle réunion", "location salle", "Agadir Bay", "Technopole"] },
+    "agency-brand": { "pages": ["/a-propos", "/"], "keywords": ["agence digitale", "EIDEN", "agence Agadir", "architecture d'entreprise"] }
+  },
+  "entities": ["/entity-map.json", "/ai-entity-index.json", "/ai-topic-map.json"],
+  "answers": ["/qa-content.md", "/answers.md", "/people-also-ask.md", "/voice-search-questions.md"]
+}

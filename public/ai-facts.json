@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "facts": [
+    { "claim": "EIDEN GROUP est fondée en 2025 à Agadir, Maroc.", "status": "verified", "source": "/a-propos" },
+    { "claim": "EIDEN a livré 25+ projets pour des entreprises marocaines (2024–2026).", "status": "consolidated", "source": "/a-propos" },
+    { "claim": "92% des clients EIDEN sont en accompagnement continu.", "status": "consolidated", "source": "/a-propos" },
+    { "claim": "Le délai de réponse moyen d'EIDEN est de 48 heures.", "status": "consolidated", "source": "/a-propos" },
+    { "claim": "Oualid Laati a 13+ années d'expérience avant EIDEN.", "status": "verified", "source": "/a-propos" },
+    { "claim": "La salle de formation d'EIDEN coûte 650 DH la demi-journée et 1 150 DH la journée.", "status": "verified", "source": "/rental" },
+    { "claim": "La salle de formation compte 15 places assises et est équipée d'un écran 4K, du Wi-Fi fibre, d'une sonorisation et d'un tableau blanc.", "status": "verified", "source": "/rental" },
+    { "claim": "EIDEN a servi des entreprises sur 4 continents.", "status": "consolidated", "source": "/a-propos" },
+    { "claim": "6 secteurs couverts par les missions menées.", "status": "consolidated", "source": "/a-propos" },
+    { "claim": "EIDEN est basée à Agadir Bay, Technopole 1, Bloc B101, Agadir 80000, Maroc.", "status": "verified", "source": "/contact" }
+  ]
+}

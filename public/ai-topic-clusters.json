@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "clusters": [
+    { "name": "Architecture & Business", "topics": ["business-architecture", "hydra-analysis", "architecture-of-scale", "digital-strategy"], "page": "/services/strategie" },
+    { "name": "Web & Tech", "topics": ["web-development", "nextjs", "core-web-vitals", "e-commerce"], "page": "/services/web" },
+    { "name": "Visibility & Search", "topics": ["seo-geo", "search-engine-optimization", "ai-engine-optimization", "hreflang", "structured-data"], "page": "/services/visibilite" },
+    { "name": "Creative & Content", "topics": ["branding", "campaigns", "content", "photography", "videography"], "page": "/services/photoVid" },
+    { "name": "Expertise Locale", "topics": ["room-rental", "training-room", "agadir-bay", "agadir"], "page": "/rental" }
+  ]
+}

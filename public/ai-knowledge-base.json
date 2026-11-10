@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "site": "https://eiden-group.com",
+  "organization": { "name": "EIDEN GROUP", "founded": 2025, "hq": "Technopole 1, Bloc B101, Agadir Bay, 80000, Maroc", "phone": "+212 777 777 428", "email": "contact@eiden-group.com" },
+  "services": [
+    { "id": "strategie", "name": "Stratégie", "description": "Diagnostic 360° (Hydra Analysis™), Architecture of Scale, Fountain Build™.", "url": "https://eiden-group.com/services/strategie" },
+    { "id": "web", "name": "Site web", "description": "Conception et développement de sites Next.js premium-class.", "url": "https://eiden-group.com/services/web" },
+    { "id": "visibilite", "name": "Visibilité", "description": "SEO, GEO/AEO, campagnes, contenu.", "url": "https://eiden-group.com/services/visibilite" },
+    { "id": "photoVid", "name": "Photo & Vidéo", "description": "Direction artistique, production, retouche.", "url": "https://eiden-group.com/services/photoVid" },
+    { "id": "salle", "name": "Location de salle de formation", "description": "Salle équipée 15 places à Agadir Bay. 650 DH / demi-journée, 1 150 DH / journée.", "url": "https://eiden-group.com/rental" }
+  ],
+  "methodology": { "Hydra Analysis™": "Diagnostic 360° d'entreprise en 2 heures.", "Architecture of Scale": "Ordre du chantier Infrastructure → Process → Capital humain → Moteur de revenus.", "Fountain Build™": "Mise en œuvre service par service, jusqu'à ce que le système tourne seul." },
+  "proof": { "projectsDelivered": "25+", "continuance": "92%", "response": "48h" },
+  "contact": { "email": "contact@eiden-group.com", "phone": "+212 777 777 428" }
+}

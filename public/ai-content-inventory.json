@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "generated": "2026-11-10",
+  "site": "https://eiden-group.com",
+  "counts": {
+    "pages": 15,
+    "machineReadable": 25,
+    "languages": ["fr", "en"],
+    "services": ["Stratégie", "Site web", "Visibilité (SEO & GEO)", "Photo & vidéo", "Location de salle de formation"]
+  },
+  "assets": [
+    { "type": "page", "path": "/", "title": "EIDEN GROUP", "language": "fr" },
+    { "type": "page", "path": "/a-propos", "title": "À propos", "language": "fr" },
+    { "type": "page", "path": "/rental", "title": "Location de salle de formation à Agadir", "language": "fr" },
+    { "type": "page", "path": "/services/strategie", "title": "Stratégie", "language": "fr" },
+    { "type": "page", "path": "/services/web", "title": "Site web", "language": "fr" },
+    { "type": "page", "path": "/services/visibilite", "title": "Visibilité", "language": "fr" },
+    { "type": "page", "path": "/services/photoVid", "title": "Photo & Vidéo", "language": "fr" },
+    { "type": "page", "path": "/portfolio", "title": "Portfolio", "language": "fr" },
+    { "type": "llms", "path": "/llms.txt", "language": "fr" },
+    { "type": "llms", "path": "/llms-full.txt", "language": "fr" },
+    { "type": "llms", "path": "/llms-en.txt", "language": "en" },
+    { "type": "jsonld", "path": "/faq.jsonld", "language": "fr" },
+    { "type": "jsonld", "path": "/organization.jsonld", "language": "fr" },
+    { "type": "feed", "path": "/feed.xml", "language": "fr" },
+    { "type": "feed", "path": "/rss.xml", "language": "fr" },
+    { "type": "feed", "path": "/atom.xml", "language": "fr" }
+  ]
+}

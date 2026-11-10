@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "site": "https://eiden-group.com",
+  "generated": "2026-11-10",
+  "aiCrawlers": ["llms.txt", "llms-full.txt", "llms-en.txt", "faq.jsonld", "entity-map.json"],
+  "entries": [
+    { "path": "/", "type": "page", "title": "EIDEN GROUP | Architecture & Business au Maroc", "lang": "fr" },
+    { "path": "/a-propos", "type": "page", "title": "À propos", "lang": "fr" },
+    { "path": "/rental", "type": "page", "title": "Location de salle de formation à Agadir", "lang": "fr" },
+    { "path": "/services/strategie", "type": "page", "title": "Stratégie — Hydra Analysis™", "lang": "fr" },
+    { "path": "/services/web", "type": "page", "title": "Site web — de la conception au ship", "lang": "fr" },
+    { "path": "/services/visibilite", "type": "page", "title": "Visibilité — SEO & GEO", "lang": "fr" },
+    { "path": "/services/photoVid", "type": "page", "title": "Photo & Vidéo — création de contenu", "lang": "fr" },
+    { "path": "/portfolio", "type": "page", "title": "Portfolio", "lang": "fr" },
+    { "path": "/contact", "type": "page", "title": "Contact", "lang": "fr" },
+    { "path": "/mission", "type": "page", "title": "Mission", "lang": "fr" },
+    { "path": "/terms", "type": "page", "title": "Terms of Service", "lang": "fr" },
+    { "path": "/privacy", "type": "page", "title": "Privacy Policy", "lang": "fr" },
+    { "path": "/security", "type": "page", "title": "Security", "lang": "fr" },
+    { "path": "/nos-solutions", "type": "page", "title": "Nos solutions", "lang": "fr" },
+    { "path": "/llms.txt", "type": "llms", "lang": "fr" },
+    { "path": "/llms-full.txt", "type": "llms", "lang": "fr" },
+    { "path": "/llms-en.txt", "type": "llms", "lang": "en" }
+  ]
+}

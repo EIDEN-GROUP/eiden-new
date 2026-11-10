@@ -1,0 +1,82 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://eiden-group.com/#business",
+      "name": "EIDEN GROUP",
+      "legalName": "EIDEN GROUP",
+      "url": "https://eiden-group.com",
+      "logo": "https://eiden-group.com/favicon.ico",
+      "image": "https://eiden-group.com/work/hero.png",
+      "email": "contact@eiden-group.com",
+      "telephone": "+212 777 777 428",
+      "foundingDate": "2025",
+      "foundingLocation": { "@type": "Place", "name": "Agadir" },
+      "priceRange": "$$",
+      "currenciesAccepted": "MAD",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Technopole 1, Bloc B101",
+        "addressLocality": "Agadir",
+        "addressRegion": "Souss-Massa",
+        "postalCode": "80000",
+        "addressCountry": "MA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.4278,
+        "longitude": -9.5981
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Agadir" },
+        { "@type": "Country", "name": "Morocco" }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/eiden-group/",
+        "https://www.instagram.com/eiden.group/",
+        "https://www.facebook.com/eiden.group/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "contact@eiden-group.com",
+          "telephone": "+212 777 777 428",
+          "availableLanguage": ["fr", "en"]
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Oualid Laati",
+        "jobTitle": "Fondateur — Architecte en chef",
+        "worksFor": { "@id": "https://eiden-group.com/#business" }
+      },
+      "knowsAbout": [
+        "Stratégie digitale",
+        "Architecture d'entreprise",
+        "Branding",
+        "Création de sites web",
+        "SEO et GEO",
+        "Visibilité IA (AEO, AIO)",
+        "Google Ads",
+        "Création de contenu",
+        "Location de salle de formation"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://eiden-group.com/#website",
+      "url": "https://eiden-group.com",
+      "name": "EIDEN GROUP",
+      "description": "Agence digitale fondée à Agadir en 2025. Stratégie, création, digital, technologie et marketing.",
+      "inLanguage": ["fr", "en"],
+      "publisher": { "@id": "https://eiden-group.com/#business" },
+      "sameAs": [
+        "https://www.linkedin.com/company/eiden-group/",
+        "https://www.instagram.com/eiden.group/",
+        "https://www.facebook.com/eiden.group/"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "topics": [
+    { "id": "digital-strategy", "label": "Stratégie digitale", "related": ["business-architecture", "marketing-acquisition", "positionnement"] },
+    { "id": "business-architecture", "label": "Architecture d'entreprise", "related": ["digital-strategy", "hydra-analysis", "architecture-of-scale"] },
+    { "id": "web-development", "label": "Développement web", "related": ["nextjs", "core-web-vitals", "e-commerce"] },
+    { "id": "seo-geo", "label": "SEO & GEO", "related": ["search-engine-optimization", "ai-engine-optimization", "hreflang", "structured-data"] },
+    { "id": "branding", "label": "Création & branding", "related": ["identity", "naming", "editorial-design"] },
+    { "id": "campaigns", "label": "Campagnes & acquisition", "related": ["google-ads", "meta-ads", "instagram", "funnel-design"] },
+    { "id": "content", "label": "Contenu", "related": ["photography", "videography", "copywriting"] },
+    { "id": "room-rental", "label": "Location de salle de formation", "related": ["training-room", "ateliers", "agadir-bay"] }
+  ]
+}
