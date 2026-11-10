@@ -80,6 +80,8 @@ export type RentalCopy = {
     package: string;
     datetime: string;
     datetimePlaceholder: string;
+    datetimeAdd: string;
+    datetimeRemove: string;
     participants: string;
     message: string;
     messagePlaceholder: string;
@@ -285,7 +287,9 @@ const fr: RentalCopy = {
     phone: "Téléphone",
     package: "Formule",
     datetime: "Date et heure",
-    datetimePlaceholder: "Choisissez une date et une heure",
+    datetimePlaceholder: "Choisissez une date et une plage horaire",
+    datetimeAdd: "Ajouter une autre date et une autre plage horaire",
+    datetimeRemove: "Retirer cette date",
     participants: "Participants",
     message: "Message / besoin",
     messagePlaceholder: "Atelier, comité, séminaire…",
@@ -501,7 +505,9 @@ const en: RentalCopy = {
     phone: "Phone",
     package: "Package",
     datetime: "Date and time",
-    datetimePlaceholder: "Pick a date and time",
+    datetimePlaceholder: "Pick a date and a time range",
+    datetimeAdd: "Add another date and time range",
+    datetimeRemove: "Remove this date",
     participants: "Participants",
     message: "Message / need",
     messagePlaceholder: "Workshop, committee, seminar…",

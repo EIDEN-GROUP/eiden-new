@@ -5,7 +5,7 @@ import { Calendar, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type DateTimeLocale = "fr" | "en";
-export type DateTimeValue = { date: string; time: string };
+export type DateTimeValue = { date: string; from: string; to: string };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const toISO = (year: number, month: number, day: number) =>
@@ -27,25 +27,34 @@ const t = {
     prev: "Mois précédent",
     next: "Mois suivant",
     clear: "Effacer",
-    summaryEmpty: "Sélectionnez une date et une heure.",
-    summarySet: "Votre réservation est prévue le {date} à {time}.",
+    summaryEmpty: "Sélectionnez une date et une plage horaire.",
+    summarySet: "Votre réservation est prévue le {date} de {from} à {to}.",
+    fromLabel: "Début",
+    toLabel: "Fin",
   },
   en: {
     prev: "Previous month",
     next: "Next month",
     clear: "Clear",
-    summaryEmpty: "Select a date and time.",
-    summarySet: "Your reservation is set for {date} at {time}.",
+    summaryEmpty: "Select a date and a time range.",
+    summarySet: "Your reservation is set for {date} from {from} to {to}.",
+    fromLabel: "From",
+    toLabel: "To",
   },
 } as const;
 
-/* The bookable window is 09:00–18:00, half-hour slots. */
-const TIME_SLOTS = Array.from({ length: 19 }, (_, index) => {
-  const minutes = 9 * 60 + index * 30;
+/* The venue is open 08:00–22:00, half-hour slots. */
+const TIME_SLOTS = Array.from({ length: 28 }, (_, index) => {
+  const minutes = 8 * 60 + index * 30;
   return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${pad(
     minutes % 60,
   )}`;
 });
+
+/* Only one picker card is ever open at a time across the whole form —
+   opening a sibling dispatches this event and the others listen for it. */
+const ZING_OPEN = "eiden-datetime-open";
+let instanceCounter = 0;
 
 /**
  * The reservation moment in one card: a calendar on the left, a scrollable
@@ -79,6 +88,8 @@ export function DateTimeField({
   const todayISO = toISO(today.getFullYear(), today.getMonth(), today.getDate());
 
   const [open, setOpen] = useState(false);
+  /* Which side of the range the next slot click fills. Auto-advances from "from" to "to". */
+  const [activeSide, setActiveSide] = useState<"from" | "to">("from");
   /* Rough card height: everything is visible at once on desktop. */
   const estimated = 430;
   const [popover, setPopover] = useState<{
@@ -97,11 +108,29 @@ export function DateTimeField({
 
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const instanceId = useRef(0);
+  if (instanceId.current === 0) instanceId.current = ++instanceCounter;
 
   const close = () => setOpen(false);
 
+  /* Slot click: fill the active side, swap the range if it flips, then advance. */
+  const pickTime = (slot: string) => {
+    const next: DateTimeValue = { ...value, [activeSide]: slot };
+    if (next.from && next.to && next.from > next.to) {
+      const from = next.to;
+      const to = next.from;
+      next.from = from;
+      next.to = to;
+    }
+    onChange(next);
+    if (activeSide === "from") setActiveSide("to");
+  };
+
   const toggleOpen = () => {
     if (!open) {
+      window.dispatchEvent(
+        new CustomEvent(ZING_OPEN, { detail: instanceId.current }),
+      );
       const rect = root.current?.getBoundingClientRect();
       if (!rect) {
         setOpen(true);
@@ -111,10 +140,20 @@ export function DateTimeField({
       const above = rect.top - 12;
       const placement = below < estimated + 12 && above > below ? "up" : "down";
       const space = placement === "up" ? above : below;
+      /* The card must stay inside the viewport: at least as wide as the trigger (or
+         a comfortable reading width on desktop), never past the edges on small screens. */
+      const width = Math.min(
+        Math.max(rect.width, Math.min(560, window.innerWidth - 24)),
+        window.innerWidth - 24,
+      );
+      const left = Math.min(
+        Math.max(rect.left, 12),
+        window.innerWidth - width - 12,
+      );
       setPopover({
         placement,
-        left: rect.left,
-        width: Math.max(rect.width, 560 > rect.width ? Math.min(560, window.innerWidth - 24) : rect.width),
+        left,
+        width,
         top: placement === "down" ? rect.bottom + 9 : undefined,
         bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,
         maxHeight: Math.max(280, Math.min(estimated, space)),
@@ -128,6 +167,17 @@ export function DateTimeField({
     const picked = value.date ? parseISO(value.date) : null;
     if (picked) setCursor(new Date(picked.getFullYear(), picked.getMonth(), 1));
   }, [value.date]);
+
+  useEffect(() => {
+    if (!open) return;
+    const sibling = (event: Event) => {
+      if ((event as CustomEvent<number>).detail !== instanceId.current) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener(ZING_OPEN, sibling);
+    return () => window.removeEventListener(ZING_OPEN, sibling);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -151,10 +201,18 @@ export function DateTimeField({
         const above = rect.top - 12;
         const placement = previous.placement;
         const space = placement === "up" ? above : below;
+        const width = Math.min(
+          Math.max(rect.width, Math.min(560, window.innerWidth - 24)),
+          window.innerWidth - 24,
+        );
+        const left = Math.min(
+          Math.max(rect.left, 12),
+          window.innerWidth - width - 12,
+        );
         return {
           ...previous,
-          left: rect.left,
-          width: Math.max(rect.width, Math.min(560, window.innerWidth - 24)),
+          left,
+          width,
           top: placement === "down" ? rect.bottom + 9 : undefined,
           bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,
           maxHeight: Math.max(280, Math.min(estimated, space)),
@@ -210,16 +268,17 @@ export function DateTimeField({
     onChange({ ...value, date: iso });
   };
 
-  const summary =
-    valueDate && value.time
-      ? localeT.summarySet
-          .replace("{date}", valueLabel ?? "")
-          .replace("{time}", value.time)
-      : localeT.summaryEmpty;
+  const complete = valueDate && value.from && value.to;
+  const summary = complete
+    ? localeT.summarySet
+        .replace("{date}", valueLabel ?? "")
+        .replace("{from}", value.from)
+        .replace("{to}", value.to)
+    : localeT.summaryEmpty;
 
   const triggerLabel = shortLabel
-    ? value.time
-      ? `${shortLabel} · ${value.time}`
+    ? value.from
+      ? `${shortLabel} · ${value.from}${value.to ? ` → ${value.to}` : " → …"}`
       : shortLabel
     : placeholder;
 
@@ -365,40 +424,86 @@ export function DateTimeField({
               </div>
             </div>
 
-            {/* Time slots */}
-            <div
-              className="no-scrollbar flex max-h-56 w-full shrink-0 flex-col gap-2 overflow-y-auto border-t border-ink/10 p-4 md:max-h-[25.5rem] md:w-44 md:border-t-0 md:border-l md:p-5"
-              data-lenis-prevent
-            >
-              {TIME_SLOTS.map((slot) => {
-                const selected = value.time === slot;
-                return (
-                  <button
-                    key={slot}
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => onChange({ ...value, time: slot })}
-                    className={cn(
-                      "w-full shrink-0 rounded-xl border py-2 text-[0.82rem] font-medium tabular-nums transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal",
-                      selected
-                        ? "border-teal bg-teal text-canvas"
-                        : "border-ink/15 text-ink hover:border-teal hover:text-teal",
-                    )}
-                  >
-                    {slot}
-                  </button>
-                );
-              })}
+            {/* Range picker: Début / Fin, then a slot column */}
+            <div className="flex w-full shrink-0 flex-col gap-3 border-t border-ink/10 p-4 md:w-48 md:border-t-0 md:border-l md:p-4">
+              <div className="grid grid-cols-2 gap-2">
+                {(["from", "to"] as const).map((side) => {
+                  const active = activeSide === side;
+                  const slotValue = side === "from" ? value.from : value.to;
+                  return (
+                    <button
+                      key={side}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => setActiveSide(side)}
+                      className={cn(
+                        "flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2 text-left transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal",
+                        active
+                          ? "border-teal bg-teal/10"
+                          : "border-ink/15 hover:border-teal/60",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "text-[8.5px] font-bold uppercase tracking-[0.22em]",
+                          active ? "text-teal" : "text-ink/45",
+                        )}
+                      >
+                        {side === "from" ? localeT.fromLabel : localeT.toLabel}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-[0.9375rem] font-semibold tabular-nums",
+                          slotValue ? "text-ink" : "text-ink/40",
+                        )}
+                      >
+                        {slotValue || "––:––"}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div
+                className="no-scrollbar max-h-56 md:max-h-[22rem] flex flex-col gap-1.5 overflow-y-auto pr-0.5"
+                data-lenis-prevent
+              >
+                {TIME_SLOTS.map((slot) => {
+                  const isFrom = slot === value.from;
+                  const isTo = slot === value.to;
+                  const inRange =
+                    value.from && value.to && slot >= value.from && slot <= value.to;
+                  return (
+                    <button
+                      key={slot}
+                      type="button"
+                      aria-pressed={isFrom || isTo}
+                      onClick={() => pickTime(slot)}
+                      className={cn(
+                        "w-full shrink-0 rounded-lg border py-1.5 text-[0.82rem] font-medium tabular-nums transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal",
+                        isFrom
+                          ? "border-teal bg-teal text-canvas"
+                          : isTo
+                            ? "border-gold bg-gold text-ink"
+                            : inRange
+                              ? "border-transparent bg-beige text-ink"
+                              : "border-ink/10 text-ink/75 hover:border-teal hover:text-teal",
+                      )}
+                    >
+                      {slot}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
           {/* Footer */}
           <div className="flex flex-col gap-2 border-t border-ink/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[0.82rem] leading-snug text-ink/80">{summary}</p>
-            {value.date || value.time ? (
+            {value.date || value.from || value.to ? (
               <button
                 type="button"
-                onClick={() => onChange({ date: "", time: "" })}
+                onClick={() => onChange({ date: "", from: "", to: "" })}
                 className="inline-flex w-fit items-center gap-1.5 text-[0.78rem] font-semibold text-ink/55 transition-colors duration-200 hover:text-teal"
               >
                 <X aria-hidden strokeWidth={2} className="size-3.5" />

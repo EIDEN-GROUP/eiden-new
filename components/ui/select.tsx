@@ -76,10 +76,14 @@ export function SelectField({
           previous?.placement ??
           (below < rowEstimate + 12 && above > below ? "up" : "down");
         const space = placement === "up" ? above : below;
+        const left = Math.min(
+          Math.max(rect.left, 12),
+          window.innerWidth - rect.width - 12,
+        );
         return {
           ...previous!,
           placement,
-          left: rect.left,
+          left,
           width: rect.width,
           top: placement === "down" ? rect.bottom + 9 : undefined,
           bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,
@@ -116,9 +120,13 @@ export function SelectField({
     const placement =
       below < rowEstimate + 12 && above > below ? "up" : "down";
     const space = placement === "up" ? above : below;
+    const left = Math.min(
+      Math.max(rect.left, 12),
+      window.innerWidth - rect.width - 12,
+    );
     setPopover({
       placement,
-      left: rect.left,
+      left,
       width: rect.width,
       top: placement === "down" ? rect.bottom + 9 : undefined,
       bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,

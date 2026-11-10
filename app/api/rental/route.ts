@@ -17,6 +17,7 @@ const ALLOWED_ORIGINS = [
   "https://www.eiden-group.com",
   "https://eiden-group.com",
   "http://localhost:3000",
+  "http://127.0.0.1:3000",
   "https://marouanes-macbook-pro.tail17d4b9.ts.net",
 ];
 
@@ -81,14 +82,32 @@ export async function POST(request: Request) {
   }
 
   const locale = body.locale === "en" ? "en" : "fr";
+  const rawSessions = Array.isArray(body.sessions) ? body.sessions : [];
+  const sessions = rawSessions
+    .map((entry) => {
+      const record = (entry ?? {}) as Record<string, unknown>;
+      return {
+        dateLabel: clean(record.dateLabel, 120),
+        timeLabel: clean(record.timeLabel, 60),
+      };
+    })
+    .filter((session) => session.dateLabel || session.timeLabel)
+    .slice(0, 10);
+  /* Backward compatibility: a single dateLabel/timeLabel pair is treated as one session. */
+  if (sessions.length === 0 && (body.dateLabel || body.timeLabel)) {
+    sessions.push({
+      dateLabel: clean(body.dateLabel, 120),
+      timeLabel: clean(body.timeLabel, 60),
+    });
+  }
+
   const payload: RentalBookingPayload = {
     name: clean(body.name, 120),
     company: clean(body.company, 160),
     email: clean(body.email, 254).toLowerCase(),
     phone: clean(body.phone, 40),
     packageName: clean(body.packageName, 160),
-    dateLabel: clean(body.dateLabel, 120),
-    timeLabel: clean(body.timeLabel, 30),
+    sessions,
     participants: clean(body.participants, 10),
     message: cleanMultiline(body.message, 4000),
     locale,
@@ -102,6 +121,9 @@ export async function POST(request: Request) {
   if (!payload.phone) errors.phone = "required";
   else if (!PHONE_RE.test(payload.phone)) errors.phone = "invalid";
   if (!payload.packageName) errors.packageName = "required";
+  if (!payload.sessions.length || payload.sessions.every((session) => !session.dateLabel)) {
+    errors.sessions = "required";
+  }
 
   if (Object.keys(errors).length > 0) {
     auditLog("validation_failed", ip, { errors });
@@ -148,7 +170,7 @@ export async function POST(request: Request) {
     auditLog("submission_accepted", ip, {
       email: payload.email,
       package: payload.packageName,
-      date: payload.dateLabel,
+      sessions: payload.sessions.length,
     });
     return NextResponse.json({ ok: true });
   } catch (error) {

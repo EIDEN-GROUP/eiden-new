@@ -13,16 +13,20 @@ import type { InlineImage } from "@/lib/emails/brand-images";
  * each other's words.
  */
 
+export type RentalSession = {
+  /** Pre-formatted date in the visitor's locale, e.g. "vendredi 20 novembre 2026". */
+  dateLabel: string;
+  /** "HH:MM → HH:MM", pre-formatted. */
+  timeLabel: string;
+};
+
 export type RentalBookingPayload = {
   name: string;
   company: string;
   email: string;
   phone: string;
   packageName: string;
-  /** Pre-formatted, in the visitor's locale, e.g. "vendredi 20 novembre 2026". */
-  dateLabel: string;
-  /** "HH:MM" or "" when the visitor has no preference. */
-  timeLabel: string;
+  sessions: RentalSession[];
   /** Free text, e.g. "12". */
   participants: string;
   message?: string;
@@ -153,8 +157,7 @@ ${escapeHtml(siteConfig.phoneMa)}<br />${addressBlock}<br />
 /** The perforated ticket stub that anchors the booking, on mint-dark paper. */
 function ticket(opts: {
   packageName: string;
-  dateLabel: string;
-  timeLabel: string;
+  sessions: RentalSession[];
   participants: string;
   locale: ContactLocale;
   statusLine: string;
@@ -164,16 +167,14 @@ function ticket(opts: {
     yourPackage: fr ? "Votre formule" : "Your package",
     seats: fr ? "Places<br />assises" : "Seats<br />available",
     date: fr ? "Date" : "Date",
-    time: fr ? "Horaire" : "Time",
     participants: fr ? "Participants" : "Participants",
-    noTime: fr ? "Sans préférence" : "No preference",
     perRoom: "15",
   };
-  const rows: [string, string][] = [
-    [T.date, opts.dateLabel || "-"],
-    [T.time, opts.timeLabel || T.noTime],
-    [T.participants, opts.participants || "-"],
-  ];
+  const rows: [string, string][] = opts.sessions.map((session, i) => [
+    opts.sessions.length > 1 ? `${T.date} ${i + 1}` : T.date,
+    `${session.dateLabel || "-"} · ${session.timeLabel || "-"}`,
+  ]);
+  rows.push([T.participants, opts.participants || "-"]);
   const rowHtml = rows
     .map(
       ([label, value]) => `<tr>
@@ -272,8 +273,8 @@ const copy = {
     },
     adminCta: (firstName: string) => `Répondre à ${firstName}`,
     adminNote: "Demande envoyée depuis eiden-group.com/rental. Ne pas transférer.",
-    adminSubject: (p: { packageName: string; dateLabel: string; name: string }) =>
-      `[Réservation salle] ${p.packageName} · ${p.dateLabel || "sans date"} · ${p.name}`,
+    adminSubject: (p: { packageName: string; name: string }) =>
+      `[Réservation salle] ${p.packageName} · ${p.name}`,
     // visitor
     visitorTitle: "Votre demande\nest bien",
     visitorAccent: "reçue.",
@@ -318,8 +319,8 @@ const copy = {
     },
     adminCta: (firstName: string) => `Reply to ${firstName}`,
     adminNote: "Request sent from eiden-group.com/rental. Do not share this email.",
-    adminSubject: (p: { packageName: string; dateLabel: string; name: string }) =>
-      `[Room booking] ${p.packageName} · ${p.dateLabel || "no date"} · ${p.name}`,
+    adminSubject: (p: { packageName: string; name: string }) =>
+      `[Room booking] ${p.packageName} · ${p.name}`,
     visitorTitle: "Your request\nhas been",
     visitorAccent: "received.",
     hello: "Hello",
@@ -355,8 +356,7 @@ export function buildRentalAdminEmail(data: RentalBookingPayload): BuiltEmail {
 
   const ticketHtml = ticket({
     packageName: data.packageName,
-    dateLabel: data.dateLabel,
-    timeLabel: data.timeLabel,
+    sessions: data.sessions,
     participants: data.participants,
     locale: data.locale,
     statusLine: t.adminStatus,
@@ -377,7 +377,6 @@ export function buildRentalAdminEmail(data: RentalBookingPayload): BuiltEmail {
 
   const subject = t.adminSubject({
     packageName: data.packageName,
-    dateLabel: data.dateLabel,
     name: data.name,
   });
 
@@ -387,8 +386,10 @@ export function buildRentalAdminEmail(data: RentalBookingPayload): BuiltEmail {
     t.adminIntro(data.name, data.company),
     "",
     `${fr ? "Formule" : "Package"}: ${data.packageName}`,
-    `${fr ? "Date" : "Date"}: ${data.dateLabel || "-"}`,
-    `${fr ? "Horaire" : "Time"}: ${data.timeLabel || (fr ? "Sans préférence" : "No preference")}`,
+    ...data.sessions.map(
+      (session, i) =>
+        `${fr ? "Date" : "Date"}${data.sessions.length > 1 ? ` ${i + 1}` : ""}: ${session.dateLabel || "-"} · ${session.timeLabel || "-"}`,
+    ),
     `${fr ? "Participants" : "Participants"}: ${data.participants || "-"}`,
     "",
     `${t.labels.name}: ${data.name}`,
@@ -427,8 +428,7 @@ export function buildRentalVisitorEmail(data: RentalBookingPayload): BuiltEmail 
 
   const ticketHtml = ticket({
     packageName: data.packageName,
-    dateLabel: data.dateLabel,
-    timeLabel: data.timeLabel,
+    sessions: data.sessions,
     participants: data.participants,
     locale: data.locale,
     statusLine: t.visitorStatus,
@@ -454,8 +454,10 @@ export function buildRentalVisitorEmail(data: RentalBookingPayload): BuiltEmail 
     t.thanks,
     "",
     `${fr ? "Formule" : "Package"}: ${data.packageName}`,
-    `${fr ? "Date" : "Date"}: ${data.dateLabel || "-"}`,
-    `${fr ? "Horaire" : "Time"}: ${data.timeLabel || (fr ? "Sans préférence" : "No preference")}`,
+    ...data.sessions.map(
+      (session, i) =>
+        `${fr ? "Date" : "Date"}${data.sessions.length > 1 ? ` ${i + 1}` : ""}: ${session.dateLabel || "-"} · ${session.timeLabel || "-"}`,
+    ),
     `${fr ? "Participants" : "Participants"}: ${data.participants || "-"}`,
     "",
     `${t.next}:`,

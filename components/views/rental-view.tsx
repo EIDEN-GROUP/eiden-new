@@ -22,6 +22,7 @@ import {
   Headphones,
   Mail,
   MapPin,
+  Plus,
   Phone,
   ShieldCheck,
   Star,
@@ -31,7 +32,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SelectField } from "@/components/ui/select";
-import { DateTimeField } from "@/components/ui/date-time-field";
+import { DateTimeField, type DateTimeValue } from "@/components/ui/date-time-field";
 import { setScrollLock } from "@/components/providers/smooth-scroll";
 import { siteConfig } from "@/lib/data/site";
 import { getRentalCopy } from "@/lib/data/rental";
@@ -257,18 +258,21 @@ const css = `
 .rental-page.rental-portal{background:transparent}
 /* Transparent backdrop, real frosted blur: the page stays visible, softened. */
 .rental-page .modal-back{position:fixed;inset:0;z-index:90;background:transparent;backdrop-filter:blur(7px) saturate(1.08);-webkit-backdrop-filter:blur(7px) saturate(1.08);display:grid;place-items:center;padding:18px}
-.rental-page .modal{width:min(680px,100%);max-height:92svh;overflow:auto;border-radius:22px;background:var(--cream);color:var(--ink);box-shadow:0 44px 120px rgba(0,0,0,.5),0 12px 34px rgba(7,28,25,.28);border:1px solid rgba(184,138,85,.4)}
-/* On tall enough screens the modal always fits its content, so the open
-   package/date popovers are allowed to float past its bottom edge instead
-   of clipping against it. */
-@media (min-height:800px){.rental-page .modal{overflow:visible}}
-.rental-page .modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:26px 30px 0}
-.rental-page .modal-head h2{font:400 30px/1.05 var(--font-editorial);color:var(--g);margin:0}
+.rental-page .modal{--mp:30px;width:min(680px,100%);max-height:92svh;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-radius:22px;background:var(--cream);color:var(--ink);box-shadow:0 44px 120px rgba(0,0,0,.5),0 12px 34px rgba(7,28,25,.28);border:1px solid rgba(184,138,85,.4)}
+/* The package/date popovers float fixed against the backdrop, so the modal is free
+   to scroll internally if the form outgrows the viewport. */
+.rental-page .modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:22px 30px 0}
+.rental-page .modal-head h2{font:400 28px/1.05 var(--font-editorial);color:var(--g);margin:0}
 .rental-page .modal-kicker{margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .rental-page .modal-sub{margin:8px 0 0;font-size:14px;line-height:1.5;color:var(--muted);max-width:46ch}
 .rental-page .modal-close{border:0;background:transparent;color:var(--g);cursor:pointer;padding:2px;transition:opacity .2s}
 .rental-page .modal-close:hover{opacity:.6}
-.rental-page .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px;padding:22px 30px 30px}
+.rental-page .datetime-field-flex{display:flex;gap:10px;align-items:flex-start}
+.rental-page .datetime-remove-static{flex:0 0 auto;display:grid;place-items:center;width:46px;height:48px;margin-top:2px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.rental-page .datetime-remove-static:hover{color:#b91c1c;border-color:#fca5a5}
+.rental-page .datetime-add{display:inline-flex;align-items:center;gap:10px;width:100%;justify-content:center;border:1.5px dashed var(--line);background:transparent;border-radius:14px;padding:12px 16px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+.rental-page .datetime-add:hover{border-color:var(--gold);color:var(--g);background:rgba(184,138,85,.08)}
+.rental-page .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px;padding:18px var(--mp) 24px}
 .rental-page .form-field{display:flex;flex-direction:column;gap:6px}
 .rental-page .form-field.full{grid-column:1/-1}
 .rental-page .form-field label{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
@@ -276,7 +280,7 @@ const css = `
 .rental-page .form-field input:focus{border-color:var(--gold)}
 .rental-page .form-field input::placeholder{color:rgba(85,99,95,.6)}
 .rental-page .form-message{min-height:1.4em;margin:0;font-size:13px}
-.rental-page .form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding-top:4px}
+.rental-page .form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:16px;position:sticky;bottom:-24px;z-index:2;margin:0 calc(var(--mp)*-1);padding:10px var(--mp) 16px;border-top:1px solid var(--line);background:var(--cream)}
 .rental-page input,.rental-page textarea,.rental-page button,.rental-page select{font-family:var(--font-sans)}
 .rental-page .reveal{opacity:0;transform:translateY(28px)}
 .rental-page .reveal.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -284,13 +288,18 @@ const css = `
 @media (max-width:1024px){.rental-page .features ul{grid-template-columns:repeat(3,1fr);row-gap:22px}.rental-page .features li:nth-child(4){border-left:0}.rental-page .cards{grid-template-columns:minmax(0,1fr);max-width:540px;margin-left:auto;margin-right:auto;gap:56px}.rental-page .card.feat{transform:none}.rental-page .card.feat:hover{transform:translateY(-6px)}.rental-page .why .wrap{grid-template-columns:1fr}.rental-page .why-list{border-left:0;padding-left:0}.rental-page .practice-grid{grid-template-columns:1fr;gap:40px}}
 @media (max-width:820px){.rental-page .hero-photo{width:100%;opacity:.42}.rental-page .hero::before{background:linear-gradient(180deg,rgba(10,46,40,.7),rgba(10,46,40,.88))}.rental-page .hero-content{padding-top:158px}}
 @media (max-width:900px){.rental-page .cta{grid-template-columns:120px minmax(0,1fr)}.rental-page .cta-perf{display:none}.rental-page .cta-notch{left:108px}.rental-page .cta-notch.b{display:none}.rental-page .cta-stub{border-radius:22px 0 0 0;border-right:2px dashed rgba(234,215,189,.3)}.rental-page .cta-stub-num{font-size:54px}.rental-page .cta-main{padding:28px 30px}.rental-page .cta-act{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;border-left:0;border-top:1px solid rgba(255,255,255,.08);padding:20px 30px 26px}.rental-page .cta-lbl{display:none}}
-@media (max-width:640px){.rental-page .wrap{padding:0 18px}.rental-page .hero{padding-bottom:140px}.rental-page .hero-photo{opacity:.38}.rental-page .hero-content{padding-top:146px}.rental-page .features ul{grid-template-columns:repeat(2,1fr)}.rental-page .features li+li{border-left:0}.rental-page .features li:last-child{grid-column:1/-1}.rental-page .photos{grid-template-columns:1fr;grid-template-rows:none}.rental-page .photos figure:first-child{grid-row:auto;aspect-ratio:4/3}.rental-page .photos figure:not(:first-child){aspect-ratio:16/10}.rental-page .why-list{grid-template-columns:repeat(2,1fr);row-gap:26px}.rental-page .why-list li+li{border-left:0}.rental-page .why-list li:nth-child(even){border-left:0}.rental-page .why{padding-bottom:16px}.rental-page .cta{grid-template-columns:1fr}.rental-page .cta-stub{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:12px;padding:18px 22px;border-right:0;border-bottom:1px solid rgba(234,215,189,.16)}.rental-page .cta-stub-num{font-size:40px}.rental-page .cta-stub-lbl{margin:0;text-align:left}.rental-page .cta-perf,.rental-page .cta-notch{display:none}.rental-page .cta-main{padding:26px 24px 8px;text-align:center;align-items:center}.rental-page .cta-act{grid-column:auto;padding:16px 24px 28px;align-items:center;flex-direction:column}.rental-page .cta-phone{width:100%;justify-content:center;font-size:20px}.rental-page .cta-wrap{padding:96px 0}.rental-page .form-grid{grid-template-columns:1fr;padding:18px 22px 24px}.rental-page .modal-head{padding:22px 22px 0}}
+@media (max-width:640px){.rental-page .wrap{padding:0 18px}.rental-page .hero{padding-bottom:140px}.rental-page .hero-photo{opacity:.38}.rental-page .hero-content{padding-top:146px}.rental-page .features ul{grid-template-columns:repeat(2,1fr)}.rental-page .features li+li{border-left:0}.rental-page .features li:last-child{grid-column:1/-1}.rental-page .photos{grid-template-columns:1fr;grid-template-rows:none}.rental-page .photos figure:first-child{grid-row:auto;aspect-ratio:4/3}.rental-page .photos figure:not(:first-child){aspect-ratio:16/10}.rental-page .why-list{grid-template-columns:repeat(2,1fr);row-gap:26px}.rental-page .why-list li+li{border-left:0}.rental-page .why-list li:nth-child(even){border-left:0}.rental-page .why{padding-bottom:16px}.rental-page .cta{grid-template-columns:1fr}.rental-page .cta-stub{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:12px;padding:18px 22px;border-right:0;border-bottom:1px solid rgba(234,215,189,.16)}.rental-page .cta-stub-num{font-size:40px}.rental-page .cta-stub-lbl{margin:0;text-align:left}.rental-page .cta-perf,.rental-page .cta-notch{display:none}.rental-page .cta-main{padding:26px 24px 8px;text-align:center;align-items:center}.rental-page .cta-act{grid-column:auto;padding:16px 24px 28px;align-items:center;flex-direction:column}.rental-page .cta-phone{width:100%;justify-content:center;font-size:20px}.rental-page .cta-wrap{padding:96px 0}.rental-page .datetime-field-flex{display:flex;gap:10px;align-items:flex-start}
+.rental-page .datetime-remove-static{flex:0 0 auto;display:grid;place-items:center;width:46px;height:48px;margin-top:2px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.rental-page .datetime-remove-static:hover{color:#b91c1c;border-color:#fca5a5}
+.rental-page .datetime-add{display:inline-flex;align-items:center;gap:10px;width:100%;justify-content:center;border:1.5px dashed var(--line);background:transparent;border-radius:14px;padding:12px 16px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+.rental-page .datetime-add:hover{border-color:var(--gold);color:var(--g);background:rgba(184,138,85,.08)}
+.rental-page .modal{--mp:22px}.rental-page .form-grid{grid-template-columns:1fr;padding:18px var(--mp) 24px}.rental-page .modal-head{padding:22px 22px 0}}
 `;
 
 const fieldClass =
   "border-0 border-b border-[#E6DCCD] bg-transparent px-0 py-2.5 font-medium text-[15px] text-[#12302A] outline-none transition-colors duration-300 placeholder:text-[#55635F]/60 focus:border-[#B88A55]";
 
-type Errors = Partial<Record<"name" | "email" | "phone" | "date", string>>;
+type Errors = Partial<Record<"name" | "email" | "phone", string>>;
 
 /* Brand glyph from the site's floating actions, same path and weight. */
 function WhatsAppGlyph() {
@@ -314,8 +323,11 @@ function ReservationForm({
   locale,
 }: ReservationFormProps) {
   const [packageIndex, setPackageIndex] = useState(initialPackage);
-  const [datetime, setDatetime] = useState({ date: "", time: "" });
+  const [sessions, setSessions] = useState<DateTimeValue[]>([
+    { date: "", from: "", to: "" },
+  ]);
   const [errors, setErrors] = useState<Errors>({});
+  const [sessionErrors, setSessionErrors] = useState<string[]>([]);
   const [sent, setSent] = useState(false);
   const [failed, setFailed] = useState(false);
   const [sending, setSending] = useState(false);
@@ -342,15 +354,21 @@ function ReservationForm({
     const company = String(data.get("company") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
-    const { date, time: timeLabel } = datetime;
-    const dateLabel = date
-      ? new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : "en-GB", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }).format(new Date(`${date}T00:00:00`))
-      : "";
+    const sessionErrors = sessions.map((session) =>
+      session.date && session.from && session.to ? "" : "✕",
+    );
+    const hasSessionError = sessionErrors.some(Boolean);
+    const fmt = new Intl.DateTimeFormat(
+      locale === "fr" ? "fr-FR" : "en-GB",
+      { weekday: "long", day: "numeric", month: "long", year: "numeric" },
+    );
+    const sessionsPayload = sessions.map((session) => ({
+      dateLabel: session.date
+        ? fmt.format(new Date(`${session.date}T00:00:00`))
+        : "",
+      timeLabel:
+        session.from && session.to ? `${session.from} → ${session.to}` : "",
+    }));
     const participants = String(data.get("participants") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
@@ -359,10 +377,10 @@ function ReservationForm({
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
       nextErrors.email = "✕";
     if (!phone || !/^[\d\s()+.-]{7,30}$/.test(phone)) nextErrors.phone = "✕";
-    if (!date) nextErrors.date = "✕";
 
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return;
+    setSessionErrors(sessionErrors);
+    if (Object.keys(nextErrors).length || sessionErrors.some(Boolean)) return;
 
     setSending(true);
     setFailed(false);
@@ -377,8 +395,7 @@ function ReservationForm({
           email,
           phone,
           packageName: selectedPackage,
-          dateLabel,
-          timeLabel,
+          sessions: sessionsPayload,
           participants,
           message,
           locale,
@@ -393,11 +410,13 @@ function ReservationForm({
       if (!response.ok || !json?.ok) throw new Error("send_failed");
       form.reset();
       setPackageIndex(1);
-      setDatetime({ date: "", time: "" });
+      setSessions([{ date: "", from: "", to: "" }]);
+      setSessionErrors([]);
       setSent(true);
       trackEvent("generate_lead", {
         method: "rental_form",
         package: selectedPackage,
+        sessions: sessions.length,
       });
     } catch {
       setFailed(true);
@@ -457,29 +476,80 @@ function ReservationForm({
           onChange={setPackageIndex}
         />
       </div>
-      <Field
-        id="datetime"
-        label={copy.form.datetime}
-        error={errors.date}
-        required
-        full
-      >
-        <DateTimeField
-          id="datetime"
-          labelledBy="datetime-label"
-          locale={locale}
-          value={datetime}
-          onChange={(next) => {
-            setDatetime(next);
-            setErrors((previous) =>
-              previous.date && next.date
-                ? { ...previous, date: undefined }
-                : previous,
-            );
-          }}
-          placeholder={copy.form.datetimePlaceholder}
-        />
-      </Field>
+      {sessions.map((session, index) => (
+        <Field
+          key={index}
+          id={`datetime-${index}`}
+          label={
+            sessions.length > 1
+              ? `${copy.form.datetime} ${index + 1}`
+              : copy.form.datetime
+          }
+          error={sessionErrors[index]}
+          required
+          full
+        >
+          <div className="datetime-field-flex">
+            <DateTimeField
+              id={`datetime-${index}`}
+              labelledBy={`datetime-${index}-label`}
+              locale={locale}
+              value={session}
+              className="min-w-0 flex-1"
+              onChange={(next) => {
+                setSessions((previous) =>
+                  previous.map((row, rowIndex) =>
+                    rowIndex === index ? next : row,
+                  ),
+                );
+                setSessionErrors((previous) =>
+                  previous.map((row, rowIndex) =>
+                    rowIndex === index &&
+                    next.date &&
+                    next.from &&
+                    next.to
+                      ? ""
+                      : row,
+                  ),
+                );
+              }}
+              placeholder={copy.form.datetimePlaceholder}
+            />
+            {index > 0 ? (
+              <button
+                type="button"
+                className="datetime-remove-static"
+                onClick={() => {
+                  setSessions((previous) =>
+                    previous.filter((_, row) => row !== index),
+                  );
+                  setSessionErrors((previous) =>
+                    previous.filter((_, row) => row !== index),
+                  );
+                }}
+                aria-label={copy.form.datetimeRemove}
+              >
+                <X width={18} height={18} strokeWidth={1.8} aria-hidden />
+              </button>
+            ) : null}
+          </div>
+        </Field>
+      ))}
+      <div className="form-field full">
+        <button
+          type="button"
+          className="datetime-add"
+          onClick={() =>
+            setSessions((previous) => [
+              ...previous,
+              { date: "", from: "", to: "" },
+            ])
+          }
+        >
+          <Plus width={18} height={18} strokeWidth={1.8} aria-hidden />
+          {copy.form.datetimeAdd}
+        </button>
+      </div>
       <Field id="participants" label={copy.form.participants}>
         <input
           id="participants"
@@ -1110,6 +1180,7 @@ export function RentalView() {
                 role="dialog"
                 aria-modal="true"
                 aria-label={copy.form.title}
+                data-lenis-prevent
                 onClick={(event) => event.stopPropagation()}
               >
                 <div className="modal-head">
