@@ -37,6 +37,16 @@ export function SelectField({
 }) {
   const listId = useId();
   const [open, setOpen] = useState(false);
+  /* Where the floating list is pinned: fixed to the viewport (never clipped by a modal),
+     on whichever side of the trigger has room, capped to the space available there. */
+  const [popover, setPopover] = useState<{
+    placement: "up" | "down";
+    left: number;
+    width: number;
+    top?: number;
+    bottom?: number;
+    maxHeight: number;
+  } | null>(null);
   /* The row the keyboard is on, which is only the chosen one until it moves. */
   const [active, setActive] = useState(value);
   const root = useRef<HTMLDivElement>(null);
@@ -51,6 +61,41 @@ export function SelectField({
     return () => document.removeEventListener("pointerdown", away);
   }, [open]);
 
+  /* Keep the floating list pinned to its trigger when the document or the modal scrolls. */
+  useEffect(() => {
+    if (!open) return;
+
+    const reposition = () => {
+      const rect = root.current?.getBoundingClientRect();
+      if (!rect) return;
+      setPopover((previous) => {
+        const rowEstimate = Math.min(options.length * 47 + 14, 256);
+        const below = window.innerHeight - rect.bottom - 12;
+        const above = rect.top - 12;
+        const placement =
+          previous?.placement ??
+          (below < rowEstimate + 12 && above > below ? "up" : "down");
+        const space = placement === "up" ? above : below;
+        return {
+          ...previous!,
+          placement,
+          left: rect.left,
+          width: rect.width,
+          top: placement === "down" ? rect.bottom + 9 : undefined,
+          bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,
+          maxHeight: Math.max(140, Math.min(rowEstimate, space)),
+        };
+      });
+    };
+
+    window.addEventListener("resize", reposition);
+    window.addEventListener("scroll", reposition, true);
+    return () => {
+      window.removeEventListener("resize", reposition);
+      window.removeEventListener("scroll", reposition, true);
+    };
+  }, [open, options.length]);
+
   /* A long list would otherwise open with the chosen row out of sight. */
   useEffect(() => {
     if (!open) return;
@@ -59,6 +104,26 @@ export function SelectField({
 
   const show = () => {
     setActive(value);
+    const rect = root.current?.getBoundingClientRect();
+    if (!rect) {
+      setOpen(true);
+      return;
+    }
+    /* Roughly: 47px rows plus a hairline of chrome, capped by the max height. */
+    const rowEstimate = Math.min(options.length * 47 + 14, 256);
+    const below = window.innerHeight - rect.bottom - 12;
+    const above = rect.top - 12;
+    const placement =
+      below < rowEstimate + 12 && above > below ? "up" : "down";
+    const space = placement === "up" ? above : below;
+    setPopover({
+      placement,
+      left: rect.left,
+      width: rect.width,
+      top: placement === "down" ? rect.bottom + 9 : undefined,
+      bottom: placement === "up" ? window.innerHeight - rect.top + 9 : undefined,
+      maxHeight: Math.max(140, Math.min(rowEstimate, space)),
+    });
     setOpen(true);
   };
 
@@ -136,15 +201,24 @@ export function SelectField({
         />
       </button>
 
-      {open ? (
+      {open && popover ? (
         <ul
           ref={list}
           id={listId}
           role="listbox"
           aria-labelledby={labelledBy ?? id}
+          style={{
+            position: "fixed",
+            left: popover.left,
+            width: popover.width,
+            top: popover.top,
+            bottom: popover.bottom,
+            maxHeight: popover.maxHeight,
+          }}
           className={cn(
-            "glass-light border-ink/10 bg-canvas absolute inset-x-0 top-[calc(100%+0.55rem)] z-30",
-            "max-h-64 overflow-y-auto rounded-2xl border p-1.5",
+            "border-ink/10 bg-canvas/85 z-30",
+            "backdrop-blur-[10px] backdrop-saturate-125",
+            "overflow-y-auto rounded-2xl border p-1.5",
             "shadow-[0_30px_60px_-34px_rgba(18,38,32,0.55)]",
             "motion-safe:animate-[eiden-fade-in_0.22s_var(--ease-brand)]",
           )}

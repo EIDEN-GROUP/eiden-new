@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 import {
   CLARITY_ID,
@@ -8,11 +9,33 @@ import {
   GTM_ID,
   applyConsent,
   readStoredConsent,
+  trackPageView,
   validateAnalyticsIds,
   writeStoredConsent,
   type ConsentChoice,
 } from "@/lib/analytics";
 import { CookieBanner } from "@/components/cookie-banner";
+
+/** GA4 only records full loads on its own; every client-side route change
+    after that needs its own page_view, or the measurement is always one
+    page behind. Suspense-wrapped: useSearchParams opts the subtree out of
+    static prerendering otherwise. */
+function RouteTracker() {
+  const pathname = usePathname();
+  const search = useSearchParams();
+  const firstRef = useRef(true);
+
+  useEffect(() => {
+    if (firstRef.current) {
+      firstRef.current = false;
+      return;
+    }
+    const query = search?.toString();
+    trackPageView(query ? `${pathname}?${query}` : pathname);
+  }, [pathname, search]);
+
+  return null;
+}
 
 /**
  * Loads GA4 + GTM + Clarity (heatmaps & session recordings), all env-gated.
@@ -80,6 +103,9 @@ export function AnalyticsProviders() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <RouteTracker />
+      </Suspense>
       {GA4_ID ? (
         <>
           <Script

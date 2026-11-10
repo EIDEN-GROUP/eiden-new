@@ -24,6 +24,7 @@ const entries: Entry[] = [
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/security", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/rental", changeFrequency: "monthly" as const, priority: 0.8 },
   ...indexedCaseSlugs.map((slug) => ({
     path: `/${slug}`,
     changeFrequency: "monthly" as const,

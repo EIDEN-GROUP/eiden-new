@@ -103,3 +103,30 @@ export function trackEvent(
     /* Best-effort, as above. */
   }
 }
+
+/**
+ * Client-side route-change page view. GA4 records the full page load via
+ * `gtag('config', ...)`, so this only fires on subsequent client-side
+ * navigations — otherwise every landing would count twice.
+ */
+export function trackPageView(path: string) {
+  try {
+    const title = document.title;
+    if (GTM_ID) {
+      window.dataLayer?.push({
+        event: "page_view",
+        page_path: path,
+        page_title: title,
+        page_location: window.location.href,
+      });
+      return;
+    }
+    window.gtag?.("event", "page_view", {
+      page_path: path,
+      page_title: title,
+      page_location: window.location.href,
+    });
+  } catch {
+    /* Best-effort, as above. */
+  }
+}
