@@ -558,7 +558,7 @@ function FilterSheet({
                     <span className="bg-canvas/10 relative size-[5.375rem] shrink-0 overflow-hidden rounded-md">
                       <Image
                         src={THUMBS[filter]}
-                        alt=""
+                        alt={`Vision client — ${String(filter)} — tarif et contenu EIDEN`}
                         fill
                         sizes="86px"
                         className="object-cover"

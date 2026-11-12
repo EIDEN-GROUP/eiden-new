@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     canonical: "/rental",
     languages: { fr: "/rental", en: "/rental", "x-default": "/rental" },
   },
+  other: {
+    "geo.region": "MA-SM",
+    "geo.placename": "Agadir",
+    "geo.position": "30.4278;-9.5981",
+    ICBM: "30.4278, -9.5981",
+  },
   openGraph: {
     type: "website",
     url: "/rental",
@@ -215,6 +221,38 @@ const rentalJsonLd = {
           text: item.a,
         },
       })),
+    },
+    {
+      "@type": "HowTo",
+      "@id": `${siteConfig.url}/rental#howto`,
+      name: "Réserver la salle de formation EIDEN à Agadir",
+      inLanguage: "fr",
+      step: [
+        {
+          "@type": "HowToStep",
+          position: 1,
+          name: "Choisissez votre formule",
+          text: "Demi-journée (650 DH), Journée complète (1 150 DH), ou Location sur devis (multi-jours ou récurrent).",
+        },
+        {
+          "@type": "HowToStep",
+          position: 2,
+          name: "Choisissez votre date et votre plage horaire",
+          text: "Sélectionnez une date de 8h à 21h30, et l'heure de début et l'heure de fin souhaitées.",
+        },
+        {
+          "@type": "HowToStep",
+          position: 3,
+          name: "Confirmez votre demande",
+          text: "Nom, e-mail, téléphone, nombre de participants. Vous recevez la confirmation sous 24 heures ouvrées.",
+        },
+      ],
+      totalTime: "PT5M",
+      estimatedCost: {
+        "@type": "MonetaryAmount",
+        currency: "MAD",
+        value: "650",
+      },
     },
     {
       "@type": "BreadcrumbList",

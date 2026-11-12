@@ -2,7 +2,22 @@ import { ViewTransition } from "react";
 import type { Metadata } from "next";
 import { ClientsV2View } from "@/components/views/clients-v2-view";
 import { projects, siteConfig } from "@/lib/data/site";
+
 import { indexedCaseSlugs } from "@/lib/seo";
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: siteConfig.url },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Portfolio",
+      item: `${siteConfig.url}/portfolio`,
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Clients",
@@ -48,6 +63,10 @@ const caseItemList = {
 export default function PortfolioPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(caseItemList) }}

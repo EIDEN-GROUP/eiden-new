@@ -264,18 +264,18 @@ export const systemPanelTextures = [
 ] as const;
 
 export const movementMedia = [
-  "/media/heritage.png",
-  "/media/schema.png",
-  "/media/intuition.png",
-  "/media/architecture.jpeg",
+  { src: "/media/heritage.png", alt: "Patrimoine marocain — l\u2019expérience de terrain qui a donné naissance à EIDEN" },
+  { src: "/media/schema.png", alt: "Schéma EIDEN — la carte des fractures visibles qui alimente Hydra Analysis™" },
+  { src: "/media/intuition.png", alt: "L\u2019intuition stratégique — voir ce que les chiffres seuls ne montrent pas" },
+  { src: "/media/architecture.jpeg", alt: "Architecture d\u0027entreprise — l\u0027identité qui assemble les systèmes EIDEN" },
 ] as const;
 
 /** One per principle, in the order the rules are written. */
 export const principleMedia = [
-  "/work/card-1.jpeg",
-  "/work/card-2.jpeg",
-  "/work/card-2.jpeg",
-  "/work/card-1.jpeg",
+  { src: "/work/card-1.jpeg", alt: "Projet EIDEN — avant les systèmes (site vitrine et identité)" },
+  { src: "/work/card-2.jpeg", alt: "Projet EIDEN — après l\u2019application de Hydra Analysis™" },
+  { src: "/work/card-2.jpeg", alt: "Projet EIDEN — campagne mise en service et optimisée" },
+  { src: "/work/card-1.jpeg", alt: "Projet EIDEN — identité livrée et déployée sur le site" },
 ] as const;
 
 export const serviceMedia: Record<string, string> = {

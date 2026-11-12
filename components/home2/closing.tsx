@@ -78,7 +78,7 @@ export function Home2Closing() {
           <article className={panel}>
             <Image
               src={heroTexture}
-              alt=""
+              alt="EIDEN GROUP — texture de fond, aperçu du studio"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="-z-10 object-cover transition-transform duration-[1200ms] ease-[var(--ease-brand)] group-hover:scale-105 motion-reduce:transition-none"

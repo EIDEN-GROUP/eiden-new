@@ -1,6 +1,21 @@
 import type { Metadata } from "next";
 import { ContactView } from "@/components/views/contact-view";
 import { ContactFaq } from "@/components/contact-faq";
+import { siteConfig } from "@/lib/data/site";
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: siteConfig.url },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Contact",
+      item: `${siteConfig.url}/contact`,
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -31,6 +46,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <ContactView />
       <ContactFaq />
     </>

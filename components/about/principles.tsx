@@ -20,7 +20,7 @@ export function AboutPrinciples({
   eyebrow: string;
   title: string;
   principles: Principle[];
-  media?: readonly string[];
+  media?: readonly { src: string; alt: string }[];
 }) {
   const deckRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +52,7 @@ export function AboutPrinciples({
                   }
                   className="deal-card glass-dark glass-top bg-ink relative flex flex-col overflow-hidden rounded-2xl p-8 sm:p-10 lg:[--dx:var(--gx)] lg:[--dy:var(--gy)] lg:[--shrink:0.05] lg:[--tilt:var(--gt)]"
                 >
-                  <Image src={media?.[index] ?? proofTexture} alt="" fill sizes="(min-width: 1024px) 46vw, 92vw" className="principle-shot-img object-cover" />
+                  <Image src={media?.[index]?.src ?? proofTexture} alt={media?.[index]?.alt ?? "Texture preuve EIDEN — capture de réalisation"} fill sizes="(min-width: 1024px) 46vw, 92vw" className="principle-shot-img object-cover" />
                   <span aria-hidden className="blur-md" />
                   <p className="font-label text-canvas relative z-1 text-[0.9375rem] font-bold tracking-[0.24em]">
                     {principle.n}

@@ -16,6 +16,30 @@ const faqJsonLd = {
   })),
 };
 
+const founderJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteConfig.url}/#oualid-laati`,
+  name: "Oualid Laati",
+  jobTitle: "Fondateur — Architecte en chef",
+  worksFor: { "@id": `${siteConfig.url}/#business` },
+  url: `${siteConfig.url}/a-propos`,
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: siteConfig.url },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "À propos",
+      item: `${siteConfig.url}/a-propos`,
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   title: "À propos",
   description:
@@ -47,6 +71,14 @@ export default function AboutPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(founderJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <AboutView />
     </>

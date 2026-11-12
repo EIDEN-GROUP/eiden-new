@@ -137,7 +137,7 @@ const fr: RentalCopy = {
         title: "Pack Demi-Journée",
         price: "650",
         unit: "DH",
-        description: "Pour un atelier, une réunion d'équipe ou un créneau de coaching.",
+        description: "Location de salle pour atelier et coaching à Agadir : un atelier, une réunion d'équipe ou un créneau de coaching.",
         points: [
           "Salle entièrement équipée",
           "Écran de présentation et sonorisation",
@@ -154,7 +154,7 @@ const fr: RentalCopy = {
         title: "Pack Journée Complète",
         price: "1 150",
         unit: "DH",
-        description: "Pour une formation, un séminaire ou un comité qui doit avancer.",
+        description: "Location de salle pour formation professionnelle à Agadir : une formation, un séminaire ou un comité qui doit avancer.",
         points: [
           "Salle entièrement équipée",
           "Écran de présentation et sonorisation",
@@ -187,7 +187,7 @@ const fr: RentalCopy = {
   practice: {
     kicker: "En pratique",
     title: "Salle de formation équipée à Agadir Bay",
-    lead: "Salle de formation avec Wi-Fi, écran TV et tableau blanc à Agadir Bay : tout est déjà installé. Vous arrivez, vous branchez, vous travaillez.",
+    lead: "Salle de formation à louer à Agadir Bay — Wi-Fi, écran TV et tableau blanc à Agadir : tout est déjà installé. Vous arrivez, vous branchez, vous travaillez.",
     kitTitle: "Dans la salle",
     kit: [
       { title: "Écran grand format 4K", detail: "HDMI et USB-C, 55 pouces" },
@@ -238,6 +238,10 @@ const fr: RentalCopy = {
         a: "Agadir Bay, Technopole 1, Bloc B101 Agadir 80000, Maroc. Le technopôle est à 10 minutes de l'aéroport Agadir Al Massira.",
       },
       {
+        q: "Puis-je louer la salle pour une réunion d'équipe ou un atelier ?",
+        a: "Oui : location de salle de réunion à Agadir — le même équipement que pour les formations : écran 4K, Wi-Fi fibre, tableau blanc, 15 chaises, table ou disposition en U. 650 DH en demi-journée, 1 150 DH en journée.",
+      },
+      {
         q: "Peut-on louer la salle pour plusieurs jours ?",
         a: "Location de salle de formation pour plusieurs jours à Agadir : oui, via la formule Location sur devis. Séries de sessions, locations sur plusieurs jours et réservations régulières ou récurrentes, avec des tarifs négociés sur la durée et la fréquence.",
       },
@@ -272,7 +276,7 @@ const fr: RentalCopy = {
     kicker: "Réservation · Agadir",
     title: "Réservez votre",
     titleAccent: "salle de formation",
-    text: "Envoyez la date et le format : nous confirmons la disponibilité, le devis et la mise en place du mobilier.",
+    text: "Location de salle de réunion à Agadir : envoyez la date et le format, nous confirmons la disponibilité, le devis et la mise en place du mobilier.",
     callLabel: "Appelez-nous",
     whatsapp: "ou écrivez-nous sur WhatsApp →",
     reply: "Réponse sous 24 heures ouvrées.",
@@ -331,7 +335,7 @@ const en: RentalCopy = {
   hero: {
     eyebrow: "Room hire · Agadir Bay",
     title: "Training room rental in Agadir",
-    lead: "15 seats, a large display, a whiteboard and fibre Wi-Fi. Everything is installed and ready when you arrive.",
+    lead: "Training room for rent in Agadir Bay, or meeting room rental in Agadir: fibre Wi-Fi, 4K screen and whiteboard. Professional training space in Agadir — everything is installed and ready when you arrive.",
     primary: "Book the room",
     secondary: "See the packages",
     address: "Agadir Bay, Technopole 1, Bloc B101 Agadir 80000, Maroc",
@@ -347,7 +351,7 @@ const en: RentalCopy = {
     kicker: "Rental prices",
     title: "Training room rental packages",
     titleAccent: "in Agadir.",
-    lead: "Training room rental prices in Agadir: 650 MAD for a half day (4 h), 1,150 MAD for a full day (8 h), a quote for multi-day bookings.",
+    lead: "Affordable training room rental in Agadir: 650 MAD for a half day (4 h), 1,150 MAD for a full day (8 h), a quote for multi-day bookings. Training room rental prices in Agadir.",
     popular: "Most requested",
     items: [
       {
@@ -355,7 +359,7 @@ const en: RentalCopy = {
         title: "Half-Day Package",
         price: "650",
         unit: "MAD",
-        description: "For a workshop, a team meeting or a coaching slot.",
+        description: "Workshop room rental in Agadir: a workshop, a team meeting or a coaching slot — and coaching room rental in Agadir.",
         points: [
           "Fully equipped room",
           "Presentation screen and sound system",
@@ -372,7 +376,7 @@ const en: RentalCopy = {
         title: "Full-Day Package",
         price: "1 150",
         unit: "MAD",
-        description: "For a training, a seminar or a committee that needs to move forward.",
+        description: "Professional training room rental in Agadir: a professional training, a seminar or a committee that needs to move forward.",
         points: [
           "Fully equipped room",
           "Presentation screen and sound system",
@@ -389,7 +393,7 @@ const en: RentalCopy = {
         title: "Custom quote",
         price: "On quote",
         unit: "",
-        description: "Several sessions, several days, or a format that does not fit the standard packs.",
+        description: "Fully equipped meeting room for rent in Agadir: several sessions, several days, or a format that does not fit the standard packs.",
         points: [
           "Multi-day rental",
           "Regular or recurring bookings",
@@ -454,6 +458,10 @@ const en: RentalCopy = {
       {
         q: "Where is the room and how do I get there?",
         a: "Agadir Bay, Technopole 1, Bloc B101 Agadir 80000, Maroc. The Technopole is 10 minutes from Agadir Al Massira Airport.",
+      },
+      {
+        q: "Can I rent the room for a team meeting or a workshop?",
+        a: "Yes: meeting room rental in Agadir — the same equipment used for trainings: business meeting room in Agadir for boardroom sessions, team meetings or committees; a small meeting room for rent in Agadir too — 15 seats, U-shape or table. 650 MAD for a half-day, 1,150 MAD for a full day.",
       },
       {
         q: "Can I rent the room for several days?",

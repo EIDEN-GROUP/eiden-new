@@ -105,7 +105,7 @@ export function Home2Hero() {
             >
               <Image
                 src={entry.src}
-                alt=""
+                alt={`Projet EIDEN — ${entry.client}`}
                 fill
                 sizes="(max-width: 640px) 30vw, 200px"
                 /* The middle of the fan is what lands first and carries the LCP,

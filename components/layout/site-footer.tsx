@@ -181,6 +181,12 @@ export function SiteFooter() {
                 {siteConfig.phoneMa}
               </a>
               <span className="hidden lg:inline">{siteConfig.address}</span>
+              <Link
+                href="/rental"
+                className="hidden lg:inline text-gold-lt hover:text-canvas transition-colors duration-300"
+              >
+                {t.footer.rental}
+              </Link>
             </span>
           </Rise>
         </div>

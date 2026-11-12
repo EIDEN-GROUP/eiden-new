@@ -15,7 +15,7 @@ type MovementsProps = {
   eyebrow: string;
   title: string;
   movements: Movement[];
-  media: readonly string[];
+  media: readonly { src: string; alt: string }[];
 };
 
 const COLUMN = "px-5 sm:px-8 lg:px-12 xl:px-16";
@@ -85,7 +85,7 @@ export function AboutMovements({
                   : "scale-[1.07] opacity-0",
               )}
             >
-              <Image src={media[index % media.length]} alt="" fill sizes="(min-width: 64rem) 44vw, 100vw" priority={index === 0} className="object-cover object-center" />
+              <Image src={media[index % media.length].src} alt={media[index % media.length].alt} fill sizes="(min-width: 64rem) 44vw, 100vw" priority={index === 0} className="object-cover object-center" />
             </div>
           ))}
 

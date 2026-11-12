@@ -65,7 +65,7 @@ export function HeroScreen({
               <Image
                 key={project.slug}
                 src={project.image}
-                alt=""
+                alt={`Projet EIDEN — ${project.client}`}
                 fill
                 sizes="(max-width: 768px) 94vw, 70rem"
                 className={cn(

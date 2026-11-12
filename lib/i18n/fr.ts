@@ -549,6 +549,7 @@ export const fr = {
     legal: "Mentions légales",
     privacy: "Confidentialité",
     rights: "Tous droits réservés",
+    rental: "Location de salle de formation à Agadir",
     madeIn: "Conçu et développé à Agadir, Maroc",
     phoneMaLabel: "Maroc",
   },

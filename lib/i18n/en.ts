@@ -554,6 +554,7 @@ export const en: Dictionary = {
     legal: "Legal notice",
     privacy: "Privacy",
     rights: "All rights reserved",
+    rental: "Training room rental in Agadir",
     madeIn: "Designed and built in Agadir, Morocco",
     phoneMaLabel: "Morocco",
   },
